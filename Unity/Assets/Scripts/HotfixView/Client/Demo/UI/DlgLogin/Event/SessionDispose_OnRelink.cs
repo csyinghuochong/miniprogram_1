@@ -56,11 +56,11 @@ namespace ET.Client
 
         private  void OnOtherAccountLogin(Scene root)
         {
-            PopupTipHelp.OpenPopupTip_2(root, "系统提示", "账号在其他设备登陆!", () => 
-                        {
-                            EventSystem.Instance.Publish(root, new ReturnLogin());
-                        })
-                    .Coroutine();
+            // PopupTipHelp.OpenPopupTip_2(root, "系统提示", "账号在其他设备登陆!", () => 
+            //             {
+            //                 EventSystem.Instance.Publish(root, new ReturnLogin());
+            //             })
+            //         .Coroutine();
         }
     }
 }

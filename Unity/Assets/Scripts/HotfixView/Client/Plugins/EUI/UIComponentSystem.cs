@@ -344,35 +344,6 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask ChangeUniversalBlurFeature(this UIComponent self)
-        {
-            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(true);
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
-            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(false);
-        }
-
-        private static void ChangeUniversalBlurFeature(this UIComponent self, bool value)
-        {
-            GameObject.Find("Global").GetComponent<RenderScaleController>().ChangeUniversalBlurFeature(value);
-        }
-
-        private static  bool HaveUniversalBlurFeature(this UIComponent self, WindowID id)
-        {
-            if (id == WindowID.WindowID_CellDungeonCell
-                || id == WindowID.WindowID_Function
-                || id == WindowID.WindowID_MapBig
-                || id == WindowID.WindowID_PetBar
-                || id == WindowID.WindowID_PetMelee
-                || id == WindowID.WindowID_PetMeleeLevel
-                || id == WindowID.WindowID_Role
-                || id == WindowID.WindowID_MJLobby
-                || id == WindowID.WindowID_Chat)
-            {
-                return true;
-            }
-            return false;
-        }
-
         private static void RealShowWindow(this UIComponent self, UIBaseWindow baseWindow, WindowID id, Entity showData = null)
         {
             Entity contextData = showData == null? null : showData;
@@ -392,28 +363,22 @@ namespace ET.Client
                     self.OpenUIList.Insert(0, id);
                 }
 
-                DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
-                if (dlgHuoBiSet != null)
-                {
-                    dlgHuoBiSet.OnUpdateTitle(self.OpenUIList[0]);
-                }
-                else
-                {
-                    self.ShowWindowAsync(WindowID.WindowID_HuoBiSet).Coroutine();
-                }
+                // DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
+                // if (dlgHuoBiSet != null)
+                // {
+                //     dlgHuoBiSet.OnUpdateTitle(self.OpenUIList[0]);
+                // }
+                // else
+                // {
+                //     self.ShowWindowAsync(WindowID.WindowID_HuoBiSet).Coroutine();
+                // }
             }
 
-            if (self.HaveUniversalBlurFeature(id))
-            {
-                //self.ChangeUniversalBlurFeature().Coroutine();
-                self.ChangeUniversalBlurFeature(true);
-            }
-
-            if (uILayerScript.HideMainUI)
-            {
-                DlgMain dlgMain = self.GetDlgLogic<DlgMain>();
-                dlgMain?.ShowMainUI(false);
-            }
+            // if (uILayerScript.HideMainUI)
+            // {
+            //     DlgMain dlgMain = self.GetDlgLogic<DlgMain>();
+            //     dlgMain?.ShowMainUI(false);
+            // }
 
             self.VisibleWindowsDic[(int)id] = baseWindow;
             Debug.Log("<color=magenta>### current Navigation window </color>" + baseWindow.WindowID.ToString());
@@ -461,40 +426,32 @@ namespace ET.Client
 
             UIBaseWindow baseWindow = self.VisibleWindowsDic[(int)windowId];
             UILayerScript uILayerScript = baseWindow.UIPrefabGameObject.GetComponent<UILayerScript>();
-            if (uILayerScript.ShowHuoBi)
-            {
-                self.OpenUIList.Remove(windowId);
-                bool haveView = self.OpenUIList.Count > 0;
-                DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
-                if (dlgHuoBiSet != null && haveView)
-                {
-                    dlgHuoBiSet.OnUpdateTitle(self.OpenUIList[0]);
-                }
-
-                if (dlgHuoBiSet != null && !haveView)
-                {
-                    self.CloseWindow(WindowID.WindowID_HuoBiSet);
-                }
-            }
-
-            if (uILayerScript.HideMainUI)
-            {
-                DlgMain dlgMain = self.GetDlgLogic<DlgMain>();
-                dlgMain?.ShowMainUI(true);
-            }
+            // if (uILayerScript.ShowHuoBi)
+            // {
+            //     self.OpenUIList.Remove(windowId);
+            //     bool haveView = self.OpenUIList.Count > 0;
+            //     DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
+            //     if (dlgHuoBiSet != null && haveView)
+            //     {
+            //         dlgHuoBiSet.OnUpdateTitle(self.OpenUIList[0]);
+            //     }
+            //
+            //     if (dlgHuoBiSet != null && !haveView)
+            //     {
+            //         self.CloseWindow(WindowID.WindowID_HuoBiSet);
+            //     }
+            // }
+            //
+            // if (uILayerScript.HideMainUI)
+            // {
+            //     DlgMain dlgMain = self.GetDlgLogic<DlgMain>();
+            //     dlgMain?.ShowMainUI(true);
+            // }
             
             if (self.GuideUISet.Equals(windowId))
             {
                 self.CloseWindow(WindowID.WindowID_Guide);
                 self.GuideUISet = WindowID.WindowID_Invaild;
-            }
-
-            if (self.HaveUniversalBlurFeature(windowId))
-            {
-                //self.ChangeUniversalBlurFeature().Coroutine();
-                
-
-               self.ChangeUniversalBlurFeature(false);
             }
 
             self.HideWindow(windowId);

@@ -60,15 +60,6 @@ namespace ET.Client
             // }
         }
 
-        public static void OnIosPayFailCallback(this RelinkComponent self)
-        {
-            DlgRecharge dlgRecharge = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>();
-            if (dlgRecharge != null)
-            {
-                dlgRecharge.View.EG_LoadingRectTransform.gameObject.SetActive(false);
-            }
-        }
-
         private static async ETTask OnApplicationQuitHandler(this RelinkComponent self)
         {
             // SessionComponent sessionComponent = self.DomainScene().GetComponent<SessionComponent>();
@@ -114,7 +105,6 @@ namespace ET.Client
             NetClient2Main_CheckSession response =   await clientSenderComponent.RequestCheckSession(mapComponent.MapType);
             
             Log.Warning($"NetClient2Main_CheckSession: {response.Error}");
-            FlyTipComponent.Instance.ShowFlyTipDi($"检测网络: {response.Error}");
 
             if (response.Error == ErrorCode.ERR_Success)  //== ErrorCode.ERR_SessionDisconnect
             {
@@ -135,44 +125,16 @@ namespace ET.Client
         {
             if (value)
             {
-                //FlyTipComponent.Instance.ShowFlyTipDi($"获得焦点！！");
                 self.CheckSession().Coroutine();
             }
             else
             {
-                DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-                if (dlgMain != null)
-                {
-                    dlgMain.OnApplicationFocusExit();
-                }
+                // DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+                // if (dlgMain != null)
+                // {
+                //     dlgMain.OnApplicationFocusExit();
+                // }
             }
-            // if (value)
-            // {
-            //     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            //     if (mapComponent.SceneType == (int)SceneTypeEnum.LoginScene)
-            //     {
-            //         return;
-            //     }
-            //
-            //     SessionComponent sessionComponent = self.DomainScene().GetComponent<SessionComponent>();
-            //     if (sessionComponent == null)
-            //     {
-            //         return;
-            //     }
-            //
-            //     if (sessionComponent.Session == null || sessionComponent.Session.IsDisposed)
-            //     {
-            //         self.CheckRelink().Coroutine();
-            //     }
-            // }
-            // else
-            // {
-            //     DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-            //     if (dlgMain != null)
-            //     {
-            //         dlgMain.OnStopAction();
-            //     }
-            // }
         }
 
         public static async ETTask CheckRelink(this RelinkComponent self)
@@ -256,8 +218,8 @@ namespace ET.Client
             
              if (nowdead == 1)
              {
-                 unit.GetComponent<UIPlayerHpComponent>().UpdateBlood();
-                 unit.GetComponent<HeroDataComponentC>().OnDead();
+                 // unit.GetComponent<UIPlayerHpComponent>().UpdateBlood();
+                 // unit.GetComponent<HeroDataComponentC>().OnDead();
                  EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
              }
             

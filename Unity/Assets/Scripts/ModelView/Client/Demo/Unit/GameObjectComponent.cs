@@ -9,14 +9,6 @@ namespace ET.Client
         public GameObject GameObject { get; set; }
         public string HorseAssetsPath;
         public GameObject ObjectHorse;
-        public Material Material;
-        public long DelayShow;
-
-        public long HighLightTimer;
-        public long DelayShowTimer;
-        public string OldShader;
-
-        public bool BianShenEffect;
-        public bool Dissolve { get; set; }
+        
     }
 }

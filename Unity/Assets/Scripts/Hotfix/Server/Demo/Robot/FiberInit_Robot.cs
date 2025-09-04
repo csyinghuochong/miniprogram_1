@@ -16,25 +16,8 @@ namespace ET.Client
             root.AddComponent<PlayerInfoComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<ObjectWait>();
-            root.AddComponent<BagComponentC>();
-            root.AddComponent<UserInfoComponentC>();
-            root.AddComponent<ChatComponent>();
-            root.AddComponent<FriendComponent>();
-            root.AddComponent<TaskComponentC>();
-            root.AddComponent<BattleMessageComponent>();
             root.AddComponent<MapComponent>();
-            root.AddComponent<PetComponentC>();
-            root.AddComponent<SkillSetComponentC>();
-            root.AddComponent<ChengJiuComponentC>();
-            root.AddComponent<MailComponentC>();
-            root.AddComponent<ShoujiComponentC>();
-            root.AddComponent<TitleComponentC>();
             root.AddComponent<ReddotComponentC>();
-            root.AddComponent<AttackComponent>();
-            root.AddComponent<ActivityComponentC>();
-            root.AddComponent<JiaYuanComponentC>();
-            root.AddComponent<TeamComponentC>();
-            root.AddComponent<CellDungeonComponentC>();
             
             root.SceneType = SceneType.Demo;
             

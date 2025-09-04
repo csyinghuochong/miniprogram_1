@@ -108,15 +108,16 @@ namespace ET.Client
                     // 等待场景切换完成
                     await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
-                    await UserInfoNetHelper.RequestUserInfoInit(root);
-                    await BagClientNetHelper.RequestBagInit(root);
-                    await PetNetHelper.RequestPetInfo(root);
-                    await TaskClientNetHelper.RequestTaskInit(root);
-                    await SkillNetHelper.RequestSkillSet(root);
-                    await FriendNetHelper.RequestFriendInfo(root);
-                    await ActivityNetHelper.RequestActivityInfo(root);
-                    await ActivityNetHelper.RequestZhanQuInfo(root);
-                    await ChengJiuNetHelper.GetChengJiuList(root);
+                    // 重新获取一下数据
+                    // await UserInfoNetHelper.RequestUserInfoInit(root);
+                    // await BagClientNetHelper.RequestBagInit(root);
+                    // await PetNetHelper.RequestPetInfo(root);
+                    // await TaskClientNetHelper.RequestTaskInit(root);
+                    // await SkillNetHelper.RequestSkillSet(root);
+                    // await FriendNetHelper.RequestFriendInfo(root);
+                    // await ActivityNetHelper.RequestActivityInfo(root);
+                    // await ActivityNetHelper.RequestZhanQuInfo(root);
+                    // await ChengJiuNetHelper.GetChengJiuList(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

@@ -60,19 +60,6 @@ namespace ET.Client
                 unit.Position = message.Position;
             }
 
-            //message.Error > 1释放技能立即停止
-            if (message.Error > 1)
-            {
-                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(message.Error);
-                MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-                moveComponent.SkillStop(unit, skillConfig).Coroutine();
-                moveComponent.Stop(message.Error == 0);
-                if (!unit.MainHero && math.distance(unit.Position , message.Position) > 0.5f)
-                {
-                    unit.Position = message.Position;
-                }
-            }
-
             unit.GetComponent<ObjectWait>()?.Notify(new Wait_UnitStop() { Error = message.Error });
             await ETTask.CompletedTask;
         }

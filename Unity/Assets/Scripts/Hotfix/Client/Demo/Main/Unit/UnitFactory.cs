@@ -41,9 +41,6 @@ namespace ET.Client
             unit.ConfigId = unitInfo.ConfigId;
 
             unit.AddComponent<ObjectWait>();
-            unit.AddComponent<HeroDataComponentC>();
-            unit.AddComponent<StateComponentC>();
-            unit.AddComponent<SingingComponent>();
             unit.AddComponent<MoveComponent>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = unitInfo.UnitName;
@@ -58,19 +55,6 @@ namespace ET.Client
             foreach (var kv in unitInfo.KV)
             {
                 numericComponentC.ApplyValue(kv.Key, kv.Value, false);
-            }
-            
-            bool noSkill = unit.Type == UnitType.Npc && NpcConfigCategory.Instance.Get(unit.ConfigId).AI == 0;
-            if (!noSkill)
-            {
-                unit.AddComponent<SkillManagerComponentC>().InitData(unitInfo);
-                unit.AddComponent<BuffManagerComponentC>().InitData(unitInfo);
-            }
-
-            if (mainHero)
-            {
-                int runraceMonster = numericComponentC.GetAsInt(NumericType.RunRaceTransform);
-                unit.Root().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
             }
             
             if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
@@ -106,8 +90,7 @@ namespace ET.Client
             {
                 numericComponentC.ApplyValue(kv.Key, kv.Value, false);
             }
-
-            unit.AddComponent<DropComponentC>();
+            
             unit.AddComponent<UnitInfoComponent>();
             unit.Position = unitInfo.Position;
 
@@ -150,37 +133,6 @@ namespace ET.Client
                 OnAfterCreateUnit(unit);
                 unit.WaitLoad = false;
             }
-        }
-        
-        //创建传送点
-        public static Unit CreateTransferItem(Scene currentScene, UnitInfo unitInfo)
-        {
-            if (unitInfo.ConfigId == 20000040)
-            {
-                PetComponentC petComponent = currentScene.Root().GetComponent<PetComponentC>();
-                if (!PetHelper.IsShenShouFull(petComponent.RolePetInfos))
-                {
-                    return null;
-                }
-            }
-
-            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, 1);
-            unit.Type = unitInfo.Type;
-
-            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-            foreach (var kv in unitInfo.KV)
-            {
-                numericComponentC.ApplyValue(kv.Key, kv.Value, false);
-            }
-
-            unit.ConfigId = unitInfo.ConfigId;
-            unitComponent.Add(unit);
-
-            unit.AddComponent<UnitInfoComponent>();
-            unit.Position = unitInfo.Position;
-            OnAfterCreateUnit(unit);
-            return unit;
         }
     }
 }

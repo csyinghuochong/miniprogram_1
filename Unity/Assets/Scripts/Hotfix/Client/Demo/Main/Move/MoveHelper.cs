@@ -5,19 +5,7 @@ namespace ET.Client
 {
     public static partial class MoveHelper
     {
-
-        public static int  IfCanMove(this Unit unit)
-        {
-            StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
-            stateComponent.ObstructStatus = 0;
-            int errorCode = stateComponent.CanMove();
-            if (ErrorCode.ERR_Success != errorCode)
-            {
-                stateComponent.CheckSilence();
-            }
-
-            return errorCode;
-        }
+        
 
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null, bool waitmove = false)

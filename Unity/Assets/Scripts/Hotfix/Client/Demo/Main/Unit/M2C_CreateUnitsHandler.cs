@@ -25,19 +25,6 @@ namespace ET.Client
                 {
                     continue;
                 }
-
-                if (unitInfo.Type == UnitType.DropItem)
-                {
-                    UnitFactory.CreateDropItem(currentScene, unitInfo);
-                }
-                else if (unitInfo.Type == UnitType.CellTransfers)
-                {
-                    UnitFactory.CreateTransferItem(currentScene, unitInfo);
-                }
-                else
-                {
-                    UnitFactory.CreateUnit(currentScene, unitInfo);
-                }
             }
 
             if (message.UpdateAll == 1)

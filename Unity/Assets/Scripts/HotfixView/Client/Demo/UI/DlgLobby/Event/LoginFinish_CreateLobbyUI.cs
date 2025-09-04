@@ -66,38 +66,22 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, LoginFinish args)
         {
-            FangChenMiComponentC fangChenMiComponent = scene.GetComponent<FangChenMiComponentC>();
-            if (fangChenMiComponent.GetPlayerAge() < 18)
-            {
-                DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-                //if (dateTime.Hour !=20 )
-                //{
-                //    string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
-                //    content = content.Replace("{0}", "0");
-                //    PopupTipHelp.OpenPopupTip_2(scene, "防沉迷提示",
-                //        content,
-                //        () =>
-                //        {
-                //            //EventSystem.Instance.Publish(scene.Root(), new ReturnLogin());
-                //            DlgMJLogin dlg =  scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>();
-                //            dlg?.HideLoadingView();
-                //        }).Coroutine();
-                //}
-                //else
-                {
-                    string minute = (60 - dateTime.Minute).ToString();
-                    string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
-                    content = content.Replace("{0}", minute);
-                
-                    await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FangChengMiTip);
-                    DlgFangChengMiTip dlgFangChengMiTip = scene.GetComponent<UIComponent>().GetDlgLogic<DlgFangChengMiTip>();
-                    dlgFangChengMiTip.InitData("防沉迷提示", content, () => { OnLoginSucess(scene, args).Coroutine(); });
-                }
-            }
-            else
-            {
-                OnLoginSucess(scene, args).Coroutine();
-            }
+            // FangChenMiComponentC fangChenMiComponent = scene.GetComponent<FangChenMiComponentC>();
+            // if (fangChenMiComponent.GetPlayerAge() < 18)
+            // {
+            //     DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            //     string minute = (60 - dateTime.Minute).ToString();
+            //     string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
+            //     content = content.Replace("{0}", minute);
+            //
+            //     await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FangChengMiTip);
+            //     DlgFangChengMiTip dlgFangChengMiTip = scene.GetComponent<UIComponent>().GetDlgLogic<DlgFangChengMiTip>();
+            //     dlgFangChengMiTip.InitData("防沉迷提示", content, () => { OnLoginSucess(scene, args).Coroutine(); });
+            // }
+            // else
+            // {
+            //     OnLoginSucess(scene, args).Coroutine();
+            // }
 
             await ETTask.CompletedTask;
         }
@@ -113,7 +97,7 @@ namespace ET.Client
             GlobalComponent.Instance.MainCamera.transform.localPosition = new Vector3(23f, 2f, 13f);
             GlobalComponent.Instance.MainCamera.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
-            FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
+            // FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
             
             await scene.GetComponent<TimerComponent>().WaitAsync(2000);

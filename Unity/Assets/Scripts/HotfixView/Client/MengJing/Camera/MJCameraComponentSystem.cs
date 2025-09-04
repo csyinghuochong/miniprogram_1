@@ -120,7 +120,6 @@ namespace ET.Client
             {
                 self.OnBuildEnter();
                 self.OnBuildEnter = null;
-                MapViewHelper.ShowOtherUnit(self.Root(), false, self.NoHideIds);
                 GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
                 globalComponent.BloodRoot.gameObject.SetActive(false);
                 self.NoHideIds.Clear();
@@ -339,7 +338,6 @@ namespace ET.Client
             self.CameraMoveType = CameraMoveType.BuildExit;
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
             self.TargetPosition = unit.Position + self.OffsetPosition;
-            MapViewHelper.ShowOtherUnit(self.Root(), true, null);
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             globalComponent.BloodRoot.gameObject.SetActive(true);
         }

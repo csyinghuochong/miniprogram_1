@@ -20,19 +20,6 @@
             }
             
             gameObjectComponent.UpdatePositon(unit.Position);
-            unit.GetComponent<EffectViewComponent>()?.UpdatePositon();
-
-            //主角
-            if (unit.MainHero)
-            {
-                MapViewHelper.OnMainHeroMove(unit);
-                unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMainHeroMove();
-                unit.Root().GetComponent<SceneUnitManagerComponent>().Move(unit,  args );
-            }
-            else
-            {
-                unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUnitChangePosition(unit);
-            }
             
             await ETTask.CompletedTask;
         }
