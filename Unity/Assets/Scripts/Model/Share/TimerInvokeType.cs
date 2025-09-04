@@ -1,0 +1,124 @@
+﻿namespace ET
+{
+    [UniqueId(100, 10000)]
+    public static class TimerInvokeType
+    {
+        // 框架层100-200，逻辑层的timer type从200起
+        public const int WaitTimer = 100;
+        public const int SessionIdleChecker = 101;
+        public const int MessageLocationSenderChecker = 102;
+        public const int MessageSenderChecker = 103;
+        
+        // 框架层100-200，逻辑层的timer type 200-300
+        public const int MoveTimer = 201;
+        public const int AITimer = 202;
+        public const int SessionAcceptTimeout = 203;
+        public const int ActivityTipTimer = 204;
+        public const int ActivityServerTimer = 205;
+        public const int SkillPassive = 206;
+        public const int MonsterSingingTimer = 207;
+        public const int DBSaveTimer = 208;
+        public const int SkillTimerS = 209;
+        public const int BuffTimerS = 210;
+        public const int SkillTimerC = 211;
+        public const int BuffTimerC = 212;
+        public const int PlayerSingingTimer = 213;
+        public const int AutoAttackGridTimer = 214;
+        public const int RoleBullet1Timer = 215;
+        public const int UnionTimer = 216;
+        public const int HappyDungeonTimer = 217;
+        public const int RankeTimer = 218;
+        public const int ArenaSceneTimer = 219;
+        public const int PaiMaiTimer = 220;
+        public const int SoloDungeonTimer = 221;
+        public const int RefreshMonsterTimer = 222;
+        public const int RunRaceDungeonTimer = 223;
+        public const int TeamDropTimer = 224;
+        public const int MailSceneTimer = 225;
+        public const int ShouLieUpLoadTimer = 226;
+        public const int AccountSessionCheckOutTime = 227;
+        public const int PlayerOfflineOutTime = 228;
+        public const int BehaviourTimer = 229;
+        public const int TuoGuanTimer = 230;
+        public const int RoleBullet2Timer = 231;
+        public const int RoleBullet5Timer = 232;
+        public const int RoleBullet6Timer = 233;
+        public const int RoleBullet7Timer = 234;
+        public const int RoleBullet7TimerC = 235;
+        public const int ResourcesLoaderTimer = 240;
+        public const int DragonChuansongTimer = 241;
+        public const int CellChuansongTimer = 242;
+        
+        public const int RoomUpdate = 301;
+        public const int JoystickTimer = 302;
+        public const int MapMiniTimer = 303;
+        public const int ChatSceneTimer = 304;
+        public const int FsmTimer = 305;
+        public const int HighLightTimer = 306;
+        public const int DelayShowTimer = 307;
+        public const int GameObjectPoolTimer = 308;
+        public const int YujingTimer = 309;
+        public const int UIUnitReviveTime = 310;
+        public const int DialogTimer = 311;
+        public const int UIDungenBossRefreshTimer = 312;
+        public const int MakeCDTimer = 313;
+        public const int ChainLightningTimer = 314;
+        public const int Effectimer = 315;
+        public const int UnionJingXuanTimer = 316;
+        public const int FallingFont = 317;
+        public const int SkillInfoShowTimer = 318;
+        public const int RoleXiLianLevel = 319;
+        public const int PetEggListItemTimer = 320;
+        public const int UIChouKaTimer = 321;
+        public const int UIMapBigTimer = 322;
+        public const int GemMakeCDTimer = 323;
+        public const int ShenQiMakeTimer = 324;
+        public const int UIMainFPSTimer = 325;
+        public const int MapTransferBossRefreshTimer = 326;
+        public const int AuctionTimer = 327;
+        public const int MainBuffTimer = 328;
+        public const int TurtleSpeak = 329;
+        public const int UILoadingTimer = 330;
+        public const int JiaYuanPetWalk = 340;
+        public const int UIMonsterSingingTimer = 341;
+        public const int OpenBoxTimer = 342;
+        public const int UIZhuaPuTimer = 343;
+        public const int TrialMainTimer = 344;
+        public const int DungeonHappyMainTimer = 345;
+        public const int PetMainTimer = 346;
+        public const int TowerOpenTimer = 347;
+        public const int UIHappyMainTimer = 348;
+        public const int BattleMainTimer = 349;
+        public const int UITeamDropTimer = 350;
+        public const int SeasonTowerTimer = 351;
+        public const int DropUITimer = 352;
+        public const int MainActivityTipTimer = 353;
+        public const int JiaYuanPurchaseTimer = 354;
+        public const int PetQuickFightTimer = 355;
+        public const int JiaYuanPlanTimer = 356;
+        public const int UIDigTreasureTimer = 357;
+        public const int JiaYuanPastureTimer = 358;
+        public const int TransferUITimer = 359;
+        public const int FindPathTimer = 360;
+        public const int DungeonMapTimer = 361;
+        public const int ReviveTimer = 362;
+        public const int CellTransferUITimer = 363;
+        public const int UICellDungeonGuide = 364;
+        public const int UICellDungeonEnterShow = 365;
+        public const int UICellChapterOpen = 366;
+        public const int UICellDungeonSettlement = 367;
+        public const int UIPetMeleeMain = 368;
+        public const int MainPetFightSwitchCD = 369;
+        public const int MainPetSwitchTimer = 370;
+        public const int PetBarSetSkillShowInfoTimer = 371;
+        public const int PetMeleeDungeonBattleTimer = 372;
+        public const int PetMeleeDungeonDealCardTimer = 373;
+        public const int PetMeleeDungeonRestoreTimer = 374;
+        public const int PetMeleeCardTimer = 375;
+        public const int UIUnionOrderTimer = 376;
+        public const int PickItemTimer = 377;
+        public const int PetEquipMakeCDTimer = 378;
+        public const int UISingleHappyMoveTimer = 379;
+        public const int UIGuideTimer = 380;
+    }
+}

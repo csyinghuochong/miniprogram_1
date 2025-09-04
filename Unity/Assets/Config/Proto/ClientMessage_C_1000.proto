@@ -1,0 +1,139 @@
+syntax = "proto3";
+// using 
+
+package ET;
+
+//ResponseType NetClient2Main_ServerList
+message Main2NetClient_ServerList // IRequest
+{
+	int32 RpcId = 1;
+	int32 OwnerFiberId = 2;
+	int32  VersionMode = 3;
+}
+
+message NetClient2Main_ServerList // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+
+	repeated ServerItem ServerItems = 4;		//服务器列表
+	string NoticeVersion = 5;
+	string NoticeText = 6;
+}
+
+//ResponseType NetClient2Main_Login
+message Main2NetClient_Login // IRequest
+{
+	int32 RpcId = 1;
+	int32 OwnerFiberId = 2;
+	string Account = 3;
+	string Password = 4;
+	int32 ServerId = 5;
+	int32 Relink = 6;
+	int32 VersionMode = 7;
+	bool CheckRealName = 8;
+}
+
+message NetClient2Main_Login // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	
+	int64 PlayerId = 4;
+	int64 AccountId = 5;
+	string Token = 6;
+	PlayerInfo PlayerInfo = 11;
+	repeated CreateRoleInfo RoleLists = 12;
+}
+
+//ResponseType NetClient2Main_RealName
+message Main2NetClient_RealName // IRequest
+{
+	int32 RpcId = 1;
+	int32 OwnerFiberId = 2;
+	
+	string Name = 3;		//姓名
+	string IdCardNO = 4;		//身份证号码
+	int32 AiType = 5;			//1认证 2查询 3上报
+	int64 AccountId	 = 6;	// 帐号Id
+	int32 VersionMode = 7;
+	string Account = 8;
+	string Password = 9;
+}
+
+message NetClient2Main_RealName // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+
+	int32 ErrorCode = 4;		//实名认证返回
+	PlayerInfo PlayerInfo = 11;
+}
+
+//ResponseType NetClient2Main_LoginGame
+message Main2NetClient_LoginGame // IRequest
+{
+	int32 RpcId = 1;
+	string Account = 2;
+	int64 RealmKey = 3;
+	int64 RoleId = 4;
+	string GateAddress = 5;
+	int64 AccountId = 6;
+	int32  ReLink = 7;
+}
+
+message NetClient2Main_LoginGame // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+
+	int64 PlayerId = 4;
+}
+
+//ResponseType RobotClient2Main_Message
+message Main2RobotClient_Message // IRequest
+{
+	int32 RpcId = 1;
+	string Message = 2;
+}
+
+message RobotClient2Main_Message // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType RobotManager2Main_Message
+message Main2RobotManager_Message // IRequest
+{
+	int32 RpcId = 1;
+	string Message = 2;
+	int32 OpType = 3;
+	string OpParam = 4;
+}
+
+message RobotManager2Main_Message // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+//ResponseType NetClient2Main_CheckSession
+message Main2NetClient_CheckSession // IRequest
+{
+	int32 RpcId = 1;
+	int32 MapType = 2;
+}
+
+message NetClient2Main_CheckSession // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
