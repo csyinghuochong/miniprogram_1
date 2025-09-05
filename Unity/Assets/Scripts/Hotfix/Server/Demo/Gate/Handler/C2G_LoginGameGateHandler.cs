@@ -52,8 +52,7 @@ namespace ET.Server
                 g2LAddLoginRecord.AccountName = request.AccountName;
                 g2LAddLoginRecord.ServerId = root.Zone();
 
-                L2G_AddLoginRecord l2ARoleLogin = (L2G_AddLoginRecord)await root.GetComponent<MessageSender>()
-                        .Call(StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId, g2LAddLoginRecord);
+                L2G_AddLoginRecord l2ARoleLogin = (L2G_AddLoginRecord)await root.GetComponent<MessageSender>().Call(StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId, g2LAddLoginRecord);
 
                 if (l2ARoleLogin.Error != ErrorCode.ERR_Success)
                 {

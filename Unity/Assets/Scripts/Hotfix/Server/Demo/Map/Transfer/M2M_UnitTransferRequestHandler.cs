@@ -31,6 +31,7 @@ namespace ET.Server
             unit.AddComponent<MoveComponent>();
             
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
+            unit.GetComponent<DBSaveComponent>().Activeted();
             
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             
