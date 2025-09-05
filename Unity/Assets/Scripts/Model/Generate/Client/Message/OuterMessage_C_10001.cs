@@ -1957,24 +1957,15 @@ namespace ET
         public int PlayerOcc { get; set; }
 
         [MemoryPackOrder(3)]
-        public int WeaponId { get; set; }
-
-        [MemoryPackOrder(4)]
         public string PlayerName { get; set; }
 
-        [MemoryPackOrder(5)]
-        public int OccTwo { get; set; }
-
-        [MemoryPackOrder(6)]
-        public int EquipIndex { get; set; }
-
-        [MemoryPackOrder(7)]
+        [MemoryPackOrder(4)]
         public int RobotId { get; set; }
 
-        [MemoryPackOrder(8)]
+        [MemoryPackOrder(5)]
         public int ServerId { get; set; }
 
-        [MemoryPackOrder(9)]
+        [MemoryPackOrder(6)]
         public int State { get; set; }
 
         public override void Dispose()
@@ -1987,10 +1978,7 @@ namespace ET
             this.UnitId = default;
             this.PlayerLv = default;
             this.PlayerOcc = default;
-            this.WeaponId = default;
             this.PlayerName = default;
-            this.OccTwo = default;
-            this.EquipIndex = default;
             this.RobotId = default;
             this.ServerId = default;
             this.State = default;

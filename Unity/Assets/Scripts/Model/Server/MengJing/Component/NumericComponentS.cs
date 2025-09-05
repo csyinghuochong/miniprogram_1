@@ -167,8 +167,7 @@ namespace ET.Server
         {
             long old = self.GetByKey(numericType);
            
-            if (numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
-                numericType != NumericType.UnionTaskId && numericType != NumericType.DailyTaskID)
+            if (numericType != NumericType.Now_Hp)
             {
                 check = false;
             }
@@ -209,22 +208,6 @@ namespace ET.Server
                         changedValue = nowCostHp;
                     }
                     break;
-                
-                case NumericType.SkillUseMP:
-                    nowCostHp = self.GetAsLong(NumericType.Max_SkillUseMP) - self.GetAsLong(NumericType.SkillUseMP);
-                    if (changedValue >= nowCostHp)
-                    {
-                        changedValue = nowCostHp;
-                    }
-                    break;
-                
-                case NumericType.PetMeleeMoLi:
-                    nowCostHp = ConfigData.PetMeleeMoLiMax - self.GetAsLong(NumericType.PetMeleeMoLi);
-                    if (changedValue >= nowCostHp)
-                    {
-                        changedValue = nowCostHp;
-                    }
-                    break;      
             }
 
             long newvalue = self.GetAsLong(numericType) + changedValue;

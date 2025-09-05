@@ -41,18 +41,6 @@ namespace ET.Server
             switch (request.SceneType)
             {
                 case MapTypeEnum.MainCityScene:
-                    float last_x = numericComponent.GetAsFloat(NumericType.MainCity_X);
-                    float last_y = numericComponent.GetAsFloat(NumericType.MainCity_Y);
-                    float last_z = numericComponent.GetAsFloat(NumericType.MainCity_Z);
-                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-                    if (last_x ==0f)
-                    {
-                        unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
-                    }
-                    else
-                    {
-                        unit.Position = new float3(last_x, last_y, last_z);
-                    }
                     // 通知客户端创建My Unit
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);

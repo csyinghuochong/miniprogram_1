@@ -431,15 +431,12 @@ message PlayerInfo
 message CreateRoleInfo
 {
 	int64 UnitId = 1;
-	int32 PlayerLv = 2;
-	int32 PlayerOcc = 3;
-	int32 WeaponId = 4;
-	string PlayerName = 5;
-	int32 OccTwo = 6;
-	int32 EquipIndex = 7;
-	int32 RobotId = 8;
-	int32 ServerId = 9;
-	int32 State = 10;
+	int PlayerLv = 2;
+	int PlayerOcc = 3;
+	string PlayerName = 4;
+	int32 RobotId = 5;
+	int32 ServerId = 6;
+	int32 State = 7;
 }
 
 //ResponseType G2C_LoginGameGate

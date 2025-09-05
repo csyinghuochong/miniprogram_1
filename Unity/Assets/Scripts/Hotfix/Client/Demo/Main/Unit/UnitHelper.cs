@@ -32,8 +32,6 @@ namespace ET.Client
             return self.Type == UnitType.Monster;
         }
 
-        
-
         public static bool IsJingLingMonster(this Unit self)
         {
             if (self.Type != UnitType.Monster)
@@ -49,53 +47,6 @@ namespace ET.Client
         {
             PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
             return playerInfoComponent.CurrentRoleId;
-        }
-
-        public static int GetTeamDungeonXieZhu(this Unit self)
-        {
-            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
-            return numericComponent.GetAsInt(NumericType.TeamDungeonXieZhu);
-        }
-
-        public static int GetTeamDungeonTimes(this Unit self)
-        {
-            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
-            return numericComponent.GetAsInt(NumericType.TeamDungeonTimes);
-        }
-
-        public static int GetMaxPiLao(this Unit self)
-        {
-            return self.IsYueKaStates() ? GlobalValueConfigCategory.Instance.MaxPiLaoYuKaUser : GlobalValueConfigCategory.Instance.MaxPiLao;
-        }
-
-        public static bool IsYueKaStates(this Unit self)
-        {
-            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0;
-        }
-
-        public static bool IsYueKaEndStates(this Unit self)
-        {
-            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
-            return numericComponent.GetAsInt(NumericType.YueKaEndTime) > 0;
-        }
-
-        public static int GetMaoXianExp(this Unit self)
-        {
-            int rechargeNum = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
-            rechargeNum *= 10;
-            rechargeNum += self.GetComponent<NumericComponentC>().GetAsInt(NumericType.MaoXianExp);
-
-            Log.Debug(
-                $" GetMaoXianExp:  {self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber)}   {self.GetComponent<NumericComponentC>().GetAsInt(NumericType.MaoXianExp)}");
-
-            return rechargeNum;
-        }
-
-        public static int GetWuqiItemID(Scene root)
-        {
-            Unit unit = GetMyUnitFromClientScene(root);
-            int itemId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Weapon);
-            return itemId;
         }
 
         public static List<Unit> GetUnitList(Scene currentScene, int unitType)
@@ -161,15 +112,6 @@ namespace ET.Client
             return units;
         }
 
-        public static float3 GetBornPostion(this Unit self)
-        {
-            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
-            return new float3(numericComponent.GetAsFloat(NumericType.Born_X),
-                numericComponent.GetAsFloat(NumericType.Born_Y),
-                numericComponent.GetAsFloat(NumericType.Born_Z));
-        }
-        
-        
         public static bool IsSelfRobot(this Unit self)
         {
             // return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
@@ -180,7 +122,7 @@ namespace ET.Client
         {
             return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
         }
-        
+
         public static int GetMonsterSonType(this Unit self)
         {
             return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
@@ -188,29 +130,13 @@ namespace ET.Client
 
         public static bool GetMonsterShowDissolve(this Unit self)
         {
-            if (self.Type!= UnitType.Monster)
+            if (self.Type != UnitType.Monster)
             {
-                return false;   
+                return false;
             }
 
             int MonsterSonType = self.GetMonsterSonType();
             return MonsterSonType <= 50;
-        }
-        
-        public static long GetMasterId(this Unit self)
-        {
-            if (self.Type == UnitType.Player)
-            {
-                return self.Id;
-            }
-
-            if (self.Type == UnitType.Pet || self.Type == UnitType.Monster
-                || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture)
-            {
-                return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
-            }
-
-            return 0;
         }
 
         public static bool IsBoss(this Unit self)
@@ -223,61 +149,11 @@ namespace ET.Client
             return self.GetMonsterType() == MonsterTypeEnum.Boss;
         }
 
-        public static bool IsYeWaiMonster(this Unit self)
-        {
-            return self.Type == UnitType.Monster && self.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId) == 0;
-        }
-
-        public static int GetBattleCamp(this Unit self)
-        {
-            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleCamp);
-        }
-
-        public static long GetTeamId(this Unit self)
-        {
-            return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.TeamId);
-        }
-
-        public static bool IsSameTeam(this Unit self, Unit other)
-        {
-            if (self.Id == other.Id)
-            {
-                return true;
-            }
-
-            long teamid_1 = self.GetTeamId();
-            long teamid_2 = other.GetTeamId();
-            return teamid_1 == teamid_2 && teamid_1 != 0;
-        }
-
-        public static long GetUnionId(this Unit self)
-        {
-            return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-        }
-
-        public static long GetUnionLeader(this Unit self)
-        {
-            return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionLeader);
-        }
-
-        public static bool IsSameUnion(this Unit self, Unit other)
-        {
-            long teamid_1 = self.GetUnionId();
-            long teamid_2 = other.GetUnionId();
-            return teamid_1 == teamid_2 && teamid_1 != 0;
-        }
-
-        public static int GetAttackMode(this Unit self)
-        {
-            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.AttackMode);
-        }
-
-       
         public static List<Unit> GetUnitListByDis(Scene scene, float3 pos, int unitType, float maxdis)
         {
             List<Unit> list = new List<Unit>();
-            List<EntityRef<Unit>> allunits  = scene.GetComponent<UnitComponent>().GetAll();
-        
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
+
             for (int i = 0; i < allunits.Count; i++)
             {
                 Unit unit = allunits[i];
@@ -285,16 +161,18 @@ namespace ET.Client
                 {
                     continue;
                 }
-        
+
                 if (math.distance(pos, unit.Position) > maxdis)
                 {
                     continue;
                 }
+
                 list.Add(unit);
             }
+
             return list;
         }
-        
+
         public static bool IsHaveBoss(Scene scene, float3 vector3, float dis)
         {
             List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();

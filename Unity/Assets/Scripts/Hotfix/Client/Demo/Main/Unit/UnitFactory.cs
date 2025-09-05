@@ -9,18 +9,6 @@ namespace ET.Client
         {
             bool selfpet = false;
             bool mainScene = currentScene.Name.Equals(StringBuilderData.MainCity);
-            if (mainScene && unitInfo.Type == UnitType.Pet || unitInfo.Type == UnitType.JingLing)
-            {
-                long mainunitid = UnitHelper.GetMyUnitFromCurrentScene(currentScene).Id;
-                foreach (var kv in unitInfo.KV)
-                {
-                    if (kv.Key == NumericType.MasterId && kv.Value == mainunitid)
-                    {
-                        selfpet = true;
-                        break;
-                    }
-                }
-            }
 
             if (unitInfo.Type == UnitType.Npc)
             {

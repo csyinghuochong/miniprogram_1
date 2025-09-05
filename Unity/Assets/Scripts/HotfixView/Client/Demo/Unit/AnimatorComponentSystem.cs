@@ -25,7 +25,6 @@ namespace ET.Client
             GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
             self.InitController(gameObject);
             self.UpdateAnimator(gameObject);
-            self.UpdateController();
         }
         
         public static void InitController(this AnimatorComponent self, GameObject gameObject)
@@ -57,38 +56,6 @@ namespace ET.Client
             {
                 GameObject child = AnimatorList.transform.GetChild(i).gameObject;
                 self.animatorControllers.Add(child.GetComponent<Animator>().runtimeAnimatorController);
-            }
-        }
-
-        public static void UpdateController(this AnimatorComponent self)
-        {
-            Unit unit = self.GetParent<Unit>();
-            if (unit.Type != UnitType.Player || unit.ConfigId != 3)
-            {
-                return;
-            }
-
-            int equipIndex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex);
-            if (self.animatorControllers.Count < equipIndex)
-            {
-                equipIndex = 0;
-            }
-
-            GameObject gameObject = unit.GetComponent<GameObjectComponent>().GameObject;
-            Animator[] animator = gameObject.GetComponentsInChildren<Animator>();
-            animator[0].runtimeAnimatorController = self.animatorControllers[equipIndex];
-
-            self.Animator = animator;
-            self.animationClips.Clear();
-            self.Parameter.Clear();
-            foreach (AnimationClip animationClip in animator[0].runtimeAnimatorController.animationClips)
-            {
-                self.animationClips[animationClip.name] = animationClip;
-            }
-
-            foreach (AnimatorControllerParameter animatorControllerParameter in animator[0].parameters)
-            {
-                self.Parameter.Add(animatorControllerParameter.name);
             }
         }
 

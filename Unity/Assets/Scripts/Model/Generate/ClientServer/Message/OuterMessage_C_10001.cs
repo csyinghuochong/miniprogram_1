@@ -1957,24 +1957,15 @@ namespace ET
         public int PlayerOcc { get; set; }
 
         [MemoryPackOrder(3)]
-        public int WeaponId { get; set; }
-
-        [MemoryPackOrder(4)]
         public string PlayerName { get; set; }
 
-        [MemoryPackOrder(5)]
-        public int OccTwo { get; set; }
-
-        [MemoryPackOrder(6)]
-        public int EquipIndex { get; set; }
-
-        [MemoryPackOrder(7)]
+        [MemoryPackOrder(4)]
         public int RobotId { get; set; }
 
-        [MemoryPackOrder(8)]
+        [MemoryPackOrder(5)]
         public int ServerId { get; set; }
 
-        [MemoryPackOrder(9)]
+        [MemoryPackOrder(6)]
         public int State { get; set; }
 
         public override void Dispose()
@@ -1987,10 +1978,7 @@ namespace ET
             this.UnitId = default;
             this.PlayerLv = default;
             this.PlayerOcc = default;
-            this.WeaponId = default;
             this.PlayerName = default;
-            this.OccTwo = default;
-            this.EquipIndex = default;
             this.RobotId = default;
             this.ServerId = default;
             this.State = default;
@@ -3613,7 +3601,7 @@ namespace ET
         public long KeJiActiteTime { get; set; }
 
         /// <summary>
-        /// 家族金币
+        /// 公会金币
         /// </summary>
         [MemoryPackOrder(16)]
         public long UnionGold { get; set; }
@@ -16608,7 +16596,7 @@ namespace ET
         }
     }
 
-    // 家族争霸赛捐献
+    // 公会争霸赛捐献
     [MemoryPackable]
     [Message(OuterMessage.C2M_DonationRequest)]
     [ResponseType(nameof(M2C_DonationResponse))]
@@ -16965,7 +16953,7 @@ namespace ET
         }
     }
 
-    // 邀请玩家加入家族
+    // 邀请玩家加入公会
     [MemoryPackable]
     [Message(OuterMessage.C2M_UnionInviteRequest)]
     public partial class C2M_UnionInviteRequest : MessageObject, ILocationMessage
@@ -17216,7 +17204,7 @@ namespace ET
         }
     }
 
-    // 家族神秘商店道具
+    // 公会神秘商店道具
     [MemoryPackable]
     [Message(OuterMessage.C2M_UnionMysteryBuyRequest)]
     [ResponseType(nameof(M2C_UnionMysteryBuyResponse))]
@@ -17362,7 +17350,7 @@ namespace ET
         }
     }
 
-    // 家族修炼
+    // 公会修炼
     [MemoryPackable]
     [Message(OuterMessage.C2M_UnionXiuLianRequest)]
     [ResponseType(nameof(M2C_UnionXiuLianResponse))]
@@ -18067,7 +18055,7 @@ namespace ET
         }
     }
 
-    // 家族竞选
+    // 公会竞选
     [MemoryPackable]
     [Message(OuterMessage.C2U_UnionJingXuanRequest)]
     [ResponseType(nameof(U2C_UnionJingXuanResponse))]
@@ -18609,7 +18597,7 @@ namespace ET
         }
     }
 
-    // 家族神秘商店道具
+    // 公会神秘商店道具
     [MemoryPackable]
     [Message(OuterMessage.C2U_UnionMysteryListRequest)]
     [ResponseType(nameof(U2C_UnionMysteryListResponse))]
@@ -18627,7 +18615,7 @@ namespace ET
         public long ActorId { get; set; }
 
         /// <summary>
-        /// 家族ID
+        /// 公会ID
         /// </summary>
         [MemoryPackOrder(0)]
         public long UnionId { get; set; }
