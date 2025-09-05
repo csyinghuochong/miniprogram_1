@@ -1,0 +1,104 @@
+{ "skeleton": { "images": "C:/Users/40635/Desktop/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "阴影", "bone": "root", "attachment": "阴影" },
+	{ "name": "zuotui", "bone": "root", "attachment": "zuotui" },
+	{ "name": "youtui", "bone": "root", "attachment": "youtui" },
+	{ "name": "youjiao", "bone": "root", "attachment": "youjiao" },
+	{ "name": "zuojiao", "bone": "root", "attachment": "zuojiao" },
+	{ "name": "zuobi", "bone": "root", "attachment": "zuobi" },
+	{ "name": "zuowan", "bone": "root", "attachment": "zuowan" },
+	{ "name": "shenti", "bone": "root", "attachment": "shenti" },
+	{ "name": "youdabi", "bone": "root", "attachment": "youdabi" },
+	{ "name": "youwan", "bone": "root", "attachment": "youwan" },
+	{ "name": "kuzi", "bone": "root", "attachment": "kuzi" },
+	{ "name": "dun", "bone": "root", "attachment": "dun" },
+	{ "name": "gunzi", "bone": "root", "attachment": "gunzi" },
+	{ "name": "xianglian", "bone": "root", "attachment": "xianglian" },
+	{ "name": "tou", "bone": "root", "attachment": "tou" },
+	{ "name": "zuiba", "bone": "root", "attachment": "zuiba" },
+	{ "name": "toufa", "bone": "root", "attachment": "toufa" },
+	{ "name": "erduo", "bone": "root", "attachment": "erduo" },
+	{ "name": "youyan", "bone": "root", "attachment": "youyan" },
+	{ "name": "youmei", "bone": "root", "attachment": "youmei" },
+	{ "name": "zuomei", "bone": "root", "attachment": "zuomei" },
+	{ "name": "zuoyan", "bone": "root", "attachment": "zuoyan" },
+	{ "name": "bizi", "bone": "root", "attachment": "bizi" }
+],
+"skins": {
+	"default": {
+		"阴影": {
+			"阴影": { "x": -1, "y": 5, "width": 684, "height": 178 }
+		},
+		"zuotui": {
+			"zuotui": { "x": 9.5, "y": 126, "width": 119, "height": 136 }
+		},
+		"youtui": {
+			"youtui": { "x": 120, "y": 147.5, "width": 84, "height": 111 }
+		},
+		"youjiao": {
+			"youjiao": { "x": 138, "y": 56.5, "width": 82, "height": 119 }
+		},
+		"zuojiao": {
+			"zuojiao": { "x": -7, "y": 54, "width": 118, "height": 106 }
+		},
+		"zuobi": {
+			"zuobi": { "x": -78, "y": 288.5, "width": 82, "height": 101 }
+		},
+		"zuowan": {
+			"zuowan": { "x": -135.5, "y": 230.5, "width": 107, "height": 101 }
+		},
+		"shenti": {
+			"shenti": { "x": 41.5, "y": 265.5, "width": 191, "height": 233 }
+		},
+		"youdabi": {
+			"youdabi": { "x": 119.5, "y": 315.5, "width": 113, "height": 105 }
+		},
+		"youwan": {
+			"youwan": { "x": 203.5, "y": 235, "width": 115, "height": 128 }
+		},
+		"kuzi": {
+			"kuzi": { "x": 72.5, "y": 169.5, "width": 247, "height": 125 }
+		},
+		"dun": {
+			"dun": { "x": 223.5, "y": 222, "width": 189, "height": 222 }
+		},
+		"gunzi": {
+			"gunzi": { "x": -298, "y": 283, "width": 316, "height": 320 }
+		},
+		"xianglian": {
+			"xianglian": { "x": -7.5, "y": 307.5, "width": 125, "height": 151 }
+		},
+		"tou": {
+			"tou": { "x": -54, "y": 517, "width": 440, "height": 366 }
+		},
+		"zuiba": {
+			"zuiba": { "x": -94, "y": 371, "width": 52, "height": 32 }
+		},
+		"toufa": {
+			"toufa": { "x": -27, "y": 708.5, "width": 270, "height": 129 }
+		},
+		"erduo": {
+			"erduo": { "x": 157, "y": 529.5, "width": 150, "height": 105 }
+		},
+		"youyan": {
+			"youyan": { "x": -76.5, "y": 527.5, "width": 127, "height": 131 }
+		},
+		"youmei": {
+			"youmei": { "x": -127, "y": 596, "width": 36, "height": 32 }
+		},
+		"zuomei": {
+			"zuomei": { "x": -188.5, "y": 594.5, "width": 33, "height": 31 }
+		},
+		"zuoyan": {
+			"zuoyan": { "x": -217, "y": 528, "width": 88, "height": 94 }
+		},
+		"bizi": {
+			"bizi": { "x": -168.5, "y": 451.5, "width": 183, "height": 135 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

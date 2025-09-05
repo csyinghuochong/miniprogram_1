@@ -1,0 +1,125 @@
+
+CAOTUAN.png
+size: 200,269
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+atk-l
+  rotate: true
+  xy: 149, 67
+  size: 27, 26
+  orig: 33, 34
+  offset: 3, 4
+  index: -1
+body
+  rotate: true
+  xy: 34, 96
+  size: 171, 155
+  orig: 171, 155
+  offset: 0, 0
+  index: -1
+eye-l-atk
+  rotate: false
+  xy: 101, 64
+  size: 26, 30
+  orig: 28, 32
+  offset: 1, 1
+  index: -1
+eye-l-beattack
+  rotate: false
+  xy: 172, 2
+  size: 26, 18
+  orig: 26, 18
+  offset: 0, 0
+  index: -1
+eye-l-death
+  rotate: false
+  xy: 132, 2
+  size: 19, 14
+  orig: 21, 17
+  offset: 1, 2
+  index: -1
+eye-r
+  rotate: true
+  xy: 2, 4
+  size: 56, 35
+  orig: 56, 35
+  offset: 0, 0
+  index: -1
+eye-r-atk
+  rotate: true
+  xy: 156, 22
+  size: 43, 40
+  orig: 43, 40
+  offset: 0, 0
+  index: -1
+eye-r-beattack
+  rotate: true
+  xy: 92, 17
+  size: 44, 36
+  orig: 45, 36
+  offset: 1, 0
+  index: -1
+eye-r-death
+  rotate: true
+  xy: 34, 62
+  size: 32, 20
+  orig: 34, 22
+  offset: 1, 1
+  index: -1
+flower
+  rotate: true
+  xy: 39, 8
+  size: 52, 51
+  orig: 54, 53
+  offset: 1, 1
+  index: -1
+hand-l
+  rotate: false
+  xy: 177, 69
+  size: 20, 25
+  orig: 22, 27
+  offset: 1, 1
+  index: -1
+hand-r
+  rotate: false
+  xy: 56, 63
+  size: 43, 31
+  orig: 45, 33
+  offset: 1, 1
+  index: -1
+mouth
+  rotate: false
+  xy: 153, 4
+  size: 17, 12
+  orig: 19, 14
+  offset: 1, 1
+  index: -1
+mouth-atk
+  rotate: true
+  xy: 129, 64
+  size: 30, 18
+  orig: 30, 18
+  offset: 0, 0
+  index: -1
+mouth-beattack
+  rotate: true
+  xy: 130, 18
+  size: 44, 24
+  orig: 50, 28
+  offset: 6, 0
+  index: -1
+mouth-death
+  rotate: false
+  xy: 92, 2
+  size: 38, 13
+  orig: 40, 15
+  offset: 1, 1
+  index: -1
+yinying
+  rotate: true
+  xy: 2, 62
+  size: 205, 30
+  orig: 207, 32
+  offset: 1, 1
+  index: -1

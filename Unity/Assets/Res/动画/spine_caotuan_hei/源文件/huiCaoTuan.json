@@ -1,0 +1,80 @@
+{ "skeleton": { "images": "/g/H5/HeiCaoTuan/1/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "yinying", "bone": "root", "attachment": "yinying" },
+	{ "name": "hand-l", "bone": "root", "attachment": "hand-l" },
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "hand-r", "bone": "root", "attachment": "hand-r" },
+	{ "name": "flower", "bone": "root", "attachment": "flower" },
+	{ "name": "eye-r-atk", "bone": "root", "attachment": "eye-r-atk" },
+	{ "name": "eye-r-beattack", "bone": "root", "attachment": "eye-r-beattack" },
+	{ "name": "eye-r-death", "bone": "root", "attachment": "eye-r-death" },
+	{ "name": "eye-r", "bone": "root", "attachment": "eye-r" },
+	{ "name": "eye-l-atk", "bone": "root", "attachment": "eye-l-atk" },
+	{ "name": "eye-l-beattack", "bone": "root", "attachment": "eye-l-beattack" },
+	{ "name": "atk-l", "bone": "root", "attachment": "atk-l" },
+	{ "name": "eye-l-death", "bone": "root", "attachment": "eye-l-death" },
+	{ "name": "mouth-atk", "bone": "root", "attachment": "mouth-atk" },
+	{ "name": "mouth", "bone": "root", "attachment": "mouth" },
+	{ "name": "mouth-beattack", "bone": "root", "attachment": "mouth-beattack" },
+	{ "name": "mouth-death", "bone": "root", "attachment": "mouth-death" }
+],
+"skins": {
+	"default": {
+		"yinying": {
+			"yinying": { "x": 4.81999999999999, "y": 674.47, "width": 207, "height": 32 }
+		},
+		"hand-l": {
+			"hand-l": { "x": -43.46, "y": 690.83, "width": 22, "height": 27 }
+		},
+		"body": {
+			"body": { "x": 10.58, "y": 752.23, "width": 171, "height": 155 }
+		},
+		"hand-r": {
+			"hand-r": { "x": 17.54, "y": 676.61, "width": 45, "height": 33 }
+		},
+		"flower": {
+			"flower": { "x": -36.04, "y": 808.51, "width": 54, "height": 53 }
+		},
+		"eye-r-atk": {
+			"eye-r-atk": { "x": -8.20999999999998, "y": 739.77, "width": 43, "height": 40 }
+		},
+		"eye-r-beattack": {
+			"eye-r-beattack": { "x": -6.88, "y": 737.81, "width": 45, "height": 36 }
+		},
+		"eye-r-death": {
+			"eye-r-death": { "x": -11.72, "y": 736.56, "width": 34, "height": 22 }
+		},
+		"eye-r": {
+			"eye-r": { "x": -7.64999999999998, "y": 738.64, "width": 56, "height": 35 }
+		},
+		"eye-l-atk": {
+			"eye-l-atk": { "x": -58.94, "y": 751.69, "width": 28, "height": 32 }
+		},
+		"eye-l-beattack": {
+			"eye-l-beattack": { "x": -61.92, "y": 746.15, "width": 26, "height": 18 }
+		},
+		"atk-l": {
+			"atk-l": { "x": -60.07, "y": 751.68, "width": 33, "height": 34 }
+		},
+		"eye-l-death": {
+			"eye-l-death": { "x": -59.8, "y": 745, "width": 21, "height": 17 }
+		},
+		"mouth-atk": {
+			"mouth-atk": { "x": -45.73, "y": 718.1, "width": 30, "height": 18 }
+		},
+		"mouth": {
+			"mouth": { "x": -45.62, "y": 722.08, "width": 19, "height": 14 }
+		},
+		"mouth-beattack": {
+			"mouth-beattack": { "x": -49.92, "y": 721.02, "width": 50, "height": 28 }
+		},
+		"mouth-death": {
+			"mouth-death": { "x": -45.02, "y": 717.62, "width": 40, "height": 15 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

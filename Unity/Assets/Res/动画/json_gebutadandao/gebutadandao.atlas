@@ -1,0 +1,69 @@
+
+gebutadandao.png
+size: 376,995
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 418
+  size: 234, 149
+  orig: 237, 151
+  offset: 1, 1
+  index: -1
+2
+  rotate: true
+  xy: 284, 164
+  size: 80, 90
+  orig: 82, 92
+  offset: 1, 1
+  index: -1
+3
+  rotate: false
+  xy: 2, 952
+  size: 353, 41
+  orig: 355, 43
+  offset: 1, 1
+  index: -1
+4
+  rotate: false
+  xy: 2, 699
+  size: 352, 251
+  orig: 355, 257
+  offset: 1, 3
+  index: -1
+5
+  rotate: true
+  xy: 227, 10
+  size: 234, 55
+  orig: 236, 57
+  offset: 1, 1
+  index: -1
+6
+  rotate: false
+  xy: 227, 246
+  size: 126, 170
+  orig: 130, 174
+  offset: 2, 2
+  index: -1
+7
+  rotate: true
+  xy: 238, 418
+  size: 149, 135
+  orig: 151, 137
+  offset: 1, 1
+  index: -1
+8
+  rotate: false
+  xy: 2, 569
+  size: 332, 128
+  orig: 384, 187
+  offset: 25, 1
+  index: -1
+9
+  rotate: true
+  xy: 2, 2
+  size: 414, 223
+  orig: 427, 226
+  offset: 12, 2
+  index: -1

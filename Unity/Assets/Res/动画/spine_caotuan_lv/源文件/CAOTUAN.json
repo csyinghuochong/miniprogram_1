@@ -1,0 +1,100 @@
+{ "skeleton": { "images": "/g/H5/1/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "yingying", "bone": "root", "attachment": "yingying" },
+	{ "name": "hand-l", "bone": "root", "attachment": "hand-l" },
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "hand-r", "bone": "root", "attachment": "hand-r" },
+	{ "name": "vine", "bone": "root", "attachment": "vine" },
+	{ "name": "flower", "bone": "root", "attachment": "flower" },
+	{ "name": "f-1", "bone": "root", "attachment": "f-1" },
+	{ "name": "f-2", "bone": "root", "attachment": "f-2" },
+	{ "name": "f-3", "bone": "root", "attachment": "f-3" },
+	{ "name": "f-4", "bone": "root", "attachment": "f-4" },
+	{ "name": "eye-r-atk", "bone": "root", "attachment": "eye-r-atk" },
+	{ "name": "eye-r-beattack", "bone": "root", "attachment": "eye-r-beattack" },
+	{ "name": "eye-r-death", "bone": "root", "attachment": "eye-r-death" },
+	{ "name": "eye-r", "bone": "root", "attachment": "eye-r" },
+	{ "name": "eye-l-atk", "bone": "root", "attachment": "eye-l-atk" },
+	{ "name": "eye-l-beattack", "bone": "root", "attachment": "eye-l-beattack" },
+	{ "name": "atk-l", "bone": "root", "attachment": "atk-l" },
+	{ "name": "eye-l-death", "bone": "root", "attachment": "eye-l-death" },
+	{ "name": "mouth-atk", "bone": "root", "attachment": "mouth-atk" },
+	{ "name": "mouth", "bone": "root", "attachment": "mouth" },
+	{ "name": "mouth-beattack", "bone": "root", "attachment": "mouth-beattack" },
+	{ "name": "mouth-death", "bone": "root", "attachment": "mouth-death" }
+],
+"skins": {
+	"default": {
+		"yingying": {
+			"yingying": { "x": 0.85999999999999, "y": 675.79, "width": 207, "height": 32 }
+		},
+		"hand-l": {
+			"hand-l": { "x": -48.25, "y": 691.17, "width": 21, "height": 25 }
+		},
+		"body": {
+			"body": { "x": 6.62, "y": 753.55, "width": 171, "height": 155 }
+		},
+		"hand-r": {
+			"hand-r": { "x": 13.09, "y": 677.6, "width": 46, "height": 33 }
+		},
+		"vine": {
+			"vine": { "x": -47.78, "y": 795.27, "width": 16, "height": 28 }
+		},
+		"flower": {
+			"flower": { "x": -75.79, "y": 815.25, "width": 57, "height": 58 }
+		},
+		"f-1": {
+			"f-1": { "x": -87.39, "y": 815.27, "width": 80, "height": 54 }
+		},
+		"f-2": {
+			"f-2": { "x": -90.24, "y": 815.27, "width": 71, "height": 54 }
+		},
+		"f-3": {
+			"f-3": { "x": -91.05, "y": 814.26, "width": 74, "height": 58 }
+		},
+		"f-4": {
+			"f-4": { "x": -90.21, "y": 815.27, "width": 77, "height": 54 }
+		},
+		"eye-r-atk": {
+			"eye-r-atk": { "x": -13.16, "y": 742.41, "width": 43, "height": 40 }
+		},
+		"eye-r-beattack": {
+			"eye-r-beattack": { "x": -11.83, "y": 740.45, "width": 45, "height": 36 }
+		},
+		"eye-r-death": {
+			"eye-r-death": { "x": -30.53, "y": 740.19, "width": 34, "height": 22 }
+		},
+		"eye-r": {
+			"eye-r": { "x": -12.35, "y": 742.9, "width": 40, "height": 41 }
+		},
+		"eye-l-atk": {
+			"eye-l-atk": { "x": -62.57, "y": 754.33, "width": 28, "height": 32 }
+		},
+		"eye-l-beattack": {
+			"eye-l-beattack": { "x": -65.55, "y": 748.79, "width": 26, "height": 18 }
+		},
+		"atk-l": {
+			"atk-l": { "x": -63.24, "y": 752.71, "width": 26, "height": 26 }
+		},
+		"eye-l-death": {
+			"eye-l-death": { "x": -63.43, "y": 745.99, "width": 21, "height": 17 }
+		},
+		"mouth-atk": {
+			"mouth-atk": { "x": -48.7, "y": 726.68, "width": 30, "height": 18 }
+		},
+		"mouth": {
+			"mouth": { "x": -48.7, "y": 729.18, "width": 30, "height": 13 }
+		},
+		"mouth-beattack": {
+			"mouth-beattack": { "x": -53.88, "y": 724.65, "width": 50, "height": 28 }
+		},
+		"mouth-death": {
+			"mouth-death": { "x": -48.32, "y": 721.91, "width": 40, "height": 15 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
