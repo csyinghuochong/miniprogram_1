@@ -12,8 +12,7 @@
         "Unity.ModelView",
         "YooAsset",
         "Coffee.UIParticle",
-        "Coffee.UIEffect",
-        "EPO"
+        "Coffee.UIEffect"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
