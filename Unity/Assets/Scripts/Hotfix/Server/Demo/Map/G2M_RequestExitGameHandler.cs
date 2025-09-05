@@ -3,7 +3,7 @@ using System;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    public class G2M_RequestExitGameHandler : MessageLocationHandler<Unit,G2M_RequestExitGame,M2G_RequestExitGame>
+    public class G2M_RequestExitGameHandler : MessageLocationHandler<Unit, G2M_RequestExitGame, M2G_RequestExitGame>
     {
         protected override async ETTask Run(Unit unit, G2M_RequestExitGame request, M2G_RequestExitGame response)
         {
@@ -16,7 +16,7 @@ namespace ET.Server
             await ETTask.CompletedTask;
         }
 
-        private async ETTask RemoveLocation( Scene root,  long untid)
+        private async ETTask RemoveLocation(Scene root, long untid)
         {
             await root.GetComponent<TimerComponent>().WaitFrameAsync();
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(untid);
@@ -25,11 +25,10 @@ namespace ET.Server
         private async ETTask RemoveUnit(Unit unit)
         {
             await unit.Fiber().WaitFrameFinish();
-            
+
             await unit.RemoveLocation(LocationType.Unit);
-            
+
             unit.GetComponent<DBSaveComponent>().OnDisconnect();
         }
-        
     }
 }

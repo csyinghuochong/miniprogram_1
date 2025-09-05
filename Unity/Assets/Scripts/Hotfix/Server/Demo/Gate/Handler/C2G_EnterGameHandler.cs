@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [FriendOf(typeof (UserInfoComponentS))]
     [FriendOf(typeof (Unit))]
     [MessageSessionHandler(SceneType.Gate)]
     public class C2G_EnterGameHandler: MessageSessionHandler<C2G_EnterGame, G2C_EnterGame>
@@ -106,7 +105,7 @@ namespace ET.Server
                             response.Error = ErrorCode.ERR_NotFindAccount;
                             return;
                         }
-
+                        
                         CreateRoleInfo createRoleInfo = newAccountList[0].GetRoleInfo(session.Zone(), request.UnitId);
                         if (createRoleInfo == null)
                         {
@@ -116,34 +115,30 @@ namespace ET.Server
 
                         // 在Gate上动态创建一个Map Scene，把Unit从DB中加载放进来，然后传送到真正的Map中，这样登陆跟传送的逻辑就完全一样了
                         GateMapComponent gateMapComponent = player.AddComponent<GateMapComponent>();
-                        gateMapComponent.Scene =
-                                GateMapFactory.Create(gateMapComponent, player.Id, IdGenerater.Instance.GenerateInstanceId(), "GateMap");
+                        gateMapComponent.Scene = GateMapFactory.Create(gateMapComponent, player.Id, IdGenerater.Instance.GenerateInstanceId(), "GateMap");
 
                         Scene scene = gateMapComponent.Scene;
 
                         player.UnitId = request.UnitId;
-                        player.ActivityServerId = UnitCacheHelper.GetActivityServerId(session.Zone());
-                        player.FriendServerId = UnitCacheHelper.GetFriendServerId(session.Zone());
-                        player.MailServerID = UnitCacheHelper.GetMailServerId(session.Zone());
-                        player.RankServerID = UnitCacheHelper.GetRankServerId(session.Zone());
-                        player.PaiMaiServerID = UnitCacheHelper.GetPaiMaiServerId(session.Zone());
-                        player.UnionServerID = UnitCacheHelper.GetUnionServerId(session.Zone());
-                        player.SoloServerID = UnitCacheHelper.GetSoloServerId(session.Zone());
-                        player.PetMatchServerID = UnitCacheHelper.GetPetMatchServerId(session.Zone());
-                        player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
-                        player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
+                        // player.ActivityServerId = UnitCacheHelper.GetActivityServerId(session.Zone());
+                        // player.FriendServerId = UnitCacheHelper.GetFriendServerId(session.Zone());
+                        // player.MailServerID = UnitCacheHelper.GetMailServerId(session.Zone());
+                        // player.RankServerID = UnitCacheHelper.GetRankServerId(session.Zone());
+                        // player.PaiMaiServerID = UnitCacheHelper.GetPaiMaiServerId(session.Zone());
+                        // player.UnionServerID = UnitCacheHelper.GetUnionServerId(session.Zone());
+                        // player.SoloServerID = UnitCacheHelper.GetSoloServerId(session.Zone());
+                        // player.PetMatchServerID = UnitCacheHelper.GetPetMatchServerId(session.Zone());
+                        // player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
+                        // player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
                         player.PlayerState = PlayerState.Game;
                         Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = request.UnitId;
- 
-                        player.ChatInfoInstanceId = await EnterWorldChatServer(unit); //登录聊天服
+                        
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 
-                        unit.GetComponent<ChengJiuComponentS>().CheckData();
-                        Function_Fight.UnitUpdateProperty_Base(unit,false, false);
-                        unit.OnLogin(session.RemoteAddress.ToString(), "");
-
+                        unit.GetComponent<DBSaveComponent>().OnLogin();
+                        
                         TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 
                         player.PlayerState = PlayerState.Game;
@@ -157,19 +152,6 @@ namespace ET.Server
                     }
                 }
             }
-        }
-
-        private async ETTask<long> EnterWorldChatServer(Unit unit)
-        {
-            ActorId chatServerId = UnitCacheHelper.GetChatId(unit.Zone());
-            G2Chat_EnterChat g2ChatEnterChat = G2Chat_EnterChat.Create(); 
-            g2ChatEnterChat.UnitId = unit.Id;
-            g2ChatEnterChat.Name = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-            g2ChatEnterChat.UnionId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
-            g2ChatEnterChat.GateSessionActorId = unit.Id;
-            Chat2G_EnterChat chat2G_EnterChat = (Chat2G_EnterChat)await unit.Root().GetComponent<MessageSender>().Call(chatServerId,
-                g2ChatEnterChat);
-            return chat2G_EnterChat.ChatInfoUnitInstanceId;
         }
     }
 }

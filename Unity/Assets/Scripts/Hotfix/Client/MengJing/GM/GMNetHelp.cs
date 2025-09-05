@@ -17,26 +17,5 @@ namespace ET.Client
             C2M_GMCommand request = new() { GMMsg = gm, Account = scene.GetComponent<PlayerInfoComponent>().Account };
             scene.GetComponent<ClientSenderCompnent>().Send(request);
         }
-
-        public static void SendGmCommands(Scene scene, string gmlist)
-        {
-            if (gmlist.Contains("chuji"))
-            {
-                ExcurteGmList(scene, ET.GMHelp.GetChuJi());
-                return;
-            }
-
-            if (gmlist.Contains("zhongji"))
-            {
-                ExcurteGmList(scene, ET.GMHelp.GetZhongJi());
-                return;
-            }
-
-            if (gmlist.Contains("gaoji"))
-            {
-                ExcurteGmList(scene, ET.GMHelp.GetGaopJi());
-                return;
-            }
-        }
     }
 }

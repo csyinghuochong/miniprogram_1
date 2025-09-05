@@ -250,17 +250,7 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Chat").ActorId;
         }
-
-        public static ActorId GetActivityServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Activity.ToString()).ActorId;
-        }
-
-        public static ActorId GetTeamServerId(int zone)
-        { 
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Team.ToString()).ActorId;
-        }
-
+        
         public static ActorId GetRechargeCenter()
         {
             return StartSceneConfigCategory.Instance.RechargeConfig.ActorId;
@@ -276,71 +266,16 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Queue.ToString()).ActorId;
         }
-
-        public static ActorId GetFriendServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Friend.ToString()).ActorId;
-        }
-        
-        public static ActorId GetChatId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Chat.ToString()).ActorId;
-        }
-        
-        public static ActorId GetPaiMaiServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.PaiMai.ToString()).ActorId;
-        }
-        
-        public static ActorId GetRankServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Rank.ToString()).ActorId;
-        }
-        
-        public static ActorId GetFubenCenterId(int zone, int index = 1)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, "FubenCenter" + index).ActorId;
-        }
-        
-        public static ActorId GetUnionServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Union.ToString()).ActorId;
-        }
-        
-        public static ActorId GetPetMatchServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.PetMatch.ToString()).ActorId;
-        }
-        
-        public static ActorId GetSoloServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Solo.ToString()).ActorId;
-        }
-
-        public static ActorId GetPopularizeServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Popularize.ToString()).ActorId;
-        }
         
         public static ActorId MainCityServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, $"Map101").ActorId;
         }
         
-        public static ActorId GetMailServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.EMail.ToString()).ActorId;
-        }
-        
         public static ActorId GetRobotServerId()
         {
             ActorId robotSceneId = StartSceneConfigCategory.Instance.RobotManagerConfig.ActorId;
             return robotSceneId;
-        }
-
-        public static ActorId GetJiaYuanServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.JiaYuan.ToString()).ActorId;
         }
         
         public static List<ActorId> GetGateServerId(int zone)

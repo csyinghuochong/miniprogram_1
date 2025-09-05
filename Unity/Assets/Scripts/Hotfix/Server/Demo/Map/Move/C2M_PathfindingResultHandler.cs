@@ -21,11 +21,6 @@ namespace ET.Server
         
         protected override async ETTask Run(Unit unit, C2M_PathfindingResult message)
         {
-            if (unit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.Transfer))
-            {
-                return;
-            }
-
             M2C_PathfindingResult m2CPathfindingResult = new();
            
             MoveComponent  moveComponent = unit.GetComponent<MoveComponent>();

@@ -11,7 +11,7 @@ namespace ET.Client
             if (mapComponent.MapType < MapTypeEnum.MainCityScene)
             {
                 //直接返回登陆
-                EventSystem.Instance.Publish(root, new ReturnLogin());
+                // EventSystem.Instance.Publish(root, new ReturnLogin());
                 return;
             }
             root.GetComponent<PlayerInfoComponent>().DisconnectType = message.Error;

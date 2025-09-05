@@ -10,7 +10,7 @@ namespace ET.Client
             
             // await UserInfoNetHelper.RequestUserInfoInit(root);
             // await UserInfoNetHelper.RequestFreshUnit(root);
-            EventSystem.Instance.Publish(root, new RelinkSucess());
+            // EventSystem.Instance.Publish(root, new RelinkSucess());
 
             await ETTask.CompletedTask;
         }

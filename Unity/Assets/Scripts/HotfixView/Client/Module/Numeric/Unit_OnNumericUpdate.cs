@@ -25,14 +25,14 @@
                         costHp = (nowHpValue - args.OldValue);
                     }
 
-                    EventSystem.Instance.Publish(args.Defend.Root(), new Now_Hp_Update()
-                    {
-                        Defend = args.Defend,
-                        ChangeHpValue = costHp,
-                        DamgeType = args.DamgeType,
-                        SkillID = args.SkillId,
-                        AttackId = args.AttackId
-                    });
+                    // EventSystem.Instance.Publish(args.Defend.Root(), new Now_Hp_Update()
+                    // {
+                    //     Defend = args.Defend,
+                    //     ChangeHpValue = costHp,
+                    //     DamgeType = args.DamgeType,
+                    //     SkillID = args.SkillId,
+                    //     AttackId = args.AttackId
+                    // });
                     break;
                 default:
                     break;

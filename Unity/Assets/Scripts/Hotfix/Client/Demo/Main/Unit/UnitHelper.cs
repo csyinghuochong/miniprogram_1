@@ -168,25 +168,8 @@ namespace ET.Client
                 numericComponent.GetAsFloat(NumericType.Born_Y),
                 numericComponent.GetAsFloat(NumericType.Born_Z));
         }
-
-        public static bool IsChest(this Unit self)
-        {
-            if (self.Type != UnitType.Monster)
-            {
-                return false;
-            }
-
-            int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
-            return sonType == MonsterSonTypeEnum.Type_55 || sonType == MonsterSonTypeEnum.Type_56 || sonType == MonsterSonTypeEnum.Type_57;
-        }
-
-        public static int GetEquipType(Scene root)
-        {
-            Unit unit = GetMyUnitFromClientScene(root);
-            int itemId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Weapon);
-            return ItemHelper.GetEquipType(unit.ConfigId, itemId);
-        }
-
+        
+        
         public static bool IsSelfRobot(this Unit self)
         {
             // return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;

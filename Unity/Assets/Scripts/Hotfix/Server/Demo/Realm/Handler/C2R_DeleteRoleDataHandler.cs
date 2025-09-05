@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [FriendOf(typeof (UserInfoComponentS))]
     [MessageSessionHandler(SceneType.Realm)]
     public class C2R_DeleteRoleDataHandler: MessageSessionHandler<C2R_DeleteRoleData, R2C_DeleteRoleData>
     {

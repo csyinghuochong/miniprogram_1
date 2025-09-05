@@ -101,9 +101,6 @@ namespace ET
                     case SceneType.RobotManager:
                         this.RobotManagerConfig = startSceneConfig;
                         break;
-                    case SceneType.Chat:
-                        this.ChatConfig = startSceneConfig;
-                        break;
                 }
             }
         }

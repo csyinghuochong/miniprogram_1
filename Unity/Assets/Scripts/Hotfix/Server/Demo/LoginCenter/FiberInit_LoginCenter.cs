@@ -16,7 +16,7 @@ namespace ET.Server
             root.AddComponent<MessageSender>();
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<LoginInfoRecordComponent>();
-            root.AddComponent<FangChenMiComponentS>();
+
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get(root.Fiber.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
             

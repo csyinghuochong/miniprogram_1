@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-	[FriendOf(typeof(UserInfoComponentS))]
     [MessageSessionHandler(SceneType.Realm)]
     public class C2R_CreateRoleDataHandler: MessageSessionHandler<C2R_CreateRoleData, R2C_CreateRoleData>
     {
@@ -49,12 +48,6 @@ namespace ET.Server
 				using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccountId.GetHashCode()))
 				{
 					DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(request.ServerId);
-					List<UserInfoComponentS> result = await dbComponent.Query<UserInfoComponentS>(request.ServerId, _account => _account.UserName == request.CreateName);
-					if (result.Count > 0)
-					{
-						response.Error = ErrorCode.ERR_RoleNameRepeat;
-						return;
-					}
 
 					int zone = session.Zone();
 					dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(zone);
@@ -85,21 +78,6 @@ namespace ET.Server
             
             await ETTask.CompletedTask;
         }
-        
-        //获取角色创建列表信息
-        public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID)
-        {
-	        CreateRoleInfo roleList = CreateRoleInfo.Create();
-
-	        roleList.OccTwo =  userInfo.OccTwo;
-	        roleList.UnitId = userID;
-	        roleList.PlayerName = userInfo.Name;
-	        roleList.PlayerLv = userInfo.Lv;
-	        roleList.PlayerOcc = userInfo.Occ;
-
-	        return roleList;
-        }
-
     }
 }
 	

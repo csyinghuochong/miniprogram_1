@@ -171,46 +171,9 @@ namespace ET.Client
                 case MapTypeEnum.MainCityScene:
                     music = "MainCity";
                     break;
-                case MapTypeEnum.TeamDungeon:
-                case MapTypeEnum.JiaYuan:
-                    music = SceneConfigCategory.Instance.Get(sceneId).Music;
-                    break;
-                case MapTypeEnum.CellDungeon:
-                case MapTypeEnum.DragonDungeon:  
-                    music = CellGenerateConfigCategory.Instance.Get(sceneId).Music;
-                    CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(sonsceneid);
-                    // string[] monsters = chapterSonConfig.CreateMonster.Split('@');
-                    //
-                    // for (int i = 0; i < monsters.Length; i++)
-                    // {
-                    //     if (monsters[i] == "0")
-                    //     {
-                    //         continue;
-                    //     }
-                    //
-                    //     string[] mondels = monsters[i].Split(';');
-                    //     string[] monsterid = mondels[2].Split(',');
-                    //     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(int.Parse(monsterid[0]));
-                    //     if (monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss)
-                    //     {
-                    //         music = "Boss";
-                    //         break;
-                    //     }
-                    // }
-                    break;
-                case MapTypeEnum.LocalDungeon:
-                    music =DungeonConfigCategory.Instance.Get(sceneId).Music;
-                    break;
                 default:
                     music = "Fight_1";
                     break;
-            }
-
-            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if(SceneConfigHelper.UseSceneConfig(sceneTypeEnum))
-            {
-                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
-                music = sceneConfig.Music;
             }
             
             if (music != "")

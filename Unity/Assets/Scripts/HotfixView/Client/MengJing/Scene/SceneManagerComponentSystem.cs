@@ -42,16 +42,6 @@ namespace ET.Client
                     string scenepath = sceneid.ToString();
                     paramss = scenepath;
                     break;
-                case MapTypeEnum.CellDungeon:
-                    paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
-                    break;
-                case MapTypeEnum.DragonDungeon:
-                    paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
-                    break;
-                case MapTypeEnum.LocalDungeon:
-                    paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
-                    playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
-                    break;
                 default:
                     paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();
                     break;
@@ -114,7 +104,7 @@ namespace ET.Client
             }
 
             int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
-            self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, sceneid, sousceneid);
+            // self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, sceneid, sousceneid);
         }
 
         public static void BeforeChangeScene(this SceneManagerComponent self)

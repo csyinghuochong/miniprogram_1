@@ -5,8 +5,6 @@ namespace ET
 {
     public static class NumericHelp
     {
-
-
         /// <summary>
         /// 1 标识整数  2表示浮点数
         /// </summary>
@@ -61,41 +59,6 @@ namespace ET
             }
         }
 
-        public static void GetProList(string prolist, List<PropertyValue> proList)
-        {
-            string[] attributeInfoList = prolist.Split('@');
-            for (int a = 0; a < attributeInfoList.Length; a++)
-            {
-                if (CommonHelp.IfNull(attributeInfoList[a]))
-                {
-                    continue;
-                }
-
-                string[] attributeInfo = attributeInfoList[a].Split(';');
-                int numericType = int.Parse(attributeInfo[0]);
-
-                if (GetNumericValueType(numericType) == 2)
-                {
-                    float fvalue = float.Parse(attributeInfo[1]);
-                    proList.Add(new PropertyValue() { HideID = numericType, HideValue = (long)(fvalue * 10000) });
-                }
-                else
-                {
-                    long lvalue = 0;
-                    try
-                    {
-                        lvalue = long.Parse(attributeInfo[1]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Debug(ex.ToString() + $"报错 {prolist}");
-                    }
-
-                    proList.Add(new PropertyValue() { HideID = numericType, HideValue = lvalue });
-                }
-            }
-        }
-
         //传入值和类型返回对应值
         public static int NumericValueSaveType(int key, float value)
         {
@@ -107,38 +70,6 @@ namespace ET
             {
                 return (int)(value);
             }
-        }
-
-        /// <summary>
-        /// 活力上限。 零点恢复活力
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="skillNumber"></param>
-        /// <returns></returns>
-        public static int GetMaxHuoLi(this Unit self, int skillNumber)
-        {
-            //开启双职业活力恢复增强
-            if (skillNumber >= 2)
-            {
-                return (int)(GlobalValueConfigCategory.Instance.MaxHuoLi * 1.5f);
-            }
-
-            return GlobalValueConfigCategory.Instance.MaxHuoLi;
-        }
-
-        public static long GetAttributeValue(RolePetInfo rolePetInfo, int numericType)
-        {
-            for (int i = 0; i < rolePetInfo.Ks.Count; i++)
-            {
-                if (rolePetInfo.Ks[i] == numericType)
-                {
-                    return rolePetInfo.Vs[i];
-                }
-            }
-
-            //从其他字段寻找
-            //if (numericType == )
-            return 0;
         }
 
         //传入子值返回母值

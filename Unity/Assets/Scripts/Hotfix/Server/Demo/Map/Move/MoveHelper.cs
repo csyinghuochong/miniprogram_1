@@ -9,15 +9,6 @@ namespace ET.Server
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask FindPathMoveToAsync(this Unit unit, float3 target, int speedRate = 100)
         {
-            StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
-            
-            // 以防止怪物再引力波的作用下不移动
-            int errorCode = stateComponent.ServerCanMove();
-            if (ErrorCode.ERR_Success != errorCode)
-            {
-                unit.SendStop(-1);
-                return;
-            }
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             moveComponent.SyncPosition();
             M2C_PathfindingResult m2CPathfindingResult = new();

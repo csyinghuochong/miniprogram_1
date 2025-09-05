@@ -9,12 +9,11 @@ namespace ET.Client
             root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<MaskWordHelper>();
             root.AddComponent<LanguageComponent>();
-            root.AddComponent<UIPathComponent>();
             root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();
             root.AddComponent<PlayerInfoComponent>();
             root.AddComponent<CurrentScenesComponent>();
-            root.AddComponent<RelinkComponent>();
+            root.AddComponent<SceneManagerComponent>();
             root.AddComponent<MapComponent>();
             root.AddComponent<GameObjectLoadComponent>();
             root.AddComponent<SoundComponent>();

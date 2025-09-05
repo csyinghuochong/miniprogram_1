@@ -92,7 +92,7 @@ namespace ET.Server
                     }
                     else
                     {
-                        centerAccountInfo =  session.AddChild<DBCenterAccountInfo>();
+                        centerAccountInfo = session.AddChild<DBCenterAccountInfo>();
                         centerAccountInfo.PlayerInfo = PlayerInfo.Create();
                         centerAccountInfo.Account = request.Account.Trim();
                         centerAccountInfo.Password = request.Password;
@@ -113,38 +113,6 @@ namespace ET.Server
                         response.Error = ErrorCode.ERR_LoginInfoIsNull;
                         session.Disconnect().Coroutine();
                         centerAccountInfo.Dispose();
-                        return;
-                    }
-
-                    FangChenMiComponentS fangChenMiComponentS = session.Root().GetComponent<FangChenMiComponentS>();
-                    bool IsHoliday = fangChenMiComponentS.IsHoliday;
-                    bool StopServer = fangChenMiComponentS.StopServer;
-                    if (StopServer && !GMHelp.IsGmAccount(request.Account))
-                    {
-                        response.Error = ErrorCode.ERR_StopServer;
-                        session.Disconnect().Coroutine();
-                        centerAccountInfo.Dispose();
-                        return;
-                    }
-                    
-                    //防沉迷相关
-                    if (centerAccountInfo.PlayerInfo.RealName == 0)
-                    {
-                        response.Error = ErrorCode.ERR_NotRealName;
-                        response.AccountId = centerAccountInfo.Id;
-                        response.PlayerInfo = centerAccountInfo.PlayerInfo;
-                        session.Disconnect().Coroutine();
-                        centerAccountInfo?.Dispose();
-                        return;
-                    }
-                    string idCardNo = centerAccountInfo.PlayerInfo.IdCardNo;
-                    int canLogin = CanLogin(idCardNo, IsHoliday, request.age_type);
-                    if (canLogin != ErrorCode.ERR_Success)
-                    {
-                        response.Error = canLogin;
-                        response.PlayerInfo = centerAccountInfo.PlayerInfo;
-                        session.Disconnect().Coroutine();
-                        centerAccountInfo?.Dispose();
                         return;
                     }
                     
@@ -186,8 +154,7 @@ namespace ET.Server
                     r2LLoginAccountRequest.AccountName = request.Account;
                     r2LLoginAccountRequest.Relink = request.Relink;
                     StartSceneConfig loginCenterConfig = StartSceneConfigCategory.Instance.LoginCenterConfig;
-                    var loginAccountResponse =  await session.Fiber().Root.GetComponent<MessageSender>()
-                            .Call(loginCenterConfig.ActorId, r2LLoginAccountRequest) as L2R_LoginAccountRequest;
+                    var loginAccountResponse =  await session.Fiber().Root.GetComponent<MessageSender>().Call(loginCenterConfig.ActorId, r2LLoginAccountRequest) as L2R_LoginAccountRequest;
   
                     if (loginAccountResponse.Error != ErrorCode.ERR_Success)
                     {
@@ -222,23 +189,27 @@ namespace ET.Server
                         {
                             continue;
                         }
-
+                    
                         DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();
                         DBComponent dbComponent = dbManagerComponent.GetZoneDB(request.ServerId);
-                        
-                        List<UserInfoComponentS> userinfolist = await dbComponent.Query<UserInfoComponentS>(request.ServerId,d=> d.Id ==centerAccountInfo.RoleList[i].UnitId);
-                        if (userinfolist == null || userinfolist.Count == 0)
+
+                        List<UserInfoComponentS> userinfoList = await dbComponent.Query<UserInfoComponentS>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
+                        if (userinfoList == null || userinfoList.Count == 0)
                         {
                             continue;
                         }
+                        
+                        CreateRoleInfo roleList = CreateRoleInfo.Create();
+                        
+                        roleList.UnitId = centerAccountInfo.RoleList[i].UnitId;
+                        roleList.PlayerName = userinfoList[0].PlayerName;
 
-                        CreateRoleInfo roleList = GetRoleListInfo(userinfolist[0].ChildrenDB[0] as UserInfo, centerAccountInfo.RoleList[i].UnitId);
-                        List<NumericComponentS> numericComponentlist = await dbComponent.Query<NumericComponentS>(request.ServerId,d=> d.Id ==centerAccountInfo.RoleList[i].UnitId);
+                        List<NumericComponentS> numericComponentlist = await dbComponent.Query<NumericComponentS>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
                         if (numericComponentlist == null || numericComponentlist.Count == 0)
                         {
                             continue;
                         }
-
+                    
                         roleList.State = centerAccountInfo.RoleList[i].State;
                         roleList.ServerId = centerAccountInfo.RoleList[i].ServerId;
                         roleList.WeaponId = numericComponentlist[0].GetAsInt(NumericType.Now_Weapon);
@@ -261,47 +232,5 @@ namespace ET.Server
                 }
             }
 		}
-
-        private CreateRoleInfo GetRoleListInfo(UserInfo userInfo, long userID)
-        {
-            CreateRoleInfo roleList = CreateRoleInfo.Create();
-
-            roleList.OccTwo = userInfo.OccTwo;
-            roleList.UnitId = userID;
-            roleList.PlayerName = userInfo.Name;
-            roleList.PlayerLv = userInfo.Lv;
-            roleList.PlayerOcc = userInfo.Occ;
-            return roleList;
-        }
-
-        public int CanLogin(string identityCard, bool isHoliday, int age_type)
-        {
-            int age = IDCardHelper.GetBirthdayAgeSex(identityCard, age_type);
-            if (age >= 18)
-            {
-                return ErrorCode.ERR_Success;
-            }
-            if (age < 12)
-            {
-                return ErrorCode.ERR_FangChengMi_Tip6;
-            }
-            DateTime dateTime = TimeHelper.DateTimeNow();
-            if (isHoliday)
-            {
-                if (dateTime.Hour == 20)
-                {
-                    return ErrorCode.ERR_Success;           //允许登录
-                }
-                else
-                {
-                    return ErrorCode.ERR_FangChengMi_Tip7;
-                }
-            }
-            else
-            {
-                return ErrorCode.ERR_FangChengMi_Tip7;
-            }
-        }
-
 	}
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-
-    [FriendOf(typeof(DBCenterAccountInfo))]
     [MessageSessionHandler(SceneType.Queue)]
     public class C2Q_EnterQueueHandler : MessageSessionHandler<C2Q_EnterQueue, Q2C_EnterQueue>
     {
@@ -12,7 +10,7 @@ namespace ET.Server
         {
             AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
             //accountSessionsComponent.Add( request.Account, session );
-            
+
             await ETTask.CompletedTask;
         }
     }

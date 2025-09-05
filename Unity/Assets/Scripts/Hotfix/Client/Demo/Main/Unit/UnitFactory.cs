@@ -42,11 +42,6 @@ namespace ET.Client
 
             unit.AddComponent<ObjectWait>();
             unit.AddComponent<MoveComponent>();
-            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-            unitInfoComponent.UnitName = unitInfo.UnitName;
-            unitInfoComponent.MasterName = unitInfo.MasterName;
-            unitInfoComponent.UnionName = unitInfo.UnionName;
-            unitInfoComponent.FashionEquipList = unitInfo.FashionEquipList;
 
             unit.Position = unitInfo.Position;
             unit.Forward = unitInfo.Forward;
@@ -91,7 +86,6 @@ namespace ET.Client
                 numericComponentC.ApplyValue(kv.Key, kv.Value, false);
             }
             
-            unit.AddComponent<UnitInfoComponent>();
             unit.Position = unitInfo.Position;
 
             OnAfterCreateUnit(unit);
