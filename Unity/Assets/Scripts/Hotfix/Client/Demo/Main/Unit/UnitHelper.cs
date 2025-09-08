@@ -32,17 +32,6 @@ namespace ET.Client
             return self.Type == UnitType.Monster;
         }
 
-        public static bool IsJingLingMonster(this Unit self)
-        {
-            if (self.Type != UnitType.Monster)
-            {
-                return false;
-            }
-
-            int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
-            return sonType == 58 || sonType == 59;
-        }
-
         public static long GetMyUnitId(Scene root)
         {
             PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
@@ -118,37 +107,6 @@ namespace ET.Client
             return false;
         }
 
-        public static int GetMonsterType(this Unit self)
-        {
-            return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
-        }
-
-        public static int GetMonsterSonType(this Unit self)
-        {
-            return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
-        }
-
-        public static bool GetMonsterShowDissolve(this Unit self)
-        {
-            if (self.Type != UnitType.Monster)
-            {
-                return false;
-            }
-
-            int MonsterSonType = self.GetMonsterSonType();
-            return MonsterSonType <= 50;
-        }
-
-        public static bool IsBoss(this Unit self)
-        {
-            if (self.Type != UnitType.Monster)
-            {
-                return false;
-            }
-
-            return self.GetMonsterType() == MonsterTypeEnum.Boss;
-        }
-
         public static List<Unit> GetUnitListByDis(Scene scene, float3 pos, int unitType, float maxdis)
         {
             List<Unit> list = new List<Unit>();
@@ -171,27 +129,6 @@ namespace ET.Client
             }
 
             return list;
-        }
-
-        public static bool IsHaveBoss(Scene scene, float3 vector3, float dis)
-        {
-            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
-            for (int i = 0; i < allunits.Count; i++)
-            {
-                Unit unit = allunits[i];
-                if (unit.Type != UnitType.Monster)
-                {
-                    continue;
-                }
-
-                if (unit.IsBoss() && unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 0 &&
-                    PositionHelper.Distance2D(vector3, unit.Position) < dis)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }

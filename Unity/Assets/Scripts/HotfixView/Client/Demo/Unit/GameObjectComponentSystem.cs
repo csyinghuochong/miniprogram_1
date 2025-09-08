@@ -51,7 +51,7 @@ namespace ET.Client
 
                     if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/1");
                     }
 
                     break;

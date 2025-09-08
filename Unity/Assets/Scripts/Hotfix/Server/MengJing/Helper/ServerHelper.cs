@@ -203,7 +203,7 @@ namespace ET
 
             List<ServerItem> serverItems = new List<ServerItem>();
             serverItems.Add(GetServerItem(1, $"{ip}:20325", "封测一区", 1720782000000, 1));
-            serverItems.Add(GetServerItem(2, $"{ip}:20335", "封测二区", 1720954800000, 1));
+            // serverItems.Add(GetServerItem(2, $"{ip}:20335", "封测二区", 1720954800000, 1));
             ConfigData.ServerItems = serverItems;
 
             CheckServerIds(ConfigData.ServerItems);

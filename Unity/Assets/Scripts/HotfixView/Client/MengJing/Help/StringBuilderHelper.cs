@@ -9,32 +9,6 @@ namespace ET.Client
             return string.Empty;
         }
 
-        public static string GetEffectPathByConfig(EffectConfig effectConfig)
-        {
-            string effectFileName = "";
-            switch (effectConfig.EffectType)
-            {
-                //技能特效
-                case 1:
-                    effectFileName = "SkillEffect/";
-                    break;
-                //受击特效
-                case 2:
-                    effectFileName = "SkillHitEffect/";
-                    break;
-                //场景特效
-                case 3:
-                    effectFileName = "ScenceEffect/";
-                    break;
-                 case 4:
-                    effectFileName = "UIEffect/";
-                    break;
-            }
-
-            string effectNamePath = effectFileName + effectConfig.EffectName;
-            return GetEffetPath(effectNamePath);
-        }
-
         public static string GetMonsterUnitPath(int modelID)
         {
             StringBuilderData.stringBuilder.Clear();
