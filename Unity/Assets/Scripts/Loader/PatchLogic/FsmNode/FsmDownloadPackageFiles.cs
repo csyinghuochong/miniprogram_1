@@ -28,8 +28,15 @@ public class FsmDownloadPackageFiles : IStateNode
     private IEnumerator BeginDownload()
     {
         var downloader = (ResourceDownloaderOperation)_machine.GetBlackboardValue("Downloader");
-        downloader.OnDownloadErrorCallback = PatchEventDefine.WebFileDownloadFailed.SendEventMessage;
-        downloader.OnDownloadProgressCallback = PatchEventDefine.DownloadProgressUpdate.SendEventMessage;
+        downloader.DownloadErrorCallback = (DownloadErrorData)=>
+        {
+            PatchEventDefine.WebFileDownloadFailed.SendEventMessage(DownloadErrorData.FileName, DownloadErrorData.ErrorInfo);
+        };
+        downloader.DownloadUpdateCallback = (DownloadUpdate) =>
+        {
+            PatchEventDefine.DownloadProgressUpdate.SendEventMessage(DownloadUpdate.TotalDownloadCount, DownloadUpdate.CurrentDownloadCount,
+                DownloadUpdate.TotalDownloadBytes, DownloadUpdate.CurrentDownloadBytes);
+        };
         downloader.BeginDownload();
         yield return downloader;
 

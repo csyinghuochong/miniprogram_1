@@ -59,7 +59,7 @@ namespace ET
 #else
 			ePlayMode = EPlayMode.HostPlayMode;
 #endif
-			YooAssets.SetDownloadSystemBreakpointResumeFileSize(5 * 1024 * 1024);
+			// YooAssets.SetDownloadSystemBreakpointResumeFileSize(5 * 1024 * 1024);
 			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
 			
 			// 游戏管理器
@@ -77,7 +77,8 @@ namespace ET
 		IEnumerator StartUpdate(EPlayMode ePlayMode)
 		{
 			// 开始补丁更新流程
-			PatchOperation operation = new PatchOperation("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString(), ePlayMode);
+			// PatchOperation operation = new PatchOperation("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString(), ePlayMode);
+			PatchOperation operation = new PatchOperation("DefaultPackage", "2", ePlayMode);
 			operation.UpdateDownHandler = () => { OnUpdaterDone().Coroutine(); };
 			YooAssets.StartOperation(operation);
 			yield return operation;

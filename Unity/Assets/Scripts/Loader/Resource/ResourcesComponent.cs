@@ -7,33 +7,6 @@ using YooAsset;
 
 namespace ET
 {
-    
-    // 用于字符串转换，减少GC
-    [FriendOf(typeof(ResourcesComponent))]
-    public static class AssetBundleHelper
-    {
-        public static string StringToAB(this string value)
-        {
-            string result =  $"Assets/Bundles/UI/Dlg/{value}.prefab";
-            return result;
-        }
-
-    }
-    
-    
-    /// <summary>
-    /// 资源文件查询服务类
-    /// </summary>
-    public class GameQueryServices : IQueryServices
-    {
-        public bool QueryStreamingAssets(string packageName, string fileName)
-        {
-            // 注意：fileName包含文件格式
-            string filePath = Path.Combine(YooAssetSettings.DefaultYooFolderName, packageName, fileName);
-            return BetterStreamingAssets.FileExists(filePath);
-        }
-    }
-    
     /// <summary>
     /// 远端资源地址查询服务类
     /// </summary>
@@ -84,14 +57,19 @@ namespace ET
             {
                 case EPlayMode.EditorSimulateMode:
                 {
+                    var buildResult = EditorSimulateModeHelper.SimulateBuild(packageName);    
+                    var packageRoot = buildResult.PackageRootDirectory;
+                    var editorFileSystemParams = FileSystemParameters.CreateDefaultEditorFileSystemParameters(packageRoot);
                     EditorSimulateModeParameters createParameters = new();
-                    createParameters.SimulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(packageName);
+                    createParameters.EditorFileSystemParameters = editorFileSystemParams;
                     await package.InitializeAsync(createParameters).Task;
                     break;
                 }
                 case EPlayMode.OfflinePlayMode:
                 {
-                    OfflinePlayModeParameters createParameters = new();
+                    var buildinFileSystemParams = FileSystemParameters.CreateDefaultBuildinFileSystemParameters();
+                    var createParameters = new OfflinePlayModeParameters();
+                    createParameters.BuildinFileSystemParameters = buildinFileSystemParams;
                     await package.InitializeAsync(createParameters).Task;
                     break;
                 }
@@ -99,9 +77,25 @@ namespace ET
                 {
                     string defaultHostServer = GetHostServerURL();
                     string fallbackHostServer = GetHostServerURL();
+                    IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+                    var cacheFileSystemParams = FileSystemParameters.CreateDefaultCacheFileSystemParameters(remoteServices);
+                    var buildinFileSystemParams = FileSystemParameters.CreateDefaultBuildinFileSystemParameters();   
                     HostPlayModeParameters createParameters = new();
-                    createParameters.QueryServices = new GameQueryServices();
-                    createParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+                    createParameters.BuildinFileSystemParameters = buildinFileSystemParams; 
+                    createParameters.CacheFileSystemParameters = cacheFileSystemParams;
+                    await package.InitializeAsync(createParameters).Task;
+                    break;
+                }
+                case EPlayMode.WebPlayMode:
+                {
+                    string defaultHostServer = GetHostServerURL();
+                    string fallbackHostServer = GetHostServerURL();
+                    IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+                    var webServerFileSystemParams = FileSystemParameters.CreateDefaultWebServerFileSystemParameters();
+                    var webRemoteFileSystemParams = FileSystemParameters.CreateDefaultWebRemoteFileSystemParameters(remoteServices); //支持跨域下载
+                    var createParameters = new WebPlayModeParameters();
+                    createParameters.WebServerFileSystemParameters = webServerFileSystemParams;
+                    createParameters.WebRemoteFileSystemParameters = webRemoteFileSystemParams;
                     await package.InitializeAsync(createParameters).Task;
                     break;
                 }
@@ -143,7 +137,7 @@ namespace ET
         public void DestroyPackage(string packageName)
         {
             ResourcePackage package = YooAssets.GetPackage(packageName);
-            package.UnloadUnusedAssets();
+            package.UnloadUnusedAssetsAsync();
         }
         
         /// <summary>
@@ -152,7 +146,7 @@ namespace ET
         /// </summary>
         public  T LoadAssetSync<T>(string location) where T: UnityEngine.Object
         {
-            AssetOperationHandle handle = YooAssets.LoadAssetSync<T>(location);
+            AssetHandle handle = YooAssets.LoadAssetSync<T>(location);
             T t = (T)handle.AssetObject;
             handle.Release();
             return t;
@@ -164,7 +158,7 @@ namespace ET
         /// </summary>
         public async ETTask<T> LoadAssetAsync<T>(string location) where T: UnityEngine.Object
         {
-            AssetOperationHandle handle = YooAssets.LoadAssetAsync<T>(location);
+            AssetHandle handle = YooAssets.LoadAssetAsync<T>(location);
             await handle.Task;
             T t = (T)handle.AssetObject;
             handle.Release();
@@ -177,7 +171,7 @@ namespace ET
         /// </summary>
         public async ETTask<Dictionary<string, T>> LoadAllAssetsAsync<T>(string location) where T: UnityEngine.Object
         {
-            AllAssetsOperationHandle allAssetsOperationHandle = YooAssets.LoadAllAssetsAsync<T>(location);
+            AllAssetsHandle allAssetsOperationHandle = YooAssets.LoadAllAssetsAsync<T>(location);
             await allAssetsOperationHandle.Task;
             Dictionary<string, T> dictionary = new Dictionary<string, T>();
             foreach(UnityEngine.Object assetObj in allAssetsOperationHandle.AllAssetObjects)
