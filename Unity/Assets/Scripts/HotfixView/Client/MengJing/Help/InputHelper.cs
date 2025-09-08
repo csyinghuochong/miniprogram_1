@@ -4,6 +4,16 @@ namespace ET.Client
 {
     public static class InputHelper
     {
+        public static bool GetKey(KeyCode key)
+        {
+            return Input.GetKey(key);
+        }
+
+        public static bool GetKeyDown(KeyCode key)
+        {
+            return Input.GetKeyDown(key);
+        }
+        
         public static bool GetKey(int code)
         {
             return Input.GetKey((KeyCode)code);

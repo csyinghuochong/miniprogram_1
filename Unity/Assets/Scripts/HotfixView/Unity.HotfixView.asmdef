@@ -11,8 +11,8 @@
         "Unity.Hotfix",
         "Unity.ModelView",
         "YooAsset",
-        "Coffee.UIParticle",
-        "Coffee.UIEffect"
+        "I2.Loc",
+        "DG.Tweening.Modules"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

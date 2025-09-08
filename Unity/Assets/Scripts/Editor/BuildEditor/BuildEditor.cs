@@ -149,9 +149,9 @@ namespace ET
             GUILayout.Space(5);
         }
 
-        public const string UII2SourceResPath = "Assets/Editor/I2Localization"; //这是编辑器下的数据 平台运行时 是不需要的
+        public const string UII2SourceResPath = "Assets/Config/Localization"; //这是编辑器下的数据 平台运行时 是不需要的
         public const string UII2SourceResName = "AllSource";
-        public const string UII2TargetLanguageResPath = "Assets/Bundles/Text";
+        public const string UII2TargetLanguageResPath = "Assets/Bundles/Localization";
 
         #region 导入
 

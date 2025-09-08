@@ -14,7 +14,7 @@ namespace ET.Client
                 // 直接进入游戏
                 CreateRoleInfo selected = playerInfoComponent.CreateRoleList[0];
 
-                PlayerPrefsHelp.SetString(PlayerPrefsHelp.LastUserID, selected.UnitId.ToString());
+                PlayerPrefsHelper.SetString(PlayerPrefsHelper.LastUserID, selected.UnitId.ToString());
                 playerInfoComponent.CurrentRoleId = selected.UnitId;
                 scene.GetComponent<MapComponent>().MapType = MapTypeEnum.LoginScene;
 

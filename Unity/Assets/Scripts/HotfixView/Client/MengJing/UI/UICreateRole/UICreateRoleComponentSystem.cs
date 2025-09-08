@@ -48,7 +48,7 @@ namespace ET.Client
             CreateRoleInfo selected = playerInfoComponent.CreateRoleList[0];
 
             self.LastLoginTime = Time.time;
-            PlayerPrefsHelp.SetString(PlayerPrefsHelp.LastUserID, selected.UnitId.ToString());
+            PlayerPrefsHelper.SetString(PlayerPrefsHelper.LastUserID, selected.UnitId.ToString());
             playerInfoComponent.CurrentRoleId = selected.UnitId;
             self.Root().GetComponent<MapComponent>().MapType = MapTypeEnum.LoginScene;
 

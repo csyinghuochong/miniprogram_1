@@ -21,8 +21,8 @@ namespace ET.Client
 
         public static void InitMusicVolume(this SoundComponent self)
         {
-            string music = PlayerPrefsHelp.GetString(PlayerPrefsHelp.MusicVolume);
-            string sound = PlayerPrefsHelp.GetString(PlayerPrefsHelp.SoundVolume);
+            string music = PlayerPrefsHelper.GetString(PlayerPrefsHelper.MusicVolume);
+            string sound = PlayerPrefsHelper.GetString(PlayerPrefsHelper.SoundVolume);
             if (string.IsNullOrEmpty(music))
             {
                 self.MusicVolume = 1f;
@@ -135,7 +135,7 @@ namespace ET.Client
                 self.m_soundclips[i].GetComponent<AudioSource>().volume = volume;
             }
 
-            PlayerPrefsHelp.SetString(PlayerPrefsHelp.SoundVolume, volume.ToString());
+            PlayerPrefsHelper.SetString(PlayerPrefsHelper.SoundVolume, volume.ToString());
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace ET.Client
                 self.m_musciclips[i].audio.volume = volume;
             }
 
-            PlayerPrefsHelp.SetString(PlayerPrefsHelp.MusicVolume, volume.ToString());
+            PlayerPrefsHelper.SetString(PlayerPrefsHelper.MusicVolume, volume.ToString());
         }
 
         /// <summary>

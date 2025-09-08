@@ -9,9 +9,8 @@
         "BetterStreamingAssets",
         "YooAsset",
         "Unity.TextMeshPro",
-        "Coffee.UIParticle",
         "Unity.RenderPipelines.Universal.Runtime",
-        "Unified.Universal.Blur"
+        "DG.Tweening.Modules"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

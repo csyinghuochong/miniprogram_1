@@ -49,8 +49,8 @@ namespace ET.Client
             playerInfoComponent.Password = self.InputField_Password.text.ToLower();
             playerInfoComponent.VersionMode = GlobalHelp.GetVersionMode();
 
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
-            PlayerPrefsHelp.SetOldServerIds(self.ServerInfo.ServerId);
+            PlayerPrefsHelper.SetInt(PlayerPrefsHelper.MyServerID, self.ServerInfo.ServerId);
+            PlayerPrefsHelper.SetOldServerIds(self.ServerInfo.ServerId);
             // PlayerPrefsHelp.SetString("MJ_Account", self.InputField_Account.text);
             // PlayerPrefsHelp.SetString("MJ_Password", self.InputField_Password.text);
 
@@ -74,7 +74,7 @@ namespace ET.Client
             playerInfoComponent.ServerItem = serverItem;
             playerInfoComponent.AllServerList = r2CServerList.ServerItems;
 
-            int myserver = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.MyServerID);
+            int myserver = PlayerPrefsHelper.GetInt(PlayerPrefsHelper.MyServerID);
             myserver = playerInfoComponent.GetNewServerId(myserver);
 
             for (int i = 0; i < r2CServerList.ServerItems.Count; i++)
