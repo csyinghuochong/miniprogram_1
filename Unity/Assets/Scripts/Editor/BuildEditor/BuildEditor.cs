@@ -151,7 +151,7 @@ namespace ET
 
         public const string UII2SourceResPath = "Assets/Config/Localization"; //这是编辑器下的数据 平台运行时 是不需要的
         public const string UII2SourceResName = "AllSource";
-        public const string UII2TargetLanguageResPath = "Assets/Bundles/Localization";
+        public const string UII2TargetLanguageResPath = "Assets/Bundles/Text";
 
         #region 导入
 
