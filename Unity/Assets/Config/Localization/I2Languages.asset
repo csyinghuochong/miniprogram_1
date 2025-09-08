@@ -21,8 +21,8 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
+      - "\u767B\u5F55"
+      - Login
       - 
       Flags: 000000
       Languages_Touch: []
