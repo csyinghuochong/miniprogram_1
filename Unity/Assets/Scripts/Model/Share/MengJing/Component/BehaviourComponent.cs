@@ -32,8 +32,6 @@ namespace ET
         /// 攻击范围，范围内攻击
         /// </summary>
         public float ActDistance { get; set; }= 3;
-
-        public readonly C2M_SkillCmd c2mSkillCmd = C2M_SkillCmd.Create();
     }
 }
 

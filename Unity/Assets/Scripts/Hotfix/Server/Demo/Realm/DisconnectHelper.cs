@@ -69,25 +69,6 @@ namespace ET.Server
     
             await timerComponent.WaitAsync(300);
         }
-
-        public static async ETTask ExitOtherServer(Scene root,  long chatUnitId)
-        {
-            A2A_BroadcastSceneRequest broadcastSceneRequest = A2A_BroadcastSceneRequest.Create();
-            broadcastSceneRequest.UnitId = chatUnitId;
-            List<StartSceneConfig> otherscenes = BroadCastHelper.GetAllScene(root.Zone());
-            
-            for (int i = 0; i < otherscenes.Count; i++)
-            {
-                await root.GetComponent<MessageSender>().Call(otherscenes[i].ActorId, broadcastSceneRequest);
-            }
-        }
-
-        private static async ETTask<long> ExitWorldChatServer(Scene root,  long chatUnitId)
-        {
-            G2Chat_RequestExitChat g2ChatEnterChat = G2Chat_RequestExitChat.Create(); 
-            IResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Chat).Call(chatUnitId, g2ChatEnterChat);
-            return iResponse.Error;
-        }
         
         public static async ETTask KickPlayer(Player player, bool isException = false)
         {

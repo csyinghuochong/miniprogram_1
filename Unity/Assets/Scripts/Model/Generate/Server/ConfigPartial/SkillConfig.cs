@@ -170,33 +170,6 @@ namespace ET
             }
         }
 
-
-        public int GetNewSkill(List<SkillPro> skillPros, int oldskiull)
-        {
-            if (skillPros == null)
-            {
-                return oldskiull;
-            }
-            for (int i = 0; i < skillPros.Count; i++)
-            {
-                List<KeyValuePairInt> equipSkillds = null;
-                this.EquipSkillList.TryGetValue(skillPros[i].SkillID, out equipSkillds);
-                if (equipSkillds == null)
-                {
-                    continue;
-                }
-
-                for (int skillindex = 0; skillindex < equipSkillds.Count; skillindex++)
-                {
-                    if (equipSkillds[skillindex].KeyId == oldskiull)
-                    {
-                        return (int)equipSkillds[skillindex].Value;
-                    }
-                }
-            }
-            return oldskiull;
-        }
-
         public int GetOldSkill(int baseskill, int newskiull)
         {
             List<KeyValuePairInt> equipSkillds = null;

@@ -28,14 +28,6 @@ namespace ET.Server
         public string stateValue;
     }
 
-    public struct UnitUseSkill
-    {
-        public Unit UnitDefend;
-        public C2M_SkillCmd skillcmd;
-        public bool zhudong;
-        public bool checkDead;
-    }
-
     public struct GenerateSerials
     {
         public Scene Scene;

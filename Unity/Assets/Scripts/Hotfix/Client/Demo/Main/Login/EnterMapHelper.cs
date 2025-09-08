@@ -38,10 +38,5 @@ namespace ET.Client
                 Log.Error(e);
             }
         }
-
-        public static void RequestQuitFuben(Scene zoneScene)
-        {
-            RequestTransfer(zoneScene, (int)MapTypeEnum.MainCityScene, GlobalValueConfigCategory.Instance.MainCityID).Coroutine();
-        }
     }
 }

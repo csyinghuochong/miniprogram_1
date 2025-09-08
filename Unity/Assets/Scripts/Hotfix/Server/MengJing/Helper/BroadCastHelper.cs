@@ -6,15 +6,6 @@ namespace ET.Server
     
     public static class BroadCastHelper
     {
-        public static async ETTask SendServerMessage(Scene root, ActorId serverid, int messageType, string message)
-        {
-            A2A_ServerMessageRequest A2A_ServerMessageRequest = A2A_ServerMessageRequest.Create();
-            A2A_ServerMessageRequest.MessageType = messageType;
-            A2A_ServerMessageRequest.MessageValue = message;
-            A2A_ServerMessageRResponse g_SendChatRequest = (A2A_ServerMessageRResponse)await root.GetComponent<MessageSender>().Call
-            (serverid, A2A_ServerMessageRequest);
-        }
-
         public static List<StartSceneConfig> GetAllScene(int zone)
         {
             List<StartSceneConfig> zonescenes = new List<StartSceneConfig>();
@@ -51,23 +42,6 @@ namespace ET.Server
                 zoneList.Add(listprogress[i].Id);
             }
             return zoneList;
-        }
-
-        public static async ETTask BroadcastProcess(Scene root,  A2A_BroadcastProcessRequest A2A_BroadcastRequest)
-        {
-            List<StartProcessConfig> listprogress = StartProcessConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < listprogress.Count; i++)
-            {
-                List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
-                if (processScenes.Count == 0 )   //|| CommonHelp.IsRobotZone(processScenes[0].Zone)) //机器人进程
-                {
-                    continue;
-                }
-
-                StartSceneConfig startSceneConfig = processScenes[0];
-                ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                A2A_BroadcastProcessResponse createUnit = (A2A_BroadcastProcessResponse)await root.GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
-            }
         }
     }
 }
