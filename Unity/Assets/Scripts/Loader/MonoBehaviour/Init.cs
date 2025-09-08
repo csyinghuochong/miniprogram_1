@@ -53,12 +53,6 @@ namespace ET
 			GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
 			ePlayMode = globalConfig.EPlayMode;
 			
-#if UNITY_EDITOR
-			ePlayMode = globalConfig.EPlayMode;
-			//ePlayMode = EPlayMode.EditorSimulateMode;
-#else
-			ePlayMode = EPlayMode.HostPlayMode;
-#endif
 			// YooAssets.SetDownloadSystemBreakpointResumeFileSize(5 * 1024 * 1024);
 			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
 			
