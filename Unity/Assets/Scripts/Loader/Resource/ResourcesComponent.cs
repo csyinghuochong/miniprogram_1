@@ -97,6 +97,34 @@ namespace ET
                     createParameters.WebServerFileSystemParameters = webServerFileSystemParams;
                     createParameters.WebRemoteFileSystemParameters = webRemoteFileSystemParams;
                     await package.InitializeAsync(createParameters).Task;
+                    
+                    var rpvo = package.RequestPackageVersionAsync();
+                    await rpvo.Task;
+                    if (rpvo.Status == EOperationStatus.Succeed)
+                    {
+                        //更新成功
+                        string packageVersion = rpvo.PackageVersion;
+                        Log.Warning($"Request package Version : {packageVersion}");
+                    }
+                    else
+                    {
+                        //更新失败
+                        Log.Warning(rpvo.Error);
+                    }
+                    
+                    var upmo = package.UpdatePackageManifestAsync(rpvo.PackageVersion);
+                    await upmo.Task;
+                    if (upmo.Status == EOperationStatus.Succeed)
+                    {
+                        //更新成功
+                        Log.Warning("Update package manifest succeed!");
+                    }
+                    else
+                    {
+                        //更新失败
+                        Log.Warning(upmo.Error);
+                    }
+                    
                     break;
                 }
                 default:
@@ -109,7 +137,8 @@ namespace ET
             {
                 //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
                 //string hostServerIP = "http://47.94.107.92";
-                string hostServerIP = "http://weijinghot.weijinggame.com";
+                // string hostServerIP = "http://weijinghot.weijinggame.com";
+                string hostServerIP = "http://49.235.169.53";
                 string appVersion = "v1.0";
                 
 #if UNITY_EDITOR

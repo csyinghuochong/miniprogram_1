@@ -63,9 +63,11 @@ namespace ET
 		
 		public void OnStartGame()
 		{
-			TogglePatchWindow(true);
-			// 开始补丁更新流程
-			StartCoroutine(StartUpdate(ePlayMode));
+			OnUpdaterDone().Coroutine();
+			
+			// TogglePatchWindow(true);
+			// // 开始补丁更新流程
+			// StartCoroutine(StartUpdate(ePlayMode));
 		}
 
 		IEnumerator StartUpdate(EPlayMode ePlayMode)
