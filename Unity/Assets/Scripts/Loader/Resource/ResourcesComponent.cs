@@ -94,12 +94,13 @@ namespace ET
                     var webServerFileSystemParams = FileSystemParameters.CreateDefaultWebServerFileSystemParameters();
                     var webRemoteFileSystemParams = FileSystemParameters.CreateDefaultWebRemoteFileSystemParameters(remoteServices); //支持跨域下载
                     var createParameters = new WebPlayModeParameters();
-                    createParameters.WebServerFileSystemParameters = webServerFileSystemParams;
+                    createParameters.WebServerFileSystemParameters = null;//本地直接Build and Run，设置为null
+                    // createParameters.WebServerFileSystemParameters = webServerFileSystemParams;
                     createParameters.WebRemoteFileSystemParameters = webRemoteFileSystemParams;
                     await package.InitializeAsync(createParameters).Task;
                     
                     var rpvo = package.RequestPackageVersionAsync();
-                    await rpvo.Task;
+                    await rpvo.Task; 
                     if (rpvo.Status == EOperationStatus.Succeed)
                     {
                         //更新成功
@@ -156,7 +157,8 @@ namespace ET
 		        else if (Application.platform == RuntimePlatform.IPhonePlayer)
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
 		        else if (Application.platform == RuntimePlatform.WebGLPlayer)
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+		        	// return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+                    return $"{Application.streamingAssetsPath}/yoo/DefaultPackage";
 		        else
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
 #endif

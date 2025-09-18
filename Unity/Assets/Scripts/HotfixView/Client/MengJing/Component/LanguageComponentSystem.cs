@@ -63,7 +63,7 @@ namespace ET.Client
             else
             {
                 self.LanguageSourceData.Awake();
-                self.LoadLanguage(self.DefaultLanguage, true);
+                self.LoadLanguage(self.DefaultLanguage, true).Coroutine();
             }
 #else
             self.LanguageSourceData.Awake();
@@ -93,7 +93,7 @@ namespace ET.Client
             {
                 if (load)
                 {
-                    self.LoadLanguage(language, true);
+                    self.LoadLanguage(language, true).Coroutine();
                     return true;
                 }
 
@@ -113,7 +113,7 @@ namespace ET.Client
         }
 
         //根据需求可提前加载语言
-        public static void LoadLanguage(this LanguageComponent self, string language, bool setCurrent = false)
+        public static async ETTask LoadLanguage(this LanguageComponent self, string language, bool setCurrent = false)
         {
 #if UNITY_EDITOR
             if (!self.UseRuntimeModule)
@@ -131,7 +131,7 @@ namespace ET.Client
 
             var assetName = self.GetLanguageAssetName(language);
 
-            var assetTextAsset = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<TextAsset>(assetName);
+            var assetTextAsset = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(assetName);
             if (assetTextAsset == null)
             {
                 Log.Error($"没有加载到目标语言资源 {language}");
@@ -152,7 +152,7 @@ namespace ET.Client
 
         private static string GetLanguageAssetName(this LanguageComponent self, string language)
         {
-            return $"Assets/Bundles/Localization/{I2LocalizeHelper.I2ResAssetNamePrefix}{language}.csv";
+            return $"Assets/Bundles/Text/{I2LocalizeHelper.I2ResAssetNamePrefix}{language}.csv";
         }
 
         private static void UseLocalizationCSV(this LanguageComponent self, string text, bool isLocalizeAll = false)
