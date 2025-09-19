@@ -63,11 +63,17 @@ namespace ET
 		
 		public void OnStartGame()
 		{
-			OnUpdaterDone().Coroutine();
-			
-			// TogglePatchWindow(true);
-			// // 开始补丁更新流程
-			// StartCoroutine(StartUpdate(ePlayMode));
+			if (this.ePlayMode != EPlayMode.WebPlayMode)
+			{
+				// 开始补丁更新流程
+				TogglePatchWindow(true);
+				StartCoroutine(StartUpdate(ePlayMode));
+			}
+			else
+			{
+				// WebGL不支持下载器
+				OnUpdaterDone().Coroutine();
+			}
 		}
 
 		IEnumerator StartUpdate(EPlayMode ePlayMode)

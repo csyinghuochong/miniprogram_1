@@ -88,11 +88,14 @@ namespace ET
                 case PlatformType.Linux:
                     buildTarget = BuildTarget.StandaloneLinux64;
                     break;
+                case PlatformType.Web:
+                    buildTarget = BuildTarget.WebGL;
+                    break;
             }
 
             AssetDatabase.Refresh();
 
-            Debug.Log("start build exe");
+            Debug.Log("start build");
 
             string[] levels = { "Assets/Scenes/Init.unity" };
             BuildReport report = BuildPipeline.BuildPlayer(levels, $"{relativeDirPrefix}/{exeName}", buildTarget, buildOptions);
@@ -102,7 +105,7 @@ namespace ET
                 return;
             }
 
-            Debug.Log("finish build exe");
+            Debug.Log("finish build");
             EditorUtility.OpenWithDefaultApp(relativeDirPrefix);
         }
     }
