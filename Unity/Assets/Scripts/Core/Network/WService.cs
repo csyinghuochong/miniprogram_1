@@ -1,9 +1,7 @@
-#if DOTNET
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
 using System.Net.WebSockets;
 
 namespace ET
@@ -25,19 +23,6 @@ namespace ET
             this.httpListener = new HttpListener();
 
             StartAccept(prefixs).Coroutine();
-        }
-        
-        public WService(AddressFamily addressFamily)
-        {
-        }
-        
-        public WService(IPEndPoint ipEndPoint)
-        {
-            this.ThreadSynchronizationContext = new ThreadSynchronizationContext();
-            
-            this.httpListener = new HttpListener();
-
-            StartAccept([$"http://{ipEndPoint}/"]).Coroutine();
         }
         
         public WService()
@@ -166,4 +151,3 @@ namespace ET
         }
     }
 }
-#endif

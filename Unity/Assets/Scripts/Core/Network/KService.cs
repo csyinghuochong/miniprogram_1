@@ -61,9 +61,6 @@ namespace ET
                 case NetworkProtocol.UDP:
                     this.Transport = new UdpTransport(ipEndPoint);
                     break;
-                case NetworkProtocol.Websocket:
-                    this.Transport = new WebSocketTransport(ipEndPoint);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException($"{this.Protocol}");
             }
@@ -82,9 +79,6 @@ namespace ET
                     break;
                 case NetworkProtocol.UDP:
                     this.Transport = new UdpTransport(addressFamily);
-                    break;
-                case NetworkProtocol.Websocket:
-                    this.Transport = new WebSocketTransport(addressFamily);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{this.Protocol}");

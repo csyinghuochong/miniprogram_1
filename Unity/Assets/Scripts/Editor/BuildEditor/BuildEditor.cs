@@ -15,8 +15,7 @@ namespace ET
         IOS,
         Windows,
         MacOS,
-        Linux,
-        Web,
+        Linux
     }
 
     /// <summary>
@@ -60,8 +59,6 @@ namespace ET
             activePlatform = PlatformType.MacOS;
 #elif UNITY_STANDALONE_LINUX
             activePlatform = PlatformType.Linux;
-#elif UNITY_WEB
-            activePlatform = PlatformType.Web;
 #else
             activePlatform = PlatformType.None;
 #endif

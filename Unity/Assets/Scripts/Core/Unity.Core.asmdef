@@ -4,8 +4,7 @@
     "references": [
         "Unity.ThirdParty",
         "Unity.Mathematics",
-        "MemoryPack",
-        "UnityWebSocket.Runtime"
+        "MemoryPack"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -9,7 +9,6 @@ namespace ET.Server
     {
         public IKcpTransport OuterUdp;
         public IKcpTransport OuterTcp;
-        public IKcpTransport OuterWebSocket;
         public IKcpTransport InnerSocket;
         public EndPoint IPEndPoint = new IPEndPoint(IPAddress.Any, 0);
 

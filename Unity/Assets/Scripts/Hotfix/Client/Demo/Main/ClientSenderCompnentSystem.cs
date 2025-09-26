@@ -38,8 +38,7 @@ namespace ET.Client
         
         public static async ETTask<R2C_ServerList> GetServerList(this ClientSenderCompnent self, int versionMode)
         {
-            // self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
-            self.fiberId = await FiberManager.Instance.Create(SchedulerType.Main, 0, SceneType.NetClient, "");
+            self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
 
             Main2NetClient_ServerList main2NetClientServerList = Main2NetClient_ServerList.Create();
@@ -55,8 +54,7 @@ namespace ET.Client
         
         public static async ETTask<NetClient2Main_RealName> RealNameAsync(this ClientSenderCompnent self, long accountId,string name,  string idcard, int versionmode)
         {
-            // self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
-            self.fiberId = await FiberManager.Instance.Create(SchedulerType.Main, 0, SceneType.NetClient, "");
+            self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
 
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
@@ -79,8 +77,7 @@ namespace ET.Client
 
         public static async ETTask<int> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink, int versionmode)
         {
-            // self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
-            self.fiberId = await FiberManager.Instance.Create(SchedulerType.Main, 0, SceneType.NetClient, "");
+            self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
             
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
