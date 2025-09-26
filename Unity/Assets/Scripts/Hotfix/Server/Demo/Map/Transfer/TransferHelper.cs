@@ -56,9 +56,9 @@ namespace ET.Server
 
         private static void OnMainToMain(Unit unit)
         {
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(GlobalValueConfigCategory.Instance.MainCityID);
-            unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
-            unit.Stop(-2);
+            // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(GlobalValueConfigCategory.Instance.MainCityID);
+            // unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
+            // unit.Stop(-2);
         }
 
         public static void OnPlayerDisconnect(Scene scene, long userId)

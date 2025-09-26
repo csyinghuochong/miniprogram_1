@@ -43,7 +43,7 @@ namespace ET.Client
                     paramss = scenepath;
                     break;
                 default:
-                    paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();
+                    // paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();
                     break;
             }
 

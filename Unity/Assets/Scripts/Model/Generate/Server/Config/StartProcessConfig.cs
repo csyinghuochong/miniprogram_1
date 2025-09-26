@@ -63,6 +63,8 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>所属机器</summary>
 		public int MachineId { get; set; }
+		/// <summary>外网端口</summary>
+		public int Port { get; set; }
 		/// <summary>内网端口</summary>
 		public int InnerPort { get; set; }
 		/// <summary>dll</summary>
@@ -71,8 +73,6 @@ namespace ET
 		public string AppName { get; set; }
 		/// <summary>进程名</summary>
 		public string Title { get; set; }
-		/// <summary>外网端口</summary>
-		public int Port { get; set; }
 
 	}
 }

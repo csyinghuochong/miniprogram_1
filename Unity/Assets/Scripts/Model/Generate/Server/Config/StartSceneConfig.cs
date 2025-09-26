@@ -61,10 +61,10 @@ namespace ET
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
-		/// <summary>所属区</summary>
-		public int Zone { get; set; }
 		/// <summary>所属进程</summary>
 		public int Process { get; set; }
+		/// <summary>所属区</summary>
+		public int Zone { get; set; }
 		/// <summary>类型</summary>
 		public string SceneType { get; set; }
 		/// <summary>名字</summary>
