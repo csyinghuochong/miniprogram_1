@@ -8,7 +8,8 @@
         "Unity.Loader",
         "Unity.Model",
         "YooAsset",
-        "I2.Loc"
+        "I2.Loc",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

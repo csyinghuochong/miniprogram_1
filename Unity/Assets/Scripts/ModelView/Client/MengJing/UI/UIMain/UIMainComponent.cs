@@ -1,7 +1,16 @@
-﻿namespace ET.Client
+﻿using TMPro;
+
+namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UIMainComponent : Entity, IAwake
+    public class UIMainComponent : Entity, IAwake, IUpdate
     {
+        public float UpdateInterval = 0.5f;
+        public float Accumulator = 0f; // 帧数累加器
+        public int FrameCount = 0; // 帧数计数
+        public float TimeLeft; // 距离下次更新的时间
+        public float FPS; // 当前帧率
+
+        public TMP_Text Text_FPS;
     }
 }

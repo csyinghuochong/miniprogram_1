@@ -12,7 +12,8 @@
         "Unity.ModelView",
         "YooAsset",
         "I2.Loc",
-        "DG.Tweening.Modules"
+        "DG.Tweening.Modules",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
