@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
@@ -14,7 +15,7 @@ namespace ET.Server
         private static void Awake(this RouterComponent self, IPEndPoint outerAddress, string innerIP)
         {
             self.OuterUdp = new UdpTransport(outerAddress);
-            self.OuterTcp = new TcpTransport(outerAddress);
+            self.OuterTcp = new WebsocketTransport(new []{$"http://*:{outerAddress.Port}/"});
             self.InnerSocket = new UdpTransport(new IPEndPoint(IPAddress.Parse(innerIP), 0));
         }
         
@@ -147,9 +148,10 @@ namespace ET.Server
             {
                 return;
             }
-
+            
             // accept
             byte flag = self.Cache[0];
+            
             switch (flag)
             {
                 case KcpProtocalType.RouterReconnectSYN:

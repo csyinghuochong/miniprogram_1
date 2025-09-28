@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace ET.Server
 {
@@ -8,18 +10,34 @@ namespace ET.Server
     {
         public async ETTask Handle(Scene scene, HttpListenerContext context)
         {
-            Console.WriteLine("HttpGetRouterHandler");
-            HttpGetRouterResponse response = new();
+            HttpGetRouterResponse httpGetRouterResponse = HttpGetRouterResponse.Create();
             foreach (StartSceneConfig startSceneConfig in StartSceneConfigCategory.Instance.Realms)
             {
-                response.Realms.Add(startSceneConfig.InnerIPPort.ToString());
+                // ������Ҫ��InnerIP����Ϊ�Ʒ�������realm�󶨲���OuterIP��,����realm������������socket���Ǽ���������ַ
+                httpGetRouterResponse.Realms.Add(startSceneConfig.InnerIPPort.ToString());
             }
             foreach (StartSceneConfig startSceneConfig in StartSceneConfigCategory.Instance.Routers)
             {
-                response.Routers.Add($"{startSceneConfig.StartProcessConfig.OuterIP}:{startSceneConfig.Port}");
+                httpGetRouterResponse.Routers.Add($"{startSceneConfig.StartProcessConfig.OuterIP}:{startSceneConfig.Port}");
             }
-            HttpHelper2.Response(context, response);
-            await ETTask.CompletedTask;
+            
+            HttpListenerRequest request = context.Request;
+            using HttpListenerResponse response = context.Response;
+            
+            if (request.HttpMethod == "OPTIONS")
+            {
+                response.AddHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With");
+                response.AddHeader("Access-Control-Allow-Methods", "GET, POST");
+                response.AddHeader("Access-Control-Max-Age", "1728000");
+            }
+            response.AppendHeader("Access-Control-Allow-Origin", "*");
+            
+            byte[] bytes = MongoHelper.ToJson(httpGetRouterResponse).ToUtf8();
+            response.StatusCode = 200;
+            response.ContentEncoding = Encoding.UTF8;
+            response.ContentLength64 = bytes.Length;
+            await response.OutputStream.WriteAsync(bytes, 0, bytes.Length);
+            await scene.Root().GetComponent<TimerComponent>().WaitAsync(1000);
         }
     }
 }

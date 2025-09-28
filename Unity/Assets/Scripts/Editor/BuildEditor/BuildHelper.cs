@@ -1,5 +1,4 @@
 using System.Linq;
-using Unity.CodeEditor;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -15,9 +14,7 @@ namespace ET
         [InitializeOnLoadMethod]
         public static void ReGenerateProjectFiles()
         {
-            CodeEditor.CurrentEditor.SyncAll();
-            
-            //CustomEditorMenu.RenamePathFilesInFolder1();
+            Unity.CodeEditor.CodeEditor.CurrentEditor.SyncAll();
         }
 
 #if ENABLE_VIEW
@@ -87,6 +84,9 @@ namespace ET
                     break;
                 case PlatformType.Linux:
                     buildTarget = BuildTarget.StandaloneLinux64;
+                    break;
+                case PlatformType.WebGL:
+                    buildTarget = BuildTarget.WebGL;
                     break;
             }
 

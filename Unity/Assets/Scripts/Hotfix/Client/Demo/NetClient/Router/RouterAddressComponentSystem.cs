@@ -23,7 +23,7 @@ namespace ET.Client
 
         private static async ETTask GetAllRouter(this RouterAddressComponent self)
         {
-            string domain =  "molongbanhao.weijinggame.com";
+            // string domain =  "molongbanhao.weijinggame.com";
             //"weijinggameserver.weijinggame.com";
             //"molongbanhao.weijinggame.com";
             // "www.weijinggame.com"; // 要解析的域名
@@ -44,16 +44,16 @@ namespace ET.Client
             //        Log.Debug($"IPv6: {ip}");
             //    }
             //}
-            IPAddress[] ipAddresses = Dns.GetHostAddresses(domain);
-            IPAddress returnIpAddress = null;
-            foreach (IPAddress ipAddress in ipAddresses)
-            {
-                returnIpAddress = ipAddress;
-                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    Log.Debug($"ipAddress: {ipAddress.ToString()}");
-                }
-            }
+            // IPAddress[] ipAddresses = Dns.GetHostAddresses(domain);
+            // IPAddress returnIpAddress = null;
+            // foreach (IPAddress ipAddress in ipAddresses)
+            // {
+            //     returnIpAddress = ipAddress;
+            //     if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+            //     {
+            //         Log.Debug($"ipAddress: {ipAddress.ToString()}");
+            //     }
+            // }
 
 
             // string url = $"https://molongbanhao.weijinggame.com:30410/get_router?v={RandomGenerator.RandUInt32()}";

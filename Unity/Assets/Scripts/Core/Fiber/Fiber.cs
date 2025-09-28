@@ -58,11 +58,10 @@ namespace ET
             this.EntitySystem = new EntitySystem();
             this.Mailboxes = new Mailboxes();
             this.ThreadSynchronizationContext = new ThreadSynchronizationContext();
-#if UNITY
+#if UNITY || UNITY_WEBGL
             this.Log = Logger.Instance.Log;
 #else
-            //this.Log = new NLogger(sceneType.ToString(), this.Process, this.Id);
-            this.Log = new NLogger(Options.Instance.AppType.ToString(), this.Process, 0);
+            this.Log = new NLogger(sceneType.ToString(), this.Process, this.Id);
 #endif
             this.Root = new Scene(this, id, 1, sceneType, name);
         }

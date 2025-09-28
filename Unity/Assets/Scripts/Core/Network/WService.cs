@@ -1,3 +1,4 @@
+#if !UNITY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,11 +66,6 @@ namespace ET
             channel.Dispose();
         }
 
-        public override bool IsDisposed()
-        {
-            return this.ThreadSynchronizationContext == null;
-        }
-
         protected void Get(long id, IPEndPoint ipEndPoint)
         {
             if (!this.channels.TryGetValue(id, out _))
@@ -87,11 +83,21 @@ namespace ET
 
         public override void Dispose()
         {
-            base.Dispose();
+            if (this.IsDisposed())
+            {
+                return;
+            }
             
+            base.Dispose();        
+
             this.ThreadSynchronizationContext = null;
             this.httpListener?.Close();
             this.httpListener = null;
+
+            foreach (var kv in this.channels.ToArray())
+            {
+                kv.Value.Dispose();
+            }
         }
 
         private async ETTask StartAccept(IEnumerable<string> prefixs)
@@ -113,7 +119,7 @@ namespace ET
 
                         HttpListenerWebSocketContext webSocketContext = await httpListenerContext.AcceptWebSocketAsync(null);
 
-                        WChannel channel = new WChannel(this.GetId, webSocketContext, this);
+                        WChannel channel = new WChannel(this.GetId, webSocketContext, httpListenerContext, this);
                         channel.RemoteAddress = httpListenerContext.Request.RemoteEndPoint;
                         this.channels[channel.Id] = channel;
 
@@ -151,3 +157,4 @@ namespace ET
         }
     }
 }
+#endif

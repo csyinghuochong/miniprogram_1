@@ -46,16 +46,18 @@ namespace ET
 			switch (this.Service.ServiceType)
 			{
 				case ServiceType.Inner:
-					this.kcp.SetNoDelay(1, 10, 2, 1);
+					this.kcp.SetNoDelay(1, 10, 2, true);
 					this.kcp.SetWindowSize(1024, 1024);
 					this.kcp.SetMtu(1400); // 默认1400
 					this.kcp.SetMinrto(30);
+					this.kcp.SetArrayPool(this.Service.byteArrayPool);
 					break;
 				case ServiceType.Outer:
-					this.kcp.SetNoDelay(1, 10, 2, 1);
+					this.kcp.SetNoDelay(1, 10, 2, true);
 					this.kcp.SetWindowSize(256, 256);
 					this.kcp.SetMtu(470);
 					this.kcp.SetMinrto(30);
+					this.kcp.SetArrayPool(this.Service.byteArrayPool);
 					break;
 			}
 
@@ -184,7 +186,7 @@ namespace ET
 				buffer.WriteTo(0, KcpProtocalType.SYN);
 				buffer.WriteTo(1, this.LocalConn);
 				buffer.WriteTo(5, this.RemoteConn);
-				this.Service.Transport.Send(buffer, 0, 9, this.RemoteAddress, ChannelType.Connect);
+				this.Service.Transport.Send(buffer, 0, 9, this.RemoteAddress, this.ChannelType);
 				// 这里很奇怪 调用socket.LocalEndPoint会动到this.RemoteAddressNonAlloc里面的temp，这里就不仔细研究了
 				Log.Info($"kchannel connect {this.LocalConn} {this.RemoteConn} {this.RealAddress}");
 
@@ -199,7 +201,7 @@ namespace ET
 			}
 		}
 
-		public void Update(uint timeNow, byte[] bytes)
+		public void Update(uint timeNow)
 		{
 			if (this.IsDisposed)
 			{
@@ -220,7 +222,7 @@ namespace ET
 			
 			try
 			{
-				this.kcp.Update(timeNow, bytes);
+				this.kcp.Update(timeNow);
 			}
 			catch (Exception e)
 			{
@@ -409,7 +411,7 @@ namespace ET
 				throw new Exception("kchannel connected but kcp is zero!");
 			}
 			// 检查等待发送的消息，如果超出最大等待大小，应该断开连接
-			int n = (int)this.kcp.WaitSendCount;
+			int n = this.kcp.WaitSnd;
 			int maxWaitSize = 0;
 			switch (this.Service.ServiceType)
 			{

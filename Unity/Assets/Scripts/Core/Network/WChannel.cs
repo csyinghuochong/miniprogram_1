@@ -1,3 +1,4 @@
+#if !UNITY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,8 @@ namespace ET
     {
         public HttpListenerWebSocketContext WebSocketContext { get; }
 
+        private readonly HttpListenerContext httpListenerContext;
+
         private readonly WService Service;
 
         private readonly WebSocket webSocket;
@@ -24,13 +27,14 @@ namespace ET
         
         private CancellationTokenSource cancellationTokenSource = new();
         
-        public WChannel(long id, HttpListenerWebSocketContext webSocketContext, WService service)
+        public WChannel(long id, HttpListenerWebSocketContext webSocketContext, HttpListenerContext httpListenerContext,  WService service)
         {
             this.Service = service;
             this.Id = id;
             this.ChannelType = ChannelType.Accept;
             this.WebSocketContext = webSocketContext;
             this.webSocket = webSocketContext.WebSocket;
+            this.httpListenerContext = httpListenerContext;
 
             isConnected = true;
             
@@ -47,6 +51,7 @@ namespace ET
             this.Id = id;
             this.ChannelType = ChannelType.Connect;
             this.webSocket = webSocket;
+            this.RemoteAddress = ipEndPoint;
 
             isConnected = false;
             
@@ -65,6 +70,7 @@ namespace ET
             this.cancellationTokenSource = null;
 
             this.webSocket.Dispose();
+            this.httpListenerContext?.Response.Close();
         }
 
         private async ETTask ConnectAsync(string url)
@@ -231,3 +237,4 @@ namespace ET
         }
     }
 }
+#endif

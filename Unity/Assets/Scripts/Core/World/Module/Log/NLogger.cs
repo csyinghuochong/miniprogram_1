@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !UNITY_WEBGL
+using System;
 using NLog;
 
 namespace ET
@@ -15,9 +16,7 @@ namespace ET
 
         public NLogger(string name, int process, int fiber)
         {
-            //this.logger = LogManager.GetLogger($"{(uint)process:000000}.{(uint)fiber:0000000000}.{name}");
-            this.logger = LogManager.GetLogger(name);
-            LogManager.Configuration.Variables["appIdFormat"] = $"{Options.Instance.Process:000000}";
+            this.logger = LogManager.GetLogger($"{(uint)process:000000}.{(uint)fiber:0000000000}.{name}");
         }
 
         public void Trace(string message)
@@ -78,3 +77,4 @@ namespace ET
 #endif
     }
 }
+#endif

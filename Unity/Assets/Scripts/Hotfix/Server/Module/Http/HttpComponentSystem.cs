@@ -111,8 +111,10 @@ namespace ET.Server
             {
                 Log.Error(e);
             }
-            context.Request.InputStream.Dispose();
-            context.Response.OutputStream.Dispose();
+            finally
+            {
+                context.Response.Close();
+            }
         }
     }
 

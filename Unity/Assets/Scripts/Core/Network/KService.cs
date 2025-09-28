@@ -61,6 +61,9 @@ namespace ET
                 case NetworkProtocol.UDP:
                     this.Transport = new UdpTransport(ipEndPoint);
                     break;
+                case NetworkProtocol.Websocket:
+                    this.Transport = new WebsocketTransport(new []{$"http://{this.ipEndPoint}/"});
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException($"{this.Protocol}");
             }
@@ -79,6 +82,9 @@ namespace ET
                     break;
                 case NetworkProtocol.UDP:
                     this.Transport = new UdpTransport(addressFamily);
+                    break;
+                case NetworkProtocol.Websocket:
+                    this.Transport = new WebsocketTransport();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{this.Protocol}");
@@ -113,9 +119,6 @@ namespace ET
 
         private readonly Dictionary<long, Action<byte>> routerAckCallback = new();
 
-        // mtu max: 1400
-        private readonly byte[] kcpBuffer = new byte[KCPBASIC.REVERSED_HEAD + (1400 + KCPBASIC.OVERHEAD) * 3];
-
         public void AddRouterAckCallback(long id, Action<byte> action)
         {
             this.routerAckCallback.Add(id, action);
@@ -126,11 +129,6 @@ namespace ET
             this.routerAckCallback.Remove(id);
         }
         
-        public override bool IsDisposed()
-        {
-            return this.Transport == null;
-        }
-
         public override void Dispose()
         {
             if (this.IsDisposed())
@@ -253,7 +251,7 @@ namespace ET
                                 buffer.WriteTo(0, KcpProtocalType.RouterReconnectACK);
                                 buffer.WriteTo(1, kChannel.LocalConn);
                                 buffer.WriteTo(5, kChannel.RemoteConn);
-                                this.Transport.Send(buffer, 0, 9, this.ipEndPoint, ChannelType.Accept);
+                                this.Transport.Send(buffer, 0, 9, this.ipEndPoint, kChannel.ChannelType);
                             }
                             catch (Exception e)
                             {
@@ -275,10 +273,6 @@ namespace ET
                             if (messageLength > 9)
                             {
                                 realAddress = this.cache.ToStr(9, messageLength - 9);
-                            }
-                            else
-                            {
-                                realAddress = this.ipEndPoint.ToString();    
                             }
 
                             remoteConn = BitConverter.ToUInt32(this.cache, 1);
@@ -302,7 +296,7 @@ namespace ET
                                 
                                 kChannel.RealAddress = realAddress;
 
-                                IPEndPoint realEndPoint = NetworkHelper.ToIPEndPoint(kChannel.RealAddress);
+                                IPEndPoint realEndPoint = kChannel.RealAddress == null? kChannel.RemoteAddress : NetworkHelper.ToIPEndPoint(kChannel.RealAddress);
                                 this.AcceptCallback(kChannel.Id, realEndPoint);
                             }
                             if (kChannel.RemoteConn != remoteConn)
@@ -325,7 +319,7 @@ namespace ET
                                 buffer.WriteTo(5, kChannel.RemoteConn);
                                 Log.Info($"kservice syn: {kChannel.Id} {remoteConn} {localConn} {kChannel.RemoteAddress}");
                                 
-                                this.Transport.Send(buffer, 0, 9, kChannel.RemoteAddress, ChannelType.Accept);
+                                this.Transport.Send(buffer, 0, 9, kChannel.RemoteAddress, kChannel.ChannelType);
                             }
                             catch (Exception e)
                             {
@@ -486,7 +480,7 @@ namespace ET
                 buffer.WriteTo(9, (uint) error);
                 for (int i = 0; i < times; ++i)
                 {
-                    this.Transport.Send(buffer, 0, 13, address, ChannelType.Accept);
+                    this.Transport.Send(buffer, 0, 13, address, ChannelType.Connect);
                 }
             }
             catch (Exception e)
@@ -571,7 +565,7 @@ namespace ET
                     continue;
                 }
 
-                kChannel.Update(timeNow, this.kcpBuffer);
+                kChannel.Update(timeNow);
             }
             this.updateIds.Clear();
         }

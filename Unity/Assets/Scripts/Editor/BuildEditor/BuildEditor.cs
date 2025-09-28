@@ -15,7 +15,8 @@ namespace ET
         IOS,
         Windows,
         MacOS,
-        Linux
+        Linux,
+        WebGL
     }
 
     /// <summary>
