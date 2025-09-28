@@ -53,22 +53,25 @@ namespace ET.Client
             go.AddComponent<LanguageSource>();
             self.LanguageSource = go.GetComponent<LanguageSource>();
 
-#if UNITY_EDITOR
-            if (!self.UseRuntimeModule)
+            if (Define.IsEditor)
             {
-                LocalizationManager.RegisterSourceInEditor();
-                self.UpdateAllLanguages();
-                self.SetLanguage(self.DefaultLanguage);
+                if (!self.UseRuntimeModule)
+                {
+                    LocalizationManager.RegisterSourceInEditor();
+                    self.UpdateAllLanguages();
+                    self.SetLanguage(self.DefaultLanguage);
+                }
+                else
+                {
+                    self.LanguageSourceData.Awake();
+                    self.LoadLanguage(self.DefaultLanguage, true).Coroutine();
+                }
             }
             else
             {
                 self.LanguageSourceData.Awake();
                 self.LoadLanguage(self.DefaultLanguage, true).Coroutine();
             }
-#else
-            self.LanguageSourceData.Awake();
-            self.LoadLanguage(self.DefaultLanguage, true);
-#endif
         }
 
         private static void UpdateAllLanguages(this LanguageComponent self)
@@ -115,13 +118,14 @@ namespace ET.Client
         //根据需求可提前加载语言
         public static async ETTask LoadLanguage(this LanguageComponent self, string language, bool setCurrent = false)
         {
-#if UNITY_EDITOR
-            if (!self.UseRuntimeModule)
+            if (Define.IsEditor)
             {
-                Log.Error($"禁止在此模式下 动态加载语言 {language}");
-                return;
+                if (!self.UseRuntimeModule)
+                {
+                    Log.Error($"禁止在此模式下 动态加载语言 {language}");
+                    return;
+                }
             }
-#endif
 
             if (self.CheckLanguage(language))
             {
