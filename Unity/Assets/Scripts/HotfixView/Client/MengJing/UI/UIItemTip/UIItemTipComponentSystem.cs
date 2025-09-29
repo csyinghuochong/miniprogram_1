@@ -37,6 +37,7 @@ namespace ET.Client
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
                 self.Text_ItemName.text = itemConfig.ItemName;
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
+                self.Button_Use.gameObject.SetActive(itemConfig.ItemType == (int)ItemType.Consume);
             }
         }
     }
