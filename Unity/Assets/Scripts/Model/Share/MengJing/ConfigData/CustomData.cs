@@ -2,20 +2,6 @@ using MemoryPack;
 
 namespace ET
 {
-
-    //通过奖励
-    [MemoryPackable]
-    [EnableClass]
-    public partial class RewardItem
-    {
-
-        [MemoryPackOrder(0)]
-        public int ItemID;
-
-        [MemoryPackOrder(1)]
-        public int ItemNum;
-    }
-
     [MemoryPackable]
     [EnableClass]
     public partial class HideProList

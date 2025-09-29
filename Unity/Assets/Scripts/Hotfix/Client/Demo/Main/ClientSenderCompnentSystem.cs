@@ -7,24 +7,24 @@ namespace ET.Client
         public int ErrorValue;
     }
     
-    [EntitySystemOf(typeof(ClientSenderCompnent))]
-    [FriendOf(typeof(ClientSenderCompnent))]
+    [EntitySystemOf(typeof(ClientSenderComponent))]
+    [FriendOf(typeof(ClientSenderComponent))]
     [FriendOf(typeof(PlayerInfoComponent))]
     public static partial class ClientSenderCompnentSystem
     {
         [EntitySystem]
-        private static void Awake(this ClientSenderCompnent self)
+        private static void Awake(this ClientSenderComponent self)
         {
 
         }
         
         [EntitySystem]
-        private static void Destroy(this ClientSenderCompnent self)
+        private static void Destroy(this ClientSenderComponent self)
         {
             self.RemoveFiberAsync().Coroutine();
         }
 
-        private static async ETTask RemoveFiberAsync(this ClientSenderCompnent self)
+        private static async ETTask RemoveFiberAsync(this ClientSenderComponent self)
         {
             if (self.fiberId == 0)
             {
@@ -36,7 +36,7 @@ namespace ET.Client
             await FiberManager.Instance.Remove(fiberId);
         }
         
-        public static async ETTask<R2C_ServerList> GetServerList(this ClientSenderCompnent self, int versionMode)
+        public static async ETTask<R2C_ServerList> GetServerList(this ClientSenderComponent self, int versionMode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -52,7 +52,7 @@ namespace ET.Client
             return r2CServerList;
         }
         
-        public static async ETTask<NetClient2Main_RealName> RealNameAsync(this ClientSenderCompnent self, long accountId,string name,  string idcard, int versionmode)
+        public static async ETTask<NetClient2Main_RealName> RealNameAsync(this ClientSenderComponent self, long accountId,string name,  string idcard, int versionmode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -75,7 +75,7 @@ namespace ET.Client
             return netClient2MainRealName;
         }
 
-        public static async ETTask<int> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink, int versionmode)
+        public static async ETTask<int> LoginAsync(this ClientSenderComponent self, string account, string password, int relink, int versionmode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -99,7 +99,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<NetClient2Main_CheckSession> RequestCheckSession(this ClientSenderCompnent self, int maptype)
+        public static async ETTask<NetClient2Main_CheckSession> RequestCheckSession(this ClientSenderComponent self, int maptype)
         {
             Main2NetClient_CheckSession main2NetClientCheck = Main2NetClient_CheckSession.Create();
             main2NetClientCheck.MapType = maptype;
@@ -107,7 +107,7 @@ namespace ET.Client
             return respone;
         }
         
-        public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderCompnent self, string account, long accountId, long key,long roleId,string address,int reLink)
+        public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderComponent self, string account, long accountId, long key,long roleId,string address,int reLink)
         {
             Main2NetClient_LoginGame main2NetClientLoginGame = Main2NetClient_LoginGame.Create();
             main2NetClientLoginGame.RealmKey    = key;
@@ -120,14 +120,14 @@ namespace ET.Client
             return response;
         }
         
-        public static void Send(this ClientSenderCompnent self, IMessage message)
+        public static void Send(this ClientSenderComponent self, IMessage message)
         {
             A2NetClient_Message a2NetClientMessage = A2NetClient_Message.Create();
             a2NetClientMessage.MessageObject = message;
             self.Root().GetComponent<ProcessInnerSender>().Send(self.netClientActorId, a2NetClientMessage);
         }
 
-        public static async ETTask<IResponse> Call(this ClientSenderCompnent self, IRequest request, bool needException = true)
+        public static async ETTask<IResponse> Call(this ClientSenderComponent self, IRequest request, bool needException = true)
         {
             A2NetClient_Request a2NetClientRequest = A2NetClient_Request.Create();
             a2NetClientRequest.MessageObject = request;

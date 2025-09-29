@@ -7,17 +7,17 @@ namespace ET.Client
     {
         public static async ETTask<R2C_ServerList> GetServerList(Scene root, int versionMode)
         {
-            root.RemoveComponent<ClientSenderCompnent>();
-            ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
-            return await clientSenderCompnent.GetServerList(versionMode);
+            root.RemoveComponent<ClientSenderComponent>();
+            ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
+            return await clientSenderComponent.GetServerList(versionMode);
         }
         
         public static async ETTask<int> RealName(Scene root, string name, string idcard)
         {
-            root.RemoveComponent<ClientSenderCompnent>();
-            ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
+            root.RemoveComponent<ClientSenderComponent>();
+            ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
             PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
-            NetClient2Main_RealName netClient2MainRealName =   (NetClient2Main_RealName ) await clientSenderCompnent.RealNameAsync(playerInfoComponent.AccountId, name, idcard, playerInfoComponent.VersionMode);
+            NetClient2Main_RealName netClient2MainRealName =   (NetClient2Main_RealName ) await clientSenderComponent.RealNameAsync(playerInfoComponent.AccountId, name, idcard, playerInfoComponent.VersionMode);
             return netClient2MainRealName.Error;
         }
         
@@ -35,7 +35,7 @@ namespace ET.Client
             request.Name = name;
             request.IdCardNO = idcard;
             request.AccountId = playerInfoComponent.AccountId;
-            M2C_RealNameResponse response =  (M2C_RealNameResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_RealNameResponse response =  (M2C_RealNameResponse)await root.GetComponent<ClientSenderComponent>().Call(request);
             if (response.Error == ErrorCode.ERR_Success && response.PlayerInfo != null)
             {
                 playerInfoComponent.PlayerInfo = response.PlayerInfo;
@@ -45,10 +45,10 @@ namespace ET.Client
 
         public static async ETTask<int> Login(Scene root, string account, string password, int reLink, int versionmode)
         {
-            root.RemoveComponent<ClientSenderCompnent>();
-            ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
+            root.RemoveComponent<ClientSenderComponent>();
+            ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
             
-            int errCode =  await clientSenderCompnent.LoginAsync(account, password, reLink, versionmode);
+            int errCode =  await clientSenderComponent.LoginAsync(account, password, reLink, versionmode);
 
             if (errCode != ErrorCode.ERR_Success)
             {
@@ -67,7 +67,7 @@ namespace ET.Client
             {
                 //请求游戏角色进入Map地图
                 PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
-                ClientSenderCompnent clientSenderComponent = root.GetComponent<ClientSenderCompnent>();
+                ClientSenderComponent clientSenderComponent = root.GetComponent<ClientSenderComponent>();
                 C2R_GetRealmKey c2RGetRealmKey = C2R_GetRealmKey.Create();
                 c2RGetRealmKey.Token = playerInfoComponent.Token;
                 c2RGetRealmKey.Account = playerInfoComponent.Account;
@@ -136,7 +136,7 @@ namespace ET.Client
             request.CreateName = name;
             request.ServerId = playerInfoComponent.ServerItem.ServerId;
 
-            R2C_CreateRoleData response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_CreateRoleData;
+            R2C_CreateRoleData response = await root.GetComponent<ClientSenderComponent>().Call(request) as R2C_CreateRoleData;
             if (response.Error == ErrorCode.ERR_Success)
             {
                 playerInfoComponent.CreateRoleList.Add(response.createRoleInfo);
@@ -151,7 +151,7 @@ namespace ET.Client
             request.AccountId = accountId;
             request.UserId = userId;
 
-            R2C_DeleteRoleData response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_DeleteRoleData;
+            R2C_DeleteRoleData response = await root.GetComponent<ClientSenderComponent>().Call(request) as R2C_DeleteRoleData;
             root.GetComponent<PlayerInfoComponent>().CreateRoleList.Remove(createRoleInfo);
         }
     }

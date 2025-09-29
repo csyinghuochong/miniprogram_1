@@ -22,7 +22,7 @@ namespace ET.Client
             // request.Difficulty = difficulty;
             request.paramInfo = paraminfo;
 
-            M2C_TransferMap response = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_TransferMap response = (M2C_TransferMap)await root.GetComponent<ClientSenderComponent>().Call(request);
 
             return ErrorCode.ERR_Success;
         }
@@ -31,7 +31,7 @@ namespace ET.Client
         {
             try
             {
-                G2C_Match g2CEnterMap = await fiber.Root.GetComponent<ClientSenderCompnent>().Call(C2G_Match.Create()) as G2C_Match;
+                G2C_Match g2CEnterMap = await fiber.Root.GetComponent<ClientSenderComponent>().Call(C2G_Match.Create()) as G2C_Match;
             }
             catch (Exception e)
             {

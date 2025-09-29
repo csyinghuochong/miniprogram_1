@@ -56,6 +56,11 @@ namespace ET.Server
                         numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
                     }
 
+                    if (unit.GetComponent<InventoryComponentS>() == null)
+                    {
+                        InventoryComponentS inventoryComponentS = unit.AddComponent<InventoryComponentS>();
+                    }
+
                     unit.AddDataComponent<DBSaveComponent>();
                     
                     //unitComponent.Add(unit);

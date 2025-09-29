@@ -541,3 +541,38 @@ message M2C_RoleDataBroadcast // IMessage
 	string UpdateTypeValue = 2;			
 	int64 UnitId = 3;
 }
+
+
+message C2M_GMCommand // ILocationMessage
+{
+	int32 RpcId = 1;
+	string GMMsg = 2;
+}
+
+message ItemInfo
+{
+	int64 Id = 1;
+	int32 ConfigId = 2;
+	int32 ContainerType = 3;
+	int32 Num = 4;
+}
+
+// ResponseType M2C_GetAllItem
+message C2M_GetAllItem // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetAllItem // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated ItemInfo ItemList = 4;
+}
+
+message M2C_ItemUpdateOp // IMessage
+{
+	ItemInfo ItemInfo = 1;
+	int32 ItemOpType = 2;
+}

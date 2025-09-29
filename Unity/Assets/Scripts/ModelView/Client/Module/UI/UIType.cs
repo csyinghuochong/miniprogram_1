@@ -12,5 +12,6 @@ namespace ET
         public const string UIMain =  "UIMain/UIMain";
         public const string UILoading = "UILoading/UILoading";
         public const string UIBag =  "UIBag/UIBag";
+        public const string UIGM =  "UIGM/UIGM";
     }
 }

@@ -12,7 +12,7 @@ namespace ET.Client
         {
             C2M_PathfindingRequest msg = C2M_PathfindingRequest.Create();
             msg.Position = targetPos;
-            unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
+            unit.Root().GetComponent<ClientSenderComponent>().Send(msg);
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             moveComponent.WaitMove = false;
             moveComponent.WaitMode = waitmove;
@@ -38,7 +38,7 @@ namespace ET.Client
             msg.Position = pathlist;
             msg.SpeedRate = speedRate;
             msg.ServerTime = serverTime;
-            unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
+            unit.Root().GetComponent<ClientSenderComponent>().Send(msg);
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();
 
             // 要取消上一次的移动协程
@@ -65,14 +65,14 @@ namespace ET.Client
         public static void Stop(Scene root)
         {
             C2M_Stop c2MStop = C2M_Stop.Create();
-            root.GetComponent<ClientSenderCompnent>().Send(c2MStop);
+            root.GetComponent<ClientSenderComponent>().Send(c2MStop);
         }
         
         public static void StopResult(Scene root, float3 position)
         {
             C2M_StopResult c2MStop = C2M_StopResult.Create();
             c2MStop.Position = position;
-            root.GetComponent<ClientSenderCompnent>().Send(c2MStop);
+            root.GetComponent<ClientSenderComponent>().Send(c2MStop);
         }
     }
 }
