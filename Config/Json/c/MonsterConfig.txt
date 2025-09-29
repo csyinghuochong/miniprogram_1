@@ -1,0 +1,5 @@
+{"dict": [
+[10000001, {"_t":"MonsterConfig","_id":10000001,"MonsterName":"哥布林","MonsterHeadIcon":"10000001","MonsterType":1,"MonsterModelID":10000001,"ChallengeTime":0,"ActDistance":1,"ActSkillID":10000001,"SkillID":[0],"Act":100,"Def":22,"Hp":1600,"AtkSpeed":1,"MoveSpeed":1,"Cri":0.02,"MonsterDescription":"一只哥布林。"}],
+[10000002, {"_t":"MonsterConfig","_id":10000002,"MonsterName":"哥布林投手","MonsterHeadIcon":"10000002","MonsterType":2,"MonsterModelID":10000002,"ChallengeTime":0,"ActDistance":4,"ActSkillID":10000002,"SkillID":[0],"Act":120,"Def":16,"Hp":1200,"AtkSpeed":1.5,"MoveSpeed":1.2,"Cri":0.03,"MonsterDescription":"哥布林投手，会远程攻击。"}],
+[10000003, {"_t":"MonsterConfig","_id":10000003,"MonsterName":"巨型骷髅","MonsterHeadIcon":"10000003","MonsterType":3,"MonsterModelID":10000003,"ChallengeTime":60,"ActDistance":4,"ActSkillID":10000003,"SkillID":[20000001],"Act":130,"Def":10,"Hp":1200,"AtkSpeed":1,"MoveSpeed":1.3,"Cri":0.08,"MonsterDescription":"超级大的骷髅。"}],
+]}

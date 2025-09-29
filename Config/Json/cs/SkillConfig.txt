@@ -1,0 +1,9 @@
+{"dict": [
+[10000001, {"_t":"SkillConfig","_id":10000001,"SkillName":"战士普通攻击","SkillIcon":"10000001","SkillActType":0,"SkillCD":0,"SkillLiveTime":1000,"DamgeValue":10,"SkillAnimation":"Test_1","SkillHitEffectID":10000001,"BuffID":[0],"SkillMusic":"gong","SkillDescribe":""}],
+[10000002, {"_t":"SkillConfig","_id":10000002,"SkillName":"箭手普通攻击","SkillIcon":"10000002","SkillActType":0,"SkillCD":0,"SkillLiveTime":1000,"DamgeValue":20,"SkillAnimation":"Test_2","SkillHitEffectID":10000002,"BuffID":[0],"SkillMusic":"gongjian","SkillDescribe":""}],
+[10000003, {"_t":"SkillConfig","_id":10000003,"SkillName":"法师普通攻击","SkillIcon":"10000003","SkillActType":0,"SkillCD":0,"SkillLiveTime":1000,"DamgeValue":15,"SkillAnimation":"Test_3","SkillHitEffectID":10000003,"BuffID":[0],"SkillMusic":"gong","SkillDescribe":""}],
+[10000004, {"_t":"SkillConfig","_id":10000004,"SkillName":"箭雨","SkillIcon":"10000004","SkillActType":1,"SkillCD":11,"SkillLiveTime":2000,"DamgeValue":100,"SkillAnimation":"Test_1","SkillHitEffectID":10000004,"BuffID":[0],"SkillMusic":"jianyu","SkillDescribe":"对全体敌人射出箭矢，造成伤害。"}],
+[10000005, {"_t":"SkillConfig","_id":10000005,"SkillName":"治疗","SkillIcon":"10000005","SkillActType":1,"SkillCD":12,"SkillLiveTime":3000,"DamgeValue":200,"SkillAnimation":"Test_2","SkillHitEffectID":10000005,"BuffID":[10000002],"SkillMusic":"gong","SkillDescribe":"治疗全体队友。"}],
+[10000006, {"_t":"SkillConfig","_id":10000006,"SkillName":"岩石爆","SkillIcon":"10000006","SkillActType":1,"SkillCD":10,"SkillLiveTime":2000,"DamgeValue":400,"SkillAnimation":"Test_3","SkillHitEffectID":10000006,"BuffID":[10000001],"SkillMusic":"gong","SkillDescribe":"召唤岩石在敌人中爆炸，造成伤害。"}],
+[20000001, {"_t":"SkillConfig","_id":20000001,"SkillName":"地裂击","SkillIcon":"10000007","SkillActType":1,"SkillCD":10,"SkillLiveTime":3000,"DamgeValue":500,"SkillAnimation":"Test_1","SkillHitEffectID":10000006,"BuffID":[10000003],"SkillMusic":"gong","SkillDescribe":"对敌人造成巨额伤害，并且减速。"}],
+]}

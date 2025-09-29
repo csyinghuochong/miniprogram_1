@@ -1,0 +1,15 @@
+{"dict": [
+[10000001, {"_t":"EffectConfig","_id":10000001,"EffectType":1,"EffectName":"Eff_Test1","SkillEffectLiveTime":1000}],
+[10000002, {"_t":"EffectConfig","_id":10000002,"EffectType":1,"EffectName":"Eff_Test2","SkillEffectLiveTime":1000}],
+[10000003, {"_t":"EffectConfig","_id":10000003,"EffectType":1,"EffectName":"Eff_Test3","SkillEffectLiveTime":1000}],
+[10000004, {"_t":"EffectConfig","_id":10000004,"EffectType":1,"EffectName":"Eff_Test4","SkillEffectLiveTime":2000}],
+[10000005, {"_t":"EffectConfig","_id":10000005,"EffectType":1,"EffectName":"Eff_Test5","SkillEffectLiveTime":3000}],
+[10000006, {"_t":"EffectConfig","_id":10000006,"EffectType":1,"EffectName":"Eff_Test6","SkillEffectLiveTime":2000}],
+[10000007, {"_t":"EffectConfig","_id":10000007,"EffectType":1,"EffectName":"Eff_Test1","SkillEffectLiveTime":3000}],
+[10000008, {"_t":"EffectConfig","_id":10000008,"EffectType":1,"EffectName":"Eff_Test2","SkillEffectLiveTime":3000}],
+[20000001, {"_t":"EffectConfig","_id":20000001,"EffectType":2,"EffectName":"Eff_Test3","SkillEffectLiveTime":1000}],
+[20000002, {"_t":"EffectConfig","_id":20000002,"EffectType":2,"EffectName":"Eff_Test4","SkillEffectLiveTime":1000}],
+[20000003, {"_t":"EffectConfig","_id":20000003,"EffectType":2,"EffectName":"Eff_Test5","SkillEffectLiveTime":1000}],
+[20000004, {"_t":"EffectConfig","_id":20000004,"EffectType":2,"EffectName":"Eff_Test6","SkillEffectLiveTime":1000}],
+[20000005, {"_t":"EffectConfig","_id":20000005,"EffectType":2,"EffectName":"Eff_Test1","SkillEffectLiveTime":3000}],
+]}
