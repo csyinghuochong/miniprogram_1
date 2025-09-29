@@ -15,9 +15,11 @@ namespace ET.Client
 
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
-            self.Button_Bag  = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
+            self.Button_Team = rc.Get<GameObject>("Button_Team").GetComponent<Button>();
+            self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
 
             self.Button_GM.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
+            self.Button_Team.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UITeam).Coroutine(); });
             self.Button_Bag.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
 
             Application.targetFrameRate = 60;

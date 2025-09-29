@@ -14,6 +14,7 @@ namespace ET.Client
 
         public TMP_Text Text_FPS;
         public Button Button_GM;
+        public Button Button_Team;
         public Button Button_Bag;
     }
 }
