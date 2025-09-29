@@ -87,7 +87,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UICommonItemList[i].UpdateInfo(itemList[i]);
+                self.UICommonItemList[i].UpdateInfo(itemList[i]).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
 

@@ -103,6 +103,7 @@ namespace ET.Client
             self.Package.UnloadUnusedAssetsAsync();
         }
 
+        // 小游戏不支持同步加载，除非提前加载好
         public static T LoadAssetSync<T>(this ResourcesLoaderComponent self, string location, long liveTime = 30 * 1000) where T : UnityEngine.Object
         {
             HandleBase handler;
