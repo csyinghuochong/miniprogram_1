@@ -3,7 +3,7 @@
     /// <summary>
     /// AB实用函数集，主要是路径拼接
     /// </summary>
-    public class ABPathHelper
+    public static class ABPathHelper
     {
         public static string GetAnimFbxPath(string fileName)
         {

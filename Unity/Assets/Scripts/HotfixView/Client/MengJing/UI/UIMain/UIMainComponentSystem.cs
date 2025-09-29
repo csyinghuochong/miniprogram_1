@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -13,6 +14,9 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
+            self.Button_Bag  = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
+
+            self.Button_Bag.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
 
             Application.targetFrameRate = 60;
         }

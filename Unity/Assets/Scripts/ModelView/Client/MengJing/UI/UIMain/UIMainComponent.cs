@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -12,5 +13,6 @@ namespace ET.Client
         public float FPS; // 当前帧率
 
         public TMP_Text Text_FPS;
+        public Button Button_Bag;
     }
 }
