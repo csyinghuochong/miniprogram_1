@@ -55,6 +55,12 @@ namespace ET.Server
                 int leftNum = rewardItems[i].ItemNum;
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
 
+                if (itemConfigId <= 10000000)
+                {
+                    // 加到玩家数据中
+                    continue;
+                }
+
                 foreach (Item item in self.Items.Values)
                 {
                     if ((int)containerType == item.ContainerType && itemConfigId == item.ConfigId)
