@@ -1,11 +1,21 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UIBagComponent : Entity, IAwake
+    public class UIBagComponent : Entity, IAwake, IDestroy
     {
+        public List<UICommonItem> UICommonItemList { get; set; } = new();
+
         public Button Button_Close;
+        public Button Button_Type_All;
+        public Button Button_Type_Material;
+        public Button Button_Type_Consume;
+        public Button Button_Type_HeroShard;
+        public Transform Content_UICommonItem;
+        public GameObject UICommonItem;
     }
 }

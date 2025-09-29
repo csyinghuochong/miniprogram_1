@@ -97,5 +97,46 @@ namespace ET.Client
 
             self.Items.Clear();
         }
+
+        public static List<Item> GetAllItems(this InventoryComponentC self)
+        {
+            List<Item> items = new List<Item>();
+            foreach (Item item in self.Items.Values)
+            {
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        public static List<Item> GetItemsByType(this InventoryComponentC self, ItemType type)
+        {
+            List<Item> items = new();
+            foreach (Item item in self.Items.Values)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+                if (itemConfig.ItemType == (int)type)
+                {
+                    items.Add(item);
+                }
+            }
+
+            return items;
+        }
+
+        public static List<Item> GetItemsByContainerType(this InventoryComponentC self, InventoryContainerType containerType)
+        {
+            List<Item> items = new();
+            foreach (Item item in self.Items.Values)
+            {
+                if (item.ContainerType == (int)containerType)
+                {
+                    items.Add(item);
+                }
+            }
+
+            return items;
+        }
     }
 }
