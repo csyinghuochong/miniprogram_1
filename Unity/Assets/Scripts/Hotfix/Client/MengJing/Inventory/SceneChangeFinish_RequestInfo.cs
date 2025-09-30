@@ -5,7 +5,8 @@
     {
         protected override async ETTask Run(Scene scene, SceneChangeFinish args)
         {
-            InventoryHelper.GetAllItems(scene).Coroutine();
+            InventoryHelper.GetAllItem(scene).Coroutine();
+            HeroHelper.GetAllHero(scene).Coroutine();
             
             await ETTask.CompletedTask;
         }

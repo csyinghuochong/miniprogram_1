@@ -2629,6 +2629,131 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.HeroInfo)]
+    public partial class HeroInfo : MessageObject
+    {
+        public static HeroInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(HeroInfo), isFromPool) as HeroInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public long Id { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int Lv { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Id = default;
+            this.ConfigId = default;
+            this.Lv = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GetAllHero)]
+    [ResponseType(nameof(M2C_GetAllHero))]
+    public partial class C2M_GetAllHero : MessageObject, ILocationRequest
+    {
+        public static C2M_GetAllHero Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetAllHero), isFromPool) as C2M_GetAllHero;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetAllHero)]
+    public partial class M2C_GetAllHero : MessageObject, ILocationResponse
+    {
+        public static M2C_GetAllHero Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetAllHero), isFromPool) as M2C_GetAllHero;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<HeroInfo> HeroList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.HeroList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_HeroUpdateOp)]
+    public partial class M2C_HeroUpdateOp : MessageObject, IMessage
+    {
+        public static M2C_HeroUpdateOp Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_HeroUpdateOp), isFromPool) as M2C_HeroUpdateOp;
+        }
+
+        [MemoryPackOrder(0)]
+        public HeroInfo HeroInfo { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int HeroOpType { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.HeroInfo = default;
+            this.HeroOpType = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -2701,5 +2826,9 @@ namespace ET
         public const ushort C2M_GetAllItem = 10069;
         public const ushort M2C_GetAllItem = 10070;
         public const ushort M2C_ItemUpdateOp = 10071;
+        public const ushort HeroInfo = 10072;
+        public const ushort C2M_GetAllHero = 10073;
+        public const ushort M2C_GetAllHero = 10074;
+        public const ushort M2C_HeroUpdateOp = 10075;
     }
 }

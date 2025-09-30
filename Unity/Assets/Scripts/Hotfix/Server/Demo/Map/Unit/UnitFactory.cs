@@ -61,6 +61,11 @@ namespace ET.Server
                         InventoryComponentS inventoryComponentS = unit.AddComponent<InventoryComponentS>();
                     }
 
+                    if (unit.GetComponent<HeroComponentS>() == null)
+                    {
+                        HeroComponentS heroComponentS = unit.AddComponent<HeroComponentS>();
+                    }
+
                     unit.AddDataComponent<DBSaveComponent>();
                     
                     //unitComponent.Add(unit);

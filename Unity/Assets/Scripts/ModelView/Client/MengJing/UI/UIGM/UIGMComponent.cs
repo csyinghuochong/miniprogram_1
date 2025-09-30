@@ -10,5 +10,7 @@ namespace ET.Client
         public TMP_InputField InputField_AddItem_ItemId;
         public TMP_InputField InputField_AddItem_ItemNum;
         public Button Button_AddItem_Send;
+        public TMP_InputField InputField_AddHero_HeroId;
+        public Button Button_AddHero_Send;
     }
 }

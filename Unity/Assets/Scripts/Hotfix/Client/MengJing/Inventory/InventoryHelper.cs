@@ -2,7 +2,7 @@
 {
     public static class InventoryHelper
     {
-        public static async ETTask<int> GetAllItems(Scene root)
+        public static async ETTask<int> GetAllItem(Scene root)
         {
             C2M_GetAllItem request = C2M_GetAllItem.Create();
 
@@ -12,11 +12,11 @@
                 return response.Error;
             }
 
-            InventoryComponentC clientInventoryComponent = root.GetComponent<InventoryComponentC>();
-            clientInventoryComponent.Clear();
+            InventoryComponentC inventoryComponentC = root.GetComponent<InventoryComponentC>();
+            inventoryComponentC.Clear();
             foreach (ItemInfo itemInfo in response.ItemList)
             {
-                clientInventoryComponent.AddItemFromMessage(itemInfo);
+                inventoryComponentC.AddItemFromMessage(itemInfo);
             }
 
             return response.Error;

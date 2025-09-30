@@ -16,6 +16,7 @@ namespace ET.Server
         private static void Destroy(this InventoryComponentS self)
         {
             self.Items.Clear();
+            self.Items = null;
         }
 
         [EntitySystem]
@@ -30,17 +31,6 @@ namespace ET.Server
             }
         }
 
-        public static List<Item> GetItems(this InventoryComponentS self)
-        {
-            List<Item> items = new List<Item>();
-            foreach (Item item in self.Items.Values)
-            {
-                items.Add(item);
-            }
-
-            return items;
-        }
-
         public static Item GetItem(this InventoryComponentS self, long itemId)
         {
             self.Items.TryGetValue(itemId, out EntityRef<Item> item);
@@ -53,6 +43,12 @@ namespace ET.Server
             {
                 int itemConfigId = rewardItems[i].ItemId;
                 int leftNum = rewardItems[i].ItemNum;
+
+                if (!ItemConfigCategory.Instance.Contain(itemConfigId))
+                {
+                    continue;
+                }
+
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
 
                 if (itemConfigId <= 10000000)

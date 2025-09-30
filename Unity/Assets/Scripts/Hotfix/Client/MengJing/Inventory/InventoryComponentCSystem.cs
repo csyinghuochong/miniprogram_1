@@ -18,17 +18,6 @@ namespace ET.Client
             self.Items = null;
         }
 
-        public static List<Item> GetItems(this InventoryComponentC self)
-        {
-            List<Item> items = new();
-            foreach (Item item in self.Items.Values)
-            {
-                items.Add(item);
-            }
-
-            return items;
-        }
-
         public static Item GetItem(this InventoryComponentC self, long itemId)
         {
             self.Items.TryGetValue(itemId, out EntityRef<Item> item);
