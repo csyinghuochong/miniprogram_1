@@ -14,8 +14,10 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
+            self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UITeam); });
+            self.Button_Hero.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
         }
     }
 }
