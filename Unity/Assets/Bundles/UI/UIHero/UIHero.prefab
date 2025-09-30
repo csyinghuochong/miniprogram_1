@@ -118,6 +118,18 @@ MonoBehaviour:
   data:
   - key: Button_Close
     gameObject: {fileID: 2884267023644722160}
+  - key: Button_Type_All
+    gameObject: {fileID: 8428632465129721033}
+  - key: Button_Type_Warrior
+    gameObject: {fileID: 7629175705134848311}
+  - key: Button_Type_Mage
+    gameObject: {fileID: 5500897348642285170}
+  - key: Button_Type_Archer
+    gameObject: {fileID: 2037196758094312791}
+  - key: Content_UIHeroItem
+    gameObject: {fileID: 1485068836293457744}
+  - key: UIHeroItem
+    gameObject: {fileID: 2892821993678541725}
 --- !u!1 &6884363501689542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,10 +1341,10 @@ RectTransform:
   - {fileID: 3802862704479457434}
   m_Father: {fileID: 8941395169776067667}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 85, y: -85}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1206573819446746255
 CanvasRenderer:
@@ -1384,7 +1396,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: []
+  data:
+  - key: Image_HeroIcon
+    gameObject: {fileID: 6884363501689542}
+  - key: Text_HeroName
+    gameObject: {fileID: 6847826035015720402}
 --- !u!1 &3120429143711889649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,7 +2153,7 @@ GameObject:
   - component: {fileID: 5875463262995740507}
   - component: {fileID: 9086283707581481175}
   m_Layer: 5
-  m_Name: Text_Name
+  m_Name: Text_HeroName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
