@@ -26,6 +26,23 @@
             return response.Error;
         }
 
+        public static async ETTask<int> SetHeroCurrentFormationIndex(Scene root, int index)
+        {
+            C2M_SetHeroCurrentFormationIndex request = C2M_SetHeroCurrentFormationIndex.Create();
+            request.CurrentFormationIndex = index;
+
+            M2C_SetHeroCurrentFormationIndex response = (M2C_SetHeroCurrentFormationIndex)await root.GetComponent<ClientSenderComponent>().Call(request);
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+            
+            HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
+            heroComponentC.CurrentFormationIndex = index;
+            
+            return response.Error;
+        }
+
         public static async ETTask<int> SetHeroFormation(Scene root, int opType, long heroId, int formationIndex, int slotIndex)
         {
             C2M_SetHeroFormation request = C2M_SetHeroFormation.Create();

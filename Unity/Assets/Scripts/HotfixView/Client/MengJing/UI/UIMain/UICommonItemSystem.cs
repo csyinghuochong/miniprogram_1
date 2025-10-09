@@ -36,10 +36,10 @@ namespace ET.Client
         {
             self.ItemId = item.Id;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+            self.Text_ItemName.SetText(itemConfig.ItemName);
+            self.Text_ItemNum.SetText("x{0}", item.Num);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             self.Image_ItemIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-            self.Text_ItemName.text = itemConfig.ItemName;
-            self.Text_ItemNum.SetText("x{0}", item.Num);
         }
     }
 }

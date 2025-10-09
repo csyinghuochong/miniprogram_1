@@ -141,7 +141,7 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            if (formationIndex < 1 || formationIndex > 4)
+            if (formationIndex < 1 || formationIndex > 2)
             {
                 return ErrorCode.ERR_ModifyData;
             }

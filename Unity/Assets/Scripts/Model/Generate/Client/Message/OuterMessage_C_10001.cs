@@ -2767,6 +2767,69 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_SetHeroCurrentFormationIndex)]
+    [ResponseType(nameof(M2C_SetHeroCurrentFormationIndex))]
+    public partial class C2M_SetHeroCurrentFormationIndex : MessageObject, ILocationRequest
+    {
+        public static C2M_SetHeroCurrentFormationIndex Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SetHeroCurrentFormationIndex), isFromPool) as C2M_SetHeroCurrentFormationIndex;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int CurrentFormationIndex { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.CurrentFormationIndex = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SetHeroCurrentFormationIndex)]
+    public partial class M2C_SetHeroCurrentFormationIndex : MessageObject, ILocationResponse
+    {
+        public static M2C_SetHeroCurrentFormationIndex Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SetHeroCurrentFormationIndex), isFromPool) as M2C_SetHeroCurrentFormationIndex;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_SetHeroFormation)]
     [ResponseType(nameof(M2C_SetHeroFormation))]
     public partial class C2M_SetHeroFormation : MessageObject, ILocationRequest
@@ -2779,6 +2842,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public int RpcId { get; set; }
 
+        /// <summary>
+        /// 0上阵 1下阵
+        /// </summary>
         [MemoryPackOrder(1)]
         public int OpType { get; set; }
 
@@ -2921,7 +2987,9 @@ namespace ET
         public const ushort C2M_GetAllHero = 10073;
         public const ushort M2C_GetAllHero = 10074;
         public const ushort M2C_HeroUpdateOp = 10075;
-        public const ushort C2M_SetHeroFormation = 10076;
-        public const ushort M2C_SetHeroFormation = 10077;
+        public const ushort C2M_SetHeroCurrentFormationIndex = 10076;
+        public const ushort M2C_SetHeroCurrentFormationIndex = 10077;
+        public const ushort C2M_SetHeroFormation = 10078;
+        public const ushort M2C_SetHeroFormation = 10079;
     }
 }
