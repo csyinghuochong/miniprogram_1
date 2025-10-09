@@ -108,12 +108,57 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
 
 	public void Sort()
 	{
-		SerializedObject serializedObject = new SerializedObject(this);
-		data.Sort(new ReferenceCollectorDataComparer());
-		EditorUtility.SetDirty(this);
+		UnityEditor.SerializedObject serializedObject = new UnityEditor.SerializedObject(this);
+		Transform rootTransform = this.transform;
+
+		var hierarchyOrder = new Dictionary<GameObject, int>();
+		int order = 0;
+
+		void CollectHierarchy(Transform parent)
+		{
+			hierarchyOrder[parent.gameObject] = order++;
+			foreach (Transform child in parent)
+			{
+				CollectHierarchy(child);
+			}
+		}
+		CollectHierarchy(rootTransform);
+
+		data.Sort((a, b) =>
+		{
+			GameObject aGo = a.gameObject as GameObject;
+			GameObject bGo = b.gameObject as GameObject;
+
+			bool aIsChild = aGo != null && hierarchyOrder.ContainsKey(aGo);
+			bool bIsChild = bGo != null && hierarchyOrder.ContainsKey(bGo);
+
+			if (aIsChild && bIsChild)
+			{
+				return hierarchyOrder[aGo].CompareTo(hierarchyOrder[bGo]);
+			}
+			else if (aIsChild)
+			{
+				return -1;
+			}
+			else if (bIsChild)
+			{
+				return 1;
+			}
+			else
+			{
+				string aType = aGo != null ? aGo.GetType().Name : "";
+				string bType = bGo != null ? bGo.GetType().Name : "";
+				int typeComp = string.Compare(aType, bType, StringComparison.Ordinal);
+				if (typeComp != 0) return typeComp;
+				return string.Compare(a.key, b.key, StringComparison.Ordinal);
+			}
+		});
+
+		UnityEditor.EditorUtility.SetDirty(this);
 		serializedObject.ApplyModifiedProperties();
 		serializedObject.UpdateIfRequiredOrScript();
 	}
+	
 #endif
     //使用泛型返回对应key的gameobject
 	public T Get<T>(string key) where T : class
