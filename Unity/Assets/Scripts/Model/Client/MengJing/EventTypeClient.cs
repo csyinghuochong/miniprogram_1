@@ -18,8 +18,12 @@ namespace ET.Client
         public int ReddotType;
         public int Number;
     }
-    
+
     public struct DataUpdate_UpdateRoleProper
+    {
+    }
+
+    public struct HeroFormationUpdate
     {
     }
 }

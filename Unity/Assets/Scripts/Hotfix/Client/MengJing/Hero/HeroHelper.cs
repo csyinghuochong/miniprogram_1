@@ -39,6 +39,8 @@
             
             HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
             heroComponentC.CurrentFormationIndex = index;
+
+            EventSystem.Instance.Publish(root, new HeroFormationUpdate());
             
             return response.Error;
         }
@@ -67,6 +69,8 @@
                     heroComponentC.Formation_2 = response.Formation;
                     break;
             }
+            
+            EventSystem.Instance.Publish(root, new HeroFormationUpdate());
 
             return response.Error;
         }
