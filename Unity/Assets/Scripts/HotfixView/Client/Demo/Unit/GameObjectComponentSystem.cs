@@ -117,6 +117,7 @@ namespace ET.Client
                 case UnitType.Hero:
                 {
                     self.UpdatePositon(unit.Position);
+                    unit.AddComponent<UIHeroHpComponent>();
                     break;
                 }
 

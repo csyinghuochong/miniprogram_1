@@ -65,7 +65,7 @@ namespace ET.Client
 
             NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
             numericComponentC.ApplyValue(NumericType.Now_Hp, 100);
-            numericComponentC.ApplyValue(NumericType.Base_MaxHp_Base, 100);
+            numericComponentC.ApplyValue(NumericType.Now_MaxHp, 100);
 
             OnAfterCreateUnit(unit);
             return unit;
