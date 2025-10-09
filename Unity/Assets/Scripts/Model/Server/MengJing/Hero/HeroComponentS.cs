@@ -8,5 +8,9 @@ namespace ET.Server
     {
         [BsonIgnore]
         public Dictionary<long, EntityRef<Hero>> Heros = new();
+
+        public int CurrentFormationIndex;
+        public List<long> Formation_1 = new();
+        public List<long> Formation_2 = new();
     }
 }

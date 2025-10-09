@@ -4,10 +4,8 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UITeamComponent : Entity, IAwake
+    public class UIFormationComponent : Entity, IAwake
     {
         public Button Button_Close;
-        public Button Button_Hero;
-        public Button Button_Formation;
     }
 }

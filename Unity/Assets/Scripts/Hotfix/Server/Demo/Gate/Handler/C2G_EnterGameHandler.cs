@@ -138,6 +138,7 @@ namespace ET.Server
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 
                         unit.GetComponent<DBSaveComponent>().OnLogin();
+                        unit.GetComponent<HeroComponentS>().OnLogin();
                         
                         TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 

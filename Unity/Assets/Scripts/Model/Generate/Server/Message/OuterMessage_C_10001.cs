@@ -2709,6 +2709,15 @@ namespace ET
         [MemoryPackOrder(3)]
         public List<HeroInfo> HeroList { get; set; } = new();
 
+        [MemoryPackOrder(4)]
+        public int CurrentFormationIndex { get; set; }
+
+        [MemoryPackOrder(5)]
+        public List<long> Formation_1 { get; set; } = new();
+
+        [MemoryPackOrder(6)]
+        public List<long> Formation_2 { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2720,6 +2729,9 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.HeroList.Clear();
+            this.CurrentFormationIndex = default;
+            this.Formation_1.Clear();
+            this.Formation_2.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -2749,6 +2761,85 @@ namespace ET
 
             this.HeroInfo = default;
             this.HeroOpType = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SetHeroFormation)]
+    [ResponseType(nameof(M2C_SetHeroFormation))]
+    public partial class C2M_SetHeroFormation : MessageObject, ILocationRequest
+    {
+        public static C2M_SetHeroFormation Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SetHeroFormation), isFromPool) as C2M_SetHeroFormation;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int OpType { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long HeroId { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int FormationIndex { get; set; }
+
+        [MemoryPackOrder(4)]
+        public int SlotIndex { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.OpType = default;
+            this.HeroId = default;
+            this.FormationIndex = default;
+            this.SlotIndex = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SetHeroFormation)]
+    public partial class M2C_SetHeroFormation : MessageObject, ILocationResponse
+    {
+        public static M2C_SetHeroFormation Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SetHeroFormation), isFromPool) as M2C_SetHeroFormation;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<long> Formation { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.Formation.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -2830,5 +2921,7 @@ namespace ET
         public const ushort C2M_GetAllHero = 10073;
         public const ushort M2C_GetAllHero = 10074;
         public const ushort M2C_HeroUpdateOp = 10075;
+        public const ushort C2M_SetHeroFormation = 10076;
+        public const ushort M2C_SetHeroFormation = 10077;
     }
 }
