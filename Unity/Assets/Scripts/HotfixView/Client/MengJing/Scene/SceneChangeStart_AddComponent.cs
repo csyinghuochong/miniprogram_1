@@ -11,15 +11,8 @@ namespace ET.Client
             {
                 root.GetComponent<SceneManagerComponent>().BeforeChangeScene();
 
-                // await UIComponent.Instance.Create(UIType.UILoading);
-                // uiComponent.GetDlgLogic<DlgLoading>().OnInitUI(args.LastSceneType, args.SceneType, args. ChapterId);
-                //
-                // DlgMain dlgMain = uiComponent.GetDlgLogic<DlgMain>();
-                // if (dlgMain != null)
-                // {
-                //     uiComponent.CloseWindow(WindowID.WindowID_MapBig);
-                //     dlgMain.BeforeEnterScene(args.LastSceneType);
-                // }
+                UI ui = await root.GetComponent<UIComponent>().Create(UIType.UILoading);
+                ui.GetComponent<UILoadingComponent>().OnInitUI();
 
                 Log.Debug($"SceneChangeStart:  {args.LastSceneType}");
 

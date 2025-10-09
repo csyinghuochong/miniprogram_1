@@ -75,28 +75,9 @@ namespace ET.Client
 
             Debug.Log("切换场景" + path);
 
-            // 获取当前场景
-
             string scenename = SceneManager.GetActiveScene().name;
-            // 打印当前场景的名称
 
             Debug.Log("当前场景的名称是: " + scenename);
-
-            //动态生成场景
-            if (SettingData.UseSceneAOI)
-            {
-                // TextAsset mapconfig = await resourcesLoaderComponent.LoadAssetAsync<TextAsset>(ABPathHelper.GetMapConfigPath(paramss));
-                // if (mapconfig!=null && mapconfig.bytes!=null)
-                // {
-                //     Debug.Log("mapconfig!=null" + path);
-                //     self.Root().GetComponent<SceneUnitManagerComponent>().InitMapObject(mapconfig.bytes, paramss  );
-                // }
-                // else
-                // {
-                //     Debug.Log("mapconfig==null" + path);
-                //     self.Root().GetComponent<SceneUnitManagerComponent>().InitMapObject(null, paramss  );
-                // }
-            }
 
             if (sceneTypeEnum != MapTypeEnum.LoginScene)
             {

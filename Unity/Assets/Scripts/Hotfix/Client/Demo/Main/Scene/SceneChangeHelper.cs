@@ -36,6 +36,7 @@
                 SceneType = sceneType,
                 ChapterId = sceneId,
             });
+
             // 等待CreateMyUnit的消息
             Wait_CreateMyUnit waitCreateMyUnit = await root.GetComponent<ObjectWait>().Wait<Wait_CreateMyUnit>();
             M2C_CreateMyUnit m2CCreateMyUnit = waitCreateMyUnit.Message;
