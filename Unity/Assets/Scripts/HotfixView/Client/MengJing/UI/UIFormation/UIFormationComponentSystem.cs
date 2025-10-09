@@ -16,17 +16,27 @@ namespace ET.Client
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Button_Plan_1 = rc.Get<GameObject>("Button_Plan_1").GetComponent<Button>();
             self.Button_Plan_2 = rc.Get<GameObject>("Button_Plan_2").GetComponent<Button>();
-
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation); });
-            self.Button_Plan_1.onClick.AddListener(() => { self.SetShowPlan(1).Coroutine(); });
-            self.Button_Plan_2.onClick.AddListener(() => { self.SetShowPlan(2).Coroutine(); });
             self.UIFormationSlotItem_1 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_1"));
             self.UIFormationSlotItem_2 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_2"));
             self.UIFormationSlotItem_3 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_3"));
             self.UIFormationSlotItem_4 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_4"));
             self.UIFormationSlotItem_5 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_5"));
+            self.Content_UIFormationHeroItem = rc.Get<GameObject>("Content_UIFormationHeroItem").transform;
+            self.UIFormationHeroItem = rc.Get<GameObject>("UIFormationHeroItem");
+            self.UIFormationHeroItem.SetActive(false);
+
+            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation); });
+            self.Button_Plan_1.onClick.AddListener(() => { self.SetShowPlan(1).Coroutine(); });
+            self.Button_Plan_2.onClick.AddListener(() => { self.SetShowPlan(2).Coroutine(); });
 
             self.SetShowPlan(self.Root().GetComponent<HeroComponentC>().CurrentFormationIndex).Coroutine();
+        }
+
+        [EntitySystem]
+        private static void Destroy(this UIFormationComponent self)
+        {
+            self.UIFormationHeroItemList.Clear();
+            self.UIFormationHeroItemList = null;
         }
 
         private static async ETTask SetShowPlan(this UIFormationComponent self, int index)
@@ -39,24 +49,92 @@ namespace ET.Client
                     return;
                 }
             }
-            
+
             self.Button_Plan_1.transform.Find("Image_On").gameObject.SetActive(index == 1);
             self.Button_Plan_1.transform.Find("Image_Off").gameObject.SetActive(index != 1);
             self.Button_Plan_2.transform.Find("Image_On").gameObject.SetActive(index == 2);
             self.Button_Plan_2.transform.Find("Image_Off").gameObject.SetActive(index != 2);
 
             self.UpdateSlotItemList();
+            self.UpdateHeroList(1);
         }
 
         private static void UpdateSlotItemList(this UIFormationComponent self)
         {
-            HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
-            List<long> currentFormation = heroComponent.GetFormation(heroComponent.CurrentFormationIndex);
-            self.UIFormationSlotItem_1.UpdateInfo(heroComponent.GetHero(currentFormation[0])).Coroutine();
-            self.UIFormationSlotItem_2.UpdateInfo(heroComponent.GetHero(currentFormation[1])).Coroutine();
-            self.UIFormationSlotItem_3.UpdateInfo(heroComponent.GetHero(currentFormation[2])).Coroutine();
-            self.UIFormationSlotItem_4.UpdateInfo(heroComponent.GetHero(currentFormation[3])).Coroutine();
-            self.UIFormationSlotItem_5.UpdateInfo(heroComponent.GetHero(currentFormation[4])).Coroutine();
+            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            List<long> currentFormation = heroComponentC.GetFormation(heroComponentC.CurrentFormationIndex);
+            self.UIFormationSlotItem_1.UpdateInfo(heroComponentC.GetHero(currentFormation[0])).Coroutine();
+            self.UIFormationSlotItem_2.UpdateInfo(heroComponentC.GetHero(currentFormation[1])).Coroutine();
+            self.UIFormationSlotItem_3.UpdateInfo(heroComponentC.GetHero(currentFormation[2])).Coroutine();
+            self.UIFormationSlotItem_4.UpdateInfo(heroComponentC.GetHero(currentFormation[3])).Coroutine();
+            self.UIFormationSlotItem_5.UpdateInfo(heroComponentC.GetHero(currentFormation[4])).Coroutine();
+        }
+
+        private static void UpdateHeroList(this UIFormationComponent self, int page)
+        {
+            self.ShowHeroType = page;
+            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+
+            List<Hero> heroList = null;
+            if (page == 1)
+            {
+                heroList = heroComponentC.GetAllHero();
+            }
+            else if (page == 2)
+            {
+                heroList = heroComponentC.GetHerosByType(HeroType.Warrior);
+            }
+            else if (page == 3)
+            {
+                heroList = heroComponentC.GetHerosByType(HeroType.Mage);
+            }
+            else if (page == 4)
+            {
+                heroList = heroComponentC.GetHerosByType(HeroType.Archer);
+            }
+            else
+            {
+                return;
+            }
+
+            while (self.UIFormationHeroItemList.Count < heroList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIFormationHeroItem, self.Content_UIFormationHeroItem);
+                UIFormationHeroItem newItem = self.AddChild<UIFormationHeroItem, GameObject>(go);
+                self.UIFormationHeroItemList.Add(newItem);
+            }
+
+            List<long> currentFormation = heroComponentC.GetFormation(heroComponentC.CurrentFormationIndex);
+            for (int i = 0; i < heroList.Count; i++)
+            {
+                self.UIFormationHeroItemList[i].UpdateInfo(heroList[i], currentFormation.Contains(heroList[i].Id)).Coroutine();
+                self.UIFormationHeroItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = heroList.Count; i < self.UIFormationHeroItemList.Count; i++)
+            {
+                self.UIFormationHeroItemList[i].GameObject.SetActive(false);
+            }
+        }
+
+        public static async ETTask OnSelectHero(this UIFormationComponent self, long heroId)
+        {
+            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            List<long> currentFormation = heroComponentC.GetFormation(heroComponentC.CurrentFormationIndex);
+            for (int i = 0; i < currentFormation.Count; i++)
+            {
+                if (currentFormation[i] == 0)
+                {
+                    // 有空位直接上阵
+                    int error = await HeroHelper.SetHeroFormation(self.Root(), 0, heroId, heroComponentC.CurrentFormationIndex, i + 1);
+                    if (error == ErrorCode.ERR_Success)
+                    {
+                        self.UpdateSlotItemList();
+                        self.UpdateHeroList(self.ShowHeroType);
+                    }
+                    return;
+                }
+            }
         }
     }
 }
