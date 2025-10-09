@@ -141,12 +141,12 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            if (formationIndex < 1 || formationIndex > 2)
+            if (formationIndex < 1 || formationIndex > self.MaxFormationIndex)
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
-            if (slotIndex < 1 || slotIndex > 5)
+            if (slotIndex < 1 || slotIndex > self.MaxFormationSlotIndex)
             {
                 return ErrorCode.ERR_ModifyData;
             }

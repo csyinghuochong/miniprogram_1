@@ -9,6 +9,10 @@ namespace ET.Server
         [BsonIgnore]
         public Dictionary<long, EntityRef<Hero>> Heros = new();
 
+        [BsonIgnore]
+        public int MaxFormationIndex = 2;
+        [BsonIgnore]
+        public int MaxFormationSlotIndex = 5;
         public int CurrentFormationIndex;
         public List<long> Formation_1 = new();
         public List<long> Formation_2 = new();

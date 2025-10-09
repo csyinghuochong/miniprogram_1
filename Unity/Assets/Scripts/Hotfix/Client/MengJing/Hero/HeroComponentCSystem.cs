@@ -114,19 +114,14 @@ namespace ET.Client
             return Heros;
         }
 
-        public static List<long> GetCurrentFormation(this HeroComponentC self)
+        public static List<long> GetFormation(this HeroComponentC self, int formationIndex)
         {
-            if (self.CurrentFormationIndex == 1)
+            return formationIndex switch
             {
-                return self.Formation_1;
-            }
-
-            if (self.CurrentFormationIndex == 2)
-            {
-                return self.Formation_2;
-            }
-
-            return null;
+                1 => self.Formation_1,
+                2 => self.Formation_2,
+                _ => null
+            };
         }
     }
 }

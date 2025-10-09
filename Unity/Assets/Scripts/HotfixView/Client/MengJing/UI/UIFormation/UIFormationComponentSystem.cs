@@ -51,7 +51,7 @@ namespace ET.Client
         private static void UpdateSlotItemList(this UIFormationComponent self)
         {
             HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
-            List<long> currentFormation = heroComponent.GetCurrentFormation();
+            List<long> currentFormation = heroComponent.GetFormation(heroComponent.CurrentFormationIndex);
             self.UIFormationSlotItem_1.UpdateInfo(heroComponent.GetHero(currentFormation[0])).Coroutine();
             self.UIFormationSlotItem_2.UpdateInfo(heroComponent.GetHero(currentFormation[1])).Coroutine();
             self.UIFormationSlotItem_3.UpdateInfo(heroComponent.GetHero(currentFormation[2])).Coroutine();
