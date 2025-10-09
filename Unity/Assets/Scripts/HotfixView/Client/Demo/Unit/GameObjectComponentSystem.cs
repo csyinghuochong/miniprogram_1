@@ -40,7 +40,7 @@ namespace ET.Client
             self.GameObject = null;
         }
 
-        public static void LoadGameObject(this GameObjectComponent self)
+        private static void LoadGameObject(this GameObjectComponent self)
         {
             Unit unit = self.GetParent<Unit>();
             int unitType = unit.Type;
@@ -48,10 +48,18 @@ namespace ET.Client
             switch (unitType)
             {
                 case UnitType.Player:
-
                     if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/1");
+                        // self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/1");
+                        return;
+                    }
+
+                    break;
+                case UnitType.Hero:
+                    if (string.IsNullOrEmpty(self.UnitAssetsPath))
+                    {
+                        HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Hero/{heroConfig.HeroModelID}");
                     }
 
                     break;
@@ -81,11 +89,11 @@ namespace ET.Client
             }
         }
 
-        public static void OnLoadGameObject(this GameObjectComponent self, GameObject go, long formId)
+        private static void OnLoadGameObject(this GameObjectComponent self, GameObject go, long formId)
         {
             if (self.IsDisposed)
             {
-                GameObject.Destroy(go);
+                UnityEngine.Object.Destroy(go);
                 return;
             }
 
@@ -96,6 +104,25 @@ namespace ET.Client
             }
 
             self.GameObject = go;
+            go.transform.SetParent(self.Root().GetComponent<GlobalComponent>().Unit);
+
+            Unit unit = self.GetParent<Unit>();
+            int unitType = unit.Type;
+            switch (unitType)
+            {
+                case UnitType.Player:
+                {
+                    break;
+                }
+                case UnitType.Hero:
+                {
+                    self.UpdatePositon(unit.Position);
+                    break;
+                }
+
+                default:
+                    break;
+            }
         }
     }
 }

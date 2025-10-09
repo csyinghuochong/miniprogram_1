@@ -7,7 +7,7 @@
         public const int Monster = 3;               //怪物
         public const int DropItem = 4;              //掉落
         public const int Transfers = 5;             //传送  无方向
-        public const int Pet = 6;                   //宠物
+        public const int Hero = 6;                   //宠物
         public const int JingLing = 7;              //精灵
         public const int Pasture = 8;               //动物
         public const int Plant = 9;                 //植物

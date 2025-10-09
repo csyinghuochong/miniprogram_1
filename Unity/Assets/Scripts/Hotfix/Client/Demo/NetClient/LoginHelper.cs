@@ -99,15 +99,8 @@ namespace ET.Client
                     await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
                     // 重新获取一下数据
-                    // await UserInfoNetHelper.RequestUserInfoInit(root);
-                    // await BagClientNetHelper.RequestBagInit(root);
-                    // await PetNetHelper.RequestPetInfo(root);
-                    // await TaskClientNetHelper.RequestTaskInit(root);
-                    // await SkillNetHelper.RequestSkillSet(root);
-                    // await FriendNetHelper.RequestFriendInfo(root);
-                    // await ActivityNetHelper.RequestActivityInfo(root);
-                    // await ActivityNetHelper.RequestZhanQuInfo(root);
-                    // await ChengJiuNetHelper.GetChengJiuList(root);
+                    await InventoryHelper.GetAllItem(root);
+                    await HeroHelper.GetAllHero(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

@@ -17,7 +17,6 @@ namespace ET.Server
                 case UnitType.JingLing:
                 case UnitType.Pasture:
                 case UnitType.Plant:
-                case UnitType.Pet:
                 case UnitType.Bullet:
                 case UnitType.Npc:
                 case UnitType.Stall:

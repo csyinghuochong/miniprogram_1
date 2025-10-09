@@ -39,7 +39,7 @@ namespace ET.Client
             {
                 numericComponentC.ApplyValue(kv.Key, kv.Value, false);
             }
-            
+
             if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
             {
                 using (ListComponent<float3> list = ListComponent<float3>.Create())
@@ -50,7 +50,23 @@ namespace ET.Client
                     unit.MoveToAsync(list).Coroutine();
                 }
             }
-            
+
+            OnAfterCreateUnit(unit);
+            return unit;
+        }
+
+        public static Unit CreateHero(Scene currentScene, Hero hero)
+        {
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(hero.Id, hero.ConfigId);
+            unit.Type = UnitType.Hero;
+            unit.ConfigId = hero.ConfigId;
+            unitComponent.Add(unit);
+
+            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+            numericComponentC.ApplyValue(NumericType.Now_Hp, 100);
+            numericComponentC.ApplyValue(NumericType.Base_MaxHp_Base, 100);
+
             OnAfterCreateUnit(unit);
             return unit;
         }
@@ -73,7 +89,7 @@ namespace ET.Client
             {
                 numericComponentC.ApplyValue(kv.Key, kv.Value, false);
             }
-            
+
             unit.Position = unitInfo.Position;
 
             OnAfterCreateUnit(unit);
@@ -87,16 +103,17 @@ namespace ET.Client
                 unit.WaitLoad = true;
                 return;
             }
+
             unit.WaitLoad = false;
 
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
         }
-        
+
         public static async ETTask ShowAllUnit(Scene root)
         {
             Scene curscene = root.CurrentScene();
             long instanceid = curscene.InstanceId;
-            List<EntityRef<Unit>> allunits= curscene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = curscene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
                 Unit unit = allunits[i];
@@ -104,14 +121,17 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 if (unit.Type == UnitType.Player)
                 {
                     await root.GetComponent<TimerComponent>().WaitFrameAsync();
                 }
+
                 if (instanceid != curscene.InstanceId)
                 {
                     break;
                 }
+
                 OnAfterCreateUnit(unit);
                 unit.WaitLoad = false;
             }

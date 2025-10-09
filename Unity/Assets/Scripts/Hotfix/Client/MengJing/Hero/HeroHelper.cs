@@ -1,4 +1,7 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
+
+namespace ET.Client
 {
     public static class HeroHelper
     {
@@ -31,17 +34,18 @@
             C2M_SetHeroCurrentFormationIndex request = C2M_SetHeroCurrentFormationIndex.Create();
             request.CurrentFormationIndex = index;
 
-            M2C_SetHeroCurrentFormationIndex response = (M2C_SetHeroCurrentFormationIndex)await root.GetComponent<ClientSenderComponent>().Call(request);
+            M2C_SetHeroCurrentFormationIndex response =
+                    (M2C_SetHeroCurrentFormationIndex)await root.GetComponent<ClientSenderComponent>().Call(request);
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return response.Error;
             }
-            
+
             HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
             heroComponentC.CurrentFormationIndex = index;
 
             EventSystem.Instance.Publish(root, new HeroFormationUpdate());
-            
+
             return response.Error;
         }
 
@@ -69,10 +73,55 @@
                     heroComponentC.Formation_2 = response.Formation;
                     break;
             }
-            
+
             EventSystem.Instance.Publish(root, new HeroFormationUpdate());
 
             return response.Error;
+        }
+
+        public static void CreateMyHeroes(Scene root)
+        {
+            UnitComponent unitComponent = root.CurrentScene().GetComponent<UnitComponent>();
+            HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
+            List<long> currentFormation = heroComponentC.GetFormation(heroComponentC.CurrentFormationIndex);
+            for (int i = 0; i < currentFormation.Count; i++)
+            {
+                Hero hero = heroComponentC.GetHero(currentFormation[i]);
+                if (hero != null)
+                {
+                    Unit unit = unitComponent.Get(hero.Id);
+                    if (unit != null)
+                    {
+                        return;
+                    }
+
+                    unit = UnitFactory.CreateHero(root.CurrentScene(), hero);
+                    if (i == 0)
+                    {
+                        unit.Position = new float3(0, 0, 3f);
+                    }
+
+                    if (i == 1)
+                    {
+                        unit.Position = new float3(-3f, 0, 0);
+                    }
+
+                    if (i == 2)
+                    {
+                        unit.Position = new float3(0, 0, 0);
+                    }
+
+                    if (i == 3)
+                    {
+                        unit.Position = new float3(3f, 0, 0);
+                    }
+
+                    if (i == 4)
+                    {
+                        unit.Position = new float3(0, 0, -3f);
+                    }
+                }
+            }
         }
     }
 }

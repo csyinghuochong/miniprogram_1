@@ -71,7 +71,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UILoadingComponent self)
         {
-
         }
 
         public static void OnInitUI(this UILoadingComponent self)
@@ -90,6 +89,16 @@ namespace ET.Client
 
         private static void ShowProgress(this UILoadingComponent self, float progress)
         {
+            if (progress < 0)
+            {
+                progress = 0;
+            }
+
+            if (progress > 1)
+            {
+                progress = 1;
+            }
+
             self.Slider_Progress.value = progress;
             self.Text_Progress.SetText("{0}%", (int)(progress * 100));
         }

@@ -22,7 +22,7 @@ namespace ET
 
         public int SpeedRate{get; set; }
 
-
+        [BsonIgnore]
         public bool WaitLoad { get; set; }
 
         [BsonElement]
@@ -69,8 +69,5 @@ namespace ET
                 return $"{this.GetType().FullName} ({this.Id})";
             }
         }
-        
-        
-        public long UpdateUITime{ get; set; }
     }
 }
