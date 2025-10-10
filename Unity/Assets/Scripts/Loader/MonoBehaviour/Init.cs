@@ -109,6 +109,11 @@ namespace ET
 		{
 			FiberManager.Instance.LateUpdate();
 		}
+		
+		private void FixedUpdate()
+		{
+			FiberManager.Instance.FixedUpdate();
+		}
 
 		private void OnApplicationQuit()
 		{

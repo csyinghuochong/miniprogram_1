@@ -43,7 +43,26 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this OperaComponent self)
         {
-            
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                self.TogglePause();
+            }
+        }
+
+        private static void TogglePause(this OperaComponent self)
+        {
+            self.IsPaused = !self.IsPaused;
+
+            if (self.IsPaused)
+            {
+                // 暂停游戏
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                // 恢复游戏
+                Time.timeScale = 1f;
+            }
         }
     }
 }
