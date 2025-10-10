@@ -4,6 +4,20 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [NumericWatcher(SceneType.Current, NumericType.Now_Hp | NumericType.Now_MaxHp)]
+    public class NumericWatcher_UpdateUIHeroHp : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (unit.Type != UnitType.Hero)
+            {
+                return;
+            }
+
+            unit.GetComponent<UIHeroHpComponent>()?.UpdateBlood();
+        }
+    }
+
     [EntitySystemOf(typeof(UIHeroHpComponent))]
     [FriendOf(typeof(UIHeroHpComponent))]
     public static partial class UIHeroHpComponentSystem
