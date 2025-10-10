@@ -81,59 +81,30 @@ namespace ET.Client
 
         public static void Test_CreateMyHeroes(Scene root)
         {
-            UnitComponent unitComponent = root.CurrentScene().GetComponent<UnitComponent>();
-            HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
-            List<long> currentFormation = heroComponentC.GetFormation(heroComponentC.CurrentFormationIndex);
-            for (int i = 0; i < currentFormation.Count; i++)
-            {
-                Hero hero = heroComponentC.GetHero(currentFormation[i]);
-                if (hero != null)
-                {
-                    Unit unit = unitComponent.Get(hero.Id);
-                    if (unit != null)
-                    {
-                        return;
-                    }
+            Unit hero_1 = UnitFactory.CreateHero(root.CurrentScene(), 10000001);
+            hero_1.Position = new float3(0, 0, 5f);
 
-                    unit = UnitFactory.CreateHero(root.CurrentScene(), hero);
-                    if (i == 0)
-                    {
-                        unit.Position = new float3(0, 0, 5f);
-                    }
+            Unit hero_2 = UnitFactory.CreateHero(root.CurrentScene(), 10000002);
+            hero_2.Position = new float3(-5f, 0, 0);
 
-                    if (i == 1)
-                    {
-                        unit.Position = new float3(-5f, 0, 0);
-                    }
+            Unit hero_3 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            hero_3.Position = new float3(0, 0, 0);
 
-                    if (i == 2)
-                    {
-                        unit.Position = new float3(0, 0, 0);
-                    }
+            Unit hero_4 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            hero_4.Position = new float3(5f, 0, 0);
 
-                    if (i == 3)
-                    {
-                        unit.Position = new float3(5f, 0, 0);
-                    }
-
-                    if (i == 4)
-                    {
-                        unit.Position = new float3(0, 0, -5f);
-                    }
-                }
-            }
+            Unit hero_5 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            hero_5.Position = new float3(0, 0, -5f);
         }
 
         public static void Test_CreateMonsters(Scene root)
         {
-            UnitComponent unitComponent = root.CurrentScene().GetComponent<UnitComponent>();
-            Unit monster_1 = UnitFactory.CreateMonster(root.CurrentScene(),10000001);
+            Unit monster_1 = UnitFactory.CreateMonster(root.CurrentScene(), 10000001);
             monster_1.Position = new float3(-7f, 0, 15f);
-            Unit monster_2 = UnitFactory.CreateMonster(root.CurrentScene(),10000002);
+            Unit monster_2 = UnitFactory.CreateMonster(root.CurrentScene(), 10000002);
             monster_2.Position = new float3(0, 0, 15f);
-            Unit monster_3 = UnitFactory.CreateMonster(root.CurrentScene(),10000003);
+            Unit monster_3 = UnitFactory.CreateMonster(root.CurrentScene(), 10000003);
             monster_3.Position = new float3(7f, 0, 15f);
-            
         }
     }
 }

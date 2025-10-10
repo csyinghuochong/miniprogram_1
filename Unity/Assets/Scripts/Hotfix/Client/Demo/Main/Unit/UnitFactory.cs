@@ -55,22 +55,24 @@ namespace ET.Client
             return unit;
         }
 
-        public static Unit CreateHero(Scene currentScene, Hero hero)
+        public static Unit CreateHero(Scene currentScene, int heroConfigId)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(hero.Id, hero.ConfigId);
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), heroConfigId);
             unit.Type = UnitType.Hero;
-            unit.ConfigId = hero.ConfigId;
+            unit.ConfigId = heroConfigId;
             unitComponent.Add(unit);
 
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(heroConfigId);
+
             NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-            numericComponentC.ApplyValue(NumericType.Now_Hp, 100);
-            numericComponentC.ApplyValue(NumericType.Now_MaxHp, 100);
+            numericComponentC.ApplyValue(NumericType.Now_Hp, heroConfig.Hp);
+            numericComponentC.ApplyValue(NumericType.Now_MaxHp, heroConfig.Hp);
 
             OnAfterCreateUnit(unit);
             return unit;
         }
-        
+
         public static Unit CreateMonster(Scene currentScene, int monsterConfigId)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
@@ -79,9 +81,11 @@ namespace ET.Client
             unit.ConfigId = monsterConfigId;
             unitComponent.Add(unit);
 
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
+
             NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-            numericComponentC.ApplyValue(NumericType.Now_Hp, 100);
-            numericComponentC.ApplyValue(NumericType.Now_MaxHp, 100);
+            numericComponentC.ApplyValue(NumericType.Now_Hp, monsterConfig.Hp);
+            numericComponentC.ApplyValue(NumericType.Now_MaxHp, monsterConfig.Hp);
 
             OnAfterCreateUnit(unit);
             return unit;
