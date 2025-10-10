@@ -53,6 +53,9 @@
 
         public const string IUpdateInterface = "ET.IUpdate";
         public const string UpdateMethod = "Update";
+        
+        public const string IFixedUpdateInterface = "ET.IFixedUpdate";
+        public const string FixedUpdateMethod = "FixedUpdate";
 
         public const string IDestroyInterface = "ET.IDestroy";
         public const string DestroyMethod = "Destroy";
