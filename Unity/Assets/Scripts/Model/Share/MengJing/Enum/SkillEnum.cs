@@ -185,14 +185,6 @@ namespace ET
         public const string SkillSingingCancel = "SkillSingingCancel";
     }
 
-    [EnableClass]
-    public class SkillCDItem
-    {
-        public int SkillID;
-        public long CDEndTime;
-        public long CDPassive;
-    }
-
     /// <summary>
     /// Buff逻辑类型
     /// </summary>
