@@ -14,6 +14,7 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
+            self.Text_TimeScale = rc.Get<GameObject>("Text_TimeScale").GetComponent<TMP_Text>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Team = rc.Get<GameObject>("Button_Team").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
@@ -40,6 +41,8 @@ namespace ET.Client
                 self.Accumulator = 0f;
                 self.FrameCount = 0;
             }
+
+            self.Text_TimeScale.SetText("TimeScale:{0:1}", Time.timeScale);
         }
     }
 }

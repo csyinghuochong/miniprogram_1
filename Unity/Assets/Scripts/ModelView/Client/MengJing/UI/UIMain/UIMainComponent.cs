@@ -13,6 +13,7 @@ namespace ET.Client
         public float FPS; // 当前帧率
 
         public TMP_Text Text_FPS;
+        public TMP_Text Text_TimeScale;
         public Button Button_GM;
         public Button Button_Team;
         public Button Button_Bag;
