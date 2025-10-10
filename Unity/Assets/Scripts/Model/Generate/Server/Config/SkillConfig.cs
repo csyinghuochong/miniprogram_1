@@ -67,6 +67,8 @@ namespace ET
 		public string SkillIcon { get; set; }
 		/// <summary>技能攻击类型</summary>
 		public int SkillActType { get; set; }
+		/// <summary>脚本名称</summary>
+		public string SkillHandler { get; set; }
 		/// <summary>技能CD</summary>
 		public double SkillCD { get; set; }
 		/// <summary>技能存在时间[毫秒]</summary>
