@@ -5,37 +5,37 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [NumericWatcher(SceneType.Current, NumericType.Now_Hp | NumericType.Now_MaxHp)]
-    public class NumericWatcher_UpdateUIHeroHp : INumericWatcher
+    public class NumericWatcher_UpdateUIMonsterHp : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            if (unit.Type != UnitType.Hero)
+            if (unit.Type != UnitType.Monster)
             {
                 return;
             }
 
-            unit.GetComponent<UIHeroHpComponent>()?.UpdateBlood();
+            unit.GetComponent<UIMonsterHpComponent>()?.UpdateBlood();
         }
     }
 
-    [EntitySystemOf(typeof(UIHeroHpComponent))]
-    [FriendOf(typeof(UIHeroHpComponent))]
-    public static partial class UIHeroHpComponentSystem
+    [EntitySystemOf(typeof(UIMonsterHpComponent))]
+    [FriendOf(typeof(UIMonsterHpComponent))]
+    public static partial class UIMonsterHpComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this UIHeroHpComponent self)
+        private static void Awake(this UIMonsterHpComponent self)
         {
-            self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIHeroHp");
+            self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
 
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, true, self.OnLoadGameObject);
         }
 
         [EntitySystem]
-        private static void Destroy(this UIHeroHpComponent self)
+        private static void Destroy(this UIMonsterHpComponent self)
         {
         }
 
-        private static void OnLoadGameObject(this UIHeroHpComponent self, GameObject gameObject, long formId)
+        private static void OnLoadGameObject(this UIMonsterHpComponent self, GameObject gameObject, long formId)
         {
             if (self.IsDisposed)
             {
@@ -69,14 +69,14 @@ namespace ET.Client
             self.UpdateBlood();
         }
 
-        public static void UpdateShow(this UIHeroHpComponent self)
+        public static void UpdateShow(this UIMonsterHpComponent self)
         {
             Unit unit = self.GetParent<Unit>();
-            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-            self.Text_Name.SetText(heroConfig.HeroName);
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+            self.Text_Name.SetText(monsterConfig.MonsterName);
         }
 
-        public static void UpdateBlood(this UIHeroHpComponent self)
+        public static void UpdateBlood(this UIMonsterHpComponent self)
         {
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
             long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);

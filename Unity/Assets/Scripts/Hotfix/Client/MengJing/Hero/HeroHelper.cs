@@ -79,7 +79,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static void CreateMyHeroes(Scene root)
+        public static void Test_CreateMyHeroes(Scene root)
         {
             UnitComponent unitComponent = root.CurrentScene().GetComponent<UnitComponent>();
             HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
@@ -98,12 +98,12 @@ namespace ET.Client
                     unit = UnitFactory.CreateHero(root.CurrentScene(), hero);
                     if (i == 0)
                     {
-                        unit.Position = new float3(0, 0, 3f);
+                        unit.Position = new float3(0, 0, 5f);
                     }
 
                     if (i == 1)
                     {
-                        unit.Position = new float3(-3f, 0, 0);
+                        unit.Position = new float3(-5f, 0, 0);
                     }
 
                     if (i == 2)
@@ -113,15 +113,27 @@ namespace ET.Client
 
                     if (i == 3)
                     {
-                        unit.Position = new float3(3f, 0, 0);
+                        unit.Position = new float3(5f, 0, 0);
                     }
 
                     if (i == 4)
                     {
-                        unit.Position = new float3(0, 0, -3f);
+                        unit.Position = new float3(0, 0, -5f);
                     }
                 }
             }
+        }
+
+        public static void Test_CreateMonsters(Scene root)
+        {
+            UnitComponent unitComponent = root.CurrentScene().GetComponent<UnitComponent>();
+            Unit monster_1 = UnitFactory.CreateMonster(root.CurrentScene(),10000001);
+            monster_1.Position = new float3(-7f, 0, 15f);
+            Unit monster_2 = UnitFactory.CreateMonster(root.CurrentScene(),10000002);
+            monster_2.Position = new float3(0, 0, 15f);
+            Unit monster_3 = UnitFactory.CreateMonster(root.CurrentScene(),10000003);
+            monster_3.Position = new float3(7f, 0, 15f);
+            
         }
     }
 }

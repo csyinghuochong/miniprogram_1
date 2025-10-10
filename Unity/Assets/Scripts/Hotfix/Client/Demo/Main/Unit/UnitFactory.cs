@@ -70,6 +70,22 @@ namespace ET.Client
             OnAfterCreateUnit(unit);
             return unit;
         }
+        
+        public static Unit CreateMonster(Scene currentScene, int monsterConfigId)
+        {
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), monsterConfigId);
+            unit.Type = UnitType.Monster;
+            unit.ConfigId = monsterConfigId;
+            unitComponent.Add(unit);
+
+            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+            numericComponentC.ApplyValue(NumericType.Now_Hp, 100);
+            numericComponentC.ApplyValue(NumericType.Now_MaxHp, 100);
+
+            OnAfterCreateUnit(unit);
+            return unit;
+        }
 
         public static Unit CreateDropItem(Scene currentScene, UnitInfo unitInfo)
         {

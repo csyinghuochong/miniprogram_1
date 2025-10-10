@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7958991127151894135}
   - component: {fileID: 3351079581118841173}
   m_Layer: 0
-  m_Name: 10000003
+  m_Name: 10000002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2745674eb28031e499ac70ef825b153e, type: 2}
+  - {fileID: 2100000, guid: 5a3598dafa118754db95756064347da7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 3c48535ae5679204c950a22a7caaa5a4, type: 2}
-  initialSkinName: 
+  skeletonDataAsset: {fileID: 11400000, guid: e57cdb51287d3924ebb2ececf816733b, type: 2}
+  initialSkinName: White
   initialFlipX: 0
   initialFlipY: 0
   updateWhenInvisible: 3
@@ -119,7 +119,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: main
+  _animationName: Move
   loop: 1
   timeScale: 1
 --- !u!54 &3351079581118841173

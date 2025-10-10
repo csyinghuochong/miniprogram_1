@@ -48,19 +48,18 @@ namespace ET.Client
             switch (unitType)
             {
                 case UnitType.Player:
-                    if (string.IsNullOrEmpty(self.UnitAssetsPath))
-                    {
-                        // self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/1");
-                        return;
-                    }
+                    // self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/1");
+                    return;
 
                     break;
                 case UnitType.Hero:
-                    if (string.IsNullOrEmpty(self.UnitAssetsPath))
-                    {
-                        HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Hero/{heroConfig.HeroModelID}");
-                    }
+                    HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Hero/{heroConfig.HeroModelID}");
+
+                    break;
+                case UnitType.Monster:
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Monster/{monsterConfig.MonsterModelID}");
 
                     break;
                 default:
@@ -118,9 +117,17 @@ namespace ET.Client
                 {
                     self.UpdatePositon(unit.Position);
                     unit.AddComponent<UIHeroHpComponent>();
+                    unit.AddComponent<SkillManagerComponent>();
+                    unit.AddComponent<AI_HeroComponent>();
                     break;
                 }
-
+                case UnitType.Monster:
+                {
+                    self.UpdatePositon(unit.Position);
+                    unit.AddComponent<UIMonsterHpComponent>();
+                    unit.AddComponent<SkillManagerComponent>();
+                    break;
+                }
                 default:
                     break;
             }

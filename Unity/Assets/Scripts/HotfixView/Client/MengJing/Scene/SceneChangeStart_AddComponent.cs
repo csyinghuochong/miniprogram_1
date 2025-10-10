@@ -17,6 +17,8 @@ namespace ET.Client
                 Log.Debug($"SceneChangeStart:  {args.LastSceneType}");
 
                 await root.GetComponent<SceneManagerComponent>().ChangeScene(args.SceneType, args.LastSceneType, args.ChapterId);
+
+                root.AddComponent<OperaComponent>();
             }
             catch (Exception e)
             {
