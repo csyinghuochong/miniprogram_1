@@ -4,6 +4,37 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
+    public class NumericWatcher_ShowDamageText : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (unit.Type == UnitType.Monster)
+            {
+                UIMonsterHpComponent uiMonsterHpComponent = unit.GetComponent<UIMonsterHpComponent>();
+                if (uiMonsterHpComponent == null)
+                {
+                    return;
+                }
+
+                uiMonsterHpComponent.UpdateBlood();
+                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
+            }
+            
+            if (unit.Type == UnitType.Hero)
+            {
+                UIHeroHpComponent uiHeroHpComponent = unit.GetComponent<UIHeroHpComponent>();
+                if (uiHeroHpComponent == null)
+                {
+                    return;
+                }
+
+                uiHeroHpComponent.UpdateBlood();
+                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), uiHeroHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
+            }
+        }
+    }
+
     [EntitySystemOf(typeof(FloatingTextComponent))]
     [FriendOf(typeof(FloatingTextComponent))]
     public static partial class FloatingTextComponentSystem
@@ -47,10 +78,7 @@ namespace ET.Client
                     Sequence seq = DOTween.Sequence();
                     seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
                             // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
-                            .OnComplete(() =>
-                            {
-                                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject);
-                            });
+                            .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
                 });
         }
     }

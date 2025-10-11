@@ -7,17 +7,17 @@ namespace ET.Client
     public static partial class GameObjectComponentSystem
     {
         [EntitySystem]
-        private static void Destroy(this GameObjectComponent self)
-        {
-            self.RecoverGameObject();
-        }
-
-        [EntitySystem]
         private static void Awake(this GameObjectComponent self)
         {
             self.GameObject = null;
             self.UnitAssetsPath = string.Empty;
             self.LoadGameObject();
+        }
+
+        [EntitySystem]
+        private static void Destroy(this GameObjectComponent self)
+        {
+            self.RecoverGameObject();
         }
 
         public static void RecoverGameObject(this GameObjectComponent self)
@@ -37,6 +37,7 @@ namespace ET.Client
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
 
+            self.GameObject.GetComponent<UnitId>().Id = 0;
             self.GameObject = null;
         }
 
@@ -116,7 +117,8 @@ namespace ET.Client
                 case UnitType.Hero:
                 {
                     self.UpdatePositon(unit.Position);
-                    self.GameObject.AddComponent<UnitId>().Id = unit.Id;
+                    UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
+                    unitId.Id = unit.Id;
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<AI_HeroComponent>();
@@ -125,7 +127,8 @@ namespace ET.Client
                 case UnitType.Monster:
                 {
                     self.UpdatePositon(unit.Position);
-                    self.GameObject.AddComponent<UnitId>().Id = unit.Id;
+                    UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
+                    unitId.Id = unit.Id;
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     break;

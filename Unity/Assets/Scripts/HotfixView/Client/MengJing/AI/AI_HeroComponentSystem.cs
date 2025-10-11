@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Spine.Unity;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -22,12 +23,14 @@ namespace ET.Client
         [EntitySystem]
         private static void FixedUpdate(this AI_HeroComponent self)
         {
-            if (self.Target == null)
+            if (self.Target == null || self.Target.GetComponent<UnitId>().Id == 0)
             {
+                self.GameObject.GetComponent<SkeletonAnimation>().AnimationName = "Idle";
+                self.GameObject.GetComponent<SkeletonAnimation>().loop = true;
                 self.FindTarget();
             }
 
-            if (self.Target != null)
+            if (self.Target != null && self.Target.GetComponent<UnitId>().Id != 0)
             {
                 float distance = Vector3.Distance(self.GameObject.transform.position, self.Target.position);
 
@@ -39,6 +42,8 @@ namespace ET.Client
                 // 否则移动到目标位置
                 else
                 {
+                    self.GameObject.GetComponent<SkeletonAnimation>().AnimationName = "Move";
+                    self.GameObject.GetComponent<SkeletonAnimation>().loop = true;
                     self.MoveToTarget();
                 }
             }

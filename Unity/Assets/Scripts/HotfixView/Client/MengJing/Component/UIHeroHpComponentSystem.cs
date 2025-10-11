@@ -33,6 +33,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIHeroHpComponent self)
         {
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HeadBarPath, self.GameObject);
         }
 
         private static void OnLoadGameObject(this UIHeroHpComponent self, GameObject gameObject, long formId)

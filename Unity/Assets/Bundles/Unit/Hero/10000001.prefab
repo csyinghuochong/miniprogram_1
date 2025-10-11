@@ -120,8 +120,8 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Move
-  loop: 1
+  _animationName: 
+  loop: 0
   timeScale: 1
 --- !u!54 &3351079581118841173
 Rigidbody:

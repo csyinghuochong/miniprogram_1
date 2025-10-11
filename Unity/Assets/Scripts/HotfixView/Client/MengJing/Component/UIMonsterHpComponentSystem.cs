@@ -14,14 +14,7 @@ namespace ET.Client
                 return;
             }
 
-            UIMonsterHpComponent uiMonsterHpComponent = unit.GetComponent<UIMonsterHpComponent>();
-            if (uiMonsterHpComponent == null)
-            {
-                return;
-            }
-
-            uiMonsterHpComponent.UpdateBlood();
-            unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
+            unit.GetComponent<UIMonsterHpComponent>()?.UpdateBlood();
         }
     }
 
@@ -40,6 +33,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIMonsterHpComponent self)
         {
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HeadBarPath, self.GameObject);
         }
 
         private static void OnLoadGameObject(this UIMonsterHpComponent self, GameObject gameObject, long formId)

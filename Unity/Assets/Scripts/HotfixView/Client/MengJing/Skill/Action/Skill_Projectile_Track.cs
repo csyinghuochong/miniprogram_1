@@ -44,7 +44,7 @@ namespace ET.Client
             if (Vector3.Distance(skill.EffectGameObject.transform.position, target.position) <= 0.5f)
             {
                 Log.Debug("弓箭达到敌人 造成伤害");
-                skill.TheUnitTarget.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
+                skill.TheUnitTarget?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
                 skill.SkillState = SkillState.Finished;
             }
         }

@@ -3,6 +3,23 @@ using Unity.Mathematics;
 
 namespace ET.Client
 {
+    [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
+    public class NumericWatcher_UnitIsDeath : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (unit.Type != UnitType.Monster && unit.Type != UnitType.Hero)
+            {
+                return;
+            }
+
+            if (args.NewValue <= 0)
+            {
+                unit.GetParent<UnitComponent>().Remove(unit.Id);
+            }
+        }
+    }
+
     public static partial class UnitFactory
     {
         public static Unit CreateUnit(Scene currentScene, UnitInfo unitInfo, bool mainHero = false)

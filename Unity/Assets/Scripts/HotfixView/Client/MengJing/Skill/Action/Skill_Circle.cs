@@ -39,7 +39,7 @@ namespace ET.Client
                     {
                         UnitComponent unitComponent = skill.Scene().GetComponent<UnitComponent>();
                         Unit target = unitComponent.Get(collider.GetComponent<UnitId>().Id);
-                        target.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
+                        target?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
                         return;
                     }
                 }

@@ -36,7 +36,7 @@ namespace ET.Client
 
             if (skill.DelayTime <= 0)
             {
-                skill.TheUnitTarget.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
+                skill.TheUnitTarget?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
                 skill.HasDealtDamage = true;
             }
         }
