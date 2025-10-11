@@ -21,7 +21,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void FixedUpdate(this AI_MonsterComponent self)
+        private static void Update(this AI_MonsterComponent self)
         {
             if (self.Target == null || self.Target.GetComponent<UnitId>().Id == 0)
             {
@@ -37,6 +37,7 @@ namespace ET.Client
                 // 如果在攻击范围内，进行攻击
                 if (distance <= self.AttackRange)
                 {
+                    self.Rigidbody.velocity = Vector3.zero;
                     self.Attack();
                 }
                 // 否则移动到目标位置
@@ -74,8 +75,7 @@ namespace ET.Client
         private static void MoveToTarget(this AI_MonsterComponent self)
         {
             Vector3 direction = (self.Target.position - self.GameObject.transform.position).normalized;
-            direction.y = 0; // 忽略Y轴，保持在同一平面
-            self.Rigidbody.MovePosition(self.GameObject.transform.position + direction * self.MoveSpeed * Time.deltaTime);
+            self.Rigidbody.velocity = direction * self.MoveSpeed;
 
             // 朝向目标
             // self.GameObject.transform.LookAt(new Vector3(self.target.position.x, self.GameObject.transform.position.y, self.target.position.z));

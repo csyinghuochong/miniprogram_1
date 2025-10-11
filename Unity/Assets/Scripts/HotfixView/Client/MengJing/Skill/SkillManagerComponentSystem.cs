@@ -12,7 +12,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void FixedUpdate(this SkillManagerComponent self)
+        private static void Update(this SkillManagerComponent self)
         {
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
