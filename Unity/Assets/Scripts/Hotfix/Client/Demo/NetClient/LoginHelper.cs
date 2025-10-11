@@ -46,6 +46,9 @@ namespace ET.Client
         public static async ETTask<int> Login(Scene root, string account, string password, int reLink, int versionmode)
         {
             root.RemoveComponent<ClientSenderComponent>();
+
+            await root.GetComponent<TimerComponent>().WaitFrameAsync();
+            
             ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
             
             int errCode =  await clientSenderComponent.LoginAsync(account, password, reLink, versionmode);
