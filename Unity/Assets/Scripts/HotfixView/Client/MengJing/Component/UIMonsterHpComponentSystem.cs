@@ -14,7 +14,14 @@ namespace ET.Client
                 return;
             }
 
-            unit.GetComponent<UIMonsterHpComponent>()?.UpdateBlood();
+            UIMonsterHpComponent uiMonsterHpComponent = unit.GetComponent<UIMonsterHpComponent>();
+            if (uiMonsterHpComponent == null)
+            {
+                return;
+            }
+
+            uiMonsterHpComponent.UpdateBlood();
+            unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
         }
     }
 
