@@ -80,6 +80,7 @@ namespace ET.Client
                 return;
             }
 
+            self.EffectGameObject = gameObject;
             self.SkillHandler.OnEffectLoaded(self);
         }
     }

@@ -82,13 +82,13 @@ namespace ET.Client
         public static void Test_CreateMyHeroes(Scene root)
         {
             Unit hero_1 = UnitFactory.CreateHero(root.CurrentScene(), 10000001);
-            hero_1.Position = new float3(0, 0, 5f);
+            hero_1.Position = new float3(0, 0, 0f);
 
-            // Unit hero_2 = UnitFactory.CreateHero(root.CurrentScene(), 10000002);
-            // hero_2.Position = new float3(-5f, 0, 0);
-            //
-            // Unit hero_3 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
-            // hero_3.Position = new float3(0, 0, 0);
+            Unit hero_2 = UnitFactory.CreateHero(root.CurrentScene(), 10000002);
+            hero_2.Position = new float3(-5f, 0, -10);
+            
+            Unit hero_3 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            hero_3.Position = new float3(0, 0, -10);
             //
             // Unit hero_4 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
             // hero_4.Position = new float3(5f, 0, 0);
@@ -100,11 +100,11 @@ namespace ET.Client
         public static void Test_CreateMonsters(Scene root)
         {
             Unit monster_1 = UnitFactory.CreateMonster(root.CurrentScene(), 10000001);
-            monster_1.Position = new float3(-7f, 0, 15f);
+            monster_1.Position = new float3(-7f, 0, 5f);
             Unit monster_2 = UnitFactory.CreateMonster(root.CurrentScene(), 10000002);
-            monster_2.Position = new float3(0, 0, 15f);
+            monster_2.Position = new float3(0, 0, 5f);
             Unit monster_3 = UnitFactory.CreateMonster(root.CurrentScene(), 10000003);
-            monster_3.Position = new float3(7f, 0, 15f);
+            monster_3.Position = new float3(7f, 0, 5f);
         }
     }
 }

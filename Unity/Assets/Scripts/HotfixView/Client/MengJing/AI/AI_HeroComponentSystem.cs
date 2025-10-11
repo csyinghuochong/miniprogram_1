@@ -22,7 +22,10 @@ namespace ET.Client
         [EntitySystem]
         private static void FixedUpdate(this AI_HeroComponent self)
         {
-            self.FindTarget();
+            if (self.Target == null)
+            {
+                self.FindTarget();
+            }
 
             if (self.Target != null)
             {
