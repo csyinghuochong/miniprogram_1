@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [NumericWatcher(SceneType.Current, NumericType.Now_Hp | NumericType.Now_MaxHp)]
+    [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
     public class NumericWatcher_UpdateUIMonsterHp : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
@@ -52,7 +52,7 @@ namespace ET.Client
             self.Text_Name = rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>();
 
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-            GameObject bloodparent = globalComponent.BloodPlayer;
+            GameObject bloodparent = globalComponent.BloodMonster;
             self.GameObject.transform.SetParent(bloodparent.transform);
             self.GameObject.transform.localScale = Vector3.one;
 
@@ -62,7 +62,7 @@ namespace ET.Client
             headBarUI.HeadBar = self.GameObject;
             headBarUI.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
             headBarUI.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
-            headBarUI.Offset = new Vector2(0, 5f);
+            headBarUI.Offset = new Vector2(0, 3f);
             headBarUI.UpdatePostion();
 
             self.UpdateShow();

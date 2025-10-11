@@ -47,7 +47,7 @@ namespace ET.Client
             self.SkillCDs = null;
         }
 
-        private static int OnUseSkill(this SkillManagerComponent self, SkillInfo skillInfo)
+        public static int OnUseSkill(this SkillManagerComponent self, SkillInfo skillInfo)
         {
             Unit unit = self.GetParent<Unit>();
 
@@ -122,13 +122,14 @@ namespace ET.Client
             if (skillCDItem == null)
             {
                 skillCDItem = new SkillCDItem();
+                skillCDItem.SkillConfigId = skillConfigId;
                 self.SkillCDs.Add(skillCDItem);
             }
 
             if (skillConfig.SkillActType == (int)SkillActType.Normal)
             {
                 // 普通攻击
-                skillCDItem.CD = 0.4f;
+                skillCDItem.CD = 1f;
             }
             else
             {

@@ -77,6 +77,18 @@ namespace ET.Client
         private static void Attack(this AI_HeroComponent self)
         {
             // Debug.Log("攻击怪物！");
+            Unit unit = self.GetParent<Unit>();
+
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+
+            SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
+            skillManagerComponent.OnUseSkill(new SkillInfo()
+            {
+                SkillConfigId = heroConfig.AtkID,
+                TargetID = self.Target.GetComponent<UnitId>().Id,
+                TargetAngle = self.GameObject.transform.eulerAngles.y,
+                TargetPosition = self.GameObject.transform.position,
+            });
         }
     }
 }

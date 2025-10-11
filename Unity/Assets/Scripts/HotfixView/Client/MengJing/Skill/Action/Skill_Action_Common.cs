@@ -27,10 +27,10 @@ namespace ET.Client
 
         public override void OnEffectLoaded(Skill skill)
         {
-            GlobalComponent globalComponent = skill.Root().GetComponent<GlobalComponent>();
-            skill.EffectGameObject.transform.SetParent(globalComponent.Unit);
-            skill.EffectGameObject.transform.position = skill.TargetPosition;
-            skill.EffectGameObject.transform.localRotation = Quaternion.Euler(0, skill.SkillInfo.TargetAngle, 0);
+            // GlobalComponent globalComponent = skill.Root().GetComponent<GlobalComponent>();
+            // skill.EffectGameObject.transform.SetParent(globalComponent.Unit);
+            // skill.EffectGameObject.transform.position = skill.TargetPosition;
+            // skill.EffectGameObject.transform.localRotation = Quaternion.Euler(0, skill.SkillInfo.TargetAngle, 0);
 
             // ColliderCallback colliderCallback = skill.EffectGameObject.GetComponent<ColliderCallback>();
             // colliderCallback.OnTriggerEnterAction = (Collider) => { this.OnTriggerEnter(skill); };

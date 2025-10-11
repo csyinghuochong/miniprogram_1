@@ -51,6 +51,28 @@ namespace ET.Client
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
+        
+        public static void ApplyChange(this NumericComponentC self, int numericType, long value, bool notice = true, bool check = true,
+        long attackid = 0, int skillId = 0, int damgeType = 0)
+        {
+            long old = self.GetByKey(numericType);
+
+            self.NumericDic[numericType] = self.NumericDic[numericType] + value;
+            
+            if (notice)
+            {
+                //发送改变属性的相关消息
+                NumbericChange args = new NumbericChange();
+                args.Defend = self.Parent as Unit;
+                args.AttackId = attackid;
+                args.NumericType = numericType;
+                args.OldValue = old;
+                args.NewValue = self.NumericDic[numericType];
+                args.SkillId = skillId;
+                args.DamgeType = damgeType;
+                EventSystem.Instance.Publish(self.Scene(), args);
+            }
+        }
 
         /// <summary>
         /// 传入改变值,设置当前的属性值, 不走公式

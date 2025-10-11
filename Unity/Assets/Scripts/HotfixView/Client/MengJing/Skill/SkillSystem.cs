@@ -21,7 +21,10 @@ namespace ET.Client
             self.SkillInfo = skillInfo;
             self.SkillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
             self.TheUnitFrom = theUnitFrom;
-
+            if (skillInfo.TargetID != 0)
+            {
+                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(skillInfo.TargetID);
+            }
             self.SkillState = SkillState.Running;
             self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
             self.TargetPosition = skillInfo.TargetPosition;
@@ -55,7 +58,7 @@ namespace ET.Client
                 return;
             }
 
-            self.EffectPath = $"Assets/Bundles/Effect/SkillEffect/{effectConfig.EffectName}";
+            self.EffectPath = $"Assets/Bundles/Effect/SkillEffect/{effectConfig.EffectName}.prefab";
 
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, true, self.OnLoadGameObject);
         }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [NumericWatcher(SceneType.Current, NumericType.Now_Hp | NumericType.Now_MaxHp)]
+    [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
     public class NumericWatcher_UpdateUIHeroHp : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
@@ -62,7 +62,7 @@ namespace ET.Client
             headBarUI.HeadBar = self.GameObject;
             headBarUI.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
             headBarUI.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
-            headBarUI.Offset = new Vector2(0, 5f);
+            headBarUI.Offset = new Vector2(0, 3f);
             headBarUI.UpdatePostion();
 
             self.UpdateShow();

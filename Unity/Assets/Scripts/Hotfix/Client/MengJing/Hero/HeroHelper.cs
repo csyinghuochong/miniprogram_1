@@ -84,17 +84,17 @@ namespace ET.Client
             Unit hero_1 = UnitFactory.CreateHero(root.CurrentScene(), 10000001);
             hero_1.Position = new float3(0, 0, 5f);
 
-            Unit hero_2 = UnitFactory.CreateHero(root.CurrentScene(), 10000002);
-            hero_2.Position = new float3(-5f, 0, 0);
-
-            Unit hero_3 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
-            hero_3.Position = new float3(0, 0, 0);
-
-            Unit hero_4 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
-            hero_4.Position = new float3(5f, 0, 0);
-
-            Unit hero_5 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
-            hero_5.Position = new float3(0, 0, -5f);
+            // Unit hero_2 = UnitFactory.CreateHero(root.CurrentScene(), 10000002);
+            // hero_2.Position = new float3(-5f, 0, 0);
+            //
+            // Unit hero_3 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            // hero_3.Position = new float3(0, 0, 0);
+            //
+            // Unit hero_4 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            // hero_4.Position = new float3(5f, 0, 0);
+            //
+            // Unit hero_5 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
+            // hero_5.Position = new float3(0, 0, -5f);
         }
 
         public static void Test_CreateMonsters(Scene root)

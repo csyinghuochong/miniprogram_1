@@ -116,6 +116,7 @@ namespace ET.Client
                 case UnitType.Hero:
                 {
                     self.UpdatePositon(unit.Position);
+                    self.GameObject.AddComponent<UnitId>().Id = unit.Id;
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<AI_HeroComponent>();
@@ -124,6 +125,7 @@ namespace ET.Client
                 case UnitType.Monster:
                 {
                     self.UpdatePositon(unit.Position);
+                    self.GameObject.AddComponent<UnitId>().Id = unit.Id;
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     break;

@@ -13,7 +13,8 @@
         "YooAsset",
         "I2.Loc",
         "DG.Tweening.Modules",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "spine-unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
