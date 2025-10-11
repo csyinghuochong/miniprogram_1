@@ -49,17 +49,5 @@ namespace ET.Client
         public override void OnEffectLoaded(Skill skill)
         {
         }
-
-        public override void OnTriggerEnter(Skill skill)
-        {
-        }
-
-        public override void OnTriggerStay(Skill skill)
-        {
-        }
-
-        public override void OnTriggerExit(Skill skill)
-        {
-        }
     }
 }

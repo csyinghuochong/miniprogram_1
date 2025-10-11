@@ -55,7 +55,7 @@ namespace ET.Client
             Collider[] colliders = Physics.OverlapSphere(self.GameObject.transform.position, self.DetectionRange);
             foreach (var collider in colliders)
             {
-                if (collider.CompareTag(self.EnemyTag))
+                if (collider.CompareTag("Monster"))
                 {
                     self.Target = collider.transform;
                     return;
@@ -90,7 +90,15 @@ namespace ET.Client
                 SkillConfigId = heroConfig.AtkID,
                 TargetID = self.Target.GetComponent<UnitId>().Id,
                 TargetAngle = self.GameObject.transform.eulerAngles.y,
-                TargetPosition = self.GameObject.transform.position,
+                TargetPosition = self.Target.transform.position,
+            });
+
+            skillManagerComponent.OnUseSkill(new SkillInfo()
+            {
+                SkillConfigId = heroConfig.SkillID[0],
+                TargetID = self.Target.GetComponent<UnitId>().Id,
+                TargetAngle = self.GameObject.transform.eulerAngles.y,
+                TargetPosition = self.Target.transform.position,
             });
         }
     }

@@ -60,20 +60,5 @@ namespace ET.Client
             skill.EffectGameObject.transform.SetParent(globalComponent.Unit);
             skill.EffectGameObject.transform.position = skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.transform.position;
         }
-
-        public override void OnTriggerEnter(Skill skill)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnTriggerStay(Skill skill)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnTriggerExit(Skill skill)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -13,8 +13,8 @@
         public abstract void OnUpdate(Skill skill);
         public abstract void OnFinished(Skill skill);
         public abstract void OnEffectLoaded(Skill skill);
-        public abstract void OnTriggerEnter(Skill skill);
-        public abstract void OnTriggerStay(Skill skill);
-        public abstract void OnTriggerExit(Skill skill);
+        public virtual void OnTriggerEnter(Skill skill) { }
+        public virtual void OnTriggerStay(Skill skill) { }
+        public virtual void OnTriggerExit(Skill skill) { }
     }
 }

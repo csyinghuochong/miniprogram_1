@@ -46,7 +46,9 @@ namespace ET.Client
         public Unit TheUnitTarget { get => this.theUnitTarget; set => this.theUnitTarget = value; }
         public Vector3 NowPosition { get; set; } //当前技能的坐标点
         public Vector3 TargetPosition { get; set; }
-        public float DelayTime { get; set; }
+        public float LogTime { get; set; } //计时用的
+        public float DelayTime { get; set; } //延迟时间
+        public float IntervalTime { get; set; } //间隔时间
         public bool HasDealtDamage { get; set; }
 
         public string EffectPath { get; set; }
