@@ -37,7 +37,11 @@ namespace ET.Client
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
 
-            self.GameObject.GetComponent<UnitId>().Id = 0;
+            if (self.GameObject.GetComponent<UnitId>())
+            {
+                self.GameObject.GetComponent<UnitId>().Id = 0;
+            }
+
             self.GameObject = null;
         }
 
@@ -116,6 +120,7 @@ namespace ET.Client
                 }
                 case UnitType.Hero:
                 {
+                    self.GameObject.tag = TagHelper.Hero;
                     self.UpdatePositon(unit.Position);
                     UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
                     unitId.Id = unit.Id;
@@ -126,11 +131,13 @@ namespace ET.Client
                 }
                 case UnitType.Monster:
                 {
+                    self.GameObject.tag = TagHelper.Monster;
                     self.UpdatePositon(unit.Position);
                     UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
                     unitId.Id = unit.Id;
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
+                    unit.AddComponent<AI_MonsterComponent>();
                     break;
                 }
                 default:

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2517121620443481973}
   - component: {fileID: 7958991127151894135}
   - component: {fileID: 3351079581118841173}
-  - component: {fileID: 6126940706043039868}
+  - component: {fileID: 8682562370680701064}
   m_Layer: 0
   m_Name: 10000001
-  m_TagString: Monster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Move
-  loop: 1
+  _animationName: 
+  loop: 0
   timeScale: 1
 --- !u!54 &3351079581118841173
 Rigidbody:
@@ -150,7 +150,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6126940706043039868
+--- !u!136 &8682562370680701064
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7455884
-  m_Height: 2.7167501
+  m_Radius: 0.7382186
+  m_Height: 2.6889415
   m_Direction: 1
-  m_Center: {x: -0.030921042, y: 1.3354268, z: 0}
+  m_Center: {x: -0.060046315, y: 1.3345717, z: 0}

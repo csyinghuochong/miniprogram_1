@@ -3,25 +3,25 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(AI_HeroComponent))]
-    [FriendOf(typeof(AI_HeroComponent))]
-    public static partial class AI_HeroComponentSystem
+    [EntitySystemOf(typeof(AI_MonsterComponent))]
+    [FriendOf(typeof(AI_MonsterComponent))]
+    public static partial class AI_MonsterComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this AI_HeroComponent self)
+        private static void Awake(this AI_MonsterComponent self)
         {
             Unit unit = self.GetParent<Unit>();
             GameObjectComponent gameObjectComponent = unit.GetComponent<GameObjectComponent>();
             self.GameObject = gameObjectComponent.GameObject;
             self.Rigidbody = gameObjectComponent.GameObject.GetComponent<Rigidbody>();
 
-            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-            self.AttackRange = heroConfig.AtkDistance;
-            self.MoveSpeed = (float)heroConfig.MoveSpeed;
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+            self.AttackRange = monsterConfig.ActDistance;
+            self.MoveSpeed = (float)monsterConfig.MoveSpeed;
         }
 
         [EntitySystem]
-        private static void FixedUpdate(this AI_HeroComponent self)
+        private static void FixedUpdate(this AI_MonsterComponent self)
         {
             if (self.Target == null || self.Target.GetComponent<UnitId>().Id == 0)
             {
@@ -50,17 +50,17 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this AI_HeroComponent self)
+        private static void Destroy(this AI_MonsterComponent self)
         {
         }
 
         // 寻找附近的怪物
-        private static void FindTarget(this AI_HeroComponent self)
+        private static void FindTarget(this AI_MonsterComponent self)
         {
             Collider[] colliders = Physics.OverlapSphere(self.GameObject.transform.position, self.DetectionRange);
             foreach (var collider in colliders)
             {
-                if (collider.CompareTag(TagHelper.Monster))
+                if (collider.CompareTag(TagHelper.Hero))
                 {
                     self.Target = collider.transform;
                     return;
@@ -71,7 +71,7 @@ namespace ET.Client
         }
 
         // 移动到目标
-        private static void MoveToTarget(this AI_HeroComponent self)
+        private static void MoveToTarget(this AI_MonsterComponent self)
         {
             Vector3 direction = (self.Target.position - self.GameObject.transform.position).normalized;
             direction.y = 0; // 忽略Y轴，保持在同一平面
@@ -82,17 +82,16 @@ namespace ET.Client
         }
 
         // 攻击目标
-        private static void Attack(this AI_HeroComponent self)
+        private static void Attack(this AI_MonsterComponent self)
         {
-            // Debug.Log("攻击怪物！");
             Unit unit = self.GetParent<Unit>();
 
-            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
 
             SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
             skillManagerComponent.OnUseSkill(new SkillInfo()
             {
-                SkillConfigId = heroConfig.AtkID,
+                SkillConfigId = monsterConfig.ActSkillID,
                 TargetID = self.Target.GetComponent<UnitId>().Id,
                 TargetAngle = self.GameObject.transform.eulerAngles.y,
                 TargetPosition = self.Target.transform.position,
@@ -100,7 +99,7 @@ namespace ET.Client
 
             skillManagerComponent.OnUseSkill(new SkillInfo()
             {
-                SkillConfigId = heroConfig.SkillID[0],
+                SkillConfigId = monsterConfig.SkillID[0],
                 TargetID = self.Target.GetComponent<UnitId>().Id,
                 TargetAngle = self.GameObject.transform.eulerAngles.y,
                 TargetPosition = self.Target.transform.position,

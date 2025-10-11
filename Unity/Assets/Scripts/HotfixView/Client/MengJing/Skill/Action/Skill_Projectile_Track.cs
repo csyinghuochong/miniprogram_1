@@ -6,7 +6,7 @@ namespace ET.Client
     /// <summary>
     /// 发射一个物体，追踪敌人，到达敌人位置时造成单体伤害，如射手发射一只箭
     /// </summary>
-    public class Skill_Projectile_Track: SkillHandler
+    public class Skill_Projectile_Track : SkillHandler
     {
         public override void OnInit(Skill skill, Unit theUnitFrom)
         {

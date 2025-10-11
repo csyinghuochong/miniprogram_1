@@ -49,15 +49,20 @@ namespace ET.Client
 
         public static int OnUseSkill(this SkillManagerComponent self, SkillInfo skillInfo)
         {
+            if (!SkillConfigCategory.Instance.Contain(skillInfo.SkillConfigId))
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
             Unit unit = self.GetParent<Unit>();
+
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
 
             int errorCode = self.IsCanUseSkill(skillInfo.SkillConfigId);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;
             }
-
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
 
             if (string.IsNullOrEmpty(skillConfig.SkillHandler))
             {

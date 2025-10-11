@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [ComponentOf(typeof(Unit))]
-    public class AI_HeroComponent : Entity, IAwake, IFixedUpdate, IDestroy
+    public class AI_MonsterComponent : Entity, IAwake, IFixedUpdate, IDestroy
     {
         public float DetectionRange = 20f; // 检测范围
         public float AttackRange; // 攻击范围
