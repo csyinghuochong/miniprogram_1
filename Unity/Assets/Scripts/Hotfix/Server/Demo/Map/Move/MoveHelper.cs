@@ -119,7 +119,7 @@ namespace ET.Server
         public static void StopResult(this Unit unit, float3 position,  int error)
         {
             unit.GetComponent<MoveComponent>().Stop(error == 0);
-            unit.Position = position;
+            unit.SetPosition(position);
             M2C_StopResult m2CStop = M2C_StopResult.Create();
             m2CStop.Error = error;
             m2CStop.Id = unit.Id;

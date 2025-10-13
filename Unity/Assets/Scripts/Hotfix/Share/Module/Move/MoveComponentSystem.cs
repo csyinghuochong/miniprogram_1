@@ -133,10 +133,10 @@ namespace ET
                 // 计算位置插值
                 if (moveTime >= self.NeedTime)
                 {
-                    unit.Position = self.NextTarget;
+                    unit.SetPosition(self.NextTarget);
                     if (self.TurnTime > 0)
                     {
-                        unit.Rotation = self.To;
+                        unit.SetRotation(self.To);
                     }
                 }
                 else
@@ -146,7 +146,7 @@ namespace ET
                     if (amount > 0)
                     {
                         float3 newPos = math.lerp(self.StartPos, self.NextTarget, amount);
-                        unit.Position = newPos;
+                        unit.SetPosition(newPos);
                     }
                     
                     // 计算方向插值
@@ -158,7 +158,7 @@ namespace ET
                             amount = 1f;
                         }
                         quaternion q = math.slerp(self.From, self.To, amount);
-                        unit.Rotation = q;
+                        unit.SetRotation(q);
                     }
                 }
 
@@ -175,8 +175,8 @@ namespace ET
                 // 如果是最后一个点
                 if (self.N >= self.Targets.Count - 1)
                 {
-                    unit.Position = self.NextTarget;
-                    unit.Rotation = self.To;
+                    unit.SetPosition(self.NextTarget);
+                    unit.SetRotation(self.To);
 
                     self.MoveFinish(ret);
                     return;
@@ -247,7 +247,7 @@ namespace ET
                 if (Math.Abs(faceV.x) > 0.01 || Math.Abs(faceV.z) > 0.01)
                 {
                     self.To = quaternion.LookRotation(faceV, math.up());
-                    unit.Rotation = self.To;
+                    unit.SetRotation(self.To);
                 }
             }
         }
@@ -260,7 +260,7 @@ namespace ET
         public static bool FlashTo(this MoveComponent self, float3 target)
         {
             Unit unit = self.GetParent<Unit>();
-            unit.Position = target;
+            unit.SetPosition(target);
             return true;
         }
 
