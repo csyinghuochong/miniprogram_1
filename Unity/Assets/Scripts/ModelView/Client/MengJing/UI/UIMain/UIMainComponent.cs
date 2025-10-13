@@ -12,8 +12,10 @@ namespace ET.Client
         public float TimeLeft; // 距离下次更新的时间
         public float FPS; // 当前帧率
 
+        public int SpeedLevel = 1;
+        
         public TMP_Text Text_FPS;
-        public TMP_Text Text_TimeScale;
+        public Button Button_Speed;
         public Button Button_GM;
         public Button Button_Team;
         public Button Button_Bag;

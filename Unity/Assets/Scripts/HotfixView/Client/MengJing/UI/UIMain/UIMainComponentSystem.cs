@@ -14,11 +14,12 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
-            self.Text_TimeScale = rc.Get<GameObject>("Text_TimeScale").GetComponent<TMP_Text>();
+            self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Team = rc.Get<GameObject>("Button_Team").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
 
+            self.Button_Speed.onClick.AddListener(() => { self.OnButton_Speed(); });
             self.Button_GM.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
             self.Button_Team.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UITeam).Coroutine(); });
             self.Button_Bag.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
@@ -41,8 +42,33 @@ namespace ET.Client
                 self.Accumulator = 0f;
                 self.FrameCount = 0;
             }
+        }
 
-            self.Text_TimeScale.SetText("TimeScale:{0:1}", Time.timeScale);
+        private static void OnButton_Speed(this UIMainComponent self)
+        {
+            self.SpeedLevel++;
+            if (self.SpeedLevel > 3)
+            {
+                self.SpeedLevel = 0;
+            }
+
+            switch (self.SpeedLevel)
+            {
+                case 0:
+                    Time.timeScale = 0f;
+                    break;
+                case 1:
+                    Time.timeScale = 1f;
+                    break;
+                case 2:
+                    Time.timeScale = 2f;
+                    break;
+                case 3:
+                    Time.timeScale = 3f;
+                    break;
+            }
+
+            self.Button_Speed.GetComponentInChildren<TMP_Text>().SetText("x{0}", self.SpeedLevel);
         }
     }
 }
