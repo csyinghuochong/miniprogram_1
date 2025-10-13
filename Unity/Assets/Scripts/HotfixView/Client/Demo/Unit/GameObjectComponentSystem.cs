@@ -126,6 +126,7 @@ namespace ET.Client
                     unitId.Id = unit.Id;
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
+                    unit.AddComponent<BuffManagerComponent>();
                     unit.AddComponent<AI_HeroComponent>();
                     break;
                 }
@@ -137,6 +138,7 @@ namespace ET.Client
                     unitId.Id = unit.Id;
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
+                    unit.AddComponent<BuffManagerComponent>();
                     unit.AddComponent<AI_MonsterComponent>();
                     break;
                 }

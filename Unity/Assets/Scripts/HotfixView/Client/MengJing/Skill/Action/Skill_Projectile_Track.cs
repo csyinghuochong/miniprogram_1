@@ -8,9 +8,8 @@ namespace ET.Client
     /// </summary>
     public class Skill_Projectile_Track : SkillHandler
     {
-        public override void OnInit(Skill skill, Unit theUnitFrom)
+        public override void OnInit(Skill skill)
         {
-            skill.BaseOnInit(skill.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(Skill skill)

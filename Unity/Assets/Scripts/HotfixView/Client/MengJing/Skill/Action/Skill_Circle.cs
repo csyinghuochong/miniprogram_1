@@ -8,9 +8,8 @@ namespace ET.Client
     /// </summary>
     public class Skill_Circle : SkillHandler
     {
-        public override void OnInit(Skill skill, Unit theUnitFrom)
+        public override void OnInit(Skill skill)
         {
-            skill.BaseOnInit(skill.SkillInfo, theUnitFrom);
             skill.IntervalTime = 0.5f;
         }
 
@@ -23,8 +22,14 @@ namespace ET.Client
 
         public override void OnUpdate(Skill skill)
         {
-            skill.BaseOnUpdate();
+            skill.SkillLiveTime -= Time.deltaTime;
 
+            if (skill.SkillLiveTime <= 0)
+            {
+                skill.SkillState = SkillState.Finished;
+                return;
+            }
+            
             skill.LogTime += Time.deltaTime;
 
             if (skill.LogTime >= skill.IntervalTime)

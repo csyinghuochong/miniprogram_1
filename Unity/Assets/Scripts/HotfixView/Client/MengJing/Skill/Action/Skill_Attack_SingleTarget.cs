@@ -8,9 +8,8 @@ namespace ET.Client
     /// </summary>
     public class Skill_SingleTarget : SkillHandler
     {
-        public override void OnInit(Skill skill, Unit theUnitFrom)
+        public override void OnInit(Skill skill)
         {
-            skill.BaseOnInit(skill.SkillInfo, theUnitFrom);
             skill.DelayTime = 0.5f; //0.5秒后出伤害
             skill.HasDealtDamage = false;
         }
@@ -25,8 +24,14 @@ namespace ET.Client
 
         public override void OnUpdate(Skill skill)
         {
-            skill.BaseOnUpdate();
+            skill.SkillLiveTime -= Time.deltaTime;
 
+            if (skill.SkillLiveTime <= 0)
+            {
+                skill.SkillState = SkillState.Finished;
+                return;
+            }
+            
             if (skill.HasDealtDamage)
             {
                 return;

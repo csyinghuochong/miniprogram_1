@@ -15,29 +15,42 @@ namespace ET.Client
         private static void Destroy(this Skill self)
         {
             self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectGameObject);
+            self.EffectPath = null;
+            self.EffectGameObject = null;
         }
 
-        public static void BaseOnInit(this Skill self, SkillInfo skillInfo, Unit theUnitFrom)
+        public static void OnInit(this Skill self, SkillInfo skillInfo, Unit theUnitFrom)
         {
             self.SkillInfo = skillInfo;
             self.SkillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
+            self.SkillHandler = SkillDispatcherComponent.Instance.Get(self.SkillConfig.SkillHandler);
+            self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
             if (skillInfo.TargetID != 0)
             {
                 self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(skillInfo.TargetID);
             }
-            self.SkillState = SkillState.Running;
+
             self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
             self.TargetPosition = skillInfo.TargetPosition;
             self.NowPosition = self.TargetPosition;
+
+            self.SkillHandler.OnInit(self);
         }
 
-        public static void BaseOnUpdate(this Skill self)
+        public static void OnExecute(this Skill self)
         {
-            if (self.SkillLiveTime <= 0)
-            {
-                self.SkillState = SkillState.Finished;
-            }
+            self.SkillHandler.OnExecute(self);
+        }
+
+        public static void OnUpdate(this Skill self)
+        {
+            self.SkillHandler.OnUpdate(self);
+        }
+
+        public static void OnFinished(this Skill self)
+        {
+            self.SkillHandler.OnFinished(self);
         }
 
         public static void InitSelfBuff(this Skill self)

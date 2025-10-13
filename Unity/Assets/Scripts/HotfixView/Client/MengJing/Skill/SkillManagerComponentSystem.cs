@@ -17,12 +17,11 @@ namespace ET.Client
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
                 Skill skill = self.Skills[i];
-                skill.SkillLiveTime -= Time.deltaTime;
-                skill.SkillHandler.OnUpdate(skill);
+                skill.OnUpdate();
 
                 if (skill.SkillState == SkillState.Finished)
                 {
-                    skill.SkillHandler.OnFinished(skill);
+                    skill.OnFinished();
                     skill.Dispose();
                     self.Skills.RemoveAt(i);
                 }
@@ -69,17 +68,13 @@ namespace ET.Client
                 return ErrorCode.ERR_ModifyData;
             }
 
-            SkillHandler skillHandler = SkillDispatcherComponent.Instance.Get(skillConfig.SkillHandler);
             Skill skill = self.AddChild<Skill>();
-            skill.SkillInfo = skillInfo;
-            skill.SkillConfig = skillConfig;
-            skill.SkillHandler = skillHandler;
             self.Skills.Add(skill);
+            skill.OnInit(skillInfo, unit);
 
             self.AddSkillCD(skillInfo.SkillConfigId);
 
-            skillHandler.OnInit(skill, unit);
-            skillHandler.OnExecute(skill);
+            skill.OnExecute();
 
             return ErrorCode.ERR_Success;
         }

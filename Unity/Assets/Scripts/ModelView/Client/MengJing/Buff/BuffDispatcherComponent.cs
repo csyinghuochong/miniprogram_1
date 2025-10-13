@@ -4,19 +4,19 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Code]
-    public class SkillDispatcherComponent : Singleton<SkillDispatcherComponent>, ISingletonAwake
+    public class BuffDispatcherComponent : Singleton<BuffDispatcherComponent>, ISingletonAwake
     {
-        private readonly Dictionary<string, SkillHandler> handlers = new();
+        private readonly Dictionary<string, BuffHandler> handlers = new();
 
         public void Awake()
         {
-            var types = CodeTypes.Instance.GetTypes(typeof(SkillHandlerAttribute));
+            var types = CodeTypes.Instance.GetTypes(typeof(BuffHandlerAttribute));
             foreach (Type type in types)
             {
-                SkillHandler handler = Activator.CreateInstance(type) as SkillHandler;
+                BuffHandler handler = Activator.CreateInstance(type) as BuffHandler;
                 if (handler == null)
                 {
-                    Log.Error($"not SkillHandler: {type.Name}");
+                    Log.Error($"not BuffHandler: {type.Name}");
                     continue;
                 }
 
@@ -24,7 +24,7 @@ namespace ET.Client
             }
         }
 
-        public SkillHandler Get(string key)
+        public BuffHandler Get(string key)
         {
             this.handlers.TryGetValue(key, out var handler);
             return handler;

@@ -4,9 +4,8 @@ namespace ET.Client
 {
     public class Skill_Action_Common : SkillHandler
     {
-        public override void OnInit(Skill skill, Unit theUnitFrom)
+        public override void OnInit(Skill skill)
         {
-            skill.BaseOnInit(skill.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(Skill skill)
@@ -17,7 +16,13 @@ namespace ET.Client
 
         public override void OnUpdate(Skill skill)
         {
-            skill.BaseOnUpdate();
+            skill.SkillLiveTime -= Time.deltaTime;
+
+            if (skill.SkillLiveTime <= 0)
+            {
+                skill.SkillState = SkillState.Finished;
+                return;
+            }
         }
 
         public override void OnFinished(Skill skill)
@@ -38,15 +43,15 @@ namespace ET.Client
             // colliderCallback.OnTriggerExitAction = (Collider) => { this.OnTriggerExit(skill); };
         }
 
-        public override void OnTriggerEnter(Skill skill)
+        public void OnTriggerEnter(Skill skill)
         {
         }
 
-        public override void OnTriggerStay(Skill skill)
+        public void OnTriggerStay(Skill skill)
         {
         }
 
-        public override void OnTriggerExit(Skill skill)
+        public void OnTriggerExit(Skill skill)
         {
         }
     }
