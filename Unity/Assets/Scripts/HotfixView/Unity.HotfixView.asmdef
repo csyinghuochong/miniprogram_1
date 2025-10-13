@@ -14,7 +14,8 @@
         "I2.Loc",
         "DG.Tweening.Modules",
         "Unity.TextMeshPro",
-        "spine-unity"
+        "spine-unity",
+        "ZString"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

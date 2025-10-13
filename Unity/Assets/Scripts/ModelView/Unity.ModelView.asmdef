@@ -9,7 +9,8 @@
         "Unity.Model",
         "YooAsset",
         "I2.Loc",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "ZString"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

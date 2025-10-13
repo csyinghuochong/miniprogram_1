@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Text;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -70,7 +71,7 @@ namespace ET.Client
                 return;
             }
 
-            self.EffectPath = $"Assets/Bundles/Effect/SkillEffect/{effectConfig.EffectName}.prefab";
+            self.EffectPath = ZString.Format("Assets/Bundles/Effect/SkillEffect/{0}.prefab", effectConfig.EffectName);
 
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, true, self.OnLoadGameObject);
         }

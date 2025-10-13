@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YooAsset;
@@ -90,10 +91,7 @@ namespace ET.Client
                 }
             }
 
-            using (zstring.Block())
-            {
-                Log.Debug(zstring.Format("目前数量：{0}     定时清理数量：{1}", self.Handlers.Count, keysToRemove.Count));
-            }
+            Log.Debug(ZString.Format("目前数量：{0}     定时清理数量：{1}", self.Handlers.Count, keysToRemove.Count));
 
             foreach (string s in keysToRemove)
             {
@@ -121,8 +119,7 @@ namespace ET.Client
             return (T)((AssetHandle)handler).AssetObject;
         }
 
-        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location)
-                where T : UnityEngine.Object
+        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location) where T : UnityEngine.Object
         {
             using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
             
@@ -145,8 +142,7 @@ namespace ET.Client
 
         public static async ETTask LoadSceneAsync(this ResourcesLoaderComponent self, string location, LoadSceneMode loadSceneMode)
         {
-            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>()
-                    .Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
+            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
 
             HandleBase handler;
 
