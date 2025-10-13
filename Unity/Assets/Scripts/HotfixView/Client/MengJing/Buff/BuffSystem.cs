@@ -12,9 +12,10 @@
         [EntitySystem]
         private static void Destroy(this Buff self)
         {
+            self.OnFinished();
         }
-        
-        public static void BaseOnInit(this Buff self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongto)
+
+        public static void OnInit(this Buff self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongto, Skill skill)
         {
             // self.PassTime = 0;
             // self.IsTrigger = false;
@@ -32,6 +33,14 @@
             // self.InterValTime = self.mBuffConfig.BuffLoopTime * 1000;
             // self.InterValTimeBegin = TimeHelper.ServerNow();
             // self.NowBuffValue = 0f;
+        }
+
+        public static void OnUpdate(this Buff self)
+        {
+        }
+
+        public static void OnFinished(this Buff self)
+        {
         }
     }
 }

@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class SkillBuffConfigCategory : Singleton<SkillBuffConfigCategory>, IMerge
+    public partial class BuffConfigCategory : Singleton<BuffConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, SkillBuffConfig> dict = new();
+        private Dictionary<int, BuffConfig> dict = new();
 		
         public void Merge(object o)
         {
-            SkillBuffConfigCategory s = o as SkillBuffConfigCategory;
+            BuffConfigCategory s = o as BuffConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public SkillBuffConfig Get(int id)
+        public BuffConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out SkillBuffConfig item);
+            this.dict.TryGetValue(id, out BuffConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (SkillBuffConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (BuffConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, SkillBuffConfig> GetAll()
+        public Dictionary<int, BuffConfig> GetAll()
         {
             return this.dict;
         }
 
-        public SkillBuffConfig GetOne()
+        public BuffConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,7 +57,7 @@ namespace ET
         }
     }
 
-	public partial class SkillBuffConfig: ProtoObject, IConfig
+	public partial class BuffConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
@@ -73,6 +73,10 @@ namespace ET
 		public int BuffBenefitType { get; set; }
 		/// <summary>Buff类型</summary>
 		public int BuffType { get; set; }
+		/// <summary>Buff是否叠加</summary>
+		public int IsBuffStackable { get; set; }
+		/// <summary>Buff叠加层数上限</summary>
+		public int BuffMaxStackCount { get; set; }
 		/// <summary>Buff参数操作类型</summary>
 		public int BuffParameterType { get; set; }
 		/// <summary>Buff参数操作值</summary>

@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     [ComponentOf(typeof(Unit))]
     public class BuffManagerComponent : Entity, IAwake, IUpdate, IDestroy
     {
+        public List<EntityRef<Buff>> Buffs = new();
     }
 }

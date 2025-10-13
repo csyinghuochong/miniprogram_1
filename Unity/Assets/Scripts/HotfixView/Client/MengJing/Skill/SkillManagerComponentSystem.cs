@@ -17,13 +17,15 @@ namespace ET.Client
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
                 Skill skill = self.Skills[i];
-                skill.OnUpdate();
 
                 if (skill.SkillState == SkillState.Finished)
                 {
                     skill.Dispose();
                     self.Skills.RemoveAt(i);
+                    continue;
                 }
+
+                skill.OnUpdate();
             }
 
             foreach (SkillCDItem skillCdItem in self.SkillCDs)
@@ -68,7 +70,7 @@ namespace ET.Client
             }
 
             self.AddSkillCD(skillInfo.SkillConfigId);
-            
+
             Skill skill = self.AddChild<Skill>();
             self.Skills.Add(skill);
             skill.OnInit(skillInfo, unit);

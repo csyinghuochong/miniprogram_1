@@ -20,7 +20,6 @@ namespace ET.Client
 
     public enum SkillState
     {
-        Waiting, //等待执行
         Running, //正在执行
         Finished, //完成
     }

@@ -73,6 +73,10 @@ namespace ET
 		public int BuffBenefitType { get; set; }
 		/// <summary>Buff类型</summary>
 		public int BuffType { get; set; }
+		/// <summary>Buff是否叠加</summary>
+		public int IsBuffStackable { get; set; }
+		/// <summary>Buff叠加层数上限</summary>
+		public int BuffMaxStackCount { get; set; }
 		/// <summary>Buff参数操作类型</summary>
 		public int BuffParameterType { get; set; }
 		/// <summary>Buff参数操作值</summary>
