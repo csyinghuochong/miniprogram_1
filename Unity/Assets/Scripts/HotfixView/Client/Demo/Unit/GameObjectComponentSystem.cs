@@ -27,6 +27,11 @@ namespace ET.Client
                 self.GameObject.transform.localScale = Vector3.one;
             }
 
+            if (self.GameObject.GetComponent<UnitId>())
+            {
+                self.GameObject.GetComponent<UnitId>().Id = 0;
+            }
+
             if (string.IsNullOrEmpty(self.UnitAssetsPath) && self.GameObject != null)
             {
                 UnityEngine.Object.Destroy(self.GameObject);
@@ -35,11 +40,6 @@ namespace ET.Client
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
-            }
-
-            if (self.GameObject.GetComponent<UnitId>())
-            {
-                self.GameObject.GetComponent<UnitId>().Id = 0;
             }
 
             self.GameObject = null;
@@ -124,6 +124,7 @@ namespace ET.Client
                     self.UpdatePositon(unit.Position);
                     UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
                     unitId.Id = unit.Id;
+                    unit.AddComponent<SetUnitTransformComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<BuffManagerComponent>();
@@ -136,6 +137,7 @@ namespace ET.Client
                     self.UpdatePositon(unit.Position);
                     UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
                     unitId.Id = unit.Id;
+                    unit.AddComponent<SetUnitTransformComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<BuffManagerComponent>();
