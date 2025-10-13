@@ -123,7 +123,7 @@ namespace ET.Server
                     //排队功能要重新实现
                     AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
                     long onlineNumber = accountSessionsComponent.AccountSessionDictionary.Values.Count;
-                    int maxNumber = GlobalValueConfigCategory.Instance.OnLineLimit;
+                    int maxNumber = 10;
                     //Log.Console($" {session.DomainZone()} ---  onlineNumber:{onlineNumber}");
                     if (accountSessionsComponent.Get(centerAccountInfo.Account) == null &&
                         onlineNumber >= maxNumber && (string.IsNullOrEmpty(queueToken) || queueToken != request.Token))

@@ -51,7 +51,7 @@ namespace ET.Server
             long userId = unit.Id;
             Scene scene = unit.Scene();
             BeforeTransfer(unit, mapComponent.MapType);
-            await Transfer(unit, mapInstanceId, (int)MapTypeEnum.MainCityScene, GlobalValueConfigCategory.Instance.MainCityID, 0, "0");
+            await Transfer(unit, mapInstanceId, (int)MapTypeEnum.MainCityScene, 101, 0, "0");
         }
 
         private static void OnMainToMain(Unit unit)

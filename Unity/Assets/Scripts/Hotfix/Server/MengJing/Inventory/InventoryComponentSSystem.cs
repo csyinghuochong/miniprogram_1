@@ -44,7 +44,7 @@ namespace ET.Server
                 int itemConfigId = rewardItems[i].ItemId;
                 int leftNum = rewardItems[i].ItemNum;
 
-                if (!ItemConfigCategory.Instance.Contain(itemConfigId))
+                if (!ItemConfigCategory.Instance.DataMap.ContainsKey(itemConfigId))
                 {
                     continue;
                 }

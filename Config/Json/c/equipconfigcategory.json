@@ -1,0 +1,372 @@
+[
+  {
+    "Id": 12000001,
+    "ItemName": "一个头盔",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000002,
+    "ItemName": "一个衣服",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000003,
+    "ItemName": "一个腰带",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000004,
+    "ItemName": "一个裤子",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000005,
+    "ItemName": "一个鞋子",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000006,
+    "ItemName": "一个戒指",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000007,
+    "ItemName": "一个手镯",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000008,
+    "ItemName": "一个项链",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000009,
+    "ItemName": "一个饰品",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  },
+  {
+    "Id": 12000010,
+    "ItemName": "一个武器",
+    "HideType": [
+      1,
+      2
+    ],
+    "HideShowPro": 0.02,
+    "SellResourcesType": [
+      1,
+      3
+    ],
+    "SellResourcesValue": [
+      100,
+      10
+    ],
+    "Equip_MinAct": 20,
+    "Equip_MaxAct": 100,
+    "Equip_MinDef": 10,
+    "Equip_MaxAdf": 50,
+    "Equip_MinHp": 100,
+    "Equip_MaxHp": 300,
+    "Equip_MinAtkSpeed": 1,
+    "Equip_MaxAtkSpeed": 3,
+    "Equip_MinMoveSpeed": 1,
+    "Equip_MaxMoveSpeed": 2,
+    "Equip_Cri": 0.01,
+    "Equip_Combo": 0.02,
+    "Equip_Counterattack": 0.03,
+    "Equip_LifeSteal": 0.04,
+    "Equip_Eva": 0.05,
+    "Equip_ReCri": 0.05,
+    "Equip_ReCombo": 0.06,
+    "Equip_ReCounterattack": 0.07,
+    "Equip_ReLifeSteal": 0.07,
+    "Equip_ReEva": 0.08
+  }
+]

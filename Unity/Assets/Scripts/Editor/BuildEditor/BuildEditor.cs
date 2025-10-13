@@ -19,6 +19,14 @@ namespace ET
         WebGL
     }
 
+    public enum ConfigFolder
+    {
+        Localhost,
+        Release,
+        RouterTest,
+        Benchmark
+    }
+    
     /// <summary>
     /// ET菜单顺序
     /// </summary>
@@ -114,12 +122,6 @@ namespace ET
                 }
 
                 BuildHelper.Build(this.platformType, this.buildOptions);
-                return;
-            }
-
-            if (GUILayout.Button("ExcelExporterSingle"))
-            {
-                ExcelFileWindow.ShowWindow();
                 return;
             }
 
@@ -405,59 +407,5 @@ namespace ET
         #endregion
 
         #endregion
-    }
-
-    public class ExcelFileWindow : EditorWindow
-    {
-        private string[] excelFiles;
-        private Vector2 scrollPosition;
-
-        public static void ShowWindow()
-        {
-            ExcelFileWindow window = GetWindow<ExcelFileWindow>("Excel Files");
-            var mainEditorWindowPos = EditorWindow.GetWindow<BuildEditor>().position;
-            window.position = new Rect(mainEditorWindowPos.xMax, mainEditorWindowPos.y, 400, mainEditorWindowPos.height);
-            window.Show();
-        }
-
-        private void OnEnable()
-        {
-            string directoryPath = "../Unity/Assets/Config/Excel/";
-            if (Directory.Exists(directoryPath))
-            {
-                excelFiles = Directory.GetFiles(directoryPath, "*.xlsx", SearchOption.AllDirectories);
-
-                for (int i = 0; i < excelFiles.Length; i++)
-                {
-                    string relativePath = Path.GetRelativePath(directoryPath, excelFiles[i]);
-                    excelFiles[i] = relativePath;
-                }
-            }
-            else
-            {
-                excelFiles = new string[0];
-                Debug.LogWarning($"Directory not found: {directoryPath}");
-            }
-        }
-
-        private void OnGUI()
-        {
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
-
-            foreach (var fileName in excelFiles)
-            {
-                if (GUILayout.Button(fileName))
-                {
-                    HandleExcelFile(fileName);
-                }
-            }
-
-            EditorGUILayout.EndScrollView();
-        }
-
-        private void HandleExcelFile(string fileName)
-        {
-            ToolsEditor.ExcelExporter(fileName);
-        }
     }
 }

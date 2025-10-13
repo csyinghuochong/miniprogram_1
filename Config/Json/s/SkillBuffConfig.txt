@@ -1,5 +1,0 @@
-{"dict": [
-[10000001, {"_t":"SkillBuffConfig","_id":10000001,"BuffName":"眩晕","BuffTime":1000,"BuffDelayTime":0,"TargetType":3,"BuffBenefitType":2,"BuffType":2,"IsBuffStackable":0,"BuffMaxStackCount":0,"BuffParameterType":0,"BuffParameterValue":0,"BuffEffectID":20000004,"BuffDescribe":"无法移动和释放技能"}],
-[10000002, {"_t":"SkillBuffConfig","_id":10000002,"BuffName":"生命恢复","BuffTime":3000,"BuffDelayTime":0,"TargetType":2,"BuffBenefitType":1,"BuffType":1,"IsBuffStackable":0,"BuffMaxStackCount":0,"BuffParameterType":0,"BuffParameterValue":0,"BuffEffectID":10000008,"BuffDescribe":""}],
-[10000003, {"_t":"SkillBuffConfig","_id":10000003,"BuffName":"减速","BuffTime":3000,"BuffDelayTime":0,"TargetType":3,"BuffBenefitType":2,"BuffType":1,"IsBuffStackable":0,"BuffMaxStackCount":0,"BuffParameterType":0,"BuffParameterValue":0,"BuffEffectID":20000005,"BuffDescribe":"减缓移动速度"}],
-]}

@@ -1,0 +1,93 @@
+[
+  {
+    "Id": 10000001,
+    "Name": "战士普通攻击",
+    "EffectType": 1,
+    "EffectName": "Eff_Test1",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 10000002,
+    "Name": "箭手普通攻击",
+    "EffectType": 1,
+    "EffectName": "Eff_Test2",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 10000003,
+    "Name": "法师普通攻击",
+    "EffectType": 1,
+    "EffectName": "Eff_Test3",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 10000004,
+    "Name": "箭雨",
+    "EffectType": 1,
+    "EffectName": "Eff_Test4",
+    "SkillEffectLiveTime": 2000
+  },
+  {
+    "Id": 10000005,
+    "Name": "治疗",
+    "EffectType": 1,
+    "EffectName": "Eff_Test5",
+    "SkillEffectLiveTime": 3000
+  },
+  {
+    "Id": 10000006,
+    "Name": "岩石爆",
+    "EffectType": 1,
+    "EffectName": "Eff_Test6",
+    "SkillEffectLiveTime": 2000
+  },
+  {
+    "Id": 10000007,
+    "Name": "通用持续性加血特效",
+    "EffectType": 1,
+    "EffectName": "Eff_Test1",
+    "SkillEffectLiveTime": 3000
+  },
+  {
+    "Id": 10000008,
+    "Name": "通用瞬间加血特效",
+    "EffectType": 1,
+    "EffectName": "Eff_Test2",
+    "SkillEffectLiveTime": 3000
+  },
+  {
+    "Id": 20000001,
+    "Name": "受击特效",
+    "EffectType": 2,
+    "EffectName": "Eff_Test3",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 20000002,
+    "Name": "受击特效",
+    "EffectType": 2,
+    "EffectName": "Eff_Test4",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 20000003,
+    "Name": "受击特效",
+    "EffectType": 2,
+    "EffectName": "Eff_Test5",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 20000004,
+    "Name": "眩晕特效",
+    "EffectType": 2,
+    "EffectName": "Eff_Test6",
+    "SkillEffectLiveTime": 1000
+  },
+  {
+    "Id": 20000005,
+    "Name": "减速特效",
+    "EffectType": 2,
+    "EffectName": "Eff_Test1",
+    "SkillEffectLiveTime": 3000
+  }
+]

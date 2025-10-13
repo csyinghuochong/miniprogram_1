@@ -49,7 +49,7 @@ namespace ET.Client
 
         public static int OnUseSkill(this SkillManagerComponent self, SkillInfo skillInfo)
         {
-            if (!SkillConfigCategory.Instance.Contain(skillInfo.SkillConfigId))
+            if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillInfo.SkillConfigId))
             {
                 return ErrorCode.ERR_ModifyData;
             }

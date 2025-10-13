@@ -1,0 +1,114 @@
+[
+  {
+    "Id": 101,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Gate",
+    "Name": "Gate1",
+    "Port": 30325
+  },
+  {
+    "Id": 102,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Gate",
+    "Name": "Gate2",
+    "Port": 30326
+  },
+  {
+    "Id": 103,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Queue",
+    "Name": "Queue",
+    "Port": 30327
+  },
+  {
+    "Id": 104,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "DBCache",
+    "Name": "DBCache",
+    "Port": 0
+  },
+  {
+    "Id": 113,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Map",
+    "Name": "Map101",
+    "Port": 0
+  },
+  {
+    "Id": 1000201,
+    "Zone": 1000,
+    "Process": 1,
+    "SceneType": "LoginCenter",
+    "Name": "LoginCenter",
+    "Port": 30310
+  },
+  {
+    "Id": 1000202,
+    "Zone": 1000,
+    "Process": 1,
+    "SceneType": "Realm",
+    "Name": "Realm",
+    "Port": 30311
+  },
+  {
+    "Id": 1000203,
+    "Zone": 1000,
+    "Process": 1,
+    "SceneType": "Location",
+    "Name": "Location",
+    "Port": 0
+  },
+  {
+    "Id": 1000301,
+    "Zone": 1001,
+    "Process": 2,
+    "SceneType": "RobotManager",
+    "Name": "RobotManager",
+    "Port": 0
+  },
+  {
+    "Id": 1000400,
+    "Zone": 1002,
+    "Process": 1,
+    "SceneType": "RouterManager",
+    "Name": "RouterManager",
+    "Port": 30300
+  },
+  {
+    "Id": 1000401,
+    "Zone": 1002,
+    "Process": 1,
+    "SceneType": "Router",
+    "Name": "Router01",
+    "Port": 30301
+  },
+  {
+    "Id": 1000402,
+    "Zone": 1002,
+    "Process": 1,
+    "SceneType": "Router",
+    "Name": "Router02",
+    "Port": 30302
+  },
+  {
+    "Id": 1000403,
+    "Zone": 1002,
+    "Process": 1,
+    "SceneType": "Router",
+    "Name": "Router03",
+    "Port": 30303
+  },
+  {
+    "Id": 1000404,
+    "Zone": 1002,
+    "Process": 1,
+    "SceneType": "Router",
+    "Name": "Router04",
+    "Port": 30304
+  }
+]

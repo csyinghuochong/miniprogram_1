@@ -32,6 +32,10 @@
 
     <ItemGroup>
 
+        <Compile Include="..\..\Unity\Assets\Scripts\ThirdParty\LubanLib\**\*.cs">
+            <Link>LubanLib/%(RecursiveDir)%(FileName)%(Extension)</Link>
+        </Compile>
+        
         <Compile Include="..\..\Unity\Assets\Scripts\ThirdParty\TrueSync\**\*.cs">
             <Link>TrueSync/%(RecursiveDir)%(FileName)%(Extension)</Link>
         </Compile>
@@ -67,5 +71,23 @@
         <PackageReference Include="SharpZipLib" Version="1.3.3" />
         <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.0.1" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\Unity\Assets\Scripts\Loader\LubanLib\BeanBase.cs.meta">
+        <Link>LubanLib\BeanBase.cs.meta</Link>
+      </Content>
+      <Content Include="..\..\Unity\Assets\Scripts\Loader\LubanLib\ByteBuf.cs.meta">
+        <Link>LubanLib\ByteBuf.cs.meta</Link>
+      </Content>
+      <Content Include="..\..\Unity\Assets\Scripts\Loader\LubanLib\ByteBufExtensions.cs.meta">
+        <Link>LubanLib\ByteBufExtensions.cs.meta</Link>
+      </Content>
+      <Content Include="..\..\Unity\Assets\Scripts\Loader\LubanLib\ITypeId.cs.meta">
+        <Link>LubanLib\ITypeId.cs.meta</Link>
+      </Content>
+      <Content Include="..\..\Unity\Assets\Scripts\Loader\LubanLib\StringUtil.cs.meta">
+        <Link>LubanLib\StringUtil.cs.meta</Link>
+      </Content>
     </ItemGroup>
 </Project>

@@ -38,7 +38,7 @@ namespace ET.Server
 
         public static void AddHeroByConfigId(this HeroComponentS self, int configId)
         {
-            if (!HeroConfigCategory.Instance.Contain(configId))
+            if (!HeroConfigCategory.Instance.DataMap.ContainsKey(configId))
             {
                 return;
             }
