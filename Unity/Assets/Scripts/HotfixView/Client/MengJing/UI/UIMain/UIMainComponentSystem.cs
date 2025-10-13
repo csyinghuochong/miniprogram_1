@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,7 @@ namespace ET.Client
             if (self.TimeLeft <= 0f)
             {
                 self.FPS = self.Accumulator / self.FrameCount;
-                self.Text_FPS.SetText("FPS:{0}", (int)self.FPS);
+                self.Text_FPS.SetTextFormat("FPS:{0}", (int)self.FPS);
 
                 self.TimeLeft = self.UpdateInterval;
                 self.Accumulator = 0f;
@@ -68,7 +69,7 @@ namespace ET.Client
                     break;
             }
 
-            self.Button_Speed.GetComponentInChildren<TMP_Text>().SetText("x{0}", self.SpeedLevel);
+            self.Button_Speed.GetComponentInChildren<TMP_Text>().SetTextFormat("x{0}", self.SpeedLevel);
         }
     }
 }

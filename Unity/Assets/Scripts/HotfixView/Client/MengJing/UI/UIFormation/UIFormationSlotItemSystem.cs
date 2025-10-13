@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,7 +36,7 @@ namespace ET.Client
             self.HeroId = hero.Id;
 
             self.Text_Lv.gameObject.SetActive(true);
-            self.Text_Lv.SetText("Lv.{0}", hero.Lv);
+            self.Text_Lv.SetTextFormat("Lv.{0}", hero.Lv);
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.gameObject.SetActive(true);
             self.Text_HeroName.SetText(heroConfig.HeroName);

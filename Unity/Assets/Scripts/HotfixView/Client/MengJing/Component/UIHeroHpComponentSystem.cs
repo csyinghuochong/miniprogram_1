@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -86,7 +87,7 @@ namespace ET.Client
             blood = Mathf.Max(blood, 0f);
 
             self.Image_Hp.fillAmount = blood;
-            self.Text_Hp.SetText("{0}/{1}", currentHp, maxHp);
+            self.Text_Hp.SetTextFormat("{0}/{1}", currentHp, maxHp);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -100,7 +101,7 @@ namespace ET.Client
             }
 
             self.Slider_Progress.value = progress;
-            self.Text_Progress.SetText("{0}%", (int)(progress * 100));
+            self.Text_Progress.SetTextFormat("{0}%", (int)(progress * 100));
         }
     }
 }
