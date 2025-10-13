@@ -127,7 +127,7 @@ namespace ET
         public readonly double EquipMinMoveSpeed;
 
         /// <summary>
-        /// 最高移速
+        /// 最高攻速
         /// </summary>
         public readonly double EquipMaxMoveSpeed;
 
