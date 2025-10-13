@@ -21,7 +21,6 @@ namespace ET.Client
 
                 if (skill.SkillState == SkillState.Finished)
                 {
-                    skill.OnFinished();
                     skill.Dispose();
                     self.Skills.RemoveAt(i);
                 }
@@ -68,12 +67,11 @@ namespace ET.Client
                 return ErrorCode.ERR_ModifyData;
             }
 
+            self.AddSkillCD(skillInfo.SkillConfigId);
+            
             Skill skill = self.AddChild<Skill>();
             self.Skills.Add(skill);
             skill.OnInit(skillInfo, unit);
-
-            self.AddSkillCD(skillInfo.SkillConfigId);
-
             skill.OnExecute();
 
             return ErrorCode.ERR_Success;

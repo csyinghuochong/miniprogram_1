@@ -14,9 +14,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this Skill self)
         {
-            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectGameObject);
-            self.EffectPath = null;
-            self.EffectGameObject = null;
+            self.OnFinished();
         }
 
         public static void OnInit(this Skill self, SkillInfo skillInfo, Unit theUnitFrom)
