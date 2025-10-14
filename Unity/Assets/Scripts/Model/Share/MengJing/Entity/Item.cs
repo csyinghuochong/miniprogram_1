@@ -24,7 +24,6 @@
         Consume = 1, //消耗
         Material = 2, //材料
         Equipment = 3, //装备
-        HeroShard = 4, //英雄碎片
     }
 
     [ChildOf]
