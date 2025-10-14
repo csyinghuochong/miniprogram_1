@@ -149,7 +149,7 @@
     "ItemQuality": 2,
     "ItemType": 2,
     "ItemSubType": 0,
-    "ItemPileSum": 99999999,
+    "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
   },
@@ -160,7 +160,7 @@
     "ItemQuality": 3,
     "ItemType": 2,
     "ItemSubType": 0,
-    "ItemPileSum": 99999999,
+    "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
   },
@@ -171,7 +171,7 @@
     "ItemQuality": 4,
     "ItemType": 2,
     "ItemSubType": 0,
-    "ItemPileSum": 99999999,
+    "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
   },
@@ -182,7 +182,7 @@
     "ItemQuality": 5,
     "ItemType": 2,
     "ItemSubType": 0,
-    "ItemPileSum": 99999999,
+    "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
   },
@@ -193,7 +193,7 @@
     "ItemQuality": 6,
     "ItemType": 2,
     "ItemSubType": 0,
-    "ItemPileSum": 99999999,
+    "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
   },
@@ -266,67 +266,67 @@
   {
     "Id": 10003001,
     "ItemName": "一个头盔",
-    "Icon": "10000001",
+    "Icon": "10003001",
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 1,
     "ItemPileSum": 1,
     "ItemEquipID": 12000001,
-    "ItemDescription": ""
+    "ItemDescription": "这是一个装备1"
   },
   {
     "Id": 10003002,
     "ItemName": "一个衣服",
-    "Icon": "10000002",
+    "Icon": "10003002",
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 2,
     "ItemPileSum": 1,
     "ItemEquipID": 12000002,
-    "ItemDescription": ""
+    "ItemDescription": "这是一个装备2"
   },
   {
     "Id": 10003003,
     "ItemName": "一个裤子",
-    "Icon": "10000004",
+    "Icon": "10003003",
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 4,
     "ItemPileSum": 1,
     "ItemEquipID": 12000003,
-    "ItemDescription": ""
+    "ItemDescription": "这是一个装备3"
   },
   {
     "Id": 10003004,
     "ItemName": "一个鞋子",
-    "Icon": "10000005",
+    "Icon": "10003004",
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 5,
     "ItemPileSum": 1,
     "ItemEquipID": 12000004,
-    "ItemDescription": ""
+    "ItemDescription": "这是一个装备4"
   },
   {
     "Id": 10003005,
     "ItemName": "一个项链",
-    "Icon": "10000008",
+    "Icon": "10003005",
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 8,
     "ItemPileSum": 1,
     "ItemEquipID": 12000005,
-    "ItemDescription": ""
+    "ItemDescription": "这是一个装备5"
   },
   {
     "Id": 10003006,
     "ItemName": "一个武器",
-    "Icon": "10000010",
+    "Icon": "10003006",
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 10,
     "ItemPileSum": 1,
     "ItemEquipID": 12000006,
-    "ItemDescription": ""
+    "ItemDescription": "这是一个装备6"
   }
 ]
