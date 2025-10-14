@@ -16,7 +16,7 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
-            self.Image_ItemBgColor = rc.Get<GameObject>("Image_ItemBgColor").GetComponent<Image>();
+            self.Image_ItemQuality = rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>();
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Text_ItemNum = rc.Get<GameObject>("Text_ItemNum").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
@@ -39,12 +39,13 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
             
             self.Text_ItemNum.SetTextFormat("{0}", item.Num);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            
             string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, itemConfig.ItemQuality.ToString());
+            self.Image_ItemQuality.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+            
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             self.Image_ItemIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-            self.Image_ItemBgColor.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+            
         }
-
-        
     }
 }
