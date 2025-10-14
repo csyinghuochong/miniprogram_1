@@ -15,17 +15,17 @@ namespace ET.Client
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
-            self.Button_Type_Material = rc.Get<GameObject>("Button_Type_Material").GetComponent<Button>();
             self.Button_Type_Consume = rc.Get<GameObject>("Button_Type_Consume").GetComponent<Button>();
-            self.Button_Type_HeroShard = rc.Get<GameObject>("Button_Type_HeroShard").GetComponent<Button>();
+            self.Button_Type_Equipment = rc.Get<GameObject>("Button_Type_Equipment").GetComponent<Button>();
+            self.Button_Type_Material = rc.Get<GameObject>("Button_Type_Material").GetComponent<Button>();
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
             self.UICommonItem.gameObject.SetActive(false);
 
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(0); });
-            self.Button_Type_Material.onClick.AddListener(() => { self.SetShowType(1); });
-            self.Button_Type_Consume.onClick.AddListener(() => { self.SetShowType(2); });
-            self.Button_Type_HeroShard.onClick.AddListener(() => { self.SetShowType(3); });
+            self.Button_Type_Consume.onClick.AddListener(() => { self.SetShowType(1); });
+            self.Button_Type_Equipment.onClick.AddListener(() => { self.SetShowType(2); });
+            self.Button_Type_Material.onClick.AddListener(() => { self.SetShowType(3); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIBag); });
 
             self.SetShowType(0);
@@ -42,12 +42,12 @@ namespace ET.Client
         {
             self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 0);
             self.Button_Type_All.transform.Find("Image_Off").gameObject.SetActive(page != 0);
-            self.Button_Type_Material.transform.Find("Image_On").gameObject.SetActive(page == 1);
-            self.Button_Type_Material.transform.Find("Image_Off").gameObject.SetActive(page != 1);
-            self.Button_Type_Consume.transform.Find("Image_On").gameObject.SetActive(page == 2);
-            self.Button_Type_Consume.transform.Find("Image_Off").gameObject.SetActive(page != 2);
-            self.Button_Type_HeroShard.transform.Find("Image_On").gameObject.SetActive(page == 3);
-            self.Button_Type_HeroShard.transform.Find("Image_Off").gameObject.SetActive(page != 3);
+            self.Button_Type_Consume.transform.Find("Image_On").gameObject.SetActive(page == 1);
+            self.Button_Type_Consume.transform.Find("Image_Off").gameObject.SetActive(page != 1);
+            self.Button_Type_Equipment.transform.Find("Image_On").gameObject.SetActive(page == 2);
+            self.Button_Type_Equipment.transform.Find("Image_Off").gameObject.SetActive(page != 2);
+            self.Button_Type_Material.transform.Find("Image_On").gameObject.SetActive(page == 3);
+            self.Button_Type_Material.transform.Find("Image_Off").gameObject.SetActive(page != 3);
 
             self.UpdateItemList(page);
         }
@@ -63,15 +63,15 @@ namespace ET.Client
             }
             else if (page == 1)
             {
-                itemList = inventoryComponentC.GetItemsByType(ItemType.Material);
+                itemList = inventoryComponentC.GetItemsByType(ItemType.Consume);
             }
             else if (page == 2)
             {
-                itemList = inventoryComponentC.GetItemsByType(ItemType.Consume);
+                itemList = inventoryComponentC.GetItemsByType(ItemType.Equipment);
             }
             else if (page == 3)
             {
-                itemList = inventoryComponentC.GetItemsByType(ItemType.HeroShard);
+                itemList = inventoryComponentC.GetItemsByType(ItemType.Material);
             }
             else
             {
