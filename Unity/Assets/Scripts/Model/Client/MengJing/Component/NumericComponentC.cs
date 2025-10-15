@@ -105,6 +105,30 @@ namespace ET.Client
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
+        
+        //重置所有属性
+        public static void ResetProperty(this NumericComponentC self)
+        {
+            long max = NumericType.Max;
+
+            foreach (int key in self.NumericDic.Keys)
+            {
+                //这个范围内的属性为特殊属性不进行重置
+                if (key >= NumericType.Now_Hp && key < max)
+                {
+                    continue;
+                }
+
+                //buff属性不进行重置
+                int yushu = key % 100;
+                if (yushu == 11 || yushu == 12)
+                {
+                    continue;
+                }
+
+                self.NumericDic[key] = 0;
+            }
+        }
     }
 
     [ComponentOf(typeof(Unit))]
