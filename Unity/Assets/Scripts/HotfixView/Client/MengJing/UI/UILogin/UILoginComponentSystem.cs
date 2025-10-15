@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,9 @@ namespace ET.Client
 
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
-            self.Text_SelectServerName = rc.Get<GameObject>("Text_SelectServerName").GetComponent<Text>();
-            self.InputField_Account = rc.Get<GameObject>("InputField_Account").GetComponent<InputField>();
-            self.InputField_Password = rc.Get<GameObject>("InputField_Password").GetComponent<InputField>();
+            self.Text_SelectServerName = rc.Get<GameObject>("Text_SelectServerName").GetComponent<TMP_Text>();
+            self.InputField_Account = rc.Get<GameObject>("InputField_Account").GetComponent<TMP_InputField>();
+            self.InputField_Password = rc.Get<GameObject>("InputField_Password").GetComponent<TMP_InputField>();
             self.Button_Login = rc.Get<GameObject>("Button_Login").GetComponent<Button>();
 
             self.Button_Login.onClick.AddListener(() => { self.OnLoginButton().Coroutine(); });

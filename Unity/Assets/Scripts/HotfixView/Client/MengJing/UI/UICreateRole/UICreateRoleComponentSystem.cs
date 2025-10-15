@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -12,7 +13,7 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
-            self.InputField_RoleName = rc.Get<GameObject>("InputField_RoleName").GetComponent<InputField>();
+            self.InputField_RoleName = rc.Get<GameObject>("InputField_RoleName").GetComponent<TMP_InputField>();
             self.Button_Create = rc.Get<GameObject>("Button_Create").GetComponent<Button>();
 
             self.Button_Create.onClick.AddListener(() => { self.OnCreateRole().Coroutine(); });

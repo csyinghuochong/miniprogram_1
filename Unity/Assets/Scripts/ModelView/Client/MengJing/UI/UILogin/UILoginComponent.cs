@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -8,9 +9,9 @@ namespace ET.Client
         public ServerItem ServerInfo;
         public long LastLoginTime;
 
-        public Text Text_SelectServerName;
-        public InputField InputField_Account;
-        public InputField InputField_Password;
+        public TMP_Text Text_SelectServerName;
+        public TMP_InputField InputField_Account;
+        public TMP_InputField InputField_Password;
         public Button Button_Login;
     }
 }

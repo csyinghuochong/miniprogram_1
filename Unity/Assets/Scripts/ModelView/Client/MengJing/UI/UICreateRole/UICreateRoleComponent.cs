@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -7,7 +8,7 @@ namespace ET.Client
     {
         public float LastLoginTime;
         
-        public InputField InputField_RoleName;
+        public TMP_InputField InputField_RoleName;
         public Button Button_Create;    
     }
 }
