@@ -25,7 +25,7 @@ namespace ET.Client
         {
             if (self.Target == null || self.Target.GetComponent<UnitId>().Id == 0)
             {
-                self.GameObject.GetComponent<SkeletonAnimation>().AnimationName = "Idle";
+                self.GameObject.GetComponent<SkeletonAnimation>().AnimationName = "idle";
                 self.GameObject.GetComponent<SkeletonAnimation>().loop = true;
                 self.FindTarget();
             }
@@ -43,7 +43,7 @@ namespace ET.Client
                 // 否则移动到目标位置
                 else
                 {
-                    self.GameObject.GetComponent<SkeletonAnimation>().AnimationName = "Move";
+                    self.GameObject.GetComponent<SkeletonAnimation>().AnimationName = "run";
                     self.GameObject.GetComponent<SkeletonAnimation>().loop = true;
                     self.MoveToTarget();
                 }

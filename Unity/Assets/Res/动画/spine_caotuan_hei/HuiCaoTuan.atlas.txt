@@ -1,5 +1,5 @@
 
-CAOTUAN.png
+HuiCaoTuan.png
 size: 200,269
 format: RGBA8888
 filter: Linear,Linear

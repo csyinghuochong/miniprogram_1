@@ -19,7 +19,7 @@ namespace ET.Client
             skill.InitSelfBuff();
             skill.PlaySkillEffects();
 
-            skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "Attack";
+            skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
         }
 
         public override void OnUpdate(Skill skill)

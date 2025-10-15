@@ -1,5 +1,5 @@
 
-哥布塔攻击.png
+gebutagongji.png
 size: 1066,339
 format: RGBA8888
 filter: Linear,Linear

@@ -1,0 +1,55 @@
+
+skeleton.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+heal_01
+  rotate: true
+  xy: 54, 28
+  size: 24, 128
+  orig: 24, 128
+  offset: 0, 0
+  index: -1
+heal_02
+  rotate: false
+  xy: 2, 2
+  size: 50, 50
+  orig: 52, 52
+  offset: 1, 1
+  index: -1
+heal_03
+  rotate: false
+  xy: 184, 32
+  size: 20, 20
+  orig: 24, 24
+  offset: 2, 2
+  index: -1
+heal_04
+  rotate: false
+  xy: 240, 154
+  size: 254, 74
+  orig: 256, 76
+  offset: 1, 1
+  index: -1
+heal_04_1
+  rotate: false
+  xy: 240, 78
+  size: 254, 74
+  orig: 256, 76
+  offset: 1, 1
+  index: -1
+heal_05
+  rotate: false
+  xy: 2, 54
+  size: 236, 174
+  orig: 256, 188
+  offset: 10, 6
+  index: -1
+heal_06
+  rotate: false
+  xy: 240, 7
+  size: 249, 69
+  orig: 256, 76
+  offset: 3, 4
+  index: -1
