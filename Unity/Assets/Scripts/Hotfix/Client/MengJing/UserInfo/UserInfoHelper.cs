@@ -17,6 +17,7 @@
             userInfoComponent.Gold = response.Gold;
             userInfoComponent.Diamond = response.Diamond;
             userInfoComponent.Exp = response.Exp;
+            userInfoComponent.Lv = response.Lv;
 
             return response.Error;
         }

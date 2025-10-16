@@ -9,6 +9,7 @@ namespace ET
         Gold,
         Diamond,
         Exp,
+        Lv,
     }
 
     [EnableClass]

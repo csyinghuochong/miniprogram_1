@@ -10,6 +10,7 @@
             response.Gold = userInfoComponent.Gold;
             response.Diamond = userInfoComponent.Diamond;
             response.Exp = userInfoComponent.Exp;
+            response.Lv = userInfoComponent.Lv;
 
             await ETTask.CompletedTask;
         }

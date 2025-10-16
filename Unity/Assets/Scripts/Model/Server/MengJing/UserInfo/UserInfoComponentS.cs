@@ -13,6 +13,7 @@ namespace ET.Server
         public long Gold { get; set; }
         public long Diamond { get; set; }
         public long Exp { get; set; }
+        public long Lv { get; set; }
 
         [BsonIgnore]
         public readonly M2C_RoleDataBroadcast m2C_RoleDataBroadcast = M2C_RoleDataBroadcast.Create();

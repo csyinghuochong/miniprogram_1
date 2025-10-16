@@ -3000,6 +3000,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public long Exp { get; set; }
 
+        [MemoryPackOrder(7)]
+        public long Lv { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3014,6 +3017,7 @@ namespace ET
             this.Gold = default;
             this.Diamond = default;
             this.Exp = default;
+            this.Lv = default;
 
             ObjectPool.Instance.Recycle(this);
         }

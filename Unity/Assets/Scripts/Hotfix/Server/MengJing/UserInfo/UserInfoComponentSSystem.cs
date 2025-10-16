@@ -53,6 +53,9 @@
                 case UserDataType.Exp:
                     self.Exp = value;
                     break;
+                case UserDataType.Lv:
+                    self.Lv = value;
+                    break;
                 default:
                     return;
             }
@@ -83,6 +86,10 @@
                 case UserDataType.Exp:
                     self.Exp += value;
                     newValue = self.Exp;
+                    break;
+                case UserDataType.Lv:
+                    self.Lv += value;
+                    newValue = self.Lv;
                     break;
                 default:
                     return;

@@ -14,6 +14,8 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
+            self.InputField_GM = rc.Get<GameObject>("InputField_GM").GetComponent<TMP_InputField>();
+            self.Button_GM_Send = rc.Get<GameObject>("Button_GM_Send").GetComponent<Button>();
             self.InputField_AddItem_ItemId = rc.Get<GameObject>("InputField_AddItem_ItemId").GetComponent<TMP_InputField>();
             self.InputField_AddItem_ItemNum = rc.Get<GameObject>("InputField_AddItem_ItemNum").GetComponent<TMP_InputField>();
             self.Button_AddItem_Send = rc.Get<GameObject>("Button_AddItem_Send").GetComponent<Button>();
@@ -21,8 +23,21 @@ namespace ET.Client
             self.Button_AddHero_Send = rc.Get<GameObject>("Button_AddHero_Send").GetComponent<Button>();
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIGM); });
+            self.Button_GM_Send.onClick.AddListener(() => { self.OnGM_Send(); });
             self.Button_AddItem_Send.onClick.AddListener(() => { self.OnAddItem_Send(); });
             self.Button_AddHero_Send.onClick.AddListener(() => { self.OnAddHero_Send(); });
+        }
+
+        private static void OnGM_Send(this UIGMComponent self)
+        {
+            string msg = self.InputField_GM.text;
+
+            if (string.IsNullOrEmpty(msg))
+            {
+                return;
+            }
+
+            GMHelp.SendGmCommand(self.Root(), msg);
         }
 
         private static void OnAddItem_Send(this UIGMComponent self)
