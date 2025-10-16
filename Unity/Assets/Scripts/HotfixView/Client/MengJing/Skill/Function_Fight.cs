@@ -24,6 +24,8 @@ namespace ET.Client
             long attack_MageAct = numericComponentAttack.GetAsLong(NumericType.Now_Mage);
             long attack_MinDef = numericComponentAttack.GetAsLong(NumericType.Now_MinDef);
             long attack_MaxDef = numericComponentAttack.GetAsLong(NumericType.Now_MaxDef);
+            long attack_MinAdf = numericComponentAttack.GetAsLong(NumericType.Now_MinAdf);
+            long attack_MaxAdf = numericComponentAttack.GetAsLong(NumericType.Now_MaxAdf);
             // ......
 
             //获取受击方属性
@@ -32,6 +34,7 @@ namespace ET.Client
             long defend_MaxHp = numericComponentDefend.GetAsLong(NumericType.Now_MaxHp);
             long defend_MinAct = numericComponentDefend.GetAsLong(NumericType.Now_MinAct);
             long defend_MaxAct = numericComponentDefend.GetAsLong(NumericType.Now_MaxAct);
+            long defend_MageAct = numericComponentDefend.GetAsLong(NumericType.Now_Mage);
             long defend_MinDef = numericComponentDefend.GetAsLong(NumericType.Now_MinDef);
             long defend_MaxDef = numericComponentDefend.GetAsLong(NumericType.Now_MaxDef);
             long defend_MinAdf = numericComponentDefend.GetAsLong(NumericType.Now_MinAdf);
