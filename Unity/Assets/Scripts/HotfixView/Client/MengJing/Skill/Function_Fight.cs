@@ -71,8 +71,8 @@ namespace ET.Client
                 int lv = hero.Lv;
 
                 // 计算各种属性 比如 角色的基础属性、等级提升后加成属性、装备属性
-                long heroBaseMaxHp = heroConfig.Hp + lv * 1;
-                long heroBaseMinAct = heroConfig.Act + lv * 1;
+                long heroBaseMaxHp = heroConfig.BaseHp + lv * 1;
+                long heroBaseMinAct = heroConfig.BaseAct + lv * 1;
 
                 // 汇总属性
                 long baseMaxHp = heroBaseMaxHp;

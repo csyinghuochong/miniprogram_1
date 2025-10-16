@@ -21,12 +21,12 @@ namespace ET.Client
         }
     }
 
-    [NumericWatcher(SceneType.Current, NumericType.Now_Speed)]
+    [NumericWatcher(SceneType.Current, NumericType.Now_MoveSpeed)]
     public class NumericWatcher_Now_Speed : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
             args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }

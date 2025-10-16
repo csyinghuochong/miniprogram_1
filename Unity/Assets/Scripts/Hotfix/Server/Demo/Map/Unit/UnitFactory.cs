@@ -52,7 +52,7 @@ namespace ET.Server
                     if (unit.GetComponent<NumericComponentS>() == null)
                     {
                         NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
-                        numericComponentS.ApplyValue(NumericType.Now_Speed, 60000, false); // 速度是6米每秒
+                        numericComponentS.ApplyValue(NumericType.Now_MoveSpeed, 60000, false); // 速度是6米每秒
                         numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
                     }
 

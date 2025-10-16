@@ -16,8 +16,8 @@ namespace ET.Client
             self.Rigidbody = gameObjectComponent.GameObject.GetComponent<Rigidbody>();
 
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-            self.AttackRange = heroConfig.AtkDistance;
-            self.MoveSpeed = (float)heroConfig.MoveSpeed;
+            self.AttackRange = (float)heroConfig.AtkDistance;
+            self.MoveSpeed = (float)heroConfig.BaseMoveSpeed;
         }
 
         [EntitySystem]

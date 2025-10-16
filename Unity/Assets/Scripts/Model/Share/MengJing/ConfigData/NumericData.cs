@@ -10,10 +10,10 @@ namespace ET
          [StaticField]
          public static List<int> BroadcastType = new List<int>
          {
-             NumericType.Now_Hp,
-             NumericType.Now_Dead,
-             NumericType.Now_Speed,
-             NumericType.Now_MaxHp,
+             // NumericType.Now_Hp,
+             // NumericType.Now_Dead,
+             // NumericType.Now_MoveSpeed,
+             // NumericType.Now_MaxHp,
          };
 
          //1 整数  2 浮点数

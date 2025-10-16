@@ -26,7 +26,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+                    float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
                     using var list = ListComponent<float3>.Create();
                     list.Add(unit.Position + (message.Position - unit.Position) * 0.5f);
                     list.Add(message.Position);

@@ -13,7 +13,7 @@
 
 			if (!unit.MainHero || !message.YaoGan)
 			{
-				float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+				float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
 				speed *= (message.SpeedRate * 0.01f);
 				unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed, 100, message.SpeedRate).Coroutine();
 			}

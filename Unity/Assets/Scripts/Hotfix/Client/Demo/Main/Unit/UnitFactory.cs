@@ -83,8 +83,8 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(heroConfigId);
 
             NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-            numericComponentC.ApplyValue(NumericType.Now_Hp, heroConfig.Hp);
-            numericComponentC.ApplyValue(NumericType.Now_MaxHp, heroConfig.Hp);
+            numericComponentC.ApplyValue(NumericType.Now_Hp, heroConfig.BaseHp);
+            numericComponentC.ApplyValue(NumericType.Now_MaxHp, heroConfig.BaseHp);
 
             OnAfterCreateUnit(unit);
             return unit;
