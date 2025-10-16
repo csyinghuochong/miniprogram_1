@@ -24,12 +24,12 @@ namespace ET
             BuffScript = _buf.ReadString();
             BuffBenefitType = _buf.ReadInt();
             BuffType = _buf.ReadInt();
+            BuffParameterType = _buf.ReadInt();
+            BuffParameterValue = _buf.ReadDouble();
             DamageType = _buf.ReadInt();
             DamagePro = _buf.ReadDouble();
             IsBuffStackable = _buf.ReadInt();
             BuffMaxStackCount = _buf.ReadInt();
-            BuffParameterType = _buf.ReadInt();
-            BuffParameterValue = _buf.ReadDouble();
             BuffEffectID = _buf.ReadInt();
             BuffDescribe = _buf.ReadString();
 
@@ -82,6 +82,16 @@ namespace ET
         public readonly int BuffType;
 
         /// <summary>
+        /// Buff参数操作类型
+        /// </summary>
+        public readonly int BuffParameterType;
+
+        /// <summary>
+        /// Buff参数操作值
+        /// </summary>
+        public readonly double BuffParameterValue;
+
+        /// <summary>
         /// 伤害类型
         /// </summary>
         public readonly int DamageType;
@@ -100,16 +110,6 @@ namespace ET
         /// Buff叠加层数上限
         /// </summary>
         public readonly int BuffMaxStackCount;
-
-        /// <summary>
-        /// Buff参数操作类型
-        /// </summary>
-        public readonly int BuffParameterType;
-
-        /// <summary>
-        /// Buff参数操作值
-        /// </summary>
-        public readonly double BuffParameterValue;
 
         /// <summary>
         /// Buff特效ID
@@ -156,12 +156,12 @@ namespace ET
             + "BuffScript:" + BuffScript + ","
             + "BuffBenefitType:" + BuffBenefitType + ","
             + "BuffType:" + BuffType + ","
+            + "BuffParameterType:" + BuffParameterType + ","
+            + "BuffParameterValue:" + BuffParameterValue + ","
             + "DamageType:" + DamageType + ","
             + "DamagePro:" + DamagePro + ","
             + "IsBuffStackable:" + IsBuffStackable + ","
             + "BuffMaxStackCount:" + BuffMaxStackCount + ","
-            + "BuffParameterType:" + BuffParameterType + ","
-            + "BuffParameterValue:" + BuffParameterValue + ","
             + "BuffEffectID:" + BuffEffectID + ","
             + "BuffDescribe:" + BuffDescribe + ","
             + "}";

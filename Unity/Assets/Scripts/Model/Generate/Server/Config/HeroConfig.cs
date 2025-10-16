@@ -18,28 +18,30 @@ namespace ET
         {
             Id = _buf.ReadInt();
             HeroName = _buf.ReadString();
+            AtkType = _buf.ReadInt();
             HeroType = _buf.ReadInt();
             HeroHeadIcon = _buf.ReadString();
             HeroModelID = _buf.ReadInt();
             HeroQuality = _buf.ReadInt();
-            AtkDistance = _buf.ReadInt();
+            DamageType = _buf.ReadInt();
             AtkID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
-            Act = _buf.ReadInt();
-            Def = _buf.ReadInt();
-            Hp = _buf.ReadInt();
-            AtkSpeed = _buf.ReadDouble();
-            MoveSpeed = _buf.ReadDouble();
-            Cri = _buf.ReadDouble();
-            Combo = _buf.ReadDouble();
-            Counterattack = _buf.ReadDouble();
-            LifeSteal = _buf.ReadDouble();
-            Eva = _buf.ReadDouble();
-            ReCri = _buf.ReadDouble();
-            ReCombo = _buf.ReadDouble();
-            ReCounterattack = _buf.ReadDouble();
-            ReLifeSteal = _buf.ReadDouble();
-            ReEva = _buf.ReadDouble();
+            BaseHp = _buf.ReadInt();
+            BaseAct = _buf.ReadInt();
+            BaseDef = _buf.ReadInt();
+            BaseAdf = _buf.ReadInt();
+            BaseCri = _buf.ReadDouble();
+            BaseReCri = _buf.ReadDouble();
+            BaseEva = _buf.ReadDouble();
+            BaseHit = _buf.ReadDouble();
+            BaseHitLess = _buf.ReadDouble();
+            BaseMoveSpeed = _buf.ReadInt();
+            BaseAtkSpeed = _buf.ReadInt();
+            AtkDistance = _buf.ReadDouble();
+            LvHp = _buf.ReadDouble();
+            LvAct = _buf.ReadDouble();
+            LvDef = _buf.ReadDouble();
+            LvAdf = _buf.ReadDouble();
             HeroDescription = _buf.ReadString();
 
             PostInit();
@@ -61,7 +63,12 @@ namespace ET
         public readonly string HeroName;
 
         /// <summary>
-        /// 英雄类型
+        /// 攻击类型
+        /// </summary>
+        public readonly int AtkType;
+
+        /// <summary>
+        /// 英雄标签
         /// </summary>
         public readonly int HeroType;
 
@@ -81,9 +88,9 @@ namespace ET
         public readonly int HeroQuality;
 
         /// <summary>
-        /// 攻击距离
+        /// 伤害类型
         /// </summary>
-        public readonly int AtkDistance;
+        public readonly int DamageType;
 
         /// <summary>
         /// 普通攻击ID
@@ -96,79 +103,84 @@ namespace ET
         public readonly int[] SkillID;
 
         /// <summary>
-        /// 初始攻击
+        /// 血量
         /// </summary>
-        public readonly int Act;
+        public readonly int BaseHp;
 
         /// <summary>
-        /// 初始防御
+        /// 攻击
         /// </summary>
-        public readonly int Def;
+        public readonly int BaseAct;
 
         /// <summary>
-        /// 初始生命
+        /// 物防
         /// </summary>
-        public readonly int Hp;
+        public readonly int BaseDef;
 
         /// <summary>
-        /// 初始攻速
+        /// 魔防
         /// </summary>
-        public readonly double AtkSpeed;
+        public readonly int BaseAdf;
 
         /// <summary>
-        /// 初始移速
+        /// 暴击
         /// </summary>
-        public readonly double MoveSpeed;
+        public readonly double BaseCri;
 
         /// <summary>
-        /// 初始暴击
+        /// 抗暴
         /// </summary>
-        public readonly double Cri;
+        public readonly double BaseReCri;
 
         /// <summary>
-        /// 初始连击
+        /// 闪避
         /// </summary>
-        public readonly double Combo;
+        public readonly double BaseEva;
 
         /// <summary>
-        /// 初始反击
+        /// 命中
         /// </summary>
-        public readonly double Counterattack;
+        public readonly double BaseHit;
 
         /// <summary>
-        /// 初始吸血
+        /// 伤害减免
         /// </summary>
-        public readonly double LifeSteal;
+        public readonly double BaseHitLess;
 
         /// <summary>
-        /// 初始闪避
+        /// 移动速度
         /// </summary>
-        public readonly double Eva;
+        public readonly int BaseMoveSpeed;
 
         /// <summary>
-        /// 初始抗暴击
+        /// 攻击速度
         /// </summary>
-        public readonly double ReCri;
+        public readonly int BaseAtkSpeed;
 
         /// <summary>
-        /// 初始抗连击
+        /// 攻击距离
         /// </summary>
-        public readonly double ReCombo;
+        public readonly double AtkDistance;
 
         /// <summary>
-        /// 初始抗反击
+        /// 等级成长血量
         /// </summary>
-        public readonly double ReCounterattack;
+        public readonly double LvHp;
 
         /// <summary>
-        /// 初始抗吸血
+        /// 等级成长攻击
         /// </summary>
-        public readonly double ReLifeSteal;
+        public readonly double LvAct;
 
         /// <summary>
-        /// 初始抗闪避
+        /// 等级成长物防
         /// </summary>
-        public readonly double ReEva;
+        public readonly double LvDef;
+
+        /// <summary>
+        /// 等级成长魔防
+        /// </summary>
+        public readonly double LvAdf;
 
         /// <summary>
         /// 英雄简介
@@ -206,6 +218,8 @@ namespace ET
             
             
             
+            
+            
         }
 
         public override string ToString()
@@ -213,28 +227,30 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "HeroName:" + HeroName + ","
+            + "AtkType:" + AtkType + ","
             + "HeroType:" + HeroType + ","
             + "HeroHeadIcon:" + HeroHeadIcon + ","
             + "HeroModelID:" + HeroModelID + ","
             + "HeroQuality:" + HeroQuality + ","
-            + "AtkDistance:" + AtkDistance + ","
+            + "DamageType:" + DamageType + ","
             + "AtkID:" + AtkID + ","
             + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
-            + "Act:" + Act + ","
-            + "Def:" + Def + ","
-            + "Hp:" + Hp + ","
-            + "AtkSpeed:" + AtkSpeed + ","
-            + "MoveSpeed:" + MoveSpeed + ","
-            + "Cri:" + Cri + ","
-            + "Combo:" + Combo + ","
-            + "Counterattack:" + Counterattack + ","
-            + "LifeSteal:" + LifeSteal + ","
-            + "Eva:" + Eva + ","
-            + "ReCri:" + ReCri + ","
-            + "ReCombo:" + ReCombo + ","
-            + "ReCounterattack:" + ReCounterattack + ","
-            + "ReLifeSteal:" + ReLifeSteal + ","
-            + "ReEva:" + ReEva + ","
+            + "BaseHp:" + BaseHp + ","
+            + "BaseAct:" + BaseAct + ","
+            + "BaseDef:" + BaseDef + ","
+            + "BaseAdf:" + BaseAdf + ","
+            + "BaseCri:" + BaseCri + ","
+            + "BaseReCri:" + BaseReCri + ","
+            + "BaseEva:" + BaseEva + ","
+            + "BaseHit:" + BaseHit + ","
+            + "BaseHitLess:" + BaseHitLess + ","
+            + "BaseMoveSpeed:" + BaseMoveSpeed + ","
+            + "BaseAtkSpeed:" + BaseAtkSpeed + ","
+            + "AtkDistance:" + AtkDistance + ","
+            + "LvHp:" + LvHp + ","
+            + "LvAct:" + LvAct + ","
+            + "LvDef:" + LvDef + ","
+            + "LvAdf:" + LvAdf + ","
             + "HeroDescription:" + HeroDescription + ","
             + "}";
         }

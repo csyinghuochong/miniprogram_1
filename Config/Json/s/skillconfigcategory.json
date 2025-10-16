@@ -156,8 +156,12 @@
       0
     ],
     "SkillHitEffectID": 10000001,
-    "InitBuffID": [],
-    "BuffID": [],
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      0
+    ],
     "SkillDescribe": "对敌人造成350%物理伤害，如果敌人生命值低于30%，造成400%物理伤害；若成功击杀，将额外恢复50%的怒气。"
   },
   {
@@ -186,7 +190,8 @@
     ],
     "SkillHitEffectID": 10000001,
     "InitBuffID": [
-      10000006
+      10000006,
+      10000012
     ],
     "BuffID": [
       0
@@ -422,7 +427,8 @@
       0
     ],
     "BuffID": [
-      10000007
+      10000007,
+      10000010
     ],
     "SkillDescribe": "每次攻击有概率对当前目标造成血量流失效果,使其每秒造成40%伤害,且造成伤害降低20%，持续4秒。"
   },
@@ -463,28 +469,34 @@
     "Id": 30000005,
     "SkillName": "溅射",
     "SkillIcon": "30000005",
-    "SkillActType": 0,
-    "DamageType": 0,
+    "SkillActType": 1,
+    "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
     "GameObjectParameter": "",
-    "SkillType": 0,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "SkillType": 2,
+    "PassiveSkillType": 2,
+    "PassiveSkillPro": 1,
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 0,
-    "SkillLiveTime": 0,
-    "ActDamage": 0,
+    "SkillLiveTime": 3000,
+    "ActDamage": 0.5,
     "DamgeValue": 0,
-    "SkillAnimation": "",
-    "SkillMusic": "",
-    "SkillTargetType": 0,
-    "DamageRangeType": 0,
-    "DamageRange": [],
-    "SkillHitEffectID": 0,
-    "InitBuffID": [],
-    "BuffID": [],
-    "SkillDescribe": ""
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 1,
+    "DamageRangeType": 1,
+    "DamageRange": [
+      2
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      0
+    ],
+    "SkillDescribe": "每次攻击会对附近单位造成50%溅射伤害。"
   },
   {
     "Id": 30000006,
@@ -566,8 +578,8 @@
     "SkillType": 2,
     "PassiveSkillType": 3,
     "PassiveSkillPro": 0.8,
-    "PassiveSkillTriggerOnce": 1,
-    "SkillCD": 999,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
     "SkillLiveTime": 5000,
     "ActDamage": 0,
     "DamgeValue": 0,
@@ -582,7 +594,43 @@
     "InitBuffID": [
       0
     ],
-    "BuffID": [],
-    "SkillDescribe": ""
+    "BuffID": [
+      10000014
+    ],
+    "SkillDescribe": "在自己身后附带一个生命图腾,图腾每秒恢复附近己方单位最大生命值的1.5%,持续5秒。"
+  },
+  {
+    "Id": 30000009,
+    "SkillName": "剑舞",
+    "SkillIcon": "30000009",
+    "SkillActType": 1,
+    "DamageType": 1,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 0,
+    "PassiveSkillPro": 0,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 0,
+    "SkillLiveTime": 3600000,
+    "ActDamage": 0,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 3,
+    "DamageRangeType": 0,
+    "DamageRange": [
+      0
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      10000015,
+      10000016
+    ],
+    "BuffID": [
+      0
+    ],
+    "SkillDescribe": "提升自身20%攻击速度和暴击率。"
   }
 ]
