@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateUserData_Refresh : AEvent<Scene, UpdateUserData>
+    public class DataUpdate_UpdateUserData_UIBagRefresh : AEvent<Scene, UpdateUserData>
     {
         protected override async ETTask Run(Scene scene, UpdateUserData args)
         {
