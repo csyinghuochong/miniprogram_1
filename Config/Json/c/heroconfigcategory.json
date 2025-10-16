@@ -60,7 +60,7 @@
   {
     "Id": 10000003,
     "HeroName": "魔法师",
-    "HeroType": 3,
+    "HeroType": 2,
     "HeroHeadIcon": "10000003",
     "HeroModelID": 10000003,
     "HeroQuality": 1,
@@ -85,5 +85,32 @@
     "ReLifeSteal": 0.08,
     "ReEva": 0.08,
     "HeroDescription": "会治疗术的法师。"
+  },
+  {
+    "Id": 10001001,
+    "HeroName": "斧王",
+    "HeroType": 1,
+    "HeroHeadIcon": "10001001",
+    "HeroModelID": 1001001,
+    "HeroQuality": 3,
+    "AtkDistance": 2,
+    "AtkID": 10000001,
+    "SkillID": [],
+    "Act": 0,
+    "Def": 0,
+    "Hp": 0,
+    "AtkSpeed": 0,
+    "MoveSpeed": 0,
+    "Cri": 0,
+    "Combo": 0,
+    "Counterattack": 0,
+    "LifeSteal": 0,
+    "Eva": 0,
+    "ReCri": 0,
+    "ReCombo": 0,
+    "ReCounterattack": 0,
+    "ReLifeSteal": 0,
+    "ReEva": 0,
+    "HeroDescription": ""
   }
 ]

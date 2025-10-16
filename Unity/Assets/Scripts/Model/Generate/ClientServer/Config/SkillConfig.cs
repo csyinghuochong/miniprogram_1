@@ -20,14 +20,26 @@ namespace ET
             SkillName = _buf.ReadString();
             SkillIcon = _buf.ReadString();
             SkillActType = _buf.ReadInt();
+            DamageType = _buf.ReadInt();
+            SkillAddAnger = _buf.ReadInt();
             SkillHandler = _buf.ReadString();
+            GameObjectParameter = _buf.ReadString();
+            SkillType = _buf.ReadInt();
+            PassiveSkillType = _buf.ReadInt();
+            PassiveSkillPro = _buf.ReadDouble();
+            PassiveSkillTriggerOnce = _buf.ReadInt();
             SkillCD = _buf.ReadDouble();
             SkillLiveTime = _buf.ReadInt();
+            ActDamage = _buf.ReadDouble();
             DamgeValue = _buf.ReadInt();
             SkillAnimation = _buf.ReadString();
-            SkillHitEffectID = _buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); BuffID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); BuffID[__index0] = __e0;}}
             SkillMusic = _buf.ReadString();
+            SkillTargetType = _buf.ReadInt();
+            DamageRangeType = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); DamageRange = new double[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { double __e0;__e0 = _buf.ReadDouble(); DamageRange[__index0] = __e0;}}
+            SkillHitEffectID = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); InitBuffID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); InitBuffID[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); BuffID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); BuffID[__index0] = __e0;}}
             SkillDescribe = _buf.ReadString();
 
             PostInit();
@@ -59,9 +71,44 @@ namespace ET
         public readonly int SkillActType;
 
         /// <summary>
+        /// 伤害类型
+        /// </summary>
+        public readonly int DamageType;
+
+        /// <summary>
+        /// 增加怒气值
+        /// </summary>
+        public readonly int SkillAddAnger;
+
+        /// <summary>
         /// 脚本名称
         /// </summary>
         public readonly string SkillHandler;
+
+        /// <summary>
+        /// 脚本参数
+        /// </summary>
+        public readonly string GameObjectParameter;
+
+        /// <summary>
+        /// 技能类型
+        /// </summary>
+        public readonly int SkillType;
+
+        /// <summary>
+        /// 被动技能触发类型
+        /// </summary>
+        public readonly int PassiveSkillType;
+
+        /// <summary>
+        /// 被动技能触发参数
+        /// </summary>
+        public readonly double PassiveSkillPro;
+
+        /// <summary>
+        /// 被动技能触发一次
+        /// </summary>
+        public readonly int PassiveSkillTriggerOnce;
 
         /// <summary>
         /// 技能CD
@@ -74,6 +121,11 @@ namespace ET
         public readonly int SkillLiveTime;
 
         /// <summary>
+        /// 攻击系数
+        /// </summary>
+        public readonly double ActDamage;
+
+        /// <summary>
         /// 固定伤害值
         /// </summary>
         public readonly int DamgeValue;
@@ -84,19 +136,39 @@ namespace ET
         public readonly string SkillAnimation;
 
         /// <summary>
+        /// 技能音效
+        /// </summary>
+        public readonly string SkillMusic;
+
+        /// <summary>
+        /// 技能目标类型
+        /// </summary>
+        public readonly int SkillTargetType;
+
+        /// <summary>
+        /// 伤害范围类型
+        /// </summary>
+        public readonly int DamageRangeType;
+
+        /// <summary>
+        /// 伤害范围
+        /// </summary>
+        public readonly double[] DamageRange;
+
+        /// <summary>
         /// 技能特效Id
         /// </summary>
         public readonly int SkillHitEffectID;
 
         /// <summary>
+        /// 初始化BUFFID
+        /// </summary>
+        public readonly int[] InitBuffID;
+
+        /// <summary>
         /// 释放BUFFID
         /// </summary>
         public readonly int[] BuffID;
-
-        /// <summary>
-        /// 技能音效
-        /// </summary>
-        public readonly string SkillMusic;
 
         /// <summary>
         /// 技能描述
@@ -122,6 +194,18 @@ namespace ET
             
             
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
 
         public override string ToString()
@@ -131,14 +215,26 @@ namespace ET
             + "SkillName:" + SkillName + ","
             + "SkillIcon:" + SkillIcon + ","
             + "SkillActType:" + SkillActType + ","
+            + "DamageType:" + DamageType + ","
+            + "SkillAddAnger:" + SkillAddAnger + ","
             + "SkillHandler:" + SkillHandler + ","
+            + "GameObjectParameter:" + GameObjectParameter + ","
+            + "SkillType:" + SkillType + ","
+            + "PassiveSkillType:" + PassiveSkillType + ","
+            + "PassiveSkillPro:" + PassiveSkillPro + ","
+            + "PassiveSkillTriggerOnce:" + PassiveSkillTriggerOnce + ","
             + "SkillCD:" + SkillCD + ","
             + "SkillLiveTime:" + SkillLiveTime + ","
+            + "ActDamage:" + ActDamage + ","
             + "DamgeValue:" + DamgeValue + ","
             + "SkillAnimation:" + SkillAnimation + ","
-            + "SkillHitEffectID:" + SkillHitEffectID + ","
-            + "BuffID:" + Luban.StringUtil.CollectionToString(BuffID) + ","
             + "SkillMusic:" + SkillMusic + ","
+            + "SkillTargetType:" + SkillTargetType + ","
+            + "DamageRangeType:" + DamageRangeType + ","
+            + "DamageRange:" + Luban.StringUtil.CollectionToString(DamageRange) + ","
+            + "SkillHitEffectID:" + SkillHitEffectID + ","
+            + "InitBuffID:" + Luban.StringUtil.CollectionToString(InitBuffID) + ","
+            + "BuffID:" + Luban.StringUtil.CollectionToString(BuffID) + ","
             + "SkillDescribe:" + SkillDescribe + ","
             + "}";
         }

@@ -21,8 +21,11 @@ namespace ET
             BuffTime = _buf.ReadInt();
             BuffDelayTime = _buf.ReadInt();
             TargetType = _buf.ReadInt();
+            BuffScript = _buf.ReadString();
             BuffBenefitType = _buf.ReadInt();
             BuffType = _buf.ReadInt();
+            DamageType = _buf.ReadInt();
+            DamagePro = _buf.ReadDouble();
             IsBuffStackable = _buf.ReadInt();
             BuffMaxStackCount = _buf.ReadInt();
             BuffParameterType = _buf.ReadInt();
@@ -64,6 +67,11 @@ namespace ET
         public readonly int TargetType;
 
         /// <summary>
+        /// Buff脚本
+        /// </summary>
+        public readonly string BuffScript;
+
+        /// <summary>
         /// Buff增益减益
         /// </summary>
         public readonly int BuffBenefitType;
@@ -72,6 +80,16 @@ namespace ET
         /// Buff类型
         /// </summary>
         public readonly int BuffType;
+
+        /// <summary>
+        /// 伤害类型
+        /// </summary>
+        public readonly int DamageType;
+
+        /// <summary>
+        /// 伤害系数
+        /// </summary>
+        public readonly double DamagePro;
 
         /// <summary>
         /// Buff是否叠加
@@ -122,6 +140,9 @@ namespace ET
             
             
             
+            
+            
+            
         }
 
         public override string ToString()
@@ -132,8 +153,11 @@ namespace ET
             + "BuffTime:" + BuffTime + ","
             + "BuffDelayTime:" + BuffDelayTime + ","
             + "TargetType:" + TargetType + ","
+            + "BuffScript:" + BuffScript + ","
             + "BuffBenefitType:" + BuffBenefitType + ","
             + "BuffType:" + BuffType + ","
+            + "DamageType:" + DamageType + ","
+            + "DamagePro:" + DamagePro + ","
             + "IsBuffStackable:" + IsBuffStackable + ","
             + "BuffMaxStackCount:" + BuffMaxStackCount + ","
             + "BuffParameterType:" + BuffParameterType + ","
