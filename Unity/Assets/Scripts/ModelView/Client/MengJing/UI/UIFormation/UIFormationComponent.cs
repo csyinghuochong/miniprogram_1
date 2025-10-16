@@ -12,13 +12,15 @@ namespace ET.Client
         public List<UIFormationHeroItem> UIFormationHeroItemList { get; set; } = new();
 
         public Button Button_Close;
-        public Button Button_Plan_1;
-        public Button Button_Plan_2;
         public UIFormationSlotItem UIFormationSlotItem_1 { get; set; }
         public UIFormationSlotItem UIFormationSlotItem_2 { get; set; }
         public UIFormationSlotItem UIFormationSlotItem_3 { get; set; }
         public UIFormationSlotItem UIFormationSlotItem_4 { get; set; }
         public UIFormationSlotItem UIFormationSlotItem_5 { get; set; }
+        public UIFormationSlotItem UIFormationSlotItem_6 { get; set; }
+        public UIFormationSlotItem UIFormationSlotItem_7 { get; set; }
+        public UIFormationSlotItem UIFormationSlotItem_8 { get; set; }
+        public UIFormationSlotItem UIFormationSlotItem_9 { get; set; }
         public Transform Content_UIFormationHeroItem;
         public GameObject UIFormationHeroItem;
     }

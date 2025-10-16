@@ -10,7 +10,6 @@ namespace ET.Client
         public long HeroId;
         
         public GameObject GameObject;
-        public TMP_Text Text_Lv;
         public Image Image_HeroIcon;
         public TMP_Text Text_HeroName;
         public Button Button_Click;

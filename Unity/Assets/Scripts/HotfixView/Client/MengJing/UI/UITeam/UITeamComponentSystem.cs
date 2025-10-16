@@ -52,35 +52,35 @@ namespace ET.Client
 
         public static void UpdateHeroList(this UITeamComponent self)
         {
-            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            List<long> currentFormation = heroComponentC.GetFormation(heroComponentC.CurrentFormationIndex);
-            List<Hero> heroList = new List<Hero>();
-            foreach (long id in currentFormation)
-            {
-                Hero hero = heroComponentC.GetHero(id);
-                if (hero != null)
-                {
-                    heroList.Add(hero);
-                }
-            }
-
-            while (self.UITeamItemList.Count < heroList.Count)
-            {
-                GameObject go = UnityEngine.Object.Instantiate(self.UITeamItem, self.Content_UITeamItem);
-                UITeamItem newItem = self.AddChild<UITeamItem, GameObject>(go);
-                self.UITeamItemList.Add(newItem);
-            }
-
-            for (int i = 0; i < heroList.Count; i++)
-            {
-                self.UITeamItemList[i].UpdateInfo(heroList[i]).Coroutine();
-                self.UITeamItemList[i].GameObject.SetActive(true);
-            }
-
-            for (int i = heroList.Count; i < self.UITeamItemList.Count; i++)
-            {
-                self.UITeamItemList[i].GameObject.SetActive(false);
-            }
+            // HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            // List<long> currentFormation = heroComponentC.Formation;
+            // List<Hero> heroList = new List<Hero>();
+            // foreach (long id in currentFormation)
+            // {
+            //     Hero hero = heroComponentC.GetHero(id);
+            //     if (hero != null)
+            //     {
+            //         heroList.Add(hero);
+            //     }
+            // }
+            //
+            // while (self.UITeamItemList.Count < heroList.Count)
+            // {
+            //     GameObject go = UnityEngine.Object.Instantiate(self.UITeamItem, self.Content_UITeamItem);
+            //     UITeamItem newItem = self.AddChild<UITeamItem, GameObject>(go);
+            //     self.UITeamItemList.Add(newItem);
+            // }
+            //
+            // for (int i = 0; i < heroList.Count; i++)
+            // {
+            //     self.UITeamItemList[i].UpdateInfo(heroList[i]).Coroutine();
+            //     self.UITeamItemList[i].GameObject.SetActive(true);
+            // }
+            //
+            // for (int i = heroList.Count; i < self.UITeamItemList.Count; i++)
+            // {
+            //     self.UITeamItemList[i].GameObject.SetActive(false);
+            // }
         }
     }
 }

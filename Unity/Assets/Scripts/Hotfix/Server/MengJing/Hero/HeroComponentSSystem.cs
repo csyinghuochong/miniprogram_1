@@ -96,43 +96,24 @@ namespace ET.Server
 
         public static void OnLogin(this HeroComponentS self)
         {
-            if (self.CurrentFormationIndex == 0)
+            if (self.Formation.Count == 0)
             {
-                self.CurrentFormationIndex = 1;
-            }
-            
-            int maxCount = 5;
-
-            if (self.Formation_1.Count < maxCount)
-            {
-                self.Formation_1.Clear();
-                for (int i = 0; i < maxCount; i++)
+                for (int i = 0; i < 9; i++)
                 {
-                    self.Formation_1.Add(0);
-                }
-            }
-
-            if (self.Formation_2.Count < maxCount)
-            {
-                self.Formation_2.Clear();
-                for (int i = 0; i < maxCount; i++)
-                {
-                    self.Formation_2.Add(0);
+                    self.Formation.Add(0);
                 }
             }
         }
 
-        public static List<long> GetFormation(this HeroComponentS self, int formationIndex)
-        {
-            return formationIndex switch
-            {
-                1 => self.Formation_1,
-                2 => self.Formation_2,
-                _ => null
-            };
-        }
-
-        public static int SetFormation(this HeroComponentS self, int opType, long heroId, int formationIndex, int slotIndex)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="opType">0上阵 1下阵</param>
+        /// <param name="heroId"></param>
+        /// <param name="slotIndex"></param>
+        /// <returns></returns>
+        public static int SetFormation(this HeroComponentS self, int opType, long heroId, int slotIndex)
         {
             Hero hero = self.GetHero(heroId);
 
@@ -141,33 +122,26 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            if (formationIndex < 1 || formationIndex > self.MaxFormationIndex)
+            if (slotIndex < 1 || slotIndex > 9)
             {
                 return ErrorCode.ERR_ModifyData;
             }
-
-            if (slotIndex < 1 || slotIndex > self.MaxFormationSlotIndex)
-            {
-                return ErrorCode.ERR_ModifyData;
-            }
-
-            List<long> formation = self.GetFormation(formationIndex);
 
             if (opType == 0)
             {
-                for (int i = 0; i < formation.Count; i++)
+                for (int i = 0; i < self.Formation.Count; i++)
                 {
-                    if (formation[i] == heroId)
+                    if (self.Formation[i] == heroId)
                     {
-                        formation[i] = 0;
+                        self.Formation[i] = self.Formation[slotIndex - 1];
                     }
                 }
 
-                formation[slotIndex - 1] = heroId;
+                self.Formation[slotIndex - 1] = heroId;
             }
             else
             {
-                formation[slotIndex - 1] = 0;
+                self.Formation[slotIndex - 1] = 0;
             }
 
             return ErrorCode.ERR_Success;

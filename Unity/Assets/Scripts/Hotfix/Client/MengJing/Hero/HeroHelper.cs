@@ -22,39 +22,16 @@ namespace ET.Client
                 heroComponentC.AddHeroFromMessage(heroInfo);
             }
 
-            heroComponentC.CurrentFormationIndex = response.CurrentFormationIndex;
-            heroComponentC.Formation_1 = response.Formation_1;
-            heroComponentC.Formation_2 = response.Formation_2;
+            heroComponentC.Formation = response.Formation;
 
             return response.Error;
         }
 
-        public static async ETTask<int> SetHeroCurrentFormationIndex(Scene root, int index)
-        {
-            C2M_SetHeroCurrentFormationIndex request = C2M_SetHeroCurrentFormationIndex.Create();
-            request.CurrentFormationIndex = index;
-
-            M2C_SetHeroCurrentFormationIndex response =
-                    (M2C_SetHeroCurrentFormationIndex)await root.GetComponent<ClientSenderComponent>().Call(request);
-            if (response.Error != ErrorCode.ERR_Success)
-            {
-                return response.Error;
-            }
-
-            HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
-            heroComponentC.CurrentFormationIndex = index;
-
-            EventSystem.Instance.Publish(root, new HeroFormationUpdate());
-
-            return response.Error;
-        }
-
-        public static async ETTask<int> SetHeroFormation(Scene root, int opType, long heroId, int formationIndex, int slotIndex)
+        public static async ETTask<int> SetHeroFormation(Scene root, int opType, long heroId, int slotIndex)
         {
             C2M_SetHeroFormation request = C2M_SetHeroFormation.Create();
             request.OpType = opType;
             request.HeroId = heroId;
-            request.FormationIndex = formationIndex;
             request.SlotIndex = slotIndex;
 
             M2C_SetHeroFormation response = (M2C_SetHeroFormation)await root.GetComponent<ClientSenderComponent>().Call(request);
@@ -64,15 +41,7 @@ namespace ET.Client
             }
 
             HeroComponentC heroComponentC = root.GetComponent<HeroComponentC>();
-            switch (formationIndex)
-            {
-                case 1:
-                    heroComponentC.Formation_1 = response.Formation;
-                    break;
-                case 2:
-                    heroComponentC.Formation_2 = response.Formation;
-                    break;
-            }
+            heroComponentC.Formation = response.Formation;
 
             EventSystem.Instance.Publish(root, new HeroFormationUpdate());
 
@@ -86,7 +55,7 @@ namespace ET.Client
 
             Unit hero_2 = UnitFactory.CreateHero(root.CurrentScene(), 10000002);
             hero_2.Position = new float3(-5f, 0, -10);
-            
+
             Unit hero_3 = UnitFactory.CreateHero(root.CurrentScene(), 10000003);
             hero_3.Position = new float3(0, 0, -10);
             //

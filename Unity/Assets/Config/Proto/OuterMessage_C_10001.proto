@@ -596,9 +596,7 @@ message M2C_GetAllHero // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 	repeated HeroInfo HeroList = 4;
-	int32 CurrentFormationIndex = 5;
-	repeated int64 Formation_1 = 6;
-	repeated int64 Formation_2 = 7;
+	repeated int64 Formation = 5;
 }
 
 message M2C_HeroUpdateOp // IMessage
@@ -607,27 +605,12 @@ message M2C_HeroUpdateOp // IMessage
 	int32 HeroOpType = 2;
 }
 
-// ResponseType M2C_SetHeroCurrentFormationIndex
-message C2M_SetHeroCurrentFormationIndex // ILocationRequest
-{
-	int32 RpcId = 1;
-	int32 CurrentFormationIndex = 2;
-}
-
-message M2C_SetHeroCurrentFormationIndex // ILocationResponse
-{
-	int32 RpcId = 1;
-	int32 Error = 2;
-	string Message = 3;
-}
-
 // ResponseType M2C_SetHeroFormation
 message C2M_SetHeroFormation // ILocationRequest
 {
 	int32 RpcId = 1;
 	int32 OpType = 2; //0上阵 1下阵
 	int64 HeroId = 3;
-	int32 FormationIndex = 4;
 	int32 SlotIndex = 5;
 }
 

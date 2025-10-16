@@ -16,7 +16,6 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
-            self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
@@ -27,7 +26,6 @@ namespace ET.Client
             if (hero == null)
             {
                 self.HeroId = 0;
-                self.Text_Lv.gameObject.SetActive(false);
                 self.Text_HeroName.gameObject.SetActive(false);
                 self.Image_HeroIcon.gameObject.SetActive(false);
                 return;
@@ -35,8 +33,6 @@ namespace ET.Client
 
             self.HeroId = hero.Id;
 
-            self.Text_Lv.gameObject.SetActive(true);
-            self.Text_Lv.SetTextFormat("Lv.{0}", hero.Lv);
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.gameObject.SetActive(true);
             self.Text_HeroName.SetText(heroConfig.HeroName);

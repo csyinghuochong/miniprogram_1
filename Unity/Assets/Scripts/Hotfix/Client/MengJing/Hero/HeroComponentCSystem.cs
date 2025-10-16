@@ -113,15 +113,5 @@ namespace ET.Client
 
             return Heros;
         }
-
-        public static List<long> GetFormation(this HeroComponentC self, int formationIndex)
-        {
-            return formationIndex switch
-            {
-                1 => self.Formation_1,
-                2 => self.Formation_2,
-                _ => null
-            };
-        }
     }
 }

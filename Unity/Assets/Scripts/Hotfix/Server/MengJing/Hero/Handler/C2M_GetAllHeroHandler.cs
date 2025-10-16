@@ -15,9 +15,7 @@ namespace ET.Server
                 response.HeroList.Add(hero.ToMessage());
             }
 
-            response.CurrentFormationIndex = heroComponentS.CurrentFormationIndex;
-            response.Formation_1 = heroComponentS.Formation_1;
-            response.Formation_2 = heroComponentS.Formation_2;
+            response.Formation = heroComponentS.Formation;
 
             await ETTask.CompletedTask;
         }
