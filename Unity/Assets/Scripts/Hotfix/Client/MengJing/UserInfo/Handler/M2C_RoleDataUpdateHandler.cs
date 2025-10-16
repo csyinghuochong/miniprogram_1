@@ -24,7 +24,11 @@
                     oldLong = userInfoComponent.Exp;
                     userInfoComponent.Exp = message.UpdateValueLong;
                     // EventSystem.Instance.Publish(root, new UpdateUserDataExp() { ChangeValue = changeValue, UpdateValue = message.UpdateValueLong });
-                    // return;
+                    // return
+                    break;
+                case (int)UserDataType.Lv:
+                    oldLong = userInfoComponent.Lv;
+                    userInfoComponent.Lv = (int)message.UpdateValueLong;
                     break;
             }
 

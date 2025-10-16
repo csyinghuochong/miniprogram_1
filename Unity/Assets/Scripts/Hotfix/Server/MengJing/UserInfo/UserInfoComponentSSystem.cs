@@ -54,7 +54,7 @@
                     self.Exp = value;
                     break;
                 case UserDataType.Lv:
-                    self.Lv = value;
+                    self.Lv = (int)value;
                     break;
                 default:
                     return;
@@ -84,11 +84,11 @@
                     newValue = self.Diamond;
                     break;
                 case UserDataType.Exp:
-                    self.Exp += value;
+                    self.AddExp((int)value);
                     newValue = self.Exp;
                     break;
                 case UserDataType.Lv:
-                    self.Lv += value;
+                    self.Lv += (int)value;
                     newValue = self.Lv;
                     break;
                 default:
@@ -101,6 +101,31 @@
                 m2C_RoleDataUpdate.UpdateType = (int)type;
                 m2C_RoleDataUpdate.UpdateValueLong = newValue;
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RoleDataUpdate);
+            }
+        }
+
+        private static void AddExp(this UserInfoComponentS self, int value)
+        {
+            self.Exp += value;
+
+            while (true)
+            {
+                ExpConfig currentExpConfig = ExpConfigCategory.Instance.Get(self.Lv);
+
+                if (self.Exp < currentExpConfig.UpExp)
+                {
+                    break;
+                }
+
+                int nextLv = self.Lv + 1;
+                if (!ExpConfigCategory.Instance.DataMap.ContainsKey(nextLv))
+                {
+                    self.Exp = currentExpConfig.UpExp;
+                    break;
+                }
+
+                self.Exp -= currentExpConfig.UpExp;
+                self.ChangeRoleData(UserDataType.Lv, 1);
             }
         }
     }

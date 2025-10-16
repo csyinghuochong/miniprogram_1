@@ -7,6 +7,6 @@
         public long Gold { get; set; }
         public long Diamond { get; set; }
         public long Exp { get; set; }
-        public long Lv { get; set; }
+        public int Lv { get; set; }
     }
 }

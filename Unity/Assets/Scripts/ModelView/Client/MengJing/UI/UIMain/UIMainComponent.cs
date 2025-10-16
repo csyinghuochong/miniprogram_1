@@ -13,7 +13,9 @@ namespace ET.Client
         public float FPS; // 当前帧率
 
         public int SpeedLevel = 1;
-        
+
+        public TMP_Text Text_PlayerName;
+        public TMP_Text Text_PlayerLv;
         public TMP_Text Text_FPS;
         public Button Button_Speed;
         public Button Button_GM;

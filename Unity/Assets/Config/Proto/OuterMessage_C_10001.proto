@@ -661,5 +661,5 @@ message M2C_GetUserInfo // ILocationResponse
 	int64 Gold = 5;
 	int64 Diamond = 6;
 	int64 Exp = 7;
-	int64 Lv = 8;
+	int32 Lv = 8;
 }

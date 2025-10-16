@@ -10,7 +10,8 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, UpdateUserData args)
         {
-            if (args.UserDataType != UserDataType.Exp)
+            if (args.UserDataType != UserDataType.Lv &&
+                args.UserDataType != UserDataType.Exp)
             {
                 return;
             }
@@ -22,6 +23,12 @@ namespace ET.Client
             }
 
             UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+
+            if (args.UserDataType == UserDataType.Lv)
+            {
+                uiMainComponent.UpdatePlayerLv();
+            }
+
             if (args.UserDataType == UserDataType.Exp)
             {
                 uiMainComponent.UpdateExp();
@@ -40,6 +47,8 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
+            self.Text_PlayerLv = rc.Get<GameObject>("Text_PlayerLv").GetComponent<TMP_Text>();
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
@@ -53,6 +62,8 @@ namespace ET.Client
             self.Button_Team.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UITeam).Coroutine(); });
             self.Button_Bag.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
 
+            self.UpdatePlayerName();
+            self.UpdatePlayerLv();
             self.UpdateExp();
             Application.targetFrameRate = 60;
         }
@@ -101,10 +112,24 @@ namespace ET.Client
             self.Button_Speed.GetComponentInChildren<TMP_Text>().SetTextFormat("x{0}", self.SpeedLevel);
         }
 
+        public static void UpdatePlayerName(this UIMainComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Text_PlayerName.SetText(userInfoComponent.PlayerName);
+        }
+
+        public static void UpdatePlayerLv(this UIMainComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Text_PlayerLv.SetTextFormat("等级：{0}", userInfoComponent.Lv);
+            
+            self.UpdateExp();
+        }
+
         public static void UpdateExp(this UIMainComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            int max = 1000; // 先暂时
+            int max = ExpConfigCategory.Instance.Get(userInfoComponent.Lv).UpExp;
             self.Slider_Exp.value = userInfoComponent.Exp * 1f / max;
             self.Text_Exp.SetTextFormat("{0}/{1}", userInfoComponent.Exp, max);
         }

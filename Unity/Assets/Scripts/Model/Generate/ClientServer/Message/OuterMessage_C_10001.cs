@@ -3001,7 +3001,7 @@ namespace ET
         public long Exp { get; set; }
 
         [MemoryPackOrder(7)]
-        public long Lv { get; set; }
+        public int Lv { get; set; }
 
         public override void Dispose()
         {
