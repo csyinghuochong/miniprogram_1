@@ -2647,6 +2647,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public int Lv { get; set; }
 
+        [MemoryPackOrder(3)]
+        public int Star { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2657,6 +2660,7 @@ namespace ET
             this.Id = default;
             this.ConfigId = default;
             this.Lv = default;
+            this.Star = default;
 
             ObjectPool.Instance.Recycle(this);
         }
