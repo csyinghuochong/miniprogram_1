@@ -19,5 +19,7 @@ namespace ET.Client
         public Button Button_GM;
         public Button Button_Team;
         public Button Button_Bag;
+        public Slider Slider_Exp;
+        public TMP_Text Text_Exp;
     }
 }

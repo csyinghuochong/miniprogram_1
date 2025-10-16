@@ -120,12 +120,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: Text_Type_Gold
+    gameObject: {fileID: 8703532972805989619}
+  - key: Text_Type_Diamond
+    gameObject: {fileID: 7025935082002528436}
   - key: Button_Close
     gameObject: {fileID: 2884267023644722160}
-  - key: Content_UICommonItem
-    gameObject: {fileID: 1485068836293457744}
-  - key: UICommonItem
-    gameObject: {fileID: 2892821993678541725}
   - key: Button_Type_All
     gameObject: {fileID: 8428632465129721033}
   - key: Button_Type_Consume
@@ -134,10 +134,10 @@ MonoBehaviour:
     gameObject: {fileID: 2037196758094312791}
   - key: Button_Type_Material
     gameObject: {fileID: 7629175705134848311}
-  - key: Text_Type_Gold
-    gameObject: {fileID: 8703532972805989619}
-  - key: Text_Type_Diamond
-    gameObject: {fileID: 7025935082002528436}
+  - key: Content_UICommonItem
+    gameObject: {fileID: 1485068836293457744}
+  - key: UICommonItem
+    gameObject: {fileID: 2892821993678541725}
 --- !u!1 &6884363501689542
 GameObject:
   m_ObjectHideFlags: 0

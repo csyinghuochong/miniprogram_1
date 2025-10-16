@@ -34,11 +34,28 @@ namespace ET.Server
                     case 2: //新增英雄
                     {
                         int heroId = int.Parse(commands[1]);
-                        
+
                         unit.GetComponent<HeroComponentS>().AddHeroByConfigId(heroId);
                         break;
                     }
+                    case 6:
+                    {
+                        int lv = int.Parse(commands[1]);
+                        UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
+                        if (lv < userInfoComponent.Lv)
+                        {
+                            return;
+                        }
+
+                        if (lv > 70)
+                        {
+                            return;
+                        }
+
+                        userInfoComponent.UpdateRoleData(UserDataType.Lv, lv);
+                        break;
+                    }
                     default:
                         break;
                 }

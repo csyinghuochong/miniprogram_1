@@ -5,6 +5,32 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateUserData_UIMainRefresh : AEvent<Scene, UpdateUserData>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserData args)
+        {
+            if (args.UserDataType != UserDataType.Exp)
+            {
+                return;
+            }
+
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            if (args.UserDataType == UserDataType.Exp)
+            {
+                uiMainComponent.UpdateExp();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIMainComponent))]
     [FriendOf(typeof(UIMainComponent))]
     public static partial class UIMainComponentSystem
@@ -19,12 +45,15 @@ namespace ET.Client
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Team = rc.Get<GameObject>("Button_Team").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
+            self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
+            self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
             self.Button_Speed.onClick.AddListener(() => { self.OnButton_Speed(); });
             self.Button_GM.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
             self.Button_Team.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UITeam).Coroutine(); });
             self.Button_Bag.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
 
+            self.UpdateExp();
             Application.targetFrameRate = 60;
         }
 
@@ -70,6 +99,14 @@ namespace ET.Client
             }
 
             self.Button_Speed.GetComponentInChildren<TMP_Text>().SetTextFormat("x{0}", self.SpeedLevel);
+        }
+
+        public static void UpdateExp(this UIMainComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            int max = 1000; // 先暂时
+            self.Slider_Exp.value = userInfoComponent.Exp * 1f / max;
+            self.Text_Exp.SetTextFormat("{0}/{1}", userInfoComponent.Exp, max);
         }
     }
 }

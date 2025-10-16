@@ -54,6 +54,20 @@ namespace ET.Server
                 if (itemConfigId <= 10000000)
                 {
                     // 加到玩家数据中
+                    UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+                    switch (itemConfig.Id)
+                    {
+                        case 1:
+                            userInfoComponent.ChangeRoleData(UserDataType.Gold, leftNum);
+                            break;
+                        case 2:
+                            userInfoComponent.ChangeRoleData(UserDataType.Diamond, leftNum);
+                            break;
+                        case 3:
+                            userInfoComponent.ChangeRoleData(UserDataType.Exp, leftNum);
+                            break;
+                    }
+
                     continue;
                 }
 
