@@ -8,14 +8,12 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIHeroComponent : Entity, IAwake, IDestroy
     {
-        public List<UIHeroItem> UIHeroItemList { get; set; } = new();
+        public List<UITeamItem> UITeamItemList { get; set; } = new();
 
+        public Transform Content_UITeamItem;
+        public GameObject UITeamItem;
         public Button Button_Close;
-        public Button Button_Type_All;
-        public Button Button_Type_Warrior;
-        public Button Button_Type_Mage;
-        public Button Button_Type_Archer;
-        public Transform Content_UIHeroItem;
-        public GameObject UIHeroItem;
+        public Button Button_Hero;
+        public Button Button_Formation;
     }
 }

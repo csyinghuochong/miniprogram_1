@@ -14,8 +14,8 @@ namespace ET
         public const string UIBag = "UIBag/UIBag";
         public const string UIGM = "UIGM/UIGM";
         public const string UIItemTip = "UIItemTip/UIItemTip";
-        public const string UITeam = "UITeam/UITeam";
         public const string UIHero = "UIHero/UIHero";
+        public const string UIHeroList = "UIHeroList/UIHeroList";
         public const string UIFormation = "UIFormation/UIFormation";
     }
 }

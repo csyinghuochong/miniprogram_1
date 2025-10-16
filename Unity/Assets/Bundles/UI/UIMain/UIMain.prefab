@@ -127,7 +127,7 @@ MonoBehaviour:
     gameObject: {fileID: 5893425352261120269}
   - key: Button_GM
     gameObject: {fileID: 6751659831917712206}
-  - key: Button_Team
+  - key: Button_Hero
     gameObject: {fileID: 3342638902107998407}
   - key: Button_Bag
     gameObject: {fileID: 6470377805221672804}
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 8046865644329169717}
   - component: {fileID: 8739785537077781310}
   m_Layer: 5
-  m_Name: Button_Team
+  m_Name: Button_Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

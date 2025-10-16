@@ -19,7 +19,7 @@ namespace ET.Client
         public TMP_Text Text_FPS;
         public Button Button_Speed;
         public Button Button_GM;
-        public Button Button_Team;
+        public Button Button_Hero;
         public Button Button_Bag;
         public Slider Slider_Exp;
         public TMP_Text Text_Exp;
