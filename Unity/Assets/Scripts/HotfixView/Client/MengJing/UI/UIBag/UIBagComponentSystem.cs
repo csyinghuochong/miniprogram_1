@@ -1,9 +1,42 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateUserData_Refresh : AEvent<Scene, UpdateUserData>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserData args)
+        {
+            if (args.UserDataType != UserDataType.Gold && args.UserDataType != UserDataType.Diamond)
+            {
+                return;
+            }
+
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIBag);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIBagComponent uiBagComponent = ui.GetComponent<UIBagComponent>();
+            if (args.UserDataType == UserDataType.Gold)
+            {
+                uiBagComponent.UpdateGold();
+            }
+
+            if (args.UserDataType == UserDataType.Diamond)
+            {
+                uiBagComponent.UpdateDiamond();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIBagComponent))]
     [FriendOf(typeof(UIBagComponent))]
     public static partial class UIBagComponentSystem
@@ -13,6 +46,8 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
+            self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
             self.Button_Type_Consume = rc.Get<GameObject>("Button_Type_Consume").GetComponent<Button>();
@@ -28,6 +63,8 @@ namespace ET.Client
             self.Button_Type_Material.onClick.AddListener(() => { self.SetShowType(3); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIBag); });
 
+            self.UpdateGold();
+            self.UpdateDiamond();
             self.SetShowType(0);
         }
 
@@ -95,6 +132,18 @@ namespace ET.Client
             {
                 self.UICommonItemList[i].GameObject.SetActive(false);
             }
+        }
+
+        public static void UpdateGold(this UIBagComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Text_Type_Gold.SetText(userInfoComponent.Gold);
+        }
+
+        public static void UpdateDiamond(this UIBagComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
     }
 }

@@ -638,3 +638,27 @@ message M2C_SetHeroFormation // ILocationResponse
 	string Message = 3;
 	repeated int64 Formation = 4;
 }
+
+message M2C_RoleDataUpdate // IMessage
+{
+	int32 UpdateType = 1;
+	string UpdateTypeValue = 2;
+	int64 UpdateValueLong = 3;
+}
+
+// ResponseType M2C_GetUserInfo
+message C2M_GetUserInfo // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetUserInfo // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	string PlayerName = 4;
+	int64 Gold = 5;
+	int64 Diamond = 6;
+	int64 Exp = 7;
+}

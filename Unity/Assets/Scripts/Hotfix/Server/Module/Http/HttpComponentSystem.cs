@@ -181,23 +181,6 @@ namespace ET.Server
             }
         }
 
-        public static CertificateDomainInfo GetCertificateDomains(X509Certificate2 cert)
-        {
-            var info = new CertificateDomainInfo();
-
-            // 获取主题中的CN（Common Name）
-            info.CommonName = GetCommonNameFromSubject(cert.Subject);
-
-            // 获取SANs（主题备用名称）
-            var sanExtension = cert.Extensions["2.5.29.17"] as X509SubjectAlternativeNameExtension;
-            if (sanExtension != null)
-            {
-                info.SubjectAlternativeNames.AddRange(ParseSubjectAlternativeNames(sanExtension));
-            }
-
-            return info;
-        }
-
         private static string GetCommonNameFromSubject(string subject)
         {
             // 主题格式示例: "CN=yourdomain.com, O=Your Organization, L=City, C=Country"

@@ -2911,6 +2911,114 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RoleDataUpdate)]
+    public partial class M2C_RoleDataUpdate : MessageObject, IMessage
+    {
+        public static M2C_RoleDataUpdate Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RoleDataUpdate), isFromPool) as M2C_RoleDataUpdate;
+        }
+
+        [MemoryPackOrder(0)]
+        public int UpdateType { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string UpdateTypeValue { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long UpdateValueLong { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UpdateType = default;
+            this.UpdateTypeValue = default;
+            this.UpdateValueLong = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GetUserInfo)]
+    [ResponseType(nameof(M2C_GetUserInfo))]
+    public partial class C2M_GetUserInfo : MessageObject, ILocationRequest
+    {
+        public static C2M_GetUserInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetUserInfo), isFromPool) as C2M_GetUserInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetUserInfo)]
+    public partial class M2C_GetUserInfo : MessageObject, ILocationResponse
+    {
+        public static M2C_GetUserInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetUserInfo), isFromPool) as M2C_GetUserInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string PlayerName { get; set; }
+
+        [MemoryPackOrder(4)]
+        public long Gold { get; set; }
+
+        [MemoryPackOrder(5)]
+        public long Diamond { get; set; }
+
+        [MemoryPackOrder(6)]
+        public long Exp { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.PlayerName = default;
+            this.Gold = default;
+            this.Diamond = default;
+            this.Exp = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -2991,5 +3099,8 @@ namespace ET
         public const ushort M2C_SetHeroCurrentFormationIndex = 10077;
         public const ushort C2M_SetHeroFormation = 10078;
         public const ushort M2C_SetHeroFormation = 10079;
+        public const ushort M2C_RoleDataUpdate = 10080;
+        public const ushort C2M_GetUserInfo = 10081;
+        public const ushort M2C_GetUserInfo = 10082;
     }
 }

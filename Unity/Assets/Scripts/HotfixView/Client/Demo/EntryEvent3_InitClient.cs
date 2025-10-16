@@ -21,6 +21,7 @@ namespace ET.Client
             root.AddComponent<ReddotViewComponent>();
             root.AddComponent<InventoryComponentC>();
             root.AddComponent<HeroComponentC>();
+            root.AddComponent<UserInfoComponentC>();
             root.AddComponent<FloatingTextComponent>();
             
             // 根据配置修改掉Main Fiber的SceneType

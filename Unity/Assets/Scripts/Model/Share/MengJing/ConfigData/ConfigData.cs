@@ -952,33 +952,6 @@ namespace ET
         };
 
         [StaticField]
-        public static Dictionary<int, int> ItemToUserDataType = new Dictionary<int, int>()
-        {
-            { 1, UserDataType.Gold },
-            { 2, UserDataType.Exp },
-            { 3, UserDataType.Diamond },
-            { 4, UserDataType.Vitality },
-            { 5, UserDataType.PiLao },
-            { 6, UserDataType.RongYu },
-            { 7, UserDataType.FangRong },
-            { 8, UserDataType.MaoXianExp },
-            { 9, UserDataType.DungeonTimes },
-            { 10, UserDataType.Recharge },
-            { 11, UserDataType.HuoYue },
-            { 12, UserDataType.Sp },
-            { 13, UserDataType.JiaYuanFund },
-            { 14, UserDataType.JiaYuanExp },
-            { 15, UserDataType.BaoShiDu },
-            { 16, UserDataType.UnionContri },
-            { 17, UserDataType.UnionExp },
-            { 18, UserDataType.JueXingExp },
-            { 31, UserDataType.SeasonExp },
-            { 32, UserDataType.SeasonCoin },
-            { 34, UserDataType.InvestMent },
-            { 35, UserDataType.UnionGold },
-        };
-
-        [StaticField]
         //以下途径获取的道具为非绑定道具,其他途径为绑定道具
         public static Dictionary<int, string> ItemGetWayNameList = new Dictionary<int, string>
         {

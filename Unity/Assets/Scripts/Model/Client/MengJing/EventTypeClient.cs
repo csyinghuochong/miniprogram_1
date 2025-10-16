@@ -3,6 +3,15 @@ using Unity.Mathematics;
 
 namespace ET.Client
 {
+    public struct UpdateUserData
+    {
+        public UserDataType UserDataType;
+        public long OldLong;
+        public long NewLong;
+        public string OldString;
+        public string NewString;
+    }
+    
     public struct ShowFlyTip
     {
         /// <summary>
