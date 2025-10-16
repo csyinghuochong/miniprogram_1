@@ -15,11 +15,11 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
+            self.Image_Border = rc.Get<GameObject>("Image_Border").GetComponent<Image>();
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
-            self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
-            self.Text_Name = rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>();
-            self.Text_CP = rc.Get<GameObject>("Text_CP").GetComponent<TMP_Text>();
-            self.Button_Up = rc.Get<GameObject>("Button_Up").GetComponent<Button>();
+            self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
+
+            self.Button_Click.onClick.AddListener(() => { self.GetParent<UIHeroComponent>().SelectHero(self.HeroId); });
         }
 
         public static async ETTask UpdateInfo(this UITeamItem self, Hero hero)
@@ -28,7 +28,11 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-            self.Text_Name.text = heroConfig.HeroName;
+        }
+
+        public static void UpdateBorder(this UITeamItem self, long heroId)
+        {
+            self.Image_Border.gameObject.SetActive(self.HeroId == heroId);
         }
     }
 }

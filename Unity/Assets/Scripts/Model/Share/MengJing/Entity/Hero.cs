@@ -19,6 +19,7 @@
     {
         public int ConfigId { get; set; }
         public int Lv { get; set; }
+        public int Exp { get; set; }
         public int Star { get; set; }
     }
 }

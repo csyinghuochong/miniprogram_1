@@ -20,6 +20,7 @@
             heroInfo.Id = self.Id;
             heroInfo.ConfigId = self.ConfigId;
             heroInfo.Lv = self.Lv;
+            heroInfo.Exp = self.Exp;
             heroInfo.Star = self.Star;
 
             return heroInfo;
@@ -29,6 +30,7 @@
         {
             self.ConfigId = heroInfo.ConfigId;
             self.Lv = heroInfo.Lv;
+            self.Exp = heroInfo.Exp;
             self.Star = heroInfo.Star;
         }
     }

@@ -2648,6 +2648,9 @@ namespace ET
         public int Lv { get; set; }
 
         [MemoryPackOrder(3)]
+        public int Exp { get; set; }
+
+        [MemoryPackOrder(4)]
         public int Star { get; set; }
 
         public override void Dispose()
@@ -2660,6 +2663,7 @@ namespace ET
             this.Id = default;
             this.ConfigId = default;
             this.Lv = default;
+            this.Exp = default;
             this.Star = default;
 
             ObjectPool.Instance.Recycle(this);

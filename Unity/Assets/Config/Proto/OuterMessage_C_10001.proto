@@ -582,7 +582,8 @@ message HeroInfo
 	int64 Id = 1;
 	int32 ConfigId = 2;
 	int32 Lv = 3;
-	int32 Star = 4;
+	int32 Exp = 4;
+	int32 Star = 5;
 }
 
 // ResponseType M2C_GetAllHero
