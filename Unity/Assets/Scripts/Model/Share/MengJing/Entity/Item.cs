@@ -17,13 +17,7 @@
     {
         None = 0, //无类型
         Bag = 1, //背包
-    }
-
-    public enum ItemType
-    {
-        Consume = 1, //消耗
-        Material = 2, //材料
-        Equipment = 3, //装备
+        HeroEquip = 2, //宠物装备
     }
 
     [ChildOf]
