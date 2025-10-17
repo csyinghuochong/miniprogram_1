@@ -34,6 +34,15 @@ namespace ET.Client
                     uI.GetComponent<UIItemTipComponent>().UpdateInfo(self.ItemId);
                 }
             }
+
+            if (self.Parent is UIHeroComponent)
+            {
+                UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
+                if (uI != null)
+                {
+                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(self.ItemId);
+                }
+            }
         }
 
         public static async ETTask UpdateInfo(this UICommonItem self, Item item)

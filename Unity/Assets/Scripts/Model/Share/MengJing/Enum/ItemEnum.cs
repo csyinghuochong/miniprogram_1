@@ -179,33 +179,6 @@ namespace ET
 
         public const int  ItemLocMax = 20;
     }
-    
-    //道具装备位置
-    //1 武器
-    //2 衣服
-    //3 护符
-    //4 戒指
-    //5 饰品
-    //6 鞋子
-    //7 裤子
-    //8 腰带
-    //9 手镯
-    //10 头盔
-    //11 项链
-    public enum ItemSubTypeEnum : int
-    {
-        Wuqi    = 1,
-        Yifu    = 2,
-        Fuhu    = 3,
-        Jiezhi  =4,
-        Shiping =5,
-        Xiezi   =6,
-        Kuzi    =7,
-        Yaodai  =8,
-        Shouzhuo=9,
-        Toukui  =10,
-        Xianglian=11,
-    }
 
     //1:白色
     //2：绿色
