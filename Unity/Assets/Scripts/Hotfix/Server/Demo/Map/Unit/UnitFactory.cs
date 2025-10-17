@@ -47,6 +47,7 @@ namespace ET.Server
                         userInfoComponentS.UnitId = id;
                         userInfoComponentS.AccInfoID = accountId;
                         userInfoComponentS.PlayerName = createRoleInfo.PlayerName;
+                        userInfoComponentS.Lv = 1;
                     }
 
                     if (unit.GetComponent<NumericComponentS>() == null)
