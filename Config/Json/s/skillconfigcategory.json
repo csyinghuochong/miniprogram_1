@@ -609,8 +609,8 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": 4,
+    "PassiveSkillPro": 1,
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 0,
     "SkillLiveTime": 3600000,
@@ -632,5 +632,296 @@
       0
     ],
     "SkillDescribe": "提升自身20%攻击速度和暴击率。"
+  },
+  {
+    "Id": 30000010,
+    "SkillName": "冰霜新星",
+    "SkillIcon": "30000010",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 2,
+    "PassiveSkillPro": 0.2,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 4000,
+    "ActDamage": 2,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_2",
+    "SkillMusic": "dao",
+    "SkillTargetType": 1,
+    "DamageRangeType": 1,
+    "DamageRange": [
+      3
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000017,
+      10000018
+    ],
+    "SkillDescribe": "立即对目标及其周围的单位造成200%伤害,并且使其移动速度和攻击速度降低50%,持续4秒。"
+  },
+  {
+    "Id": 30000011,
+    "SkillName": "冰封禁制",
+    "SkillIcon": "30000011",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 2,
+    "PassiveSkillPro": 0.2,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 3000,
+    "ActDamage": 0.5,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 2,
+    "DamageRangeType": 0,
+    "DamageRange": [
+      0
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000019,
+      10000020
+    ],
+    "SkillDescribe": "将当前目标锁定在冰块之中,使其不能移动和攻击，并且造成每秒50%伤害的冻伤效果,持续3秒。"
+  },
+  {
+    "Id": 30000012,
+    "SkillName": "辉煌光环",
+    "SkillIcon": "30000012",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 4,
+    "PassiveSkillPro": 1,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 0,
+    "SkillLiveTime": 3600000,
+    "ActDamage": 0,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_2",
+    "SkillMusic": "dao",
+    "SkillTargetType": 5,
+    "DamageRangeType": 0,
+    "DamageRange": [
+      0
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000021
+    ],
+    "SkillDescribe": "提升场内所有队友的怒气恢复速度,每秒恢复1点。"
+  },
+  {
+    "Id": 30000013,
+    "SkillName": "洗礼",
+    "SkillIcon": "30000013",
+    "SkillActType": 1,
+    "DamageType": 1,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 5,
+    "PassiveSkillPro": 0.6,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 3000,
+    "ActDamage": 1,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 1,
+    "DamageRangeType": 1,
+    "DamageRange": [
+      3
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000022
+    ],
+    "SkillDescribe": "立即恢复一个友方20%的最大生命值,并对其附近单位造成100%伤害。"
+  },
+  {
+    "Id": 30000014,
+    "SkillName": "驱逐",
+    "SkillIcon": "30000014",
+    "SkillActType": 1,
+    "DamageType": 1,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 5,
+    "PassiveSkillPro": 0.3,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 3000,
+    "ActDamage": 0,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 2,
+    "DamageRangeType": 0,
+    "DamageRange": [
+      0
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000023
+    ],
+    "SkillDescribe": "当己方有队友血量下降到30%后会激励保护其免受后面4次的攻击或技能伤害。"
+  },
+  {
+    "Id": 30000015,
+    "SkillName": "退化光环",
+    "SkillIcon": "30000015",
+    "SkillActType": 1,
+    "DamageType": 1,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 4,
+    "PassiveSkillPro": 1,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 0,
+    "SkillLiveTime": 3600000,
+    "ActDamage": 0,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 0,
+    "DamageRangeType": 1,
+    "DamageRange": [
+      4
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000024,
+      10000025
+    ],
+    "SkillDescribe": "对附近单位造成退化效果,使其移动速度降低25%,并使其造成伤害降低10%。"
+  },
+  {
+    "Id": 30000016,
+    "SkillName": "致命链接",
+    "SkillIcon": "30000016",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 2,
+    "PassiveSkillPro": 0.2,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 5000,
+    "ActDamage": 0.1,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 6,
+    "DamageRangeType": 0,
+    "DamageRange": [
+      0
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [],
+    "BuffID": [],
+    "SkillDescribe": "将敌方所有目标链接到一起,其中任意一个受到伤害,其他所有单位都额外承受当前伤害的10%,持续5秒。"
+  },
+  {
+    "Id": 30000017,
+    "SkillName": "暗言术",
+    "SkillIcon": "30000017",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 0,
+    "PassiveSkillType": 0,
+    "PassiveSkillPro": 0,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 5000,
+    "ActDamage": 0,
+    "DamgeValue": 0,
+    "SkillAnimation": "",
+    "SkillMusic": "",
+    "SkillTargetType": 0,
+    "DamageRangeType": 0,
+    "DamageRange": [],
+    "SkillHitEffectID": 0,
+    "InitBuffID": [],
+    "BuffID": [],
+    "SkillDescribe": "释放强大的魔法治疗一个队友或伤害一个敌人,使其每秒造成60%伤害或每秒恢复2.5%最大生命生命,持续5秒。"
+  },
+  {
+    "Id": 30000018,
+    "SkillName": "剧变",
+    "SkillIcon": "30000018",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "",
+    "GameObjectParameter": "",
+    "SkillType": 2,
+    "PassiveSkillType": 2,
+    "PassiveSkillPro": 0.2,
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 10,
+    "SkillLiveTime": 3000,
+    "ActDamage": 0,
+    "DamgeValue": 0,
+    "SkillAnimation": "Test_3",
+    "SkillMusic": "dao",
+    "SkillTargetType": 1,
+    "DamageRangeType": 1,
+    "DamageRange": [
+      4
+    ],
+    "SkillHitEffectID": 10000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000026,
+      10000027
+    ],
+    "SkillDescribe": "对一个区域进行施法,使其攻击速度和移动速度降低至50%,持续3秒。"
   }
 ]

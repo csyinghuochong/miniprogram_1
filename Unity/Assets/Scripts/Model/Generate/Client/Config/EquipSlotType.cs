@@ -40,9 +40,9 @@ namespace ET
         Xianglian = 5,
 
         /// <summary>
-        /// 1号武器孔位
+        /// 武器孔位
         /// </summary>
-        Wuqi_1 = 6,
+        Wuqi = 6,
 
         /// <summary>
         /// 2号武器孔位(危境有个英雄可以装2个武器)
