@@ -26,10 +26,13 @@ namespace ET.Client
 
         private static async ETTask OnClick(this UICommonItem self)
         {
-            UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
-            if (uI != null)
+            if (self.Parent is UIBagComponent)
             {
-                uI.GetComponent<UIItemTipComponent>().UpdateInfo(self.ItemId);
+                UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
+                if (uI != null)
+                {
+                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(self.ItemId);
+                }
             }
         }
 
@@ -37,15 +40,14 @@ namespace ET.Client
         {
             self.ItemId = item.Id;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-            
+
             self.Text_ItemNum.SetTextFormat("{0}", item.Num);
-            
+
             string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, itemConfig.ItemQuality.ToString());
-            self.Image_ItemQuality.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
-            
+            self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            self.Image_ItemIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-            
+            self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
         }
     }
 }

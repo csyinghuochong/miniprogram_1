@@ -22,15 +22,21 @@ namespace ET
             MonsterType = _buf.ReadInt();
             MonsterModelID = _buf.ReadInt();
             ChallengeTime = _buf.ReadInt();
-            ActDistance = _buf.ReadInt();
             ActSkillID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
+            Lv = _buf.ReadInt();
+            MoveSpeed = _buf.ReadDouble();
+            ActDistance = _buf.ReadDouble();
+            AtkSpeed = _buf.ReadDouble();
+            Hp = _buf.ReadInt();
             Act = _buf.ReadInt();
             Def = _buf.ReadInt();
-            Hp = _buf.ReadInt();
-            AtkSpeed = _buf.ReadDouble();
-            MoveSpeed = _buf.ReadDouble();
+            Adf = _buf.ReadInt();
             Cri = _buf.ReadDouble();
+            ReCri = _buf.ReadDouble();
+            Eva = _buf.ReadDouble();
+            Hit = _buf.ReadDouble();
+            HitLess = _buf.ReadDouble();
             MonsterDescription = _buf.ReadString();
 
             PostInit();
@@ -72,11 +78,6 @@ namespace ET
         public readonly int ChallengeTime;
 
         /// <summary>
-        /// 攻击距离
-        /// </summary>
-        public readonly int ActDistance;
-
-        /// <summary>
         /// 普通攻击ID
         /// </summary>
         public readonly int ActSkillID;
@@ -87,34 +88,69 @@ namespace ET
         public readonly int[] SkillID;
 
         /// <summary>
+        /// 怪物等级
+        /// </summary>
+        public readonly int Lv;
+
+        /// <summary>
+        /// 移动速度
+        /// </summary>
+        public readonly double MoveSpeed;
+
+        /// <summary>
+        /// 攻击距离
+        /// </summary>
+        public readonly double ActDistance;
+
+        /// <summary>
+        /// 攻击速度
+        /// </summary>
+        public readonly double AtkSpeed;
+
+        /// <summary>
+        /// 怪物生命
+        /// </summary>
+        public readonly int Hp;
+
+        /// <summary>
         /// 攻击
         /// </summary>
         public readonly int Act;
 
         /// <summary>
-        /// 防御
+        /// 物理防御
         /// </summary>
         public readonly int Def;
 
         /// <summary>
-        /// 生命
+        /// 魔法防御
         /// </summary>
-        public readonly int Hp;
-
-        /// <summary>
-        /// 攻速
-        /// </summary>
-        public readonly double AtkSpeed;
-
-        /// <summary>
-        /// 移速
-        /// </summary>
-        public readonly double MoveSpeed;
+        public readonly int Adf;
 
         /// <summary>
         /// 暴击概率
         /// </summary>
         public readonly double Cri;
+
+        /// <summary>
+        /// 抗爆概率
+        /// </summary>
+        public readonly double ReCri;
+
+        /// <summary>
+        /// 闪避概率
+        /// </summary>
+        public readonly double Eva;
+
+        /// <summary>
+        /// 命中概率
+        /// </summary>
+        public readonly double Hit;
+
+        /// <summary>
+        /// 伤害减免
+        /// </summary>
+        public readonly double HitLess;
 
         /// <summary>
         /// 怪物简介
@@ -143,6 +179,12 @@ namespace ET
             
             
             
+            
+            
+            
+            
+            
+            
         }
 
         public override string ToString()
@@ -154,15 +196,21 @@ namespace ET
             + "MonsterType:" + MonsterType + ","
             + "MonsterModelID:" + MonsterModelID + ","
             + "ChallengeTime:" + ChallengeTime + ","
-            + "ActDistance:" + ActDistance + ","
             + "ActSkillID:" + ActSkillID + ","
             + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
+            + "Lv:" + Lv + ","
+            + "MoveSpeed:" + MoveSpeed + ","
+            + "ActDistance:" + ActDistance + ","
+            + "AtkSpeed:" + AtkSpeed + ","
+            + "Hp:" + Hp + ","
             + "Act:" + Act + ","
             + "Def:" + Def + ","
-            + "Hp:" + Hp + ","
-            + "AtkSpeed:" + AtkSpeed + ","
-            + "MoveSpeed:" + MoveSpeed + ","
+            + "Adf:" + Adf + ","
             + "Cri:" + Cri + ","
+            + "ReCri:" + ReCri + ","
+            + "Eva:" + Eva + ","
+            + "Hit:" + Hit + ","
+            + "HitLess:" + HitLess + ","
             + "MonsterDescription:" + MonsterDescription + ","
             + "}";
         }

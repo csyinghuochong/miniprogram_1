@@ -16,7 +16,7 @@ namespace ET.Client
             self.Rigidbody = gameObjectComponent.GameObject.GetComponent<Rigidbody>();
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            self.AttackRange = monsterConfig.ActDistance;
+            self.AttackRange = (float)monsterConfig.ActDistance;
             self.MoveSpeed = (float)monsterConfig.MoveSpeed;
         }
 

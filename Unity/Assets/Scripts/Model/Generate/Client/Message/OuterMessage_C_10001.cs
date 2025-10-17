@@ -2653,6 +2653,9 @@ namespace ET
         [MemoryPackOrder(4)]
         public int Star { get; set; }
 
+        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [MemoryPackOrder(5)]
+        public Dictionary<int, long> Equipments { get; set; } = new();
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2665,6 +2668,7 @@ namespace ET
             this.Lv = default;
             this.Exp = default;
             this.Star = default;
+            this.Equipments.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -2839,6 +2843,80 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.Formation.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SetHeroEquipment)]
+    [ResponseType(nameof(M2C_SetHeroEquipment))]
+    public partial class C2M_SetHeroEquipment : MessageObject, ILocationRequest
+    {
+        public static C2M_SetHeroEquipment Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SetHeroEquipment), isFromPool) as C2M_SetHeroEquipment;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// 0穿上 1卸下
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public int OpType { get; set; }
+
+        [MemoryPackOrder(4)]
+        public long HeroId { get; set; }
+
+        [MemoryPackOrder(5)]
+        public long ItemId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.OpType = default;
+            this.HeroId = default;
+            this.ItemId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SetHeroEquipment)]
+    public partial class M2C_SetHeroEquipment : MessageObject, ILocationResponse
+    {
+        public static M2C_SetHeroEquipment Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SetHeroEquipment), isFromPool) as M2C_SetHeroEquipment;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -3034,8 +3112,10 @@ namespace ET
         public const ushort M2C_HeroUpdateOp = 10075;
         public const ushort C2M_SetHeroFormation = 10076;
         public const ushort M2C_SetHeroFormation = 10077;
-        public const ushort M2C_RoleDataUpdate = 10078;
-        public const ushort C2M_GetUserInfo = 10079;
-        public const ushort M2C_GetUserInfo = 10080;
+        public const ushort C2M_SetHeroEquipment = 10078;
+        public const ushort M2C_SetHeroEquipment = 10079;
+        public const ushort M2C_RoleDataUpdate = 10080;
+        public const ushort C2M_GetUserInfo = 10081;
+        public const ushort M2C_GetUserInfo = 10082;
     }
 }

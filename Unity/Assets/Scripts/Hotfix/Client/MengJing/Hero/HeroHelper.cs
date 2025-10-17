@@ -48,6 +48,18 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> SetHeroEquipment(Scene root, int opType, long heroId, long itemId)
+        {
+            C2M_SetHeroEquipment request = C2M_SetHeroEquipment.Create();
+            request.OpType = opType;
+            request.HeroId = heroId;
+            request.ItemId = itemId;
+
+            M2C_SetHeroEquipment response = (M2C_SetHeroEquipment)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
+
         public static void Test_CreateMyHeroes(Scene root)
         {
             Unit hero_1 = UnitFactory.CreateHero(root.CurrentScene(), 10000001);

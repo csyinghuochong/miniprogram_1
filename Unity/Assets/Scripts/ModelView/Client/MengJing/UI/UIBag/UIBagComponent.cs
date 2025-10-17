@@ -8,6 +8,7 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIBagComponent : Entity, IAwake, IDestroy
     {
+        public int CurrentPage { get; set; } = 0;
         public List<UICommonItem> UICommonItemList { get; set; } = new();
 
         public TMP_Text Text_Type_Gold;

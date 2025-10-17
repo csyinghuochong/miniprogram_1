@@ -1,4 +1,8 @@
-﻿namespace ET
+﻿using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
+
+namespace ET
 {
     public enum HeroOpType
     {
@@ -13,6 +17,7 @@
         Archer = 2, //射手
         Mage = 3, //法师
     }
+    
 
     [ChildOf]
     public class Hero : Entity, IAwake, IDestroy, ISerializeToEntity
@@ -21,5 +26,8 @@
         public int Lv { get; set; }
         public int Exp { get; set; }
         public int Star { get; set; }
+
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+        public Dictionary<int, long> Equipments { get; set; } = new();
     }
 }

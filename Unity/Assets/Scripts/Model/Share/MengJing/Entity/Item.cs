@@ -17,7 +17,7 @@
     {
         None = 0, //无类型
         Bag = 1, //背包
-        HeroEquip = 2, //宠物装备
+        HeroEquipment = 2, //英雄装备
     }
 
     [ChildOf]

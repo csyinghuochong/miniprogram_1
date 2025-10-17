@@ -99,7 +99,7 @@ namespace ET.Client
 
             if (skillCdItem.CD > 0)
             {
-                return ErrorCode.ERR_UseSkillInCD3;
+                return ErrorCode.ERR_UseSkillInCD;
             }
 
             return ErrorCode.ERR_Success;

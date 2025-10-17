@@ -140,29 +140,7 @@ namespace ET
         public const int PetHeXin = 5;
     }
 
-    //装备类型细分
-    //0:通用
-    //1:剑
-    //2:刀
-    //3:法杖
-    //4:魔法书
-    //5:弓手
-    //11:布甲
-    //12:轻甲
-    //13:重甲
-    public static class ItemEquipType
-    {
-        public const int Common = 0;
-        public const int Sword = 1;
-        public const int Knife = 2;
-        public const int Wand = 3;
-        public const int Book = 4;
-        public const int Bow = 5;
 
-        public const int Bujia = 11;
-        public const int QingJia = 12;
-        public const int ZhongJia = 13;
-    }
 
     //道具存放位置
     //0背包

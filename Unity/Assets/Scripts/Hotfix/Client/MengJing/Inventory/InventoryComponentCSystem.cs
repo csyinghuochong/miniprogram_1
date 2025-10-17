@@ -30,12 +30,7 @@ namespace ET.Client
             item.FromMessage(itemInfo);
             self.Items.Add(item.Id, item);
 
-            // EventSystem.Instance.Publish(self.Root(), new ClientInventoryContainerUpdate()
-            // {
-            //     ItemOpType = ItemOpType.Add,
-            //     InventoryContainerType = self.InventoryContainerType,
-            //     ItemId = itemInfo.Id
-            // });
+            EventSystem.Instance.Publish(self.Root(), new InventoryUpdate());
         }
 
         public static void RemoveItemById(this InventoryComponentC self, long itemId)
@@ -50,12 +45,7 @@ namespace ET.Client
             self.Items.Remove(itemId);
             item?.Dispose();
 
-            // EventSystem.Instance.Publish(self.Root(), new ClientInventoryContainerUpdate()
-            // {
-            //     ItemOpType = ItemOpType.Remove,
-            //     InventoryContainerType = self.InventoryContainerType,
-            //     ItemId = itemId
-            // });
+            EventSystem.Instance.Publish(self.Root(), new InventoryUpdate());
         }
 
         public static void UpdateItem(this InventoryComponentC self, ItemInfo itemInfo)
@@ -69,12 +59,7 @@ namespace ET.Client
             Item item = itemRef;
             item.FromMessage(itemInfo);
 
-            // EventSystem.Instance.Publish(self.Root(), new ClientInventoryContainerUpdate()
-            // {
-            //     ItemOpType = ItemOpType.Update,
-            //     InventoryContainerType = self.InventoryContainerType,
-            //     ItemId = itemInfo.Id
-            // });
+            EventSystem.Instance.Publish(self.Root(), new InventoryUpdate());
         }
 
         public static void Clear(this InventoryComponentC self)
@@ -98,28 +83,35 @@ namespace ET.Client
             return items;
         }
 
-        public static List<Item> GetItemsByType(this InventoryComponentC self, ItemType type)
+        public static List<Item> GetItemsByContainer(this InventoryComponentC self, InventoryContainerType containerType)
         {
             List<Item> items = new();
             foreach (Item item in self.Items.Values)
             {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-
-                if (itemConfig.ItemType == (int)type)
+                if (item.ContainerType != (int)containerType)
                 {
-                    items.Add(item);
+                    continue;
                 }
+
+                items.Add(item);
             }
 
             return items;
         }
 
-        public static List<Item> GetItemsByContainerType(this InventoryComponentC self, InventoryContainerType containerType)
+        public static List<Item> GetItemsByType(this InventoryComponentC self, ItemType type, InventoryContainerType containerType)
         {
             List<Item> items = new();
             foreach (Item item in self.Items.Values)
             {
-                if (item.ContainerType == (int)containerType)
+                if (item.ContainerType != (int)containerType)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+                if (itemConfig.ItemType == (int)type)
                 {
                     items.Add(item);
                 }

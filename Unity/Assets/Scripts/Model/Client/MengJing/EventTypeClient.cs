@@ -11,7 +11,7 @@ namespace ET.Client
         public string OldString;
         public string NewString;
     }
-    
+
     public struct ShowFlyTip
     {
         /// <summary>
@@ -33,6 +33,10 @@ namespace ET.Client
     }
 
     public struct HeroFormationUpdate
+    {
+    }
+
+    public struct InventoryUpdate
     {
     }
 }

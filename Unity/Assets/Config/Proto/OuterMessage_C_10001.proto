@@ -584,6 +584,7 @@ message HeroInfo
 	int32 Lv = 3;
 	int32 Exp = 4;
 	int32 Star = 5;
+	map<int32,int64> Equipments = 6;
 }
 
 // ResponseType M2C_GetAllHero
@@ -622,6 +623,22 @@ message M2C_SetHeroFormation // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 	repeated int64 Formation = 4;
+}
+
+// ResponseType M2C_SetHeroEquipment
+message C2M_SetHeroEquipment // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 OpType = 2; //0穿上 1卸下
+	int64 HeroId = 5;
+	int64 ItemId = 6;
+}
+
+message M2C_SetHeroEquipment // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
 }
 
 message M2C_RoleDataUpdate // IMessage

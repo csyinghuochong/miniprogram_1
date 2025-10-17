@@ -37,6 +37,24 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class InventoryUpdate_UIBagRefresh : AEvent<Scene, InventoryUpdate>
+    {
+        protected override async ETTask Run(Scene scene, InventoryUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIBag);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIBagComponent uiBagComponent = ui.GetComponent<UIBagComponent>();
+            uiBagComponent.UpdateItemList(uiBagComponent.CurrentPage);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIBagComponent))]
     [FriendOf(typeof(UIBagComponent))]
     public static partial class UIBagComponentSystem
@@ -77,6 +95,7 @@ namespace ET.Client
 
         private static void SetShowType(this UIBagComponent self, int page)
         {
+            self.CurrentPage = page;
             self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 0);
             self.Button_Type_All.transform.Find("Image_Off").gameObject.SetActive(page != 0);
             self.Button_Type_Consume.transform.Find("Image_On").gameObject.SetActive(page == 1);
@@ -89,26 +108,26 @@ namespace ET.Client
             self.UpdateItemList(page);
         }
 
-        private static void UpdateItemList(this UIBagComponent self, int page)
+        public static void UpdateItemList(this UIBagComponent self, int page)
         {
             InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
 
             List<Item> itemList = null;
             if (page == 0)
             {
-                itemList = inventoryComponentC.GetAllItems();
+                itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Bag);
             }
             else if (page == 1)
             {
-                itemList = inventoryComponentC.GetItemsByType(ItemType.Consume);
+                itemList = inventoryComponentC.GetItemsByType(ItemType.Consume, InventoryContainerType.Bag);
             }
             else if (page == 2)
             {
-                itemList = inventoryComponentC.GetItemsByType(ItemType.Equipment);
+                itemList = inventoryComponentC.GetItemsByType(ItemType.Equipment, InventoryContainerType.Bag);
             }
             else if (page == 3)
             {
-                itemList = inventoryComponentC.GetItemsByType(ItemType.Material);
+                itemList = inventoryComponentC.GetItemsByType(ItemType.Material, InventoryContainerType.Bag);
             }
             else
             {
