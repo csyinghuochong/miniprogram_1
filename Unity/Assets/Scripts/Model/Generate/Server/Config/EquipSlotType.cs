@@ -14,6 +14,8 @@ namespace ET
     /// </summary>
     public enum EquipSlotType
     {
+        None = 0,
+
         /// <summary>
         /// 头盔孔位
         /// </summary>
