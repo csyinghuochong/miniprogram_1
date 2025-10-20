@@ -48,10 +48,8 @@ namespace ET.Client
             self.GameObject = gameObject;
             Unit unit = self.GetParent<Unit>();
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-
-            self.Image_Hp = rc.Get<GameObject>("Image_Hp").GetComponent<Image>();
-            self.Text_Hp = rc.Get<GameObject>("Text_Hp").GetComponent<TMP_Text>();
-            self.Text_Name = rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>();
+            
+            self.Slider_MonsterHp = rc.Get<GameObject>("Slider_MonsterHp").GetComponent<Slider>();
 
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             GameObject bloodparent = globalComponent.BloodMonster;
@@ -75,7 +73,6 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            self.Text_Name.SetText(monsterConfig.MonsterName);
         }
 
         public static void UpdateBlood(this UIMonsterHpComponent self)
@@ -86,8 +83,7 @@ namespace ET.Client
             float blood = currentHp * 1f / maxHp;
             blood = Mathf.Max(blood, 0f);
 
-            self.Image_Hp.fillAmount = blood;
-            self.Text_Hp.SetTextFormat("{0}/{1}", currentHp, maxHp);
+            self.Slider_MonsterHp.value = blood;
         }
     }
 }

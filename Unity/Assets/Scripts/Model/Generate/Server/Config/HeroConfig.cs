@@ -35,8 +35,8 @@ namespace ET
             BaseEva = _buf.ReadDouble();
             BaseHit = _buf.ReadDouble();
             BaseHitLess = _buf.ReadDouble();
-            BaseMoveSpeed = _buf.ReadInt();
-            BaseAtkSpeed = _buf.ReadInt();
+            BaseMoveSpeed = _buf.ReadDouble();
+            BaseAtkSpeed = _buf.ReadDouble();
             AtkDistance = _buf.ReadDouble();
             LvHp = _buf.ReadDouble();
             LvAct = _buf.ReadDouble();
@@ -150,12 +150,12 @@ namespace ET
         /// <summary>
         /// 移动速度
         /// </summary>
-        public readonly int BaseMoveSpeed;
+        public readonly double BaseMoveSpeed;
 
         /// <summary>
         /// 攻击速度
         /// </summary>
-        public readonly int BaseAtkSpeed;
+        public readonly double BaseAtkSpeed;
 
         /// <summary>
         /// 攻击距离
