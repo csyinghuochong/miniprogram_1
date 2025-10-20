@@ -31,16 +31,22 @@ namespace ET.Client
                 UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
                 if (uI != null)
                 {
-                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(self.ItemId);
+                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData() { ItemId = self.ItemId });
                 }
             }
 
             if (self.Parent is UIHeroComponent)
             {
+                UIHeroComponent uiHeroComponent = self.Parent as UIHeroComponent;
                 UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
                 if (uI != null)
                 {
-                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(self.ItemId);
+                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
+                    {
+                        ItemId = self.ItemId,
+                        ItemTipOpType = ItemTipOpType.UIHero_Wear,
+                        HeroId = uiHeroComponent.CurrentHeroId
+                    });
                 }
             }
         }

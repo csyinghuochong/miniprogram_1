@@ -22,6 +22,10 @@ namespace ET.Client
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Wear = rc.Get<GameObject>("Button_Wear").GetComponent<Button>();
             self.Button_TakeOff = rc.Get<GameObject>("Button_TakeOff").GetComponent<Button>();
+
+            self.Button_Sell.gameObject.SetActive(false);
+            self.Button_Wear.gameObject.SetActive(false);
+            self.Button_TakeOff.gameObject.SetActive(false);
         }
 
         [EntitySystem]
@@ -29,11 +33,11 @@ namespace ET.Client
         {
         }
 
-        public static void UpdateInfo(this UIItemTip_EquipmentComponent self, long itemId)
+        public static void UpdateInfo(this UIItemTip_EquipmentComponent self, UIItemTipData uiItemTipData)
         {
-            self.ItemId = itemId;
+            self.UIItemTipData = uiItemTipData;
 
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(itemId);
+            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
 
@@ -51,6 +55,25 @@ namespace ET.Client
             self.Text_ItemName.SetText(itemConfig.ItemName);
             self.Text_ItemEquipmentType.SetText(type);
             self.Text_Lv.SetTextFormat("{0}级", 0);
+
+            if (uiItemTipData.ItemTipOpType == ItemTipOpType.UIHero_Wear)
+            {
+                self.Button_Sell.gameObject.SetActive(true);
+                self.Button_Wear.gameObject.SetActive(true);
+
+                self.Button_Wear.AddListener(self.OnButton_Wear);
+            }
+        }
+
+        private static void OnButton_Wear(this UIItemTip_EquipmentComponent self)
+        {
+            HeroHelper.SetHeroEquipment(self.Root(), 0, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnClose(this UIItemTip_EquipmentComponent self)
+        {
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
     }
 }

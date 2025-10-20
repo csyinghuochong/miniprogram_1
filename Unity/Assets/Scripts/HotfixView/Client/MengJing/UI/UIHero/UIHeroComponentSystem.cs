@@ -44,7 +44,7 @@ namespace ET.Client
 
     [EntitySystemOf(typeof(UIHeroComponent))]
     [FriendOf(typeof(UIHeroComponent))]
-    public static partial class UITeamComponentSystem
+    public static partial class UIHeroComponentSystem
     {
         [EntitySystem]
         private static void Awake(this UIHeroComponent self)

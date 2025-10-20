@@ -39,4 +39,16 @@ namespace ET.Client
     public struct InventoryUpdate
     {
     }
+
+    public struct UIItemTip_Sell
+    {
+    }
+
+    public struct UIItemTip_Wear
+    {
+    }
+
+    public struct UIItemTip_TakeOff
+    {
+    }
 }

@@ -6,7 +6,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(UIHeroListComponent))]
     [FriendOf(typeof(UIHeroListComponent))]
-    public static partial class UIHeroComponentSystem
+    public static partial class UIHeroListComponentSystem
     {
         [EntitySystem]
         private static void Awake(this UIHeroListComponent self)

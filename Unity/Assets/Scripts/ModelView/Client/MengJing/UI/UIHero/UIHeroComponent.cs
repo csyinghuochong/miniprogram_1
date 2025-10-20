@@ -8,7 +8,7 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIHeroComponent : Entity, IAwake, IDestroy
     {
-        public long CurrentHeroId;
+        public long CurrentHeroId { get; set; }
         public List<UICommonItem> UICommonItemList { get; set; } = new();
         public List<UITeamItem> UITeamItemList { get; set; } = new();
 
