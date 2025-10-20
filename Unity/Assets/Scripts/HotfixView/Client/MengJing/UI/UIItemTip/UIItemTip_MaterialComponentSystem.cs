@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(UIItemTip_NormalComponent))]
-    [FriendOf(typeof(UIItemTip_NormalComponent))]
-    public static partial class UIItemTip_NormalComponentSystem
+    [EntitySystemOf(typeof(UIItemTip_MaterialComponent))]
+    [FriendOf(typeof(UIItemTip_MaterialComponent))]
+    public static partial class UIItemTip_MaterialComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this UIItemTip_NormalComponent self, GameObject gameObject)
+        private static void Awake(this UIItemTip_MaterialComponent self, GameObject gameObject)
         {
             self.GameObject = gameObject;
 
@@ -17,17 +17,17 @@ namespace ET.Client
 
             self.Text_ItemName = rc.Get<GameObject>("Text_ItemName").GetComponent<TMP_Text>();
             self.Text_ItemDescription = rc.Get<GameObject>("Text_ItemDescription").GetComponent<TMP_Text>();
-            self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
+            self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
 
-            self.Button_Use.onClick.AddListener(() => { Log.Warning("使用道具"); });
+            self.Button_Sell.onClick.AddListener(() => { Log.Warning("出售道具"); });
         }
 
         [EntitySystem]
-        private static void Destroy(this UIItemTip_NormalComponent self)
+        private static void Destroy(this UIItemTip_MaterialComponent self)
         {
         }
         
-        public static void UpdateInfo(this UIItemTip_NormalComponent self, long itemId)
+        public static void UpdateInfo(this UIItemTip_MaterialComponent self, long itemId)
         {
             self.ItemId = itemId;
 
@@ -37,7 +37,6 @@ namespace ET.Client
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
                 self.Text_ItemName.text = itemConfig.ItemName;
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
-                self.Button_Use.gameObject.SetActive(itemConfig.ItemType == (int)ItemType.Consume);
             }
         }
     }

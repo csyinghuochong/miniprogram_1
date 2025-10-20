@@ -22,6 +22,8 @@ namespace ET
             ItemQuality = _buf.ReadInt();
             ItemType = _buf.ReadInt();
             ItemSubType = _buf.ReadInt();
+            SellMoneyType = _buf.ReadInt();
+            SellMoneyValue = _buf.ReadInt();
             ItemPileSum = _buf.ReadInt();
             ItemEquipID = _buf.ReadInt();
             ItemDescription = _buf.ReadString();
@@ -65,6 +67,16 @@ namespace ET
         public readonly int ItemSubType;
 
         /// <summary>
+        /// 出售货币类型
+        /// </summary>
+        public readonly int SellMoneyType;
+
+        /// <summary>
+        /// 出售货币值
+        /// </summary>
+        public readonly int SellMoneyValue;
+
+        /// <summary>
         /// 道具堆叠最大数量
         /// </summary>
         public readonly int ItemPileSum;
@@ -94,6 +106,8 @@ namespace ET
             
             
             
+            
+            
         }
 
         public override string ToString()
@@ -105,6 +119,8 @@ namespace ET
             + "ItemQuality:" + ItemQuality + ","
             + "ItemType:" + ItemType + ","
             + "ItemSubType:" + ItemSubType + ","
+            + "SellMoneyType:" + SellMoneyType + ","
+            + "SellMoneyValue:" + SellMoneyValue + ","
             + "ItemPileSum:" + ItemPileSum + ","
             + "ItemEquipID:" + ItemEquipID + ","
             + "ItemDescription:" + ItemDescription + ","

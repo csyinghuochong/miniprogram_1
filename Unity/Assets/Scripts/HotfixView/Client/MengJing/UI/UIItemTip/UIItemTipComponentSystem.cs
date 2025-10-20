@@ -14,10 +14,12 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
-            self.UIItemTip_NormalComponent = self.AddComponent<UIItemTip_NormalComponent, GameObject>(rc.Get<GameObject>("UIItemTip_Normal"));
+            self.UIItemTip_ConsumeComponent = self.AddComponent<UIItemTip_ConsumeComponent, GameObject>(rc.Get<GameObject>("UIItemTip_Consume"));
+            self.UIItemTip_MaterialComponent = self.AddComponent<UIItemTip_MaterialComponent, GameObject>(rc.Get<GameObject>("UIItemTip_Material"));
             self.UIItemTip_EquipmentComponent = self.AddComponent<UIItemTip_EquipmentComponent, GameObject>(rc.Get<GameObject>("UIItemTip_Equipment"));
 
-            self.UIItemTip_NormalComponent.GameObject.SetActive(false);
+            self.UIItemTip_ConsumeComponent.GameObject.SetActive(false);
+            self.UIItemTip_MaterialComponent.GameObject.SetActive(false);
             self.UIItemTip_EquipmentComponent.GameObject.SetActive(false);
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip); });
         }
@@ -33,10 +35,16 @@ namespace ET.Client
             if (item != null)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-                if (itemConfig.ItemType == (int)ItemType.Consume || itemConfig.ItemType == (int)ItemType.Material)
+                if (itemConfig.ItemType == (int)ItemType.Consume)
                 {
-                    self.UIItemTip_NormalComponent.GameObject.SetActive(true);
-                    self.UIItemTip_NormalComponent.UpdateInfo(itemId);
+                    self.UIItemTip_ConsumeComponent.GameObject.SetActive(true);
+                    self.UIItemTip_ConsumeComponent.UpdateInfo(itemId);
+                }
+
+                if (itemConfig.ItemType == (int)ItemType.Material)
+                {
+                    self.UIItemTip_MaterialComponent.GameObject.SetActive(true);
+                    self.UIItemTip_MaterialComponent.UpdateInfo(itemId);
                 }
 
                 if (itemConfig.ItemType == (int)ItemType.Equipment)

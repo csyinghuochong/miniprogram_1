@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf]
-    public class UIItemTip_NormalComponent : Entity, IAwake<GameObject>, IDestroy
+    public class UIItemTip_MaterialComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public long ItemId;
 
@@ -13,6 +13,6 @@ namespace ET.Client
 
         public TMP_Text Text_ItemName;
         public TMP_Text Text_ItemDescription;
-        public Button Button_Use;
+        public Button Button_Sell;
     }
 }

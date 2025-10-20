@@ -6,6 +6,8 @@
     "ItemQuality": 3,
     "ItemType": 1,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 100,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
     "ItemDescription": "一种货币"
@@ -17,6 +19,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 200,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
     "ItemDescription": "更加有价值的货币"
@@ -28,6 +32,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 300,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
     "ItemDescription": "角色经验值"
@@ -39,6 +45,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 400,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
     "ItemDescription": "吞噬魔物必备的消耗品"
@@ -50,6 +58,8 @@
     "ItemQuality": 4,
     "ItemType": 1,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 500,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
     "ItemDescription": "联盟贡献度可以在联盟商店中兑换商品"
@@ -61,6 +71,8 @@
     "ItemQuality": 6,
     "ItemType": 1,
     "ItemSubType": 3,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 600,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "打开后从以下红色技能中随机获取一件"
@@ -72,6 +84,8 @@
     "ItemQuality": 6,
     "ItemType": 1,
     "ItemSubType": 4,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 700,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "打开后从以下红色技能中自选一件"
@@ -83,6 +97,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 6,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 800,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "可以在招募中心召唤随从"
@@ -94,6 +110,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 5,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 900,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "使用后永久增加攻击资质"
@@ -105,6 +123,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 5,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1000,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "使用后永久增加防御资质"
@@ -116,6 +136,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 5,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1100,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "使用后永久增加气血资质"
@@ -127,6 +149,8 @@
     "ItemQuality": 5,
     "ItemType": 1,
     "ItemSubType": 5,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1200,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "使用后永久增加闪避资质"
@@ -138,6 +162,8 @@
     "ItemQuality": 3,
     "ItemType": 1,
     "ItemSubType": 7,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1300,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
     "ItemDescription": "消耗入场券进入副本"
@@ -149,6 +175,8 @@
     "ItemQuality": 2,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1400,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
@@ -160,6 +188,8 @@
     "ItemQuality": 3,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1500,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
@@ -171,6 +201,8 @@
     "ItemQuality": 4,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1600,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
@@ -182,6 +214,8 @@
     "ItemQuality": 5,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1700,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
@@ -193,6 +227,8 @@
     "ItemQuality": 6,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1800,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "英雄碎片，合成英雄"
@@ -204,6 +240,8 @@
     "ItemQuality": 1,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1900,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "一种材料1"
@@ -215,6 +253,8 @@
     "ItemQuality": 2,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2000,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "一种材料2"
@@ -226,6 +266,8 @@
     "ItemQuality": 3,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2100,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "一种材料3"
@@ -237,6 +279,8 @@
     "ItemQuality": 4,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2200,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "一种材料4"
@@ -248,6 +292,8 @@
     "ItemQuality": 5,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2300,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "一种材料5"
@@ -259,6 +305,8 @@
     "ItemQuality": 6,
     "ItemType": 2,
     "ItemSubType": 0,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2400,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
     "ItemDescription": "一种材料6"
@@ -270,6 +318,8 @@
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 1,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2500,
     "ItemPileSum": 1,
     "ItemEquipID": 12000001,
     "ItemDescription": "这是一个装备1"
@@ -281,6 +331,8 @@
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 2,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2600,
     "ItemPileSum": 1,
     "ItemEquipID": 12000002,
     "ItemDescription": "这是一个装备2"
@@ -292,6 +344,8 @@
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 4,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2700,
     "ItemPileSum": 1,
     "ItemEquipID": 12000003,
     "ItemDescription": "这是一个装备3"
@@ -303,6 +357,8 @@
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 5,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2800,
     "ItemPileSum": 1,
     "ItemEquipID": 12000004,
     "ItemDescription": "这是一个装备4"
@@ -314,6 +370,8 @@
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 8,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2900,
     "ItemPileSum": 1,
     "ItemEquipID": 12000005,
     "ItemDescription": "这是一个装备5"
@@ -325,6 +383,8 @@
     "ItemQuality": 3,
     "ItemType": 3,
     "ItemSubType": 10,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 3000,
     "ItemPileSum": 1,
     "ItemEquipID": 12000006,
     "ItemDescription": "这是一个装备6"
