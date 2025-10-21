@@ -10,12 +10,6 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, UpdateUserData args)
         {
-            if (args.UserDataType != UserDataType.Lv &&
-                args.UserDataType != UserDataType.Exp)
-            {
-                return;
-            }
-
             UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
             {
@@ -34,6 +28,16 @@ namespace ET.Client
                 uiMainComponent.UpdateExp();
             }
 
+            if (args.UserDataType == UserDataType.Gold)
+            {
+                uiMainComponent.UpdateGold();
+            }
+
+            if (args.UserDataType == UserDataType.Diamond)
+            {
+                uiMainComponent.UpdateDiamond();
+            }
+
             await ETTask.CompletedTask;
         }
     }
@@ -50,6 +54,8 @@ namespace ET.Client
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_PlayerLv = rc.Get<GameObject>("Text_PlayerLv").GetComponent<TMP_Text>();
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
+            self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
+            self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
@@ -64,12 +70,19 @@ namespace ET.Client
 
             self.UpdatePlayerName();
             self.UpdatePlayerLv();
+            self.UpdateGold();
+            self.UpdateDiamond();
             self.UpdateExp();
             Application.targetFrameRate = 60;
         }
 
         [EntitySystem]
         private static void Update(this UIMainComponent self)
+        {
+            self.UpdateFPS();
+        }
+
+        private static void UpdateFPS(this UIMainComponent self)
         {
             self.TimeLeft -= Time.deltaTime;
             self.Accumulator += Time.timeScale / Time.deltaTime;
@@ -121,9 +134,35 @@ namespace ET.Client
         public static void UpdatePlayerLv(this UIMainComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            self.Text_PlayerLv.SetTextFormat("等级：{0}", userInfoComponent.Lv);
-            
+            self.Text_PlayerLv.SetText(userInfoComponent.Lv);
+
             self.UpdateExp();
+        }
+
+        public static void UpdateGold(this UIMainComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            if (userInfoComponent.Gold < 1000)
+            {
+                self.Text_Gold.SetText(userInfoComponent.Gold);
+            }
+            else
+            {
+                self.Text_Gold.SetTextFormat("{0}K", userInfoComponent.Gold / 1000);
+            }
+        }
+
+        public static void UpdateDiamond(this UIMainComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            if (userInfoComponent.Diamond < 1000)
+            {
+                self.Text_Diamond.SetText(userInfoComponent.Diamond);
+            }
+            else
+            {
+                self.Text_Diamond.SetTextFormat("{0}K", userInfoComponent.Diamond / 1000);
+            }
         }
 
         public static void UpdateExp(this UIMainComponent self)

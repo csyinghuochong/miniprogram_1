@@ -149,6 +149,10 @@ MonoBehaviour:
     gameObject: {fileID: 863141001273443094}
   - key: Text_FPS
     gameObject: {fileID: 3523739314070148987}
+  - key: Text_Gold
+    gameObject: {fileID: 7379980397126928414}
+  - key: Text_Diamond
+    gameObject: {fileID: 1893285141822115623}
   - key: Button_Speed
     gameObject: {fileID: 5893425352261120269}
   - key: Button_GM
@@ -1817,7 +1821,7 @@ GameObject:
   - component: {fileID: 422601228827617855}
   - component: {fileID: 2121740675352688413}
   m_Layer: 5
-  m_Name: Text_Dimond
+  m_Name: Text_Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

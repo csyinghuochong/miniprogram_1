@@ -17,6 +17,8 @@ namespace ET.Client
         public TMP_Text Text_PlayerName;
         public TMP_Text Text_PlayerLv;
         public TMP_Text Text_FPS;
+        public TMP_Text Text_Gold;
+        public TMP_Text Text_Diamond;
         public Button Button_Speed;
         public Button Button_GM;
         public Button Button_Hero;
