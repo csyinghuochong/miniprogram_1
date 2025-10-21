@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public static class InventoryHelper
+    public static class ClientInventoryHelper
     {
         public static async ETTask<int> GetAllItem(Scene root)
         {
@@ -18,6 +18,15 @@
             {
                 inventoryComponentC.AddItemFromMessage(itemInfo);
             }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> SellItem(Scene root, long itemId)
+        {
+            C2M_SellItem request = C2M_SellItem.Create();
+
+            M2C_SellItem response = (M2C_SellItem)await root.GetComponent<ClientSenderComponent>().Call(request);
 
             return response.Error;
         }

@@ -19,6 +19,7 @@
         {
         }
 
+        // 直接设置
         public static void UpdateRoleData(this UserInfoComponentS self, UserDataType type, string value, bool notice = true)
         {
             switch (type)

@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace ET.Client
 {
-    public static class HeroHelper
+    public static class ClientHeroHelper
     {
         public static async ETTask<int> GetAllHero(Scene root)
         {

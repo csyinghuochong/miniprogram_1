@@ -110,7 +110,7 @@ namespace ET.Client
                 if (currentFormation[i] == 0)
                 {
                     // 有空位直接上阵
-                    int error = await HeroHelper.SetHeroFormation(self.Root(), 0, heroId, i + 1);
+                    int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 0, heroId, i + 1);
                     if (error == ErrorCode.ERR_Success)
                     {
                         self.UpdateSlotItemList();

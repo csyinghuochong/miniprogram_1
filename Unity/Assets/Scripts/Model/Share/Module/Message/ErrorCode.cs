@@ -54,5 +54,6 @@ namespace ET
         public const int ERR_UseSkillInCD = 20131;
         public const int ERR_NotFindAccount = 20132; //账号不存在
         public const int ERR_CreateRoleName = 20133; //角色名字不合法
+        public const int ERR_NotEnoughItems = 20134; //道具不足
     }
 }

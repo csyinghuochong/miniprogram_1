@@ -19,23 +19,26 @@ namespace ET.Client
             self.Text_ItemDescription = rc.Get<GameObject>("Text_ItemDescription").GetComponent<TMP_Text>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
 
-            self.Button_Sell.onClick.AddListener(() => { self.OnButton_Sell(); });
+            self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
         }
 
         [EntitySystem]
         private static void Destroy(this UIItemTip_MaterialComponent self)
         {
         }
-        
-        private static void OnButton_Sell(this UIItemTip_MaterialComponent self)
+
+        private static async ETTask OnButton_Sell(this UIItemTip_MaterialComponent self)
         {
-            self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine();
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip);
+            UIItemSellTipComponent uiItemSellTipComponent = ui.GetComponent<UIItemSellTipComponent>();
+            uiItemSellTipComponent.UpdateInfo(self.UIItemTipData.ItemId);
+
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
-        
+
         public static void UpdateInfo(this UIItemTip_MaterialComponent self, UIItemTipData uiItemTipData)
         {
-            self.UIItemTipData =  uiItemTipData;
+            self.UIItemTipData = uiItemTipData;
 
             Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
             if (item != null)

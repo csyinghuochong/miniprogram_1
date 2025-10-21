@@ -6,6 +6,8 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIItemSellTipComponent : Entity, IAwake, IDestroy
     {
+        public long ItemId;
+        
         public TMP_InputField InputField_SellNum;
         public TMP_Text Text_SellPrice;
         

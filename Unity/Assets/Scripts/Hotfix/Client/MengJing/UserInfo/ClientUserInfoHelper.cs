@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public static class UserInfoHelper
+    public static class ClientUserInfoHelper
     {
         public static async ETTask<int> RequestGetUserInfo(Scene root)
         {

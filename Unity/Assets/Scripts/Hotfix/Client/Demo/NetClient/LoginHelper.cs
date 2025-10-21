@@ -102,9 +102,9 @@ namespace ET.Client
                     await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
                     // 重新获取一下数据
-                    await UserInfoHelper.RequestGetUserInfo(root);
-                    await InventoryHelper.GetAllItem(root);
-                    await HeroHelper.GetAllHero(root);
+                    await ClientUserInfoHelper.RequestGetUserInfo(root);
+                    await ClientInventoryHelper.GetAllItem(root);
+                    await ClientHeroHelper.GetAllHero(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

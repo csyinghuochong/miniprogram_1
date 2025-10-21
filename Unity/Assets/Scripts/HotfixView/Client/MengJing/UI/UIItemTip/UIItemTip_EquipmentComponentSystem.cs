@@ -26,17 +26,15 @@ namespace ET.Client
             self.Button_Sell.gameObject.SetActive(false);
             self.Button_Wear.gameObject.SetActive(false);
             self.Button_TakeOff.gameObject.SetActive(false);
+
+            self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
+            self.Button_Wear.AddListener(self.OnButton_Wear);
+            self.Button_TakeOff.AddListener(self.OnButton_TakeOff);
         }
 
         [EntitySystem]
         private static void Destroy(this UIItemTip_EquipmentComponent self)
         {
-        }
-
-        private static void OnButton_Sell(this UIItemTip_EquipmentComponent self)
-        {
-            self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine();
-            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
 
         public static void UpdateInfo(this UIItemTip_EquipmentComponent self, UIItemTipData uiItemTipData)
@@ -66,30 +64,32 @@ namespace ET.Client
             {
                 self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);
-
-                self.Button_Sell.AddListener(self.OnButton_Sell);
-                self.Button_Wear.AddListener(self.OnButton_Wear);
             }
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_TakeOff)
             {
-                self.Button_Sell.gameObject.SetActive(true);
                 self.Button_TakeOff.gameObject.SetActive(true);
-
-                self.Button_Sell.AddListener(self.OnButton_Sell);
-                self.Button_TakeOff.AddListener(self.OnButton_TakeOff);
             }
+        }
+
+        private static async ETTask OnButton_Sell(this UIItemTip_EquipmentComponent self)
+        {
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip);
+            UIItemSellTipComponent uiItemSellTipComponent = ui.GetComponent<UIItemSellTipComponent>();
+            uiItemSellTipComponent.UpdateInfo(self.UIItemTipData.ItemId);
+
+            self.OnClose();
         }
 
         private static void OnButton_Wear(this UIItemTip_EquipmentComponent self)
         {
-            HeroHelper.SetHeroEquipment(self.Root(), 0, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
+            ClientHeroHelper.SetHeroEquipment(self.Root(), 0, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
             self.OnClose();
         }
 
         private static void OnButton_TakeOff(this UIItemTip_EquipmentComponent self)
         {
-            HeroHelper.SetHeroEquipment(self.Root(), 1, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
+            ClientHeroHelper.SetHeroEquipment(self.Root(), 1, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
             self.OnClose();
         }
 

@@ -20,16 +20,23 @@ namespace ET.Client
             self.Button_Cancel = rc.Get<GameObject>("Button_Cancel").GetComponent<Button>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
 
-            self.Button_Cancel.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemSellTip); });
-
-
+            self.Button_Cancel.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemSellTip); });
+            self.Button_Sell.AddListener(self.OnButton_Sell);
         }
 
         [EntitySystem]
         private static void Destroy(this UIItemSellTipComponent self)
         {
         }
-        
-        
+
+        public static void UpdateInfo(this UIItemSellTipComponent self, long itemId)
+        {
+            self.ItemId = itemId;
+        }
+
+        private static void OnButton_Sell(this UIItemSellTipComponent self)
+        {
+            ClientInventoryHelper.SellItem(self.Root(), self.ItemId).Coroutine();
+        }
     }
 }

@@ -571,6 +571,22 @@ message M2C_GetAllItem // ILocationResponse
 	repeated ItemInfo ItemList = 4;
 }
 
+// ResponseType M2C_SellItem
+message C2M_SellItem // ILocationRequest
+{
+	int32 RpcId = 1;
+	int64 ItemId = 2;
+	int32 Num = 3;
+}
+
+message M2C_SellItem // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+
 message M2C_ItemUpdateOp // IMessage
 {
 	ItemInfo ItemInfo = 1;
