@@ -25,9 +25,10 @@ namespace ET
             EquipMinAct = _buf.ReadInt();
             EquipMaxAct = _buf.ReadInt();
             EquipMinDef = _buf.ReadInt();
+            EquipMaxDef = _buf.ReadInt();
+            EquipMinAdf = _buf.ReadInt();
             EquipMaxAdf = _buf.ReadInt();
-            EquipMinHp = _buf.ReadInt();
-            EquipMaxHp = _buf.ReadInt();
+            EquipHp = _buf.ReadInt();
             EquipMinAtkSpeed = _buf.ReadDouble();
             EquipMaxAtkSpeed = _buf.ReadDouble();
             EquipMinMoveSpeed = _buf.ReadDouble();
@@ -99,17 +100,22 @@ namespace ET
         /// <summary>
         /// 最高防御
         /// </summary>
+        public readonly int EquipMaxDef;
+
+        /// <summary>
+        /// 最低魔防
+        /// </summary>
+        public readonly int EquipMinAdf;
+
+        /// <summary>
+        /// 最高魔防
+        /// </summary>
         public readonly int EquipMaxAdf;
 
         /// <summary>
-        /// 最低生命
+        /// 生命
         /// </summary>
-        public readonly int EquipMinHp;
-
-        /// <summary>
-        /// 最高生命
-        /// </summary>
-        public readonly int EquipMaxHp;
+        public readonly int EquipHp;
 
         /// <summary>
         /// 最低攻速
@@ -213,6 +219,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -227,9 +234,10 @@ namespace ET
             + "EquipMinAct:" + EquipMinAct + ","
             + "EquipMaxAct:" + EquipMaxAct + ","
             + "EquipMinDef:" + EquipMinDef + ","
+            + "EquipMaxDef:" + EquipMaxDef + ","
+            + "EquipMinAdf:" + EquipMinAdf + ","
             + "EquipMaxAdf:" + EquipMaxAdf + ","
-            + "EquipMinHp:" + EquipMinHp + ","
-            + "EquipMaxHp:" + EquipMaxHp + ","
+            + "EquipHp:" + EquipHp + ","
             + "EquipMinAtkSpeed:" + EquipMinAtkSpeed + ","
             + "EquipMaxAtkSpeed:" + EquipMaxAtkSpeed + ","
             + "EquipMinMoveSpeed:" + EquipMinMoveSpeed + ","
