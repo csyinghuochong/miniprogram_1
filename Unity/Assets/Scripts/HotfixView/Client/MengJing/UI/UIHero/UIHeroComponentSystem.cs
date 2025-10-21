@@ -180,6 +180,29 @@ namespace ET.Client
             self.UpdateHeroInfo().Coroutine();
         }
 
+        private static async ETTask OnEquipmentClick(this UIHeroComponent self, EquipSlotType equipSlotType)
+        {
+            self.ShowItemList();
+
+            HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
+            Hero hero = heroComponent.GetHero(self.CurrentHeroId);
+            if (!hero.Equipments.ContainsKey((int)equipSlotType) || hero.Equipments[(int)equipSlotType] == 0)
+            {
+                return;
+            }
+
+            UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
+            if (uI != null)
+            {
+                uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
+                {
+                    ItemId = hero.Equipments[(int)equipSlotType],
+                    UIItemTipOpType = UIItemTipOpType.UIHero_TakeOff,
+                    HeroId = self.CurrentHeroId
+                });
+            }
+        }
+
         public static async ETTask UpdateHeroInfo(this UIHeroComponent self)
         {
             if (self.CurrentHeroId == 0)
@@ -208,12 +231,12 @@ namespace ET.Client
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
 
-            self.UIEquipmentItem_1.UpdateInfo(hero).Coroutine();
-            self.UIEquipmentItem_2.UpdateInfo(hero).Coroutine();
-            self.UIEquipmentItem_3.UpdateInfo(hero).Coroutine();
-            self.UIEquipmentItem_4.UpdateInfo(hero).Coroutine();
-            self.UIEquipmentItem_5.UpdateInfo(hero).Coroutine();
-            self.UIEquipmentItem_6.UpdateInfo(hero).Coroutine();
+            self.UIEquipmentItem_1.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
+            self.UIEquipmentItem_2.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
+            self.UIEquipmentItem_3.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
+            self.UIEquipmentItem_4.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
+            self.UIEquipmentItem_5.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
+            self.UIEquipmentItem_6.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
 
             self.ShowBaseStatItem(1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
             self.ShowBaseStatItem(2, "攻击", hero.NumericDic[NumericType.Base_MaxAct_Base].ToString());

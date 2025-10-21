@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -6,8 +7,8 @@ namespace ET.Client
     [ChildOf]
     public class UIEquipmentItem : Entity, IAwake<GameObject>, IDestroy
     {
-        public long HeroId { get; set; }
         public EquipSlotType EquipSlotType { get; set; }
+        public Action<EquipSlotType> OnEquipmentClick;
 
         public GameObject GameObject;
         public Image Image_ItemQuality;

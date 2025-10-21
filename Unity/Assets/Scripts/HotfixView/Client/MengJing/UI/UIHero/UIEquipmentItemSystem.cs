@@ -1,4 +1,5 @@
-﻿using Cysharp.Text;
+﻿using System;
+using Cysharp.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,16 +30,13 @@ namespace ET.Client
 
         private static void OnClick(this UIEquipmentItem self)
         {
-            if (self.Parent is UIHeroComponent)
-            {
-                self.GetParent<UIHeroComponent>().ShowItemList();
-            }
+            self.OnEquipmentClick?.Invoke(self.EquipSlotType);
         }
 
-        public static async ETTask UpdateInfo(this UIEquipmentItem self, Hero hero)
+        public static async ETTask UpdateInfo(this UIEquipmentItem self, Hero hero, Action<EquipSlotType> onEquipmentClick)
         {
-            self.HeroId = hero.Id;
-
+            self.OnEquipmentClick = onEquipmentClick;
+            
             if (!hero.Equipments.ContainsKey((int)self.EquipSlotType) || hero.Equipments[(int)self.EquipSlotType] == 0)
             {
                 self.Image_ItemQuality.overrideSprite = null;

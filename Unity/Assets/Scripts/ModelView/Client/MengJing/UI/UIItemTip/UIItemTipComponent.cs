@@ -7,7 +7,8 @@ namespace ET.Client
     public enum UIItemTipOpType
     {
         None = 0,
-        UIHero_Wear
+        UIHero_Wear,
+        UIHero_TakeOff,
     }
 
     public struct UIItemTipData
