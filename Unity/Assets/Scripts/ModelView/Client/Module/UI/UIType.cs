@@ -17,5 +17,6 @@ namespace ET
         public const string UIHero = "UIHero/UIHero";
         public const string UIHeroList = "UIHeroList/UIHeroList";
         public const string UIFormation = "UIFormation/UIFormation";
+        public const string UIItemSellTip = "UIItemSellTip/UIItemSellTip";
     }
 }

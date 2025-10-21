@@ -20,7 +20,7 @@ namespace ET.Client
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
 
-            self.Button_Sell.onClick.AddListener(() => { Log.Warning("出售道具"); });
+            self.Button_Sell.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine(); });
             self.Button_Use.onClick.AddListener(() => { Log.Warning("使用道具"); });
         }
 

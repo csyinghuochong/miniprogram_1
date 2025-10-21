@@ -61,6 +61,7 @@ namespace ET.Client
                 self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);
 
+                self.Button_Sell.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine(); });
                 self.Button_Wear.AddListener(self.OnButton_Wear);
             }
         }

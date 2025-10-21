@@ -19,7 +19,7 @@ namespace ET.Client
             self.Text_ItemDescription = rc.Get<GameObject>("Text_ItemDescription").GetComponent<TMP_Text>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
 
-            self.Button_Sell.onClick.AddListener(() => { Log.Warning("出售道具"); });
+            self.Button_Sell.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine(); });
         }
 
         [EntitySystem]

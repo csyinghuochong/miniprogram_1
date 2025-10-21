@@ -118,14 +118,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: Button_Less
-    gameObject: {fileID: 6007679757866969994}
-  - key: Button_Add
-    gameObject: {fileID: 4528501834704084142}
   - key: InputField_SellNum
     gameObject: {fileID: 6908098956205594239}
   - key: Text_SellPrice
     gameObject: {fileID: 7898806553943435372}
+  - key: Button_Less
+    gameObject: {fileID: 6007679757866969994}
+  - key: Button_Add
+    gameObject: {fileID: 4528501834704084142}
   - key: Button_Cancel
     gameObject: {fileID: 5454175757838144097}
   - key: Button_Sell
