@@ -32,6 +32,12 @@ namespace ET.Client
         private static void Destroy(this UIItemTip_EquipmentComponent self)
         {
         }
+        
+        private static void OnButton_Sell(this UIItemTip_EquipmentComponent self)
+        {
+            self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine();
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
+        }
 
         public static void UpdateInfo(this UIItemTip_EquipmentComponent self, UIItemTipData uiItemTipData)
         {
@@ -61,7 +67,7 @@ namespace ET.Client
                 self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);
 
-                self.Button_Sell.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine(); });
+                self.Button_Sell.onClick.AddListener(() => { self.OnButton_Sell(); });
                 self.Button_Wear.AddListener(self.OnButton_Wear);
             }
         }

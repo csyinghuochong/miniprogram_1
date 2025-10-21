@@ -20,13 +20,19 @@ namespace ET.Client
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
 
-            self.Button_Sell.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine(); });
+            self.Button_Sell.onClick.AddListener(() => { self.OnButton_Sell(); });
             self.Button_Use.onClick.AddListener(() => { Log.Warning("使用道具"); });
         }
 
         [EntitySystem]
         private static void Destroy(this UIItemTip_ConsumeComponent self)
         {
+        }
+
+        private static void OnButton_Sell(this UIItemTip_ConsumeComponent self)
+        {
+            self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine();
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
         
         public static void UpdateInfo(this UIItemTip_ConsumeComponent self, UIItemTipData uiItemTipData)

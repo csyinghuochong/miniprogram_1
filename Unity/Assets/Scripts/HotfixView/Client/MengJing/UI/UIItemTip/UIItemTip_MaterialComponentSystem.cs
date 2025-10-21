@@ -19,12 +19,18 @@ namespace ET.Client
             self.Text_ItemDescription = rc.Get<GameObject>("Text_ItemDescription").GetComponent<TMP_Text>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
 
-            self.Button_Sell.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine(); });
+            self.Button_Sell.onClick.AddListener(() => { self.OnButton_Sell(); });
         }
 
         [EntitySystem]
         private static void Destroy(this UIItemTip_MaterialComponent self)
         {
+        }
+        
+        private static void OnButton_Sell(this UIItemTip_MaterialComponent self)
+        {
+            self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip).Coroutine();
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
         
         public static void UpdateInfo(this UIItemTip_MaterialComponent self, UIItemTipData uiItemTipData)
