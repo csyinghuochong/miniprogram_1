@@ -11,7 +11,8 @@
         "Unity.Hotfix",
         "YooAsset",
         "Unity.Mathematics",
-        "I2.Loc"
+        "I2.Loc",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"
