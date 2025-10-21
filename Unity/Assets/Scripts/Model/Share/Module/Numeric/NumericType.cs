@@ -9,6 +9,7 @@
         public const int Now_Hp = 3001;                                         //生命值
         public const int Now_Dead = 3002;                                       //0活 1死
         public const int LastLoginTime = 3003;
+        public const int CombatPower = 3004;                                    //战斗力
         
         public const int Max = 10000;
 

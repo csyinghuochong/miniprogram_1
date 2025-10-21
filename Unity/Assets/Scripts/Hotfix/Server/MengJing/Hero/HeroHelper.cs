@@ -39,6 +39,7 @@ namespace ET.Server
             double base_ReCounterattack = 0;
             double base_ReLifeSteal = 0;
             double base_ReEva = 0;
+            long combatPower = 0;
 
             // 等级成长
             base_MaxHp += hero.Lv * heroConfig.LvHp;
@@ -85,6 +86,9 @@ namespace ET.Server
                 }
             }
 
+            // 计算战斗力
+            combatPower = base_MaxHp + base_MinAct + base_MaxAct + base_MinDef + base_MaxDef + base_MinAdf + base_MaxAdf;
+
             // 保存数据
             hero.NumericDic.Add(NumericType.Now_Hp, base_MaxHp);
             hero.NumericDic.Add(NumericType.Base_MaxHp_Base, base_MaxHp);
@@ -101,6 +105,7 @@ namespace ET.Server
             hero.NumericDic.Add(NumericType.Base_HitDamageLessPro_Base, (long)(base_HitLess * 10000));
             hero.NumericDic.Add(NumericType.Base_Speed_Base, (long)(base_MoveSpeed * 10000));
             hero.NumericDic.Add(NumericType.Base_AtkSpeed_Base, (long)(base_AtkSpeed * 10000));
+            hero.NumericDic.Add(NumericType.CombatPower, combatPower);
         }
     }
 }

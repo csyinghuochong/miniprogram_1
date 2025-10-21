@@ -93,6 +93,7 @@ namespace ET.Server
                 item.ContainerType = (int)InventoryContainerType.HeroEquipment;
 
                 ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
+                HeroHelper.UpdateHeroStats(unit, hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 
