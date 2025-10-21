@@ -29,10 +29,8 @@ namespace ET
             EquipMinAdf = _buf.ReadInt();
             EquipMaxAdf = _buf.ReadInt();
             EquipHp = _buf.ReadInt();
-            EquipMinAtkSpeed = _buf.ReadDouble();
-            EquipMaxAtkSpeed = _buf.ReadDouble();
-            EquipMinMoveSpeed = _buf.ReadDouble();
-            EquipMaxMoveSpeed = _buf.ReadDouble();
+            EquipAtkSpeed = _buf.ReadDouble();
+            EquipMoveSpeed = _buf.ReadDouble();
             EquipCri = _buf.ReadDouble();
             EquipCombo = _buf.ReadDouble();
             EquipCounterattack = _buf.ReadDouble();
@@ -118,24 +116,14 @@ namespace ET
         public readonly int EquipHp;
 
         /// <summary>
-        /// 最低攻速
+        /// 攻速
         /// </summary>
-        public readonly double EquipMinAtkSpeed;
+        public readonly double EquipAtkSpeed;
 
         /// <summary>
-        /// 最高攻速
+        /// 移速
         /// </summary>
-        public readonly double EquipMaxAtkSpeed;
-
-        /// <summary>
-        /// 最低移速
-        /// </summary>
-        public readonly double EquipMinMoveSpeed;
-
-        /// <summary>
-        /// 最高攻速
-        /// </summary>
-        public readonly double EquipMaxMoveSpeed;
+        public readonly double EquipMoveSpeed;
 
         /// <summary>
         /// 暴击
@@ -218,8 +206,6 @@ namespace ET
             
             
             
-            
-            
         }
 
         public override string ToString()
@@ -238,10 +224,8 @@ namespace ET
             + "EquipMinAdf:" + EquipMinAdf + ","
             + "EquipMaxAdf:" + EquipMaxAdf + ","
             + "EquipHp:" + EquipHp + ","
-            + "EquipMinAtkSpeed:" + EquipMinAtkSpeed + ","
-            + "EquipMaxAtkSpeed:" + EquipMaxAtkSpeed + ","
-            + "EquipMinMoveSpeed:" + EquipMinMoveSpeed + ","
-            + "EquipMaxMoveSpeed:" + EquipMaxMoveSpeed + ","
+            + "EquipAtkSpeed:" + EquipAtkSpeed + ","
+            + "EquipMoveSpeed:" + EquipMoveSpeed + ","
             + "EquipCri:" + EquipCri + ","
             + "EquipCombo:" + EquipCombo + ","
             + "EquipCounterattack:" + EquipCounterattack + ","
