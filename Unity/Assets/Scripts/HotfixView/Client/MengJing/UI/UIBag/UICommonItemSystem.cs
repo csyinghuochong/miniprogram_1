@@ -44,7 +44,7 @@ namespace ET.Client
                     uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                     {
                         ItemId = self.ItemId,
-                        ItemTipOpType = ItemTipOpType.UIHero_Wear,
+                        UIItemTipOpType = UIItemTipOpType.UIHero_Wear,
                         HeroId = uiHeroComponent.CurrentHeroId
                     });
                 }

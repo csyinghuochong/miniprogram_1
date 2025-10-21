@@ -6,7 +6,15 @@ namespace ET.Client
 {
     public enum UIItemTipOpType
     {
+        None = 0,
+        UIHero_Wear
+    }
 
+    public struct UIItemTipData
+    {
+        public long ItemId;
+        public UIItemTipOpType UIItemTipOpType;
+        public long HeroId;
     }
 
     [ComponentOf(typeof(UI))]

@@ -29,28 +29,28 @@ namespace ET.Client
         {
         }
 
-        public static void UpdateInfo(this UIItemTipComponent self, long itemId)
+        public static void UpdateInfo(this UIItemTipComponent self, UIItemTipData uiItemTipData)
         {
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(itemId);
+            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
             if (item != null)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
                 if (itemConfig.ItemType == (int)ItemType.Consume)
                 {
                     self.UIItemTip_ConsumeComponent.GameObject.SetActive(true);
-                    self.UIItemTip_ConsumeComponent.UpdateInfo(itemId);
+                    self.UIItemTip_ConsumeComponent.UpdateInfo(uiItemTipData);
                 }
 
                 if (itemConfig.ItemType == (int)ItemType.Material)
                 {
                     self.UIItemTip_MaterialComponent.GameObject.SetActive(true);
-                    self.UIItemTip_MaterialComponent.UpdateInfo(itemId);
+                    self.UIItemTip_MaterialComponent.UpdateInfo(uiItemTipData);
                 }
 
                 if (itemConfig.ItemType == (int)ItemType.Equipment)
                 {
                     self.UIItemTip_EquipmentComponent.GameObject.SetActive(true);
-                    self.UIItemTip_EquipmentComponent.UpdateInfo(itemId);
+                    self.UIItemTip_EquipmentComponent.UpdateInfo(uiItemTipData);
                 }
             }
         }

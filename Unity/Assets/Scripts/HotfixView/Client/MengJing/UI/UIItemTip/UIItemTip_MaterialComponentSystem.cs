@@ -27,11 +27,11 @@ namespace ET.Client
         {
         }
         
-        public static void UpdateInfo(this UIItemTip_MaterialComponent self, long itemId)
+        public static void UpdateInfo(this UIItemTip_MaterialComponent self, UIItemTipData uiItemTipData)
         {
-            self.ItemId = itemId;
+            self.UIItemTipData =  uiItemTipData;
 
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(itemId);
+            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
             if (item != null)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);

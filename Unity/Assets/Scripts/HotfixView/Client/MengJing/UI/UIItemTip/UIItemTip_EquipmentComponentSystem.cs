@@ -56,7 +56,7 @@ namespace ET.Client
             self.Text_ItemEquipmentType.SetText(type);
             self.Text_Lv.SetTextFormat("{0}级", 0);
 
-            if (uiItemTipData.ItemTipOpType == ItemTipOpType.UIHero_Wear)
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {
                 self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);

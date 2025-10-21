@@ -7,7 +7,7 @@ namespace ET.Client
     [ComponentOf]
     public class UIItemTip_ConsumeComponent : Entity, IAwake<GameObject>, IDestroy
     {
-        public long ItemId;
+        public UIItemTipData UIItemTipData;
 
         public GameObject GameObject { get; set; }
 
