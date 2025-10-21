@@ -25,6 +25,24 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class HeroUpdate_UpdateUIHero : AEvent<Scene, HeroUpdate>
+    {
+        protected override async ETTask Run(Scene root, HeroUpdate args)
+        {
+            UI ui = root.GetComponent<UIComponent>().Get(UIType.UIHero);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
+            uiHeroComponent.UpdateHeroInfo().Coroutine();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class InventoryUpdate_UIHeroRefresh : AEvent<Scene, InventoryUpdate>
     {
         protected override async ETTask Run(Scene scene, InventoryUpdate args)
@@ -151,7 +169,7 @@ namespace ET.Client
             self.UpdateHeroInfo().Coroutine();
         }
 
-        private static async ETTask UpdateHeroInfo(this UIHeroComponent self)
+        public static async ETTask UpdateHeroInfo(this UIHeroComponent self)
         {
             if (self.CurrentHeroId == 0)
             {

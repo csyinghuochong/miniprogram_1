@@ -30,12 +30,7 @@ namespace ET.Client
             hero.FromMessage(heroInfo);
             self.Heros.Add(hero.Id, hero);
 
-            // EventSystem.Instance.Publish(self.Root(), new ClientInventoryContainerUpdate()
-            // {
-            //     ItemOpType = ItemOpType.Add,
-            //     InventoryContainerType = self.InventoryContainerType,
-            //     ItemId = itemInfo.Id
-            // });
+            EventSystem.Instance.Publish(self.Root(), new HeroUpdate());
         }
 
         public static void RemoveHeroById(this HeroComponentC self, long heroId)
@@ -50,12 +45,7 @@ namespace ET.Client
             self.Heros.Remove(heroId);
             hero?.Dispose();
 
-            // EventSystem.Instance.Publish(self.Root(), new ClientInventoryContainerUpdate()
-            // {
-            //     ItemOpType = ItemOpType.Remove,
-            //     InventoryContainerType = self.InventoryContainerType,
-            //     ItemId = itemId
-            // });
+            EventSystem.Instance.Publish(self.Root(), new HeroUpdate());
         }
 
         public static void UpdateHero(this HeroComponentC self, HeroInfo heroInfo)
@@ -69,12 +59,7 @@ namespace ET.Client
             Hero hero = heroRef;
             hero.FromMessage(heroInfo);
 
-            // EventSystem.Instance.Publish(self.Root(), new ClientInventoryContainerUpdate()
-            // {
-            //     ItemOpType = ItemOpType.Update,
-            //     InventoryContainerType = self.InventoryContainerType,
-            //     ItemId = itemInfo.Id
-            // });
+            EventSystem.Instance.Publish(self.Root(), new HeroUpdate());
         }
 
         public static void Clear(this HeroComponentC self)

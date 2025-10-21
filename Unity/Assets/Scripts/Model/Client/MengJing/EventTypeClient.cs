@@ -35,6 +35,10 @@ namespace ET.Client
     public struct HeroFormationUpdate
     {
     }
+    
+    public struct HeroUpdate
+    {
+    }
 
     public struct InventoryUpdate
     {
