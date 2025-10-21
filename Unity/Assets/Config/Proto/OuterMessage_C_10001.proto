@@ -585,6 +585,7 @@ message HeroInfo
 	int32 Exp = 4;
 	int32 Star = 5;
 	map<int32,int64> Equipments = 6;
+	map<int32,int64> NumericDic = 7;
 }
 
 // ResponseType M2C_GetAllHero

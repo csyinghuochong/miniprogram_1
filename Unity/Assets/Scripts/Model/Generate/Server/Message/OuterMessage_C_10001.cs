@@ -2656,6 +2656,9 @@ namespace ET
         [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(5)]
         public Dictionary<int, long> Equipments { get; set; } = new();
+        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [MemoryPackOrder(6)]
+        public Dictionary<int, long> NumericDic { get; set; } = new();
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2669,6 +2672,7 @@ namespace ET
             this.Exp = default;
             this.Star = default;
             this.Equipments.Clear();
+            this.NumericDic.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

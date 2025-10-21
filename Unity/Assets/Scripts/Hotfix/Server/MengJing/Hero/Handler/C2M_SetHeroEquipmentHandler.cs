@@ -93,7 +93,7 @@ namespace ET.Server
                 item.ContainerType = (int)InventoryContainerType.HeroEquipment;
 
                 ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
-                HeroNoticeHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+                HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 
             // 卸下装备
@@ -125,7 +125,8 @@ namespace ET.Server
                 item.ContainerType = (int)InventoryContainerType.Bag;
 
                 ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
-                HeroNoticeHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+                HeroHelper.UpdateHeroStats(unit, hero);
+                HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 
             await ETTask.CompletedTask;

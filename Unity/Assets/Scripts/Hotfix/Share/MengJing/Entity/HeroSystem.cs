@@ -23,6 +23,7 @@
             heroInfo.Exp = self.Exp;
             heroInfo.Star = self.Star;
             heroInfo.Equipments = self.Equipments;
+            heroInfo.NumericDic = self.NumericDic;
 
             return heroInfo;
         }
@@ -34,6 +35,7 @@
             self.Exp = heroInfo.Exp;
             self.Star = heroInfo.Star;
             self.Equipments = heroInfo.Equipments;
+            self.NumericDic = heroInfo.NumericDic;
         }
     }
 }

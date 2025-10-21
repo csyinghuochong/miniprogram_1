@@ -25,6 +25,7 @@ namespace ET.Server
             {
                 if (entity is Hero hero)
                 {
+                    HeroHelper.UpdateHeroStats(self.GetParent<Unit>(), hero);
                     self.Heros.Add(hero.Id, hero);
                 }
             }
@@ -48,6 +49,8 @@ namespace ET.Server
             Hero hero = self.AddChild<Hero>();
             hero.ConfigId = configId;
             hero.Lv = 1;
+
+            HeroHelper.UpdateHeroStats(self.GetParent<Unit>(), hero);
             self.AddHero(hero);
         }
 
@@ -64,7 +67,7 @@ namespace ET.Server
             }
 
             self.Heros.Add(hero.Id, hero);
-            HeroNoticeHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Add);
+            HeroHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Add);
         }
 
         // 直接消耗掉
@@ -77,7 +80,7 @@ namespace ET.Server
 
             Hero hero = heroRef;
             self.Heros.Remove(heroId);
-            HeroNoticeHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Remove);
+            HeroHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Remove);
             hero?.Dispose();
 
             return true;

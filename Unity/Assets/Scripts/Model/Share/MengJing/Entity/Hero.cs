@@ -17,7 +17,6 @@ namespace ET
         Archer = 2, //射手
         Mage = 3, //法师
     }
-    
 
     [ChildOf]
     public class Hero : Entity, IAwake, IDestroy, ISerializeToEntity
@@ -29,5 +28,8 @@ namespace ET
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, long> Equipments { get; set; } = new();
+
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+        public Dictionary<int, long> NumericDic { get; set; } = new();
     }
 }
