@@ -38,10 +38,10 @@ namespace ET
             BaseMoveSpeed = _buf.ReadDouble();
             BaseAtkSpeed = _buf.ReadDouble();
             AtkDistance = _buf.ReadDouble();
-            LvHp = _buf.ReadDouble();
-            LvAct = _buf.ReadDouble();
-            LvDef = _buf.ReadDouble();
-            LvAdf = _buf.ReadDouble();
+            LvHp = _buf.ReadInt();
+            LvAct = _buf.ReadInt();
+            LvDef = _buf.ReadInt();
+            LvAdf = _buf.ReadInt();
             HeroDescription = _buf.ReadString();
 
             PostInit();
@@ -165,22 +165,22 @@ namespace ET
         /// <summary>
         /// 等级成长血量
         /// </summary>
-        public readonly double LvHp;
+        public readonly int LvHp;
 
         /// <summary>
         /// 等级成长攻击
         /// </summary>
-        public readonly double LvAct;
+        public readonly int LvAct;
 
         /// <summary>
         /// 等级成长物防
         /// </summary>
-        public readonly double LvDef;
+        public readonly int LvDef;
 
         /// <summary>
         /// 等级成长魔防
         /// </summary>
-        public readonly double LvAdf;
+        public readonly int LvAdf;
 
         /// <summary>
         /// 英雄简介
