@@ -201,13 +201,27 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UICommonItemList[i].UpdateInfo(itemList[i]).Coroutine();
+                self.UICommonItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId).Coroutine(); }).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
 
             for (int i = itemList.Count; i < self.UICommonItemList.Count; i++)
             {
                 self.UICommonItemList[i].GameObject.SetActive(false);
+            }
+        }
+
+        private static async ETTask OnItemClick(this UIHeroComponent self, long itemId)
+        {
+            UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
+            if (uI != null)
+            {
+                uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
+                {
+                    ItemId = itemId,
+                    UIItemTipOpType = UIItemTipOpType.UIHero_Wear,
+                    HeroId = self.CurrentHeroId
+                });
             }
         }
 

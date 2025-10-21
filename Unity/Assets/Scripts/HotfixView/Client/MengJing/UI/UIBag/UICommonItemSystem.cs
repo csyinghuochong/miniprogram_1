@@ -1,4 +1,5 @@
-﻿using Cysharp.Text;
+﻿using System;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,39 +22,18 @@ namespace ET.Client
             self.Text_ItemNum = rc.Get<GameObject>("Text_ItemNum").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
 
-            self.Button_Click.onClick.AddListener(() => { self.OnClick().Coroutine(); });
+            self.Button_Click.AddListener(self.OnClick);
         }
 
-        private static async ETTask OnClick(this UICommonItem self)
+        private static void OnClick(this UICommonItem self)
         {
-            if (self.Parent is UIBagComponent)
-            {
-                UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
-                if (uI != null)
-                {
-                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData() { ItemId = self.ItemId });
-                }
-            }
-
-            if (self.Parent is UIHeroComponent)
-            {
-                UIHeroComponent uiHeroComponent = self.Parent as UIHeroComponent;
-                UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
-                if (uI != null)
-                {
-                    uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
-                    {
-                        ItemId = self.ItemId,
-                        UIItemTipOpType = UIItemTipOpType.UIHero_Wear,
-                        HeroId = uiHeroComponent.CurrentHeroId
-                    });
-                }
-            }
+            self.OnItemClick?.Invoke(self.ItemId);
         }
 
-        public static async ETTask UpdateInfo(this UICommonItem self, Item item)
+        public static async ETTask UpdateInfo(this UICommonItem self, Item item, Action<long> onItemClick = null)
         {
             self.ItemId = item.Id;
+            self.OnItemClick = onItemClick;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
             self.Text_ItemNum.SetTextFormat("{0}", item.Num);

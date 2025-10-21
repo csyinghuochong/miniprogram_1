@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace ET.Client
     {
         public long ItemId;
 
+        public Action<long> OnItemClick;
         public GameObject GameObject { get; set; }
 
         public Image Image_ItemQuality;
