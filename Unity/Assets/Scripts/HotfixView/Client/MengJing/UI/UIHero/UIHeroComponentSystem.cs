@@ -71,7 +71,7 @@ namespace ET.Client
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
 
-            self.UIHeroInfo = rc.Get<GameObject>("UIHeroInfo");
+            self.UIHeroInfo_1 = rc.Get<GameObject>("UIHeroInfo_1");
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Text_HeroCP = rc.Get<GameObject>("Text_HeroCP").GetComponent<TMP_Text>();
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
@@ -84,6 +84,13 @@ namespace ET.Client
             self.UIEquipmentItem_4 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_4"));
             self.UIEquipmentItem_5 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_5"));
             self.UIEquipmentItem_6 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_6"));
+            self.UIHeroInfo_2 = rc.Get<GameObject>("UIHeroInfo_2");
+            self.Content_UIBaseStatItem = rc.Get<GameObject>("Content_UIBaseStatItem").transform;
+            self.UIBaseStatItem = rc.GetComponent<ReferenceCollector>().Get<GameObject>("UIBaseStatItem");
+            self.UIBaseStatItem.SetActive(false);
+            self.Content_UIOtherStatItem = rc.Get<GameObject>("Content_UIOtherStatItem").transform;
+            self.UIOtherStatItem = rc.GetComponent<ReferenceCollector>().Get<GameObject>("UIOtherStatItem");
+            self.UIOtherStatItem.SetActive(false);
             self.ScrollView_ItemList = rc.Get<GameObject>("ScrollView_ItemList");
             self.ScrollView_ItemList.SetActive(false);
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
@@ -161,6 +168,10 @@ namespace ET.Client
         {
             self.CurrentHeroId = heroId;
 
+            self.UIHeroInfo_1.SetActive(true);
+            self.UIHeroInfo_2.SetActive(true);
+            self.ScrollView_ItemList.SetActive(false);
+
             foreach (UITeamItem item in self.UITeamItemList)
             {
                 item.UpdateBorder(heroId);
@@ -173,7 +184,8 @@ namespace ET.Client
         {
             if (self.CurrentHeroId == 0)
             {
-                self.UIHeroInfo.SetActive(false);
+                self.UIHeroInfo_1.SetActive(false);
+                self.UIHeroInfo_2.SetActive(false);
                 return;
             }
 
@@ -181,11 +193,10 @@ namespace ET.Client
             Hero hero = heroComponent.GetHero(self.CurrentHeroId);
             if (hero == null)
             {
-                self.UIHeroInfo.SetActive(false);
+                self.UIHeroInfo_1.SetActive(false);
+                self.UIHeroInfo_2.SetActive(false);
                 return;
             }
-
-            self.UIHeroInfo.SetActive(true);
 
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
@@ -202,6 +213,56 @@ namespace ET.Client
             self.UIEquipmentItem_4.UpdateInfo(hero).Coroutine();
             self.UIEquipmentItem_5.UpdateInfo(hero).Coroutine();
             self.UIEquipmentItem_6.UpdateInfo(hero).Coroutine();
+
+            self.ShowBaseStatItem(1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
+            self.ShowBaseStatItem(2, "攻击", hero.NumericDic[NumericType.Base_MaxAct_Base].ToString());
+            self.ShowBaseStatItem(3, "物防", hero.NumericDic[NumericType.Base_MaxDef_Base].ToString());
+            self.ShowBaseStatItem(4, "魔防", hero.NumericDic[NumericType.Base_MaxAdf_Base].ToString());
+
+            self.ShowOtherStatItem(1, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(2, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
+        }
+
+        private static void ShowBaseStatItem(this UIHeroComponent self, int index, string name, string value)
+        {
+            Transform item = null;
+            if (self.Content_UIBaseStatItem.childCount <= index)
+            {
+                item = UnityEngine.Object.Instantiate(self.UIBaseStatItem, self.Content_UIBaseStatItem).transform;
+            }
+            else
+            {
+                item = self.Content_UIBaseStatItem.GetChild(index);
+            }
+
+            if (item == null)
+            {
+            }
+
+            item.gameObject.SetActive(true);
+
+            ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
+            rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
+            rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
+        }
+
+        private static void ShowOtherStatItem(this UIHeroComponent self, int index, string name, string value)
+        {
+            Transform item = null;
+            if (self.Content_UIOtherStatItem.childCount <= index)
+            {
+                item = UnityEngine.Object.Instantiate(self.UIOtherStatItem, self.Content_UIOtherStatItem).transform;
+            }
+            else
+            {
+                item = self.Content_UIOtherStatItem.GetChild(index);
+            }
+
+            item.gameObject.SetActive(true);
+
+            ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
+            rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
+            rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
         }
 
         public static void UpdateItemList(this UIHeroComponent self)
@@ -245,6 +306,7 @@ namespace ET.Client
 
         public static void ShowItemList(this UIHeroComponent self)
         {
+            self.UIHeroInfo_2.SetActive(false);
             self.ScrollView_ItemList.SetActive(true);
             self.UpdateItemList();
         }

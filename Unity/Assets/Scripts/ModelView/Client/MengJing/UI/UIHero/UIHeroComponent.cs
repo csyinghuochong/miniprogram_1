@@ -14,7 +14,7 @@ namespace ET.Client
 
         public Button Button_Close;
 
-        public GameObject UIHeroInfo;
+        public GameObject UIHeroInfo_1;
         public TMP_Text Text_HeroName;
         public TMP_Text Text_HeroCP;
         public Image Image_HeroIcon;
@@ -27,6 +27,11 @@ namespace ET.Client
         public UIEquipmentItem UIEquipmentItem_4 { get; set; }
         public UIEquipmentItem UIEquipmentItem_5 { get; set; }
         public UIEquipmentItem UIEquipmentItem_6 { get; set; }
+        public GameObject UIHeroInfo_2;
+        public Transform Content_UIBaseStatItem;
+        public GameObject UIBaseStatItem;
+        public Transform Content_UIOtherStatItem;
+        public GameObject UIOtherStatItem;
         public GameObject ScrollView_ItemList;
         public Transform Content_UICommonItem;
         public GameObject UICommonItem;

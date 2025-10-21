@@ -25,7 +25,6 @@ namespace ET.Server
             {
                 if (entity is Hero hero)
                 {
-                    HeroHelper.UpdateHeroStats(self.GetParent<Unit>(), hero);
                     self.Heros.Add(hero.Id, hero);
                 }
             }
