@@ -134,7 +134,7 @@
   {
     "Id": 20000001,
     "SkillName": "淘汰之刃",
-    "SkillIcon": "20000001",
+    "SkillIcon": "10000005",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -167,7 +167,7 @@
   {
     "Id": 20000002,
     "SkillName": "神之力量",
-    "SkillIcon": "20000002",
+    "SkillIcon": "10000006",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -201,7 +201,7 @@
   {
     "Id": 20000003,
     "SkillName": "无敌击",
-    "SkillIcon": "20000003",
+    "SkillIcon": "10000007",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -234,7 +234,7 @@
   {
     "Id": 20000004,
     "SkillName": "极寒领域",
-    "SkillIcon": "20000004",
+    "SkillIcon": "10000001",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -267,7 +267,7 @@
   {
     "Id": 20000005,
     "SkillName": "守护天使",
-    "SkillIcon": "20000005",
+    "SkillIcon": "10000002",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -301,7 +301,7 @@
   {
     "Id": 20000006,
     "SkillName": "混乱之雨",
-    "SkillIcon": "20000006",
+    "SkillIcon": "10000003",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -334,7 +334,7 @@
   {
     "Id": 30000001,
     "SkillName": "怒吼",
-    "SkillIcon": "30000001",
+    "SkillIcon": "10000004",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -368,7 +368,7 @@
   {
     "Id": 30000002,
     "SkillName": "反击螺旋",
-    "SkillIcon": "30000002",
+    "SkillIcon": "10000005",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -401,7 +401,7 @@
   {
     "Id": 30000003,
     "SkillName": "战斗饥渴",
-    "SkillIcon": "30000003",
+    "SkillIcon": "10000006",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -435,7 +435,7 @@
   {
     "Id": 30000004,
     "SkillName": "巨力挥舞",
-    "SkillIcon": "30000004",
+    "SkillIcon": "10000007",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -468,7 +468,7 @@
   {
     "Id": 30000005,
     "SkillName": "溅射",
-    "SkillIcon": "30000005",
+    "SkillIcon": "10000001",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -501,7 +501,7 @@
   {
     "Id": 30000006,
     "SkillName": "战吼",
-    "SkillIcon": "30000006",
+    "SkillIcon": "10000002",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -536,7 +536,7 @@
   {
     "Id": 30000007,
     "SkillName": "剑刃风暴",
-    "SkillIcon": "30000007",
+    "SkillIcon": "10000003",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -569,7 +569,7 @@
   {
     "Id": 30000008,
     "SkillName": "治疗守卫",
-    "SkillIcon": "30000008",
+    "SkillIcon": "10000004",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -602,7 +602,7 @@
   {
     "Id": 30000009,
     "SkillName": "剑舞",
-    "SkillIcon": "30000009",
+    "SkillIcon": "10000005",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -636,7 +636,7 @@
   {
     "Id": 30000010,
     "SkillName": "冰霜新星",
-    "SkillIcon": "30000010",
+    "SkillIcon": "10000006",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -670,7 +670,7 @@
   {
     "Id": 30000011,
     "SkillName": "冰封禁制",
-    "SkillIcon": "30000011",
+    "SkillIcon": "10000007",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -704,7 +704,7 @@
   {
     "Id": 30000012,
     "SkillName": "辉煌光环",
-    "SkillIcon": "30000012",
+    "SkillIcon": "10000001",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -737,7 +737,7 @@
   {
     "Id": 30000013,
     "SkillName": "洗礼",
-    "SkillIcon": "30000013",
+    "SkillIcon": "10000002",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -770,7 +770,7 @@
   {
     "Id": 30000014,
     "SkillName": "驱逐",
-    "SkillIcon": "30000014",
+    "SkillIcon": "10000003",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -803,7 +803,7 @@
   {
     "Id": 30000015,
     "SkillName": "退化光环",
-    "SkillIcon": "30000015",
+    "SkillIcon": "10000004",
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
@@ -837,7 +837,7 @@
   {
     "Id": 30000016,
     "SkillName": "致命链接",
-    "SkillIcon": "30000016",
+    "SkillIcon": "10000005",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -866,7 +866,7 @@
   {
     "Id": 30000017,
     "SkillName": "暗言术",
-    "SkillIcon": "30000017",
+    "SkillIcon": "10000006",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
@@ -893,7 +893,7 @@
   {
     "Id": 30000018,
     "SkillName": "剧变",
-    "SkillIcon": "30000018",
+    "SkillIcon": "10000007",
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
