@@ -36,7 +36,8 @@ namespace ET.Client
 
         private static void OnButton_Sell(this UIItemSellTipComponent self)
         {
-            ClientInventoryHelper.SellItem(self.Root(), self.ItemId).Coroutine();
+            ClientInventoryHelper.SellItem(self.Root(), self.ItemId, 1).Coroutine();
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemSellTip);
         }
     }
 }

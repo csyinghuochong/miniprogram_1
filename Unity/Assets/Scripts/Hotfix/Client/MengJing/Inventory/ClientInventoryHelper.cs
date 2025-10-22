@@ -22,9 +22,11 @@
             return response.Error;
         }
 
-        public static async ETTask<int> SellItem(Scene root, long itemId)
+        public static async ETTask<int> SellItem(Scene root, long itemId, int num)
         {
             C2M_SellItem request = C2M_SellItem.Create();
+            request.ItemId = itemId;
+            request.Num = num;
 
             M2C_SellItem response = (M2C_SellItem)await root.GetComponent<ClientSenderComponent>().Call(request);
 

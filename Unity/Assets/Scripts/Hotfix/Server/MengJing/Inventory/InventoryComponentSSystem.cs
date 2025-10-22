@@ -37,7 +37,7 @@ namespace ET.Server
             return item;
         }
 
-        public static void AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType)
+        public static void AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             for (int i = rewardItems.Count - 1; i >= 0; i--)
             {
@@ -93,17 +93,149 @@ namespace ET.Server
                     }
                 }
 
-                if (leftNum <= 0)
+                while (leftNum > 0)
+                {
+                    Item newItem = self.AddChild<Item>();
+                    newItem.ConfigId = itemConfigId;
+                    newItem.ContainerType = (int)containerType;
+
+                    if (leftNum > itemConfig.ItemPileSum)
+                    {
+                        newItem.Num = itemConfig.ItemPileSum;
+                        leftNum -= itemConfig.ItemPileSum;
+                    }
+                    else
+                    {
+                        newItem.Num = leftNum;
+                        leftNum = 0;
+                    }
+
+                    self.AddItem(newItem);
+                }
+            }
+        }
+
+        public static bool HaveItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
+        {
+            Dictionary<int, int> removeItems = new();
+            foreach (RewardItem rewardItem in rewardItems)
+            {
+                if (!removeItems.ContainsKey(rewardItem.ItemId))
+                {
+                    removeItems.Add(rewardItem.ItemId, rewardItem.ItemNum);
+                }
+                else
+                {
+                    removeItems[rewardItem.ItemId] += rewardItem.ItemNum;
+                }
+            }
+
+            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+            foreach (KeyValuePair<int, int> pair in removeItems)
+            {
+                int itemConfigId = pair.Key;
+                int leftNum = pair.Value;
+                if (itemConfigId == 1)
+                {
+                    if (userInfoComponent.Gold < leftNum)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (itemConfigId == 2)
+                {
+                    if (userInfoComponent.Diamond < leftNum)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                foreach (Item item in self.Items.Values)
+                {
+                    if ((int)containerType == item.ContainerType && itemConfigId == item.ConfigId)
+                    {
+                        leftNum -= item.Num;
+                    }
+                }
+
+                if (leftNum > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static int RemoveItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
+        {
+            if (!self.HaveItemData(rewardItems, containerType))
+            {
+                return ErrorCode.ERR_NotEnoughItems;
+            }
+
+            for (int i = rewardItems.Count - 1; i >= 0; i--)
+            {
+                int itemConfigId = rewardItems[i].ItemId;
+                int leftNum = rewardItems[i].ItemNum;
+
+                if (!ItemConfigCategory.Instance.DataMap.ContainsKey(itemConfigId))
                 {
                     continue;
                 }
 
-                Item newItem = self.AddChild<Item>();
-                newItem.ConfigId = itemConfigId;
-                newItem.ContainerType = (int)containerType;
-                newItem.Num = leftNum;
-                self.AddItem(newItem);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
+
+                if (itemConfigId <= 10000000)
+                {
+                    UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+                    switch (itemConfig.Id)
+                    {
+                        case 1:
+                            userInfoComponent.ChangeRoleData(UserDataType.Gold, -leftNum);
+                            break;
+                        case 2:
+                            userInfoComponent.ChangeRoleData(UserDataType.Diamond, -leftNum);
+                            break;
+                    }
+
+                    continue;
+                }
+
+                List<EntityRef<Item>> items = self.Items.Values.ToList();
+                for (int j = items.Count - 1; j > 0; j--)
+                {
+                    Item item = items[j];
+                    if ((int)containerType == item.ContainerType && itemConfigId == item.ConfigId)
+                    {
+                        if (item.Num > 0)
+                        {
+                            if (item.Num > leftNum)
+                            {
+                                item.Num -= leftNum;
+                                ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
+                                break;
+                            }
+                            else
+                            {
+                                leftNum -= item.Num;
+                                self.RemoveItem(item.Id);
+                            }
+                        }
+                    }
+                }
             }
+
+            return ErrorCode.ERR_Success;
         }
 
         public static void AddItem(this InventoryComponentS self, Item item)
@@ -144,6 +276,43 @@ namespace ET.Server
             foreach (Item item in self.Items.Values)
             {
                 items.Add(item);
+            }
+
+            return items;
+        }
+
+        public static List<Item> GetItemsByContainer(this InventoryComponentS self, InventoryContainerType containerType)
+        {
+            List<Item> items = new();
+            foreach (Item item in self.Items.Values)
+            {
+                if (item.ContainerType != (int)containerType)
+                {
+                    continue;
+                }
+
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        public static List<Item> GetItemsByType(this InventoryComponentS self, ItemType type, InventoryContainerType containerType)
+        {
+            List<Item> items = new();
+            foreach (Item item in self.Items.Values)
+            {
+                if (item.ContainerType != (int)containerType)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+                if (itemConfig.ItemType == (int)type)
+                {
+                    items.Add(item);
+                }
             }
 
             return items;
