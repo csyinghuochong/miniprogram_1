@@ -123,6 +123,8 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIHeroComponent self)
         {
+            self.UISkillItemList.Clear();
+            self.UISkillItemList = null;
             self.UICommonItemList.Clear();
             self.UICommonItemList = null;
             self.UITeamItemList.Clear();
