@@ -10,7 +10,8 @@
         "YooAsset",
         "I2.Loc",
         "Unity.TextMeshPro",
-        "ZString"
+        "ZString",
+        "spine-unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Text;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -59,12 +60,12 @@ namespace ET.Client
                     break;
                 case UnitType.Hero:
                     HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Hero/{heroConfig.HeroModelID}");
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ZString.Format("Hero/{0}", heroConfig.HeroModelID));
 
                     break;
                 case UnitType.Monster:
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Monster/{monsterConfig.MonsterModelID}");
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ZString.Format("Monster/{0}", monsterConfig.MonsterModelID));
 
                     break;
                 default:

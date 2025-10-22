@@ -105,6 +105,15 @@ namespace ET
 
             return prefabPath;
         }
+        
+        public static string GetUIUnitPath(string fileName)
+        {
+            string prefabPath;
+
+            prefabPath = ZString.Format("Assets/Bundles/UI/Spine/{0}.prefab", fileName);
+
+            return prefabPath;
+        }
 
         public static string GetSceneUnitPath(string fileName)
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Text;
+using Spine.Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -72,9 +73,9 @@ namespace ET.Client
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
 
             self.UIHeroInfo_1 = rc.Get<GameObject>("UIHeroInfo_1");
+            self.Spine_HeroModel  = rc.Get<GameObject>("Spine_HeroModel").transform;
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Text_HeroCP = rc.Get<GameObject>("Text_HeroCP").GetComponent<TMP_Text>();
-            self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Text_HeroLv = rc.Get<GameObject>("Text_HeroLv").GetComponent<TMP_Text>();
             self.Slider_HeroExp = rc.Get<GameObject>("Slider_HeroExp").GetComponent<Slider>();
             self.Text_HeroExp = rc.Get<GameObject>("Text_HeroExp").GetComponent<TMP_Text>();
@@ -224,8 +225,10 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Text_HeroCP.SetTextFormat("战力：{0}", hero.NumericDic[NumericType.CombatPower]);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
-            self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            string path = ABPathHelper.GetUIUnitPath(ZString.Format("Hero/{0}", heroConfig.HeroModelID));
+            GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
+            UICommonHelper.DestoryChild(self.Spine_HeroModel.gameObject);
+            UnityEngine.Object.Instantiate(model, self.Spine_HeroModel);
             self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
             int maxExp = 100; // 暂时
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
