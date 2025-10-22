@@ -37,7 +37,9 @@ namespace ET.Client
 
         private static async ETTask OnButton_Click(this UISkillItem self)
         {
-            await ETTask.CompletedTask;
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UISkillTip);
+            UISkillTipComponent uiSkillTipComponent = ui.GetComponent<UISkillTipComponent>();
+            uiSkillTipComponent.UpdateInfo(self.SkillConfigId).Coroutine();
         }
     }
 }
