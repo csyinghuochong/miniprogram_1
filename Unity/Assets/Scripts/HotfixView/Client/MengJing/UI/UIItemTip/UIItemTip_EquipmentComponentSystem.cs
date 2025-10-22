@@ -1,4 +1,5 @@
-﻿using Cysharp.Text;
+﻿using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,11 +20,14 @@ namespace ET.Client
             self.Text_ItemName = rc.Get<GameObject>("Text_ItemName").GetComponent<TMP_Text>();
             self.Text_ItemEquipmentType = rc.Get<GameObject>("Text_ItemEquipmentType").GetComponent<TMP_Text>();
             self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
+            self.Image_CombatPowerChange = rc.Get<GameObject>("Image_CombatPowerChange").GetComponent<Image>();
+            self.Text_CombatPowerChange = rc.Get<GameObject>("Text_CombatPowerChange").GetComponent<TMP_Text>();
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Wear = rc.Get<GameObject>("Button_Wear").GetComponent<Button>();
             self.Button_TakeOff = rc.Get<GameObject>("Button_TakeOff").GetComponent<Button>();
 
+            self.Image_CombatPowerChange.gameObject.SetActive(false);
             self.Button_Sell.gameObject.SetActive(false);
             self.Button_Wear.gameObject.SetActive(false);
             self.Button_TakeOff.gameObject.SetActive(false);
@@ -42,10 +46,11 @@ namespace ET.Client
         {
             self.UIItemTipData = uiItemTipData;
 
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
+            InventoryComponentC inventoryComponent = self.Root().GetComponent<InventoryComponentC>();
+            Item item = inventoryComponent.GetItem(uiItemTipData.ItemId);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
-            
+
             string type = itemConfig.ItemSubType switch
             {
                 (int)ItemEquipmentType.Toukui => "头盔",
@@ -60,7 +65,7 @@ namespace ET.Client
             self.Text_ItemName.SetText(itemConfig.ItemName);
             self.Text_ItemEquipmentType.SetText(type);
             self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
-            
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
@@ -68,6 +73,39 @@ namespace ET.Client
             {
                 self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);
+
+                Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)itemConfig.ItemSubType);
+
+                if (equipSlotType == EquipSlotType.None)
+                {
+                    self.Button_Wear.gameObject.SetActive(false);
+                }
+                else
+                {
+                    self.Image_CombatPowerChange.gameObject.SetActive(true);
+
+                    List<Item> equipments = new List<Item>();
+
+                    foreach (KeyValuePair<int, long> heroEquipment in hero.Equipments)
+                    {
+                        if (heroEquipment.Value != 0)
+                        {
+                            Item oldItem = inventoryComponent.GetItem(heroEquipment.Value);
+                            if (oldItem != null && heroEquipment.Value != hero.Equipments[(int)equipSlotType])
+                            {
+                                equipments.Add(oldItem);
+                            }
+                        }
+                    }
+
+                    equipments.Add(item);
+
+                    Dictionary<int, long> oldNumericDic = hero.NumericDic;
+                    Dictionary<int, long> newNumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
+
+                    self.Text_CombatPowerChange.SetText(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower]);
+                }
             }
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_TakeOff)
