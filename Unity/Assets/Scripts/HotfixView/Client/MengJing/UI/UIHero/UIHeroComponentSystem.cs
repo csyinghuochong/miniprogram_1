@@ -192,7 +192,7 @@ namespace ET.Client
 
             HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
             Hero hero = heroComponent.GetHero(self.CurrentHeroId);
-            if (!hero.Equipments.ContainsKey((int)equipSlotType) || hero.Equipments[(int)equipSlotType] == 0)
+            if (hero.Equipments[(int)equipSlotType] == 0)
             {
                 return;
             }

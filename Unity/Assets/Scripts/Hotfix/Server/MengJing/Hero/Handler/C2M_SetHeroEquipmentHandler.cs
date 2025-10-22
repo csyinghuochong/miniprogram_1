@@ -41,39 +41,12 @@ namespace ET.Server
                     return;
                 }
 
-                EquipSlotType equipSlotType = EquipSlotType.None;
-                ItemEquipmentType itemEquipmentType = (ItemEquipmentType)itemConfig.ItemSubType;
-                switch (itemEquipmentType)
-                {
-                    case ItemEquipmentType.Toukui:
-                        equipSlotType = EquipSlotType.Toukui;
-                        break;
-                    case ItemEquipmentType.Yifu:
-                        equipSlotType = EquipSlotType.Yifu;
-                        break;
-                    case ItemEquipmentType.Kuzi:
-                        equipSlotType = EquipSlotType.Kuzi;
-                        break;
-                    case ItemEquipmentType.Xiezi:
-                        equipSlotType = EquipSlotType.Xiezi;
-                        break;
-                    case ItemEquipmentType.Xianglian:
-                        equipSlotType = EquipSlotType.Xianglian;
-                        break;
-                    case ItemEquipmentType.Wuqi:
-                        equipSlotType = EquipSlotType.Wuqi;
-                        break;
-                }
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)itemConfig.ItemSubType);
 
                 if (equipSlotType == EquipSlotType.None)
                 {
-                    response.Error = ErrorCode.ERR_ModifyData;
+                    response.Error = ErrorCode.ERR_HeroNotEquipSlot;
                     return;
-                }
-
-                if (!hero.Equipments.ContainsKey((int)equipSlotType))
-                {
-                    hero.Equipments.Add((int)equipSlotType, 0);
                 }
 
                 // 卸下原有装备
@@ -93,7 +66,7 @@ namespace ET.Server
                 item.ContainerType = (int)InventoryContainerType.HeroEquipment;
 
                 ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
-                HeroHelper.UpdateHeroStats(unit, hero);
+                HeroHelper.UpdateHeroNumeric(unit, hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 
@@ -126,7 +99,7 @@ namespace ET.Server
                 item.ContainerType = (int)InventoryContainerType.Bag;
 
                 ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
-                HeroHelper.UpdateHeroStats(unit, hero);
+                HeroHelper.UpdateHeroNumeric(unit, hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 

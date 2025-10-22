@@ -56,5 +56,6 @@ namespace ET
         public const int ERR_CreateRoleName = 20133; //角色名字不合法
         public const int ERR_NotEnoughItems = 20134; //道具不足
         public const int ERR_NotExistItem = 20135; //道具不存在
+        public const int ERR_HeroNotEquipSlot = 20136; //英雄没有这个类型的装备孔位
     }
 }

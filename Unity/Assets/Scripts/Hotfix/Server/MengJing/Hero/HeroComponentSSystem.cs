@@ -49,7 +49,7 @@ namespace ET.Server
             hero.ConfigId = configId;
             hero.Lv = 1;
 
-            HeroHelper.UpdateHeroStats(self.GetParent<Unit>(), hero);
+            HeroHelper.UpdateHeroNumeric(self.GetParent<Unit>(), hero);
             self.AddHero(hero);
         }
 
@@ -104,6 +104,16 @@ namespace ET.Server
                 {
                     self.Formation.Add(0);
                 }
+            }
+
+            foreach (Hero hero in self.Heros.Values)
+            {
+                hero.Equipments.TryAdd((int)EquipSlotType.Toukui, 0);
+                hero.Equipments.TryAdd((int)EquipSlotType.Yifu, 0);
+                hero.Equipments.TryAdd((int)EquipSlotType.Kuzi, 0);
+                hero.Equipments.TryAdd((int)EquipSlotType.Xiezi, 0);
+                hero.Equipments.TryAdd((int)EquipSlotType.Xianglian, 0);
+                hero.Equipments.TryAdd((int)EquipSlotType.Wuqi, 0);
             }
         }
 
