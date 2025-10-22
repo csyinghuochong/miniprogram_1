@@ -418,5 +418,19 @@
     "ItemPileSum": 1,
     "ItemEquipID": 12000006,
     "ItemDescription": "这是一个装备6"
+  },
+  {
+    "Id": 10003011,
+    "ItemName": "一个更吊的头盔",
+    "Icon": "10003001",
+    "ItemQuality": 3,
+    "UseLv": 25,
+    "ItemType": 3,
+    "ItemSubType": 1,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 3100,
+    "ItemPileSum": 1,
+    "ItemEquipID": 12000011,
+    "ItemDescription": "这是一个装备1"
   }
 ]
