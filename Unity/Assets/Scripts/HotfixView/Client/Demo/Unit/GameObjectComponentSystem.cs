@@ -60,12 +60,12 @@ namespace ET.Client
                     break;
                 case UnitType.Hero:
                     HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ZString.Format("Hero/{0}", heroConfig.HeroModelID));
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
 
                     break;
                 case UnitType.Monster:
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ZString.Format("Monster/{0}", monsterConfig.MonsterModelID));
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Monster, monsterConfig.MonsterModelID);
 
                     break;
                 default:

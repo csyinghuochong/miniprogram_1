@@ -21,7 +21,7 @@ namespace ET
             AtkType = _buf.ReadInt();
             HeroType = _buf.ReadInt();
             HeroHeadIcon = _buf.ReadString();
-            HeroModelID = _buf.ReadInt();
+            HeroModelID = _buf.ReadString();
             HeroQuality = _buf.ReadInt();
             DamageType = _buf.ReadInt();
             AtkID = _buf.ReadInt();
@@ -80,7 +80,7 @@ namespace ET
         /// <summary>
         /// 英雄模型ID
         /// </summary>
-        public readonly int HeroModelID;
+        public readonly string HeroModelID;
 
         /// <summary>
         /// 英雄品质

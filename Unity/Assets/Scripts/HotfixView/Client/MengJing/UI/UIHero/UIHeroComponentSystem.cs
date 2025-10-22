@@ -225,7 +225,7 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Text_HeroCP.SetTextFormat("战力：{0}", hero.NumericDic[NumericType.CombatPower]);
-            string path = ABPathHelper.GetUIUnitPath(ZString.Format("Hero/{0}", heroConfig.HeroModelID));
+            string path = ABPathHelper.GetUIUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
             GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
             UICommonHelper.DestoryChild(self.Spine_HeroModel.gameObject);
             UnityEngine.Object.Instantiate(model, self.Spine_HeroModel);

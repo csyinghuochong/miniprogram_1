@@ -20,7 +20,7 @@ namespace ET
             MonsterName = _buf.ReadString();
             MonsterHeadIcon = _buf.ReadString();
             MonsterType = _buf.ReadInt();
-            MonsterModelID = _buf.ReadInt();
+            MonsterModelID = _buf.ReadString();
             ChallengeTime = _buf.ReadInt();
             ActSkillID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
@@ -70,7 +70,7 @@ namespace ET
         /// <summary>
         /// 怪物模型ID
         /// </summary>
-        public readonly int MonsterModelID;
+        public readonly string MonsterModelID;
 
         /// <summary>
         /// 怪物挑战时间[秒]

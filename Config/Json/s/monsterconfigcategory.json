@@ -4,7 +4,7 @@
     "MonsterName": "哥布林",
     "MonsterHeadIcon": "10000001",
     "MonsterType": 1,
-    "MonsterModelID": 10000001,
+    "MonsterModelID": "10000001",
     "ChallengeTime": 0,
     "ActSkillID": 10000001,
     "SkillID": [
@@ -30,7 +30,7 @@
     "MonsterName": "哥布林投手",
     "MonsterHeadIcon": "10000002",
     "MonsterType": 2,
-    "MonsterModelID": 10000002,
+    "MonsterModelID": "10000002",
     "ChallengeTime": 0,
     "ActSkillID": 10000002,
     "SkillID": [
@@ -56,7 +56,7 @@
     "MonsterName": "巨型骷髅",
     "MonsterHeadIcon": "10000003",
     "MonsterType": 3,
-    "MonsterModelID": 10000003,
+    "MonsterModelID": "10000003",
     "ChallengeTime": 60,
     "ActSkillID": 10000003,
     "SkillID": [
