@@ -31,10 +31,10 @@ namespace ET.Client
         public UIEquipmentItem UIEquipmentItem_5 { get; set; }
         public UIEquipmentItem UIEquipmentItem_6 { get; set; }
         public GameObject UIHeroInfo_2;
-        public Transform Content_UIBaseStatItem;
-        public GameObject UIBaseStatItem;
-        public Transform Content_UIOtherStatItem;
-        public GameObject UIOtherStatItem;
+        public Transform Content_UIBaseAttributeItem;
+        public GameObject UIBaseAttributeItem;
+        public Transform Content_UIOtherAttributeItem;
+        public GameObject UIOtherAttributeItem;
         public Transform Content_UISkillItem;
         public GameObject UISkillItem;
         public GameObject ScrollView_ItemList;

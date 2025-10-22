@@ -147,13 +147,13 @@ MonoBehaviour:
     gameObject: {fileID: 3064621907394404454}
   - key: UIHeroInfo_2
     gameObject: {fileID: 2702838617383073277}
-  - key: Content_UIBaseStatItem
+  - key: Content_UIBaseAttributeItem
     gameObject: {fileID: 5736800486734862824}
-  - key: UIBaseStatItem
+  - key: UIBaseAttributeItem
     gameObject: {fileID: 8023497178636655515}
-  - key: Content_UIOtherStatItem
+  - key: Content_UIOtherAttributeItem
     gameObject: {fileID: 565865779347210848}
-  - key: UIOtherStatItem
+  - key: UIOtherAttributeItem
     gameObject: {fileID: 5446824025472604157}
   - key: Content_UISkillItem
     gameObject: {fileID: 3054391922508649809}
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 5931700099489620152}
   - component: {fileID: 2279427899831844340}
   m_Layer: 5
-  m_Name: Content_UIOtherStatItem
+  m_Name: Content_UIOtherAttributeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 7252192903241587588}
   - component: {fileID: 1040272174411718316}
   m_Layer: 5
-  m_Name: Scroll View_BaseStats
+  m_Name: Scroll View_BaseAttributes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4247,7 +4247,7 @@ GameObject:
   - component: {fileID: 7447337633055671111}
   - component: {fileID: 6163303792259947081}
   m_Layer: 5
-  m_Name: UIOtherStatItem
+  m_Name: UIOtherAttributeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4819,7 +4819,7 @@ GameObject:
   - component: {fileID: 4437653560949737025}
   - component: {fileID: 8689006091944869723}
   m_Layer: 5
-  m_Name: Content_UIBaseStatItem
+  m_Name: Content_UIBaseAttributeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5181,7 +5181,7 @@ GameObject:
   - component: {fileID: 8443032807819917442}
   - component: {fileID: 8904884032548139583}
   m_Layer: 5
-  m_Name: Scroll View_OtherStats
+  m_Name: Scroll View_OtherAttributes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6643,7 +6643,7 @@ GameObject:
   - component: {fileID: 3838440826279726538}
   - component: {fileID: 7889689273748634549}
   m_Layer: 5
-  m_Name: UIBaseStatItem
+  m_Name: UIBaseAttributeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -86,12 +86,12 @@ namespace ET.Client
             self.UIEquipmentItem_5 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_5"));
             self.UIEquipmentItem_6 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_6"));
             self.UIHeroInfo_2 = rc.Get<GameObject>("UIHeroInfo_2");
-            self.Content_UIBaseStatItem = rc.Get<GameObject>("Content_UIBaseStatItem").transform;
-            self.UIBaseStatItem = rc.Get<GameObject>("UIBaseStatItem");
-            self.UIBaseStatItem.SetActive(false);
-            self.Content_UIOtherStatItem = rc.Get<GameObject>("Content_UIOtherStatItem").transform;
-            self.UIOtherStatItem = rc.Get<GameObject>("UIOtherStatItem");
-            self.UIOtherStatItem.SetActive(false);
+            self.Content_UIBaseAttributeItem = rc.Get<GameObject>("Content_UIBaseAttributeItem").transform;
+            self.UIBaseAttributeItem = rc.Get<GameObject>("UIBaseAttributeItem");
+            self.UIBaseAttributeItem.SetActive(false);
+            self.Content_UIOtherAttributeItem = rc.Get<GameObject>("Content_UIOtherAttributeItem").transform;
+            self.UIOtherAttributeItem = rc.Get<GameObject>("UIOtherAttributeItem");
+            self.UIOtherAttributeItem.SetActive(false);
             self.Content_UISkillItem = rc.Get<GameObject>("Content_UISkillItem").transform;
             self.UISkillItem = rc.Get<GameObject>("UISkillItem");
             self.UISkillItem.SetActive(false);
@@ -282,13 +282,13 @@ namespace ET.Client
         private static void ShowBaseStatItem(this UIHeroComponent self, int index, string name, string value)
         {
             Transform item = null;
-            if (self.Content_UIBaseStatItem.childCount <= index)
+            if (self.Content_UIBaseAttributeItem.childCount <= index)
             {
-                item = UnityEngine.Object.Instantiate(self.UIBaseStatItem, self.Content_UIBaseStatItem).transform;
+                item = UnityEngine.Object.Instantiate(self.UIBaseAttributeItem, self.Content_UIBaseAttributeItem).transform;
             }
             else
             {
-                item = self.Content_UIBaseStatItem.GetChild(index);
+                item = self.Content_UIBaseAttributeItem.GetChild(index);
             }
 
             if (item == null)
@@ -305,13 +305,13 @@ namespace ET.Client
         private static void ShowOtherStatItem(this UIHeroComponent self, int index, string name, string value)
         {
             Transform item = null;
-            if (self.Content_UIOtherStatItem.childCount <= index)
+            if (self.Content_UIOtherAttributeItem.childCount <= index)
             {
-                item = UnityEngine.Object.Instantiate(self.UIOtherStatItem, self.Content_UIOtherStatItem).transform;
+                item = UnityEngine.Object.Instantiate(self.UIOtherAttributeItem, self.Content_UIOtherAttributeItem).transform;
             }
             else
             {
-                item = self.Content_UIOtherStatItem.GetChild(index);
+                item = self.Content_UIOtherAttributeItem.GetChild(index);
             }
 
             item.gameObject.SetActive(true);
