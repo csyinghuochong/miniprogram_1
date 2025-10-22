@@ -571,6 +571,12 @@ message M2C_GetAllItem // ILocationResponse
 	repeated ItemInfo ItemList = 4;
 }
 
+message M2C_ItemUpdateOp // IMessage
+{
+	ItemInfo ItemInfo = 1;
+	int32 ItemOpType = 2;
+}
+
 // ResponseType M2C_SellItem
 message C2M_SellItem // ILocationRequest
 {
@@ -586,11 +592,20 @@ message M2C_SellItem // ILocationResponse
 	string Message = 3;
 }
 
-
-message M2C_ItemUpdateOp // IMessage
+// ResponseType M2C_UseItem
+message C2M_UseItem // ILocationRequest
 {
-	ItemInfo ItemInfo = 1;
-	int32 ItemOpType = 2;
+	int32 RpcId = 1;
+	int64 ItemId = 2;
+	int32 Num = 3;
+	int64 HeroId = 4;
+}
+
+message M2C_UseItem // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
 }
 
 message HeroInfo

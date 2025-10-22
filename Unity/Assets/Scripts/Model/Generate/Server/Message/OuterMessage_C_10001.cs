@@ -2601,6 +2601,35 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.M2C_ItemUpdateOp)]
+    public partial class M2C_ItemUpdateOp : MessageObject, IMessage
+    {
+        public static M2C_ItemUpdateOp Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ItemUpdateOp), isFromPool) as M2C_ItemUpdateOp;
+        }
+
+        [MemoryPackOrder(0)]
+        public ItemInfo ItemInfo { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ItemOpType { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ItemInfo = default;
+            this.ItemOpType = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_SellItem)]
     [ResponseType(nameof(M2C_SellItem))]
     public partial class C2M_SellItem : MessageObject, ILocationRequest
@@ -2668,19 +2697,26 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.M2C_ItemUpdateOp)]
-    public partial class M2C_ItemUpdateOp : MessageObject, IMessage
+    [Message(OuterMessage.C2M_UseItem)]
+    [ResponseType(nameof(M2C_UseItem))]
+    public partial class C2M_UseItem : MessageObject, ILocationRequest
     {
-        public static M2C_ItemUpdateOp Create(bool isFromPool = false)
+        public static C2M_UseItem Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2C_ItemUpdateOp), isFromPool) as M2C_ItemUpdateOp;
+            return ObjectPool.Instance.Fetch(typeof(C2M_UseItem), isFromPool) as C2M_UseItem;
         }
 
         [MemoryPackOrder(0)]
-        public ItemInfo ItemInfo { get; set; }
+        public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int ItemOpType { get; set; }
+        public long ItemId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int Num { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long HeroId { get; set; }
 
         public override void Dispose()
         {
@@ -2689,8 +2725,43 @@ namespace ET
                 return;
             }
 
-            this.ItemInfo = default;
-            this.ItemOpType = default;
+            this.RpcId = default;
+            this.ItemId = default;
+            this.Num = default;
+            this.HeroId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_UseItem)]
+    public partial class M2C_UseItem : MessageObject, ILocationResponse
+    {
+        public static M2C_UseItem Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_UseItem), isFromPool) as M2C_UseItem;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -3176,19 +3247,21 @@ namespace ET
         public const ushort ItemInfo = 10068;
         public const ushort C2M_GetAllItem = 10069;
         public const ushort M2C_GetAllItem = 10070;
-        public const ushort C2M_SellItem = 10071;
-        public const ushort M2C_SellItem = 10072;
-        public const ushort M2C_ItemUpdateOp = 10073;
-        public const ushort HeroInfo = 10074;
-        public const ushort C2M_GetAllHero = 10075;
-        public const ushort M2C_GetAllHero = 10076;
-        public const ushort M2C_HeroUpdateOp = 10077;
-        public const ushort C2M_SetHeroFormation = 10078;
-        public const ushort M2C_SetHeroFormation = 10079;
-        public const ushort C2M_SetHeroEquipment = 10080;
-        public const ushort M2C_SetHeroEquipment = 10081;
-        public const ushort M2C_RoleDataUpdate = 10082;
-        public const ushort C2M_GetUserInfo = 10083;
-        public const ushort M2C_GetUserInfo = 10084;
+        public const ushort M2C_ItemUpdateOp = 10071;
+        public const ushort C2M_SellItem = 10072;
+        public const ushort M2C_SellItem = 10073;
+        public const ushort C2M_UseItem = 10074;
+        public const ushort M2C_UseItem = 10075;
+        public const ushort HeroInfo = 10076;
+        public const ushort C2M_GetAllHero = 10077;
+        public const ushort M2C_GetAllHero = 10078;
+        public const ushort M2C_HeroUpdateOp = 10079;
+        public const ushort C2M_SetHeroFormation = 10080;
+        public const ushort M2C_SetHeroFormation = 10081;
+        public const ushort C2M_SetHeroEquipment = 10082;
+        public const ushort M2C_SetHeroEquipment = 10083;
+        public const ushort M2C_RoleDataUpdate = 10084;
+        public const ushort C2M_GetUserInfo = 10085;
+        public const ushort M2C_GetUserInfo = 10086;
     }
 }

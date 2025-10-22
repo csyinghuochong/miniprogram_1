@@ -10,6 +10,13 @@ namespace ET.Server
             InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
 
             Item item = inventoryComponent.GetItem(request.ItemId);
+
+            if (item == null)
+            {
+                response.Error = ErrorCode.ERR_NotExistItem;
+                return;
+            }
+            
             if (item.ContainerType != (int)InventoryContainerType.Bag)
             {
                 response.Error = ErrorCode.ERR_ModifyData;

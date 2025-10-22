@@ -1,0 +1,33 @@
+﻿namespace ET.Server
+{
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_UseItemHandler : MessageLocationHandler<Unit, C2M_UseItem, M2C_UseItem>
+    {
+        protected override async ETTask Run(Unit unit, C2M_UseItem request, M2C_UseItem response)
+        {
+            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+
+            Item item = inventoryComponent.GetItem(request.ItemId);
+            
+            if (item == null)
+            {
+                response.Error = ErrorCode.ERR_NotExistItem;
+                return;
+            }
+            
+            if (item.ContainerType != (int)InventoryContainerType.Bag)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+
+            if (request.Num < 1 || request.Num > item.Num)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+            
+            await ETTask.CompletedTask;
+        }
+    }
+}
