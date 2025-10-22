@@ -19,6 +19,7 @@ namespace ET.Client
             self.Text_ItemName = rc.Get<GameObject>("Text_ItemName").GetComponent<TMP_Text>();
             self.Text_ItemEquipmentType = rc.Get<GameObject>("Text_ItemEquipmentType").GetComponent<TMP_Text>();
             self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
+            self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Wear = rc.Get<GameObject>("Button_Wear").GetComponent<Button>();
             self.Button_TakeOff = rc.Get<GameObject>("Button_TakeOff").GetComponent<Button>();
@@ -37,14 +38,14 @@ namespace ET.Client
         {
         }
 
-        public static void UpdateInfo(this UIItemTip_EquipmentComponent self, UIItemTipData uiItemTipData)
+        public static async ETTask UpdateInfo(this UIItemTip_EquipmentComponent self, UIItemTipData uiItemTipData)
         {
             self.UIItemTipData = uiItemTipData;
 
             Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
-
+            
             string type = itemConfig.ItemSubType switch
             {
                 (int)ItemEquipmentType.Toukui => "头盔",
@@ -58,7 +59,10 @@ namespace ET.Client
 
             self.Text_ItemName.SetText(itemConfig.ItemName);
             self.Text_ItemEquipmentType.SetText(type);
-            self.Text_Lv.SetTextFormat("{0}级", 0);
+            self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
+            
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {

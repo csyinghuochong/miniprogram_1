@@ -20,6 +20,7 @@ namespace ET
             ItemName = _buf.ReadString();
             Icon = _buf.ReadString();
             ItemQuality = _buf.ReadInt();
+            UseLv = _buf.ReadInt();
             ItemType = _buf.ReadInt();
             ItemSubType = _buf.ReadInt();
             SellMoneyType = _buf.ReadInt();
@@ -55,6 +56,11 @@ namespace ET
         /// 道具品质
         /// </summary>
         public readonly int ItemQuality;
+
+        /// <summary>
+        /// 使用等级
+        /// </summary>
+        public readonly int UseLv;
 
         /// <summary>
         /// 道具类型
@@ -108,6 +114,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -117,6 +124,7 @@ namespace ET
             + "ItemName:" + ItemName + ","
             + "Icon:" + Icon + ","
             + "ItemQuality:" + ItemQuality + ","
+            + "UseLv:" + UseLv + ","
             + "ItemType:" + ItemType + ","
             + "ItemSubType:" + ItemSubType + ","
             + "SellMoneyType:" + SellMoneyType + ","

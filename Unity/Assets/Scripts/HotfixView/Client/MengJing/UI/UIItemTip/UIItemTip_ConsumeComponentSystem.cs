@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,9 @@ namespace ET.Client
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
             self.Text_ItemName = rc.Get<GameObject>("Text_ItemName").GetComponent<TMP_Text>();
+            self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
             self.Text_ItemDescription = rc.Get<GameObject>("Text_ItemDescription").GetComponent<TMP_Text>();
+            self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
 
@@ -38,7 +41,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
 
-        public static void UpdateInfo(this UIItemTip_ConsumeComponent self, UIItemTipData uiItemTipData)
+        public static async ETTask UpdateInfo(this UIItemTip_ConsumeComponent self, UIItemTipData uiItemTipData)
         {
             self.UIItemTipData = uiItemTipData;
 
@@ -46,8 +49,13 @@ namespace ET.Client
             if (item != null)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-                self.Text_ItemName.text = itemConfig.ItemName;
+                
+                self.Text_ItemName.SetText(itemConfig.ItemName);
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
+                self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
+                
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
             }
         }
     }

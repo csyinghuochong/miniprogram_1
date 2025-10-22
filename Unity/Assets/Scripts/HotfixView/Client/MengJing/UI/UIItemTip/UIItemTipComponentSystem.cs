@@ -38,19 +38,19 @@ namespace ET.Client
                 if (itemConfig.ItemType == (int)ItemType.Consume)
                 {
                     self.UIItemTip_ConsumeComponent.GameObject.SetActive(true);
-                    self.UIItemTip_ConsumeComponent.UpdateInfo(uiItemTipData);
+                    self.UIItemTip_ConsumeComponent.UpdateInfo(uiItemTipData).Coroutine();
                 }
 
                 if (itemConfig.ItemType == (int)ItemType.Material)
                 {
                     self.UIItemTip_MaterialComponent.GameObject.SetActive(true);
-                    self.UIItemTip_MaterialComponent.UpdateInfo(uiItemTipData);
+                    self.UIItemTip_MaterialComponent.UpdateInfo(uiItemTipData).Coroutine();
                 }
 
                 if (itemConfig.ItemType == (int)ItemType.Equipment)
                 {
                     self.UIItemTip_EquipmentComponent.GameObject.SetActive(true);
-                    self.UIItemTip_EquipmentComponent.UpdateInfo(uiItemTipData);
+                    self.UIItemTip_EquipmentComponent.UpdateInfo(uiItemTipData).Coroutine();
                 }
             }
         }

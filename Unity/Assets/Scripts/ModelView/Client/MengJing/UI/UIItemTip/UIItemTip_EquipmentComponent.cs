@@ -13,6 +13,7 @@ namespace ET.Client
         public TMP_Text Text_ItemName;
         public TMP_Text Text_ItemEquipmentType;
         public TMP_Text Text_Lv;
+        public Image Image_ItemIcon;
         public Button Button_Sell;
         public Button Button_Wear;
         public Button Button_TakeOff;

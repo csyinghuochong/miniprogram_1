@@ -12,7 +12,9 @@ namespace ET.Client
         public GameObject GameObject { get; set; }
 
         public TMP_Text Text_ItemName;
+        public TMP_Text Text_Lv;
         public TMP_Text Text_ItemDescription;
+        public Image Image_ItemIcon;
         public Button Button_Sell;
     }
 }
