@@ -76,7 +76,7 @@ namespace ET.Client
         {
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemSellTip);
             UIItemSellTipComponent uiItemSellTipComponent = ui.GetComponent<UIItemSellTipComponent>();
-            uiItemSellTipComponent.UpdateInfo(self.UIItemTipData.ItemId);
+            uiItemSellTipComponent.InitUI(self.UIItemTipData);
 
             self.OnClose();
         }
