@@ -15,6 +15,10 @@ namespace ET.Client
         public TMP_Text Text_Lv;
         public Image Image_CombatPowerChange;
         public TMP_Text Text_CombatPowerChange;
+        public Image Image_CombatPowerReduction;
+        public Image Image_CombatPowerIncrease;
+        public Transform BaseAttributeList;
+        public GameObject UIAttributeItem;
         public Image Image_ItemIcon;
         public Button Button_Sell;
         public Button Button_Wear;

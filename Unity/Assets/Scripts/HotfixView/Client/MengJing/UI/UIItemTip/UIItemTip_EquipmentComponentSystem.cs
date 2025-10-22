@@ -21,13 +21,18 @@ namespace ET.Client
             self.Text_ItemEquipmentType = rc.Get<GameObject>("Text_ItemEquipmentType").GetComponent<TMP_Text>();
             self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
             self.Image_CombatPowerChange = rc.Get<GameObject>("Image_CombatPowerChange").GetComponent<Image>();
+            self.Image_CombatPowerChange.gameObject.SetActive(false);
             self.Text_CombatPowerChange = rc.Get<GameObject>("Text_CombatPowerChange").GetComponent<TMP_Text>();
+            self.Image_CombatPowerReduction = rc.Get<GameObject>("Image_CombatPowerReduction").GetComponent<Image>();
+            self.Image_CombatPowerIncrease = rc.Get<GameObject>("Image_CombatPowerIncrease").GetComponent<Image>();
+            self.BaseAttributeList = rc.Get<GameObject>("BaseAttributeList").transform;
+            self.UIAttributeItem = rc.Get<GameObject>("UIAttributeItem");
+            self.UIAttributeItem.SetActive(false);
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Wear = rc.Get<GameObject>("Button_Wear").GetComponent<Button>();
             self.Button_TakeOff = rc.Get<GameObject>("Button_TakeOff").GetComponent<Button>();
 
-            self.Image_CombatPowerChange.gameObject.SetActive(false);
             self.Button_Sell.gameObject.SetActive(false);
             self.Button_Wear.gameObject.SetActive(false);
             self.Button_TakeOff.gameObject.SetActive(false);
@@ -47,11 +52,11 @@ namespace ET.Client
             self.UIItemTipData = uiItemTipData;
 
             InventoryComponentC inventoryComponent = self.Root().GetComponent<InventoryComponentC>();
-            Item item = inventoryComponent.GetItem(uiItemTipData.ItemId);
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-            EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
+            Item newItem = inventoryComponent.GetItem(uiItemTipData.ItemId);
+            ItemConfig newItemConfig = ItemConfigCategory.Instance.Get(newItem.ConfigId);
+            EquipConfig newEquipConfig = EquipConfigCategory.Instance.Get(newItemConfig.ItemEquipID);
 
-            string type = itemConfig.ItemSubType switch
+            string type = newItemConfig.ItemSubType switch
             {
                 (int)ItemEquipmentType.Toukui => "头盔",
                 (int)ItemEquipmentType.Yifu => "衣服",
@@ -62,11 +67,11 @@ namespace ET.Client
                 _ => ""
             };
 
-            self.Text_ItemName.SetText(itemConfig.ItemName);
+            self.Text_ItemName.SetText(newItemConfig.ItemName);
             self.Text_ItemEquipmentType.SetText(type);
-            self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
+            self.Text_Lv.SetTextFormat("{0}级", newItemConfig.UseLv);
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, newItemConfig.Icon);
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
@@ -75,7 +80,7 @@ namespace ET.Client
                 self.Button_Wear.gameObject.SetActive(true);
 
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
-                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)itemConfig.ItemSubType);
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)newItemConfig.ItemSubType);
 
                 if (equipSlotType == EquipSlotType.None)
                 {
@@ -99,12 +104,30 @@ namespace ET.Client
                         }
                     }
 
-                    equipments.Add(item);
+                    equipments.Add(newItem);
 
                     Dictionary<int, long> oldNumericDic = hero.NumericDic;
                     Dictionary<int, long> newNumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
 
                     self.Text_CombatPowerChange.SetText(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower]);
+                    self.Image_CombatPowerReduction.gameObject.SetActive(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower] < 0);
+                    self.Image_CombatPowerIncrease.gameObject.SetActive(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower] > 0);
+                    
+                    GameObject baseAttributeItem = UnityEngine.Object.Instantiate(self.UIAttributeItem, self.BaseAttributeList);
+                    ReferenceCollector rc = baseAttributeItem.GetComponent<ReferenceCollector>();
+                    rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText("攻击");
+                    rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(newEquipConfig.EquipMaxAct);
+                    rc.Get<GameObject>("Image_Reduction").SetActive(newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base] < 0);
+                    rc.Get<GameObject>("Image_Increase").SetActive(newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base] > 0);
+                    baseAttributeItem.SetActive(true);
+                    
+                    baseAttributeItem = UnityEngine.Object.Instantiate(self.UIAttributeItem, self.BaseAttributeList);
+                    rc = baseAttributeItem.GetComponent<ReferenceCollector>();
+                    rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText("防御");
+                    rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(newEquipConfig.EquipMaxDef);
+                    rc.Get<GameObject>("Image_Reduction").SetActive(newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base] < 0);
+                    rc.Get<GameObject>("Image_Increase").SetActive(newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base] > 0);
+                    baseAttributeItem.SetActive(true);
                 }
             }
 
