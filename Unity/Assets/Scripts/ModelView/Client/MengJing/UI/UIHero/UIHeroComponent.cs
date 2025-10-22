@@ -10,6 +10,8 @@ namespace ET.Client
     public class UIHeroComponent : Entity, IAwake, IDestroy
     {
         public long CurrentHeroId { get; set; }
+
+        public List<UISkillItem> UISkillItemList { get; set; } = new();
         public List<UICommonItem> UICommonItemList { get; set; } = new();
         public List<UITeamItem> UITeamItemList { get; set; } = new();
 
@@ -33,6 +35,8 @@ namespace ET.Client
         public GameObject UIBaseStatItem;
         public Transform Content_UIOtherStatItem;
         public GameObject UIOtherStatItem;
+        public Transform Content_UISkillItem;
+        public GameObject UISkillItem;
         public GameObject ScrollView_ItemList;
         public Transform Content_UICommonItem;
         public GameObject UICommonItem;

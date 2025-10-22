@@ -73,7 +73,7 @@ namespace ET.Client
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
 
             self.UIHeroInfo_1 = rc.Get<GameObject>("UIHeroInfo_1");
-            self.Spine_HeroModel  = rc.Get<GameObject>("Spine_HeroModel").transform;
+            self.Spine_HeroModel = rc.Get<GameObject>("Spine_HeroModel").transform;
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Text_HeroCP = rc.Get<GameObject>("Text_HeroCP").GetComponent<TMP_Text>();
             self.Text_HeroLv = rc.Get<GameObject>("Text_HeroLv").GetComponent<TMP_Text>();
@@ -87,11 +87,14 @@ namespace ET.Client
             self.UIEquipmentItem_6 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_6"));
             self.UIHeroInfo_2 = rc.Get<GameObject>("UIHeroInfo_2");
             self.Content_UIBaseStatItem = rc.Get<GameObject>("Content_UIBaseStatItem").transform;
-            self.UIBaseStatItem = rc.GetComponent<ReferenceCollector>().Get<GameObject>("UIBaseStatItem");
+            self.UIBaseStatItem = rc.Get<GameObject>("UIBaseStatItem");
             self.UIBaseStatItem.SetActive(false);
             self.Content_UIOtherStatItem = rc.Get<GameObject>("Content_UIOtherStatItem").transform;
-            self.UIOtherStatItem = rc.GetComponent<ReferenceCollector>().Get<GameObject>("UIOtherStatItem");
+            self.UIOtherStatItem = rc.Get<GameObject>("UIOtherStatItem");
             self.UIOtherStatItem.SetActive(false);
+            self.Content_UISkillItem = rc.Get<GameObject>("Content_UISkillItem").transform;
+            self.UISkillItem = rc.Get<GameObject>("UISkillItem");
+            self.UISkillItem.SetActive(false);
             self.ScrollView_ItemList = rc.Get<GameObject>("ScrollView_ItemList");
             self.ScrollView_ItemList.SetActive(false);
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
@@ -225,15 +228,18 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Text_HeroCP.SetTextFormat("战力：{0}", hero.NumericDic[NumericType.CombatPower]);
+
             string path = ABPathHelper.GetUIUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
             GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
             UICommonHelper.DestoryChild(self.Spine_HeroModel.gameObject);
             UnityEngine.Object.Instantiate(model, self.Spine_HeroModel);
+
             self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
             int maxExp = 100; // 暂时
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
 
+            // 装备
             self.UIEquipmentItem_1.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
             self.UIEquipmentItem_2.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
             self.UIEquipmentItem_3.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
@@ -241,13 +247,34 @@ namespace ET.Client
             self.UIEquipmentItem_5.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
             self.UIEquipmentItem_6.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
 
+            // 基础属性
             self.ShowBaseStatItem(1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
             self.ShowBaseStatItem(2, "攻击", hero.NumericDic[NumericType.Base_MaxAct_Base].ToString());
             self.ShowBaseStatItem(3, "物防", hero.NumericDic[NumericType.Base_MaxDef_Base].ToString());
             self.ShowBaseStatItem(4, "魔防", hero.NumericDic[NumericType.Base_MaxAdf_Base].ToString());
 
+            // 特殊属性
             self.ShowOtherStatItem(1, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
             self.ShowOtherStatItem(2, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
+
+            // 技能
+            while (self.UISkillItemList.Count < heroConfig.SkillID.Length)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UISkillItem, self.Content_UISkillItem);
+                UISkillItem newItem = self.AddChild<UISkillItem, GameObject>(go);
+                self.UISkillItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < heroConfig.SkillID.Length; i++)
+            {
+                self.UISkillItemList[i].UpdateInfo(heroConfig.SkillID[i]).Coroutine();
+                self.UISkillItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = heroConfig.SkillID.Length; i < self.UISkillItemList.Count; i++)
+            {
+                self.UISkillItemList[i].GameObject.SetActive(false);
+            }
         }
 
         private static void ShowBaseStatItem(this UIHeroComponent self, int index, string name, string value)
