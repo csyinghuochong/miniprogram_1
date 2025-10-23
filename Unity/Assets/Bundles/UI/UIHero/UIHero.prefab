@@ -118,16 +118,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: Text_Type_Gold
+    gameObject: {fileID: 743390546318364538}
+  - key: Text_Type_Diamond
+    gameObject: {fileID: 5044012106190388321}
   - key: Button_Close
     gameObject: {fileID: 2884267023644722160}
   - key: UIHeroInfo_1
     gameObject: {fileID: 8552741494945830746}
   - key: Spine_HeroModel
     gameObject: {fileID: 209884172195129780}
-  - key: Text_Type_Gold
-    gameObject: {fileID: 743390546318364538}
-  - key: Text_Type_Diamond
-    gameObject: {fileID: 5044012106190388321}
   - key: Text_HeroName
     gameObject: {fileID: 5539521616649302433}
   - key: Text_HeroCP
@@ -164,6 +164,12 @@ MonoBehaviour:
     gameObject: {fileID: 3054391922508649809}
   - key: UISkillItem
     gameObject: {fileID: 2788321915231996297}
+  - key: Button_XiangXi
+    gameObject: {fileID: 2398444208251217606}
+  - key: Button_ShengXing
+    gameObject: {fileID: 3391831106351796190}
+  - key: Button_ShengJi
+    gameObject: {fileID: 5697726388323782283}
   - key: ScrollView_ItemList
     gameObject: {fileID: 4603914184067087456}
   - key: Content_UICommonItem
@@ -176,12 +182,6 @@ MonoBehaviour:
     gameObject: {fileID: 8066048520589287252}
   - key: Button_Formation
     gameObject: {fileID: 2402162829818240152}
-  - key: Button_XiangXi
-    gameObject: {fileID: 2398444208251217606}
-  - key: Button_ShengXing
-    gameObject: {fileID: 3391831106351796190}
-  - key: Button_ShengJi
-    gameObject: {fileID: 5697726388323782283}
   - key: UICommonItem
     gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
       type: 3}
@@ -2695,10 +2695,10 @@ RectTransform:
   - {fileID: 5722532684599678917}
   m_Father: {fileID: 8755606602168945634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6375582558916529993
 CanvasRenderer:
@@ -4672,9 +4672,9 @@ RectTransform:
   - {fileID: 3767145388084759244}
   m_Father: {fileID: 3353464542228487045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 60, y: -60}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4613773291833500196
@@ -4739,10 +4739,10 @@ RectTransform:
   - {fileID: 2555575009963295109}
   m_Father: {fileID: 3459315102984017918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -17.5}
+  m_SizeDelta: {x: 250, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7670865456239273393
 CanvasRenderer:
@@ -7305,10 +7305,10 @@ RectTransform:
   - {fileID: 6914181551222970013}
   m_Father: {fileID: 4196095570501044305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -17.5}
+  m_SizeDelta: {x: 250, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1448138340928365437
 CanvasRenderer:

@@ -39,6 +39,9 @@ namespace ET.Client
         public GameObject UIOtherAttributeItem;
         public Transform Content_UISkillItem;
         public GameObject UISkillItem;
+        public Button Button_XiangXi;
+        public Button Button_ShengXing;
+        public Button Button_ShengJi;
         public GameObject ScrollView_ItemList;
         public Transform Content_UICommonItem;
         public GameObject UICommonItem;
@@ -46,8 +49,5 @@ namespace ET.Client
         public GameObject UITeamItem;
         public Button Button_Hero;
         public Button Button_Formation;
-        public Button Button_XiangXi;
-        public Button Button_ShengXing;
-        public Button Button_ShengJi;
     }
 }

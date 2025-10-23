@@ -124,6 +124,9 @@ namespace ET.Client
             self.Content_UISkillItem = rc.Get<GameObject>("Content_UISkillItem").transform;
             self.UISkillItem = rc.Get<GameObject>("UISkillItem");
             self.UISkillItem.SetActive(false);
+            self.Button_XiangXi = rc.Get<GameObject>("Button_XiangXi").GetComponent<Button>();
+            self.Button_ShengXing = rc.Get<GameObject>("Button_ShengXing").GetComponent<Button>();
+            self.Button_ShengJi = rc.Get<GameObject>("Button_ShengJi").GetComponent<Button>();
             self.ScrollView_ItemList = rc.Get<GameObject>("ScrollView_ItemList");
             self.ScrollView_ItemList.SetActive(false);
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
@@ -140,9 +143,10 @@ namespace ET.Client
             self.UIEquipmentItem_4.EquipSlotType = EquipSlotType.Xiezi;
             self.UIEquipmentItem_5.EquipSlotType = EquipSlotType.Xianglian;
             self.UIEquipmentItem_6.EquipSlotType = EquipSlotType.Wuqi;
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
-            self.Button_Hero.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
-            self.Button_Formation.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
+            self.Button_ShengJi.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroLvUp).Coroutine(); });
+            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
+            self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
+            self.Button_Formation.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
 
             self.UpdateGold();
             self.UpdateDiamond();
