@@ -237,7 +237,7 @@ namespace ET.Client
             UnityEngine.Object.Instantiate(model, self.Spine_HeroModel);
 
             self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
-            int maxExp = 100; // 暂时
+            int maxExp = ExpConfigCategory.Instance.Get(hero.Lv).HeroUpExp;
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
 
