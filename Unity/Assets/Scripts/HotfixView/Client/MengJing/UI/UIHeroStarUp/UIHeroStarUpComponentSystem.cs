@@ -18,6 +18,7 @@ namespace ET.Client
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Text_HeroLv = rc.Get<GameObject>("Text_HeroLv").GetComponent<TMP_Text>();
+            self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Transform_HeroStar = rc.Get<GameObject>("Transform_HeroStar").transform;
             self.Slider_HeroHunShi = rc.Get<GameObject>("Slider_HeroHunShi").GetComponent<Slider>();
             self.Text_HeroHunShi = rc.Get<GameObject>("Text_HeroHunShi").GetComponent<TMP_Text>();
@@ -48,6 +49,10 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
+            
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
+            self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            
             int maxExp = heroConfig.HeroUpStarNeed[hero.Star];
             self.Slider_HeroHunShi.value = hero.HunShi * 1f / maxExp;
             self.Text_HeroHunShi.SetTextFormat("{0}/{1}", hero.HunShi, maxExp);

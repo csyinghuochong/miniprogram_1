@@ -15,6 +15,7 @@ namespace ET.Client
         public Button Button_Close;
         public TMP_Text Text_HeroName;
         public TMP_Text Text_HeroLv;
+        public Image Image_HeroIcon;
         public Slider Slider_HeroExp;
         public TMP_Text Text_HeroExp;
         public Transform Content_UICommonItem;
