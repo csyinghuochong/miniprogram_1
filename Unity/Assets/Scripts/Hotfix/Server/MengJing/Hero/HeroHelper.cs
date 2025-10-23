@@ -37,7 +37,7 @@ namespace ET.Server
         {
             hero.Exp += value;
 
-            while (true)
+            for (int i = 0; i < 99999; i++)
             {
                 ExpConfig expConfig = ExpConfigCategory.Instance.Get(hero.Lv);
 
@@ -55,6 +55,31 @@ namespace ET.Server
 
                 hero.Exp -= expConfig.HeroUpExp;
                 hero.Lv += 1;
+            }
+        }
+
+        public static void AddHeroHunShi(Hero hero, int value)
+        {
+            hero.HunShi += value;
+
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+            for (int i = 0; i < 99999; i++)
+            {
+                if (hero.HunShi < heroConfig.HeroUpStarNeed[hero.Star])
+                {
+                    break;
+                }
+
+                int nextStar = hero.Star + 1;
+
+                if (nextStar >= heroConfig.HeroUpStarNeed.Length)
+                {
+                    hero.HunShi = heroConfig.HeroUpStarNeed[hero.Star];
+                    break;
+                }
+
+                hero.HunShi -= heroConfig.HeroUpStarNeed[hero.Star];
+                hero.Star += 1;
             }
         }
     }

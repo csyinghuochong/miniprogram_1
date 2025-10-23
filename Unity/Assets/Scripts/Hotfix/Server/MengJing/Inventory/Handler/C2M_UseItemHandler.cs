@@ -47,8 +47,24 @@
                     HeroHelper.UpdateHeroNumeric(unit, hero);
                     HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
                 }
-                
-                // 英雄新级
+
+                // 英雄星级
+                if (itemConfig.ItemSubType == (int)ItemConsumeType.HeroHunshi)
+                {
+                    Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
+
+                    if (hero == null)
+                    {
+                        response.Error = ErrorCode.ERR_NotExistHero;
+                        return;
+                    }
+
+                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
+
+                    HeroHelper.AddHeroHunShi(hero, request.Num * int.Parse(itemConfig.ItemUsePar));
+                    HeroHelper.UpdateHeroNumeric(unit, hero);
+                    HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+                }
             }
 
             await ETTask.CompletedTask;

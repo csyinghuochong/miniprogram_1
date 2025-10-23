@@ -25,6 +25,7 @@ namespace ET
         public int Lv { get; set; }
         public int Exp { get; set; }
         public int Star { get; set; }
+        public int HunShi{ get; set; }
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, long> Equipments { get; set; } = new();

@@ -109,7 +109,7 @@
         {
             self.Exp += value;
 
-            while (true)
+            for (int i = 0; i < 99999; i++)
             {
                 ExpConfig expConfig = ExpConfigCategory.Instance.Get(self.Lv);
 
