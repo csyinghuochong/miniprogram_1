@@ -14,6 +14,8 @@ namespace ET
     /// </summary>
     public enum ItemEquipmentType
     {
+        None = 0,
+
         /// <summary>
         /// 头盔
         /// </summary>

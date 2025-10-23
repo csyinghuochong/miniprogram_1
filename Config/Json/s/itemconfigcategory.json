@@ -11,6 +11,7 @@
     "SellMoneyValue": 100,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种货币"
   },
   {
@@ -25,6 +26,7 @@
     "SellMoneyValue": 200,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "更加有价值的货币"
   },
   {
@@ -39,6 +41,7 @@
     "SellMoneyValue": 300,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "角色经验值"
   },
   {
@@ -53,6 +56,7 @@
     "SellMoneyValue": 400,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "吞噬魔物必备的消耗品"
   },
   {
@@ -67,6 +71,7 @@
     "SellMoneyValue": 500,
     "ItemPileSum": 99999999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "联盟贡献度可以在联盟商店中兑换商品"
   },
   {
@@ -81,6 +86,7 @@
     "SellMoneyValue": 600,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "打开后从以下红色技能中随机获取一件"
   },
   {
@@ -95,6 +101,7 @@
     "SellMoneyValue": 700,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "打开后从以下红色技能中自选一件"
   },
   {
@@ -109,6 +116,7 @@
     "SellMoneyValue": 800,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "可以在招募中心召唤随从"
   },
   {
@@ -123,6 +131,7 @@
     "SellMoneyValue": 900,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "使用后永久增加攻击资质"
   },
   {
@@ -137,6 +146,7 @@
     "SellMoneyValue": 1000,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "使用后永久增加防御资质"
   },
   {
@@ -151,6 +161,7 @@
     "SellMoneyValue": 1100,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "使用后永久增加气血资质"
   },
   {
@@ -165,6 +176,7 @@
     "SellMoneyValue": 1200,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "使用后永久增加闪避资质"
   },
   {
@@ -179,7 +191,23 @@
     "SellMoneyValue": 1300,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "消耗入场券进入副本"
+  },
+  {
+    "Id": 10001009,
+    "ItemName": "英雄经验道具",
+    "Icon": "10000009",
+    "ItemQuality": 3,
+    "UseLv": 1,
+    "ItemType": 1,
+    "ItemSubType": 8,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1400,
+    "ItemPileSum": 99,
+    "ItemEquipID": 0,
+    "ItemUsePar": "100",
+    "ItemDescription": "英雄增加100经验"
   },
   {
     "Id": 10002001,
@@ -193,6 +221,7 @@
     "SellMoneyValue": 1400,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
@@ -207,6 +236,7 @@
     "SellMoneyValue": 1500,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
@@ -221,6 +251,7 @@
     "SellMoneyValue": 1600,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
@@ -235,6 +266,7 @@
     "SellMoneyValue": 1700,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
@@ -249,6 +281,7 @@
     "SellMoneyValue": 1800,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
@@ -263,6 +296,7 @@
     "SellMoneyValue": 1900,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种材料1"
   },
   {
@@ -277,6 +311,7 @@
     "SellMoneyValue": 2000,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种材料2"
   },
   {
@@ -291,6 +326,7 @@
     "SellMoneyValue": 2100,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种材料3"
   },
   {
@@ -305,6 +341,7 @@
     "SellMoneyValue": 2200,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种材料4"
   },
   {
@@ -319,6 +356,7 @@
     "SellMoneyValue": 2300,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种材料5"
   },
   {
@@ -333,6 +371,7 @@
     "SellMoneyValue": 2400,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
+    "ItemUsePar": "",
     "ItemDescription": "一种材料6"
   },
   {
@@ -347,6 +386,7 @@
     "SellMoneyValue": 2500,
     "ItemPileSum": 1,
     "ItemEquipID": 12000001,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备1"
   },
   {
@@ -361,6 +401,7 @@
     "SellMoneyValue": 2600,
     "ItemPileSum": 1,
     "ItemEquipID": 12000002,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备2"
   },
   {
@@ -375,6 +416,7 @@
     "SellMoneyValue": 2700,
     "ItemPileSum": 1,
     "ItemEquipID": 12000003,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备3"
   },
   {
@@ -389,6 +431,7 @@
     "SellMoneyValue": 2800,
     "ItemPileSum": 1,
     "ItemEquipID": 12000004,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备4"
   },
   {
@@ -403,6 +446,7 @@
     "SellMoneyValue": 2900,
     "ItemPileSum": 1,
     "ItemEquipID": 12000005,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备5"
   },
   {
@@ -417,6 +461,7 @@
     "SellMoneyValue": 3000,
     "ItemPileSum": 1,
     "ItemEquipID": 12000006,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备6"
   },
   {
@@ -431,6 +476,7 @@
     "SellMoneyValue": 3100,
     "ItemPileSum": 1,
     "ItemEquipID": 12000011,
+    "ItemUsePar": "",
     "ItemDescription": "这是一个装备1"
   }
 ]

@@ -27,6 +27,7 @@ namespace ET
             SellMoneyValue = _buf.ReadInt();
             ItemPileSum = _buf.ReadInt();
             ItemEquipID = _buf.ReadInt();
+            ItemUsePar = _buf.ReadString();
             ItemDescription = _buf.ReadString();
 
             PostInit();
@@ -93,6 +94,11 @@ namespace ET
         public readonly int ItemEquipID;
 
         /// <summary>
+        /// 道具使用参数
+        /// </summary>
+        public readonly string ItemUsePar;
+
+        /// <summary>
         /// 道具描述
         /// </summary>
         public readonly string ItemDescription;
@@ -103,6 +109,7 @@ namespace ET
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -131,6 +138,7 @@ namespace ET
             + "SellMoneyValue:" + SellMoneyValue + ","
             + "ItemPileSum:" + ItemPileSum + ","
             + "ItemEquipID:" + ItemEquipID + ","
+            + "ItemUsePar:" + ItemUsePar + ","
             + "ItemDescription:" + ItemDescription + ","
             + "}";
         }

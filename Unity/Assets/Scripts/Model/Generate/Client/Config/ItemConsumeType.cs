@@ -14,6 +14,8 @@ namespace ET
     /// </summary>
     public enum ItemConsumeType
     {
+        None = 0,
+
         /// <summary>
         /// 获得金币值
         /// </summary>
@@ -28,6 +30,11 @@ namespace ET
         /// 随机宝箱
         /// </summary>
         BaoXian = 3,
+
+        /// <summary>
+        /// 英雄经验
+        /// </summary>
+        HeroExp = 8,
 
     }
 }

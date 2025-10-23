@@ -14,6 +14,8 @@ namespace ET
     /// </summary>
     public enum ItemType
     {
+        None = 0,
+
         /// <summary>
         /// 消耗
         /// </summary>
