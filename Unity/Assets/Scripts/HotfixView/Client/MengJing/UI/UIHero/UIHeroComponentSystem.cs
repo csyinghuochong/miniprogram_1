@@ -8,6 +8,33 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateUserData_UpdateUIHero : AEvent<Scene, UpdateUserData>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserData args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIHero);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
+
+            if (args.UserDataType == UserDataType.Gold)
+            {
+                uiHeroComponent.UpdateGold();
+            }
+
+            if (args.UserDataType == UserDataType.Diamond)
+            {
+                uiHeroComponent.UpdateDiamond();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class HeroFormationUpdate_UpdateUIHero : AEvent<Scene, HeroFormationUpdate>
     {
         protected override async ETTask Run(Scene root, HeroFormationUpdate args)
@@ -20,18 +47,6 @@ namespace ET.Client
 
             UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
             uiHeroComponent.UpdateHeroList();
-            
-            //
-            if (args.UserDataType == UserDataType.Gold)
-            {
-                uiHeroComponent.UpdateGold();
-            }
-
-            //
-            if (args.UserDataType == UserDataType.Diamond)
-            {
-                uiHeroComponent.UpdateDiamond();
-            }
 
             await ETTask.CompletedTask;
         }
