@@ -73,7 +73,6 @@ namespace ET.Client
             self.Button_Type_Material = rc.Get<GameObject>("Button_Type_Material").GetComponent<Button>();
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
-            self.UICommonItem.gameObject.SetActive(false);
 
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_Consume.onClick.AddListener(() => { self.SetShowType(1); });

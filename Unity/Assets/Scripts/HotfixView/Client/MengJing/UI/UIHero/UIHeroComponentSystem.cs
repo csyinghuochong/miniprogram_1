@@ -113,7 +113,6 @@ namespace ET.Client
             self.ScrollView_ItemList.SetActive(false);
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
-            self.UICommonItem.gameObject.SetActive(false);
             self.Content_UITeamItem = rc.Get<GameObject>("Content_UITeamItem").transform;
             self.UITeamItem = rc.Get<GameObject>("UITeamItem");
             self.UITeamItem.SetActive(false);
