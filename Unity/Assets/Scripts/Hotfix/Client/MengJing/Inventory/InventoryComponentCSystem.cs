@@ -119,5 +119,26 @@ namespace ET.Client
 
             return items;
         }
+
+        public static List<Item> GetItemsBySubType(this InventoryComponentC self, ItemType type, int subType, InventoryContainerType containerType)
+        {
+            List<Item> items = new();
+            foreach (Item item in self.Items.Values)
+            {
+                if (item.ContainerType != (int)containerType)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+                if (itemConfig.ItemType == (int)type && itemConfig.ItemSubType == subType)
+                {
+                    items.Add(item);
+                }
+            }
+
+            return items;
+        }
     }
 }

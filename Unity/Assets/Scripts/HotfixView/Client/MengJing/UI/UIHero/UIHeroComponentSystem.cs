@@ -143,7 +143,7 @@ namespace ET.Client
             self.UIEquipmentItem_4.EquipSlotType = EquipSlotType.Xiezi;
             self.UIEquipmentItem_5.EquipSlotType = EquipSlotType.Xianglian;
             self.UIEquipmentItem_6.EquipSlotType = EquipSlotType.Wuqi;
-            self.Button_ShengJi.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroLvUp).Coroutine(); });
+            self.Button_ShengJi.AddListener(() => { self.OnButton_ShengJi().Coroutine(); });
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
             self.Button_Formation.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
@@ -411,6 +411,18 @@ namespace ET.Client
             self.UIHeroInfo_2.SetActive(false);
             self.ScrollView_ItemList.SetActive(true);
             self.UpdateItemList();
+        }
+
+        private static async ETTask OnButton_ShengJi(this UIHeroComponent self)
+        {
+            if (self.CurrentHeroId == 0)
+            {
+                return;
+            }
+
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroLvUp);
+            UIHeroLvUpComponent uiHeroLvUpComponent = ui.GetComponent<UIHeroLvUpComponent>();
+            uiHeroLvUpComponent.UpdateInfo(self.CurrentHeroId).Coroutine();
         }
     }
 }

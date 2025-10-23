@@ -57,5 +57,8 @@ namespace ET
         public const int ERR_NotEnoughItems = 20134; //道具不足
         public const int ERR_NotExistItem = 20135; //道具不存在
         public const int ERR_HeroNotEquipSlot = 20136; //英雄没有这个类型的装备孔位
+        public const int ERR_InventoryContainerError = 20137; //背包容器错误
+        public const int ERR_ItemUseNumError = 20138; //道具使用数量错误
+        public const int ERR_NotExistHero = 20139; //英雄不存在
     }
 }

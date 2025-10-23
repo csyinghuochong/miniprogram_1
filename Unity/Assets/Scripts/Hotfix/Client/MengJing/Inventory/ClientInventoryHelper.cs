@@ -32,5 +32,17 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> UseItem(Scene root, long itemId, int num = 1, long heroId = 0)
+        {
+            C2M_UseItem request = C2M_UseItem.Create();
+            request.ItemId = itemId;
+            request.Num = num;
+            request.HeroId = heroId;
+
+            M2C_UseItem response = (M2C_UseItem)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

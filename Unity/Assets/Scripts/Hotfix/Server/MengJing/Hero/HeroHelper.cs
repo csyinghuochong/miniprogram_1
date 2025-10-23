@@ -32,5 +32,30 @@ namespace ET.Server
 
             hero.NumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
         }
+
+        public static void AddHeroExp(Hero hero, int value)
+        {
+            hero.Exp += value;
+
+            while (true)
+            {
+                ExpConfig expConfig = ExpConfigCategory.Instance.Get(hero.Lv);
+
+                if (hero.Exp < expConfig.HeroUpExp)
+                {
+                    break;
+                }
+
+                int nextLv = hero.Lv + 1;
+                if (!ExpConfigCategory.Instance.DataMap.ContainsKey(nextLv))
+                {
+                    hero.Exp = expConfig.HeroUpExp;
+                    break;
+                }
+
+                hero.Exp -= expConfig.HeroUpExp;
+                hero.Lv += 1;
+            }
+        }
     }
 }

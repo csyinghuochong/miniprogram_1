@@ -270,6 +270,29 @@ namespace ET.Server
             return true;
         }
 
+        public static bool RemoveItem(this InventoryComponentS self, long itemId, int num)
+        {
+            if (!self.Items.TryGetValue(itemId, out EntityRef<Item> itemRef))
+            {
+                return false;
+            }
+
+            Item item = itemRef;
+
+            if (item.Num > num)
+            {
+                item.Num -= num;
+                ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
+                return true;
+            }
+
+            self.Items.Remove(itemId);
+            ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Remove);
+            item?.Dispose();
+
+            return true;
+        }
+
         public static List<Item> GetAllItems(this InventoryComponentS self)
         {
             List<Item> items = new List<Item>();

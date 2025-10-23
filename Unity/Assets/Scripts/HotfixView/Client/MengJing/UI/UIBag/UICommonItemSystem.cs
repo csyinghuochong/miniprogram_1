@@ -46,5 +46,10 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
         }
+
+        public static void SetSelected(this UICommonItem self, long itemId)
+        {
+            self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
+        }
     }
 }

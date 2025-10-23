@@ -8,25 +8,47 @@
             InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
 
             Item item = inventoryComponent.GetItem(request.ItemId);
-            
+
             if (item == null)
             {
                 response.Error = ErrorCode.ERR_NotExistItem;
                 return;
             }
-            
+
             if (item.ContainerType != (int)InventoryContainerType.Bag)
             {
-                response.Error = ErrorCode.ERR_ModifyData;
+                response.Error = ErrorCode.ERR_InventoryContainerError;
                 return;
             }
 
             if (request.Num < 1 || request.Num > item.Num)
             {
-                response.Error = ErrorCode.ERR_ModifyData;
+                response.Error = ErrorCode.ERR_ItemUseNumError;
                 return;
             }
-            
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+            if (itemConfig.ItemType == (int)ItemType.Consume)
+            {
+                // 英雄经验
+                if (itemConfig.ItemSubType == (int)ItemConsumeType.HeroExp)
+                {
+                    Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
+
+                    if (hero == null)
+                    {
+                        response.Error = ErrorCode.ERR_NotExistHero;
+                        return;
+                    }
+
+                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
+
+                    HeroHelper.AddHeroExp(hero, request.Num * int.Parse(itemConfig.ItemUsePar));
+                    HeroHelper.UpdateHeroNumeric(unit, hero);
+                    HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+                }
+            }
+
             await ETTask.CompletedTask;
         }
     }
