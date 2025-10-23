@@ -145,6 +145,7 @@ namespace ET.Client
             self.UIEquipmentItem_4.EquipSlotType = EquipSlotType.Xiezi;
             self.UIEquipmentItem_5.EquipSlotType = EquipSlotType.Xianglian;
             self.UIEquipmentItem_6.EquipSlotType = EquipSlotType.Wuqi;
+            self.Button_XiangXi.AddListener(() => { self.OnButton_XiangXi().Coroutine(); });
             self.Button_ShengJi.AddListener(() => { self.OnButton_ShengJi().Coroutine(); });
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
@@ -429,6 +430,13 @@ namespace ET.Client
             self.UIHeroInfo_2.SetActive(false);
             self.ScrollView_ItemList.SetActive(true);
             self.UpdateItemList();
+        }
+        
+        public static async ETTask OnButton_XiangXi(this UIHeroComponent self)
+        {
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroAttributes);
+            UIHeroAttributesComponent uiHeroAttributesComponent = ui.GetComponent<UIHeroAttributesComponent>();
+            uiHeroAttributesComponent.UpdateAttributes(self.CurrentHeroId);
         }
 
         private static async ETTask OnButton_ShengJi(this UIHeroComponent self)
