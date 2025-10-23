@@ -77,8 +77,7 @@ namespace ET.Client
 
             InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
 
-            List<Item> itemList =
-                    inventoryComponentC.GetItemsBySubType(ItemType.Consume, (int)ItemConsumeType.HeroHunshi, InventoryContainerType.Bag);
+            List<Item> itemList = inventoryComponentC.GetItemsBySubType(ItemType.Consume, (int)ItemConsumeType.HeroHunshi, InventoryContainerType.Bag);
 
             while (self.UICommonItemList.Count < itemList.Count)
             {
