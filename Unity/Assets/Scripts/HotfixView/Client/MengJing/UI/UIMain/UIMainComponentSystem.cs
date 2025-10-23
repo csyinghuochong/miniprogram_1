@@ -168,7 +168,7 @@ namespace ET.Client
         public static void UpdateExp(this UIMainComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            int max = ExpConfigCategory.Instance.Get(userInfoComponent.Lv).UpExp;
+            int max = ExpConfigCategory.Instance.Get(userInfoComponent.Lv).PlayerUpExp;
             self.Slider_Exp.value = userInfoComponent.Exp * 1f / max;
             self.Text_Exp.SetTextFormat("{0}/{1}", userInfoComponent.Exp, max);
         }

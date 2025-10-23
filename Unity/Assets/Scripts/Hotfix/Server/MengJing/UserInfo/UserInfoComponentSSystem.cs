@@ -113,7 +113,7 @@
             {
                 ExpConfig currentExpConfig = ExpConfigCategory.Instance.Get(self.Lv);
 
-                if (self.Exp < currentExpConfig.UpExp)
+                if (self.Exp < currentExpConfig.PlayerUpExp)
                 {
                     break;
                 }
@@ -121,11 +121,11 @@
                 int nextLv = self.Lv + 1;
                 if (!ExpConfigCategory.Instance.DataMap.ContainsKey(nextLv))
                 {
-                    self.Exp = currentExpConfig.UpExp;
+                    self.Exp = currentExpConfig.PlayerUpExp;
                     break;
                 }
 
-                self.Exp -= currentExpConfig.UpExp;
+                self.Exp -= currentExpConfig.PlayerUpExp;
                 self.ChangeRoleData(UserDataType.Lv, 1);
             }
         }

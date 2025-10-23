@@ -17,7 +17,8 @@ namespace ET
         public ExpConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
-            UpExp = _buf.ReadInt();
+            PlayerUpExp = _buf.ReadInt();
+            HeroUpExp = _buf.ReadInt();
 
             PostInit();
         }
@@ -33,9 +34,14 @@ namespace ET
         public readonly int Id;
 
         /// <summary>
-        /// 角色升级经验
+        /// 玩家升级经验
         /// </summary>
-        public readonly int UpExp;
+        public readonly int PlayerUpExp;
+
+        /// <summary>
+        /// 英雄升级经验
+        /// </summary>
+        public readonly int HeroUpExp;
 
 
         public const int __ID__ = 1163743135;
@@ -45,13 +51,15 @@ namespace ET
         {
             
             
+            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
-            + "UpExp:" + UpExp + ","
+            + "PlayerUpExp:" + PlayerUpExp + ","
+            + "HeroUpExp:" + HeroUpExp + ","
             + "}";
         }
 
