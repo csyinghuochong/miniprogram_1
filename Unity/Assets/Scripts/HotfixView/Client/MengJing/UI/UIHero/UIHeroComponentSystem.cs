@@ -114,6 +114,8 @@ namespace ET.Client
             self.UIEquipmentItem_4 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_4"));
             self.UIEquipmentItem_5 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_5"));
             self.UIEquipmentItem_6 = self.AddChild<UIEquipmentItem, GameObject>(rc.Get<GameObject>("UIEquipmentItem_6"));
+            self.Transform_HeroStar = rc.Get<GameObject>("Transform_HeroStar").transform;
+            self.Transform_HeroStar.GetChild(0).gameObject.SetActive(false);
             self.UIHeroInfo_2 = rc.Get<GameObject>("UIHeroInfo_2");
             self.Content_UIBaseAttributeItem = rc.Get<GameObject>("Content_UIBaseAttributeItem").transform;
             self.UIBaseAttributeItem = rc.Get<GameObject>("UIBaseAttributeItem");
@@ -286,6 +288,22 @@ namespace ET.Client
             int maxExp = ExpConfigCategory.Instance.Get(hero.Lv).HeroUpExp;
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
+            
+            // 星级
+            UICommonHelper.HideChild(self.Transform_HeroStar.gameObject);
+            for (int i = 0; i < hero.Star; i++)
+            {
+                if (i < self.Transform_HeroStar.childCount)
+                {
+                    self.Transform_HeroStar.GetChild(i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    GameObject prefab = self.Transform_HeroStar.GetChild(0).gameObject;
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, self.Transform_HeroStar);
+                    go.SetActive(true);
+                }
+            }
 
             // 装备
             self.UIEquipmentItem_1.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();

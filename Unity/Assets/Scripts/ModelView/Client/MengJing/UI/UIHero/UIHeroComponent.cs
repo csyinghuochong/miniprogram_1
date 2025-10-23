@@ -32,6 +32,7 @@ namespace ET.Client
         public UIEquipmentItem UIEquipmentItem_4 { get; set; }
         public UIEquipmentItem UIEquipmentItem_5 { get; set; }
         public UIEquipmentItem UIEquipmentItem_6 { get; set; }
+        public Transform Transform_HeroStar;
         public GameObject UIHeroInfo_2;
         public Transform Content_UIBaseAttributeItem;
         public GameObject UIBaseAttributeItem;
