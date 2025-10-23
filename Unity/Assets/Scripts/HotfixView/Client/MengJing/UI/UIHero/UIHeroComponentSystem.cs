@@ -20,6 +20,18 @@ namespace ET.Client
 
             UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
             uiHeroComponent.UpdateHeroList();
+            
+            //
+            if (args.UserDataType == UserDataType.Gold)
+            {
+                uiHeroComponent.UpdateGold();
+            }
+
+            //
+            if (args.UserDataType == UserDataType.Diamond)
+            {
+                uiHeroComponent.UpdateDiamond();
+            }
 
             await ETTask.CompletedTask;
         }
@@ -74,6 +86,8 @@ namespace ET.Client
 
             self.UIHeroInfo_1 = rc.Get<GameObject>("UIHeroInfo_1");
             self.Spine_HeroModel = rc.Get<GameObject>("Spine_HeroModel").transform;
+            self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
+            self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Text_HeroCP = rc.Get<GameObject>("Text_HeroCP").GetComponent<TMP_Text>();
             self.Text_HeroLv = rc.Get<GameObject>("Text_HeroLv").GetComponent<TMP_Text>();
@@ -116,6 +130,8 @@ namespace ET.Client
             self.Button_Hero.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
             self.Button_Formation.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
 
+            self.UpdateGold();
+            self.UpdateDiamond();
             self.UpdateHeroList();
             self.SelectFirstHero();
         }
@@ -129,6 +145,18 @@ namespace ET.Client
             self.UICommonItemList = null;
             self.UITeamItemList.Clear();
             self.UITeamItemList = null;
+        }
+        
+        public static void UpdateGold(this UIHeroComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Text_Type_Gold.SetText(userInfoComponent.Gold);
+        }
+
+        public static void UpdateDiamond(this UIHeroComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
 
         public static void UpdateHeroList(this UIHeroComponent self)

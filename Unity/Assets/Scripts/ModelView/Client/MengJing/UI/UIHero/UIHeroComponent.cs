@@ -19,6 +19,8 @@ namespace ET.Client
 
         public GameObject UIHeroInfo_1;
         public Transform Spine_HeroModel;
+        public TMP_Text Text_Type_Gold;
+        public TMP_Text Text_Type_Diamond;
         public TMP_Text Text_HeroName;
         public TMP_Text Text_HeroCP;
         public TMP_Text Text_HeroLv;
@@ -44,5 +46,8 @@ namespace ET.Client
         public GameObject UITeamItem;
         public Button Button_Hero;
         public Button Button_Formation;
+        public Button Button_XiangXi;
+        public Button Button_ShengXing;
+        public Button Button_ShengJi;
     }
 }

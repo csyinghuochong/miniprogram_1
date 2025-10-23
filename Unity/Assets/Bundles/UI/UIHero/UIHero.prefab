@@ -121,16 +121,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: Text_Type_Gold
-    gameObject: {fileID: 743390546318364538}
-  - key: Text_Type_Diamond
-    gameObject: {fileID: 5044012106190388321}
   - key: Button_Close
     gameObject: {fileID: 2884267023644722160}
   - key: UIHeroInfo_1
     gameObject: {fileID: 8552741494945830746}
   - key: Spine_HeroModel
     gameObject: {fileID: 209884172195129780}
+  - key: Text_Type_Gold
+    gameObject: {fileID: 743390546318364538}
+  - key: Text_Type_Diamond
+    gameObject: {fileID: 5044012106190388321}
   - key: Text_HeroName
     gameObject: {fileID: 5539521616649302433}
   - key: Text_HeroCP
