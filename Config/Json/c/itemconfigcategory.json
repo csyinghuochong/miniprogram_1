@@ -210,6 +210,21 @@
     "ItemDescription": "英雄增加100经验"
   },
   {
+    "Id": 10001010,
+    "ItemName": "低级魂石",
+    "Icon": "10000009",
+    "ItemQuality": 3,
+    "UseLv": 1,
+    "ItemType": 1,
+    "ItemSubType": 9,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 1500,
+    "ItemPileSum": 99,
+    "ItemEquipID": 0,
+    "ItemUsePar": "100",
+    "ItemDescription": "英雄增加100魂石"
+  },
+  {
     "Id": 10002001,
     "ItemName": "大熊猫碎片",
     "Icon": "10000009",

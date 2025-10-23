@@ -47,6 +47,8 @@
                     HeroHelper.UpdateHeroNumeric(unit, hero);
                     HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
                 }
+                
+                // 英雄新级
             }
 
             await ETTask.CompletedTask;

@@ -36,5 +36,10 @@ namespace ET
         /// </summary>
         HeroExp = 8,
 
+        /// <summary>
+        /// 英雄魂石
+        /// </summary>
+        HeroHunshi = 9,
+
     }
 }
