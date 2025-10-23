@@ -47,7 +47,7 @@ namespace ET.Server
                 }
 
                 int nextLv = hero.Lv + 1;
-                if (!ExpConfigCategory.Instance.DataMap.ContainsKey(nextLv))
+                if (!ExpConfigCategory.Instance.DataMap.ContainsKey(nextLv) || ExpConfigCategory.Instance.Get(nextLv).HeroUpExp == 0)
                 {
                     hero.Exp = expConfig.HeroUpExp;
                     break;
