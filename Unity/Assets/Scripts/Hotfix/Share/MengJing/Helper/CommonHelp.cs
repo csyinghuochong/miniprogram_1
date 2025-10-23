@@ -90,6 +90,15 @@ namespace ET
             base_MaxDef += hero.Lv * heroConfig.LvDef;
             base_MinAdf += hero.Lv * heroConfig.LvAdf;
             base_MaxAdf += hero.Lv * heroConfig.LvAdf;
+            
+            // 星级
+            base_MaxHp += hero.Star * 100;
+            base_MinAct += hero.Star * 100;
+            base_MaxAct += hero.Star * 100;
+            base_MinDef += hero.Star * 100;
+            base_MaxDef += hero.Star * 100;
+            base_MinAdf += hero.Star * 100;
+            base_MaxAdf += hero.Star * 100;
 
             // 装备
             foreach (Item item in equipments)
@@ -117,6 +126,8 @@ namespace ET
                 base_ReCounterattack += equipConfig.EquipReCounterattack;
                 base_ReLifeSteal += equipConfig.EquipLifeSteal;
                 base_ReEva += equipConfig.EquipReEva;
+                
+                // TODO 装备词条属性
             }
 
             // 计算战斗力
