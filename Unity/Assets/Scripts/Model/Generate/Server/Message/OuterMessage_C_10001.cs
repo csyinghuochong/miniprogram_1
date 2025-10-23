@@ -2791,11 +2791,14 @@ namespace ET
         [MemoryPackOrder(4)]
         public int Star { get; set; }
 
-        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(5)]
-        public Dictionary<int, long> Equipments { get; set; } = new();
+        public int HunShi { get; set; }
+
         [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(6)]
+        public Dictionary<int, long> Equipments { get; set; } = new();
+        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [MemoryPackOrder(7)]
         public Dictionary<int, long> NumericDic { get; set; } = new();
         public override void Dispose()
         {
@@ -2809,6 +2812,7 @@ namespace ET
             this.Lv = default;
             this.Exp = default;
             this.Star = default;
+            this.HunShi = default;
             this.Equipments.Clear();
             this.NumericDic.Clear();
 

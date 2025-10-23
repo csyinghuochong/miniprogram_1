@@ -22,6 +22,7 @@
             heroInfo.Lv = self.Lv;
             heroInfo.Exp = self.Exp;
             heroInfo.Star = self.Star;
+            heroInfo.HunShi = self.HunShi;
             heroInfo.Equipments = self.Equipments;
             heroInfo.NumericDic = self.NumericDic;
 
@@ -34,6 +35,7 @@
             self.Lv = heroInfo.Lv;
             self.Exp = heroInfo.Exp;
             self.Star = heroInfo.Star;
+            self.HunShi = heroInfo.HunShi;
             self.Equipments = heroInfo.Equipments;
             self.NumericDic = heroInfo.NumericDic;
         }
