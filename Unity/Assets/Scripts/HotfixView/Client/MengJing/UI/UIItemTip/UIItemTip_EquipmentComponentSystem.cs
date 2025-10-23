@@ -74,6 +74,9 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, newItemConfig.Icon);
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
+            long actChange = 0;
+            long defChange = 0;
+
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {
                 self.Button_Sell.gameObject.SetActive(true);
@@ -109,25 +112,13 @@ namespace ET.Client
                     Dictionary<int, long> oldNumericDic = hero.NumericDic;
                     Dictionary<int, long> newNumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
 
-                    self.Text_CombatPowerChange.SetText(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower]);
-                    self.Image_CombatPowerReduction.gameObject.SetActive(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower] < 0);
-                    self.Image_CombatPowerIncrease.gameObject.SetActive(newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower] > 0);
-                    
-                    GameObject baseAttributeItem = UnityEngine.Object.Instantiate(self.UIAttributeItem, self.BaseAttributeList);
-                    ReferenceCollector rc = baseAttributeItem.GetComponent<ReferenceCollector>();
-                    rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText("攻击");
-                    rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(newEquipConfig.EquipMaxAct);
-                    rc.Get<GameObject>("Image_Reduction").SetActive(newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base] < 0);
-                    rc.Get<GameObject>("Image_Increase").SetActive(newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base] > 0);
-                    baseAttributeItem.SetActive(true);
-                    
-                    baseAttributeItem = UnityEngine.Object.Instantiate(self.UIAttributeItem, self.BaseAttributeList);
-                    rc = baseAttributeItem.GetComponent<ReferenceCollector>();
-                    rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText("防御");
-                    rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(newEquipConfig.EquipMaxDef);
-                    rc.Get<GameObject>("Image_Reduction").SetActive(newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base] < 0);
-                    rc.Get<GameObject>("Image_Increase").SetActive(newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base] > 0);
-                    baseAttributeItem.SetActive(true);
+                    long combatPowerChange = newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower];
+                    self.Text_CombatPowerChange.SetText(combatPowerChange);
+                    self.Image_CombatPowerReduction.gameObject.SetActive(combatPowerChange < 0);
+                    self.Image_CombatPowerIncrease.gameObject.SetActive(combatPowerChange > 0);
+
+                    actChange = newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base];
+                    defChange = newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base];
                 }
             }
 
@@ -135,6 +126,20 @@ namespace ET.Client
             {
                 self.Button_TakeOff.gameObject.SetActive(true);
             }
+
+            self.ShowBaseAttributeItem("攻击", newEquipConfig.EquipMaxAct.ToString(), actChange);
+            self.ShowBaseAttributeItem("防御", newEquipConfig.EquipMaxDef.ToString(), defChange);
+        }
+
+        private static void ShowBaseAttributeItem(this UIItemTip_EquipmentComponent self, string name, string value, long change)
+        {
+            GameObject baseAttributeItem = UnityEngine.Object.Instantiate(self.UIAttributeItem, self.BaseAttributeList);
+            ReferenceCollector rc = baseAttributeItem.GetComponent<ReferenceCollector>();
+            rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
+            rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
+            rc.Get<GameObject>("Image_Reduction").SetActive(change < 0);
+            rc.Get<GameObject>("Image_Increase").SetActive(change > 0);
+            baseAttributeItem.SetActive(true);
         }
 
         private static async ETTask OnButton_Sell(this UIItemTip_EquipmentComponent self)
