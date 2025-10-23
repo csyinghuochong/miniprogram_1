@@ -6,7 +6,13 @@
     "HeroType": 1,
     "HeroHeadIcon": "10001001",
     "HeroModelID": "10001001",
-    "HeroQuality": 3,
+    "HeroUpStarNeed": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
     "DamageType": 1,
     "AtkID": 10000001,
     "SkillID": [
@@ -40,7 +46,13 @@
     "HeroType": 2,
     "HeroHeadIcon": "10001002",
     "HeroModelID": "10001002",
-    "HeroQuality": 4,
+    "HeroUpStarNeed": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
     "DamageType": 1,
     "AtkID": 10000001,
     "SkillID": [
@@ -74,7 +86,13 @@
     "HeroType": 2,
     "HeroHeadIcon": "10001003",
     "HeroModelID": "10001003",
-    "HeroQuality": 5,
+    "HeroUpStarNeed": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
     "DamageType": 1,
     "AtkID": 10000001,
     "SkillID": [
@@ -108,7 +126,13 @@
     "HeroType": 3,
     "HeroHeadIcon": "10001004",
     "HeroModelID": "10001004",
-    "HeroQuality": 1,
+    "HeroUpStarNeed": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
     "DamageType": 1,
     "AtkID": 10000001,
     "SkillID": [
@@ -142,7 +166,13 @@
     "HeroType": 2,
     "HeroHeadIcon": "10002001",
     "HeroModelID": "10002001",
-    "HeroQuality": 2,
+    "HeroUpStarNeed": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
     "DamageType": 2,
     "AtkID": 10000002,
     "SkillID": [
@@ -176,7 +206,13 @@
     "HeroType": 3,
     "HeroHeadIcon": "10002002",
     "HeroModelID": "10002002",
-    "HeroQuality": 3,
+    "HeroUpStarNeed": [
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
     "DamageType": 2,
     "AtkID": 10000003,
     "SkillID": [

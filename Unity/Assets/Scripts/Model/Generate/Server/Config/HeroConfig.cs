@@ -22,7 +22,7 @@ namespace ET
             HeroType = _buf.ReadInt();
             HeroHeadIcon = _buf.ReadString();
             HeroModelID = _buf.ReadString();
-            HeroQuality = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); HeroUpStarNeed = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); HeroUpStarNeed[__index0] = __e0;}}
             DamageType = _buf.ReadInt();
             AtkID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
@@ -83,9 +83,9 @@ namespace ET
         public readonly string HeroModelID;
 
         /// <summary>
-        /// 英雄品质
+        /// 英雄升星需要的魂石
         /// </summary>
-        public readonly int HeroQuality;
+        public readonly int[] HeroUpStarNeed;
 
         /// <summary>
         /// 伤害类型
@@ -231,7 +231,7 @@ namespace ET
             + "HeroType:" + HeroType + ","
             + "HeroHeadIcon:" + HeroHeadIcon + ","
             + "HeroModelID:" + HeroModelID + ","
-            + "HeroQuality:" + HeroQuality + ","
+            + "HeroUpStarNeed:" + Luban.StringUtil.CollectionToString(HeroUpStarNeed) + ","
             + "DamageType:" + DamageType + ","
             + "AtkID:" + AtkID + ","
             + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
