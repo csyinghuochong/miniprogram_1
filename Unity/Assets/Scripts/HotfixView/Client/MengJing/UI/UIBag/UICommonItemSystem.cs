@@ -21,6 +21,8 @@ namespace ET.Client
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Text_ItemNum = rc.Get<GameObject>("Text_ItemNum").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
+            self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
+            self.Image_Selected.gameObject.SetActive(false);
 
             self.Button_Click.AddListener(self.OnClick);
         }

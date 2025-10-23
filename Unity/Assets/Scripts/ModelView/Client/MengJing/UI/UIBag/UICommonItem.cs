@@ -17,5 +17,6 @@ namespace ET.Client
         public Image Image_ItemIcon;
         public TMP_Text Text_ItemNum;
         public Button Button_Click;
+        public Image Image_Selected;
     }
 }
