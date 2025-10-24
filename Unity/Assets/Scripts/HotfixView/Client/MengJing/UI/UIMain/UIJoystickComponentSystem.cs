@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -27,7 +28,7 @@ namespace ET.Client
             self.RectTransform = self.StartArea.GetComponent<RectTransform>();
             self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
-            // self.MyUnit = UnitHelper.GetMyUnitFromCurrentScene(self.Scene());
+            self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             // self.MoveComponent = self.MyUnit.GetComponent<MoveComponent>();
             self.ClientSenderComponent = self.Root().GetComponent<ClientSenderComponent>();
 
@@ -47,7 +48,8 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this UIJoystickComponent self)
         {
-            self.SendMove();
+            self.Move();
+            // self.SendMove();
         }
 
         private static void OnPointerDown(this UIJoystickComponent self, PointerEventData pdata)
@@ -133,10 +135,27 @@ namespace ET.Client
             self.PositionFocus.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, angle - 135);
             self.PositionFocus.SetActive(true);
 
-            self.Direction.z = self.Direction.y;
-            self.Direction.y = 0;
+            // 3D
+            // self.Direction.z = self.Direction.y;
+            // self.Direction.y = 0;
         }
 
+        private static void Move(this UIJoystickComponent self)
+        {
+            if (!self.IsDrag)
+            {
+                return;
+            }
+            
+            if (self.MyUnit == null)
+            {
+                return;
+            }
+
+            float3 move = self.Direction * 5f * Time.deltaTime;
+            self.MyUnit.SetPosition(self.MyUnit.Position + move);
+        }
+        
         private static void SendMove(this UIJoystickComponent self)
         {
             // if (!self.IsDrag)

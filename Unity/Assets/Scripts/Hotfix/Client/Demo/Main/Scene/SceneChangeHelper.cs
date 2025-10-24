@@ -2,13 +2,12 @@
 {
     public static partial class SceneChangeHelper
     {
-        
         // 场景切换协程
         //message.SceneType, message.SceneId, message.Difficulty, message.ParamInfo);
-        public static async ETTask SceneChangeTo(Scene root,  long sceneInstanceId, int sceneType, int sceneId, int difficulty, string pagramInfo)
+        public static async ETTask SceneChangeTo(Scene root, long sceneInstanceId, int sceneType, int sceneId, int difficulty, string pagramInfo)
         {
             //root.RemoveComponent<AIComponent>();
-            
+
             CurrentScenesComponent currentScenesComponent = root.GetComponent<CurrentScenesComponent>();
             currentScenesComponent.Scene?.Dispose(); // 删除之前的CurrentScene，创建新的
             Scene currentScene = CurrentSceneFactory.Create(sceneInstanceId, sceneId.ToString(), currentScenesComponent);
@@ -26,7 +25,7 @@
             //     
             // }
             mapComponent.SetMapInfo(sceneType, sceneId, int.Parse(pagramInfo));
-            
+
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(root, new SceneChangeStart()
             {
@@ -43,7 +42,8 @@
             Unit unit = UnitFactory.CreateUnit(currentScene, m2CCreateMyUnit.Unit, true);
             unitComponent.Add(unit);
 
-            EventSystem.Instance.Publish(root, new SceneChangeFinish() { SceneType = sceneType} );
+            EventSystem.Instance.Publish(root, new SceneChangeFinish() { SceneType = sceneType });
+
             // 通知等待场景切换的协程
             root.GetComponent<ObjectWait>().Notify(new Wait_SceneChangeFinish());
         }
