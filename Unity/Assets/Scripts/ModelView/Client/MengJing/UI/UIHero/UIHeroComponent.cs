@@ -49,6 +49,7 @@ namespace ET.Client
         public Transform Content_UITeamItem;
         public GameObject UITeamItem;
         public Button Button_Hero;
+        public Button Button_HeroList;
         public Button Button_Formation;
     }
 }

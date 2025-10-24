@@ -17,5 +17,8 @@ namespace ET.Client
         public Button Button_Type_Ranged;
         public Transform Content_UIHeroItem;
         public GameObject UIHeroItem;
+        public Button Button_Hero;
+        public Button Button_HeroList;
+        public Button Button_Formation;
     }
 }

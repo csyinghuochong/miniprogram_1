@@ -23,5 +23,8 @@ namespace ET.Client
         public UIFormationSlotItem UIFormationSlotItem_9 { get; set; }
         public Transform Content_UIFormationHeroItem;
         public GameObject UIFormationHeroItem;
+        public Button Button_Hero;
+        public Button Button_HeroList;
+        public Button Button_Formation;
     }
 }

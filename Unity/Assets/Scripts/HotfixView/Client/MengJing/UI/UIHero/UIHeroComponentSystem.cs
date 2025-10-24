@@ -137,6 +137,7 @@ namespace ET.Client
             self.UITeamItem = rc.Get<GameObject>("UITeamItem");
             self.UITeamItem.SetActive(false);
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
+            self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
             self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
 
             self.UIEquipmentItem_1.EquipSlotType = EquipSlotType.Toukui;
@@ -149,8 +150,17 @@ namespace ET.Client
             self.Button_ShengXing.AddListener(() => { self.OnButton_ShengXing().Coroutine(); });
             self.Button_ShengJi.AddListener(() => { self.OnButton_ShengJi().Coroutine(); });
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
-            self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
-            self.Button_Formation.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
+            self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
+            self.Button_HeroList.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine();
+                self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero);
+            });
+            self.Button_Formation.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine();
+                self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero);
+            });
 
             self.UpdateGold();
             self.UpdateDiamond();
@@ -168,7 +178,7 @@ namespace ET.Client
             self.UITeamItemList.Clear();
             self.UITeamItemList = null;
         }
-        
+
         public static void UpdateGold(this UIHeroComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
@@ -290,7 +300,7 @@ namespace ET.Client
             int maxExp = ExpConfigCategory.Instance.Get(hero.Lv).HeroUpExp;
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
-            
+
             // 星级
             UICommonHelper.HideChild(self.Transform_HeroStar.gameObject);
             for (int i = 0; i < hero.Star; i++)
@@ -317,9 +327,12 @@ namespace ET.Client
 
             // 基础属性
             self.ShowBaseStatItem(1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
-            self.ShowBaseStatItem(2, "攻击", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAct_Base], hero.NumericDic[NumericType.Base_MaxAct_Base]));
-            self.ShowBaseStatItem(3, "物防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinDef_Base], hero.NumericDic[NumericType.Base_MaxDef_Base]));
-            self.ShowBaseStatItem(4, "魔防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAdf_Base], hero.NumericDic[NumericType.Base_MaxAdf_Base]));
+            self.ShowBaseStatItem(2, "攻击",
+                ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAct_Base], hero.NumericDic[NumericType.Base_MaxAct_Base]));
+            self.ShowBaseStatItem(3, "物防",
+                ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinDef_Base], hero.NumericDic[NumericType.Base_MaxDef_Base]));
+            self.ShowBaseStatItem(4, "魔防",
+                ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAdf_Base], hero.NumericDic[NumericType.Base_MaxAdf_Base]));
 
             // 特殊属性
             self.ShowOtherStatItem(1, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
@@ -432,7 +445,7 @@ namespace ET.Client
             self.ScrollView_ItemList.SetActive(true);
             self.UpdateItemList();
         }
-        
+
         public static async ETTask OnButton_XiangXi(this UIHeroComponent self)
         {
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroAttributes);
@@ -451,7 +464,7 @@ namespace ET.Client
             UIHeroStarUpComponent uiHeroStarUpComponent = ui.GetComponent<UIHeroStarUpComponent>();
             uiHeroStarUpComponent.UpdateInfo(self.CurrentHeroId).Coroutine();
         }
-        
+
         private static async ETTask OnButton_ShengJi(this UIHeroComponent self)
         {
             if (self.CurrentHeroId == 0)

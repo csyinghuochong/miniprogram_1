@@ -23,11 +23,25 @@ namespace ET.Client
             self.Content_UIHeroItem = rc.Get<GameObject>("Content_UIHeroItem").GetComponent<Transform>();
             self.UIHeroItem = rc.Get<GameObject>("UIHeroItem");
             self.UIHeroItem.gameObject.SetActive(false);
+            self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
+            self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
+            self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
 
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Melee.onClick.AddListener(() => { self.SetShowType(2); });
             self.Button_Type_Ranged.onClick.AddListener(() => { self.SetShowType(3); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList); });
+            self.Button_Hero.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine();
+                self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList);
+            });
+            self.Button_HeroList.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
+            self.Button_Formation.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine();
+                self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList);
+            });
             
             self.SetShowType(1);
             self.UpdateHaveHeroCount();

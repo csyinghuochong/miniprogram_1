@@ -26,8 +26,22 @@ namespace ET.Client
             self.Content_UIFormationHeroItem = rc.Get<GameObject>("Content_UIFormationHeroItem").transform;
             self.UIFormationHeroItem = rc.Get<GameObject>("UIFormationHeroItem");
             self.UIFormationHeroItem.SetActive(false);
+            self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
+            self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
+            self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation); });
+            self.Button_Hero.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine();
+                self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation);
+            });
+            self.Button_HeroList.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine();
+                self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation);
+            });
+            self.Button_Formation.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
 
             self.UpdateSlotItemList();
             self.UpdateHeroList(1);
