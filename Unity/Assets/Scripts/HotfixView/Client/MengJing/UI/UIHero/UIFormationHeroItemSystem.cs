@@ -46,7 +46,7 @@ namespace ET.Client
 
         private static void OnClick(this UIFormationHeroItem self)
         {
-            self.GetParent<UIFormationComponent>().OnSelectHero(self.HeroId).Coroutine();
+            self.GetParent<UIHeroFormationComponent>().OnSelectHero(self.HeroId).Coroutine();
         }
     }
 }

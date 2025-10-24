@@ -62,9 +62,6 @@ namespace ET.Client
             self.Button_XiangXi.AddListener(() => { self.OnButton_XiangXi().Coroutine(); });
             self.Button_ShengXing.AddListener(() => { self.OnButton_ShengXing().Coroutine(); });
             self.Button_ShengJi.AddListener(() => { self.OnButton_ShengJi().Coroutine(); });
-            
-            self.UpdateHeroList();
-            self.SelectFirstHero();
         }
 
         [EntitySystem]
@@ -111,7 +108,7 @@ namespace ET.Client
             }
         }
 
-        private static void SelectFirstHero(this UIHeroInfoComponent self)
+        public static void SelectFirstHero(this UIHeroInfoComponent self)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             self.SelectHero(heroComponentC.Formation[0]);

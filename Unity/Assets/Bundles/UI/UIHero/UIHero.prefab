@@ -33,8 +33,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8051216684579973487}
-  - {fileID: 199774177016898016}
   - {fileID: 8788283922907023567}
+  - {fileID: 199774177016898016}
   - {fileID: 2909121302185984512}
   - {fileID: 3014443979096736677}
   - {fileID: 139799784201679224}
@@ -116,10 +116,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: Button_Close
-    gameObject: {fileID: 2884267023644722160}
   - key: Transform_PanelRoot
     gameObject: {fileID: 1019726171436669887}
+  - key: Button_Close
+    gameObject: {fileID: 2884267023644722160}
   - key: Text_Type_Gold
     gameObject: {fileID: 743390546318364538}
   - key: Text_Type_Diamond
@@ -130,8 +130,14 @@ MonoBehaviour:
     gameObject: {fileID: 8066048520589287252}
   - key: Button_Formation
     gameObject: {fileID: 2402162829818240152}
+  - key: UIHeroFormation
+    gameObject: {fileID: 1386170326414932, guid: f7c3c0381723fd24095f9bbd778d40b8,
+      type: 3}
   - key: UIHeroInfo
     gameObject: {fileID: 1386170326414932, guid: 1d0842eefbd1d994cb58899de20749f1,
+      type: 3}
+  - key: UIHeroList
+    gameObject: {fileID: 1386170326414932, guid: fb1f06b77eac83a40ab02a6be0ab8606,
       type: 3}
 --- !u!1 &337960973921982458
 GameObject:

@@ -11,40 +11,23 @@ namespace ET.Client
     public static partial class UIHeroListComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this UIHeroListComponent self)
+        private static void Awake(this UIHeroListComponent self, GameObject gameObject)
         {
-            ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
+            self.GameObject = gameObject;
+            
+            ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
             self.Text_HaveHeroCount = rc.Get<GameObject>("Text_HaveHeroValue").GetComponent<TMP_Text>();
-            self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
             self.Button_Type_Melee = rc.Get<GameObject>("Button_Type_Melee").GetComponent<Button>();
             self.Button_Type_Ranged = rc.Get<GameObject>("Button_Type_Ranged").GetComponent<Button>();
             self.Content_UIHeroItem = rc.Get<GameObject>("Content_UIHeroItem").GetComponent<Transform>();
             self.UIHeroItem = rc.Get<GameObject>("UIHeroItem");
             self.UIHeroItem.gameObject.SetActive(false);
-            self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
-            self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
-            self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
 
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Melee.onClick.AddListener(() => { self.SetShowType(2); });
             self.Button_Type_Ranged.onClick.AddListener(() => { self.SetShowType(3); });
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList); });
-            self.Button_Hero.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine();
-                self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList);
-            });
-            self.Button_HeroList.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
-            self.Button_Formation.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine();
-                self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList);
-            });
-            
-            self.SetShowType(1);
-            self.UpdateHaveHeroCount();
         }
 
         [EntitySystem]
@@ -54,7 +37,7 @@ namespace ET.Client
             self.UIHeroItem = null;
         }
 
-        private static void SetShowType(this UIHeroListComponent self, int page)
+        public static void SetShowType(this UIHeroListComponent self, int page)
         {
             self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 1);
             self.Button_Type_All.transform.Find("Image_Off").gameObject.SetActive(page != 1);
@@ -66,7 +49,7 @@ namespace ET.Client
             self.UpdateHeroList(page);
         }
 
-        private static void UpdateHaveHeroCount(this UIHeroListComponent self)
+        public static void UpdateHaveHeroCount(this UIHeroListComponent self)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             int heroCount = heroComponentC.GetAllHeroCount();

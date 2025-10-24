@@ -97,8 +97,8 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
-            self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Transform_PanelRoot = rc.Get<GameObject>("Transform_PanelRoot").transform;
+            self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
             self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
 
@@ -106,19 +106,64 @@ namespace ET.Client
             self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
             self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
 
-            self.UIHeroInfoComponent = self.AddComponent<UIHeroInfoComponent, GameObject>(UnityEngine.Object.Instantiate(rc.Get<GameObject>("UIHeroInfo"), self.Transform_PanelRoot));
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
-            self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
-            self.Button_HeroList.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine(); });
-            self.Button_Formation.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
+            self.Button_Hero.AddListener(() => { self.ShowPanel(1); });
+            self.Button_HeroList.AddListener(() => { self.ShowPanel(2); });
+            self.Button_Formation.AddListener(() => { self.ShowPanel(3); });
 
             self.UpdateGold();
             self.UpdateDiamond();
+            self.ShowPanel(1);
         }
 
         [EntitySystem]
         private static void Destroy(this UIHeroComponent self)
         {
+        }
+
+        private static void ShowPanel(this UIHeroComponent self, int panel)
+        {
+            ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
+
+            UICommonHelper.HideChild(self.Transform_PanelRoot.gameObject);
+            if (panel == 1)
+            {
+                if (self.UIHeroInfoComponent == null)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(rc.Get<GameObject>("UIHeroInfo"), self.Transform_PanelRoot);
+                    self.UIHeroInfoComponent = self.AddComponent<UIHeroInfoComponent, GameObject>(go);
+                }
+
+                self.UIHeroInfoComponent.UpdateHeroList();
+                self.UIHeroInfoComponent.SelectFirstHero();
+                self.UIHeroInfoComponent.GameObject.SetActive(true);
+            }
+
+            if (panel == 2)
+            {
+                if (self.UIHeroListComponent == null)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(rc.Get<GameObject>("UIHeroList"), self.Transform_PanelRoot);
+                    self.UIHeroListComponent = self.AddComponent<UIHeroListComponent, GameObject>(go);
+                }
+
+                self.UIHeroListComponent.SetShowType(1);
+                self.UIHeroListComponent.UpdateHaveHeroCount();
+                self.UIHeroListComponent.GameObject.SetActive(true);
+            }
+
+            if (panel == 3)
+            {
+                if (self.UIHeroFormationComponent == null)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(rc.Get<GameObject>("UIHeroFormation"), self.Transform_PanelRoot);
+                    self.UIHeroFormationComponent = self.AddComponent<UIHeroFormationComponent, GameObject>(go);
+                }
+
+                self.UIHeroFormationComponent.UpdateSlotItemList();
+                self.UIHeroFormationComponent.UpdateHeroList(1);
+                self.UIHeroFormationComponent.GameObject.SetActive(true);
+            }
         }
 
         public static void UpdateGold(this UIHeroComponent self)

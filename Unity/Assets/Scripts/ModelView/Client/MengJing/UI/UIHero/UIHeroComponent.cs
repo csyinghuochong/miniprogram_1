@@ -10,9 +10,11 @@ namespace ET.Client
     public class UIHeroComponent : Entity, IAwake, IDestroy
     {
         public UIHeroInfoComponent UIHeroInfoComponent { get; set; }
+        public UIHeroListComponent UIHeroListComponent { get; set; }
+        public UIHeroFormationComponent UIHeroFormationComponent { get; set; }
 
-        public Button Button_Close;
         public Transform Transform_PanelRoot;
+        public Button Button_Close;
         public TMP_Text Text_Type_Gold;
         public TMP_Text Text_Type_Diamond;
         public Button Button_Hero;

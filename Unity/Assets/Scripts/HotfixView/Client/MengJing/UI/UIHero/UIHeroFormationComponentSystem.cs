@@ -4,16 +4,17 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(UIFormationComponent))]
-    [FriendOf(typeof(UIFormationComponent))]
-    public static partial class UIFormationComponentSystem
+    [EntitySystemOf(typeof(UIHeroFormationComponent))]
+    [FriendOf(typeof(UIHeroFormationComponent))]
+    public static partial class UIHeroFormationComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this UIFormationComponent self)
+        private static void Awake(this UIHeroFormationComponent self, GameObject gameObject)
         {
-            ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
+            self.GameObject = gameObject;
 
-            self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
+            ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
+
             self.UIFormationSlotItem_1 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_1"));
             self.UIFormationSlotItem_2 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_2"));
             self.UIFormationSlotItem_3 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_3"));
@@ -26,35 +27,16 @@ namespace ET.Client
             self.Content_UIFormationHeroItem = rc.Get<GameObject>("Content_UIFormationHeroItem").transform;
             self.UIFormationHeroItem = rc.Get<GameObject>("UIFormationHeroItem");
             self.UIFormationHeroItem.SetActive(false);
-            self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
-            self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
-            self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
-
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation); });
-            self.Button_Hero.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine();
-                self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation);
-            });
-            self.Button_HeroList.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroList).Coroutine();
-                self.Root().GetComponent<UIComponent>().Remove(UIType.UIFormation);
-            });
-            self.Button_Formation.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFormation).Coroutine(); });
-
-            self.UpdateSlotItemList();
-            self.UpdateHeroList(1);
         }
 
         [EntitySystem]
-        private static void Destroy(this UIFormationComponent self)
+        private static void Destroy(this UIHeroFormationComponent self)
         {
             self.UIFormationHeroItemList.Clear();
             self.UIFormationHeroItemList = null;
         }
 
-        private static void UpdateSlotItemList(this UIFormationComponent self)
+        public static void UpdateSlotItemList(this UIHeroFormationComponent self)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             self.UIFormationSlotItem_1.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[0])).Coroutine();
@@ -68,7 +50,7 @@ namespace ET.Client
             self.UIFormationSlotItem_9.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[8])).Coroutine();
         }
 
-        private static void UpdateHeroList(this UIFormationComponent self, int page)
+        public static void UpdateHeroList(this UIHeroFormationComponent self, int page)
         {
             self.ShowHeroType = page;
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
@@ -111,7 +93,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnSelectHero(this UIFormationComponent self, long heroId)
+        public static async ETTask OnSelectHero(this UIHeroFormationComponent self, long heroId)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             List<long> currentFormation = heroComponentC.Formation;
