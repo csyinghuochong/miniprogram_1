@@ -24,6 +24,7 @@ namespace ET
             SkillAddAnger = _buf.ReadInt();
             SkillHandler = _buf.ReadString();
             GameObjectParameter = _buf.ReadString();
+            UnlockStar = _buf.ReadInt();
             SkillType = _buf.ReadInt();
             PassiveSkillType = _buf.ReadInt();
             PassiveSkillPro = _buf.ReadDouble();
@@ -89,6 +90,11 @@ namespace ET
         /// 脚本参数
         /// </summary>
         public readonly string GameObjectParameter;
+
+        /// <summary>
+        /// 解锁星级
+        /// </summary>
+        public readonly int UnlockStar;
 
         /// <summary>
         /// 技能类型
@@ -206,6 +212,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -219,6 +226,7 @@ namespace ET
             + "SkillAddAnger:" + SkillAddAnger + ","
             + "SkillHandler:" + SkillHandler + ","
             + "GameObjectParameter:" + GameObjectParameter + ","
+            + "UnlockStar:" + UnlockStar + ","
             + "SkillType:" + SkillType + ","
             + "PassiveSkillType:" + PassiveSkillType + ","
             + "PassiveSkillPro:" + PassiveSkillPro + ","

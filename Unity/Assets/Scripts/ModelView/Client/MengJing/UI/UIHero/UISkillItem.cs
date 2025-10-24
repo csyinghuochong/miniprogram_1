@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -11,5 +12,7 @@ namespace ET.Client
         public GameObject GameObject { get; set; }
         public Image Image_SkillIcon;
         public Button Button_Click;
+        public GameObject Unlock;
+        public TMP_Text Text_Unlock;
     }
 }

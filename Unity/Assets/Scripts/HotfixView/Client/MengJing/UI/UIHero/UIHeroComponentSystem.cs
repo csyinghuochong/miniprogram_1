@@ -335,7 +335,7 @@ namespace ET.Client
 
             for (int i = 0; i < heroConfig.SkillID.Length; i++)
             {
-                self.UISkillItemList[i].UpdateInfo(heroConfig.SkillID[i]).Coroutine();
+                self.UISkillItemList[i].UpdateInfo(heroConfig.SkillID[i], hero.Star).Coroutine();
                 self.UISkillItemList[i].GameObject.SetActive(true);
             }
 
