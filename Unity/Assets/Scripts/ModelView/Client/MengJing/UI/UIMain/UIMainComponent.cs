@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -14,6 +15,9 @@ namespace ET.Client
 
         public int SpeedLevel = 1;
 
+        public UIJoystickComponent UIJoystickComponent { get; set; }
+
+        public GameObject UIJoystick;
         public TMP_Text Text_PlayerName;
         public TMP_Text Text_PlayerLv;
         public TMP_Text Text_FPS;

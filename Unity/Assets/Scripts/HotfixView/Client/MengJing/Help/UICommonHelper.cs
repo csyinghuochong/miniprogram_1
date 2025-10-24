@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -10,6 +12,21 @@ namespace ET.Client
         {
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(clickEventHandler);
+        }
+
+        public static void AddEventTrigger(this EventTrigger eventTrigger, Action<PointerEventData> action, EventTriggerType etype)
+        {
+            EventTrigger.Entry entry = new();
+            entry.eventID = etype;
+            entry.callback.AddListener(Callback);
+            eventTrigger.triggers.Add(entry);
+            return;
+
+            void Callback(BaseEventData eventdata)
+            {
+                PointerEventData data = eventdata as PointerEventData;
+                action(data);
+            }
         }
 
         public static void SetParent(GameObject son, GameObject parent)
