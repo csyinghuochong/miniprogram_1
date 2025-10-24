@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,28 @@ namespace ET.Client
         {
             self.UIFormationHeroItemList.Clear();
             self.UIFormationHeroItemList = null;
+        }
+
+        public static void UpdateTotalCP(this UIHeroFormationComponent self)
+        {
+            long totalCP = 0;
+
+            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            List<long> currentFormation = heroComponentC.Formation;
+            
+            for (int i = 0; i < currentFormation.Count; i++)
+            {
+                Hero hero = heroComponentC.GetHero(currentFormation[i]);
+                
+                if (hero == null)
+                {
+                    continue;
+                }
+
+                totalCP += hero.NumericDic[NumericType.CombatPower];
+            }
+
+            self.Text_TotalCP.SetTextFormat("我的战力：{0}", totalCP);
         }
 
         public static void UpdateSlotItemList(this UIHeroFormationComponent self)
@@ -126,6 +149,7 @@ namespace ET.Client
                     int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 0, heroId, i + 1);
                     if (error == ErrorCode.ERR_Success)
                     {
+                        self.UpdateTotalCP();
                         self.UpdateSlotItemList();
                         self.UpdateHeroList(self.ShowHeroType);
                     }

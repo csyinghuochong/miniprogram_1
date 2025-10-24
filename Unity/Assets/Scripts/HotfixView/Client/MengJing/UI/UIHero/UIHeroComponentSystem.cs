@@ -168,6 +168,7 @@ namespace ET.Client
                 }
 
                 self.UIHeroFormationComponent.SetShowType(1);
+                self.UIHeroFormationComponent.UpdateTotalCP();
                 self.UIHeroFormationComponent.UpdateSlotItemList();
                 self.UIHeroFormationComponent.GameObject.SetActive(true);
             }
