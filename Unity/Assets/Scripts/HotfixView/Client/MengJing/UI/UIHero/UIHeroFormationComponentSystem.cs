@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_TotalCP = rc.Get<GameObject>("Text_TotalCP").GetComponent<TMP_Text>();
             self.UIFormationSlotItem_1 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_1"));
             self.UIFormationSlotItem_2 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_2"));
             self.UIFormationSlotItem_3 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_3"));
@@ -24,9 +26,16 @@ namespace ET.Client
             self.UIFormationSlotItem_7 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_7"));
             self.UIFormationSlotItem_8 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_8"));
             self.UIFormationSlotItem_9 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_9"));
+            self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
+            self.Button_Type_Melee = rc.Get<GameObject>("Button_Type_Melee").GetComponent<Button>();
+            self.Button_Type_Ranged = rc.Get<GameObject>("Button_Type_Ranged").GetComponent<Button>();
             self.Content_UIFormationHeroItem = rc.Get<GameObject>("Content_UIFormationHeroItem").transform;
             self.UIFormationHeroItem = rc.Get<GameObject>("UIFormationHeroItem");
             self.UIFormationHeroItem.SetActive(false);
+            
+            self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(1); });
+            self.Button_Type_Melee.onClick.AddListener(() => { self.SetShowType(2); });
+            self.Button_Type_Ranged.onClick.AddListener(() => { self.SetShowType(3); });
         }
 
         [EntitySystem]
@@ -48,6 +57,18 @@ namespace ET.Client
             self.UIFormationSlotItem_7.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[6])).Coroutine();
             self.UIFormationSlotItem_8.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[7])).Coroutine();
             self.UIFormationSlotItem_9.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[8])).Coroutine();
+        }
+        
+        public static void SetShowType(this UIHeroFormationComponent self, int page)
+        {
+            self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 1);
+            self.Button_Type_All.transform.Find("Image_Off").gameObject.SetActive(page != 1);
+            self.Button_Type_Melee.transform.Find("Image_On").gameObject.SetActive(page == 2);
+            self.Button_Type_Melee.transform.Find("Image_Off").gameObject.SetActive(page != 2);
+            self.Button_Type_Ranged.transform.Find("Image_On").gameObject.SetActive(page == 3);
+            self.Button_Type_Ranged.transform.Find("Image_Off").gameObject.SetActive(page != 3);
+
+            self.UpdateHeroList(page);
         }
 
         public static void UpdateHeroList(this UIHeroFormationComponent self, int page)

@@ -124,6 +124,13 @@ namespace ET.Client
         private static void ShowPanel(this UIHeroComponent self, int panel)
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
+            
+            self.Button_Hero.transform.Find("Image_On").gameObject.SetActive(panel == 1);
+            self.Button_Hero.transform.Find("Image_Off").gameObject.SetActive(panel != 1);
+            self.Button_HeroList.transform.Find("Image_On").gameObject.SetActive(panel == 2);
+            self.Button_HeroList.transform.Find("Image_Off").gameObject.SetActive(panel != 2);
+            self.Button_Formation.transform.Find("Image_On").gameObject.SetActive(panel == 3);
+            self.Button_Formation.transform.Find("Image_Off").gameObject.SetActive(panel != 3);
 
             UICommonHelper.HideChild(self.Transform_PanelRoot.gameObject);
             if (panel == 1)
@@ -160,8 +167,8 @@ namespace ET.Client
                     self.UIHeroFormationComponent = self.AddComponent<UIHeroFormationComponent, GameObject>(go);
                 }
 
+                self.UIHeroFormationComponent.SetShowType(1);
                 self.UIHeroFormationComponent.UpdateSlotItemList();
-                self.UIHeroFormationComponent.UpdateHeroList(1);
                 self.UIHeroFormationComponent.GameObject.SetActive(true);
             }
         }
