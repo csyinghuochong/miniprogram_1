@@ -12,7 +12,7 @@ namespace ET
 
         public int Type { get; set; }
 
-        public int ConfigId { get; set; } //配置表id
+        public int ConfigId { get; set; }
 
         public bool MainHero { get; set; }
 

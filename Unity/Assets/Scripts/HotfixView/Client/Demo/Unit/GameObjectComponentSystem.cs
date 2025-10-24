@@ -3,6 +3,20 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [NumericWatcher(SceneType.Current, NumericType.CurrentHeroId)]
+    public class NumericWatcher_ReloadGameObject : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (unit.Type != UnitType.Player)
+            {
+                return;
+            }
+
+            unit.GetComponent<GameObjectComponent>()?.ReloadGameObject();
+        }
+    }
+
     [FriendOf(typeof(GameObjectComponent))]
     [EntitySystemOf(typeof(GameObjectComponent))]
     public static partial class GameObjectComponentSystem
@@ -10,8 +24,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this GameObjectComponent self)
         {
-            self.GameObject = null;
-            self.UnitAssetsPath = string.Empty;
             self.LoadGameObject();
         }
 
@@ -21,14 +33,14 @@ namespace ET.Client
             self.RecoverGameObject();
         }
 
-        public static void RecoverGameObject(this GameObjectComponent self)
+        private static void RecoverGameObject(this GameObjectComponent self)
         {
             if (self.GameObject != null)
             {
                 self.GameObject.transform.localScale = Vector3.one;
             }
 
-            if (self.GameObject.GetComponent<UnitId>())
+            if (self.GameObject.GetComponent<UnitId>() != null)
             {
                 self.GameObject.GetComponent<UnitId>().Id = 0;
             }
@@ -54,20 +66,38 @@ namespace ET.Client
             switch (unitType)
             {
                 case UnitType.Player:
-                    // self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/1");
-                    return;
+                {
+                    long heroId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.CurrentHeroId);
+                    Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(heroId);
 
+                    if (hero == null)
+                    {
+                        return;
+                    }
+
+                    if (!HeroConfigCategory.Instance.DataMap.ContainsKey(hero.ConfigId))
+                    {
+                        return;
+                    }
+
+                    HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
                     break;
+                }
                 case UnitType.Hero:
+                {
                     HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
 
                     break;
+                }
                 case UnitType.Monster:
+                {
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Monster, monsterConfig.MonsterModelID);
 
                     break;
+                }
                 default:
                     break;
             }
@@ -112,19 +142,22 @@ namespace ET.Client
             go.transform.SetParent(self.Root().GetComponent<GlobalComponent>().Unit);
 
             Unit unit = self.GetParent<Unit>();
+            self.UpdatePositon(unit.Position);
+            UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
+            unitId.Id = unit.Id;
             int unitType = unit.Type;
             switch (unitType)
             {
                 case UnitType.Player:
                 {
+                    self.GameObject.tag = TagHelper.Player;
+
                     break;
                 }
                 case UnitType.Hero:
                 {
                     self.GameObject.tag = TagHelper.Hero;
-                    self.UpdatePositon(unit.Position);
-                    UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
-                    unitId.Id = unit.Id;
+
                     unit.AddComponent<SetUnitTransformComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
@@ -135,9 +168,7 @@ namespace ET.Client
                 case UnitType.Monster:
                 {
                     self.GameObject.tag = TagHelper.Monster;
-                    self.UpdatePositon(unit.Position);
-                    UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
-                    unitId.Id = unit.Id;
+
                     unit.AddComponent<SetUnitTransformComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
@@ -148,6 +179,43 @@ namespace ET.Client
                 default:
                     break;
             }
+        }
+
+        public static void ReloadGameObject(this GameObjectComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            int unitType = unit.Type;
+            switch (unitType)
+            {
+                case UnitType.Player:
+                {
+                    self.GameObject.tag = TagHelper.Player;
+
+                    break;
+                }
+                case UnitType.Hero:
+                {
+                    unit.RemoveComponent<SetUnitTransformComponent>();
+                    unit.RemoveComponent<UIHeroHpComponent>();
+                    unit.RemoveComponent<SkillManagerComponent>();
+                    unit.RemoveComponent<BuffManagerComponent>();
+                    unit.RemoveComponent<AI_HeroComponent>();
+                    break;
+                }
+                case UnitType.Monster:
+                {
+                    unit.RemoveComponent<SetUnitTransformComponent>();
+                    unit.RemoveComponent<UIMonsterHpComponent>();
+                    unit.RemoveComponent<SkillManagerComponent>();
+                    unit.RemoveComponent<BuffManagerComponent>();
+                    unit.RemoveComponent<AI_MonsterComponent>();
+                    break;
+                }
+            }
+
+            self.RecoverGameObject();
+
+            self.LoadGameObject();
         }
     }
 }

@@ -158,5 +158,15 @@ namespace ET.Server
 
             return ErrorCode.ERR_Success;
         }
+
+        public static long GetHeroIdFromFormation(this HeroComponentS self, int index)
+        {
+            if (index < 1 || index > self.Formation.Count)
+            {
+                return 0;
+            }
+
+            return self.Formation[index - 1];
+        }
     }
 }
