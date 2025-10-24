@@ -117,13 +117,13 @@ namespace ET.Client
             Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.ItemId);
             if (item == null)
             {
-                Log.Warning("请选择道具");
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("请选择道具");
                 return;
             }
 
             if (num > item.Num)
             {
-                Log.Warning("道具数量不足");
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("道具数量不足");
                 return;
             }
 

@@ -18,9 +18,10 @@ namespace ET.Client
                 }
 
                 uiMonsterHpComponent.UpdateBlood();
-                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
+                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(),
+                    uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
             }
-            
+
             if (unit.Type == UnitType.Hero)
             {
                 UIHeroHpComponent uiHeroHpComponent = unit.GetComponent<UIHeroHpComponent>();
@@ -30,7 +31,8 @@ namespace ET.Client
                 }
 
                 uiHeroHpComponent.UpdateBlood();
-                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), uiHeroHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
+                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(),
+                    uiHeroHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
             }
         }
     }
@@ -41,11 +43,6 @@ namespace ET.Client
     {
         [EntitySystem]
         private static void Awake(this FloatingTextComponent self)
-        {
-        }
-
-        [EntitySystem]
-        private static void FixedUpdate(this FloatingTextComponent self)
         {
         }
 
@@ -77,6 +74,34 @@ namespace ET.Client
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
+                            // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
+                            .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                });
+        }
+
+        public static void ShowTipText(this FloatingTextComponent self, string text)
+        {
+            string path = "Assets/Bundles/UI/Blood/Text_Tip.prefab";
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
+                (gameObject, instanceId) =>
+                {
+                    if (instanceId != self.InstanceId)
+                    {
+                        if (gameObject != null)
+                        {
+                            UnityEngine.Object.DestroyImmediate(gameObject);
+                        }
+
+                        return;
+                    }
+
+                    gameObject.transform.SetParent(GlobalComponent.Instance.PopUpRoot);
+                    gameObject.transform.localScale = Vector3.one;
+                    gameObject.GetComponent<TMP_Text>().text = text;
+                    gameObject.transform.localPosition = Vector3.zero;
+
+                    Sequence seq = DOTween.Sequence();
+                    seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 200f, 1.0f).SetEase(Ease.OutQuad))
                             // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
                             .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
                 });

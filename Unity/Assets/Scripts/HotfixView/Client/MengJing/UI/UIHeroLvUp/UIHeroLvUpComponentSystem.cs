@@ -48,10 +48,10 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
-            
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-            
+
             int maxExp = ExpConfigCategory.Instance.Get(hero.Lv).HeroUpExp;
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
@@ -98,13 +98,13 @@ namespace ET.Client
             Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.ItemId);
             if (item == null)
             {
-                Log.Warning("请选择道具");
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("请选择道具");
                 return;
             }
 
             if (num > item.Num)
             {
-                Log.Warning("道具数量不足");
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("道具数量不足");
                 return;
             }
 
