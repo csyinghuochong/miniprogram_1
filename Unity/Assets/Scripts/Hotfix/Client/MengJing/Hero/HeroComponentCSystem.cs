@@ -98,5 +98,10 @@ namespace ET.Client
 
             return Heros;
         }
+
+        public static int GetAllHeroCount(this HeroComponentC self)
+        {
+            return self.Heros.Count;
+        }
     }
 }

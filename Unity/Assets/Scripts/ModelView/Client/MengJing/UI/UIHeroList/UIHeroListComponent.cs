@@ -10,11 +10,11 @@ namespace ET.Client
     {
         public List<UIHeroItem> UIHeroItemList { get; set; } = new();
 
+        public TMP_Text Text_HaveHeroCount;
         public Button Button_Close;
         public Button Button_Type_All;
-        public Button Button_Type_Warrior;
-        public Button Button_Type_Mage;
-        public Button Button_Type_Archer;
+        public Button Button_Type_Melee;
+        public Button Button_Type_Ranged;
         public Transform Content_UIHeroItem;
         public GameObject UIHeroItem;
     }

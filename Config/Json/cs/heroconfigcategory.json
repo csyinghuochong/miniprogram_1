@@ -2,8 +2,8 @@
   {
     "Id": 10001001,
     "HeroName": "斧王",
-    "AtkType": 1,
     "HeroType": 1,
+    "HeroTag": 1,
     "HeroHeadIcon": "10001001",
     "HeroModelID": "10001001",
     "HeroUpStarNeed": [
@@ -42,8 +42,8 @@
   {
     "Id": 10001002,
     "HeroName": "流浪剑客",
-    "AtkType": 1,
-    "HeroType": 2,
+    "HeroType": 1,
+    "HeroTag": 2,
     "HeroHeadIcon": "10001002",
     "HeroModelID": "10001002",
     "HeroUpStarNeed": [
@@ -82,8 +82,8 @@
   {
     "Id": 10001003,
     "HeroName": "剑圣",
-    "AtkType": 1,
-    "HeroType": 2,
+    "HeroType": 1,
+    "HeroTag": 2,
     "HeroHeadIcon": "10001003",
     "HeroModelID": "10001003",
     "HeroUpStarNeed": [
@@ -122,8 +122,8 @@
   {
     "Id": 10001004,
     "HeroName": "全能骑士",
-    "AtkType": 1,
-    "HeroType": 3,
+    "HeroType": 1,
+    "HeroTag": 3,
     "HeroHeadIcon": "10001004",
     "HeroModelID": "10001004",
     "HeroUpStarNeed": [
@@ -162,8 +162,8 @@
   {
     "Id": 10002001,
     "HeroName": "冰女",
-    "AtkType": 2,
     "HeroType": 2,
+    "HeroTag": 2,
     "HeroHeadIcon": "10002001",
     "HeroModelID": "10002001",
     "HeroUpStarNeed": [
@@ -202,8 +202,8 @@
   {
     "Id": 10002002,
     "HeroName": "术士",
-    "AtkType": 2,
-    "HeroType": 3,
+    "HeroType": 2,
+    "HeroTag": 3,
     "HeroHeadIcon": "10002002",
     "HeroModelID": "10002002",
     "HeroUpStarNeed": [

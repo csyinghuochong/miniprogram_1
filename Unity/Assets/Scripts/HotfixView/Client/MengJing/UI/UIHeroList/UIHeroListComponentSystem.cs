@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,22 +15,22 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_HaveHeroCount = rc.Get<GameObject>("Text_HaveHeroValue").GetComponent<TMP_Text>();
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
-            self.Button_Type_Warrior = rc.Get<GameObject>("Button_Type_Warrior").GetComponent<Button>();
-            self.Button_Type_Mage = rc.Get<GameObject>("Button_Type_Mage").GetComponent<Button>();
-            self.Button_Type_Archer = rc.Get<GameObject>("Button_Type_Archer").GetComponent<Button>();
+            self.Button_Type_Melee = rc.Get<GameObject>("Button_Type_Melee").GetComponent<Button>();
+            self.Button_Type_Ranged = rc.Get<GameObject>("Button_Type_Ranged").GetComponent<Button>();
             self.Content_UIHeroItem = rc.Get<GameObject>("Content_UIHeroItem").GetComponent<Transform>();
             self.UIHeroItem = rc.Get<GameObject>("UIHeroItem");
             self.UIHeroItem.gameObject.SetActive(false);
 
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(1); });
-            self.Button_Type_Warrior.onClick.AddListener(() => { self.SetShowType(2); });
-            self.Button_Type_Mage.onClick.AddListener(() => { self.SetShowType(3); });
-            self.Button_Type_Archer.onClick.AddListener(() => { self.SetShowType(4); });
+            self.Button_Type_Melee.onClick.AddListener(() => { self.SetShowType(2); });
+            self.Button_Type_Ranged.onClick.AddListener(() => { self.SetShowType(3); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHeroList); });
-
+            
             self.SetShowType(1);
+            self.UpdateHaveHeroCount();
         }
 
         [EntitySystem]
@@ -42,14 +44,21 @@ namespace ET.Client
         {
             self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 1);
             self.Button_Type_All.transform.Find("Image_Off").gameObject.SetActive(page != 1);
-            self.Button_Type_Warrior.transform.Find("Image_On").gameObject.SetActive(page == 2);
-            self.Button_Type_Warrior.transform.Find("Image_Off").gameObject.SetActive(page != 2);
-            self.Button_Type_Mage.transform.Find("Image_On").gameObject.SetActive(page == 3);
-            self.Button_Type_Mage.transform.Find("Image_Off").gameObject.SetActive(page != 3);
-            self.Button_Type_Archer.transform.Find("Image_On").gameObject.SetActive(page == 4);
-            self.Button_Type_Archer.transform.Find("Image_Off").gameObject.SetActive(page != 4);
+            self.Button_Type_Melee.transform.Find("Image_On").gameObject.SetActive(page == 2);
+            self.Button_Type_Melee.transform.Find("Image_Off").gameObject.SetActive(page != 2);
+            self.Button_Type_Ranged.transform.Find("Image_On").gameObject.SetActive(page == 3);
+            self.Button_Type_Ranged.transform.Find("Image_Off").gameObject.SetActive(page != 3);
 
             self.UpdateHeroList(page);
+        }
+
+        private static void UpdateHaveHeroCount(this UIHeroListComponent self)
+        {
+            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            int heroCount = heroComponentC.GetAllHeroCount();
+            int allHeroCount = HeroConfigCategory.Instance.DataMap.Count;
+
+            self.Text_HaveHeroCount.SetTextFormat("{0}/{0}", heroCount, allHeroCount);
         }
 
         private static void UpdateHeroList(this UIHeroListComponent self, int page)
@@ -63,15 +72,11 @@ namespace ET.Client
             }
             else if (page == 2)
             {
-                heroList = heroComponentC.GetHerosByType(HeroType.Warrior);
+                heroList = heroComponentC.GetHerosByType(HeroType.Melee);
             }
             else if (page == 3)
             {
-                heroList = heroComponentC.GetHerosByType(HeroType.Mage);
-            }
-            else if (page == 4)
-            {
-                heroList = heroComponentC.GetHerosByType(HeroType.Archer);
+                heroList = heroComponentC.GetHerosByType(HeroType.Ranged);
             }
             else
             {

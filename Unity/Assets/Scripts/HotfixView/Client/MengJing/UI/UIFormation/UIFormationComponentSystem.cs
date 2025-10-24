@@ -66,15 +66,11 @@ namespace ET.Client
             }
             else if (page == 2)
             {
-                heroList = heroComponentC.GetHerosByType(HeroType.Warrior);
+                heroList = heroComponentC.GetHerosByType(HeroType.Melee);
             }
             else if (page == 3)
             {
-                heroList = heroComponentC.GetHerosByType(HeroType.Mage);
-            }
-            else if (page == 4)
-            {
-                heroList = heroComponentC.GetHerosByType(HeroType.Archer);
+                heroList = heroComponentC.GetHerosByType(HeroType.Ranged);
             }
             else
             {

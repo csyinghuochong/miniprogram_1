@@ -18,8 +18,8 @@ namespace ET
         {
             Id = _buf.ReadInt();
             HeroName = _buf.ReadString();
-            AtkType = _buf.ReadInt();
             HeroType = _buf.ReadInt();
+            HeroTag = _buf.ReadInt();
             HeroHeadIcon = _buf.ReadString();
             HeroModelID = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); HeroUpStarNeed = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); HeroUpStarNeed[__index0] = __e0;}}
@@ -63,14 +63,14 @@ namespace ET
         public readonly string HeroName;
 
         /// <summary>
-        /// 攻击类型
+        /// 英雄类型
         /// </summary>
-        public readonly int AtkType;
+        public readonly int HeroType;
 
         /// <summary>
         /// 英雄标签
         /// </summary>
-        public readonly int HeroType;
+        public readonly int HeroTag;
 
         /// <summary>
         /// 英雄头像
@@ -227,8 +227,8 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "HeroName:" + HeroName + ","
-            + "AtkType:" + AtkType + ","
             + "HeroType:" + HeroType + ","
+            + "HeroTag:" + HeroTag + ","
             + "HeroHeadIcon:" + HeroHeadIcon + ","
             + "HeroModelID:" + HeroModelID + ","
             + "HeroUpStarNeed:" + Luban.StringUtil.CollectionToString(HeroUpStarNeed) + ","

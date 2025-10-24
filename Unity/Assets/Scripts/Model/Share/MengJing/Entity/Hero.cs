@@ -13,9 +13,8 @@ namespace ET
 
     public enum HeroType
     {
-        Warrior = 1, //战士
-        Archer = 2, //射手
-        Mage = 3, //法师
+        Melee = 1, //近战
+        Ranged = 2, //远程
     }
 
     [ChildOf]
