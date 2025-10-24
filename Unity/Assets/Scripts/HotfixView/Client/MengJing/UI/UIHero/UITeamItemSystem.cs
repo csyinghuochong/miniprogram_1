@@ -19,7 +19,7 @@ namespace ET.Client
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
 
-            self.Button_Click.onClick.AddListener(() => { self.GetParent<UIHeroComponent>().SelectHero(self.HeroId); });
+            self.Button_Click.onClick.AddListener(() => { self.GetParent<UIHeroInfoComponent>().SelectHero(self.HeroId); });
         }
 
         public static async ETTask UpdateInfo(this UITeamItem self, Hero hero)
