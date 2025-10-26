@@ -1,22 +1,14 @@
 {
-    "name": "Unity.HotfixView",
+    "name": "Unity.App",
     "rootNamespace": "ET",
     "references": [
-        "Unity.ThirdParty",
         "Unity.Core",
-        "Unity.Mathematics",
+        "Unity.ThirdParty",
         "Unity.Loader",
-        "MemoryPack",
-        "Unity.Mono",
         "Unity.Model",
-        "Unity.Hotfix",
         "Unity.ModelView",
-        "YooAsset",
-        "I2.Loc",
-        "DG.Tweening.Modules",
-        "Unity.TextMeshPro",
-        "spine-unity",
-        "ZString"
+        "Unity.Hotfix",
+        "Unity.HotfixView"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

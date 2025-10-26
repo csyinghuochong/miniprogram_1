@@ -1,18 +1,8 @@
 {
-    "name": "Unity.ModelView",
+    "name": "Unity.Mono",
     "rootNamespace": "ET",
     "references": [
-        "Unity.ThirdParty",
-        "Unity.Core",
-        "Unity.Mathematics",
-        "Unity.Loader",
-        "Unity.Mono",
-        "Unity.Model",
-        "YooAsset",
-        "I2.Loc",
-        "Unity.TextMeshPro",
-        "ZString",
-        "spine-unity"
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

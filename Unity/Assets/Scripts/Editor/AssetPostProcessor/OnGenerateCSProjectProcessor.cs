@@ -28,12 +28,22 @@ namespace ET
                 return GenerateCustomProject(content);
             }
 
+            if (path.EndsWith("Unity.Mono.csproj") || path.EndsWith("Unity.Mono.csproj"))
+            {
+                return AddCopyAfterBuild(GenerateCustomProject(content));
+            }
+            
             if (path.EndsWith("Unity.Model.csproj") || path.EndsWith("Unity.Hotfix.csproj"))
             {
                 return AddCopyAfterBuild(GenerateCustomProject(content));
             }
 
             if (path.EndsWith("Unity.ModelView.csproj") || path.EndsWith("Unity.HotfixView.csproj"))
+            {
+                return AddCopyAfterBuild(GenerateCustomProject(content));
+            }
+            
+            if (path.EndsWith("Unity.App.csproj") || path.EndsWith("Unity.App.csproj"))
             {
                 return AddCopyAfterBuild(GenerateCustomProject(content));
             }

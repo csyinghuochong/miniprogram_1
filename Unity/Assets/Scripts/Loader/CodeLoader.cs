@@ -9,6 +9,7 @@ namespace ET
 {
     public class CodeLoader: Singleton<CodeLoader>, ISingletonAwake
     {
+        private Assembly monoAssembly;
         private Assembly modelAssembly;
         private Assembly modelViewAssembly;
 
@@ -18,7 +19,8 @@ namespace ET
 
         public void Awake()
         {
-            this.enableDll = Resources.Load<GlobalConfig>("GlobalConfig").EnableDll;
+            // 加了Mono程序集后不能启用EnableDll，不然会Edit下运行后会找不到脚本
+            // this.enableDll = Resources.Load<GlobalConfig>("GlobalConfig").EnableDll;
         }
 
         public async ETTask DownloadAsync()
@@ -34,6 +36,8 @@ namespace ET
         {
             if (!Define.IsEditor)
             {
+                byte[] monoAssBytes = this.dlls["Unity.Mono.dll"].bytes;
+                byte[] monoPdbBytes = this.dlls["Unity.Mono.pdb"].bytes;
                 byte[] modelAssBytes = this.dlls["Unity.Model.dll"].bytes;
                 byte[] modelPdbBytes = this.dlls["Unity.Model.pdb"].bytes;
                 byte[] modelViewAssBytes = this.dlls["Unity.ModelView.dll"].bytes;
@@ -52,6 +56,7 @@ namespace ET
                         RuntimeApi.LoadMetadataForAOTAssembly(textAsset.bytes, HomologousImageMode.SuperSet);
                     }
                 }
+                this.monoAssembly = Assembly.Load(monoAssBytes, monoPdbBytes);
                 this.modelAssembly = Assembly.Load(modelAssBytes, modelPdbBytes);
                 this.modelViewAssembly = Assembly.Load(modelViewAssBytes, modelViewPdbBytes);
             }
@@ -72,7 +77,11 @@ namespace ET
                     foreach (Assembly ass in assemblies)
                     {
                         string name = ass.GetName().Name;
-                        if (name == "Unity.Model")
+                        if (name == "Unity.Mono")
+                        {
+                            this.monoAssembly = ass;
+                        }
+                        else if (name == "Unity.Model")
                         {
                             this.modelAssembly = ass;
                         }
@@ -89,32 +98,37 @@ namespace ET
                 }
             }
             
-            (Assembly hotfixAssembly, Assembly hotfixViewAssembly) = this.LoadHotfix();
+            (Assembly hotfixAssembly, Assembly hotfixViewAssembly, Assembly appAssembly) = this.LoadHotfix();
 
             World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[]
             {
-                typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
-                hotfixViewAssembly
+                typeof(World).Assembly, typeof(Init).Assembly, this.monoAssembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
+                hotfixViewAssembly, appAssembly
             });
-            Log.Warning($"this.modelAssembly:  {this.modelAssembly.FullName}");
+
             IStaticMethod start = new StaticMethod(this.modelAssembly, "ET.Entry", "Start");
             start.Run();
         }
 
-        private (Assembly, Assembly) LoadHotfix()
+        private (Assembly, Assembly, Assembly) LoadHotfix()
         {
             byte[] hotfixAssBytes;
             byte[] hotfixPdbBytes;
             byte[] hotfixViewAssBytes;
             byte[] hotfixViewPdbBytes;
+            byte[] appAssBytes;
+            byte[] appPdbBytes;
             Assembly hotfixAssembly = null;
             Assembly hotfixViewAssembly = null;
+            Assembly appAssembly = null;
             if (!Define.IsEditor)
             {
                 hotfixAssBytes = this.dlls["Unity.Hotfix.dll"].bytes;
                 hotfixPdbBytes = this.dlls["Unity.Hotfix.pdb"].bytes;
                 hotfixViewAssBytes = this.dlls["Unity.HotfixView.dll"].bytes;
                 hotfixViewPdbBytes = this.dlls["Unity.HotfixView.pdb"].bytes;
+                appAssBytes = this.dlls["Unity.App.dll"].bytes;
+                appPdbBytes = this.dlls["Unity.Mono.pdb"].bytes;
                 // 如果需要测试，可替换成下面注释的代码直接加载Assets/Bundles/Code/Hotfix.dll.bytes，但真正打包时必须使用上面的代码
                 //hotfixAssBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Unity.Hotfix.dll.bytes"));
                 //hotfixPdbBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Unity.Hotfix.pdb.bytes"));
@@ -122,6 +136,7 @@ namespace ET
                 //hotfixViewPdbBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Unity.HotfixView.pdb.bytes"));
                 hotfixAssembly = Assembly.Load(hotfixAssBytes, hotfixPdbBytes);
                 hotfixViewAssembly = Assembly.Load(hotfixViewAssBytes, hotfixViewPdbBytes);
+                appAssembly = Assembly.Load(appAssBytes, appPdbBytes);
             }
             else
             {
@@ -148,8 +163,12 @@ namespace ET
                         {
                             hotfixViewAssembly = ass;
                         }
+                        else if (name == "Unity.App")
+                        {
+                            appAssembly = ass;
+                        }
 
-                        if (hotfixAssembly != null && hotfixViewAssembly != null)
+                        if (hotfixAssembly != null && hotfixViewAssembly != null && appAssembly != null)
                         {
                             break;
                         }
@@ -157,21 +176,23 @@ namespace ET
                 }
             }
             
-            return (hotfixAssembly, hotfixViewAssembly);
+            return (hotfixAssembly, hotfixViewAssembly, appAssembly);
         }
 
         public void Reload()
         {
-            (Assembly hotfixAssembly, Assembly hotfixViewAssembly) = this.LoadHotfix();
-
-            CodeTypes codeTypes = World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[]
-            {
-                typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
-                hotfixViewAssembly
-            });
-            codeTypes.CreateCode();
-
-            Log.Info($"reload dll finish!");
+            Log.Warning("客户端取消热重载功能");
+            // 热重载只能更新逻辑，客户端用了委托不能热重载，加了mono程序集应该也不能热重载
+            // (Assembly hotfixAssembly, Assembly hotfixViewAssembly) = this.LoadHotfix();
+            //
+            // CodeTypes codeTypes = World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[]
+            // {
+            //     typeof (World).Assembly, typeof (Init).Assembly, this.modelAssembly, this.modelViewAssembly, hotfixAssembly,
+            //     hotfixViewAssembly
+            // });
+            // codeTypes.CreateCode();
+            //
+            // Log.Info($"reload dll finish!");
         }
     }
 }
