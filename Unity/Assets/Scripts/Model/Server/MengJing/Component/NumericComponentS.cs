@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson.Serialization.Attributes;
@@ -65,7 +64,8 @@ namespace ET.Server
             return self.GetByKey(numericType);
         }
 
-        private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, int damgeType = 0)
+        private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false,
+        long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             long old = 0;
             int nowValue = 0;
@@ -73,7 +73,7 @@ namespace ET.Server
 
             if (numericType > NumericType.Max)
             {
-                ///注意下 客户端应该是不需要这个逻辑的。
+                // 注意下 客户端应该是不需要这个逻辑的。
                 self.NumericDic[numericType] = value;
                 nowValue = numericType / 100;
                 int add = nowValue * 100 + 1;
@@ -163,23 +163,24 @@ namespace ET.Server
             self.ApplyValue(numericType, (long)(value * 10000), notice);
         }
 
-        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = true, long attackid = 0, int skillId = 0, int damgeType = 0)
+        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = true,
+        long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             long old = self.GetByKey(numericType);
-           
+
             if (numericType != NumericType.Now_Hp)
             {
                 check = false;
             }
-            
+
             if (check && old == value)
             {
                 return;
             }
-            
+
             self.Update(numericType, value, notice, check, attackid, skillId, damgeType);
         }
-        
+
         /// <summary>
         /// 传入改变值,设置当前的属性值, 不走公式，一定会广播给客户端
         /// </summary>
@@ -190,7 +191,8 @@ namespace ET.Server
         /// <param name="skillID"></param>
         /// <param name="notice"></param>
         /// <param name="DamgeType"></param>
-        public static void ApplyChange(this NumericComponentS self, int numericType, long changedValue, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, int damgeType = 0)
+        public static void ApplyChange(this NumericComponentS self, int numericType, long changedValue, bool notice = true, bool check = false,
+        long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             //改变值为0不做任何处理
             if (changedValue == 0)
@@ -198,7 +200,7 @@ namespace ET.Server
                 return;
             }
 
-             //是否超过指定上限值
+            //是否超过指定上限值
             switch (numericType)
             {
                 case NumericType.Now_Hp:
@@ -207,11 +209,12 @@ namespace ET.Server
                     {
                         changedValue = nowCostHp;
                     }
+
                     break;
             }
 
             long newvalue = self.GetAsLong(numericType) + changedValue;
-            self.ApplyValue( numericType, newvalue, notice,  true, attackid, skillId, damgeType);
+            self.ApplyValue(numericType, newvalue, notice, true, attackid, skillId, damgeType);
         }
     }
 
