@@ -19,10 +19,14 @@ namespace ET.Client
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
+
+            self.Button_Click.onClick.AddListener(() => { self.OnClick(); });
         }
 
-        public static async ETTask UpdateInfo(this UIFormationSlotItem self, Hero hero)
+        public static async ETTask UpdateInfo(this UIFormationSlotItem self, Hero hero, int slotIndex)
         {
+            self.SlotIndex = slotIndex;
+
             if (hero == null)
             {
                 self.HeroId = 0;
@@ -39,6 +43,11 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.gameObject.SetActive(true);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+        }
+
+        private static void OnClick(this UIFormationSlotItem self)
+        {
+            self.GetParent<UIHeroFormationComponent>().OnUnloadHero(self.HeroId, self.SlotIndex).Coroutine();
         }
     }
 }

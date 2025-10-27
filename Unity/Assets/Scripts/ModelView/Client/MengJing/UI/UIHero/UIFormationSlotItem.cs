@@ -8,6 +8,7 @@ namespace ET.Client
     public class UIFormationSlotItem : Entity, IAwake<GameObject>
     {
         public long HeroId;
+        public int SlotIndex;
         
         public GameObject GameObject;
         public Image Image_HeroIcon;

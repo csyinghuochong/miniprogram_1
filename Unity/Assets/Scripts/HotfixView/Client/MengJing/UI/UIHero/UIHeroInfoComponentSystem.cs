@@ -111,7 +111,15 @@ namespace ET.Client
         public static void SelectFirstHero(this UIHeroInfoComponent self)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            self.SelectHero(heroComponentC.Formation[0]);
+
+            for (int i = 0; i < heroComponentC.Formation.Count; i++)
+            {
+                if (heroComponentC.Formation[i] != 0)
+                {
+                    self.SelectHero(heroComponentC.Formation[i]);
+                    break;
+                }
+            }
         }
 
         public static void SelectHero(this UIHeroInfoComponent self, long heroId)

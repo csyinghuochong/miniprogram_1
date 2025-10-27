@@ -33,7 +33,7 @@ namespace ET.Client
             self.Content_UIFormationHeroItem = rc.Get<GameObject>("Content_UIFormationHeroItem").transform;
             self.UIFormationHeroItem = rc.Get<GameObject>("UIFormationHeroItem");
             self.UIFormationHeroItem.SetActive(false);
-            
+
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Melee.onClick.AddListener(() => { self.SetShowType(2); });
             self.Button_Type_Ranged.onClick.AddListener(() => { self.SetShowType(3); });
@@ -52,11 +52,11 @@ namespace ET.Client
 
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             List<long> currentFormation = heroComponentC.Formation;
-            
+
             for (int i = 0; i < currentFormation.Count; i++)
             {
                 Hero hero = heroComponentC.GetHero(currentFormation[i]);
-                
+
                 if (hero == null)
                 {
                     continue;
@@ -71,17 +71,17 @@ namespace ET.Client
         public static void UpdateSlotItemList(this UIHeroFormationComponent self)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            self.UIFormationSlotItem_1.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[0])).Coroutine();
-            self.UIFormationSlotItem_2.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[1])).Coroutine();
-            self.UIFormationSlotItem_3.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[2])).Coroutine();
-            self.UIFormationSlotItem_4.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[3])).Coroutine();
-            self.UIFormationSlotItem_5.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[4])).Coroutine();
-            self.UIFormationSlotItem_6.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[5])).Coroutine();
-            self.UIFormationSlotItem_7.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[6])).Coroutine();
-            self.UIFormationSlotItem_8.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[7])).Coroutine();
-            self.UIFormationSlotItem_9.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[8])).Coroutine();
+            self.UIFormationSlotItem_1.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[0]), 1).Coroutine();
+            self.UIFormationSlotItem_2.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[1]), 2).Coroutine();
+            self.UIFormationSlotItem_3.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[2]), 3).Coroutine();
+            self.UIFormationSlotItem_4.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[3]), 4).Coroutine();
+            self.UIFormationSlotItem_5.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[4]), 5).Coroutine();
+            self.UIFormationSlotItem_6.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[5]), 6).Coroutine();
+            self.UIFormationSlotItem_7.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[6]), 7).Coroutine();
+            self.UIFormationSlotItem_8.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[7]), 8).Coroutine();
+            self.UIFormationSlotItem_9.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[8]), 9).Coroutine();
         }
-        
+
         public static void SetShowType(this UIHeroFormationComponent self, int page)
         {
             self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 1);
@@ -156,6 +156,17 @@ namespace ET.Client
 
                     return;
                 }
+            }
+        }
+
+        public static async ETTask OnUnloadHero(this UIHeroFormationComponent self, long heroId, int slotIndex)
+        {
+            int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 1, heroId, slotIndex);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.UpdateTotalCP();
+                self.UpdateSlotItemList();
+                self.UpdateHeroList(self.ShowHeroType);
             }
         }
     }
