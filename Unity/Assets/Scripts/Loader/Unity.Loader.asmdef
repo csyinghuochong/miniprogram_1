@@ -10,7 +10,8 @@
         "YooAsset",
         "Unity.TextMeshPro",
         "Unity.RenderPipelines.Universal.Runtime",
-        "DG.Tweening.Modules"
+        "DG.Tweening.Modules",
+        "ZString"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
