@@ -29,18 +29,18 @@ namespace ET
             EquipMinAdf = _buf.ReadInt();
             EquipMaxAdf = _buf.ReadInt();
             EquipHp = _buf.ReadInt();
-            EquipAtkSpeed = _buf.ReadDouble();
-            EquipMoveSpeed = _buf.ReadDouble();
-            EquipCri = _buf.ReadDouble();
-            EquipCombo = _buf.ReadDouble();
-            EquipCounterattack = _buf.ReadDouble();
-            EquipLifeSteal = _buf.ReadDouble();
-            EquipEva = _buf.ReadDouble();
-            EquipReCri = _buf.ReadDouble();
-            EquipReCombo = _buf.ReadDouble();
-            EquipReCounterattack = _buf.ReadDouble();
-            EquipReLifeSteal = _buf.ReadDouble();
-            EquipReEva = _buf.ReadDouble();
+            EquipAtkSpeed = _buf.ReadLong();
+            EquipMoveSpeed = _buf.ReadLong();
+            EquipCri = _buf.ReadLong();
+            EquipCombo = _buf.ReadLong();
+            EquipCounterattack = _buf.ReadLong();
+            EquipLifeSteal = _buf.ReadLong();
+            EquipEva = _buf.ReadLong();
+            EquipReCri = _buf.ReadLong();
+            EquipReCombo = _buf.ReadLong();
+            EquipReCounterattack = _buf.ReadLong();
+            EquipReLifeSteal = _buf.ReadLong();
+            EquipReEva = _buf.ReadLong();
 
             PostInit();
         }
@@ -118,62 +118,62 @@ namespace ET
         /// <summary>
         /// 攻速
         /// </summary>
-        public readonly double EquipAtkSpeed;
+        public readonly long EquipAtkSpeed;
 
         /// <summary>
         /// 移速
         /// </summary>
-        public readonly double EquipMoveSpeed;
+        public readonly long EquipMoveSpeed;
 
         /// <summary>
         /// 暴击
         /// </summary>
-        public readonly double EquipCri;
+        public readonly long EquipCri;
 
         /// <summary>
         /// 连击
         /// </summary>
-        public readonly double EquipCombo;
+        public readonly long EquipCombo;
 
         /// <summary>
         /// 反击
         /// </summary>
-        public readonly double EquipCounterattack;
+        public readonly long EquipCounterattack;
 
         /// <summary>
         /// 吸血
         /// </summary>
-        public readonly double EquipLifeSteal;
+        public readonly long EquipLifeSteal;
 
         /// <summary>
         /// 闪避
         /// </summary>
-        public readonly double EquipEva;
+        public readonly long EquipEva;
 
         /// <summary>
         /// 抗暴击
         /// </summary>
-        public readonly double EquipReCri;
+        public readonly long EquipReCri;
 
         /// <summary>
         /// 抗连击
         /// </summary>
-        public readonly double EquipReCombo;
+        public readonly long EquipReCombo;
 
         /// <summary>
         /// 抗反击
         /// </summary>
-        public readonly double EquipReCounterattack;
+        public readonly long EquipReCounterattack;
 
         /// <summary>
         /// 抗吸血
         /// </summary>
-        public readonly double EquipReLifeSteal;
+        public readonly long EquipReLifeSteal;
 
         /// <summary>
         /// 抗闪避
         /// </summary>
-        public readonly double EquipReEva;
+        public readonly long EquipReEva;
 
 
         public const int __ID__ = -233858190;

@@ -25,18 +25,18 @@ namespace ET
             ActSkillID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
             Lv = _buf.ReadInt();
-            MoveSpeed = _buf.ReadDouble();
-            ActDistance = _buf.ReadDouble();
-            AtkSpeed = _buf.ReadDouble();
+            MoveSpeed = _buf.ReadLong();
+            ActDistance = _buf.ReadLong();
+            AtkSpeed = _buf.ReadLong();
             Hp = _buf.ReadInt();
             Act = _buf.ReadInt();
             Def = _buf.ReadInt();
             Adf = _buf.ReadInt();
-            Cri = _buf.ReadDouble();
-            ReCri = _buf.ReadDouble();
-            Eva = _buf.ReadDouble();
-            Hit = _buf.ReadDouble();
-            HitLess = _buf.ReadDouble();
+            Cri = _buf.ReadLong();
+            ReCri = _buf.ReadLong();
+            Eva = _buf.ReadLong();
+            Hit = _buf.ReadLong();
+            HitLess = _buf.ReadLong();
             MonsterDescription = _buf.ReadString();
 
             PostInit();
@@ -95,17 +95,17 @@ namespace ET
         /// <summary>
         /// 移动速度
         /// </summary>
-        public readonly double MoveSpeed;
+        public readonly long MoveSpeed;
 
         /// <summary>
         /// 攻击距离
         /// </summary>
-        public readonly double ActDistance;
+        public readonly long ActDistance;
 
         /// <summary>
         /// 攻击速度
         /// </summary>
-        public readonly double AtkSpeed;
+        public readonly long AtkSpeed;
 
         /// <summary>
         /// 怪物生命
@@ -130,27 +130,27 @@ namespace ET
         /// <summary>
         /// 暴击概率
         /// </summary>
-        public readonly double Cri;
+        public readonly long Cri;
 
         /// <summary>
         /// 抗爆概率
         /// </summary>
-        public readonly double ReCri;
+        public readonly long ReCri;
 
         /// <summary>
         /// 闪避概率
         /// </summary>
-        public readonly double Eva;
+        public readonly long Eva;
 
         /// <summary>
         /// 命中概率
         /// </summary>
-        public readonly double Hit;
+        public readonly long Hit;
 
         /// <summary>
         /// 伤害减免
         /// </summary>
-        public readonly double HitLess;
+        public readonly long HitLess;
 
         /// <summary>
         /// 怪物简介

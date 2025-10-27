@@ -66,20 +66,20 @@ namespace ET
             long base_MaxDef = heroConfig.BaseDef;
             long base_MinAdf = heroConfig.BaseAdf;
             long base_MaxAdf = heroConfig.BaseAdf;
-            double base_Cri = heroConfig.BaseCri;
-            double base_ReCri = heroConfig.BaseReCri;
-            double base_Eva = heroConfig.BaseEva;
-            double base_Hit = heroConfig.BaseHit;
-            double base_HitLess = heroConfig.BaseHitLess;
-            double base_MoveSpeed = heroConfig.BaseMoveSpeed;
-            double base_AtkSpeed = heroConfig.BaseAtkSpeed;
-            double base_Combo = 0;
-            double base_Counterattack = 0;
-            double base_LifeSteal = 0;
-            double base_ReCombo = 0;
-            double base_ReCounterattack = 0;
-            double base_ReLifeSteal = 0;
-            double base_ReEva = 0;
+            long base_Cri = heroConfig.BaseCri;
+            long base_ReCri = heroConfig.BaseReCri;
+            long base_Eva = heroConfig.BaseEva;
+            long base_Hit = heroConfig.BaseHit;
+            long base_HitLess = heroConfig.BaseHitLess;
+            long base_MoveSpeed = heroConfig.BaseMoveSpeed;
+            long base_AtkSpeed = heroConfig.BaseAtkSpeed;
+            long base_Combo = 0;
+            long base_Counterattack = 0;
+            long base_LifeSteal = 0;
+            long base_ReCombo = 0;
+            long base_ReCounterattack = 0;
+            long base_ReLifeSteal = 0;
+            long base_ReEva = 0;
             long combatPower = 0;
 
             // 等级成长
@@ -142,13 +142,13 @@ namespace ET
             numericDic.Add(NumericType.Base_MaxDef_Base, base_MaxDef);
             numericDic.Add(NumericType.Base_MinAdf_Base, base_MaxAdf);
             numericDic.Add(NumericType.Base_MaxAdf_Base, base_MinAdf);
-            numericDic.Add(NumericType.Base_Cri_Base, (long)(base_Cri * 10000));
-            numericDic.Add(NumericType.Base_ReCri_Base, (long)(base_ReCri * 10000));
-            numericDic.Add(NumericType.Base_Eva_Base, (long)(base_Eva * 10000));
-            numericDic.Add(NumericType.Base_Hit_Base, (long)(base_Hit * 10000));
-            numericDic.Add(NumericType.Base_HitDamageLessPro_Base, (long)(base_HitLess * 10000));
-            numericDic.Add(NumericType.Base_Speed_Base, (long)(base_MoveSpeed * 10000));
-            numericDic.Add(NumericType.Base_AtkSpeed_Base, (long)(base_AtkSpeed * 10000));
+            numericDic.Add(NumericType.Base_Cri_Base, base_Cri);
+            numericDic.Add(NumericType.Base_ReCri_Base, base_ReCri);
+            numericDic.Add(NumericType.Base_Eva_Base, base_Eva);
+            numericDic.Add(NumericType.Base_Hit_Base, base_Hit);
+            numericDic.Add(NumericType.Base_HitDamageLessPro_Base, base_HitLess);
+            numericDic.Add(NumericType.Base_Speed_Base, base_MoveSpeed);
+            numericDic.Add(NumericType.Base_AtkSpeed_Base, base_AtkSpeed);
             numericDic.Add(NumericType.CombatPower, combatPower);
 
             return numericDic;

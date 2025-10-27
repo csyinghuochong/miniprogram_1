@@ -30,14 +30,14 @@ namespace ET
             BaseAct = _buf.ReadInt();
             BaseDef = _buf.ReadInt();
             BaseAdf = _buf.ReadInt();
-            BaseCri = _buf.ReadDouble();
-            BaseReCri = _buf.ReadDouble();
-            BaseEva = _buf.ReadDouble();
-            BaseHit = _buf.ReadDouble();
-            BaseHitLess = _buf.ReadDouble();
-            BaseMoveSpeed = _buf.ReadDouble();
-            BaseAtkSpeed = _buf.ReadDouble();
-            AtkDistance = _buf.ReadDouble();
+            BaseCri = _buf.ReadLong();
+            BaseReCri = _buf.ReadLong();
+            BaseEva = _buf.ReadLong();
+            BaseHit = _buf.ReadLong();
+            BaseHitLess = _buf.ReadLong();
+            BaseMoveSpeed = _buf.ReadLong();
+            BaseAtkSpeed = _buf.ReadLong();
+            AtkDistance = _buf.ReadLong();
             LvHp = _buf.ReadInt();
             LvAct = _buf.ReadInt();
             LvDef = _buf.ReadInt();
@@ -125,42 +125,42 @@ namespace ET
         /// <summary>
         /// 暴击
         /// </summary>
-        public readonly double BaseCri;
+        public readonly long BaseCri;
 
         /// <summary>
         /// 抗暴
         /// </summary>
-        public readonly double BaseReCri;
+        public readonly long BaseReCri;
 
         /// <summary>
         /// 闪避
         /// </summary>
-        public readonly double BaseEva;
+        public readonly long BaseEva;
 
         /// <summary>
         /// 命中
         /// </summary>
-        public readonly double BaseHit;
+        public readonly long BaseHit;
 
         /// <summary>
         /// 伤害减免
         /// </summary>
-        public readonly double BaseHitLess;
+        public readonly long BaseHitLess;
 
         /// <summary>
         /// 移动速度
         /// </summary>
-        public readonly double BaseMoveSpeed;
+        public readonly long BaseMoveSpeed;
 
         /// <summary>
         /// 攻击速度
         /// </summary>
-        public readonly double BaseAtkSpeed;
+        public readonly long BaseAtkSpeed;
 
         /// <summary>
         /// 攻击距离
         /// </summary>
-        public readonly double AtkDistance;
+        public readonly long AtkDistance;
 
         /// <summary>
         /// 等级成长血量
