@@ -12,8 +12,9 @@ namespace ET.Client
         public GameObject GameObject { get; set; }
         public Image Image_HeroIcon;
         public Image Image_Selected;
-        public TMP_Text Text_Lv;
         public TMP_Text Text_HeroName;
+        public TMP_Text Text_Lv;
+        public TMP_Text Text_HeroCP;
         public Button Button_Click;
     }
 }
