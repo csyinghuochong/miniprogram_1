@@ -18,6 +18,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             LevelName = _buf.ReadString();
+            SceneName = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); WaveIds = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); WaveIds[__index0] = __e0;}}
             RewardExp = _buf.ReadInt();
 
@@ -40,6 +41,11 @@ namespace ET
         public readonly string LevelName;
 
         /// <summary>
+        /// 地图名称
+        /// </summary>
+        public readonly string SceneName;
+
+        /// <summary>
         /// 波
         /// </summary>
         public readonly int[] WaveIds;
@@ -59,6 +65,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -66,6 +73,7 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "LevelName:" + LevelName + ","
+            + "SceneName:" + SceneName + ","
             + "WaveIds:" + Luban.StringUtil.CollectionToString(WaveIds) + ","
             + "RewardExp:" + RewardExp + ","
             + "}";
