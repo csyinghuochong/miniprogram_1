@@ -152,6 +152,7 @@ namespace ET.Client
                 {
                     self.GameObject.tag = TagHelper.Player;
 
+                    unit.AddComponent<UIPlayerHpComponent>();
                     break;
                 }
                 case UnitType.Hero:
@@ -189,7 +190,7 @@ namespace ET.Client
             {
                 case UnitType.Player:
                 {
-                    self.GameObject.tag = TagHelper.Player;
+                    unit.RemoveComponent<UIPlayerHpComponent>();
 
                     break;
                 }
