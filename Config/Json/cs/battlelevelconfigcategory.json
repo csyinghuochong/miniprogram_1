@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 101,
+    "LevelName": "关卡1-1",
+    "WaveIds": [
+      1001,
+      1002,
+      1003
+    ],
+    "RewardExp": 500
+  },
+  {
+    "Id": 102,
+    "LevelName": "关卡1-2",
+    "WaveIds": [
+      1001,
+      1002,
+      1003
+    ],
+    "RewardExp": 500
+  },
+  {
+    "Id": 201,
+    "LevelName": "关卡2-1",
+    "WaveIds": [
+      1001,
+      1002,
+      1003
+    ],
+    "RewardExp": 500
+  }
+]
