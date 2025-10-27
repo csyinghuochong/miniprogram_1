@@ -43,6 +43,10 @@ namespace ET.Client
                 self.Unlock.SetActive(true);
                 self.Text_Unlock.SetTextFormat("{0}星激活", skillConfig.UnlockStar);
             }
+            else
+            {
+                self.Unlock.SetActive(false);
+            }
         }
 
         private static async ETTask OnButton_Click(this UISkillItem self)
