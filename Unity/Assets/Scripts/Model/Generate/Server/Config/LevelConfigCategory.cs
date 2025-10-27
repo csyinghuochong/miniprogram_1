@@ -13,20 +13,20 @@ using System.Collections.Generic;
 namespace ET
 {
     [Config]
-    public partial class BattleLevelConfigCategory : Singleton<BattleLevelConfigCategory>, IConfig
+    public partial class LevelConfigCategory : Singleton<LevelConfigCategory>, IConfig
     {
-        private readonly Dictionary<int, BattleLevelConfig> _dataMap;
-        private readonly List<BattleLevelConfig> _dataList;
+        private readonly Dictionary<int, LevelConfig> _dataMap;
+        private readonly List<LevelConfig> _dataList;
 
-        public BattleLevelConfigCategory(ByteBuf _buf)
+        public LevelConfigCategory(ByteBuf _buf)
         {
-            _dataMap = new Dictionary<int, BattleLevelConfig>();
-            _dataList = new List<BattleLevelConfig>();
+            _dataMap = new Dictionary<int, LevelConfig>();
+            _dataList = new List<LevelConfig>();
 
             for (int n = _buf.ReadSize(); n > 0; --n)
             {
-                BattleLevelConfig _v;
-                _v = global::ET.BattleLevelConfig.DeserializeBattleLevelConfig(_buf);
+                LevelConfig _v;
+                _v = global::ET.LevelConfig.DeserializeLevelConfig(_buf);
                 _dataList.Add(_v);
                 _dataMap.Add(_v.Id, _v);
             }
@@ -34,11 +34,11 @@ namespace ET
             PostInit();
         }
 
-        public Dictionary<int, BattleLevelConfig> DataMap => _dataMap;
-        public List<BattleLevelConfig> DataList => _dataList;
+        public Dictionary<int, LevelConfig> DataMap => _dataMap;
+        public List<LevelConfig> DataList => _dataList;
 
-        public BattleLevelConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
-        public BattleLevelConfig Get(int key)
+        public LevelConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
+        public LevelConfig Get(int key)
         {
             if (_dataMap.TryGetValue(key,out var v))
             {

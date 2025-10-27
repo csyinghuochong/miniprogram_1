@@ -12,9 +12,9 @@ using Luban;
 namespace ET
 {
     [EnableClass]
-    public sealed partial class BattleLevelConfig : BeanBase
+    public sealed partial class LevelConfig : BeanBase
     {
-        public BattleLevelConfig(ByteBuf _buf)
+        public LevelConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
             LevelName = _buf.ReadString();
@@ -24,9 +24,9 @@ namespace ET
             PostInit();
         }
 
-        public static BattleLevelConfig DeserializeBattleLevelConfig(ByteBuf _buf)
+        public static LevelConfig DeserializeLevelConfig(ByteBuf _buf)
         {
-            return new BattleLevelConfig(_buf);
+            return new LevelConfig(_buf);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace ET
         public readonly int RewardExp;
 
 
-        public const int __ID__ = -1369519122;
+        public const int __ID__ = -1308229690;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()

@@ -13,20 +13,20 @@ using System.Collections.Generic;
 namespace ET
 {
     [Config]
-    public partial class BattleWaveConfigCategory : Singleton<BattleWaveConfigCategory>, IConfig
+    public partial class WaveConfigCategory : Singleton<WaveConfigCategory>, IConfig
     {
-        private readonly Dictionary<int, BattleWaveConfig> _dataMap;
-        private readonly List<BattleWaveConfig> _dataList;
+        private readonly Dictionary<int, WaveConfig> _dataMap;
+        private readonly List<WaveConfig> _dataList;
 
-        public BattleWaveConfigCategory(ByteBuf _buf)
+        public WaveConfigCategory(ByteBuf _buf)
         {
-            _dataMap = new Dictionary<int, BattleWaveConfig>();
-            _dataList = new List<BattleWaveConfig>();
+            _dataMap = new Dictionary<int, WaveConfig>();
+            _dataList = new List<WaveConfig>();
 
             for (int n = _buf.ReadSize(); n > 0; --n)
             {
-                BattleWaveConfig _v;
-                _v = global::ET.BattleWaveConfig.DeserializeBattleWaveConfig(_buf);
+                WaveConfig _v;
+                _v = global::ET.WaveConfig.DeserializeWaveConfig(_buf);
                 _dataList.Add(_v);
                 _dataMap.Add(_v.Id, _v);
             }
@@ -34,11 +34,11 @@ namespace ET
             PostInit();
         }
 
-        public Dictionary<int, BattleWaveConfig> DataMap => _dataMap;
-        public List<BattleWaveConfig> DataList => _dataList;
+        public Dictionary<int, WaveConfig> DataMap => _dataMap;
+        public List<WaveConfig> DataList => _dataList;
 
-        public BattleWaveConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
-        public BattleWaveConfig Get(int key)
+        public WaveConfig GetOrDefault(int key) => _dataMap.GetValueOrDefault(key);
+        public WaveConfig Get(int key)
         {
             if (_dataMap.TryGetValue(key,out var v))
             {

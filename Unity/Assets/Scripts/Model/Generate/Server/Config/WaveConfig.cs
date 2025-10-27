@@ -12,9 +12,9 @@ using Luban;
 namespace ET
 {
     [EnableClass]
-    public sealed partial class BattleWaveConfig : BeanBase
+    public sealed partial class WaveConfig : BeanBase
     {
-        public BattleWaveConfig(ByteBuf _buf)
+        public WaveConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
@@ -23,9 +23,9 @@ namespace ET
             PostInit();
         }
 
-        public static BattleWaveConfig DeserializeBattleWaveConfig(ByteBuf _buf)
+        public static WaveConfig DeserializeWaveConfig(ByteBuf _buf)
         {
-            return new BattleWaveConfig(_buf);
+            return new WaveConfig(_buf);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace ET
         public readonly int[] MonsterBatchIds;
 
 
-        public const int __ID__ = 150015635;
+        public const int __ID__ = 1814560699;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
