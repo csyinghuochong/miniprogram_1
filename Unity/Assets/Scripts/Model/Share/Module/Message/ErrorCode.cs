@@ -60,5 +60,8 @@ namespace ET
         public const int ERR_InventoryContainerError = 20137; //背包容器错误
         public const int ERR_ItemUseNumError = 20138; //道具使用数量错误
         public const int ERR_NotExistHero = 20139; //英雄不存在
+        public const int ERR_AlreadyAdventureState = 20140; //已在闯关中
+        public const int ERR_AdventureLevelIdError = 20141;
+        public const int ERR_AdventureWinResultError = 20142; //战斗胜利数据异常
     }
 }
