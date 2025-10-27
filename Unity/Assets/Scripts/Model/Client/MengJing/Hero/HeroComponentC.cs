@@ -8,5 +8,11 @@ namespace ET.Client
         public Dictionary<long, EntityRef<Hero>> Heros = new();
 
         public List<long> Formation { get; set; } = new();
+
+        //最大上阵英雄数量
+        public int maxTeamHeroCount { get; set; } = 5;
+
+        //已上阵英雄数量
+        public int currentTeamHeroCount { get; set; }
     }
 }

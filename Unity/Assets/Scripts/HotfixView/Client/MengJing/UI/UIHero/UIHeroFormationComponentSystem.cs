@@ -98,6 +98,7 @@ namespace ET.Client
         {
             self.ShowHeroType = page;
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            heroComponentC.currentTeamHeroCount = 0;
 
             List<Hero> heroList = null;
             if (page == 1)
@@ -135,12 +136,30 @@ namespace ET.Client
             {
                 self.UIFormationHeroItemList[i].GameObject.SetActive(false);
             }
+            
+            //获取当前上阵英雄数量
+            for (int i = 0; i < currentFormation.Count; i++)
+            {
+                if (currentFormation[i] == 0)
+                {
+                    continue;
+                }
+
+                heroComponentC.currentTeamHeroCount += 1;
+            }
         }
 
         public static async ETTask OnSelectHero(this UIHeroFormationComponent self, long heroId)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             List<long> currentFormation = heroComponentC.Formation;
+            
+            if (heroComponentC.currentTeamHeroCount >= heroComponentC.maxTeamHeroCount)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("上阵英雄数量已满");
+                return;
+            }
+            
             for (int i = 0; i < currentFormation.Count; i++)
             {
                 if (currentFormation[i] == 0)
@@ -149,6 +168,7 @@ namespace ET.Client
                     int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 0, heroId, i + 1);
                     if (error == ErrorCode.ERR_Success)
                     {
+                        heroComponentC.currentTeamHeroCount += 1;
                         self.UpdateTotalCP();
                         self.UpdateSlotItemList();
                         self.UpdateHeroList(self.ShowHeroType);
@@ -161,9 +181,17 @@ namespace ET.Client
 
         public static async ETTask OnUnloadHero(this UIHeroFormationComponent self, long heroId, int slotIndex)
         {
+            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
+            if (heroComponentC.currentTeamHeroCount <= 1)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("最少上阵一个英雄");
+                return;
+            }
+
             int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 1, heroId, slotIndex);
             if (error == ErrorCode.ERR_Success)
             {
+                heroComponentC.currentTeamHeroCount -= 1;
                 self.UpdateTotalCP();
                 self.UpdateSlotItemList();
                 self.UpdateHeroList(self.ShowHeroType);
