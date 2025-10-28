@@ -15,4 +15,5 @@
 		public int SkillId;
 		public int DamgeType;           //1 暴击   2闪避
 	}
+
 }
