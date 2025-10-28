@@ -79,7 +79,7 @@ namespace ET.Client
                 self.UICommonItemList[i].GameObject.SetActive(false);
             }
 
-            self.OnItemClick(0);
+            self.OnItemClick(itemList[0].Id);
 
             await ETTask.CompletedTask;
         }
@@ -90,15 +90,12 @@ namespace ET.Client
 
             foreach (UICommonItem uiCommonItem in self.UICommonItemList)
             {
-                if (self.ItemId != 0)
-                {
-                    InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
-                    Item item = inventoryComponentC.GetItem(self.ItemId);
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+                InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
+                Item item = inventoryComponentC.GetItem(self.ItemId);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                    string[] expRange = itemConfig.ItemUsePar.Split(',');
-                    self.Text_Tip.SetTextFormat("预计增加:{0}-{1}经验", expRange[0], expRange[1]);
-                }
+                string[] expRange = itemConfig.ItemUsePar.Split(',');
+                self.Text_Tip.SetTextFormat("预计增加:{0}-{1}经验", expRange[0], expRange[1]);
 
                 uiCommonItem.SetSelected(self.ItemId);
             }
