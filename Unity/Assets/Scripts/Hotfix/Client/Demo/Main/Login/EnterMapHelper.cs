@@ -1,12 +1,11 @@
 using System;
-using Unity.Mathematics;
 
 namespace ET.Client
 {
     [FriendOf(typeof(PlayerInfoComponent))]
     public static partial class EnterMapHelper
     {
-        public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId, string paraminfo = "0")
+        public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId = 0, string paraminfo = "0")
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             if (TimeHelper.ServerNow() - mapComponent.LastQuitTime < 2000)
@@ -19,7 +18,6 @@ namespace ET.Client
             C2M_TransferMap request = C2M_TransferMap.Create();
             request.SceneType = newsceneType;
             request.SceneId = sceneId;
-            // request.Difficulty = difficulty;
             request.paramInfo = paraminfo;
 
             M2C_TransferMap response = (M2C_TransferMap)await root.GetComponent<ClientSenderComponent>().Call(request);

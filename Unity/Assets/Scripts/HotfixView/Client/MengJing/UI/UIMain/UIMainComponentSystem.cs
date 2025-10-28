@@ -57,6 +57,7 @@ namespace ET.Client
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
             self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
+            self.Button_StartLevel = rc.Get<GameObject>("Button_StartLevel").GetComponent<Button>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
@@ -65,6 +66,7 @@ namespace ET.Client
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(self.UIJoystick);
+            self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalLevel).Coroutine(); });
             self.Button_Speed.onClick.AddListener(() => { self.OnButton_Speed(); });
             self.Button_GM.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
             self.Button_Hero.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });

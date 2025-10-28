@@ -18,7 +18,7 @@ namespace ET.Client
 
                 await root.GetComponent<SceneManagerComponent>().ChangeScene(args.SceneType, args.LastSceneType, args.ChapterId);
 
-                root.AddComponent<OperaComponent>();
+                // root.AddComponent<OperaComponent>();
             }
             catch (Exception e)
             {

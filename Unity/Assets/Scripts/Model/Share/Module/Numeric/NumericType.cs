@@ -14,6 +14,7 @@
         public const int MainCity_X = 3006;
         public const int MainCity_Y = 3007;
         public const int MainCity_Z = 3008;
+        public const int PassedLevelId = 3009;                                  //通关的关卡Id
 
         public const int Max = 10000;
 

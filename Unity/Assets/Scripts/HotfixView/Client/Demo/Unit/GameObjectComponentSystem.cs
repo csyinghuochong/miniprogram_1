@@ -38,11 +38,11 @@ namespace ET.Client
             if (self.GameObject != null)
             {
                 self.GameObject.transform.localScale = Vector3.one;
-            }
 
-            if (self.GameObject.GetComponent<UnitId>() != null)
-            {
-                self.GameObject.GetComponent<UnitId>().Id = 0;
+                if (self.GameObject.GetComponent<UnitId>() != null)
+                {
+                    self.GameObject.GetComponent<UnitId>().Id = 0;
+                }
             }
 
             if (string.IsNullOrEmpty(self.UnitAssetsPath) && self.GameObject != null)

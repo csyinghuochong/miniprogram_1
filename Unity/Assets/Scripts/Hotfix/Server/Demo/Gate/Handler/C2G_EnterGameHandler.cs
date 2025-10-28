@@ -139,7 +139,12 @@ namespace ET.Server
 
                         unit.GetComponent<DBSaveComponent>().OnLogin();
                         unit.GetComponent<HeroComponentS>().OnLogin();
-                        unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CurrentHeroId, unit.GetComponent<HeroComponentS>().GetHeroIdFromFormation(1), false);
+                        NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+                        numericComponent.ApplyValue(NumericType.CurrentHeroId, unit.GetComponent<HeroComponentS>().GetHeroIdFromFormation(1), false);
+                        if (!LevelConfigCategory.Instance.DataMap.ContainsKey(numericComponent.GetAsInt(NumericType.PassedLevelId)))
+                        {
+                            numericComponent.ApplyValue(NumericType.PassedLevelId, LevelConfigCategory.Instance.DataList[0].Id, false);
+                        }
                         
                         TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 

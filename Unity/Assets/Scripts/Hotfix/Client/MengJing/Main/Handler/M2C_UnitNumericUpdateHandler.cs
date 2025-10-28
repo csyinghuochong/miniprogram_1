@@ -9,14 +9,14 @@ namespace ET.Client
         protected override async ETTask Run(Scene root, M2C_UnitNumericUpdate message)
         {
             Scene currentScene = root.CurrentScene();
-            Unit nowNunt = currentScene.GetComponent<UnitComponent>().Get(message.UnitId);
-            if (nowNunt == null)
+            Unit unit = currentScene.GetComponent<UnitComponent>()?.Get(message.UnitId);
+            if (unit == null)
             {
                 return;
             }
 
             //客户端的NumericComponent.Set不会抛出事件。需要自己手动抛出
-            NumericComponentC numericComponent = nowNunt.GetComponent<NumericComponentC>();
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             numericComponent.ApplyValue(message.AttackId, message.NumericType, message.NewValue, message.SkillId, true, message.DamgeType);
             await ETTask.CompletedTask;
         }
