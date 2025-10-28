@@ -52,6 +52,8 @@ namespace ET.Server
 
                         MapComponent mapComponent = levelScene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo(MapTypeEnum.LocalLevel, request.SceneId);
+                        
+                        levelScene.AddComponent<LocalLevelComponent>();
 
                         BeforeTransfer(unit, oldMapType);
                         await Transfer(unit, levelScene.GetActorId(), MapTypeEnum.LocalLevel, request.SceneId);

@@ -63,6 +63,9 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
                     
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+                    
+                    scene.GetComponent<LocalLevelComponent>().MainUnit = unit;
+                    scene.GetComponent<LocalLevelComponent>().GenerateLevel();
                     break;
                 }
             }

@@ -17,9 +17,6 @@ namespace ET
         public MonsterBatchConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
-            DelayTime = _buf.ReadFloat();
-            SpawnInterval = _buf.ReadFloat();
-            SpawnNum = _buf.ReadInt();
             SpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             MonsterId = _buf.ReadInt();
 
@@ -35,21 +32,6 @@ namespace ET
         /// Id
         /// </summary>
         public readonly int Id;
-
-        /// <summary>
-        /// 延迟出现时间
-        /// </summary>
-        public readonly float DelayTime;
-
-        /// <summary>
-        /// 刷新间隔
-        /// </summary>
-        public readonly float SpawnInterval;
-
-        /// <summary>
-        /// 生成几次
-        /// </summary>
-        public readonly int SpawnNum;
 
         /// <summary>
         /// 刷新位置
@@ -70,18 +52,12 @@ namespace ET
             
             
             
-            
-            
-            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
-            + "DelayTime:" + DelayTime + ","
-            + "SpawnInterval:" + SpawnInterval + ","
-            + "SpawnNum:" + SpawnNum + ","
             + "SpawnPosition:" + SpawnPosition + ","
             + "MonsterId:" + MonsterId + ","
             + "}";

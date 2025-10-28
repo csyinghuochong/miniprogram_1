@@ -1,9 +1,6 @@
 [
   {
     "Id": 1010101,
-    "DelayTime": 1,
-    "SpawnInterval": 2,
-    "SpawnNum": 2,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -12,9 +9,6 @@
   },
   {
     "Id": 1010201,
-    "DelayTime": 1,
-    "SpawnInterval": 2,
-    "SpawnNum": 2,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -23,9 +17,6 @@
   },
   {
     "Id": 1010202,
-    "DelayTime": 1,
-    "SpawnInterval": 2,
-    "SpawnNum": 2,
     "SpawnPosition": {
       "x": 5,
       "y": 5
@@ -34,9 +25,6 @@
   },
   {
     "Id": 1010301,
-    "DelayTime": 1,
-    "SpawnInterval": 2,
-    "SpawnNum": 1,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -45,9 +33,6 @@
   },
   {
     "Id": 2010101,
-    "DelayTime": 1,
-    "SpawnInterval": 2,
-    "SpawnNum": 2,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -56,9 +41,6 @@
   },
   {
     "Id": 2010201,
-    "DelayTime": 1,
-    "SpawnInterval": 2,
-    "SpawnNum": 2,
     "SpawnPosition": {
       "x": 0,
       "y": 5
