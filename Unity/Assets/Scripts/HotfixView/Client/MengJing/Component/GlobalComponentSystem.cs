@@ -1,12 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace ET
+namespace ET.Client
 {
-    [FriendOf(typeof(GlobalComponent))]
+    [EntitySystemOf(typeof(GlobalComponent))]
     public static partial class GlobalComponentSystem
     {
         [EntitySystem]
-        public static void Awake(this GlobalComponent self)
+        private static void Awake(this GlobalComponent self)
         {
             GlobalComponent.Instance = self;
 
@@ -44,9 +44,8 @@ namespace ET
             self.BloodText_Layer2.AddComponent<RectTransform>();
             SetParent(self.BloodText_Layer2, self.BloodText);
         }
-
         [EntitySystem]
-        public static void Destroy(this GlobalComponent self)
+        private static void Destroy(this GlobalComponent self)
         {
             GameObject.DestroyImmediate(  self.BloodPlayer );
             GameObject.DestroyImmediate(  self.BloodMonster );
@@ -61,7 +60,7 @@ namespace ET
             self.BloodText_Layer1 = null;
             self.BloodText_Layer2 = null;
         }
-
+        
         public static void SetParent(GameObject son, GameObject parent)
         {
             if (son == null || parent == null)
@@ -70,38 +69,5 @@ namespace ET
             son.transform.localPosition = Vector3.zero;
             son.transform.localScale = Vector3.one;
         }
-    }
-
-    [ComponentOf(typeof(Scene))]
-    public class GlobalComponent : Entity, IAwake, IDestroy
-    {
-        [StaticField]
-        public static GlobalComponent Instance { get; set; }
-
-        public Transform Global { get; set; }
-        public Transform Unit { get; set; }
-        public Transform UI;
-
-        public GlobalConfig GlobalConfig { get; set; }
-
-        public Transform BloodRoot { get; set; }
-        public Transform NormalRoot { get; set; }
-        public Transform MidRoot { get; set; }
-        public Transform PopUpRoot { get; set; }
-        public Transform FixedRoot { get; set; }
-        public Transform PoolRoot { get; set; }
-        public Transform OtherRoot { get; set; }
-
-        public Transform MainCamera { get; set; }
-
-        public Transform UICamera { get; set; }
-
-        public GameObject BloodPlayer { get; set; }
-        public GameObject BloodMonster { get; set; }
-
-        public GameObject BloodText { get; set; }
-        public GameObject BloodText_Layer0 { get; set; }
-        public GameObject BloodText_Layer1 { get; set; }
-        public GameObject BloodText_Layer2 { get; set; }
     }
 }
