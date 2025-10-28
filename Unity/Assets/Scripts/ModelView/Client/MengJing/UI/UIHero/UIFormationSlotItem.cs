@@ -10,6 +10,8 @@ namespace ET.Client
     {
         public long HeroId;
         public int SlotIndex;
+        public bool IsDrag;
+        public GameObject CopyModelGameObject;
 
         public GameObject GameObject;
         public Transform Transform_HeroIcon;

@@ -27,6 +27,14 @@ namespace ET.Client
             return response.Error;
         }
 
+        /// <summary>
+        /// 设置英雄阵容
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="opType">0上阵 1下阵</param>
+        /// <param name="heroId"></param>
+        /// <param name="slotIndex"></param>
+        /// <returns></returns>
         public static async ETTask<int> SetHeroFormation(Scene root, int opType, long heroId, int slotIndex)
         {
             C2M_SetHeroFormation request = C2M_SetHeroFormation.Create();

@@ -26,6 +26,7 @@ namespace ET.Client
                         .Find(ZString.Format("UIFormationSlotItem_{0}", i + 1)).gameObject);
                 self.UIFormationSlotItemList.Add(uiFormationSlotItem);
             }
+
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
             self.Button_Type_Melee = rc.Get<GameObject>("Button_Type_Melee").GetComponent<Button>();
             self.Button_Type_Ranged = rc.Get<GameObject>("Button_Type_Ranged").GetComponent<Button>();
@@ -87,7 +88,7 @@ namespace ET.Client
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             for (int i = 0; i < 9; i++)
             {
-                self.UIFormationSlotItemList[i].UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[i]), i + 1).Coroutine();
+                self.UIFormationSlotItemList[i].UpdateInfo(heroComponentC.Formation[i], i + 1).Coroutine();
             }
         }
 
@@ -173,6 +174,17 @@ namespace ET.Client
 
                     return;
                 }
+            }
+        }
+
+        public static async ETTask OnSelectHero(this UIHeroFormationComponent self, long heroId, int slotIndex)
+        {
+            int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 0, heroId, slotIndex);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.UpdateTotalCP();
+                self.UpdateSlotItemList();
+                self.UpdateHeroList(self.ShowHeroType);
             }
         }
 
