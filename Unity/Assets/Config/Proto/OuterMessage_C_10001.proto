@@ -698,39 +698,3 @@ message M2C_GetUserInfo // ILocationResponse
 	int64 Exp = 7;
 	int32 Lv = 8;
 }
-
-// ResponseType M2C_StartGameLevel
-message C2M_StartGameLevel // ILocationRequest
-{
-	int32 RpcId = 1;
-	int LevelId = 2;
-}
-
-message M2C_StartGameLevel // ILocationResponse
-{
-	int32 RpcId = 1;
-	int32 Error = 2;
-	string Message = 3;
-}
-
-message BattleInfo
-{
-	int64 AttackUnitId = 1;
-	int32 DefendUnitId = 2;
-	int32 SkillId = 3;
-}
-
-// ResponseType M2C_EndGameLevel
-message C2M_EndGameLevel // ILocationRequest
-{
-	int32 RpcId = 1;
-	int BattleResult = 2;
-	repeated BattleInfo BattleInfoList = 3;
-}
-
-message M2C_EndGameLevel // ILocationResponse
-{
-	int32 RpcId = 1;
-	int32 Error = 2;
-	string Message = 3;
-}

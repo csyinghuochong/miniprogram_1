@@ -3,7 +3,6 @@
     public static partial class SceneChangeHelper
     {
         // 场景切换协程
-        //message.SceneType, message.SceneId, message.Difficulty, message.ParamInfo);
         public static async ETTask SceneChangeTo(Scene root, long sceneInstanceId, int sceneType, int sceneId, int difficulty, string pagramInfo)
         {
             //root.RemoveComponent<AIComponent>();
@@ -24,7 +23,7 @@
             // {
             //     
             // }
-            mapComponent.SetMapInfo(sceneType, sceneId, int.Parse(pagramInfo));
+            mapComponent.SetMapInfo(sceneType, sceneId);
 
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(root, new SceneChangeStart()

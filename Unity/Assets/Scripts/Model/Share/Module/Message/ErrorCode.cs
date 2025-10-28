@@ -63,5 +63,6 @@ namespace ET
         public const int ERR_AlreadyAdventureState = 20140; //已在闯关中
         public const int ERR_AdventureLevelIdError = 20141;
         public const int ERR_AdventureWinResultError = 20142; //战斗胜利数据异常
+        public const int ERR_LevelIsNot = 20143; //关卡Id不存在
     }
 }

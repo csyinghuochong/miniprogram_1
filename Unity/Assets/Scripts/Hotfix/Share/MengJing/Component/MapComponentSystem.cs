@@ -9,11 +9,10 @@ namespace ET
         {
         }
 
-        public static void SetMapInfo(this MapComponent self, int sceneTypeEnum, int mapid, int sonMapid)
+        public static void SetMapInfo(this MapComponent self, int sceneTypeEnum, int mapid)
         {
             self.MapType = sceneTypeEnum;
             self.SceneId = mapid;
-            self.SonSceneId = sonMapid;
         }
         
         public static void SetSubLevel(this MapComponent self, int sonMapid)

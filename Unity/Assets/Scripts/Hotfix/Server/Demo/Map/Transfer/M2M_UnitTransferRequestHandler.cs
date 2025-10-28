@@ -5,7 +5,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class M2M_UnitTransferRequestHandler: MessageHandler<Scene, M2M_UnitTransferRequest, M2M_UnitTransferResponse>
+    public class M2M_UnitTransferRequestHandler : MessageHandler<Scene, M2M_UnitTransferRequest, M2M_UnitTransferResponse>
     {
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
         {
@@ -19,7 +19,6 @@ namespace ET.Server
                 {
                     Entity entity = MongoHelper.Deserialize<Entity>(bytes);
                     unit.AddComponent(entity);
-                    
                 }
                 catch (Exception e)
                 {
@@ -27,26 +26,45 @@ namespace ET.Server
                     throw;
                 }
             }
-           
+
             unit.AddComponent<MoveComponent>();
-            
+
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
-            
+
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            
-            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
+
+            M2C_StartSceneChange m2CStartSceneChange = new()
+            {
+                SceneInstanceId = scene.InstanceId, 
+                SceneId = request.SceneId, 
+                SceneType = request.SceneType, 
+                Difficulty = request.Difficulty,
+                ParamInfo = request.ParamInfo
+            };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
-            
-            M2C_CreateMyUnit m2CCreateUnits =  M2C_CreateMyUnit.Create();;
+
+            M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
             switch (request.SceneType)
             {
                 case MapTypeEnum.MainCityScene:
-                    // 通知客户端创建My Unit
+                {
+                    m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+                    MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+
+                    unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+                    break;
+                }
+                case MapTypeEnum.LocalLevel:
+                {
+                    unit.Position = float3.zero;
+                    
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
                     
+                    unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
                     break;
+                }
             }
 
             TransferHelper.AfterTransfer(unit, request.SceneType);

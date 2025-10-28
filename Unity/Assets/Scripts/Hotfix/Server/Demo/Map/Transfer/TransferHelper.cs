@@ -15,13 +15,53 @@ namespace ET.Server
                     return ErrorCode.ERR_RequestRepeatedly;
                 }
 
-                int oldScene = unit.Scene().GetComponent<MapComponent>().MapType;
+                int oldMapType = unit.Scene().GetComponent<MapComponent>().MapType;
+
+                // 从主城传送到其他地图，保存在主城的坐标
+                if (oldMapType == MapTypeEnum.MainCityScene && request.SceneType != MapTypeEnum.MainCityScene)
+                {
+                    NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+                    numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x);
+                    numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y);
+                    numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z);
+                }
 
                 switch (request.SceneType)
                 {
                     case MapTypeEnum.MainCityScene:
-                        await MainCityTransfer(unit);
+                    {
+                        if (oldMapType == MapTypeEnum.MainCityScene)
+                        {
+                            unit.Position = new float3(0, 0, 0);
+                            unit.Stop(0);
+                            return ErrorCode.ERR_Success;
+                        }
+
+                        //传送回主场景
+                        ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
+                        long userId = unit.Id;
+                        Scene scene = unit.Scene();
+                        BeforeTransfer(unit, oldMapType);
+                        await Transfer(unit, mapInstanceId, MapTypeEnum.MainCityScene, 101);
+
                         break;
+                    }
+                    case MapTypeEnum.LocalLevel:
+                    {
+                        long levelId = IdGenerater.Instance.GenerateId();
+                        long levelInstanceId = IdGenerater.Instance.GenerateInstanceId();
+                        Scene levelScene = GateMapFactory.Create(unit.Root(), levelId, levelInstanceId, $"LocalLevel{levelId}");
+
+                        MapComponent mapComponent = levelScene.GetComponent<MapComponent>();
+                        mapComponent.SetMapInfo(MapTypeEnum.LocalLevel, request.SceneId);
+                        // mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(sceneId).MapID;
+
+                        BeforeTransfer(unit, oldMapType);
+
+                        await Transfer(unit, levelScene.GetActorId(), MapTypeEnum.LocalLevel, request.SceneId);
+
+                        break;
+                    }
                     default:
                         break;
                 }
@@ -34,38 +74,14 @@ namespace ET.Server
         {
             await unit.Fiber().WaitFrameFinish();
 
-            await Transfer(unit, sceneInstanceId, MapTypeEnum.MainCityScene, 101, 1, "0");
-        }
-
-        public static async ETTask MainCityTransfer(Unit unit)
-        {
-            MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-            if (mapComponent.MapType == MapTypeEnum.MainCityScene)
-            {
-                OnMainToMain(unit);
-                return;
-            }
-            
-            //传送回主场景
-            ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
-            long userId = unit.Id;
-            Scene scene = unit.Scene();
-            BeforeTransfer(unit, mapComponent.MapType);
-            await Transfer(unit, mapInstanceId, (int)MapTypeEnum.MainCityScene, 101, 0, "0");
-        }
-
-        private static void OnMainToMain(Unit unit)
-        {
-            // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(GlobalValueConfigCategory.Instance.MainCityID);
-            // unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
-            // unit.Stop(-2);
+            await Transfer(unit, sceneInstanceId, MapTypeEnum.MainCityScene, 101);
         }
 
         public static void OnPlayerDisconnect(Scene scene, long userId)
         {
         }
 
-        public static void BeforeTransfer(Unit unit, int sceneType)
+        private static void BeforeTransfer(Unit unit, int sceneType)
         {
             //删除unit,让其它进程发送过来的消息找不到actor，重发
             //Game.EventSystem.Remove(unitId);
@@ -78,7 +94,7 @@ namespace ET.Server
         {
         }
 
-        public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty, string paramInfo)
+        private static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId)
         {
             Scene root = unit.Root();
             // location加锁
@@ -89,8 +105,6 @@ namespace ET.Server
             request.Unit = unit.ToBson();
             request.SceneType = sceneType;
             request.SceneId = sceneId;
-            request.FubenDifficulty = fubenDifficulty;
-            request.ParamInfo = paramInfo;
 
             foreach (Entity entity in unit.Components.Values)
             {

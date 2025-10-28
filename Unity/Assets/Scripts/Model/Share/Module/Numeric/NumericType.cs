@@ -11,10 +11,9 @@
         public const int LastLoginTime = 3003;
         public const int CombatPower = 3004;                                    //战斗力
         public const int CurrentHeroId = 3005;                                  //在主城显示的英雄
-        public const int AdventureState = 3006;                                 //关卡冒险状态
-        public const int AdventureStartTime = 3008;                             //关卡开始冒险的时间
-        public const int IsAlive = 3009;                                        //存活状态  0为死亡 1为活着
-        public const int BattleRandomSeed = 3010;                               //战斗随机数种子
+        public const int MainCity_X = 3006;
+        public const int MainCity_Y = 3007;
+        public const int MainCity_Z = 3008;
 
         public const int Max = 10000;
 

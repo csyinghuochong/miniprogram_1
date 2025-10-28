@@ -269,7 +269,7 @@ namespace ET.Server
         
         public static ActorId MainCityServerId(int zone)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, $"Map101").ActorId;
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Map101").ActorId;
         }
         
         public static ActorId GetRobotServerId()

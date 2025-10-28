@@ -38,12 +38,12 @@ namespace ET.Client
                     paramss = "Login";
                     break;
                 case MapTypeEnum.MainCityScene:
-                    PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
-                    string scenepath = sceneid.ToString();
-                    paramss = scenepath;
+                    paramss = "MainCity";
+                    break;
+                case MapTypeEnum.LocalLevel:
+                    paramss = "Level";
                     break;
                 default:
-                    // paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();
                     break;
             }
 
