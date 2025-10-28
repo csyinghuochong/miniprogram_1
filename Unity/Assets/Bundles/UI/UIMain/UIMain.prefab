@@ -39,10 +39,10 @@ RectTransform:
   - {fileID: 6822206981165467528}
   - {fileID: 6825102058386347864}
   - {fileID: 1548175801698220174}
+  - {fileID: 3198267218093514893}
   - {fileID: 4152468698242975453}
   - {fileID: 3675870774036113858}
   - {fileID: 860697443539204674}
-  - {fileID: 3198267218093514893}
   - {fileID: 5391597801209371385}
   - {fileID: 4300685477641153974}
   - {fileID: 3469678812308009068}
@@ -137,6 +137,8 @@ MonoBehaviour:
     gameObject: {fileID: 3523739314070148987}
   - key: UIJoystick
     gameObject: {fileID: 4683740165286688662}
+  - key: Button_Recall
+    gameObject: {fileID: 672110121185644835}
   - key: Button_StartLevel
     gameObject: {fileID: 2017694304402586671}
   - key: Button_GM

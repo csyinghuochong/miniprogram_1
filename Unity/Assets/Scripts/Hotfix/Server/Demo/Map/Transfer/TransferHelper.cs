@@ -42,13 +42,6 @@ namespace ET.Server
                         BeforeTransfer(unit, oldMapType);
                         await Transfer(unit, mapInstanceId, MapTypeEnum.MainCityScene, 101);
 
-                        // 单人关卡销毁
-                        if (oldMapType == MapTypeEnum.LocalLevel)
-                        {
-                            oldScene.Dispose();
-                            return ErrorCode.ERR_Success;
-                        }
-
                         break;
                     }
                     case MapTypeEnum.LocalLevel:
@@ -61,13 +54,19 @@ namespace ET.Server
                         mapComponent.SetMapInfo(MapTypeEnum.LocalLevel, request.SceneId);
 
                         BeforeTransfer(unit, oldMapType);
-
                         await Transfer(unit, levelScene.GetActorId(), MapTypeEnum.LocalLevel, request.SceneId);
 
                         break;
                     }
                     default:
                         break;
+                }
+
+                // 单人关卡销毁
+                if (oldMapType == MapTypeEnum.LocalLevel)
+                {
+                    oldScene.Dispose();
+                    return ErrorCode.ERR_Success;
                 }
             }
 
@@ -85,7 +84,7 @@ namespace ET.Server
         {
             int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
 
-            // 玩家下线，销毁单人副本
+            // 单人关卡销毁
             if (sceneTypeEnum == MapTypeEnum.LocalLevel)
             {
                 scene.Dispose();
