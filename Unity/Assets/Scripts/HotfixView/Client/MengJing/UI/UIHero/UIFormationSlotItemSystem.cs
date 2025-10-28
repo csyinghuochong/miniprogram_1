@@ -48,6 +48,10 @@ namespace ET.Client
             self.CopyModelGameObject = UnityEngine.Object.Instantiate(self.Transform_HeroIcon.GetChild(0).gameObject, self.GameObject.transform.parent.parent);
             self.CopyModelGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             
+            
+            self.Text_HeroName.gameObject.SetActive(false);
+            self.Transform_HeroIcon.gameObject.SetActive(false);
+            
             self.IsDrag = true;
         }
 

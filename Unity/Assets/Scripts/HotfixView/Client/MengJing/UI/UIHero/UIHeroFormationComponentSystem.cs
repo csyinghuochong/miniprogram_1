@@ -46,7 +46,7 @@ namespace ET.Client
             self.UIFormationHeroItemList = null;
         }
 
-        public static void UpdateTotalCP(this UIHeroFormationComponent self)
+        public static void UpdateOther(this UIHeroFormationComponent self)
         {
             long totalCP = 0;
 
@@ -167,7 +167,7 @@ namespace ET.Client
                     if (error == ErrorCode.ERR_Success)
                     {
                         heroComponentC.currentTeamHeroCount += 1;
-                        self.UpdateTotalCP();
+                        self.UpdateOther();
                         self.UpdateSlotItemList();
                         self.UpdateHeroList(self.ShowHeroType);
                     }
@@ -182,7 +182,7 @@ namespace ET.Client
             int error = await ClientHeroHelper.SetHeroFormation(self.Root(), 0, heroId, slotIndex);
             if (error == ErrorCode.ERR_Success)
             {
-                self.UpdateTotalCP();
+                self.UpdateOther();
                 self.UpdateSlotItemList();
                 self.UpdateHeroList(self.ShowHeroType);
             }
@@ -201,7 +201,7 @@ namespace ET.Client
             if (error == ErrorCode.ERR_Success)
             {
                 heroComponentC.currentTeamHeroCount -= 1;
-                self.UpdateTotalCP();
+                self.UpdateOther();
                 self.UpdateSlotItemList();
                 self.UpdateHeroList(self.ShowHeroType);
             }
