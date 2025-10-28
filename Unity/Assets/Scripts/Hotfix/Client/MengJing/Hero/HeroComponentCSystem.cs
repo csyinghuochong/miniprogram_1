@@ -101,7 +101,15 @@ namespace ET.Client
 
         public static int GetAllHeroCount(this HeroComponentC self)
         {
-            return self.Heros.Count;
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            foreach (Hero hero in self.Heros.Values)
+            {
+                HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+
+                dic.TryAdd(hero.ConfigId, 1);
+            }
+
+            return dic.Count;
         }
 
         public static long GetHeroIdByEquipmentId(this HeroComponentC self, long itemId)

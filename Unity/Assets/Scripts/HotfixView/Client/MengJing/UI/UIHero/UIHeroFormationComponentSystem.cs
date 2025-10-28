@@ -17,6 +17,7 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_FormationCount = rc.Get<GameObject>("Text_FormationCount").GetComponent<TMP_Text>();
             self.Text_TotalCP = rc.Get<GameObject>("Text_TotalCP").GetComponent<TMP_Text>();
             self.UIFormationSlotItem_1 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_1"));
             self.UIFormationSlotItem_2 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_2"));
@@ -65,6 +66,21 @@ namespace ET.Client
                 totalCP += hero.NumericDic[NumericType.CombatPower];
             }
 
+            //获取当前上阵英雄数量
+            int currentHeroCount = 0;
+            for (int i = 0; i < currentFormation.Count; i++)
+            {
+                if (currentFormation[i] == 0)
+                {
+                    continue;
+                }
+
+                currentHeroCount += 1;
+            }
+
+            heroComponentC.currentTeamHeroCount = currentHeroCount;
+
+            self.Text_FormationCount.SetTextFormat("上阵数:{0}/{1}", heroComponentC.currentTeamHeroCount, heroComponentC.maxTeamHeroCount);
             self.Text_TotalCP.SetTextFormat("我的战力：{0}", totalCP);
         }
 
@@ -98,7 +114,6 @@ namespace ET.Client
         {
             self.ShowHeroType = page;
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            heroComponentC.currentTeamHeroCount = 0;
 
             List<Hero> heroList = null;
             if (page == 1)
@@ -136,30 +151,19 @@ namespace ET.Client
             {
                 self.UIFormationHeroItemList[i].GameObject.SetActive(false);
             }
-            
-            //获取当前上阵英雄数量
-            for (int i = 0; i < currentFormation.Count; i++)
-            {
-                if (currentFormation[i] == 0)
-                {
-                    continue;
-                }
-
-                heroComponentC.currentTeamHeroCount += 1;
-            }
         }
 
         public static async ETTask OnSelectHero(this UIHeroFormationComponent self, long heroId)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             List<long> currentFormation = heroComponentC.Formation;
-            
+
             if (heroComponentC.currentTeamHeroCount >= heroComponentC.maxTeamHeroCount)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("上阵英雄数量已满");
                 return;
             }
-            
+
             for (int i = 0; i < currentFormation.Count; i++)
             {
                 if (currentFormation[i] == 0)

@@ -13,6 +13,7 @@ namespace ET.Client
         public int ShowHeroType;
         public List<UIFormationHeroItem> UIFormationHeroItemList { get; set; } = new();
 
+        public TMP_Text Text_FormationCount;
         public TMP_Text Text_TotalCP;
         public UIFormationSlotItem UIFormationSlotItem_1 { get; set; }
         public UIFormationSlotItem UIFormationSlotItem_2 { get; set; }
