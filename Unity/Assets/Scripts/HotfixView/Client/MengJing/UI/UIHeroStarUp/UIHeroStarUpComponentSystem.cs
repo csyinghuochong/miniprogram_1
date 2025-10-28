@@ -47,6 +47,7 @@ namespace ET.Client
             Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(heroId);
 
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+            self.Text_Tip.SetText("");
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
             
@@ -108,6 +109,17 @@ namespace ET.Client
 
             foreach (UICommonItem uiCommonItem in self.UICommonItemList)
             {
+
+                if (self.ItemId != 0)
+                {
+                    InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
+                    Item item = inventoryComponentC.GetItem(self.ItemId);
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+                    string[] hunShiRange = itemConfig.ItemUsePar.Split(',');
+                    self.Text_Tip.SetTextFormat("预计增加:{0}-{1}魂石", hunShiRange[0], hunShiRange[1]);
+                }
+                
                 uiCommonItem.SetSelected(self.ItemId);
             }
         }
