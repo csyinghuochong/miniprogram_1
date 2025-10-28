@@ -45,13 +45,13 @@ namespace ET.Client
                 return;
             }
 
-            self.CopyModelGameObject = UnityEngine.Object.Instantiate(self.Transform_HeroIcon.GetChild(0).gameObject, self.GameObject.transform.parent.parent);
+            self.CopyModelGameObject =
+                    UnityEngine.Object.Instantiate(self.Transform_HeroIcon.GetChild(0).gameObject, self.GameObject.transform.parent.parent);
             self.CopyModelGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            
-            
+
             self.Text_HeroName.gameObject.SetActive(false);
             self.Transform_HeroIcon.gameObject.SetActive(false);
-            
+
             self.IsDrag = true;
         }
 
@@ -61,7 +61,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             Vector2 localPoint = new Vector2();
             RectTransform canvas = self.GameObject.transform.parent.parent.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
@@ -91,6 +91,7 @@ namespace ET.Client
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pdata, results);
 
+            bool select = false;
             for (int i = 0; i < results.Count; i++)
             {
                 string name = results[i].gameObject.name;
@@ -103,11 +104,18 @@ namespace ET.Client
                 // UIFormationSlotItem_
                 int index = int.Parse(name.Substring(20, name.Length - 20));
 
+                select = true;
                 self.GetParent<UIHeroFormationComponent>().OnSelectHero(self.HeroId, index).Coroutine();
-                
+
                 break;
             }
-            
+
+            if (!select)
+            {
+                self.Text_HeroName.gameObject.SetActive(true);
+                self.Transform_HeroIcon.gameObject.SetActive(true);
+            }
+
             if (self.CopyModelGameObject != null)
             {
                 UnityEngine.Object.Destroy(self.CopyModelGameObject);
