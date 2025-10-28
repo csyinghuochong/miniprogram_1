@@ -55,7 +55,7 @@ namespace ET.Client
             int heroCount = heroComponentC.GetAllHeroCount();
             int allHeroCount = HeroConfigCategory.Instance.DataMap.Count;
 
-            self.Text_HaveHeroCount.SetTextFormat("{0}/{0}", heroCount, allHeroCount);
+            self.Text_HaveHeroCount.SetTextFormat("{0}/{1}", heroCount, allHeroCount);
         }
 
         private static void UpdateHeroList(this UIHeroListComponent self, int page)
