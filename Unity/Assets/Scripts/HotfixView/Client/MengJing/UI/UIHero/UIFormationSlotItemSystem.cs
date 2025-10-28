@@ -1,6 +1,7 @@
 ﻿using Cysharp.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -16,11 +17,9 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
-            self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
+            self.Transform_HeroIcon = rc.Get<GameObject>("Transform_HeroIcon").transform;
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
-            self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
-
-            self.Button_Click.onClick.AddListener(() => { self.OnClick(); });
+            self.EventTrigger_Click = rc.Get<GameObject>("EventTrigger_Click").GetComponent<EventTrigger>();
         }
 
         public static async ETTask UpdateInfo(this UIFormationSlotItem self, Hero hero, int slotIndex)
@@ -31,7 +30,7 @@ namespace ET.Client
             {
                 self.HeroId = 0;
                 self.Text_HeroName.gameObject.SetActive(false);
-                self.Image_HeroIcon.gameObject.SetActive(false);
+                self.Transform_HeroIcon.gameObject.SetActive(false);
                 return;
             }
 
@@ -40,9 +39,11 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.gameObject.SetActive(true);
             self.Text_HeroName.SetText(heroConfig.HeroName);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
-            self.Image_HeroIcon.gameObject.SetActive(true);
-            self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            self.Transform_HeroIcon.gameObject.SetActive(true);
+            string path = ABPathHelper.GetUIUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
+            GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
+            UICommonHelper.DestoryChild(self.Transform_HeroIcon.gameObject);
+            UnityEngine.Object.Instantiate(model, self.Transform_HeroIcon);
         }
 
         private static void OnClick(this UIFormationSlotItem self)

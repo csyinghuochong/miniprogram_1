@@ -19,15 +19,13 @@ namespace ET.Client
 
             self.Text_FormationCount = rc.Get<GameObject>("Text_FormationCount").GetComponent<TMP_Text>();
             self.Text_TotalCP = rc.Get<GameObject>("Text_TotalCP").GetComponent<TMP_Text>();
-            self.UIFormationSlotItem_1 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_1"));
-            self.UIFormationSlotItem_2 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_2"));
-            self.UIFormationSlotItem_3 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_3"));
-            self.UIFormationSlotItem_4 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_4"));
-            self.UIFormationSlotItem_5 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_5"));
-            self.UIFormationSlotItem_6 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_6"));
-            self.UIFormationSlotItem_7 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_7"));
-            self.UIFormationSlotItem_8 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_8"));
-            self.UIFormationSlotItem_9 = self.AddChild<UIFormationSlotItem, GameObject>(rc.Get<GameObject>("UIFormationSlotItem_9"));
+            self.Transform_UIFormationSlotItemList = rc.Get<GameObject>("Transform_UIFormationSlotItemList").transform;
+            for (int i = 0; i < 9; i++)
+            {
+                UIFormationSlotItem uiFormationSlotItem = self.AddChild<UIFormationSlotItem, GameObject>(self.Transform_UIFormationSlotItemList
+                        .Find(ZString.Format("UIFormationSlotItem_{0}", i + 1)).gameObject);
+                self.UIFormationSlotItemList.Add(uiFormationSlotItem);
+            }
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
             self.Button_Type_Melee = rc.Get<GameObject>("Button_Type_Melee").GetComponent<Button>();
             self.Button_Type_Ranged = rc.Get<GameObject>("Button_Type_Ranged").GetComponent<Button>();
@@ -87,15 +85,10 @@ namespace ET.Client
         public static void UpdateSlotItemList(this UIHeroFormationComponent self)
         {
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            self.UIFormationSlotItem_1.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[0]), 1).Coroutine();
-            self.UIFormationSlotItem_2.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[1]), 2).Coroutine();
-            self.UIFormationSlotItem_3.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[2]), 3).Coroutine();
-            self.UIFormationSlotItem_4.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[3]), 4).Coroutine();
-            self.UIFormationSlotItem_5.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[4]), 5).Coroutine();
-            self.UIFormationSlotItem_6.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[5]), 6).Coroutine();
-            self.UIFormationSlotItem_7.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[6]), 7).Coroutine();
-            self.UIFormationSlotItem_8.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[7]), 8).Coroutine();
-            self.UIFormationSlotItem_9.UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[8]), 9).Coroutine();
+            for (int i = 0; i < 9; i++)
+            {
+                self.UIFormationSlotItemList[i].UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[i]), i + 1).Coroutine();
+            }
         }
 
         public static void SetShowType(this UIHeroFormationComponent self, int page)

@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -9,10 +10,10 @@ namespace ET.Client
     {
         public long HeroId;
         public int SlotIndex;
-        
+
         public GameObject GameObject;
-        public Image Image_HeroIcon;
+        public Transform Transform_HeroIcon;
         public TMP_Text Text_HeroName;
-        public Button Button_Click;
+        public EventTrigger EventTrigger_Click;
     }
 }
