@@ -103,5 +103,21 @@ namespace ET.Client
         {
             return self.Heros.Count;
         }
+
+        public static long GetHeroIdByEquipmentId(this HeroComponentC self, long itemId)
+        {
+            foreach (Hero hero in self.Heros.Values)
+            {
+                foreach (long value in hero.Equipments.Values)
+                {
+                    if (value == itemId)
+                    {
+                        return hero.Id;
+                    }
+                }
+            }
+
+            return 0;
+        }
     }
 }

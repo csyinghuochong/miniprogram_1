@@ -65,23 +65,6 @@ namespace ET.Client
 
             UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
             uiHeroComponent.UIHeroInfoComponent?.UpdateHeroInfo().Coroutine();
-
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [Event(SceneType.Demo)]
-    public class InventoryUpdate_UIHeroRefresh : AEvent<Scene, InventoryUpdate>
-    {
-        protected override async ETTask Run(Scene scene, InventoryUpdate args)
-        {
-            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIHero);
-            if (ui == null)
-            {
-                return;
-            }
-
-            UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
             uiHeroComponent.UIHeroInfoComponent?.UpdateItemList();
 
             await ETTask.CompletedTask;
