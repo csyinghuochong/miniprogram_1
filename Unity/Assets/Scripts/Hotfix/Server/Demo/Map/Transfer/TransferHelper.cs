@@ -15,6 +15,7 @@ namespace ET.Server
                     return ErrorCode.ERR_RequestRepeatedly;
                 }
 
+                Scene oldScene = unit.Scene();
                 int oldMapType = unit.Scene().GetComponent<MapComponent>().MapType;
 
                 // 从主城传送到其他地图，保存在主城的坐标
@@ -37,12 +38,16 @@ namespace ET.Server
                             return ErrorCode.ERR_Success;
                         }
 
-                        //传送回主场景
                         ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
-                        long userId = unit.Id;
-                        Scene scene = unit.Scene();
                         BeforeTransfer(unit, oldMapType);
                         await Transfer(unit, mapInstanceId, MapTypeEnum.MainCityScene, 101);
+
+                        // 单人关卡销毁
+                        if (oldMapType == MapTypeEnum.LocalLevel)
+                        {
+                            oldScene.Dispose();
+                            return ErrorCode.ERR_Success;
+                        }
 
                         break;
                     }
@@ -54,7 +59,6 @@ namespace ET.Server
 
                         MapComponent mapComponent = levelScene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo(MapTypeEnum.LocalLevel, request.SceneId);
-                        // mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(sceneId).MapID;
 
                         BeforeTransfer(unit, oldMapType);
 
@@ -79,6 +83,14 @@ namespace ET.Server
 
         public static void OnPlayerDisconnect(Scene scene, long userId)
         {
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
+
+            // 玩家下线，销毁单人副本
+            if (sceneTypeEnum == MapTypeEnum.LocalLevel)
+            {
+                scene.Dispose();
+                return;
+            }
         }
 
         private static void BeforeTransfer(Unit unit, int sceneType)
@@ -112,12 +124,8 @@ namespace ET.Server
                 {
                     request.Entitys.Add(entity.ToBson());
                 }
-                else
-                {
-                }
             }
 
-            //unit.Dispose();
             unit.GetParent<UnitComponent>().Remove(unit.Id);
             await root.GetComponent<TimerComponent>().WaitFrameAsync();
             await root.GetComponent<LocationProxyComponent>().Lock(LocationType.Unit, unitId, request.OldActorId);

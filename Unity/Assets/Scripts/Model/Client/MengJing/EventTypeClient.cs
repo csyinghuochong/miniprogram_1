@@ -3,6 +3,11 @@ using Unity.Mathematics;
 
 namespace ET.Client
 {
+    public struct RelinkSucceed
+    {
+        public int ErrorCode;
+    }
+    
     public struct UpdateUserData
     {
         public UserDataType UserDataType;
