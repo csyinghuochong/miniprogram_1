@@ -43,7 +43,13 @@
 
                     inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
-                    HeroHelper.AddHeroExp(hero, request.Num * int.Parse(itemConfig.ItemUsePar));
+                    string[] expRange = itemConfig.ItemUsePar.Split(',');
+                    for (int i = 0; i < request.Num; i++)
+                    {
+                        int expValue = RandomHelper.RandomNumber(int.Parse(expRange[0]), int.Parse(expRange[1]));
+                        HeroHelper.AddHeroExp(hero, request.Num * expValue);
+                    }
+
                     HeroHelper.UpdateHeroNumeric(unit, hero);
                     HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
                 }
@@ -61,7 +67,13 @@
 
                     inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
-                    HeroHelper.AddHeroHunShi(hero, request.Num * int.Parse(itemConfig.ItemUsePar));
+                    string[] hunShiRange = itemConfig.ItemUsePar.Split(',');
+                    for (int i = 0; i < request.Num; i++)
+                    {
+                        int hunShiValue = RandomHelper.RandomNumber(int.Parse(hunShiRange[0]), int.Parse(hunShiRange[1]));
+                        HeroHelper.AddHeroHunShi(hero, request.Num * hunShiValue);
+                    }
+
                     HeroHelper.UpdateHeroNumeric(unit, hero);
                     HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
                 }

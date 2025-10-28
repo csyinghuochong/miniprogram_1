@@ -24,7 +24,7 @@ namespace ET.Client
             self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
 
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
-            self.Button_Use.AddListener(() => { Log.Warning("使用道具"); });
+            self.Button_Use.AddListener(() => { self.OnButton_Use().Coroutine(); });
         }
 
         [EntitySystem]
@@ -56,6 +56,18 @@ namespace ET.Client
                 
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            }
+        }
+        
+        private static async ETTask OnButton_Use(this UIItemTip_ConsumeComponent self)
+        {
+            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.UIItemTipData.ItemId);
+            
+            int error = await ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.ItemId, 1, 0);
+
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
             }
         }
     }
