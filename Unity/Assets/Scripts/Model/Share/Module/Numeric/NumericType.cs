@@ -10,7 +10,7 @@
         public const int Now_Dead = 3002;                                       //0活 1死
         public const int LastLoginTime = 3003;
         public const int CombatPower = 3004;                                    //战斗力
-        public const int CurrentHeroId = 3005;                                  //在主城显示的英雄
+        public const int ShowHeroId = 3005;                                  //在主城显示的英雄
         public const int MainCity_X = 3006;
         public const int MainCity_Y = 3007;
         public const int MainCity_Z = 3008;

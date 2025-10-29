@@ -6,9 +6,9 @@
     {
         protected override async ETTask Run(Unit unit, C2M_SetHeroFormation request, M2C_SetHeroFormation response)
         {
-            HeroComponentS heroComponentS = unit.GetComponent<HeroComponentS>();
+            HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
 
-            int error = heroComponentS.SetFormation(request.OpType, request.HeroId, request.SlotIndex);
+            int error = heroComponent.SetFormation(request.OpType, request.HeroId, request.SlotIndex);
 
             if (error != ErrorCode.ERR_Success)
             {
@@ -16,7 +16,13 @@
                 return;
             }
 
-            response.Formation = heroComponentS.Formation;
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            if (heroComponent.GetFirstHero() != null)
+            {
+                numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId);
+            }
+            
+            response.Formation = heroComponent.Formation;
 
             await ETTask.CompletedTask;
         }

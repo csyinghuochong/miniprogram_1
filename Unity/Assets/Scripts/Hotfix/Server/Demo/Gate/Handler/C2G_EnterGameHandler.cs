@@ -139,8 +139,12 @@ namespace ET.Server
 
                         unit.GetComponent<DBSaveComponent>().OnLogin();
                         unit.GetComponent<HeroComponentS>().OnLogin();
+                        HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
                         NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-                        numericComponent.ApplyValue(NumericType.CurrentHeroId, unit.GetComponent<HeroComponentS>().GetHeroIdFromFormation(1), false);
+                        if (heroComponent.GetFirstHero() != null)
+                        {
+                            numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId, false);
+                        }
                         
                         TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 

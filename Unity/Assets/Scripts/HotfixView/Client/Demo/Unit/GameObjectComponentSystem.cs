@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [NumericWatcher(SceneType.Current, NumericType.CurrentHeroId)]
+    [NumericWatcher(SceneType.Current, NumericType.ShowHeroId)]
     public class NumericWatcher_ReloadGameObject : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
@@ -67,20 +67,20 @@ namespace ET.Client
             {
                 case UnitType.Player:
                 {
-                    long heroId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.CurrentHeroId);
-                    Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(heroId);
+                    NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+                    int heroId = numericComponent.GetAsInt(NumericType.ShowHeroId);
 
-                    if (hero == null)
+                    HeroConfig heroConfig = null;
+                    if (!HeroConfigCategory.Instance.DataMap.ContainsKey(heroId))
                     {
-                        return;
+                        // 没有英雄上阵，默认用第一个吧
+                        heroConfig = HeroConfigCategory.Instance.DataList[0];
+                    }
+                    else
+                    {
+                        heroConfig = HeroConfigCategory.Instance.Get(heroId);
                     }
 
-                    if (!HeroConfigCategory.Instance.DataMap.ContainsKey(hero.ConfigId))
-                    {
-                        return;
-                    }
-
-                    HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
                     break;
                 }

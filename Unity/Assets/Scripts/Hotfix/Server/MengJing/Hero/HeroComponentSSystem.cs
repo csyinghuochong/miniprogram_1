@@ -168,5 +168,19 @@ namespace ET.Server
 
             return self.Formation[index - 1];
         }
+
+        public static Hero GetFirstHero(this HeroComponentS self)
+        {
+            foreach (long heroId in self.Formation)
+            {
+                if (heroId != 0)
+                {
+                    return self.GetHero(heroId);
+                }
+
+            }
+
+            return null;
+        }
     }
 }

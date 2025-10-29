@@ -73,7 +73,7 @@ namespace ET.Server
 
             if (numericType > NumericType.Max)
             {
-                ///注意下 客户端应该是不需要这个逻辑的。
+                // 注意下 客户端应该是不需要这个逻辑的。
                 self.NumericDic[numericType] = value;
                 nowValue = numericType / 100;
                 int add = nowValue * 100 + 1;
