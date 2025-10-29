@@ -159,7 +159,6 @@ namespace ET.Client
                 {
                     self.GameObject.tag = TagHelper.Hero;
 
-                    unit.AddComponent<SetUnitTransformComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<BuffManagerComponent>();
@@ -170,7 +169,6 @@ namespace ET.Client
                 {
                     self.GameObject.tag = TagHelper.Monster;
 
-                    unit.AddComponent<SetUnitTransformComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<BuffManagerComponent>();
@@ -196,7 +194,6 @@ namespace ET.Client
                 }
                 case UnitType.Hero:
                 {
-                    unit.RemoveComponent<SetUnitTransformComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
                     unit.RemoveComponent<SkillManagerComponent>();
                     unit.RemoveComponent<BuffManagerComponent>();
@@ -205,7 +202,6 @@ namespace ET.Client
                 }
                 case UnitType.Monster:
                 {
-                    unit.RemoveComponent<SetUnitTransformComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
                     unit.RemoveComponent<SkillManagerComponent>();
                     unit.RemoveComponent<BuffManagerComponent>();
