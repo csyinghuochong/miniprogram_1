@@ -160,12 +160,26 @@ namespace ET.Client
         public static void UpdateGold(this UIHeroComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            
+            if (userInfoComponent.Gold >= 10000)
+            {
+                self.Text_Type_Gold.SetTextFormat("{0}k", userInfoComponent.Gold / 1000);
+                return;
+            }
+
             self.Text_Type_Gold.SetText(userInfoComponent.Gold);
         }
 
         public static void UpdateDiamond(this UIHeroComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            
+            if (userInfoComponent.Diamond >= 10000)
+            {
+                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
+                return;
+            }
+
             self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
     }
