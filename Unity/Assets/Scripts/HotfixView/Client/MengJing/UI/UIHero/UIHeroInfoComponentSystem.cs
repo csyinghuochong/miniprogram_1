@@ -181,14 +181,15 @@ namespace ET.Client
 
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.SetText(heroConfig.HeroName);
-            self.Text_HeroCP.SetTextFormat("战力：{0}", hero.NumericDic[NumericType.CombatPower]);
+            self.Text_HeroCP.SetText(hero.NumericDic[NumericType.CombatPower]);
 
             string path = ABPathHelper.GetUIUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
             GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
+            model.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             UICommonHelper.DestoryChild(self.Spine_HeroModel.gameObject);
             UnityEngine.Object.Instantiate(model, self.Spine_HeroModel);
 
-            self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
+            self.Text_HeroLv.SetTextFormat("LV.{0}", hero.Lv);
             int maxExp = ExpConfigCategory.Instance.Get(hero.Lv).HeroUpExp;
             self.Slider_HeroExp.value = hero.Exp * 1f / maxExp;
             self.Text_HeroExp.SetTextFormat("{0}/{1}", hero.Exp, maxExp);
