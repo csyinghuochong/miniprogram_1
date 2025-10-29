@@ -37,9 +37,9 @@ namespace ET.Server
 
             M2C_StartSceneChange m2CStartSceneChange = new()
             {
-                SceneInstanceId = scene.InstanceId, 
-                SceneId = request.SceneId, 
-                SceneType = request.SceneType, 
+                SceneInstanceId = scene.InstanceId,
+                SceneId = request.SceneId,
+                SceneType = request.SceneType,
                 Difficulty = request.Difficulty,
                 ParamInfo = request.ParamInfo
             };
@@ -50,6 +50,11 @@ namespace ET.Server
             {
                 case MapTypeEnum.MainCityScene:
                 {
+                    float x = numericComponent.GetAsFloat(NumericType.MainCity_X);
+                    float y = numericComponent.GetAsFloat(NumericType.MainCity_Y);
+                    float z = numericComponent.GetAsFloat(NumericType.MainCity_Z);
+                    unit.Position = new float3(x, y, z);
+
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
@@ -59,12 +64,12 @@ namespace ET.Server
                 case MapTypeEnum.LocalLevel:
                 {
                     unit.Position = float3.zero;
-                    
+
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
-                    
+
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
-                    
+
                     // 创建英雄队列
                     HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
                     for (int i = 0; i < heroComponent.Formation.Count; i++)
@@ -91,7 +96,7 @@ namespace ET.Server
 
                         UnitFactory.CreateHero(scene, unit, hero, position);
                     }
-                    
+
                     scene.GetComponent<LocalLevelComponent>().MainUnit = unit;
                     scene.GetComponent<LocalLevelComponent>().GenerateLevel();
                     break;

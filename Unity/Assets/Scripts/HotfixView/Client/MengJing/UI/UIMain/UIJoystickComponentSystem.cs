@@ -220,10 +220,8 @@ namespace ET.Client
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
 
-            List<float3> position = new List<float3>();
-            position.Add(target);
-            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create();
-            c2MPathfindingResult.Position = position;
+            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
+            c2MPathfindingResult.Position.Add(target);
             self.ClientSenderComponent.Send(c2MPathfindingResult);
         }
 
