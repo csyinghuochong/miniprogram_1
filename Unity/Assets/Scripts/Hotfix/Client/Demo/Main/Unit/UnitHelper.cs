@@ -22,11 +22,6 @@ namespace ET.Client
             return false;
         }
 
-        public static bool IsPasture(this Unit self)
-        {
-            return self.Type == UnitType.Pasture;
-        }
-
         public static bool IsMonster(this Unit self)
         {
             return self.Type == UnitType.Monster;

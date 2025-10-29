@@ -269,11 +269,11 @@ namespace ET
         [MemoryPackOrder(6)]
         public MoveInfo MoveInfo { get; set; }
 
-        /// <summary>
-        /// 自身名字
-        /// </summary>
         [MemoryPackOrder(20)]
         public string UnitName { get; set; }
+
+        [MemoryPackOrder(21)]
+        public string MasterName { get; set; }
 
         public override void Dispose()
         {
@@ -290,6 +290,7 @@ namespace ET
             this.KV.Clear();
             this.MoveInfo = default;
             this.UnitName = default;
+            this.MasterName = default;
 
             ObjectPool.Instance.Recycle(this);
         }

@@ -19,64 +19,72 @@ namespace ET.Server
             //     UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             // }
 
-            await Create(scene, unit, player.UnitId, UnitType.Player, createRoleInfo, account, accountId);
+            CreatePlayer(scene, unit, player.UnitId, createRoleInfo, account, accountId);
 
             //UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
 
             return unit;
         }
 
-        public static async ETTask Create(Scene scene, Unit unit, long id, int unitType, CreateRoleInfo createRoleInfo, string account, long accountId)
+        private static void CreatePlayer(Scene scene, Unit unit, long id, CreateRoleInfo createRoleInfo, string account, long accountId)
         {
-            await ETTask.CompletedTask;
-            
-            //UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
-            switch (unitType)
+            unit.Position = new float3(0, 0, 0);
+            unit.Type = UnitType.Player;
+            unit.ConfigId = createRoleInfo.PlayerOcc;
+
+            if (unit.GetComponent<UserInfoComponentS>() == null)
             {
-                case UnitType.Player:
-                {
-                    //Unit unit = unitComponent.AddChildWithId<Unit, int>(id, 1001);
-                    unit.AddComponent<MoveComponent>();
-                    unit.Position = new float3(0, 0, 0);
-                    unit.Type = UnitType.Player;
-                    unit.ConfigId = createRoleInfo.PlayerOcc;
-                    if (unit.GetComponent<UserInfoComponentS>() == null)
-                    {
-                        UserInfoComponentS userInfoComponentS = unit.AddComponent<UserInfoComponentS>();
-                        userInfoComponentS.Account = account;
-                        userInfoComponentS.UnitId = id;
-                        userInfoComponentS.AccInfoID = accountId;
-                        userInfoComponentS.PlayerName = createRoleInfo.PlayerName;
-                        userInfoComponentS.Lv = 1;
-                    }
-
-                    if (unit.GetComponent<NumericComponentS>() == null)
-                    {
-                        NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
-                        numericComponentS.ApplyValue(NumericType.Now_MoveSpeed, 60000, false); // 速度是6米每秒
-                        numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
-                    }
-
-                    if (unit.GetComponent<InventoryComponentS>() == null)
-                    {
-                        InventoryComponentS inventoryComponentS = unit.AddComponent<InventoryComponentS>();
-                    }
-
-                    if (unit.GetComponent<HeroComponentS>() == null)
-                    {
-                        HeroComponentS heroComponentS = unit.AddComponent<HeroComponentS>();
-                    }
-
-                    unit.AddDataComponent<DBSaveComponent>();
-                    
-                    //unitComponent.Add(unit);
-                    // 加入aoi
-                    unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
-                    return;
-                }
-                default:
-                    throw new Exception($"not such unit type: {unitType}");
+                UserInfoComponentS userInfoComponentS = unit.AddComponent<UserInfoComponentS>();
+                userInfoComponentS.Account = account;
+                userInfoComponentS.UnitId = id;
+                userInfoComponentS.AccInfoID = accountId;
+                userInfoComponentS.PlayerName = createRoleInfo.PlayerName;
+                userInfoComponentS.Lv = 1;
             }
+
+            if (unit.GetComponent<NumericComponentS>() == null)
+            {
+                NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
+                numericComponentS.ApplyValue(NumericType.Now_MoveSpeed, 60000, false); // 速度是6米每秒
+                numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
+            }
+
+            if (unit.GetComponent<InventoryComponentS>() == null)
+            {
+                InventoryComponentS inventoryComponentS = unit.AddComponent<InventoryComponentS>();
+            }
+
+            if (unit.GetComponent<HeroComponentS>() == null)
+            {
+                HeroComponentS heroComponentS = unit.AddComponent<HeroComponentS>();
+            }
+
+            unit.AddComponent<UnitInfoComponent>();
+            unit.AddComponent<MoveComponent>();
+            unit.AddDataComponent<DBSaveComponent>();
+            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+        }
+
+        public static Unit CreateHero(Scene scene, Unit master, Hero hero, float2 position)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(hero.Id, hero.ConfigId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.Position = new float3(position.x, position.y, 0);
+            unit.Type = UnitType.Hero;
+
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            foreach (KeyValuePair<int, long> keyValuePair in hero.NumericDic)
+            {
+                numericComponent.ApplyValue(keyValuePair.Key, keyValuePair.Value, false);
+            }
+
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
+            unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().PlayerName;
+
+            unit.AddComponent<AOIEntity, int, float3>(5 * 1000, unit.Position);
+
+            return unit;
         }
     }
 }

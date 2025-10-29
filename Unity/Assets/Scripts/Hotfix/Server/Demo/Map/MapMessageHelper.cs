@@ -4,40 +4,17 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [FriendOf(typeof (NumericComponentS))]
-    [FriendOf(typeof (MoveComponent))]
+    [FriendOf(typeof(NumericComponentS))]
+    [FriendOf(typeof(MoveComponent))]
     public static partial class MapMessageHelper
     {
-        
-          public static void GetUnitInfo(Unit sendUnit, M2C_CreateUnits createUnits)
-        {
-            switch (sendUnit.Type)
-            {
-                case UnitType.Player:
-                case UnitType.JingLing:
-                case UnitType.Pasture:
-                case UnitType.Plant:
-                case UnitType.Bullet:
-                case UnitType.Npc:
-                case UnitType.Stall:
-                case UnitType.Monster:
-                case UnitType.DropItem:
-                case UnitType.Transfers:
-                case UnitType.CellTransfers:
-                    createUnits.Units.Add(CreateUnitInfo(sendUnit));
-                    break;
-                default:
-                    break;
-            }
-        }
-
         public static UnitInfo CreateUnitInfo(Unit unit)
         {
             UnitInfo unitInfo = UnitInfo.Create();
             NumericComponentS nc = unit.GetComponent<NumericComponentS>();
             unitInfo.UnitId = unit.Id;
             unitInfo.ConfigId = unit.ConfigId;
-            unitInfo.Type = (int)unit.Type();
+            unitInfo.Type = unit.Type;
             unitInfo.Position = unit.Position;
             unitInfo.Forward = unit.Forward;
 
@@ -64,17 +41,35 @@ namespace ET.Server
                 }
             }
 
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+            switch (unit.Type)
+            {
+                case UnitType.Player:
+                {
+                    UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+
+                    unitInfo.UnitName = userInfoComponent.PlayerName;
+
+                    break;
+                }
+                case UnitType.Hero:
+                {
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
+                    unitInfo.MasterName = unitInfoComponent.MasterName;
+
+                    break;
+                }
+            }
+
             return unitInfo;
         }
-        
-        
+
         public static void NoticeUnitAdd(Unit unit, Unit sendUnit)
         {
             M2C_CreateUnits createUnits = M2C_CreateUnits.Create();
-            GetUnitInfo(sendUnit, createUnits);
+            createUnits.Units.Add(CreateUnitInfo(sendUnit));
             SendToClient(unit, createUnits);
         }
-
 
         public static void NoticeUnitRemove(Unit unit, Unit sendUnit)
         {
@@ -85,7 +80,6 @@ namespace ET.Server
 
         public static void Broadcast(Unit unit, IMessage message)
         {
-            
             (message as MessageObject).IsFromPool = false;
             Dictionary<long, EntityRef<AOIEntity>> dict = unit.GetBeSeePlayers();
             // 网络底层做了优化，同一个消息不会多次序列化
@@ -96,7 +90,7 @@ namespace ET.Server
                 oneTypeMessageLocationType.Send(u.Unit.Id, message);
             }
         }
-        
+
         public static void SendToClient(Unit unit, IMessage message)
         {
             unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.Id, message);

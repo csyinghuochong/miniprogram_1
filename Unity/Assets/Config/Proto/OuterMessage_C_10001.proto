@@ -63,7 +63,8 @@ message UnitInfo
 	map<int32, int64> KV = 6;
 	MoveInfo MoveInfo = 7;
 
-	string UnitName = 21;		//自身名字
+	string UnitName = 21;
+	string MasterName = 22;
 }
 
 message M2C_CreateUnits // IMessage

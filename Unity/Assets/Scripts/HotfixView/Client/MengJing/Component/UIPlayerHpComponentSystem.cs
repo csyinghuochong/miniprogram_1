@@ -49,7 +49,7 @@ namespace ET.Client
             headBarUI.Offset = new Vector2(0, 3f);
             headBarUI.UpdatePostion();
 
-            self.Text_Name.SetText(self.Root().GetComponent<UserInfoComponentC>().PlayerName); //先这样，还不知道大厅是不是可以看到其他玩家的
+            self.Text_Name.SetText(self.GetParent<Unit>().GetComponent<UnitInfoComponent>().UnitName);
         }
     }
 }

@@ -32,14 +32,16 @@ namespace ET.Client
                 selfpet = true;
             }
 
-            if (mainScene && (SettingData.NoShowOther || UnitHelper.GetUnitList(currentScene, UnitType.Player).Count >= SettingData.NoShowPlayer)
-                && !mainHero && !selfpet)
+            if (mainScene &&
+                (SettingData.NoShowOther || UnitHelper.GetUnitList(currentScene, UnitType.Player).Count >= SettingData.NoShowPlayer) &&
+                !mainHero &&
+                !selfpet)
             {
                 return null;
             }
 
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, (int)unitInfo.ConfigId);
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, unitInfo.ConfigId);
             unitComponent.Add(unit);
             unit.MainHero = mainHero;
             unit.Type = unitInfo.Type;
@@ -47,14 +49,18 @@ namespace ET.Client
 
             unit.AddComponent<ObjectWait>();
             unit.AddComponent<MoveComponent>();
+            
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unitInfoComponent.UnitName = unitInfo.UnitName;
+            unitInfoComponent.MasterName = unitInfo.MasterName;
 
             unit.Position = unitInfo.Position;
             unit.Forward = unitInfo.Forward;
 
-            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+            NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>();
             foreach (var kv in unitInfo.KV)
             {
-                numericComponentC.ApplyValue(kv.Key, kv.Value, false);
+                numericComponent.ApplyValue(kv.Key, kv.Value, false);
             }
 
             if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
@@ -67,42 +73,6 @@ namespace ET.Client
                     unit.MoveToAsync(list).Coroutine();
                 }
             }
-
-            OnAfterCreateUnit(unit);
-            return unit;
-        }
-
-        public static Unit CreateHero(Scene currentScene, int heroConfigId)
-        {
-            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), heroConfigId);
-            unit.Type = UnitType.Hero;
-            unit.ConfigId = heroConfigId;
-            unitComponent.Add(unit);
-
-            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(heroConfigId);
-
-            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-            numericComponentC.ApplyValue(NumericType.Now_Hp, heroConfig.BaseHp);
-            numericComponentC.ApplyValue(NumericType.Now_MaxHp, heroConfig.BaseHp);
-
-            OnAfterCreateUnit(unit);
-            return unit;
-        }
-
-        public static Unit CreateMonster(Scene currentScene, int monsterConfigId)
-        {
-            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), monsterConfigId);
-            unit.Type = UnitType.Monster;
-            unit.ConfigId = monsterConfigId;
-            unitComponent.Add(unit);
-
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
-
-            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-            numericComponentC.ApplyValue(NumericType.Now_Hp, monsterConfig.Hp);
-            numericComponentC.ApplyValue(NumericType.Now_MaxHp, monsterConfig.Hp);
 
             OnAfterCreateUnit(unit);
             return unit;
