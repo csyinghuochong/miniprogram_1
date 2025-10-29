@@ -66,6 +66,8 @@ namespace ET.Client
 
             self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
             self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
+            self.Button_AddGold = rc.Get<GameObject>("Button_AddGold").GetComponent<Button>();
+            self.Button_AddDiamond = rc.Get<GameObject>("Button_AddDiamond").GetComponent<Button>();
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Button_Type_All = rc.Get<GameObject>("Button_Type_All").GetComponent<Button>();
             self.Button_Type_Consume = rc.Get<GameObject>("Button_Type_Consume").GetComponent<Button>();
@@ -74,6 +76,8 @@ namespace ET.Client
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
 
+            self.Button_AddGold.onClick.AddListener(() => { Log.Warning("弹出来金币界面"); });
+            self.Button_AddDiamond.onClick.AddListener(() => { Log.Warning("弹出来钻石界面"); });
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_Consume.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Equipment.onClick.AddListener(() => { self.SetShowType(2); });
