@@ -57,7 +57,7 @@ namespace ET.Client
         {
             if (unitComponent.Get(unitid) != null)
             {
-                unitComponent.Get(unitid).SetPosition(new float3(x, y, z));
+                unitComponent.Get(unitid).Position =new float3(x, y, z);
                 return true;
             }
 

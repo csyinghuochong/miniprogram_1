@@ -73,7 +73,7 @@ namespace ET.Client
                     HeroConfig heroConfig = null;
                     if (!HeroConfigCategory.Instance.DataMap.ContainsKey(heroId))
                     {
-                        // 没有英雄上阵，默认用第一个吧
+                        Log.Warning("没有英雄上阵，默认用第一个吧");
                         heroConfig = HeroConfigCategory.Instance.DataList[0];
                     }
                     else
@@ -112,7 +112,7 @@ namespace ET.Client
         {
             if (self.GameObject != null)
             {
-                self.GameObject.transform.rotation = quaternion;
+                // self.GameObject.transform.rotation = quaternion;
             }
         }
 

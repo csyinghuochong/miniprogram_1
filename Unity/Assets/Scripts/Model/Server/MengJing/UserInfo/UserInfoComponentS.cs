@@ -8,6 +8,7 @@ namespace ET.Server
         public string Account { get; set; }
         public long UnitId { get; set; }
         public long AccInfoID { get; set; }
+        public long RobotId { get; set; }
 
         public string PlayerName { get; set; }
         public long Gold { get; set; }

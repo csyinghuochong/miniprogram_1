@@ -87,9 +87,29 @@ namespace ET.Server
                     $"{TimeHelper.DateTimeNow().ToString()}  移除";
             Log.Debug(offLineInfo);
 
-            self.UpdateCacheDB();
+            Scene scene = unit.Scene();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
+            if (sceneTypeEnum == MapTypeEnum.MainCityScene)
+            {
+                numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x);
+                numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y);
+                numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z);
+            }
+
+            numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
+            self.PlayerState = PlayerState.None;
+            TransferHelper.BeforeTransfer(unit, sceneTypeEnum);
+
+            if (!unit.IsRobot())
+            {
+                self.UpdateCacheDB();
+                ServerLogHelper.LoginInfo(offLineInfo);
+                ServerLogHelper.LogDebug(offLineInfo);
+            }
+
             unit.GetParent<UnitComponent>().Remove(unit.Id);
-            TransferHelper.OnPlayerDisconnect(unit.Scene(), unit.Id);
+            TransferHelper.OnPlayerDisconnect(scene, unit.Id);
         }
 
         public static void Activeted(this DBSaveComponent self)

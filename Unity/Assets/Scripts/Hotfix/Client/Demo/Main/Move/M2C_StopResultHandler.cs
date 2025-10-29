@@ -19,7 +19,7 @@ namespace ET.Client
                 {
                     MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
                     moveComponent.Stop(message.Error == 0);
-                    unit.SetPosition(message.Position);
+                    unit.Position = message.Position;
                     // unit.Rotation = message.Rotation;
                     EventSystem.Instance.Publish(root.CurrentScene(), new MoveStop() { Unit = unit });
                 }

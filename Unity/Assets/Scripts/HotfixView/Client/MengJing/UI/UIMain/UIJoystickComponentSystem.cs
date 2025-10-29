@@ -153,7 +153,7 @@ namespace ET.Client
             }
 
             float3 move = self.Direction * 5f * Time.deltaTime;
-            self.MyUnit.SetPosition(self.MyUnit.Position + move);
+            self.MyUnit.Position = self.MyUnit.Position + move;
         }
         
         private static void SendMove(this UIJoystickComponent self)
