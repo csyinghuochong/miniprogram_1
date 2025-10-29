@@ -48,8 +48,8 @@ namespace ET.Client
             self.GameObject = gameObject;
             Unit unit = self.GetParent<Unit>();
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-            
-            self.Slider_HeroHp = rc.Get<GameObject>("Slider_HeroHp").GetComponent<Slider>();
+
+            self.Image_Hp = rc.Get<GameObject>("Image_Hp").GetComponent<Image>();
 
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             GameObject bloodparent = globalComponent.BloodPlayer;
@@ -82,8 +82,8 @@ namespace ET.Client
             long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
             float blood = currentHp * 1f / maxHp;
             blood = Mathf.Max(blood, 0f);
-            
-            self.Slider_HeroHp.value = blood;
+
+            self.Image_Hp.fillAmount = blood;
         }
     }
 }

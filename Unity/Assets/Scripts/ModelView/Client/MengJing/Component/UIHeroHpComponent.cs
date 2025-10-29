@@ -10,6 +10,6 @@ namespace ET.Client
         public string HeadBarPath;
 
         public GameObject GameObject { get; set; }
-        public Slider Slider_HeroHp;
+        public Image Image_Hp;
     }
 }
