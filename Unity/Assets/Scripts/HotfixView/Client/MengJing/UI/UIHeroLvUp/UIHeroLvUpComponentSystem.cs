@@ -48,7 +48,7 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_Tip.SetText("");
             self.Text_HeroName.SetText(heroConfig.HeroName);
-            self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
+            self.Text_HeroLv.SetTextFormat("Lv.{0}", hero.Lv);
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
@@ -95,7 +95,7 @@ namespace ET.Client
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
                 string[] expRange = itemConfig.ItemUsePar.Split(',');
-                self.Text_Tip.SetTextFormat("预计增加:{0}-{1}经验", expRange[0], expRange[1]);
+                self.Text_Tip.SetTextFormat("预计增加{0}-{1}经验", expRange[0], expRange[1]);
 
                 uiCommonItem.SetSelected(self.ItemId);
             }
