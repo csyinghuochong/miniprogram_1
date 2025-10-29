@@ -13,8 +13,6 @@ namespace ET.Client
         public float TimeLeft; // 距离下次更新的时间
         public float FPS; // 当前帧率
 
-        public int SpeedLevel = 1;
-
         public UIJoystickComponent UIJoystickComponent { get; set; }
 
         public GameObject UIJoystick;

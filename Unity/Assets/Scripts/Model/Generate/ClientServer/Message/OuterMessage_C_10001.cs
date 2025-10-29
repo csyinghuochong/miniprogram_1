@@ -3181,6 +3181,98 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SetTimeScale)]
+    [ResponseType(nameof(M2C_SetTimeScale))]
+    public partial class C2M_SetTimeScale : MessageObject, ILocationRequest
+    {
+        public static C2M_SetTimeScale Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SetTimeScale), isFromPool) as C2M_SetTimeScale;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public float TimeScale { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.TimeScale = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SetTimeScale)]
+    public partial class M2C_SetTimeScale : MessageObject, ILocationResponse
+    {
+        public static M2C_SetTimeScale Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SetTimeScale), isFromPool) as M2C_SetTimeScale;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_UpdateTimeScale)]
+    public partial class M2C_UpdateTimeScale : MessageObject, IMessage
+    {
+        public static M2C_UpdateTimeScale Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_UpdateTimeScale), isFromPool) as M2C_UpdateTimeScale;
+        }
+
+        [MemoryPackOrder(0)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(1)]
+        public float TimeScale { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Error = default;
+            this.TimeScale = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3268,5 +3360,8 @@ namespace ET
         public const ushort M2C_RoleDataUpdate = 10084;
         public const ushort C2M_GetUserInfo = 10085;
         public const ushort M2C_GetUserInfo = 10086;
+        public const ushort C2M_SetTimeScale = 10087;
+        public const ushort M2C_SetTimeScale = 10088;
+        public const ushort M2C_UpdateTimeScale = 10089;
     }
 }

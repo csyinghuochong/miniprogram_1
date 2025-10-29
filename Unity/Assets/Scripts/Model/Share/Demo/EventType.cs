@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace ET.Client
+namespace ET
 {
+    public struct UpdateTimeScale
+    {
+        public float TimeScale;
+    }
+
     public struct SceneChangeStart
     {
         public Scene RootScene;
@@ -27,7 +32,7 @@ namespace ET.Client
     public struct AppStartInitFinish
     {
     }
-    
+
     public struct EnterMapFinish
     {
     }
@@ -52,13 +57,12 @@ namespace ET.Client
     {
         public Unit Unit;
     }
-    
+
     public struct LoginFinish
     {
     }
-    
+
     public struct SessionDispose
     {
-        
     }
 }

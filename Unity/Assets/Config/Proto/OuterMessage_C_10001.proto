@@ -699,3 +699,23 @@ message M2C_GetUserInfo // ILocationResponse
 	int64 Exp = 7;
 	int32 Lv = 8;
 }
+
+// ResponseType M2C_SetTimeScale
+message C2M_SetTimeScale // ILocationRequest
+{
+	int32 RpcId = 1;
+	float TimeScale = 2;
+}
+
+message M2C_SetTimeScale // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message M2C_UpdateTimeScale // IMessage
+{
+	int32 Error = 1;
+	float TimeScale = 2;
+}

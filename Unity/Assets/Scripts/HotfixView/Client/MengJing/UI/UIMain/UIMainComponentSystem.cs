@@ -41,6 +41,26 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+    
+    [Event(SceneType.Demo)]
+    public class UpdateTimeScale_UIMainRefresh : AEvent<Scene, UpdateTimeScale>
+    {
+        protected override async ETTask Run(Scene scene, UpdateTimeScale args)
+        {
+            Time.timeScale = args.TimeScale;
+            
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateTimeScale();
+
+            await ETTask.CompletedTask;
+        }
+    }
 
     [EntitySystemOf(typeof(UIMainComponent))]
     [FriendOf(typeof(UIMainComponent))]
@@ -106,29 +126,33 @@ namespace ET.Client
 
         private static void OnButton_Speed(this UIMainComponent self)
         {
-            self.SpeedLevel++;
-            if (self.SpeedLevel > 3)
+            float timeScale = Time.timeScale;
+
+            if (timeScale <= 0.5f)
             {
-                self.SpeedLevel = 0;
+                timeScale = 1f;
+            }
+            else if (timeScale <= 1f)
+            {
+                timeScale = 2f;
+            }
+            else if (timeScale <= 2f)
+            {
+                timeScale = 3f;
+            }
+            else
+            {
+                timeScale = 0;
             }
 
-            switch (self.SpeedLevel)
-            {
-                case 0:
-                    Time.timeScale = 0f;
-                    break;
-                case 1:
-                    Time.timeScale = 1f;
-                    break;
-                case 2:
-                    Time.timeScale = 2f;
-                    break;
-                case 3:
-                    Time.timeScale = 3f;
-                    break;
-            }
+            C2M_SetTimeScale request = C2M_SetTimeScale.Create();
+            request.TimeScale = timeScale;
+            self.Root().GetComponent<ClientSenderComponent>().Call(request).Coroutine();
+        }
 
-            self.Button_Speed.GetComponentInChildren<TMP_Text>().SetTextFormat("x{0}", self.SpeedLevel);
+        public static void UpdateTimeScale(this UIMainComponent self)
+        {
+            self.Button_Speed.GetComponentInChildren<TMP_Text>().SetTextFormat("x{0:0.#}", Time.timeScale);
         }
 
         public static void UpdatePlayerName(this UIMainComponent self)

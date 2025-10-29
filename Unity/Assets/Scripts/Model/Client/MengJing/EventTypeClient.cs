@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public int ErrorCode;
     }
-    
+
     public struct UpdateUserData
     {
         public UserDataType UserDataType;
@@ -40,7 +40,7 @@ namespace ET.Client
     public struct HeroFormationUpdate
     {
     }
-    
+
     public struct HeroUpdate
     {
     }

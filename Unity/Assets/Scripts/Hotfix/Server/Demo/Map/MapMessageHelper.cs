@@ -91,6 +91,26 @@ namespace ET.Server
             }
         }
 
+        /// <summary>
+        /// 广播给Scene内的所有玩家
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="message"></param>
+        public static void Broadcast(Scene scene, IMessage message)
+        {
+            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            foreach (EntityRef<Unit> unitRef in unitComponent.GetAll())
+            {
+                Unit u = unitRef;
+                if (u.Type != UnitType.Player)
+                {
+                    continue;
+                }
+
+                SendToClient(u, message);
+            }
+        }
+
         public static void SendToClient(Unit unit, IMessage message)
         {
             unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.Id, message);
