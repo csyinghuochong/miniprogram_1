@@ -24,7 +24,7 @@ namespace ET.Client
             self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
 
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
-            self.Button_Use.AddListener(() => { self.OnButton_Use().Coroutine(); });
+            self.Button_Use.AddListener(() => { self.OnButton_Use(); });
         }
 
         [EntitySystem]
@@ -59,16 +59,9 @@ namespace ET.Client
             }
         }
         
-        private static async ETTask OnButton_Use(this UIItemTip_ConsumeComponent self)
-        {
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.UIItemTipData.ItemId);
-            
-            int error = await ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.ItemId, 1, 0);
-
-            if (error != ErrorCode.ERR_Success)
-            {
-                return;
-            }
+        private static void OnButton_Use(this UIItemTip_ConsumeComponent self)
+        { 
+            ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.ItemId, 1, 0).Coroutine();
         }
     }
 }
