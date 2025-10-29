@@ -7,6 +7,8 @@ namespace ET
     [ChildOf]
     public class Scene: Entity, IScene
     {
+        public float TimeScale { get; set; } = 1f;
+        
         [BsonIgnore]
         public Fiber Fiber { get; set; }
         

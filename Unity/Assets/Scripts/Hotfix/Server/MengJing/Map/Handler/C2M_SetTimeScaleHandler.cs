@@ -21,10 +21,10 @@
                 return;
             }
 
-            mapComponent.TimeScale = request.TimeScale;
+            unit.Scene().TimeScale = request.TimeScale;
 
             M2C_UpdateTimeScale m2CUpdateTimeScale = M2C_UpdateTimeScale.Create();
-            m2CUpdateTimeScale.TimeScale = mapComponent.TimeScale;
+            m2CUpdateTimeScale.TimeScale = request.TimeScale;
             MapMessageHelper.Broadcast(unit.Scene(), m2CUpdateTimeScale);
 
             await ETTask.CompletedTask;

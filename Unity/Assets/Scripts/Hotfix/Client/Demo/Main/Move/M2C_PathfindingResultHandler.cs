@@ -11,12 +11,12 @@
 				return;
 			}
 
-			if (!unit.MainHero || !message.YaoGan)
-			{
+			// if (!unit.MainHero || !message.YaoGan)
+			// {
 				float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-				speed *= (message.SpeedRate * 0.01f);
-				unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed, 100, message.SpeedRate).Coroutine();
-			}
+				// speed *= (message.SpeedRate * 0.01f);
+				unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed).Coroutine();
+			// }
 			
 			await ETTask.CompletedTask;
 		}

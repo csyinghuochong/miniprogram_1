@@ -37,7 +37,7 @@ namespace ET.Server
         public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent, int speedRate)
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
-            speed *= (speedRate * 0.01f);
+            // speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(positonsss, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {

@@ -6,7 +6,9 @@
     {
         protected override async ETTask Run(Scene root, M2C_UpdateTimeScale message)
         {
-            root.GetComponent<MapComponent>().TimeScale = message.TimeScale;
+            root.CurrentScene().TimeScale = message.TimeScale;
+
+            EventSystem.Instance.Publish(root, new UpdateTimeScale() { TimeScale = message.TimeScale });
 
             await ETTask.CompletedTask;
         }

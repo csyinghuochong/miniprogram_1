@@ -34,6 +34,7 @@ namespace ET.Server
             //如果延迟过大， 则加速追赶
             
             // 广播寻路路径
+            message.Position.Insert(0, unit.Position);
             m2CPathfindingResult.Id = unit.Id;
             m2CPathfindingResult.Points = message.Position;
             m2CPathfindingResult.YaoGan = true;

@@ -121,7 +121,8 @@ namespace ET
             Unit unit = self.GetParent<Unit>();
             
             long timeNow = TimeInfo.Instance.ClientNow();
-            long moveTime = timeNow - self.StartTime;
+            // 应用时间缩放计算实际移动时间
+            long moveTime = (long)((timeNow - self.StartTime) * self.Scene().TimeScale);
 
             while (true)
             {
@@ -211,7 +212,8 @@ namespace ET
 
             self.StartTime += self.NeedTime;
             
-            self.NeedTime = (long) (distance / self.Speed * 1000);
+            // 考虑时间缩放计算所需时间
+            self.NeedTime = (long)(distance / (self.Speed * self.Scene().TimeScale) * 1000);
             
             if (self.TurnTime > 0)
             {

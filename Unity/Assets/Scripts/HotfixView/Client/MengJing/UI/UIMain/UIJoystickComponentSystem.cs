@@ -1,4 +1,6 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +13,22 @@ namespace ET.Client
     [EntitySystemOf(typeof(UIJoystickComponent))]
     public static partial class UIJoystickComponentSystem
     {
+        [Invoke(TimerInvokeType.JoystickTimer)]
+        public class JoystickTimer : ATimer<UIJoystickComponent>
+        {
+            protected override void Run(UIJoystickComponent self)
+            {
+                try
+                {
+                    self.SendMove();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this UIJoystickComponent self, GameObject gameObject)
         {
@@ -29,7 +47,7 @@ namespace ET.Client
             self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            // self.MoveComponent = self.MyUnit.GetComponent<MoveComponent>();
+            self.MoveComponent = self.MyUnit.GetComponent<MoveComponent>();
             self.ClientSenderComponent = self.Root().GetComponent<ClientSenderComponent>();
 
             // 事件触发顺序 如果拖拽 PointerDown、BeginDrag、Drag、PointerUp、EndDrag 未拖拽 PointerDown、PointerUp
@@ -46,10 +64,9 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Update(this UIJoystickComponent self)
+        private static void Destroy(this UIJoystickComponent self)
         {
-            self.Move();
-            // self.SendMove();
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
         }
 
         private static void OnPointerDown(this UIJoystickComponent self, PointerEventData pdata)
@@ -78,6 +95,9 @@ namespace ET.Client
 
             self.IsDrag = true;
             self.LastDirection = Vector3.zero;
+
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+            self.JoystickTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(250, TimerInvokeType.JoystickTimer, self);
         }
 
         private static void OnDrag(this UIJoystickComponent self, PointerEventData pdata)
@@ -97,6 +117,8 @@ namespace ET.Client
             C2M_Stop c2MStop = C2M_Stop.Create();
             self.ClientSenderComponent.Send(c2MStop);
             self.ResetUI();
+
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
         }
 
         private static void SetAlpha(this UIJoystickComponent self, float value)
@@ -140,42 +162,19 @@ namespace ET.Client
             // self.Direction.y = 0;
         }
 
-        private static void Move(this UIJoystickComponent self)
+        private static void SendMove(this UIJoystickComponent self)
         {
             if (!self.IsDrag)
             {
                 return;
             }
-            
+
             if (self.MyUnit == null)
             {
                 return;
             }
 
-            float3 move = self.Direction * 5f * Time.deltaTime;
-            self.MyUnit.Position = self.MyUnit.Position + move;
-        }
-        
-        private static void SendMove(this UIJoystickComponent self)
-        {
-            // if (!self.IsDrag)
-            // {
-            //     return;
-            // }
-            //
-            // if (self.MyUnit == null)
-            // {
-            //     return;
-            // }
-            //
-            // // 切换方向立刻从新寻路，保持同一方向则要马上完成之前的移动后。解决卡边会发送寻路消息频繁
-            // if (self.LastDirection != Vector3.zero && Vector3.Angle(self.Direction, self.LastDirection) < 10f &&
-            //     (self.MoveComponent.Targets.Count > 1 || Vector3.Distance(self.LastUnitPosition, self.MyUnit.Position) < 0.001f))
-            // {
-            //     return;
-            // }
-            //
-            // // 适应摄像机
+            // 适应摄像机 3D
             // Quaternion rotation = Quaternion.Euler(0, self.MainCamera.transform.eulerAngles.y, 0);
             // Vector3 direction = rotation * self.Direction;
             //
@@ -212,6 +211,20 @@ namespace ET.Client
             // C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create();
             // c2MPathfindingResult.Position = target;
             // self.ClientSenderComponent.Send(c2MPathfindingResult);
+
+            // 2D
+            float3 start = self.MyUnit.Position;
+            Vector2 dire = self.Direction * 5f;
+            float3 target = new float3(start.x + dire.x, start.y + dire.y, start.z);
+
+            self.LastDirection = self.Direction;
+            self.LastUnitPosition = self.MyUnit.Position;
+
+            List<float3> position = new List<float3>();
+            position.Add(target);
+            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create();
+            c2MPathfindingResult.Position = position;
+            self.ClientSenderComponent.Send(c2MPathfindingResult);
         }
 
         private static void ResetUI(this UIJoystickComponent self)

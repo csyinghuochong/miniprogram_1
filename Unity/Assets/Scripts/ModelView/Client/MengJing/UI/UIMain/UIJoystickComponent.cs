@@ -14,7 +14,7 @@ namespace ET.Client
     /// 摇杆
     /// </summary>
     [ComponentOf(typeof(UIMainComponent))]
-    public class UIJoystickComponent : Entity, IAwake<GameObject>, IUpdate
+    public class UIJoystickComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject;
         public GameObject StartArea;
@@ -39,9 +39,11 @@ namespace ET.Client
         public EJoystickModel JoystickModel;
         public float Radius; // 摇杆按钮移动的半径
 
-        public Vector3 Direction; // 方向单位向量
-        public Vector3 LastDirection;
-        public Vector3 Target;
+        public long JoystickTimer;
+
+        public Vector2 Direction; // 方向单位向量
+        public Vector2 LastDirection;
+        public Vector2 Target;
         public bool IsDrag;
         public float3 LastUnitPosition;
     }
