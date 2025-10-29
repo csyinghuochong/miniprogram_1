@@ -140,6 +140,7 @@ namespace ET.Client
 
             self.GameObject = go;
             go.transform.SetParent(self.Root().GetComponent<GlobalComponent>().Unit);
+            self.GameObject.SetActive(true);
 
             Unit unit = self.GetParent<Unit>();
             self.UpdatePositon(unit.Position);
