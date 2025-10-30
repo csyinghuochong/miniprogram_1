@@ -1,5 +1,4 @@
 ﻿using Unity.Mathematics;
-using UnityEngine;
 
 namespace ET.Client
 {
@@ -8,7 +7,7 @@ namespace ET.Client
     {
         public SkillInfo SkillInfo { get; set; }
         public SkillConfig SkillConfig { get; set; }
-        public SkillHandler SkillHandler { get; set; }
+        public SkillHandlerC SkillHandlerC { get; set; }
         public SkillState SkillState { get; set; }
         public float SkillLiveTime { get; set; }
         private EntityRef<Unit> theUnitFrom; //来自哪个Unit
@@ -21,8 +20,5 @@ namespace ET.Client
         public float DelayTime { get; set; } //延迟时间
         public float IntervalTime { get; set; } //间隔时间
         public bool HasDealtDamage { get; set; }
-
-        public string EffectPath { get; set; }
-        public GameObject EffectGameObject { get; set; }
     }
 }

@@ -1,12 +1,12 @@
 ﻿namespace ET.Client
 {
-    public class SkillHandlerAttribute : BaseAttribute
+    public class SkillHandlerCAttribute : BaseAttribute
     {
     }
 
     [EnableClass]
-    [SkillHandler]
-    public abstract class SkillHandler
+    [SkillHandlerC]
+    public abstract class SkillHandlerC
     {
         public abstract void OnInit(SkillC skillC);
         public abstract void OnExecute(SkillC skillC);
