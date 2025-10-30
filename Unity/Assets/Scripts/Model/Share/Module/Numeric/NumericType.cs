@@ -10,11 +10,15 @@
         public const int Now_Dead = 3002;                                       //0活 1死
         public const int LastLoginTime = 3003;
         public const int CombatPower = 3004;                                    //战斗力
-        public const int ShowHeroId = 3005;                                  //在主城显示的英雄
+        public const int ShowHeroId = 3005;                                     //在主城显示的英雄ConfigId
         public const int MainCity_X = 3006;
         public const int MainCity_Y = 3007;
         public const int MainCity_Z = 3008;
-        public const int PassedLevelId = 3009;                                  //通关的关卡Id
+        // 闯关相关
+        public const int PassedLevelId = 3100;                                  //通关的关卡Id
+        public const int CurrentLevelId = 3101;                                 //当前进行的关卡Id
+        public const int CurrentWaveIndex = 3102;                               //当前进行的关卡第几波，从1开始
+        public const int CurrentWaveKillMonsterNum = 3103;                      //当前这一波已经击杀的怪物数量
 
         public const int Max = 10000;
 

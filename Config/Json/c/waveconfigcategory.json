@@ -4,7 +4,8 @@
     "Name": "关卡1-1第1波",
     "HaveBoss": false,
     "MonsterBatchIds": [
-      1010101
+      1010101,
+      1010102
     ]
   },
   {
@@ -19,6 +20,32 @@
   {
     "Id": 10103,
     "Name": "关卡1-1第3波",
+    "HaveBoss": true,
+    "MonsterBatchIds": [
+      1010301
+    ]
+  },
+  {
+    "Id": 10201,
+    "Name": "关卡1-2第1波",
+    "HaveBoss": false,
+    "MonsterBatchIds": [
+      1010101,
+      1010102
+    ]
+  },
+  {
+    "Id": 10202,
+    "Name": "关卡1-2第2波",
+    "HaveBoss": false,
+    "MonsterBatchIds": [
+      1010201,
+      1010202
+    ]
+  },
+  {
+    "Id": 10203,
+    "Name": "关卡1-2第3波",
     "HaveBoss": true,
     "MonsterBatchIds": [
       1010301

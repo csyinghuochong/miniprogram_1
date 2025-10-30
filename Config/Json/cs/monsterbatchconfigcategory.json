@@ -9,6 +9,15 @@
     "MonsterId": 10000001
   },
   {
+    "Id": 1010102,
+    "SpawnTime": 0.2,
+    "SpawnPosition": {
+      "x": 1,
+      "y": 5
+    },
+    "MonsterId": 10000001
+  },
+  {
     "Id": 1010201,
     "SpawnTime": 0.5,
     "SpawnPosition": {

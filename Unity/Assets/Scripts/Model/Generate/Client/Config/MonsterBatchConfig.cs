@@ -35,12 +35,12 @@ namespace ET
         public readonly int Id;
 
         /// <summary>
-        /// 刷新时间
+        /// 生成时间
         /// </summary>
         public readonly float SpawnTime;
 
         /// <summary>
-        /// 刷新位置
+        /// 生成位置
         /// </summary>
         public readonly vector2 SpawnPosition;
 

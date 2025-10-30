@@ -62,7 +62,7 @@ namespace ET.Server
             unit.AddComponent<UnitInfoComponent>();
             unit.AddComponent<MoveComponent>();
             unit.AddDataComponent<DBSaveComponent>();
-            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
         }
 
         public static Unit CreateHero(Scene scene, Unit master, Hero hero, float2 position)
@@ -82,7 +82,28 @@ namespace ET.Server
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().PlayerName;
 
-            unit.AddComponent<AOIEntity, int, float3>(5 * 1000, unit.Position);
+            unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
+
+            return unit;
+        }
+
+        public static Unit CreateMonster(Scene scene, int monsterConfigId, float2 position)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), monsterConfigId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.Position = new float3(position.x, position.y, 0);
+            unit.Type = UnitType.Monster;
+
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
+
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            numericComponent.ApplyValue(NumericType.Now_Hp, monsterConfig.Hp, false);
+            numericComponent.ApplyValue(NumericType.Base_MaxHp_Base, monsterConfig.Hp, false);
+
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unitInfoComponent.UnitName = monsterConfig.MonsterName;
+
+            unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
 
             return unit;
         }

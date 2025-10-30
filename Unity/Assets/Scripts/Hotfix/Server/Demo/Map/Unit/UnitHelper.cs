@@ -87,5 +87,29 @@ namespace ET.Server
         {
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().RobotId > 0;
         }
+
+        public static void OnDead(this Unit self, Unit attack, bool nodrop = false)
+        {
+            self.GetComponent<MoveComponent>()?.Stop(false);
+            int waitRevive = self.OnWaitRevive();
+
+            EventSystem.Instance.Publish(self.Scene(), new UnitKillEvent()
+            {
+                WaitRevive = waitRevive,
+                UnitAttack = attack,
+                UnitDefend = self,
+                NoDrop = nodrop,
+            });
+        }
+
+        /// <summary>
+        /// 0 不复活 1等待复活
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static int OnWaitRevive(this Unit self)
+        {
+            return 0;
+        }
     }
 }

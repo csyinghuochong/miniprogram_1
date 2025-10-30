@@ -1,0 +1,49 @@
+﻿namespace ET.Server
+{
+    [Event(SceneType.Map)]
+    public class UnitKillEvent_NotifyOther : AEvent<Scene, UnitKillEvent>
+    {
+        protected override async ETTask Run(Scene scene, UnitKillEvent args)
+        {
+            Unit defendUnit = args.UnitDefend;
+            Unit mainAttack = args.UnitAttack;
+
+            MapComponent mapComponent = scene.GetComponent<MapComponent>();
+            int sceneId = mapComponent.SceneId;
+            int sceneTypeEnum = mapComponent.MapType;
+            defendUnit.GetComponent<MoveComponent>()?.Stop(false);
+
+            switch (sceneTypeEnum)
+            {
+                case MapTypeEnum.LocalLevel:
+                {
+                    scene.GetComponent<LocalLevelComponent>().OnKillEvent(defendUnit);
+
+                    break;
+                }
+            }
+
+            long waitTime = 100;
+            OnRemoveUnit(defendUnit.Root(), args, waitTime).Coroutine();
+
+            await ETTask.CompletedTask;
+        }
+
+        private async ETTask OnRemoveUnit(Scene root, UnitKillEvent args, long waitTime)
+        {
+            Unit unitDefend = args.UnitDefend;
+
+            await root.GetComponent<TimerComponent>().WaitAsync(waitTime);
+
+            if (unitDefend.IsDisposed)
+            {
+                return;
+            }
+
+            if (unitDefend.Type != UnitType.Player && args.WaitRevive == 0)
+            {
+                unitDefend.GetParent<UnitComponent>().Remove(unitDefend.Id);
+            }
+        }
+    }
+}
