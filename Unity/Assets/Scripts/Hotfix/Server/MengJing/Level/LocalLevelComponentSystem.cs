@@ -104,11 +104,6 @@ namespace ET.Server
                     if (nextWaveConfig.HaveBoss)
                     {
                         // 等待玩家进入Boss房间
-                        numericComponent.ApplyChange(NumericType.CurrentWaveIndex, 1);
-                        numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
-                        self.SpawnedMonsterBatchIds.Clear();
-                        self.SpawnTime = 0;
-                        
                         self.WaitPlayerEnterBossRoom = true;
                     }
                     else
@@ -130,6 +125,11 @@ namespace ET.Server
                 return;
             }
 
+            if (!self.WaitPlayerEnterBossRoom)
+            {
+                return;
+            }
+            
             NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             if (numericComponent.GetAsInt(NumericType.CurrentWaveIndex) >= levelConfig.WaveIds.Length)
@@ -140,6 +140,10 @@ namespace ET.Server
             WaveConfig nextWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[numericComponent.GetAsInt(NumericType.CurrentWaveIndex)]);
             if (nextWaveConfig.HaveBoss)
             {
+                numericComponent.ApplyChange(NumericType.CurrentWaveIndex, 1);
+                numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
+                self.SpawnedMonsterBatchIds.Clear();
+                self.SpawnTime = 0;
                 self.WaitPlayerEnterBossRoom = false;
             }
         }

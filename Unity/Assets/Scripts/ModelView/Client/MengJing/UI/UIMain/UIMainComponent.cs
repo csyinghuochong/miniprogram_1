@@ -27,6 +27,7 @@ namespace ET.Client
         public Button Button_GM;
         public Button Button_Hero;
         public Button Button_Bag;
+        public Button Button_Boss;
         public Slider Slider_Exp;
         public TMP_Text Text_Exp;
     }

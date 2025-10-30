@@ -3273,6 +3273,65 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_EnterBossRoom)]
+    [ResponseType(nameof(M2C_EnterBossRoom))]
+    public partial class C2M_EnterBossRoom : MessageObject, ILocationRequest
+    {
+        public static C2M_EnterBossRoom Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_EnterBossRoom), isFromPool) as C2M_EnterBossRoom;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_EnterBossRoom)]
+    public partial class M2C_EnterBossRoom : MessageObject, ILocationResponse
+    {
+        public static M2C_EnterBossRoom Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_EnterBossRoom), isFromPool) as M2C_EnterBossRoom;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3363,5 +3422,7 @@ namespace ET
         public const ushort C2M_SetTimeScale = 10087;
         public const ushort M2C_SetTimeScale = 10088;
         public const ushort M2C_UpdateTimeScale = 10089;
+        public const ushort C2M_EnterBossRoom = 10090;
+        public const ushort M2C_EnterBossRoom = 10091;
     }
 }

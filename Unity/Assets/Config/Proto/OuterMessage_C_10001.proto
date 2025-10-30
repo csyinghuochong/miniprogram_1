@@ -719,3 +719,16 @@ message M2C_UpdateTimeScale // IMessage
 	int32 Error = 1;
 	float TimeScale = 2;
 }
+
+// ResponseType M2C_EnterBossRoom
+message C2M_EnterBossRoom // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_EnterBossRoom // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}

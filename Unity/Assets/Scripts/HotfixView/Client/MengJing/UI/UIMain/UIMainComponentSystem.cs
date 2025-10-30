@@ -83,6 +83,7 @@ namespace ET.Client
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
+            self.Button_Boss = rc.Get<GameObject>("Button_Boss").GetComponent<Button>();
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
@@ -93,6 +94,7 @@ namespace ET.Client
             self.Button_GM.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
+            self.Button_Boss.AddListener(() => { ClientLevelHelper.EnterBossRoom(self.Root()).Coroutine(); });
 
             Application.targetFrameRate = 60;
         }
