@@ -51,7 +51,21 @@ namespace ET.Client
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
                 
+                string color = itemConfig.ItemQuality switch
+                {
+                    1 => "#0e832a",
+                    2 => "#2e69c4",
+                    3 => "#d6bb10",
+                    4 => "#be5e10",
+                    5 => "#e200af",
+                    6 => "#d01a06",
+                };
+                
+                Color nowColor;
+                ColorUtility.TryParseHtmlString(color, out nowColor);
+                
                 self.Text_ItemName.SetText(itemConfig.ItemName);
+                self.Text_ItemName.color = nowColor;
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
                 self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
                 

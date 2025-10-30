@@ -67,8 +67,22 @@ namespace ET.Client
                 (int)ItemEquipmentType.Wuqi => "武器",
                 _ => ""
             };
-
+            
+            string color = newItemConfig.ItemQuality switch
+            {
+                1 => "#0e832a",
+                2 => "#2e69c4",
+                3 => "#d6bb10",
+                4 => "#be5e10",
+                5 => "#e200af",
+                6 => "#d01a06",
+            };
+                
+            Color nowColor;
+            ColorUtility.TryParseHtmlString(color, out nowColor);
+                
             self.Text_ItemName.SetText(newItemConfig.ItemName);
+            self.Text_ItemName.color = nowColor;
             self.Text_ItemEquipmentType.SetText(type);
             self.Text_Lv.SetTextFormat("{0}级", newItemConfig.UseLv);
             
