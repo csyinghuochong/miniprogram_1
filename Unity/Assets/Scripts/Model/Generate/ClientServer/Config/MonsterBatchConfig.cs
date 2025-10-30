@@ -17,6 +17,7 @@ namespace ET
         public MonsterBatchConfig(ByteBuf _buf)
         {
             Id = _buf.ReadInt();
+            SpawnTime = _buf.ReadFloat();
             SpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             MonsterId = _buf.ReadInt();
 
@@ -32,6 +33,11 @@ namespace ET
         /// Id
         /// </summary>
         public readonly int Id;
+
+        /// <summary>
+        /// 刷新时间
+        /// </summary>
+        public readonly float SpawnTime;
 
         /// <summary>
         /// 刷新位置
@@ -52,12 +58,14 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
         {
             return "{ "
             + "Id:" + Id + ","
+            + "SpawnTime:" + SpawnTime + ","
             + "SpawnPosition:" + SpawnPosition + ","
             + "MonsterId:" + MonsterId + ","
             + "}";

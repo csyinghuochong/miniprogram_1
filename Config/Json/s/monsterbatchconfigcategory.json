@@ -1,6 +1,7 @@
 [
   {
     "Id": 1010101,
+    "SpawnTime": 0.5,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -9,6 +10,7 @@
   },
   {
     "Id": 1010201,
+    "SpawnTime": 0.5,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -17,6 +19,7 @@
   },
   {
     "Id": 1010202,
+    "SpawnTime": 1,
     "SpawnPosition": {
       "x": 5,
       "y": 5
@@ -25,6 +28,7 @@
   },
   {
     "Id": 1010301,
+    "SpawnTime": 0.5,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -33,6 +37,7 @@
   },
   {
     "Id": 2010101,
+    "SpawnTime": 0.5,
     "SpawnPosition": {
       "x": 0,
       "y": 5
@@ -41,6 +46,7 @@
   },
   {
     "Id": 2010201,
+    "SpawnTime": 0.5,
     "SpawnPosition": {
       "x": 0,
       "y": 5
