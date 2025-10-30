@@ -18,6 +18,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
+            HaveBoss = _buf.ReadBool();
             {int __n0 = _buf.ReadSize(); MonsterBatchIds = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); MonsterBatchIds[__index0] = __e0;}}
 
             PostInit();
@@ -39,6 +40,11 @@ namespace ET
         public readonly string Name;
 
         /// <summary>
+        /// 有Boss
+        /// </summary>
+        public readonly bool HaveBoss;
+
+        /// <summary>
         /// 怪物批次 Id
         /// </summary>
         public readonly int[] MonsterBatchIds;
@@ -52,6 +58,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -59,6 +66,7 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Name:" + Name + ","
+            + "HaveBoss:" + HaveBoss + ","
             + "MonsterBatchIds:" + Luban.StringUtil.CollectionToString(MonsterBatchIds) + ","
             + "}";
         }
