@@ -46,9 +46,6 @@ namespace ET.Client
             self.RectTransform = self.StartArea.GetComponent<RectTransform>();
             self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
-            self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.MoveComponent = self.MyUnit.GetComponent<MoveComponent>();
-            self.ClientSenderComponent = self.Root().GetComponent<ClientSenderComponent>();
 
             // 事件触发顺序 如果拖拽 PointerDown、BeginDrag、Drag、PointerUp、EndDrag 未拖拽 PointerDown、PointerUp
             self.StartArea.GetComponent<EventTrigger>().AddEventTrigger(self.OnPointerDown, EventTriggerType.PointerDown);
@@ -67,6 +64,11 @@ namespace ET.Client
         private static void Destroy(this UIJoystickComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+        }
+
+        public static void AfterEnterScene(this UIJoystickComponent self, int sceneType)
+        {
+            self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
         }
 
         private static void OnPointerDown(this UIJoystickComponent self, PointerEventData pdata)
@@ -115,7 +117,7 @@ namespace ET.Client
             self.IsDrag = false;
             self.LastDirection = Vector3.zero;
             C2M_Stop c2MStop = C2M_Stop.Create();
-            self.ClientSenderComponent.Send(c2MStop);
+            self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
             self.ResetUI();
 
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
@@ -131,12 +133,6 @@ namespace ET.Client
             self.PositionFocus.SetActive(false);
         }
 
-        /// <summary>
-        /// 移动摇杆按钮，并得到方向
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="pdata"></param>
-        /// <returns></returns>
         private static void SetDirection(this UIJoystickComponent self, PointerEventData pdata)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(self.RectTransform, pdata.position, self.UICamera, out self.NewPoint);
@@ -222,7 +218,7 @@ namespace ET.Client
 
             C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
             c2MPathfindingResult.Position.Add(target);
-            self.ClientSenderComponent.Send(c2MPathfindingResult);
+            self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
         }
 
         private static void ResetUI(this UIJoystickComponent self)

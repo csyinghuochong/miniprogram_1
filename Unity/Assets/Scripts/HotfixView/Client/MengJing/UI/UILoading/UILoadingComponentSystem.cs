@@ -19,6 +19,11 @@ namespace ET.Client
         }
 
         [EntitySystem]
+        private static void Destroy(this UILoadingComponent self)
+        {
+        }
+
+        [EntitySystem]
         private static void Update(this UILoadingComponent self)
         {
             if (self.Program < 0.3)
@@ -63,15 +68,16 @@ namespace ET.Client
                 return;
             }
 
+            UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui != null)
+            {
+                ui.GetComponent<UIMainComponent>().AfterEnterScene(self.Root().GetComponent<MapComponent>().MapType);
+            }
+
             // Camera camera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             // camera.GetComponent<Camera>().fieldOfView = 50;
 
             self.Root().GetComponent<UIComponent>().Remove(UIType.UILoading);
-        }
-
-        [EntitySystem]
-        private static void Destroy(this UILoadingComponent self)
-        {
         }
 
         public static void OnInitUI(this UILoadingComponent self)

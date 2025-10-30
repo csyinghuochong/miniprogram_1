@@ -11,9 +11,6 @@ namespace ET.Client
             await root.GetComponent<UIComponent>().Create(UIType.UIMain);
             root.GetComponent<UIComponent>().Remove(UIType.UICreateRole);
             root.GetComponent<UIComponent>().Remove(UIType.UILogin);
-
-            // HeroHelper.Test_CreateMyHeroes(root);
-            // HeroHelper.Test_CreateMonsters(root);
         }
     }
 }

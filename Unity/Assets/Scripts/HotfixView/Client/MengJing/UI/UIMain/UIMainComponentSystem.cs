@@ -41,14 +41,14 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [Event(SceneType.Demo)]
     public class UpdateTimeScale_UIMainRefresh : AEvent<Scene, UpdateTimeScale>
     {
         protected override async ETTask Run(Scene scene, UpdateTimeScale args)
         {
             Time.timeScale = args.TimeScale;
-            
+
             UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
             {
@@ -77,7 +77,7 @@ namespace ET.Client
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
             self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
-            self.Button_Recall =  rc.Get<GameObject>("Button_Recall").GetComponent<Button>();
+            self.Button_Recall = rc.Get<GameObject>("Button_Recall").GetComponent<Button>();
             self.Button_StartLevel = rc.Get<GameObject>("Button_StartLevel").GetComponent<Button>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
@@ -94,11 +94,6 @@ namespace ET.Client
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
 
-            self.UpdatePlayerName();
-            self.UpdatePlayerLv();
-            self.UpdateGold();
-            self.UpdateDiamond();
-            self.UpdateExp();
             Application.targetFrameRate = 60;
         }
 
@@ -106,6 +101,23 @@ namespace ET.Client
         private static void Update(this UIMainComponent self)
         {
             self.UpdateFPS();
+        }
+
+        // 加载场景之前
+        public static void BeforeEnterScene(this UIMainComponent self, int lastSceneType)
+        {
+        }
+
+        // 场景和角色都加载完成后
+        public static void AfterEnterScene(this UIMainComponent self, int sceneType)
+        {
+            self.UpdatePlayerName();
+            self.UpdatePlayerLv();
+            self.UpdateGold();
+            self.UpdateDiamond();
+            self.UpdateExp();
+            
+            self.UIJoystickComponent.AfterEnterScene(sceneType);
         }
 
         private static void UpdateFPS(this UIMainComponent self)

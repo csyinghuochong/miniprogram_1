@@ -14,6 +14,12 @@ namespace ET.Client
                 UI ui = await root.GetComponent<UIComponent>().Create(UIType.UILoading);
                 ui.GetComponent<UILoadingComponent>().OnInitUI();
 
+                ui = root.GetComponent<UIComponent>().Get(UIType.UIMain);
+                if (ui != null)
+                {
+                    ui.GetComponent<UIMainComponent>().BeforeEnterScene(args.LastSceneType);
+                }
+
                 Log.Debug($"SceneChangeStart:  {args.LastSceneType}");
 
                 await root.GetComponent<SceneManagerComponent>().ChangeScene(args.SceneType, args.LastSceneType, args.ChapterId);
