@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 675529763996408761}
   - component: {fileID: 314467550134060543}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 3593863555065524348}
   - component: {fileID: 4299251609532693579}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 1141396733206061254}
   - component: {fileID: 4531653266673549881}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1061,6 +1061,10 @@ MonoBehaviour:
     gameObject: {fileID: 3203116607182228058}
   - key: EventTrigger_Click
     gameObject: {fileID: 2055750459514440145}
+  - key: Image_HeroOn
+    gameObject: {fileID: 88327969711336057}
+  - key: Image_HeroOff
+    gameObject: {fileID: 15239096030905224}
 --- !u!1 &982792495465711180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,10 +1192,10 @@ RectTransform:
   - {fileID: 247828803183702797}
   m_Father: {fileID: 7594638280589038552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 112.5, y: -72.5}
+  m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2351540919469883444
 CanvasRenderer:
@@ -2048,7 +2052,7 @@ GameObject:
   - component: {fileID: 4090474538032539428}
   - component: {fileID: 6053613964386981008}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2515,6 +2519,10 @@ MonoBehaviour:
     gameObject: {fileID: 5742584346854438028}
   - key: EventTrigger_Click
     gameObject: {fileID: 3268619890468975504}
+  - key: Image_HeroOn
+    gameObject: {fileID: 7829252113951596675}
+  - key: Image_HeroOff
+    gameObject: {fileID: 6294162518299487715}
 --- !u!1 &2815485464336572707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3232,7 +3240,7 @@ GameObject:
   - component: {fileID: 8786043501807974562}
   - component: {fileID: 1020479230116400029}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3713,7 +3721,7 @@ GameObject:
   - component: {fileID: 7820995918090200457}
   - component: {fileID: 3556748132686529774}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4543,6 +4551,10 @@ MonoBehaviour:
     gameObject: {fileID: 6584878887058640934}
   - key: EventTrigger_Click
     gameObject: {fileID: 6285310595680615950}
+  - key: Image_HeroOn
+    gameObject: {fileID: 2274561230974241660}
+  - key: Image_HeroOff
+    gameObject: {fileID: 3573241838326535237}
 --- !u!1 &4566139524133831686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,6 +4766,10 @@ MonoBehaviour:
     gameObject: {fileID: 3511706967827931449}
   - key: EventTrigger_Click
     gameObject: {fileID: 8620369228649659469}
+  - key: Image_HeroOn
+    gameObject: {fileID: 85502710476623218}
+  - key: Image_HeroOff
+    gameObject: {fileID: 3669656105814756169}
 --- !u!1 &4946883035191394055
 GameObject:
   m_ObjectHideFlags: 0
@@ -4921,6 +4937,10 @@ MonoBehaviour:
     gameObject: {fileID: 2016333203405955971}
   - key: EventTrigger_Click
     gameObject: {fileID: 7453348032556929136}
+  - key: Image_HeroOn
+    gameObject: {fileID: 470724169762177108}
+  - key: Image_HeroOff
+    gameObject: {fileID: 1606590348941217791}
 --- !u!1 &5095814323479830814
 GameObject:
   m_ObjectHideFlags: 0
@@ -6526,6 +6546,10 @@ MonoBehaviour:
     gameObject: {fileID: 716178030156594696}
   - key: EventTrigger_Click
     gameObject: {fileID: 2585577550501999734}
+  - key: Image_HeroOn
+    gameObject: {fileID: 3805206306628635546}
+  - key: Image_HeroOff
+    gameObject: {fileID: 3268055109693742953}
 --- !u!1 &7291016892598965749
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,7 +6681,7 @@ GameObject:
   - component: {fileID: 3220767215849439791}
   - component: {fileID: 8542822420354081552}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7142,6 +7166,10 @@ MonoBehaviour:
     gameObject: {fileID: 4405128423061155528}
   - key: EventTrigger_Click
     gameObject: {fileID: 8632702314278151245}
+  - key: Image_HeroOn
+    gameObject: {fileID: 7435470768919012723}
+  - key: Image_HeroOff
+    gameObject: {fileID: 4346846910949614165}
 --- !u!1 &7792222988047650489
 GameObject:
   m_ObjectHideFlags: 0
@@ -7277,7 +7305,7 @@ GameObject:
   - component: {fileID: 3115469149343574259}
   - component: {fileID: 251743223750729067}
   m_Layer: 0
-  m_Name: Image_On
+  m_Name: Image_HeroOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7684,6 +7712,10 @@ MonoBehaviour:
     gameObject: {fileID: 306560398205989456}
   - key: EventTrigger_Click
     gameObject: {fileID: 982792495465711180}
+  - key: Image_HeroOn
+    gameObject: {fileID: 7356617974250459291}
+  - key: Image_HeroOff
+    gameObject: {fileID: 6648370347942318315}
 --- !u!1 &8546374806056580237
 GameObject:
   m_ObjectHideFlags: 0
@@ -7744,6 +7776,10 @@ MonoBehaviour:
     gameObject: {fileID: 4212198846388261834}
   - key: EventTrigger_Click
     gameObject: {fileID: 454825565774492464}
+  - key: Image_HeroOn
+    gameObject: {fileID: 3421249260011686438}
+  - key: Image_HeroOff
+    gameObject: {fileID: 5910688150926376743}
 --- !u!1 &8620369228649659469
 GameObject:
   m_ObjectHideFlags: 0

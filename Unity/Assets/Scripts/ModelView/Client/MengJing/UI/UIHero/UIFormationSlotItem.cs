@@ -17,5 +17,7 @@ namespace ET.Client
         public Transform Transform_HeroIcon;
         public TMP_Text Text_HeroName;
         public EventTrigger EventTrigger_Click;
+        public Image Image_HeroOn;
+        public Image Image_HeroOff;
     }
 }

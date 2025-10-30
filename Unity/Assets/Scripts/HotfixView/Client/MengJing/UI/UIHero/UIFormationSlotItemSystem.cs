@@ -21,6 +21,8 @@ namespace ET.Client
             self.Transform_HeroIcon = rc.Get<GameObject>("Transform_HeroIcon").transform;
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.EventTrigger_Click = rc.Get<GameObject>("EventTrigger_Click").GetComponent<EventTrigger>();
+            self.Image_HeroOn = rc.Get<GameObject>("Image_HeroOn").GetComponent<Image>();
+            self.Image_HeroOff = rc.Get<GameObject>("Image_HeroOff").GetComponent<Image>();
 
             self.EventTrigger_Click.AddEventTrigger(self.OnPointerDown, EventTriggerType.PointerDown);
             self.EventTrigger_Click.AddEventTrigger(self.OnBeginDrag, EventTriggerType.BeginDrag);
@@ -138,6 +140,8 @@ namespace ET.Client
                 self.HeroId = 0;
                 self.Text_HeroName.gameObject.SetActive(false);
                 self.Transform_HeroIcon.gameObject.SetActive(false);
+                self.Image_HeroOn.gameObject.SetActive(false);
+                self.Image_HeroOff.gameObject.SetActive(true);
                 return;
             }
 
@@ -145,6 +149,8 @@ namespace ET.Client
             self.Text_HeroName.gameObject.SetActive(true);
             self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Transform_HeroIcon.gameObject.SetActive(true);
+            self.Image_HeroOn.gameObject.SetActive(true);
+            self.Image_HeroOff.gameObject.SetActive(false);
             UICommonHelper.DestoryChild(self.Transform_HeroIcon.gameObject);
             string path = ABPathHelper.GetUIUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
             GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
