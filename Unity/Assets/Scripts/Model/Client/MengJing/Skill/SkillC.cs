@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public SkillInfo SkillInfo { get; set; }
         public SkillConfig SkillConfig { get; set; }
-        public SkillHandlerC SkillHandlerC { get; set; }
+        public SkillHandlerC SkillHandler { get; set; }
         public SkillState SkillState { get; set; }
         public float SkillLiveTime { get; set; }
         private EntityRef<Unit> theUnitFrom; //来自哪个Unit

@@ -19,7 +19,7 @@
         {
             self.SkillInfo = skillInfo;
             self.SkillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
-            self.SkillHandlerC = SkillDispatcherComponentC.Instance.Get(self.SkillConfig.SkillHandler);
+            self.SkillHandler = SkillDispatcherComponentC.Instance.Get(self.SkillConfig.SkillHandler);
             self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
             if (skillInfo.TargetID != 0)
@@ -31,22 +31,22 @@
             self.TargetPosition = skillInfo.TargetPosition;
             self.NowPosition = self.TargetPosition;
 
-            self.SkillHandlerC.OnInit(self);
+            self.SkillHandler.OnInit(self);
         }
 
         public static void OnExecute(this SkillC self)
         {
-            self.SkillHandlerC.OnExecute(self);
+            self.SkillHandler.OnExecute(self);
         }
 
         public static void OnUpdate(this SkillC self)
         {
-            self.SkillHandlerC.OnUpdate(self);
+            self.SkillHandler.OnUpdate(self);
         }
 
         public static void OnFinished(this SkillC self)
         {
-            self.SkillHandlerC.OnFinished(self);
+            self.SkillHandler.OnFinished(self);
         }
 
         public static void InitSelfBuff(this SkillC self)

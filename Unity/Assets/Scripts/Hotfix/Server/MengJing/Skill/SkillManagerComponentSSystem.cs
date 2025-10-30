@@ -1,22 +1,153 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [EntitySystemOf(typeof(SkillManagerComponentS))]
     [FriendOf(typeof(SkillManagerComponentS))]
     public static partial class SkillManagerComponentSSystem
     {
-        [EntitySystem]
-        private static void Awake(this SkillManagerComponentS self)
+        [Invoke(TimerInvokeType.SkillTimerS)]
+        public class SkillTimerS : ATimer<SkillManagerComponentS>
         {
+            protected override void Run(SkillManagerComponentS self)
+            {
+                try
+                {
+                    self.Update();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
         }
 
         [EntitySystem]
-        private static void Update(this SkillManagerComponentS self)
+        private static void Awake(this SkillManagerComponentS self)
         {
+            self.TimeInterval = 33;
+            self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerS, self);
         }
 
         [EntitySystem]
         private static void Destroy(this SkillManagerComponentS self)
         {
+        }
+
+        private static void Update(this SkillManagerComponentS self)
+        {
+            for (int i = self.Skills.Count - 1; i >= 0; i--)
+            {
+                SkillS skill = self.Skills[i];
+
+                if (skill.SkillState == SkillState.Finished)
+                {
+                    skill.Dispose();
+                    self.Skills.RemoveAt(i);
+                    continue;
+                }
+
+                skill.OnUpdate();
+            }
+
+            foreach (SkillCDItem skillCdItem in self.SkillCDs)
+            {
+                skillCdItem.CD -= self.TimeInterval / 1000f * self.Scene().TimeScale;
+                if (skillCdItem.CD < 0)
+                {
+                    skillCdItem.CD = 0;
+                }
+            }
+        }
+
+        public static int OnUseSkill(this SkillManagerComponentS self, SkillInfo skillInfo)
+        {
+            if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillInfo.SkillConfigId))
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            Unit unit = self.GetParent<Unit>();
+
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
+
+            int errorCode = self.IsCanUseSkill(skillInfo.SkillConfigId);
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                return errorCode;
+            }
+
+            if (string.IsNullOrEmpty(skillConfig.SkillHandler))
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            self.AddSkillCD(skillInfo.SkillConfigId);
+
+            SkillS skill = self.AddChild<SkillS>();
+            self.Skills.Add(skill);
+            skill.OnInit(skillInfo, unit);
+            skill.OnExecute();
+
+            return ErrorCode.ERR_Success;
+        }
+
+        public static int IsCanUseSkill(this SkillManagerComponentS self, int nowSkillID)
+        {
+            SkillCDItem skillCdItem = null;
+
+            foreach (SkillCDItem skillCDItem in self.SkillCDs)
+            {
+                if (skillCDItem.SkillConfigId == nowSkillID)
+                {
+                    skillCdItem = skillCDItem;
+                    break;
+                }
+            }
+
+            if (skillCdItem == null)
+            {
+                return ErrorCode.ERR_Success;
+            }
+
+            if (skillCdItem.CD > 0)
+            {
+                return ErrorCode.ERR_UseSkillInCD;
+            }
+
+            return ErrorCode.ERR_Success;
+        }
+
+        private static void AddSkillCD(this SkillManagerComponentS self, int skillConfigId)
+        {
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
+
+            SkillCDItem skillCDItem = null;
+            foreach (SkillCDItem skillCdItem in self.SkillCDs)
+            {
+                if (skillCdItem.SkillConfigId == skillConfigId)
+                {
+                    skillCDItem = skillCdItem;
+                    break;
+                }
+            }
+
+            if (skillCDItem == null)
+            {
+                skillCDItem = new SkillCDItem();
+                skillCDItem.SkillConfigId = skillConfigId;
+                self.SkillCDs.Add(skillCDItem);
+            }
+
+            if (skillConfig.SkillActType == (int)SkillActType.Normal)
+            {
+                // 普通攻击
+                skillCDItem.CD = 1f;
+            }
+            else
+            {
+                skillCDItem.CD = (float)skillConfig.SkillCD;
+            }
         }
     }
 }

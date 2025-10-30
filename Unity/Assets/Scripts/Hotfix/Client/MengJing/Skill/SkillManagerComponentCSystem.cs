@@ -6,8 +6,8 @@ namespace ET.Client
     [FriendOf(typeof(SkillManagerComponentC))]
     public static partial class SkillManagerComponentCSystem
     {
-        [Invoke(TimerInvokeType.SkillTimerS)]
-        public class SkillTimerS : ATimer<SkillManagerComponentC>
+        [Invoke(TimerInvokeType.SkillTimerC)]
+        public class SkillTimerC : ATimer<SkillManagerComponentC>
         {
             protected override void Run(SkillManagerComponentC self)
             {
@@ -26,7 +26,17 @@ namespace ET.Client
         private static void Awake(this SkillManagerComponentC self)
         {
             self.TimeInterval = 33;
-            self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerS, self);
+            self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerC, self);
+        }
+
+        [EntitySystem]
+        private static void Destroy(this SkillManagerComponentC self)
+        {
+            self.Skills.Clear();
+            self.Skills = null;
+            self.SkillCDs.Clear();
+            self.SkillCDs = null;
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         private static void Update(this SkillManagerComponentC self)
@@ -53,16 +63,6 @@ namespace ET.Client
                     skillCdItem.CD = 0;
                 }
             }
-        }
-
-        [EntitySystem]
-        private static void Destroy(this SkillManagerComponentC self)
-        {
-            self.Skills.Clear();
-            self.Skills = null;
-            self.SkillCDs.Clear();
-            self.SkillCDs = null;
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         public static int OnUseSkill(this SkillManagerComponentC self, SkillInfo skillInfo)

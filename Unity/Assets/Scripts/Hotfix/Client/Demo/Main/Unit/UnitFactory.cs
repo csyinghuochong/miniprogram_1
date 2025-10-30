@@ -74,6 +74,8 @@ namespace ET.Client
                 }
             }
 
+            unit.AddComponent<SkillManagerComponentC>();
+
             OnAfterCreateUnit(unit);
             return unit;
         }

@@ -163,9 +163,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
-                    unit.AddComponent<SkillManagerComponentC>();
                     unit.AddComponent<BuffManagerComponent>();
-                    unit.AddComponent<AI_HeroComponent>();
                     break;
                 }
                 case UnitType.Monster:
@@ -174,9 +172,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
-                    unit.AddComponent<SkillManagerComponentC>();
                     unit.AddComponent<BuffManagerComponent>();
-                    unit.AddComponent<AI_MonsterComponent>();
                     break;
                 }
                 default:
@@ -201,18 +197,14 @@ namespace ET.Client
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
-                    unit.RemoveComponent<SkillManagerComponentC>();
                     unit.RemoveComponent<BuffManagerComponent>();
-                    unit.RemoveComponent<AI_HeroComponent>();
                     break;
                 }
                 case UnitType.Monster:
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
-                    unit.RemoveComponent<SkillManagerComponentC>();
                     unit.RemoveComponent<BuffManagerComponent>();
-                    unit.RemoveComponent<AI_MonsterComponent>();
                     break;
                 }
             }

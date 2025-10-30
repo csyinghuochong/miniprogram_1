@@ -3,8 +3,11 @@
 namespace ET.Server
 {
     [ComponentOf(typeof(Unit))]
-    public class SkillManagerComponentS : Entity, IAwake, IUpdate, IDestroy
+    public class SkillManagerComponentS : Entity, IAwake, IDestroy
     {
+        public long Timer;
+        public int TimeInterval;
+
         public List<EntityRef<SkillS>> Skills = new();
         public List<SkillCDItem> SkillCDs { get; set; } = new();
     }
