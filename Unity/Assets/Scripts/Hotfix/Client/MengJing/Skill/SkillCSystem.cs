@@ -39,9 +39,9 @@
             self.SkillHandler.OnExecute(self);
         }
 
-        public static void OnUpdate(this SkillC self)
+        public static void OnUpdate(this SkillC self, float deltaTime)
         {
-            self.SkillHandler.OnUpdate(self);
+            self.SkillHandler.OnUpdate(self, deltaTime);
         }
 
         public static void OnFinished(this SkillC self)

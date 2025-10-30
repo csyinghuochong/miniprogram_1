@@ -36,6 +36,8 @@ namespace ET.Server
 
         private static void Update(this SkillManagerComponentS self)
         {
+            float deltaTime = self.TimeInterval / 1000f * self.Scene().TimeScale;
+
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
                 SkillS skill = self.Skills[i];
@@ -47,12 +49,12 @@ namespace ET.Server
                     continue;
                 }
 
-                skill.OnUpdate();
+                skill.OnUpdate(deltaTime);
             }
 
             foreach (SkillCDItem skillCdItem in self.SkillCDs)
             {
-                skillCdItem.CD -= self.TimeInterval / 1000f * self.Scene().TimeScale;
+                skillCdItem.CD -= deltaTime;
                 if (skillCdItem.CD < 0)
                 {
                     skillCdItem.CD = 0;

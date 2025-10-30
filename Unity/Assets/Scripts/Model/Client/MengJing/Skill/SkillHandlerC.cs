@@ -10,8 +10,7 @@
     {
         public abstract void OnInit(SkillC skillC);
         public abstract void OnExecute(SkillC skillC);
-        public abstract void OnUpdate(SkillC skillC);
+        public abstract void OnUpdate(SkillC skillC, float deltaTime);
         public abstract void OnFinished(SkillC skillC);
-        public abstract void OnEffectLoaded(SkillC skillC);
     }
 }
