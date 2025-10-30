@@ -42,11 +42,11 @@ namespace ET.Client
 
             HeadBarUI headBarUI = self.GameObject.GetComponent<HeadBarUI>();
             headBarUI.enabled = true;
-            headBarUI.HeadPos = unit.GetComponent<GameObjectComponent>().GameObject.transform;
+            headBarUI.HeadPos = unit.GetComponent<UnitBoneComponent>().Hp;
             headBarUI.HeadBar = self.GameObject;
             headBarUI.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
             headBarUI.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
-            headBarUI.Offset = new Vector2(0, 3f);
+            headBarUI.Offset = new Vector2(0, 0);
             headBarUI.UpdatePostion();
 
             self.Text_Name.SetText(self.GetParent<Unit>().GetComponent<UnitInfoComponent>().UnitName);

@@ -153,6 +153,7 @@ namespace ET.Client
                 {
                     self.GameObject.tag = TagHelper.Player;
 
+                    unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
                     break;
                 }
@@ -160,6 +161,7 @@ namespace ET.Client
                 {
                     self.GameObject.tag = TagHelper.Hero;
 
+                    unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<BuffManagerComponent>();
@@ -170,6 +172,7 @@ namespace ET.Client
                 {
                     self.GameObject.tag = TagHelper.Monster;
 
+                    unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<SkillManagerComponent>();
                     unit.AddComponent<BuffManagerComponent>();
@@ -189,12 +192,14 @@ namespace ET.Client
             {
                 case UnitType.Player:
                 {
+                    unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIPlayerHpComponent>();
 
                     break;
                 }
                 case UnitType.Hero:
                 {
+                    unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
                     unit.RemoveComponent<SkillManagerComponent>();
                     unit.RemoveComponent<BuffManagerComponent>();
@@ -203,6 +208,7 @@ namespace ET.Client
                 }
                 case UnitType.Monster:
                 {
+                    unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
                     unit.RemoveComponent<SkillManagerComponent>();
                     unit.RemoveComponent<BuffManagerComponent>();
