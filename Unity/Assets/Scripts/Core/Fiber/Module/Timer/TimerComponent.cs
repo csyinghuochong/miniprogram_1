@@ -288,11 +288,13 @@ namespace ET
 
         public static long NewRepeatedTimer(this TimerComponent self, long time, int type, object args)
         {
+#if DOTNET
             if (time < 100)
             {
                 Log.Error($"time too small: {time}");
                 return 0;
             }
+#endif
 
             return self.NewRepeatedTimerInner(time, type, args);
         }
