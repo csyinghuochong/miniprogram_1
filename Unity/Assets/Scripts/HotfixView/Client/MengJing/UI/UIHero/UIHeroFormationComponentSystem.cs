@@ -80,7 +80,7 @@ namespace ET.Client
             heroComponentC.currentTeamHeroCount = currentHeroCount;
 
             self.Text_FormationCount.SetTextFormat("上阵数:{0}/{1}", heroComponentC.currentTeamHeroCount, heroComponentC.maxTeamHeroCount);
-            self.Text_TotalCP.SetTextFormat("我的战力：{0}", totalCP);
+            self.Text_TotalCP.SetText(totalCP);
         }
 
         public static void UpdateSlotItemList(this UIHeroFormationComponent self)

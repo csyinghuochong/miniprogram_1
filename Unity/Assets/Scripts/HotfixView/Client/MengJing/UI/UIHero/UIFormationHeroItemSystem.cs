@@ -18,7 +18,6 @@ namespace ET.Client
 
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
-            self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
             self.Text_HeroCP = rc.Get<GameObject>("Text_HeroCP").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
@@ -36,10 +35,9 @@ namespace ET.Client
 
             self.HeroId = hero.Id;
 
-            self.Text_Lv.SetTextFormat("等级:{0}", hero.Lv);
-            self.Text_HeroCP.SetTextFormat("战力:{0}", hero.NumericDic[NumericType.CombatPower]);
+            self.Text_Lv.SetTextFormat("LV.{0}", hero.Lv);
+            self.Text_HeroCP.SetText(hero.NumericDic[NumericType.CombatPower]);
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
-            self.Text_HeroName.SetText(heroConfig.HeroName);
             self.Image_Selected.gameObject.SetActive(selected);
             self.Button_Click.gameObject.SetActive(!selected);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);

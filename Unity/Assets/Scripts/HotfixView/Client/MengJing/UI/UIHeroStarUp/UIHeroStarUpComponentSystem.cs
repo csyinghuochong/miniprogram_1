@@ -49,7 +49,6 @@ namespace ET.Client
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_Tip.SetText("");
             self.Text_HeroName.SetText(heroConfig.HeroName);
-            self.Text_HeroLv.SetTextFormat("等级：{0}", hero.Lv);
             
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);

@@ -46,7 +46,7 @@ namespace ET.Client
                 }
             }
 
-            self.Text_HeroCombatPower.SetTextFormat("战力:{0}", hero.NumericDic[NumericType.CombatPower]);
+            self.Text_HeroCombatPower.SetText(hero.NumericDic[NumericType.CombatPower]);
         }
     }
 }

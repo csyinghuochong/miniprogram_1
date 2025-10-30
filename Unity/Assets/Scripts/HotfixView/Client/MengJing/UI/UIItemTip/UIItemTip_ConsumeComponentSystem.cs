@@ -19,6 +19,7 @@ namespace ET.Client
             self.Text_ItemName = rc.Get<GameObject>("Text_ItemName").GetComponent<TMP_Text>();
             self.Text_Lv = rc.Get<GameObject>("Text_Lv").GetComponent<TMP_Text>();
             self.Text_ItemDescription = rc.Get<GameObject>("Text_ItemDescription").GetComponent<TMP_Text>();
+            self.Image_ItemQuality = rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>();
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Use = rc.Get<GameObject>("Button_Use").GetComponent<Button>();
@@ -53,6 +54,9 @@ namespace ET.Client
                 self.Text_ItemName.SetText(itemConfig.ItemName);
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
                 self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
+                
+                string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
+                self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
                 
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);

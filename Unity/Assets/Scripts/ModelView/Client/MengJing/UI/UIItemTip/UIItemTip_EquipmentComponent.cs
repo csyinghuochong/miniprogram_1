@@ -19,6 +19,7 @@ namespace ET.Client
         public Image Image_CombatPowerIncrease;
         public Transform BaseAttributeList;
         public GameObject UIAttributeItem;
+        public Image Image_ItemQuality;
         public Image Image_ItemIcon;
         public Button Button_Sell;
         public Button Button_Wear;
