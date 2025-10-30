@@ -18,10 +18,12 @@ namespace ET.Client
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
             self.Image_ItemQuality = rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>();
+            self.Image_On = rc.Get<GameObject>("Image_On").GetComponent<Image>();
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Text_ItemNum = rc.Get<GameObject>("Text_ItemNum").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
             self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
+            self.Image_On.gameObject.SetActive(false);
             self.Image_Selected.gameObject.SetActive(false);
 
             self.Button_Click.AddListener(self.OnClick);
@@ -48,6 +50,11 @@ namespace ET.Client
         }
 
         public static void SetSelected(this UICommonItem self, long itemId)
+        {
+            self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
+        }
+
+        public static void SetImageOn(this UICommonItem self, long itemId)
         {
             self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
         }
