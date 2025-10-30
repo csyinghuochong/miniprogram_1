@@ -12,7 +12,7 @@
             int sceneId = mapComponent.SceneId;
             int sceneTypeEnum = mapComponent.MapType;
             defendUnit.GetComponent<MoveComponent>()?.Stop(false);
-
+            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             switch (sceneTypeEnum)
             {
                 case MapTypeEnum.LocalLevel:
@@ -22,6 +22,8 @@
                     break;
                 }
             }
+
+            numericComponentDefend.ApplyValue(NumericType.Now_Dead, 1);
 
             long waitTime = 100;
             OnRemoveUnit(defendUnit.Root(), args, waitTime).Coroutine();

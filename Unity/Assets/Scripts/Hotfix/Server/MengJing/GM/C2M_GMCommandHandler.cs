@@ -18,6 +18,24 @@ namespace ET.Server
                 {
                     return;
                 }
+                
+                // 击杀所有怪物
+                if (message.GMMsg == "#killall")
+                {
+                    List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
+                    for (int i = units.Count - 1; i >= 0; i--)
+                    {
+                        Unit u = units[i];
+                        if (u.Type != UnitType.Monster)
+                        {
+                            continue;
+                        }
+
+                        u.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, -1000000000, attackid: unit.Id);
+                    }
+
+                    return;
+                }
 
                 switch (int.Parse(commands[0]))
                 {
