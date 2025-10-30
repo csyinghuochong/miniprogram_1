@@ -49,6 +49,7 @@ namespace ET.Client
             Unit unit = self.GetParent<Unit>();
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_Name = rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>();
             self.Image_Hp = rc.Get<GameObject>("Image_Hp").GetComponent<Image>();
 
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
@@ -73,6 +74,9 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+            self.Text_Name.text = unitInfoComponent.UnitName;
         }
 
         public static void UpdateBlood(this UIHeroHpComponent self)

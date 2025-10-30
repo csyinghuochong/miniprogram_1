@@ -59,6 +59,12 @@ namespace ET.Server
 
                     break;
                 }
+                case UnitType.Monster:
+                {
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
+
+                    break;
+                }
             }
 
             return unitInfo;
