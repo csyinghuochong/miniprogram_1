@@ -26,7 +26,7 @@ namespace ET.Client
         private static void Awake(this SkillManagerComponentC self)
         {
             self.TimeInterval = 33;
-            self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerC, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerC, self);
         }
 
         [EntitySystem]

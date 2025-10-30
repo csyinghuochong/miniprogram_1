@@ -25,13 +25,18 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this SkillManagerComponentS self)
         {
-            self.TimeInterval = 33;
-            self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerS, self);
+            self.TimeInterval = 100;
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerS, self);
         }
 
         [EntitySystem]
         private static void Destroy(this SkillManagerComponentS self)
         {
+            self.Skills.Clear();
+            self.Skills = null;
+            self.SkillCDs.Clear();
+            self.SkillCDs = null;
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         private static void Update(this SkillManagerComponentS self)
