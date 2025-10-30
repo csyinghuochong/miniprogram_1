@@ -1,22 +1,39 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(SkillManagerComponent))]
-    [FriendOf(typeof(SkillManagerComponent))]
-    public static partial class SkillManagerComponentSystem
+    [EntitySystemOf(typeof(SkillManagerComponentC))]
+    [FriendOf(typeof(SkillManagerComponentC))]
+    public static partial class SkillManagerComponentCSystem
     {
-        [EntitySystem]
-        private static void Awake(this SkillManagerComponent self)
+        [Invoke(TimerInvokeType.SkillTimerS)]
+        public class SkillTimerS : ATimer<SkillManagerComponentC>
         {
+            protected override void Run(SkillManagerComponentC self)
+            {
+                try
+                {
+                    self.Update();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
         }
 
         [EntitySystem]
-        private static void Update(this SkillManagerComponent self)
+        private static void Awake(this SkillManagerComponentC self)
+        {
+            self.TimeInterval = 33;
+            self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerS, self);
+        }
+
+        private static void Update(this SkillManagerComponentC self)
         {
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
-                Skill skill = self.Skills[i];
+                SkillC skill = self.Skills[i];
 
                 if (skill.SkillState == SkillState.Finished)
                 {
@@ -30,7 +47,7 @@ namespace ET.Client
 
             foreach (SkillCDItem skillCdItem in self.SkillCDs)
             {
-                skillCdItem.CD -= Time.deltaTime;
+                skillCdItem.CD -= self.TimeInterval / 1000f * self.Scene().TimeScale;
                 if (skillCdItem.CD < 0)
                 {
                     skillCdItem.CD = 0;
@@ -39,15 +56,16 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this SkillManagerComponent self)
+        private static void Destroy(this SkillManagerComponentC self)
         {
             self.Skills.Clear();
             self.Skills = null;
             self.SkillCDs.Clear();
             self.SkillCDs = null;
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static int OnUseSkill(this SkillManagerComponent self, SkillInfo skillInfo)
+        public static int OnUseSkill(this SkillManagerComponentC self, SkillInfo skillInfo)
         {
             if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillInfo.SkillConfigId))
             {
@@ -71,7 +89,7 @@ namespace ET.Client
 
             self.AddSkillCD(skillInfo.SkillConfigId);
 
-            Skill skill = self.AddChild<Skill>();
+            SkillC skill = self.AddChild<SkillC>();
             self.Skills.Add(skill);
             skill.OnInit(skillInfo, unit);
             skill.OnExecute();
@@ -79,7 +97,7 @@ namespace ET.Client
             return ErrorCode.ERR_Success;
         }
 
-        public static int IsCanUseSkill(this SkillManagerComponent self, int nowSkillID)
+        public static int IsCanUseSkill(this SkillManagerComponentC self, int nowSkillID)
         {
             SkillCDItem skillCdItem = null;
 
@@ -105,7 +123,7 @@ namespace ET.Client
             return ErrorCode.ERR_Success;
         }
 
-        private static void AddSkillCD(this SkillManagerComponent self, int skillConfigId)
+        private static void AddSkillCD(this SkillManagerComponentC self, int skillConfigId)
         {
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 

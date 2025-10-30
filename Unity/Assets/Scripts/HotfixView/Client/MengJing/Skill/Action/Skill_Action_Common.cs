@@ -4,33 +4,33 @@ namespace ET.Client
 {
     public class Skill_Action_Common : SkillHandler
     {
-        public override void OnInit(Skill skill)
+        public override void OnInit(SkillC skillC)
         {
         }
 
-        public override void OnExecute(Skill skill)
+        public override void OnExecute(SkillC skillC)
         {
-            skill.InitSelfBuff();
-            skill.PlaySkillEffects();
+            skillC.InitSelfBuff();
+            skillC.PlaySkillEffects();
         }
 
-        public override void OnUpdate(Skill skill)
+        public override void OnUpdate(SkillC skillC)
         {
-            skill.SkillLiveTime -= Time.deltaTime;
+            skillC.SkillLiveTime -= Time.deltaTime;
 
-            if (skill.SkillLiveTime <= 0)
+            if (skillC.SkillLiveTime <= 0)
             {
-                skill.SkillState = SkillState.Finished;
+                skillC.SkillState = SkillState.Finished;
                 return;
             }
         }
 
-        public override void OnFinished(Skill skill)
+        public override void OnFinished(SkillC skillC)
         {
-            skill.EndSkillEffect();
+            skillC.EndSkillEffect();
         }
 
-        public override void OnEffectLoaded(Skill skill)
+        public override void OnEffectLoaded(SkillC skillC)
         {
             // GlobalComponent globalComponent = skill.Root().GetComponent<GlobalComponent>();
             // skill.EffectGameObject.transform.SetParent(globalComponent.Unit);
@@ -43,15 +43,15 @@ namespace ET.Client
             // colliderCallback.OnTriggerExitAction = (Collider) => { this.OnTriggerExit(skill); };
         }
 
-        public void OnTriggerEnter(Skill skill)
+        public void OnTriggerEnter(SkillC skillC)
         {
         }
 
-        public void OnTriggerStay(Skill skill)
+        public void OnTriggerStay(SkillC skillC)
         {
         }
 
-        public void OnTriggerExit(Skill skill)
+        public void OnTriggerExit(SkillC skillC)
         {
         }
     }

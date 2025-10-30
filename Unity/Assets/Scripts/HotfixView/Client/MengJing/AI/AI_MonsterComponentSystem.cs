@@ -84,26 +84,26 @@ namespace ET.Client
         // 攻击目标
         private static void Attack(this AI_MonsterComponent self)
         {
-            Unit unit = self.GetParent<Unit>();
-
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-
-            SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
-            skillManagerComponent.OnUseSkill(new SkillInfo()
-            {
-                SkillConfigId = monsterConfig.ActSkillID,
-                TargetID = self.Target.GetComponent<UnitId>().Id,
-                TargetAngle = self.GameObject.transform.eulerAngles.y,
-                TargetPosition = self.Target.transform.position,
-            });
-
-            skillManagerComponent.OnUseSkill(new SkillInfo()
-            {
-                SkillConfigId = monsterConfig.SkillID[0],
-                TargetID = self.Target.GetComponent<UnitId>().Id,
-                TargetAngle = self.GameObject.transform.eulerAngles.y,
-                TargetPosition = self.Target.transform.position,
-            });
+            // Unit unit = self.GetParent<Unit>();
+            //
+            // MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+            //
+            // SkillManagerComponentC skillManagerComponentC = unit.GetComponent<SkillManagerComponentC>();
+            // skillManagerComponentC.OnUseSkill(new SkillInfo()
+            // {
+            //     SkillConfigId = monsterConfig.ActSkillID,
+            //     TargetID = self.Target.GetComponent<UnitId>().Id,
+            //     TargetAngle = self.GameObject.transform.eulerAngles.y,
+            //     TargetPosition = self.Target.transform.position,
+            // });
+            //
+            // skillManagerComponentC.OnUseSkill(new SkillInfo()
+            // {
+            //     SkillConfigId = monsterConfig.SkillID[0],
+            //     TargetID = self.Target.GetComponent<UnitId>().Id,
+            //     TargetAngle = self.GameObject.transform.eulerAngles.y,
+            //     TargetPosition = self.Target.transform.position,
+            // });
         }
     }
 }

@@ -8,50 +8,50 @@ namespace ET.Client
     /// </summary>
     public class Skill_SingleTarget : SkillHandler
     {
-        public override void OnInit(Skill skill)
+        public override void OnInit(SkillC skillC)
         {
-            skill.DelayTime = 0.5f; //0.5秒后出伤害
-            skill.HasDealtDamage = false;
+            skillC.DelayTime = 0.5f; //0.5秒后出伤害
+            skillC.HasDealtDamage = false;
         }
 
-        public override void OnExecute(Skill skill)
+        public override void OnExecute(SkillC skillC)
         {
-            skill.InitSelfBuff();
-            skill.PlaySkillEffects();
+            skillC.InitSelfBuff();
+            skillC.PlaySkillEffects();
 
-            skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
+            skillC.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
         }
 
-        public override void OnUpdate(Skill skill)
+        public override void OnUpdate(SkillC skillC)
         {
-            skill.SkillLiveTime -= Time.deltaTime;
+            skillC.SkillLiveTime -= Time.deltaTime;
 
-            if (skill.SkillLiveTime <= 0)
+            if (skillC.SkillLiveTime <= 0)
             {
-                skill.SkillState = SkillState.Finished;
+                skillC.SkillState = SkillState.Finished;
                 return;
             }
             
-            if (skill.HasDealtDamage)
+            if (skillC.HasDealtDamage)
             {
                 return;
             }
 
-            skill.DelayTime -= Time.deltaTime;
+            skillC.DelayTime -= Time.deltaTime;
 
-            if (skill.DelayTime <= 0)
+            if (skillC.DelayTime <= 0)
             {
-                skill.TheUnitTarget?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
-                skill.HasDealtDamage = true;
+                skillC.TheUnitTarget?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skillC.SkillConfig.DamgeValue);
+                skillC.HasDealtDamage = true;
             }
         }
 
-        public override void OnFinished(Skill skill)
+        public override void OnFinished(SkillC skillC)
         {
-            skill.EndSkillEffect();
+            skillC.EndSkillEffect();
         }
 
-        public override void OnEffectLoaded(Skill skill)
+        public override void OnEffectLoaded(SkillC skillC)
         {
         }
     }

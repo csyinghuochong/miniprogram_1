@@ -14,8 +14,8 @@
         /// <param name="buff">Buff数据</param>
         /// <param name="theUnitFrom">来自哪个Unit</param>
         /// <param name="theUnitBelongTo">寄生于哪个Unit</param>
-        /// <param name="skill"></param>
-        public abstract void OnInit(Buff buff, Unit theUnitFrom, Unit theUnitBelongTo, Skill skill);
+        /// <param name="skillC"></param>
+        public abstract void OnInit(Buff buff, Unit theUnitFrom, Unit theUnitBelongTo, SkillC skillC);
 
         /// <summary>
         /// Buff持续

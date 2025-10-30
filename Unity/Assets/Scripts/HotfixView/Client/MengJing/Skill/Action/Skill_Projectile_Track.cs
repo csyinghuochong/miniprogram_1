@@ -8,55 +8,55 @@ namespace ET.Client
     /// </summary>
     public class Skill_Projectile_Track : SkillHandler
     {
-        public override void OnInit(Skill skill)
+        public override void OnInit(SkillC skillC)
         {
         }
 
-        public override void OnExecute(Skill skill)
+        public override void OnExecute(SkillC skillC)
         {
-            skill.InitSelfBuff();
-            skill.PlaySkillEffects();
+            skillC.InitSelfBuff();
+            skillC.PlaySkillEffects();
 
-            skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
+            skillC.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
         }
 
-        public override void OnUpdate(Skill skill)
+        public override void OnUpdate(SkillC skillC)
         {
-            if (skill.TheUnitTarget == null)
+            if (skillC.TheUnitTarget == null)
             {
-                skill.SkillState = SkillState.Finished;
+                skillC.SkillState = SkillState.Finished;
                 return;
             }
 
-            if (skill.EffectGameObject == null)
+            if (skillC.EffectGameObject == null)
             {
                 return;
             }
             
             // 向目标移动
-            Transform target = skill.TheUnitTarget.GetComponent<GameObjectComponent>().GameObject.transform;
-            Vector3 dir = target.position - skill.EffectGameObject.transform.position;
-            skill.EffectGameObject.transform.position += dir.normalized * 2f * Time.deltaTime;
-            skill.EffectGameObject.transform.forward = dir;
+            Transform target = skillC.TheUnitTarget.GetComponent<GameObjectComponent>().GameObject.transform;
+            Vector3 dir = target.position - skillC.EffectGameObject.transform.position;
+            skillC.EffectGameObject.transform.position += dir.normalized * 2f * Time.deltaTime;
+            skillC.EffectGameObject.transform.forward = dir;
 
             // 检测是否到达目标
-            if (Vector3.Distance(skill.EffectGameObject.transform.position, target.position) <= 0.5f)
+            if (Vector3.Distance(skillC.EffectGameObject.transform.position, target.position) <= 0.5f)
             {
-                skill.TheUnitTarget?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
-                skill.SkillState = SkillState.Finished;
+                skillC.TheUnitTarget?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skillC.SkillConfig.DamgeValue);
+                skillC.SkillState = SkillState.Finished;
             }
         }
 
-        public override void OnFinished(Skill skill)
+        public override void OnFinished(SkillC skillC)
         {
-            skill.EndSkillEffect();
+            skillC.EndSkillEffect();
         }
 
-        public override void OnEffectLoaded(Skill skill)
+        public override void OnEffectLoaded(SkillC skillC)
         {
-            GlobalComponent globalComponent = skill.Root().GetComponent<GlobalComponent>();
-            skill.EffectGameObject.transform.SetParent(globalComponent.Unit);
-            skill.EffectGameObject.transform.position = skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.transform.position;
+            GlobalComponent globalComponent = skillC.Root().GetComponent<GlobalComponent>();
+            skillC.EffectGameObject.transform.SetParent(globalComponent.Unit);
+            skillC.EffectGameObject.transform.position = skillC.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.transform.position;
         }
     }
 }

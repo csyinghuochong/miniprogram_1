@@ -15,7 +15,7 @@
             self.OnFinished();
         }
 
-        public static void OnInit(this Buff self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongto, Skill skill)
+        public static void OnInit(this Buff self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongto, SkillC skillC)
         {
             // self.PassTime = 0;
             // self.IsTrigger = false;

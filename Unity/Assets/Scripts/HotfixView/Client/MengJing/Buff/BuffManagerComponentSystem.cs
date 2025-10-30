@@ -42,7 +42,7 @@ namespace ET.Client
             self.Buffs = null;
         }
 
-        public static void BuffFactory(this BuffManagerComponent self, BuffData buffData, Unit from, Skill skill)
+        public static void BuffFactory(this BuffManagerComponent self, BuffData buffData, Unit from, SkillC skillC)
         {
             Unit unit = self.GetParent<Unit>();
             BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
@@ -79,7 +79,7 @@ namespace ET.Client
             {
                 Buff buff = self.AddChild<Buff>();
                 self.Buffs.Add(buff);
-                buff.OnInit(buffData, from, unit, skill);
+                buff.OnInit(buffData, from, unit, skillC);
             }
         }
     }

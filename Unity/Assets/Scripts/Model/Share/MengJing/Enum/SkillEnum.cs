@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System.Numerics;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -225,20 +226,32 @@ namespace ET
         public long UnitIdFrom;
         public float3 TargetPostion;
     }
+    
+    public struct SkillInfo
+    {
+        public int SkillConfigId;
+        public long TargetID;
+        public float TargetAngle;
+        public float3 TargetPosition;
+    }
+
+    [EnableClass]
+    public class SkillCDItem
+    {
+        public int SkillConfigId;
+        public float CD;
+    }
 
     public enum SkillState
     {
-        /// <summary>
-        /// 等待执行
-        /// </summary>
-        Waiting,
-        /// <summary>
-        /// 正在执行
-        /// </summary>
-        Running,
-        /// <summary>
-        /// 使命完成
-        /// </summary>
-        Finished,
+        Running, //正在执行
+        Finished, //完成
+    }
+
+    public enum SkillActType
+    {
+        Normal = 0, //普通攻击
+        Active = 1, //主动技能
+        Passive = 2, //被动
     }
 }

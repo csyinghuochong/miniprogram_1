@@ -9,11 +9,11 @@ namespace ET.Client
         /// </summary>
         /// <param name="attackUnit">攻击方</param>
         /// <param name="defendUnit">受击方</param>
-        /// <param name="skill"></param>
+        /// <param name="skillC"></param>
         /// <returns></returns>
-        public static bool Fight(Unit attackUnit, Unit defendUnit, Skill skill)
+        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillC skillC)
         {
-            SkillConfig skillConfig = skill.SkillConfig;
+            SkillConfig skillConfig = skillC.SkillConfig;
 
             //获取攻击方属性
             NumericComponentC numericComponentAttack = attackUnit.GetComponent<NumericComponentC>();

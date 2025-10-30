@@ -8,59 +8,59 @@ namespace ET.Client
     /// </summary>
     public class Skill_Circle : SkillHandler
     {
-        public override void OnInit(Skill skill)
+        public override void OnInit(SkillC skillC)
         {
-            skill.IntervalTime = 0.5f;
+            skillC.IntervalTime = 0.5f;
         }
 
-        public override void OnExecute(Skill skill)
+        public override void OnExecute(SkillC skillC)
         {
-            skill.InitSelfBuff();
-            skill.PlaySkillEffects();
-            skill.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
+            skillC.InitSelfBuff();
+            skillC.PlaySkillEffects();
+            skillC.TheUnitFrom.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>().AnimationName = "attack";
         }
 
-        public override void OnUpdate(Skill skill)
+        public override void OnUpdate(SkillC skillC)
         {
-            skill.SkillLiveTime -= Time.deltaTime;
+            skillC.SkillLiveTime -= Time.deltaTime;
 
-            if (skill.SkillLiveTime <= 0)
+            if (skillC.SkillLiveTime <= 0)
             {
-                skill.SkillState = SkillState.Finished;
+                skillC.SkillState = SkillState.Finished;
                 return;
             }
             
-            skill.LogTime += Time.deltaTime;
+            skillC.LogTime += Time.deltaTime;
 
-            if (skill.LogTime >= skill.IntervalTime)
+            if (skillC.LogTime >= skillC.IntervalTime)
             {
-                skill.LogTime = 0;
+                skillC.LogTime = 0;
 
-                Collider[] colliders = Physics.OverlapSphere(skill.TargetPosition, 2f);
+                Collider[] colliders = Physics.OverlapSphere(skillC.TargetPosition, 2f);
 
                 foreach (var collider in colliders)
                 {
                     if (collider.CompareTag("Monster"))
                     {
-                        UnitComponent unitComponent = skill.Scene().GetComponent<UnitComponent>();
+                        UnitComponent unitComponent = skillC.Scene().GetComponent<UnitComponent>();
                         Unit target = unitComponent.Get(collider.GetComponent<UnitId>().Id);
-                        target?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skill.SkillConfig.DamgeValue);
+                        target?.GetComponent<NumericComponentC>().ApplyChange(NumericType.Now_Hp, -skillC.SkillConfig.DamgeValue);
                         return;
                     }
                 }
             }
         }
 
-        public override void OnFinished(Skill skill)
+        public override void OnFinished(SkillC skillC)
         {
-            skill.EndSkillEffect();
+            skillC.EndSkillEffect();
         }
 
-        public override void OnEffectLoaded(Skill skill)
+        public override void OnEffectLoaded(SkillC skillC)
         {
-            GlobalComponent globalComponent = skill.Root().GetComponent<GlobalComponent>();
-            skill.EffectGameObject.transform.SetParent(globalComponent.Unit);
-            skill.EffectGameObject.transform.position = skill.TargetPosition;
+            GlobalComponent globalComponent = skillC.Root().GetComponent<GlobalComponent>();
+            skillC.EffectGameObject.transform.SetParent(globalComponent.Unit);
+            skillC.EffectGameObject.transform.position = skillC.TargetPosition;
         }
     }
 }

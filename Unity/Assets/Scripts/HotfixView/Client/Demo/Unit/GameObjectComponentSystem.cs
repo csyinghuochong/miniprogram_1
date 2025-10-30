@@ -163,7 +163,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
-                    unit.AddComponent<SkillManagerComponent>();
+                    unit.AddComponent<SkillManagerComponentC>();
                     unit.AddComponent<BuffManagerComponent>();
                     unit.AddComponent<AI_HeroComponent>();
                     break;
@@ -174,7 +174,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
-                    unit.AddComponent<SkillManagerComponent>();
+                    unit.AddComponent<SkillManagerComponentC>();
                     unit.AddComponent<BuffManagerComponent>();
                     unit.AddComponent<AI_MonsterComponent>();
                     break;
@@ -201,7 +201,7 @@ namespace ET.Client
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
-                    unit.RemoveComponent<SkillManagerComponent>();
+                    unit.RemoveComponent<SkillManagerComponentC>();
                     unit.RemoveComponent<BuffManagerComponent>();
                     unit.RemoveComponent<AI_HeroComponent>();
                     break;
@@ -210,7 +210,7 @@ namespace ET.Client
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
-                    unit.RemoveComponent<SkillManagerComponent>();
+                    unit.RemoveComponent<SkillManagerComponentC>();
                     unit.RemoveComponent<BuffManagerComponent>();
                     unit.RemoveComponent<AI_MonsterComponent>();
                     break;

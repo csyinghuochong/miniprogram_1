@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(Skill))]
-    [FriendOf(typeof(Skill))]
-    public static partial class SkillSystem
+    [EntitySystemOf(typeof(SkillC))]
+    [FriendOf(typeof(SkillC))]
+    public static partial class SkillCSystem
     {
         [EntitySystem]
-        private static void Awake(this Skill self)
+        private static void Awake(this SkillC self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this Skill self)
+        private static void Destroy(this SkillC self)
         {
             self.OnFinished();
         }
 
-        public static void OnInit(this Skill self, SkillInfo skillInfo, Unit theUnitFrom)
+        public static void OnInit(this SkillC self, SkillInfo skillInfo, Unit theUnitFrom)
         {
             self.SkillInfo = skillInfo;
             self.SkillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
@@ -37,26 +37,26 @@ namespace ET.Client
             self.SkillHandler.OnInit(self);
         }
 
-        public static void OnExecute(this Skill self)
+        public static void OnExecute(this SkillC self)
         {
             self.SkillHandler.OnExecute(self);
         }
 
-        public static void OnUpdate(this Skill self)
+        public static void OnUpdate(this SkillC self)
         {
             self.SkillHandler.OnUpdate(self);
         }
 
-        public static void OnFinished(this Skill self)
+        public static void OnFinished(this SkillC self)
         {
             self.SkillHandler.OnFinished(self);
         }
 
-        public static void InitSelfBuff(this Skill self)
+        public static void InitSelfBuff(this SkillC self)
         {
         }
 
-        public static void PlaySkillEffects(this Skill self)
+        public static void PlaySkillEffects(this SkillC self)
         {
             SkillConfig skillConfig = self.SkillConfig;
             if (skillConfig.SkillHitEffectID == 0)
@@ -76,14 +76,14 @@ namespace ET.Client
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, true, self.OnLoadGameObject);
         }
 
-        public static void EndSkillEffect(this Skill self)
+        public static void EndSkillEffect(this SkillC self)
         {
             self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectGameObject);
             self.EffectPath = null;
             self.EffectGameObject = null;
         }
 
-        private static void OnLoadGameObject(this Skill self, GameObject gameObject, long instanceId)
+        private static void OnLoadGameObject(this SkillC self, GameObject gameObject, long instanceId)
         {
             if (instanceId != self.InstanceId)
             {

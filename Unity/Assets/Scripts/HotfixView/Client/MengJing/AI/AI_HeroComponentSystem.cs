@@ -85,26 +85,26 @@ namespace ET.Client
         private static void Attack(this AI_HeroComponent self)
         {
             // Debug.Log("攻击怪物！");
-            Unit unit = self.GetParent<Unit>();
-
-            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-
-            SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
-            skillManagerComponent.OnUseSkill(new SkillInfo()
-            {
-                SkillConfigId = heroConfig.AtkID,
-                TargetID = self.Target.GetComponent<UnitId>().Id,
-                TargetAngle = self.GameObject.transform.eulerAngles.y,
-                TargetPosition = self.Target.transform.position,
-            });
-
-            skillManagerComponent.OnUseSkill(new SkillInfo()
-            {
-                SkillConfigId = heroConfig.SkillID[0],
-                TargetID = self.Target.GetComponent<UnitId>().Id,
-                TargetAngle = self.GameObject.transform.eulerAngles.y,
-                TargetPosition = self.Target.transform.position,
-            });
+            // Unit unit = self.GetParent<Unit>();
+            //
+            // HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+            //
+            // SkillManagerComponentC skillManagerComponentC = unit.GetComponent<SkillManagerComponentC>();
+            // skillManagerComponentC.OnUseSkill(new SkillInfo()
+            // {
+            //     SkillConfigId = heroConfig.AtkID,
+            //     TargetID = self.Target.GetComponent<UnitId>().Id,
+            //     TargetAngle = self.GameObject.transform.eulerAngles.y,
+            //     TargetPosition = self.Target.transform.position,
+            // });
+            //
+            // skillManagerComponentC.OnUseSkill(new SkillInfo()
+            // {
+            //     SkillConfigId = heroConfig.SkillID[0],
+            //     TargetID = self.Target.GetComponent<UnitId>().Id,
+            //     TargetAngle = self.GameObject.transform.eulerAngles.y,
+            //     TargetPosition = self.Target.transform.position,
+            // });
         }
     }
 }
