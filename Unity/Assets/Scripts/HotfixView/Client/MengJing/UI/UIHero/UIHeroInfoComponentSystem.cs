@@ -323,7 +323,7 @@ namespace ET.Client
             for (int i = 0; i < itemList.Count; i++)
             {
                 self.UICommonItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId).Coroutine(); }).Coroutine();
-                self.UICommonItemList[i].Image_Selected.gameObject.SetActive(heroComponent.GetHeroIdByEquipmentId(itemList[i].Id) != 0);
+                self.UICommonItemList[i].Image_Equipped.gameObject.SetActive(heroComponent.GetHeroIdByEquipmentId(itemList[i].Id) != 0);
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
 

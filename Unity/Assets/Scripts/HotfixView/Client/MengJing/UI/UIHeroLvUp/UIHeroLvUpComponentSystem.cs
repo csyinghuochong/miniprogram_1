@@ -79,8 +79,11 @@ namespace ET.Client
                 self.UICommonItemList[i].GameObject.SetActive(false);
             }
 
-            self.OnItemClick(itemList[0].Id);
-
+            if (itemList.Count >= 1)
+            {
+                self.OnItemClick(itemList[0].Id);
+            }
+            
             await ETTask.CompletedTask;
         }
 

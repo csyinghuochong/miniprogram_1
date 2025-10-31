@@ -17,13 +17,18 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
+            self.Item = rc.Get<GameObject>("Item");
+            self.Image_ItemNull = rc.Get<GameObject>("Image_ItemNull").GetComponent<Image>();
             self.Image_ItemQuality = rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>();
             self.Image_On = rc.Get<GameObject>("Image_On").GetComponent<Image>();
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Text_ItemNum = rc.Get<GameObject>("Text_ItemNum").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
             self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
+            self.Image_Equipped = rc.Get<GameObject>("Image_Equipped").GetComponent<Image>();
+            
             self.Image_On.gameObject.SetActive(false);
+            self.Image_Equipped.gameObject.SetActive(false);
             self.Image_Selected.gameObject.SetActive(false);
 
             self.Button_Click.AddListener(self.OnClick);
@@ -58,5 +63,7 @@ namespace ET.Client
         {
             self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
         }
+        
+        
     }
 }
