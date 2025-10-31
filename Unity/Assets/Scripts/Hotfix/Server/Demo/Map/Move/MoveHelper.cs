@@ -34,7 +34,7 @@ namespace ET.Server
             }
         }
 
-        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent, int speedRate)
+        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent)
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
             // speed *= (speedRate * 0.01f);

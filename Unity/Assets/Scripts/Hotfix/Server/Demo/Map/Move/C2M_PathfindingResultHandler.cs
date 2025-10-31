@@ -21,7 +21,7 @@ namespace ET.Server
         
         protected override async ETTask Run(Unit unit, C2M_PathfindingResult message)
         {
-            M2C_PathfindingResult m2CPathfindingResult = new();
+            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
            
             MoveComponent  moveComponent = unit.GetComponent<MoveComponent>();
             long passTime = TimeHelper.ServerNow() - message.ServerTime;
@@ -41,7 +41,7 @@ namespace ET.Server
             m2CPathfindingResult.SpeedRate = message.SpeedRate;
             
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
-            MoveHelper.PathResultToAsync(unit, message.Position, moveComponent, message.SpeedRate).Coroutine();
+            MoveHelper.PathResultToAsync(unit, message.Position, moveComponent).Coroutine();
            
             await ETTask.CompletedTask;
         }

@@ -84,6 +84,12 @@ namespace ET.Server
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().PlayerName;
 
+            unit.AddComponent<MoveComponent>();
+
+            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(1);
+            aiComponent.InitHero();
+            aiComponent.Begin();
+
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
 
             return unit;
@@ -99,12 +105,31 @@ namespace ET.Server
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
 
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
+            numericComponent.ApplyValue(NumericType.Base_AtkSpeed_Base, monsterConfig.AtkSpeed, false);
             numericComponent.ApplyValue(NumericType.Now_Hp, monsterConfig.Hp, false);
             numericComponent.ApplyValue(NumericType.Base_MaxHp_Base, monsterConfig.Hp, false);
+            numericComponent.ApplyValue(NumericType.Base_MinAct_Base, monsterConfig.Act, false);
+            numericComponent.ApplyValue(NumericType.Base_MaxAct_Base, monsterConfig.Act, false);
+            numericComponent.ApplyValue(NumericType.Base_MinDef_Base, monsterConfig.Def, false);
+            numericComponent.ApplyValue(NumericType.Base_MaxDef_Base, monsterConfig.Def, false);
+            numericComponent.ApplyValue(NumericType.Base_MinAdf_Base, monsterConfig.Adf, false);
+            numericComponent.ApplyValue(NumericType.Base_MaxAdf_Base, monsterConfig.Adf, false);
+            numericComponent.ApplyValue(NumericType.Base_Cri_Base, monsterConfig.Cri, false);
+            numericComponent.ApplyValue(NumericType.Base_ReCri_Base, monsterConfig.ReCri, false);
+            numericComponent.ApplyValue(NumericType.Base_Eva_Base, monsterConfig.Eva, false);
+            numericComponent.ApplyValue(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
+            numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, monsterConfig.HitLess, false);
 
             unit.AddComponent<SkillManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
+
+            unit.AddComponent<MoveComponent>();
+
+            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(1);
+            aiComponent.InitMonster();
+            aiComponent.Begin();
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
 

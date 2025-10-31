@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -55,7 +56,15 @@ namespace ET.Server
                         unit.Stop(-2);
                     }
 
-                    unit.FindPathMoveToAsync(target.Position).Coroutine();
+                    M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
+           
+                    MoveComponent  moveComponent = unit.GetComponent<MoveComponent>();
+                    List<float3> position = new List<float3>();
+                    position.Add(unit.Position);
+                    position.Add(target.Position);
+            
+                    MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
+                    MoveHelper.PathResultToAsync(unit, position, moveComponent).Coroutine();
                 }
 
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(checkTime, cancellationToken);
