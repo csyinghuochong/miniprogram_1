@@ -58,10 +58,6 @@ namespace ET.Client
             self.SkillHandler.OnFinished(self);
         }
 
-        public static void InitSelfBuff(this SkillC self)
-        {
-        }
-
         public static void PlaySkillEffects(this SkillC self, float3 position, float angle = 0f)
         {
             SkillConfig skillConfig = self.SkillConfig;
