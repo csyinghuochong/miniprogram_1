@@ -3,30 +3,14 @@
     "Id": 101,
     "AIConfigId": 1,
     "Order": 1,
-    "Name": "AI_XunLuo",
-    "Desc": "巡逻",
+    "Name": "AI_ZhuiJi",
+    "Desc": "追击",
     "NodeParams": ""
   },
   {
     "Id": 102,
     "AIConfigId": 1,
     "Order": 2,
-    "Name": "AI_Retreat",
-    "Desc": "撤退",
-    "NodeParams": ""
-  },
-  {
-    "Id": 103,
-    "AIConfigId": 1,
-    "Order": 3,
-    "Name": "AI_ZhuiJi",
-    "Desc": "追击",
-    "NodeParams": ""
-  },
-  {
-    "Id": 104,
-    "AIConfigId": 1,
-    "Order": 4,
     "Name": "AI_Attack",
     "Desc": "攻击",
     "NodeParams": ""
