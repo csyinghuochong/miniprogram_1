@@ -102,14 +102,46 @@ namespace ET.Server
             });
         }
 
-        /// <summary>
-        /// 0 不复活 1等待复活
-        /// </summary>
-        /// <param name="self"></param>
-        /// <returns></returns>
+        // 0不复活 1等待复活
         public static int OnWaitRevive(this Unit self)
         {
             return 0;
+        }
+
+        public static bool IsCanAttackUnit(this Unit self, Unit defend, bool checkDead = true)
+        {
+            if (self.Id == defend.Id)
+            {
+                return false;
+            }
+
+            if (!defend.IsCanBeAttack(checkDead))
+            {
+                return false;
+            }
+
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+
+            if (mapComponent.MapType != MapTypeEnum.LocalLevel)
+            {
+                return false;
+            }
+
+            return self.Type != defend.Type;
+        }
+
+        public static bool IsCanBeAttack(this Unit self, bool checkDead = true)
+        {
+            if (checkDead)
+            {
+                NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+                if (numericComponent.GetAsLong(NumericType.Now_Hp) <= 0 || numericComponent.GetAsLong(NumericType.Now_Dead) == 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
