@@ -196,20 +196,21 @@ namespace ET.Client
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIPlayerHpComponent>();
-
+                    unit.RemoveComponent<EffectViewComponent>();
                     break;
                 }
                 case UnitType.Hero:
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
-                    
+                    unit.RemoveComponent<EffectViewComponent>();
                     break;
                 }
                 case UnitType.Monster:
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
+                    unit.RemoveComponent<EffectViewComponent>();
                     break;
                 }
             }
