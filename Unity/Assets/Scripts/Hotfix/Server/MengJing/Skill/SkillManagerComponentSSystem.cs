@@ -18,7 +18,7 @@ namespace ET.Server
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e.ToString());
+                    Log.Error(e);
                 }
             }
         }
