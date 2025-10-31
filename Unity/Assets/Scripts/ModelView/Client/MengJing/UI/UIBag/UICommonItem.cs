@@ -12,12 +12,16 @@ namespace ET.Client
 
         public Action<long> OnItemClick;
         public GameObject GameObject { get; set; }
-
+        
+        public GameObject Item { get; set; }
+        public Image Image_ItemNull { get; set; }
         public Image Image_ItemQuality;
         public Image Image_On;
         public Image Image_ItemIcon;
         public TMP_Text Text_ItemNum;
         public Button Button_Click;
         public Image Image_Selected { get; set; }
+        public Image Image_Equipped { get; set; }
+        
     }
 }
