@@ -67,7 +67,7 @@ namespace ET.Client
                 (int)ItemEquipmentType.Wuqi => "武器",
                 _ => ""
             };
-            
+
             string color = newItemConfig.ItemQuality switch
             {
                 1 => "#0e832a",
@@ -77,15 +77,15 @@ namespace ET.Client
                 5 => "#e200af",
                 6 => "#d01a06",
             };
-                
+
             Color nowColor;
             ColorUtility.TryParseHtmlString(color, out nowColor);
-                
+
             self.Text_ItemName.SetText(newItemConfig.ItemName);
             self.Text_ItemName.color = nowColor;
             self.Text_ItemEquipmentType.SetText(type);
             self.Text_Lv.SetTextFormat("{0}级", newItemConfig.UseLv);
-            
+
             string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", newItemConfig.ItemQuality));
             self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
 
@@ -94,13 +94,13 @@ namespace ET.Client
 
             long actChange = 0;
             long defChange = 0;
-            
+
             self.ShowBaseAttributeItem("攻击", newEquipConfig.EquipMaxAct.ToString(), actChange);
             self.ShowBaseAttributeItem("防御", newEquipConfig.EquipMaxDef.ToString(), defChange);
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {
-                self.Button_Sell.gameObject.SetActive(true);
+                //self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);
 
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
@@ -141,15 +141,17 @@ namespace ET.Client
                     actChange = newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base];
                     defChange = newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base];
                 }
-                
+
+                return;
             }
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_TakeOff)
             {
                 self.Button_TakeOff.gameObject.SetActive(true);
-                
+                return;
             }
-            
+
+            self.Button_Sell.gameObject.SetActive(true);
         }
 
         private static void ShowBaseAttributeItem(this UIItemTip_EquipmentComponent self, string name, string value, long change)
