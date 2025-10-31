@@ -3332,6 +3332,130 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_TryUseSkill)]
+    [ResponseType(nameof(M2C_EnterBossRoom))]
+    public partial class C2M_TryUseSkill : MessageObject, ILocationRequest
+    {
+        public static C2M_TryUseSkill Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_TryUseSkill), isFromPool) as C2M_TryUseSkill;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int SkillConfigId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long TargetId { get; set; }
+
+        [MemoryPackOrder(3)]
+        public float Angle { get; set; }
+
+        [MemoryPackOrder(4)]
+        public Unity.Mathematics.float3 Position { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SkillConfigId = default;
+            this.TargetId = default;
+            this.Angle = default;
+            this.Position = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_TryUseSkill)]
+    public partial class M2C_TryUseSkill : MessageObject, ILocationResponse
+    {
+        public static M2C_TryUseSkill Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_TryUseSkill), isFromPool) as M2C_TryUseSkill;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_OnUseSkill)]
+    public partial class M2C_OnUseSkill : MessageObject, IMessage
+    {
+        public static M2C_OnUseSkill Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_OnUseSkill), isFromPool) as M2C_OnUseSkill;
+        }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int SkillConfigId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long TargetId { get; set; }
+
+        [MemoryPackOrder(3)]
+        public float Angle { get; set; }
+
+        [MemoryPackOrder(4)]
+        public Unity.Mathematics.float3 Position { get; set; }
+
+        [MemoryPackOrder(5)]
+        public float CD { get; set; }
+
+        [MemoryPackOrder(6)]
+        public float PublicCD { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitId = default;
+            this.SkillConfigId = default;
+            this.TargetId = default;
+            this.Angle = default;
+            this.Position = default;
+            this.CD = default;
+            this.PublicCD = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3424,5 +3548,8 @@ namespace ET
         public const ushort M2C_UpdateTimeScale = 10089;
         public const ushort C2M_EnterBossRoom = 10090;
         public const ushort M2C_EnterBossRoom = 10091;
+        public const ushort C2M_TryUseSkill = 10092;
+        public const ushort M2C_TryUseSkill = 10093;
+        public const ushort M2C_OnUseSkill = 10094;
     }
 }

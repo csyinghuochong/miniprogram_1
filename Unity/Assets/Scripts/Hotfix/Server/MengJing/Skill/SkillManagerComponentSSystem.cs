@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -65,20 +66,26 @@ namespace ET.Server
                     skillCdItem.CD = 0;
                 }
             }
+
+            self.PublicCD -= deltaTime;
+            if (self.PublicCD < 0)
+            {
+                self.PublicCD = 0;
+            }
         }
 
-        public static int OnUseSkill(this SkillManagerComponentS self, SkillInfo skillInfo)
+        public static int TryUseSkill(this SkillManagerComponentS self, int skillConfigId, long targetId, float angle, float3 position)
         {
-            if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillInfo.SkillConfigId))
+            if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillConfigId))
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
             Unit unit = self.GetParent<Unit>();
 
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
-            int errorCode = self.IsCanUseSkill(skillInfo.SkillConfigId);
+            int errorCode = self.IsCanUseSkill(skillConfigId);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;
@@ -89,23 +96,40 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            self.AddSkillCD(skillInfo.SkillConfigId);
+            float cd = self.AddSkillCD(skillConfigId);
+
+            TryUseSkillInfo tryUseSkillInfo = new TryUseSkillInfo();
+            tryUseSkillInfo.SkillConfigId = skillConfigId;
+            tryUseSkillInfo.TargetId = targetId;
+            tryUseSkillInfo.Angle = angle;
+            tryUseSkillInfo.Position = position;
 
             SkillS skill = self.AddChild<SkillS>();
             self.Skills.Add(skill);
-            skill.OnInit(skillInfo, unit);
+            skill.OnInit(tryUseSkillInfo, unit);
             skill.OnExecute();
+
+            M2C_OnUseSkill message = M2C_OnUseSkill.Create();
+            message.UnitId = unit.Id;
+            message.SkillConfigId = skillConfigId;
+            message.TargetId = targetId;
+            message.Angle = angle;
+            message.Position = position;
+            message.CD = cd;
+            message.PublicCD = self.PublicCD;
+
+            MapMessageHelper.Broadcast(self.GetParent<Unit>(), message);
 
             return ErrorCode.ERR_Success;
         }
 
-        public static int IsCanUseSkill(this SkillManagerComponentS self, int nowSkillID)
+        public static int IsCanUseSkill(this SkillManagerComponentS self, int skillConfigId)
         {
             SkillCDItem skillCdItem = null;
 
             foreach (SkillCDItem skillCDItem in self.SkillCDs)
             {
-                if (skillCDItem.SkillConfigId == nowSkillID)
+                if (skillCDItem.SkillConfigId == skillConfigId)
                 {
                     skillCdItem = skillCDItem;
                     break;
@@ -122,10 +146,15 @@ namespace ET.Server
                 return ErrorCode.ERR_UseSkillInCD;
             }
 
+            if (self.PublicCD > 0)
+            {
+                return ErrorCode.ERR_UseSkillInPublicCD;
+            }
+
             return ErrorCode.ERR_Success;
         }
 
-        private static void AddSkillCD(this SkillManagerComponentS self, int skillConfigId)
+        private static float AddSkillCD(this SkillManagerComponentS self, int skillConfigId)
         {
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
@@ -155,6 +184,10 @@ namespace ET.Server
             {
                 skillCDItem.CD = (float)skillConfig.SkillCD;
             }
+
+            self.PublicCD = 0.5f;
+
+            return skillCDItem.CD;
         }
     }
 }

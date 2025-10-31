@@ -5,7 +5,7 @@ namespace ET.Server
     [ChildOf(typeof(SkillManagerComponentS))]
     public class SkillS : Entity, IAwake, IDestroy
     {
-        public SkillInfo SkillInfo { get; set; }
+        public TryUseSkillInfo TryUseSkillInfo { get; set; }
         public SkillConfig SkillConfig { get; set; }
         public SkillHandlerS SkillHandler { get; set; }
         public SkillState SkillState { get; set; }

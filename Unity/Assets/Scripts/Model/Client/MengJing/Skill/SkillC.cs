@@ -5,7 +5,7 @@ namespace ET.Client
     [ChildOf(typeof(SkillManagerComponentC))]
     public class SkillC : Entity, IAwake, IDestroy
     {
-        public SkillInfo SkillInfo { get; set; }
+        public TryUseSkillInfo TryUseSkillInfo { get; set; }
         public SkillConfig SkillConfig { get; set; }
         public SkillHandlerC SkillHandler { get; set; }
         public SkillState SkillState { get; set; }

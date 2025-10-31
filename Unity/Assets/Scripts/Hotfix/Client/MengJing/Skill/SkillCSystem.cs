@@ -15,20 +15,20 @@
             self.OnFinished();
         }
 
-        public static void OnInit(this SkillC self, SkillInfo skillInfo, Unit theUnitFrom)
+        public static void OnInit(this SkillC self, TryUseSkillInfo tryUseSkillInfo, Unit theUnitFrom)
         {
-            self.SkillInfo = skillInfo;
-            self.SkillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
+            self.TryUseSkillInfo = tryUseSkillInfo;
+            self.SkillConfig = SkillConfigCategory.Instance.Get(tryUseSkillInfo.SkillConfigId);
             self.SkillHandler = SkillDispatcherComponentC.Instance.Get(self.SkillConfig.SkillHandler);
             self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
-            if (skillInfo.TargetID != 0)
+            if (tryUseSkillInfo.TargetId != 0)
             {
-                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(skillInfo.TargetID);
+                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(tryUseSkillInfo.TargetId);
             }
 
             self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
-            self.TargetPosition = skillInfo.TargetPosition;
+            self.TargetPosition = tryUseSkillInfo.Position;
             self.NowPosition = self.TargetPosition;
 
             self.SkillHandler.OnInit(self);

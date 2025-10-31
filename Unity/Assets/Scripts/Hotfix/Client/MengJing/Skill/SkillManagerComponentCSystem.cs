@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -65,20 +66,24 @@ namespace ET.Client
                     skillCdItem.CD = 0;
                 }
             }
+
+            self.PublicCD -= deltaTime;
+            if (self.PublicCD < 0)
+            {
+                self.PublicCD = 0;
+            }
         }
 
-        public static int OnUseSkill(this SkillManagerComponentC self, SkillInfo skillInfo)
+        public static async ETTask<int> TryUseSkill(this SkillManagerComponentC self, int skillConfigId, long targetId, float angle, float3 position)
         {
-            if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillInfo.SkillConfigId))
+            if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillConfigId))
             {
                 return ErrorCode.ERR_ModifyData;
             }
 
-            Unit unit = self.GetParent<Unit>();
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillInfo.SkillConfigId);
-
-            int errorCode = self.IsCanUseSkill(skillInfo.SkillConfigId);
+            int errorCode = self.IsCanUseSkill(skillConfigId);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;
@@ -86,26 +91,44 @@ namespace ET.Client
 
             if (string.IsNullOrEmpty(skillConfig.SkillHandler))
             {
-                return ErrorCode.ERR_ModifyData;
+                return ErrorCode.ERR_NotSkillHandler;
             }
 
-            self.AddSkillCD(skillInfo.SkillConfigId);
+            C2M_TryUseSkill request = C2M_TryUseSkill.Create();
+            request.SkillConfigId = skillConfigId;
+            request.TargetId = targetId;
+            request.Angle = angle;
+            request.Position = position;
+
+            M2C_TryUseSkill response = (M2C_TryUseSkill)await self.Root().GetComponent<ClientSenderComponent>().Call(request);
+            return response.Error;
+        }
+
+        public static void OnUseSkill(this SkillManagerComponentC self, M2C_OnUseSkill message)
+        {
+            self.AddSkillCD(message.SkillConfigId, message.CD, message.PublicCD);
+
+            Unit unit = self.GetParent<Unit>();
+
+            TryUseSkillInfo tryUseSkillInfo = new TryUseSkillInfo();
+            tryUseSkillInfo.SkillConfigId = message.SkillConfigId;
+            tryUseSkillInfo.TargetId = message.TargetId;
+            tryUseSkillInfo.Angle = message.Angle;
+            tryUseSkillInfo.Position = message.Position;
 
             SkillC skill = self.AddChild<SkillC>();
             self.Skills.Add(skill);
-            skill.OnInit(skillInfo, unit);
+            skill.OnInit(tryUseSkillInfo, unit);
             skill.OnExecute();
-
-            return ErrorCode.ERR_Success;
         }
 
-        public static int IsCanUseSkill(this SkillManagerComponentC self, int nowSkillID)
+        public static int IsCanUseSkill(this SkillManagerComponentC self, int skillConfigId)
         {
             SkillCDItem skillCdItem = null;
 
             foreach (SkillCDItem skillCDItem in self.SkillCDs)
             {
-                if (skillCDItem.SkillConfigId == nowSkillID)
+                if (skillCDItem.SkillConfigId == skillConfigId)
                 {
                     skillCdItem = skillCDItem;
                     break;
@@ -122,13 +145,16 @@ namespace ET.Client
                 return ErrorCode.ERR_UseSkillInCD;
             }
 
+            if (self.PublicCD > 0)
+            {
+                return ErrorCode.ERR_UseSkillInPublicCD;
+            }
+
             return ErrorCode.ERR_Success;
         }
 
-        private static void AddSkillCD(this SkillManagerComponentC self, int skillConfigId)
+        private static void AddSkillCD(this SkillManagerComponentC self, int skillConfigId, float cd, float publicCD)
         {
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
-
             SkillCDItem skillCDItem = null;
             foreach (SkillCDItem skillCdItem in self.SkillCDs)
             {
@@ -146,15 +172,9 @@ namespace ET.Client
                 self.SkillCDs.Add(skillCDItem);
             }
 
-            if (skillConfig.SkillActType == (int)SkillActType.Normal)
-            {
-                // 普通攻击
-                skillCDItem.CD = 1f;
-            }
-            else
-            {
-                skillCDItem.CD = (float)skillConfig.SkillCD;
-            }
+            skillCDItem.CD = cd;
+
+            self.PublicCD = publicCD;
         }
     }
 }

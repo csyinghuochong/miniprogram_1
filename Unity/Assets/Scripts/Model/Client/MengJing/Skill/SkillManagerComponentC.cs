@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public long Timer;
         public int TimeInterval;
-
+        public float PublicCD;
         public List<EntityRef<SkillC>> Skills = new();
         public List<SkillCDItem> SkillCDs { get; set; } = new();
     }

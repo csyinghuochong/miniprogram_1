@@ -732,3 +732,32 @@ message M2C_EnterBossRoom // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+// ResponseType M2C_EnterBossRoom
+message C2M_TryUseSkill // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 SkillConfigId = 2;
+	int64 TargetId = 3;
+	float Angle = 4;
+	Unity.Mathematics.float3 Position = 5;
+}
+
+message M2C_TryUseSkill // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message M2C_OnUseSkill // IMessage
+{
+	int64 UnitId = 1;
+	int32 SkillConfigId = 2;
+	int64 TargetId = 3;
+	float Angle = 4;
+	Unity.Mathematics.float3 Position = 5;
+	float CD = 6;
+	float PublicCD = 7;
+}
+	

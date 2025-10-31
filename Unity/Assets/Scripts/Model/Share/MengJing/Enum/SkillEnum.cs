@@ -227,12 +227,12 @@ namespace ET
         public float3 TargetPostion;
     }
     
-    public struct SkillInfo
+    public struct TryUseSkillInfo
     {
         public int SkillConfigId;
-        public long TargetID;
-        public float TargetAngle;
-        public float3 TargetPosition;
+        public long TargetId;
+        public float Angle;
+        public float3 Position;
     }
 
     [EnableClass]
