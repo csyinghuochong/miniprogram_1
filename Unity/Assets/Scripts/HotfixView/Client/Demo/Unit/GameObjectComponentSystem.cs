@@ -13,6 +13,11 @@ namespace ET.Client
                 return;
             }
 
+            if (args.OldValue == args.NewValue)
+            {
+                return;
+            }
+
             unit.GetComponent<GameObjectComponent>()?.ReloadGameObject();
         }
     }
