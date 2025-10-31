@@ -20,7 +20,10 @@ namespace ET
             Name = _buf.ReadString();
             EffectType = _buf.ReadInt();
             EffectName = _buf.ReadString();
-            SkillEffectLiveTime = _buf.ReadInt();
+            SkillEffectLiveTime = _buf.ReadFloat();
+            SkillEffectDelayTime = _buf.ReadFloat();
+            SkillParent = _buf.ReadInt();
+            SkillParentPosition = _buf.ReadString();
 
             PostInit();
         }
@@ -51,9 +54,24 @@ namespace ET
         public readonly string EffectName;
 
         /// <summary>
-        /// 技能特效存在时间[毫秒]
+        /// 技能特效存在时间
         /// </summary>
-        public readonly int SkillEffectLiveTime;
+        public readonly float SkillEffectLiveTime;
+
+        /// <summary>
+        /// 技能特效延迟释放时间
+        /// </summary>
+        public readonly float SkillEffectDelayTime;
+
+        /// <summary>
+        /// 绑定父级
+        /// </summary>
+        public readonly int SkillParent;
+
+        /// <summary>
+        /// 绑定父级位置
+        /// </summary>
+        public readonly string SkillParentPosition;
 
 
         public const int __ID__ = -682668973;
@@ -61,6 +79,9 @@ namespace ET
 
         public  void ResolveRef()
         {
+            
+            
+            
             
             
             
@@ -76,6 +97,9 @@ namespace ET
             + "EffectType:" + EffectType + ","
             + "EffectName:" + EffectName + ","
             + "SkillEffectLiveTime:" + SkillEffectLiveTime + ","
+            + "SkillEffectDelayTime:" + SkillEffectDelayTime + ","
+            + "SkillParent:" + SkillParent + ","
+            + "SkillParentPosition:" + SkillParentPosition + ","
             + "}";
         }
 
