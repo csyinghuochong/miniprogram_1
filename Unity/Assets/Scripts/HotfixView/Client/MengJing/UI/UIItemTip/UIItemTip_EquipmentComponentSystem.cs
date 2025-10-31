@@ -149,15 +149,25 @@ namespace ET.Client
             {
                 self.Button_Sell.gameObject.SetActive(true);
             }
-            
-            self.ShowBaseAttributeItem("攻击", newEquipConfig.EquipMaxAct.ToString(), actChange);
-            self.ShowBaseAttributeItem("防御", newEquipConfig.EquipMaxDef.ToString(), defChange);
+
+            self.ShowBaseAttributeItem(1, "攻击", newEquipConfig.EquipMaxAct.ToString(), actChange);
+            self.ShowBaseAttributeItem(2, "防御", newEquipConfig.EquipMaxDef.ToString(), defChange);
         }
 
-        private static void ShowBaseAttributeItem(this UIItemTip_EquipmentComponent self, string name, string value, long change)
+        private static void ShowBaseAttributeItem(this UIItemTip_EquipmentComponent self, int index, string name, string value, long change)
         {
             GameObject baseAttributeItem = UnityEngine.Object.Instantiate(self.UIAttributeItem, self.BaseAttributeList);
             ReferenceCollector rc = baseAttributeItem.GetComponent<ReferenceCollector>();
+            if (index % 2 == 0)
+            {
+                rc.Get<GameObject>("Image_Icon1").GetComponent<Image>().gameObject.SetActive(false);
+                
+            }
+            else
+            {
+                rc.Get<GameObject>("Image_Icon2").GetComponent<Image>().gameObject.SetActive(false);
+                rc.Get<GameObject>("Image_BG").GetComponent<Image>().gameObject.SetActive(false);
+            }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
             rc.Get<GameObject>("Image_Reduction").SetActive(change < 0);

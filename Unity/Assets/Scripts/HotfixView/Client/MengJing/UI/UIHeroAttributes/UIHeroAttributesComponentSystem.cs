@@ -71,6 +71,14 @@ namespace ET.Client
             item.gameObject.SetActive(true);
 
             ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
+            if (index % 2 == 0)
+            {
+                rc.Get<GameObject>("Image_Icon1").GetComponent<Image>().gameObject.SetActive(false);
+            }
+            else
+            {
+                rc.Get<GameObject>("Image_Icon2").GetComponent<Image>().gameObject.SetActive(false);
+            }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
         }
@@ -90,6 +98,14 @@ namespace ET.Client
             item.gameObject.SetActive(true);
 
             ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
+            if (index % 2 == 0)
+            {
+                rc.Get<GameObject>("Image_Icon1").GetComponent<Image>().gameObject.SetActive(false);
+            }
+            else
+            {
+                rc.Get<GameObject>("Image_Icon2").GetComponent<Image>().gameObject.SetActive(false);
+            }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
         }
