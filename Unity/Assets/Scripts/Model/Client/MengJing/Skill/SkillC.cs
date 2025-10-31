@@ -1,11 +1,12 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
     [ChildOf(typeof(SkillManagerComponentC))]
     public class SkillC : Entity, IAwake, IDestroy
     {
-        public TryUseSkillInfo TryUseSkillInfo { get; set; }
+        public UseSkillInfo UseSkillInfo { get; set; }
         public SkillConfig SkillConfig { get; set; }
         public SkillHandlerC SkillHandler { get; set; }
         public SkillState SkillState { get; set; }
@@ -16,9 +17,7 @@ namespace ET.Client
         public Unit TheUnitTarget { get => this.theUnitTarget; set => this.theUnitTarget = value; }
         public float3 NowPosition { get; set; } //当前技能的坐标点
         public float3 TargetPosition { get; set; }
-        public float LogTime { get; set; } //计时用的
-        public float DelayTime { get; set; } //延迟时间
-        public float IntervalTime { get; set; } //间隔时间
-        public bool HasDealtDamage { get; set; }
+
+        public List<long> EffectInstanceId { get; set; } = new();
     }
 }

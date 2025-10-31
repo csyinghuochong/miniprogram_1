@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ET.Client
+namespace ET.Server
 {
     public static class Function_Fight
     {
@@ -9,14 +9,14 @@ namespace ET.Client
         /// </summary>
         /// <param name="attackUnit">攻击方</param>
         /// <param name="defendUnit">受击方</param>
-        /// <param name="skillC"></param>
+        /// <param name="skill"></param>
         /// <returns></returns>
-        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillC skillC)
+        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillS skill)
         {
-            SkillConfig skillConfig = skillC.SkillConfig;
+            SkillConfig skillConfig = skill.SkillConfig;
 
             //获取攻击方属性
-            NumericComponentC numericComponentAttack = attackUnit.GetComponent<NumericComponentC>();
+            NumericComponentS numericComponentAttack = attackUnit.GetComponent<NumericComponentS>();
             long attack_Hp = numericComponentAttack.GetAsLong(NumericType.Now_Hp);
             long attack_MaxHp = numericComponentAttack.GetAsLong(NumericType.Now_MaxHp);
             long attack_MinAct = numericComponentAttack.GetAsLong(NumericType.Now_MinAct);
@@ -29,7 +29,7 @@ namespace ET.Client
             // ......
 
             //获取受击方属性
-            NumericComponentC numericComponentDefend = defendUnit.GetComponent<NumericComponentC>();
+            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             long defend_Hp = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
             long defend_MaxHp = numericComponentDefend.GetAsLong(NumericType.Now_MaxHp);
             long defend_MinAct = numericComponentDefend.GetAsLong(NumericType.Now_MinAct);
@@ -52,50 +52,6 @@ namespace ET.Client
             numericComponentDefend.ApplyChange(NumericType.Now_Hp, damage);
 
             return true;
-        }
-
-        // 更新角色的属性，把配置表、角色的各种等级、装备的属性等等计算后加到NumericComponentC中
-        public static void UnitUpdateProperty_Base(Unit unit)
-        {
-            // 更新英雄属性
-            if (unit.Type == UnitType.Hero)
-            {
-                HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-                Hero hero = unit.Root().GetComponent<HeroComponentC>().GetHero(unit.Id);
-
-                NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-                numericComponent.ResetProperty();
-
-                Dictionary<int, long> UpdateProDicList = new Dictionary<int, long>();
-
-                int lv = hero.Lv;
-
-                // 计算各种属性 比如 角色的基础属性、等级提升后加成属性、装备属性
-                long heroBaseMaxHp = heroConfig.BaseHp + lv * 1;
-                long heroBaseMinAct = heroConfig.BaseAct + lv * 1;
-
-                // 汇总属性
-                long baseMaxHp = heroBaseMaxHp;
-                long baseMinAct = heroBaseMaxHp;
-
-                // 保存基础属性数据
-                AddUpdateProDicList(NumericType.Base_MaxHp_Base, baseMaxHp, UpdateProDicList);
-                AddUpdateProDicList(NumericType.Base_MaxAct_Base, baseMaxHp, UpdateProDicList);
-
-                //更新属性，设置到NumericComponent
-                foreach (int key in UpdateProDicList.Keys)
-                {
-                    long setValue = numericComponent.GetAsLong(key) + UpdateProDicList[key];
-
-                    long numType = key;
-                    if (key > NumericType.Max)
-                    {
-                        numType = key / 100;
-                    }
-
-                    numericComponent.ApplyValue(key, setValue);
-                }
-            }
         }
 
         private static void AddUpdateProDicList(int typeID, long typeValue, Dictionary<int, long> dic)

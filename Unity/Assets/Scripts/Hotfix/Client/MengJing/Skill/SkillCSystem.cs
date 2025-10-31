@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using Unity.Mathematics;
+
+namespace ET.Client
 {
     [EntitySystemOf(typeof(SkillC))]
     [FriendOf(typeof(SkillC))]
@@ -15,20 +17,20 @@
             self.OnFinished();
         }
 
-        public static void OnInit(this SkillC self, TryUseSkillInfo tryUseSkillInfo, Unit theUnitFrom)
+        public static void OnInit(this SkillC self, UseSkillInfo useSkillInfo, Unit theUnitFrom)
         {
-            self.TryUseSkillInfo = tryUseSkillInfo;
-            self.SkillConfig = SkillConfigCategory.Instance.Get(tryUseSkillInfo.SkillConfigId);
+            self.UseSkillInfo = useSkillInfo;
+            self.SkillConfig = SkillConfigCategory.Instance.Get(useSkillInfo.SkillConfigId);
             self.SkillHandler = SkillDispatcherComponentC.Instance.Get(self.SkillConfig.SkillHandler);
             self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
-            if (tryUseSkillInfo.TargetId != 0)
+            if (useSkillInfo.TargetId != 0)
             {
-                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(tryUseSkillInfo.TargetId);
+                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(useSkillInfo.TargetId);
             }
 
             self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
-            self.TargetPosition = tryUseSkillInfo.Position;
+            self.TargetPosition = useSkillInfo.Position;
             self.NowPosition = self.TargetPosition;
 
             self.SkillHandler.OnInit(self);
@@ -53,47 +55,49 @@
         {
         }
 
-        // public static void PlaySkillEffects(this SkillC self)
-        // {
-        //     SkillConfig skillConfig = self.SkillConfig;
-        //     if (skillConfig.SkillHitEffectID == 0)
-        //     {
-        //         return;
-        //     }
-        //
-        //     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillHitEffectID);
-        //
-        //     if (string.IsNullOrEmpty(effectConfig.EffectName))
-        //     {
-        //         return;
-        //     }
-        //
-        //     self.EffectPath = ZString.Format("Assets/Bundles/Effect/SkillEffect/{0}.prefab", effectConfig.EffectName);
-        //
-        //     self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, true, self.OnLoadGameObject);
-        // }
-        //
-        // public static void EndSkillEffect(this SkillC self)
-        // {
-        //     self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectGameObject);
-        //     self.EffectPath = null;
-        //     self.EffectGameObject = null;
-        // }
-        //
-        // private static void OnLoadGameObject(this SkillC self, GameObject gameObject, long instanceId)
-        // {
-        //     if (instanceId != self.InstanceId)
-        //     {
-        //         if (gameObject != null)
-        //         {
-        //             UnityEngine.Object.DestroyImmediate(gameObject);
-        //         }
-        //
-        //         return;
-        //     }
-        //
-        //     self.EffectGameObject = gameObject;
-        //     self.SkillHandlerC.OnEffectLoaded(self);
-        // }
+        public static void PlaySkillEffects(this SkillC self, float3 position, float angle = 0f)
+        {
+            SkillConfig skillConfig = self.SkillConfig;
+            if (skillConfig.SkillHitEffectID == 0)
+            {
+                return;
+            }
+
+            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillHitEffectID);
+
+            if (string.IsNullOrEmpty(effectConfig.EffectName))
+            {
+                return;
+            }
+
+            EffectData playEffectBuffData = new EffectData();
+            playEffectBuffData.TargetID = self.UseSkillInfo.TargetId;
+            playEffectBuffData.EffectId = effectConfig.Id; //特效相关配置
+            playEffectBuffData.EffectPosition = position; //技能目标点
+            playEffectBuffData.EffectAngle = angle;
+            playEffectBuffData.TargetAngle = self.UseSkillInfo.Angle; //技能角度
+            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect; //特效类型
+            playEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
+
+            self.EffectInstanceId.Add(playEffectBuffData.InstanceId);
+
+            EventSystem.Instance.Publish(self.Root(), new SkillEffect()
+            {
+                EffectData = playEffectBuffData,
+                Unit = self.TheUnitFrom
+            });
+        }
+
+        public static void EndSkillEffect(this SkillC self)
+        {
+            for (int i = 0; i < self.EffectInstanceId.Count; i++)
+            {
+                EventSystem.Instance.Publish(self.Root(), new SkillEffectFinish
+                {
+                    EffectInstanceId = self.EffectInstanceId[i],
+                    Unit = self.TheUnitFrom
+                });
+            }
+        }
     }
 }

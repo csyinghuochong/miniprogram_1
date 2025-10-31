@@ -9,14 +9,17 @@ namespace ET
         /// 回收
         /// </summary>
         None,
+
         /// <summary>
         /// 等待移除
         /// </summary>
         WaitRemove,
+
         /// <summary>
         /// 正在执行
         /// </summary>
         Running,
+
         /// <summary>
         /// Buff使命完成
         /// </summary>
@@ -77,7 +80,7 @@ namespace ET
     //5:  被动附加属性技能ID
     //6: 武器总技能ID（根据不同武器分配不同的技能ID）
     public enum SkillTypeEnum
-    { 
+    {
         None,
         ActiveSkill = 1,
         PassiveSkill = 2,
@@ -191,23 +194,8 @@ namespace ET
     /// </summary>
     public static class EffectTypeEnum
     {
-        public const int SkillEffect = 1;              //技能特效
+        public const int SkillEffect = 1; //技能特效
         public const int BuffEffect = 2;
-    }
-
-    public struct EffectData
-    {
-        public int EffectTypeEnum;
-        
-        public int EffectId { get; set; }
-
-        public float3 EffectPosition;
-        public float EffectAngle;
-
-        public int TargetAngle;
-        public long TargetID { get; set; }
-
-        public long InstanceId;
     }
 
     public struct BuffData
@@ -226,8 +214,8 @@ namespace ET
         public long UnitIdFrom;
         public float3 TargetPostion;
     }
-    
-    public struct TryUseSkillInfo
+
+    public struct UseSkillInfo
     {
         public int SkillConfigId;
         public long TargetId;

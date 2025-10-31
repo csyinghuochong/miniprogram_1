@@ -110,15 +110,15 @@ namespace ET.Client
 
             Unit unit = self.GetParent<Unit>();
 
-            TryUseSkillInfo tryUseSkillInfo = new TryUseSkillInfo();
-            tryUseSkillInfo.SkillConfigId = message.SkillConfigId;
-            tryUseSkillInfo.TargetId = message.TargetId;
-            tryUseSkillInfo.Angle = message.Angle;
-            tryUseSkillInfo.Position = message.Position;
+            UseSkillInfo useSkillInfo = new UseSkillInfo();
+            useSkillInfo.SkillConfigId = message.SkillConfigId;
+            useSkillInfo.TargetId = message.TargetId;
+            useSkillInfo.Angle = message.Angle;
+            useSkillInfo.Position = message.Position;
 
             SkillC skill = self.AddChild<SkillC>();
             self.Skills.Add(skill);
-            skill.OnInit(tryUseSkillInfo, unit);
+            skill.OnInit(useSkillInfo, unit);
             skill.OnExecute();
         }
 

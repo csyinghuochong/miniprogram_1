@@ -98,15 +98,15 @@ namespace ET.Server
 
             float cd = self.AddSkillCD(skillConfigId);
 
-            TryUseSkillInfo tryUseSkillInfo = new TryUseSkillInfo();
-            tryUseSkillInfo.SkillConfigId = skillConfigId;
-            tryUseSkillInfo.TargetId = targetId;
-            tryUseSkillInfo.Angle = angle;
-            tryUseSkillInfo.Position = position;
+            UseSkillInfo useSkillInfo = new UseSkillInfo();
+            useSkillInfo.SkillConfigId = skillConfigId;
+            useSkillInfo.TargetId = targetId;
+            useSkillInfo.Angle = angle;
+            useSkillInfo.Position = position;
 
             SkillS skill = self.AddChild<SkillS>();
             self.Skills.Add(skill);
-            skill.OnInit(tryUseSkillInfo, unit);
+            skill.OnInit(useSkillInfo, unit);
             skill.OnExecute();
 
             M2C_OnUseSkill message = M2C_OnUseSkill.Create();

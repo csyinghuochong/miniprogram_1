@@ -60,4 +60,27 @@ namespace ET.Client
     public struct UIItemTip_TakeOff
     {
     }
+
+    public struct EffectData
+    {
+        public int EffectTypeEnum;
+        public int EffectId;
+        public float3 EffectPosition;
+        public float EffectAngle;
+        public float TargetAngle;
+        public long TargetID;
+        public long InstanceId;
+    }
+
+    public struct SkillEffect
+    {
+        public EffectData EffectData;
+        public Unit Unit;
+    }
+
+    public struct SkillEffectFinish
+    {
+        public long EffectInstanceId;
+        public Unit Unit;
+    }
 }
