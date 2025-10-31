@@ -733,7 +733,7 @@ message M2C_EnterBossRoom // ILocationResponse
 	string Message = 3;
 }
 
-// ResponseType M2C_EnterBossRoom
+// ResponseType M2C_TryUseSkill
 message C2M_TryUseSkill // ILocationRequest
 {
 	int32 RpcId = 1;

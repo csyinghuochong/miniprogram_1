@@ -3334,7 +3334,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(OuterMessage.C2M_TryUseSkill)]
-    [ResponseType(nameof(M2C_EnterBossRoom))]
+    [ResponseType(nameof(M2C_TryUseSkill))]
     public partial class C2M_TryUseSkill : MessageObject, ILocationRequest
     {
         public static C2M_TryUseSkill Create(bool isFromPool = false)
