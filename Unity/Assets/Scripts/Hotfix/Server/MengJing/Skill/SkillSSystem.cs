@@ -41,6 +41,13 @@
 
         public static void OnUpdate(this SkillS self, float deltaTime)
         {
+            self.ElapsedTime += deltaTime;
+            if (self.ElapsedTime >= self.SkillConfig.SkillLiveTime)
+            {
+                self.SkillState = SkillState.Finished;
+                return;
+            }
+
             self.SkillHandler.OnUpdate(self, deltaTime);
         }
 

@@ -155,6 +155,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
+                    unit.AddComponent<EffectViewComponent>();
                     break;
                 }
                 case UnitType.Hero:
@@ -163,7 +164,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
-                    unit.AddComponent<BuffManagerComponent>();
+                    unit.AddComponent<EffectViewComponent>();
                     break;
                 }
                 case UnitType.Monster:
@@ -172,7 +173,7 @@ namespace ET.Client
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
-                    unit.AddComponent<BuffManagerComponent>();
+                    unit.AddComponent<EffectViewComponent>();
                     break;
                 }
                 default:
@@ -197,14 +198,13 @@ namespace ET.Client
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
-                    unit.RemoveComponent<BuffManagerComponent>();
+                    
                     break;
                 }
                 case UnitType.Monster:
                 {
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
-                    unit.RemoveComponent<BuffManagerComponent>();
                     break;
                 }
             }

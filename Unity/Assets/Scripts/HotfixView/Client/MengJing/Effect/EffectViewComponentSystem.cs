@@ -1,0 +1,114 @@
+﻿using System;
+
+namespace ET.Client
+{
+    [EntitySystemOf(typeof(EffectViewComponent))]
+    [FriendOf(typeof(EffectViewComponent))]
+    public static partial class EffectViewComponentSystem
+    {
+        [Invoke(TimerInvokeType.EffectTimer)]
+        public class EffectTimer : ATimer<EffectViewComponent>
+        {
+            protected override void Run(EffectViewComponent self)
+            {
+                try
+                {
+                    self.Update();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
+        }
+
+        [EntitySystem]
+        private static void Awake(this EffectViewComponent self)
+        {
+            self.TimeInterval = 33;
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.EffectTimer, self);
+
+            self.InitEffect();
+        }
+
+        [EntitySystem]
+        private static void Destroy(this EffectViewComponent self)
+        {
+            self.OnDispose();
+        }
+
+        private static void Update(this EffectViewComponent self)
+        {
+            float deltaTime = self.TimeInterval / 1000f * self.Scene().TimeScale;
+
+            for (int i = self.Effects.Count - 1; i >= 0; i--)
+            {
+                Effect effect = self.Effects[i];
+
+                if (effect.EffectState == EffectState.Finished)
+                {
+                    effect.Dispose();
+                    self.Effects.RemoveAt(i);
+                    continue;
+                }
+
+                effect.OnUpdate(deltaTime);
+            }
+
+            if (self.Effects.Count == 0)
+            {
+                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            }
+        }
+
+        public static void RemoveEffectId(this EffectViewComponent self, long instanceId)
+        {
+            for (int i = self.Effects.Count - 1; i >= 0; i--)
+            {
+                if (self.Effects[i].EffectData.InstanceId == instanceId)
+                {
+                    self.Effects[i].EffectState = EffectState.Finished;
+                }
+            }
+        }
+
+        public static Effect GetEffect(this EffectViewComponent self, long instanceId)
+        {
+            for (int i = self.Effects.Count - 1; i >= 0; i--)
+            {
+                if (self.Effects[i].EffectData.InstanceId == instanceId)
+                {
+                    return self.Effects[i];
+                }
+            }
+
+            return null;
+        }
+
+        public static Effect EffectFactory(this EffectViewComponent self, EffectData effectData)
+        {
+            Unit unit = self.GetParent<Unit>();
+
+            self.RemoveSameBuffEffect(effectData);
+
+            Effect resultEffect = self.AddChild<Effect>(true);
+            resultEffect.OnInit(effectData, unit);
+            self.Effects.Add(resultEffect);
+
+            return resultEffect;
+        }
+
+        private static void InitEffect(this EffectViewComponent self)
+        {
+        }
+
+        private static void RemoveSameBuffEffect(this EffectViewComponent self, EffectData effectData)
+        {
+        }
+
+        public static void OnDispose(this EffectViewComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+        }
+    }
+}

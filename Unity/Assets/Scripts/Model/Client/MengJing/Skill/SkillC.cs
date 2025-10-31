@@ -17,6 +17,7 @@ namespace ET.Client
         public Unit TheUnitTarget { get => this.theUnitTarget; set => this.theUnitTarget = value; }
         public float3 NowPosition { get; set; } //当前技能的坐标点
         public float3 TargetPosition { get; set; }
+        public float ElapsedTime{ get; set; }
 
         public List<long> EffectInstanceId { get; set; } = new();
     }
