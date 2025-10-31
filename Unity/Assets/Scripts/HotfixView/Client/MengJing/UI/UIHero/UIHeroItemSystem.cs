@@ -32,11 +32,12 @@ namespace ET.Client
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
             UICommonHelper.HideChild(self.Transform_HeroStar.gameObject);
-            for (int i = 0; i < hero.Star; i++)
+            for (int i = 0; i < heroConfig.HeroUpStarNeed.Length; i++)
             {
                 if (i < self.Transform_HeroStar.childCount)
                 {
                     self.Transform_HeroStar.GetChild(i).gameObject.SetActive(true);
+                    self.Transform_HeroStar.GetChild(i).GetChild(0).gameObject.SetActive(false);
                 }
                 else
                 {
@@ -44,6 +45,9 @@ namespace ET.Client
                     GameObject go = UnityEngine.Object.Instantiate(prefab, self.Transform_HeroStar);
                     go.SetActive(true);
                 }
+
+                GameObject star = self.Transform_HeroStar.GetChild(i).GetChild(0).gameObject;
+                star.SetActive(hero.Star > i);
             }
 
             self.Text_HeroCombatPower.SetText(hero.NumericDic[NumericType.CombatPower]);

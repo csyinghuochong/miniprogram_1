@@ -69,15 +69,15 @@ namespace ET.Server
                 {
                     break;
                 }
-
+            
                 int nextStar = hero.Star + 1;
-
+            
                 if (nextStar >= heroConfig.HeroUpStarNeed.Length)
                 {
                     hero.HunShi = heroConfig.HeroUpStarNeed[hero.Star];
                     break;
                 }
-
+            
                 hero.HunShi -= heroConfig.HeroUpStarNeed[hero.Star];
                 hero.Star += 1;
             }
