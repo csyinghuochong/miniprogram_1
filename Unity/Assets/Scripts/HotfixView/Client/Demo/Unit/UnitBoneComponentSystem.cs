@@ -15,6 +15,7 @@ namespace ET.Client
             if (boneSet != null)
             {
                 self.Hp = boneSet.Find("Hp");
+                self.Center = boneSet.Find("Center");
             }
         }
 
@@ -22,6 +23,21 @@ namespace ET.Client
         private static void Destroy(this UnitBoneComponent self)
         {
             self.Hp = null;
+        }
+
+        public static Transform GetTransform(this UnitBoneComponent self, string posType)
+        {
+            switch (posType)
+            {
+                case PosType.Hp:
+                    return self.Hp;
+                    break;
+                case PosType.Center:
+                    return self.Center;
+                    break;
+            }
+
+            return null;
         }
     }
 }
