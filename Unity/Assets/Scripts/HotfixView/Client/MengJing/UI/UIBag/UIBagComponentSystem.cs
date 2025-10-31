@@ -137,7 +137,7 @@ namespace ET.Client
                 return;
             }
 
-            while (self.UICommonItemList.Count < itemList.Count)
+            while (self.UICommonItemList.Count < (itemList.Count > 100 ? itemList.Count : 100))
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
                 UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
@@ -152,7 +152,9 @@ namespace ET.Client
 
             for (int i = itemList.Count; i < self.UICommonItemList.Count; i++)
             {
-                self.UICommonItemList[i].GameObject.SetActive(false);
+                self.UICommonItemList[i].GameObject.SetActive(true);
+                self.UICommonItemList[i].Image_ItemNull.gameObject.SetActive(true);
+                self.UICommonItemList[i].Item.SetActive(false);
             }
         }
 
