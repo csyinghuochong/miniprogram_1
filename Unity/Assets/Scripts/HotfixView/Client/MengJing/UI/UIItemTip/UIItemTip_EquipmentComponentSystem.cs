@@ -94,6 +94,9 @@ namespace ET.Client
 
             long actChange = 0;
             long defChange = 0;
+            
+            self.ShowBaseAttributeItem("攻击", newEquipConfig.EquipMaxAct.ToString(), actChange);
+            self.ShowBaseAttributeItem("防御", newEquipConfig.EquipMaxDef.ToString(), defChange);
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {
@@ -138,15 +141,15 @@ namespace ET.Client
                     actChange = newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base];
                     defChange = newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base];
                 }
+                
             }
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_TakeOff)
             {
                 self.Button_TakeOff.gameObject.SetActive(true);
+                
             }
-
-            self.ShowBaseAttributeItem("攻击", newEquipConfig.EquipMaxAct.ToString(), actChange);
-            self.ShowBaseAttributeItem("防御", newEquipConfig.EquipMaxDef.ToString(), defChange);
+            
         }
 
         private static void ShowBaseAttributeItem(this UIItemTip_EquipmentComponent self, string name, string value, long change)

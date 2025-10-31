@@ -148,6 +148,7 @@ namespace ET.Client
             {
                 self.UICommonItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId).Coroutine(); }).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
+                self.UICommonItemList[i].Item.SetActive(true);
             }
 
             for (int i = itemList.Count; i < self.UICommonItemList.Count; i++)
