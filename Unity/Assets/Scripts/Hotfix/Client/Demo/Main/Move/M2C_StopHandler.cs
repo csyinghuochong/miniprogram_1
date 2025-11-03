@@ -13,8 +13,7 @@ namespace ET.Client
                 return;
             }
 
-            unit.GetComponent<Move2DComponent>().Stop();
-            unit.Position = message.Position;
+            unit.GetComponent<Move2DComponent>().Stop(message.Position);
 
             // //移动停止，插值同步
             // if (message.Error == 0 )

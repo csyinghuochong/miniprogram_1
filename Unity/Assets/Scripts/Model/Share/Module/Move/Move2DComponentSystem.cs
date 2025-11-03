@@ -27,10 +27,12 @@ namespace ET
         [EntitySystem]
         private static void Awake(this Move2DComponent self)
         {
+            self.Unit = self.GetParent<Unit>();
+
 #if DOTNET
             self.TimeInterval = 100;
 #else
-            self.TimeInterval = 33;
+            self.TimeInterval = 20;
 #endif
         }
 
@@ -50,20 +52,19 @@ namespace ET
 
             float deltaTime = self.TimeInterval / 1000f * self.Scene().TimeScale;
 
-            Unit unit = self.GetParent<Unit>();
             float3 target = self.Targets[0];
-            float3 direction = target - unit.Position;
+            float3 direction = target - self.Unit.Position;
             float distanceToTarget = math.length(direction);
             float moveStep = self.Speed * deltaTime;
 
             if (distanceToTarget <= moveStep)
             {
-                unit.Position = target;
+                self.Unit.Position = target;
                 self.Targets.RemoveAt(0);
             }
             else
             {
-                unit.Position += math.normalize(direction) * moveStep;
+                self.Unit.Position += math.normalize(direction) * moveStep;
             }
         }
 
@@ -108,6 +109,25 @@ namespace ET
             self.Targets.Clear();
 
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+
+        // 距离差距过大，直接同步，否则平滑移动过去
+        public static void Stop(this Move2DComponent self, float3 target)
+        {
+            float3 direction = target - self.Unit.Position;
+            float distanceToTarget = math.length(direction);
+            if (distanceToTarget > 5f)
+            {
+                self.Targets.Clear();
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+
+                self.Unit.Position = target;
+            }
+            else
+            {
+                self.Targets.Clear();
+                self.Targets.Add(target);
+            }
         }
     }
 }
