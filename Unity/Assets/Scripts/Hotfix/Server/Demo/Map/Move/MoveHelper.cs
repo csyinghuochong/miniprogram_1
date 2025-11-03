@@ -34,19 +34,32 @@ namespace ET.Server
             }
         }
 
-        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent)
+        public static void PathResultTo(Unit unit, float3 target)
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
-            // speed *= (speedRate * 0.01f);
+            unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
+            
+            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
+            m2CPathfindingResult.Id = unit.Id;
+            m2CPathfindingResult.Points.Add(target);
+
+            MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
+        }
+
+        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent, float speedRate)
+        {
+            float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
+            speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(positonsss, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
                 //Console.WriteLine($"PathResultToAsync  unit.SendStop(0):  {TimeHelper.ServerNow()}");
                 //unit.SendStop(0);
             }
+
             await ETTask.CompletedTask;
         }
-        
+
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask BulletMoveToAsync(this Unit unit,  float3 target)
         {
@@ -101,7 +114,8 @@ namespace ET.Server
 
         public static void Stop(this Unit unit, int error)
         {
-            unit.GetComponent<MoveComponent>().Stop(error == 0);
+            // unit.GetComponent<MoveComponent>().Stop(error == 0);
+            unit.GetComponent<Move2DComponent>().Stop();
             unit.SendStop(error);
         }
 

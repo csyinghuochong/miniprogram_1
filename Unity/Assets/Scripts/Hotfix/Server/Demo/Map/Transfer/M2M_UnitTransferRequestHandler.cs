@@ -28,8 +28,8 @@ namespace ET.Server
                 }
             }
 
-            unit.AddComponent<MoveComponent>();
-
+            // unit.AddComponent<MoveComponent>();
+            unit.AddComponent<Move2DComponent>();
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 

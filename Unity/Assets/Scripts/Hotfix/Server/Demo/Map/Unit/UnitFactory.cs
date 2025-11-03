@@ -45,7 +45,7 @@ namespace ET.Server
             if (unit.GetComponent<NumericComponentS>() == null)
             {
                 NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
-                numericComponentS.ApplyValue(NumericType.Now_MoveSpeed, 60000, false); // 速度是6米每秒
+                numericComponentS.ApplyValue(NumericType.Base_Speed_Base, 60000, false); // 速度是6米每秒
                 numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
             }
 
@@ -61,7 +61,8 @@ namespace ET.Server
 
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<UnitInfoComponent>();
-            unit.AddComponent<MoveComponent>();
+            // unit.AddComponent<MoveComponent>();
+            unit.AddComponent<Move2DComponent>();
             unit.AddDataComponent<DBSaveComponent>();
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
         }
@@ -84,7 +85,8 @@ namespace ET.Server
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().PlayerName;
 
-            unit.AddComponent<MoveComponent>();
+            // unit.AddComponent<MoveComponent>();
+            unit.AddComponent<Move2DComponent>();
 
             AIComponent aiComponent = unit.AddComponent<AIComponent, int>(1);
             aiComponent.InitHero();
@@ -125,7 +127,8 @@ namespace ET.Server
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
-            unit.AddComponent<MoveComponent>();
+            // unit.AddComponent<MoveComponent>();
+            unit.AddComponent<Move2DComponent>();
 
             AIComponent aiComponent = unit.AddComponent<AIComponent, int>(1);
             aiComponent.InitMonster();

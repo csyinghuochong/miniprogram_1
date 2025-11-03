@@ -18,6 +18,7 @@ namespace ET
 
         public int SceneType { get; set; }
 
+        [BsonIgnore]
         public int SpeedRate { get; set; }
 
         [BsonIgnore]

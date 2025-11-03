@@ -48,7 +48,8 @@ namespace ET.Client
             unit.ConfigId = unitInfo.ConfigId;
 
             unit.AddComponent<ObjectWait>();
-            unit.AddComponent<MoveComponent>();
+            // unit.AddComponent<MoveComponent>();
+            unit.AddComponent<Move2DComponent>();
             
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = unitInfo.UnitName;
