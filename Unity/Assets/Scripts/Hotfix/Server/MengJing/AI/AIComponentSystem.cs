@@ -129,6 +129,11 @@ namespace ET.Server
             return self.AISkillIDList[RandomHelper.RandomNumber(0, self.AISkillIDList.Count)];
         }
 
+        public static void BeAttack(this AIComponent self, Unit attackUnit)
+        {
+            self.BeAttackId = attackUnit.Id;
+        }
+        
         public static void Begin(this AIComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);

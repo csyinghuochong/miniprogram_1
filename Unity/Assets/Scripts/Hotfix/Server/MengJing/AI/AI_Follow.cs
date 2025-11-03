@@ -22,6 +22,12 @@ namespace ET.Server
                 return 0;
             }
 
+            if (unitComponent.Get(aiComponent.BeAttackId) != null)
+            {
+                aiComponent.TargetID = aiComponent.BeAttackId;
+                return 1;
+            }
+
             return aiComponent.TargetID != 0 ? 1 : 0;
         }
 

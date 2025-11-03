@@ -12,7 +12,8 @@ namespace ET.Server
         public ETCancellationToken CancellationToken;
         public long Timer;
         public int Current;
-        public long TargetID { get; set; }
+        public long TargetID { get; set; } //攻击目标
+        public long BeAttackId{ get; set; } //被谁打了
         public float FollowDistance { get; set; } //跟随距离，超过这个距离要马上跟上主人
         public bool IsRetreat { get; set; }
         public float ActDistance { get; set; } //攻击距离

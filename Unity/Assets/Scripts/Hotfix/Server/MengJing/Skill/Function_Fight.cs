@@ -22,7 +22,7 @@ namespace ET.Server
             {
                 return false;
             }
-            
+
             SkillConfig skillConfig = skill.SkillConfig;
 
             //获取攻击方属性
@@ -57,6 +57,9 @@ namespace ET.Server
             {
                 return false;
             }
+
+            // AI
+            defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);
 
             // 结算伤害
             numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage);
