@@ -24,5 +24,6 @@ namespace ET.Client
         public Button Button_Sell;
         public Button Button_Wear;
         public Button Button_TakeOff;
+        public TMP_Text Text_EquipHero;
     }
 }

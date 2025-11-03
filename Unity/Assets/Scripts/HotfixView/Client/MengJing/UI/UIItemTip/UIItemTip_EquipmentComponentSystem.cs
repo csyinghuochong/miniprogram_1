@@ -33,10 +33,12 @@ namespace ET.Client
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
             self.Button_Wear = rc.Get<GameObject>("Button_Wear").GetComponent<Button>();
             self.Button_TakeOff = rc.Get<GameObject>("Button_TakeOff").GetComponent<Button>();
+            self.Text_EquipHero = rc.Get<GameObject>("Text_EquipHero").GetComponent<TMP_Text>();
 
             self.Button_Sell.gameObject.SetActive(false);
             self.Button_Wear.gameObject.SetActive(false);
             self.Button_TakeOff.gameObject.SetActive(false);
+            self.Text_EquipHero.gameObject.SetActive(false);
 
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
             self.Button_Wear.AddListener(self.OnButton_Wear);
@@ -97,7 +99,6 @@ namespace ET.Client
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {
-                //self.Button_Sell.gameObject.SetActive(true);
                 self.Button_Wear.gameObject.SetActive(true);
 
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
@@ -143,6 +144,10 @@ namespace ET.Client
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_TakeOff)
             {
                 self.Button_TakeOff.gameObject.SetActive(true);
+                Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
+                HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+                self.Text_EquipHero.gameObject.SetActive(true);
+                self.Text_EquipHero.SetText(heroConfig.HeroName);
             }
 
             if (uiItemTipData.UIItemTipOpType == 0)
@@ -168,6 +173,7 @@ namespace ET.Client
                 rc.Get<GameObject>("Image_IconAtk").GetComponent<Image>().gameObject.SetActive(false);
                 rc.Get<GameObject>("Image_BG").GetComponent<Image>().gameObject.SetActive(false);
             }
+
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
             rc.Get<GameObject>("Image_Reduction").SetActive(change < 0);
