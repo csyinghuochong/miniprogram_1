@@ -146,8 +146,39 @@ namespace ET.Client
                 self.Button_TakeOff.gameObject.SetActive(true);
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
                 HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)newItemConfig.ItemSubType);
+
                 self.Text_EquipHero.gameObject.SetActive(true);
                 self.Text_EquipHero.SetText(heroConfig.HeroName);
+                self.Image_CombatPowerChange.gameObject.SetActive(true);
+
+                List<Item> equipments = new List<Item>();
+
+                foreach (KeyValuePair<int, long> heroEquipment in hero.Equipments)
+                {
+                    if (heroEquipment.Value != 0)
+                    {
+                        Item oldItem = inventoryComponent.GetItem(heroEquipment.Value);
+                        if (oldItem != null && heroEquipment.Value != hero.Equipments[(int)equipSlotType])
+                        {
+                            equipments.Remove(oldItem);
+                        }
+                    }
+                }
+
+                equipments.Remove(newItem);
+
+                Dictionary<int, long> oldNumericDic = hero.NumericDic;
+                Dictionary<int, long> newNumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
+
+                long combatPowerChange = newNumericDic[NumericType.CombatPower] - oldNumericDic[NumericType.CombatPower];
+                self.Text_CombatPowerChange.SetText(combatPowerChange);
+                self.Image_CombatPowerReduction.gameObject.SetActive(combatPowerChange < 0);
+                self.Image_CombatPowerIncrease.gameObject.SetActive(combatPowerChange > 0);
+
+                actChange = newNumericDic[NumericType.Base_MaxAct_Base] - oldNumericDic[NumericType.Base_MaxAct_Base];
+                defChange = newNumericDic[NumericType.Base_MaxDef_Base] - oldNumericDic[NumericType.Base_MaxDef_Base];
+
             }
 
             if (uiItemTipData.UIItemTipOpType == 0)
