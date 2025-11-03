@@ -9,45 +9,17 @@ namespace ET.Server
     public class AIComponent : Entity, IAwake<int>, IDestroy
     {
         public int AIConfigId { get; set; }
-
         public ETCancellationToken CancellationToken;
-
         public long Timer;
-
         public int Current;
-
         public long TargetID { get; set; }
-
-        public float ActRange { get; set; }
-
+        public float FollowDistance { get; set; } //跟随距离，超过这个距离要马上跟上主人
         public bool IsRetreat { get; set; }
-
-        /// <summary>
-        /// 追击范围，超出则撤退
-        /// </summary>
-        public float ChaseRange { get; set; }
-
-        /// <summary>
-        /// 巡逻范围
-        /// </summary>
-        public float PatrolRange { get; set; }
-
-        public double ActDistance { get; set; }
-
+        public float ActDistance { get; set; } //攻击距离
         public List<int> AISkillIDList { get; set; } = new(); //当前所有技能
-
-        public long LastChangeTime;
-
-        public long LastZhuiJiTime;
-
         public float3 TargetZhuiJi { get; set; }
-
         public int SceneType { get; set; }
-
-        public int CheckJianGeTimeNum; //检测间隔时间次数
-
         public long AIDelay;
-
         public List<float3> TargetPoint { get; set; } = new();
     }
 }

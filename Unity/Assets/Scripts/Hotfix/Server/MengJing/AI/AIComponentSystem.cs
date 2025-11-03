@@ -28,8 +28,6 @@ namespace ET.Server
         private static void Awake(this AIComponent self, int aiConfigId)
         {
             self.AIConfigId = aiConfigId;
-            self.IsRetreat = false;
-            self.PatrolRange = 0f;
             self.AISkillIDList.Clear();
             self.TargetPoint.Clear();
             self.TargetZhuiJi = float3.zero;
@@ -93,14 +91,6 @@ namespace ET.Server
             }
         }
 
-        public static void ChangeTarget(this AIComponent self, long targetId)
-        {
-            if (!self.IsRetreat)
-            {
-                self.TargetID = targetId;
-            }
-        }
-
         private static void Cancel(this AIComponent self)
         {
             self.CancellationToken?.Cancel();
@@ -114,8 +104,6 @@ namespace ET.Server
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-            self.ChaseRange = 100;
-            self.ActRange = 100;
             self.ActDistance = monsterConfig.ActDistance / 10000f;
             self.AISkillIDList.Add(monsterConfig.ActSkillID);
         }
@@ -126,8 +114,7 @@ namespace ET.Server
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-            self.ChaseRange = 100;
-            self.ActRange = 100;
+            self.FollowDistance = 10f;
             self.ActDistance = heroConfig.AtkDistance / 10000f;
             self.AISkillIDList.Add(heroConfig.AtkID);
         }
@@ -140,58 +127,6 @@ namespace ET.Server
         public static int GetActSkillId(this AIComponent self)
         {
             return self.AISkillIDList[RandomHelper.RandomNumber(0, self.AISkillIDList.Count)];
-        }
-
-        public static void BeAttacking(this AIComponent self, Unit attack)
-        {
-            Unit main = self.GetParent<Unit>();
-            if (!main.IsCanAttackUnit(attack))
-            {
-                return;
-            }
-
-            long serverTime = TimeHelper.ServerNow();
-            if (serverTime - self.LastChangeTime < 6000)
-            {
-                return;
-            }
-
-            self.LastChangeTime = serverTime;
-            if (main.Type == UnitType.Hero)
-            {
-                bool gaiLv = RandomHelper.RandFloat01() < 0.1f;
-                if (self.TargetID != 0 && gaiLv)
-                {
-                    self.ChangeTarget(attack.Id);
-                }
-
-                if (self.TargetID == 0)
-                {
-                    self.ChangeTarget(attack.Id);
-                }
-            }
-            else
-            {
-                //怪物
-                //1.首先攻击默认攻击他的目标。
-                //2.攻击时有概率转换自己为攻击目标（近战攻击10 %，远程攻击5 %）。
-                //3.如果转换攻击目标，6秒内不在转换攻击目标
-                float gaiLv = RandomHelper.RandFloat01();
-                if (self.TargetID != 0 && self.ActDistance <= 4 && gaiLv <= 0.1f)
-                {
-                    self.ChangeTarget(attack.Id);
-                }
-
-                if (self.TargetID != 0 && self.ActDistance > 4 && gaiLv <= 0.05f)
-                {
-                    self.ChangeTarget(attack.Id);
-                }
-
-                if (self.TargetID == 0)
-                {
-                    self.ChangeTarget(attack.Id);
-                }
-            }
         }
 
         public static void Begin(this AIComponent self)
@@ -218,11 +153,6 @@ namespace ET.Server
             self.Cancel();
             self.Current = -1;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-        }
-
-        public static float GetActRange(this AIComponent self)
-        {
-            return self.ActRange;
         }
     }
 }

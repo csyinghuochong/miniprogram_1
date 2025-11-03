@@ -112,7 +112,7 @@ namespace ET.Server
             return target;
         }
 
-        public static void Stop(this Unit unit, int error)
+        public static void Stop(this Unit unit, int error = 0)
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
             unit.GetComponent<Move2DComponent>().Stop();

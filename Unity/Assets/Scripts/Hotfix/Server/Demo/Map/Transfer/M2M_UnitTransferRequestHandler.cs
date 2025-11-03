@@ -80,19 +80,7 @@ namespace ET.Server
                             continue;
                         }
 
-                        float2 position = i switch
-                        {
-                            0 => new float2(-3, 3),
-                            1 => new float2(0, 3),
-                            2 => new float2(3, 3),
-                            3 => new float2(-3, 0),
-                            4 => new float2(0, 0),
-                            5 => new float2(3, 0),
-                            6 => new float2(-3, -3),
-                            7 => new float2(0, -3),
-                            8 => new float2(3, -3),
-                            _ => float2.zero
-                        };
+                        float3 position = heroComponent.GetHeroPosition(hero.Id);
 
                         UnitFactory.CreateHero(scene, unit, hero, position);
                     }

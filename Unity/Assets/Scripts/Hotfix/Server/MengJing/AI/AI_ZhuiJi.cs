@@ -13,14 +13,14 @@ namespace ET.Server
             foreach (EntityRef<Unit> unitRef in unitComponent.GetAll())
             {
                 Unit u = unitRef;
-                if (u.IsCanAttackUnit(myUnit))
+                if (myUnit.IsCanAttackUnit(u))
                 {
                     aiComponent.TargetID = u.Id;
                     break;
                 }
             }
 
-            if (aiComponent.TargetID == 0 || aiComponent.IsRetreat)
+            if (aiComponent.TargetID == 0)
             {
                 return 1;
             }
@@ -32,7 +32,7 @@ namespace ET.Server
                 return 1;
             }
 
-            // 不再攻击距离内追击敌人
+            // 不在攻击距离内追击敌人
             float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
             bool zhuiji = distance >= aiComponent.ActDistance;
 
@@ -43,6 +43,7 @@ namespace ET.Server
         {
             Unit unit = aiComponent.GetParent<Unit>();
 
+            float offsetDistance = 2.0f; //偏移距离
             long checkTime = 200;
 
             for (int i = 0; i < 10000; i++)
@@ -50,13 +51,23 @@ namespace ET.Server
                 Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);
                 if (target != null)
                 {
-                    bool zhuiji = math.distance(unit.Position, target.Position) >= aiComponent.ActDistance;
-                    if (!zhuiji)
-                    {
-                        unit.Stop(-2);
-                    }
+                    float currentDistance = math.distance(unit.Position, target.Position);
+                    bool needChase = currentDistance >= aiComponent.ActDistance;
 
-                    MoveHelper.PathResultTo(unit, target.Position);
+                    if (!needChase)
+                    {
+                        unit.Stop();
+                    }
+                    else
+                    {
+                        if (currentDistance > 0.1f)
+                        {
+                            float3 direction = math.normalize(unit.Position - target.Position);
+                            float3 targetSidePosition = target.Position + direction * offsetDistance;
+
+                            MoveHelper.PathResultTo(unit, targetSidePosition);
+                        }
+                    }
                 }
 
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(checkTime, cancellationToken);

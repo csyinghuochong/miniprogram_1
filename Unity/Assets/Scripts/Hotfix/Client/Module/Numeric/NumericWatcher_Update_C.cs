@@ -27,8 +27,8 @@ namespace ET.Client
         public void Run(Unit unit, NumbericChange args)
         {
             float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+            args.Defend.GetComponent<Move2DComponent>().Speed = speed;
+            // args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }
-
 }

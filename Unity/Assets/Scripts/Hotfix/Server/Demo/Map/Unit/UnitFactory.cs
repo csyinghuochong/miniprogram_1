@@ -67,11 +67,11 @@ namespace ET.Server
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
         }
 
-        public static Unit CreateHero(Scene scene, Unit master, Hero hero, float2 position)
+        public static Unit CreateHero(Scene scene, Unit master, Hero hero, float3 position)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(hero.Id, hero.ConfigId);
             scene.GetComponent<UnitComponent>().Add(unit);
-            unit.Position = new float3(position.x, position.y, 0);
+            unit.Position = position;
             unit.Type = UnitType.Hero;
 
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
@@ -79,6 +79,7 @@ namespace ET.Server
             {
                 numericComponent.ApplyValue(keyValuePair.Key, keyValuePair.Value, false);
             }
+            numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
 
             unit.AddComponent<SkillManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
@@ -130,7 +131,7 @@ namespace ET.Server
             // unit.AddComponent<MoveComponent>();
             unit.AddComponent<Move2DComponent>();
 
-            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(1);
+            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(2);
             aiComponent.InitMonster();
             aiComponent.Begin();
 

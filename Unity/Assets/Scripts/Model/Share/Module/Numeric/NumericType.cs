@@ -14,6 +14,8 @@
         public const int MainCity_X = 3006;
         public const int MainCity_Y = 3007;
         public const int MainCity_Z = 3008;
+        public const int MasterId = 3009;                                       //主人
+        
         // 闯关相关
         public const int PassedLevelId = 3100;                                  //通关的关卡Id
         public const int CurrentLevelId = 3101;                                 //当前进行的关卡Id

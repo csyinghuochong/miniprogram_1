@@ -115,6 +115,12 @@ namespace ET.Server
                 return false;
             }
 
+            // 玩家不能被攻击
+            if (defend.Type == UnitType.Player)
+            {
+                return false;
+            }
+
             if (!defend.IsCanBeAttack(checkDead))
             {
                 return false;
