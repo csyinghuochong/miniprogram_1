@@ -219,14 +219,14 @@ namespace ET.Client
             self.UIEquipmentItem_6.UpdateInfo(hero, (type) => { self.OnEquipmentClick(type).Coroutine(); }).Coroutine();
 
             // 基础属性
-            self.ShowBaseStatItem(1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
-            self.ShowBaseStatItem(2, "攻击", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAct_Base], hero.NumericDic[NumericType.Base_MaxAct_Base]));
-            self.ShowBaseStatItem(3, "物防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinDef_Base], hero.NumericDic[NumericType.Base_MaxDef_Base]));
-            self.ShowBaseStatItem(4, "魔防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAdf_Base], hero.NumericDic[NumericType.Base_MaxAdf_Base]));
+            self.ShowBaseStatItem(1, 1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
+            self.ShowBaseStatItem(2, 2, "攻击", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAct_Base], hero.NumericDic[NumericType.Base_MaxAct_Base]));
+            self.ShowBaseStatItem(3, 1, "物防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinDef_Base], hero.NumericDic[NumericType.Base_MaxDef_Base]));
+            self.ShowBaseStatItem(4, 1, "魔防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAdf_Base], hero.NumericDic[NumericType.Base_MaxAdf_Base]));
 
             // 特殊属性
-            self.ShowOtherStatItem(1, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
-            self.ShowOtherStatItem(2, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(1, 2, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(2, 1, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
 
             // 技能
             while (self.UISkillItemList.Count < heroConfig.SkillID.Length)
@@ -247,8 +247,8 @@ namespace ET.Client
                 self.UISkillItemList[i].GameObject.SetActive(false);
             }
         }
-
-        private static void ShowBaseStatItem(this UIHeroInfoComponent self, int index, string name, string value)
+        
+        private static void ShowBaseStatItem(this UIHeroInfoComponent self, int index, int icon, string name, string value)
         {
             Transform item = null;
             if (self.Content_UIBaseAttributeItem.childCount <= index)
@@ -267,11 +267,21 @@ namespace ET.Client
             item.gameObject.SetActive(true);
 
             ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
+            //显示抗性图标
+            if (icon == 1)
+            {
+                rc.Get<GameObject>("Image_IconAtk").GetComponent<Image>().gameObject.SetActive(false);
+            }
+            //显示攻击图标
+            else if (icon == 2)
+            {
+                rc.Get<GameObject>("Image_IconDef").GetComponent<Image>().gameObject.SetActive(false);
+            }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
         }
 
-        private static void ShowOtherStatItem(this UIHeroInfoComponent self, int index, string name, string value)
+        private static void ShowOtherStatItem(this UIHeroInfoComponent self, int index, int icon, string name, string value)
         {
             Transform item = null;
             if (self.Content_UIOtherAttributeItem.childCount <= index)
@@ -286,6 +296,14 @@ namespace ET.Client
             item.gameObject.SetActive(true);
 
             ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
+            if (icon == 1)
+            {
+                rc.Get<GameObject>("Image_IconAtk").GetComponent<Image>().gameObject.SetActive(false);
+            }
+            else if (icon == 2)
+            {
+                rc.Get<GameObject>("Image_IconDef").GetComponent<Image>().gameObject.SetActive(false);
+            }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
         }

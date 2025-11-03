@@ -39,20 +39,23 @@ namespace ET.Client
             Hero hero = heroComponent.GetHero(self.CurrentHeroId);
 
             // 基础属性
-            self.ShowBaseStatItem(1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
-            self.ShowBaseStatItem(2, "攻击", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAct_Base], hero.NumericDic[NumericType.Base_MaxAct_Base]));
-            self.ShowBaseStatItem(3, "物防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinDef_Base], hero.NumericDic[NumericType.Base_MaxDef_Base]));
-            self.ShowBaseStatItem(4, "魔防", ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAdf_Base], hero.NumericDic[NumericType.Base_MaxAdf_Base]));
+            self.ShowBaseStatItem(1, 1, "生命", hero.NumericDic[NumericType.Base_MaxHp_Base].ToString());
+            self.ShowBaseStatItem(2, 2, "攻击",
+                ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAct_Base], hero.NumericDic[NumericType.Base_MaxAct_Base]));
+            self.ShowBaseStatItem(3, 1, "物防",
+                ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinDef_Base], hero.NumericDic[NumericType.Base_MaxDef_Base]));
+            self.ShowBaseStatItem(4, 1, "魔防",
+                ZString.Format("{0}-{1}", hero.NumericDic[NumericType.Base_MinAdf_Base], hero.NumericDic[NumericType.Base_MaxAdf_Base]));
 
             // 特殊属性
-            self.ShowOtherStatItem(1, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
-            self.ShowOtherStatItem(2, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
-            self.ShowOtherStatItem(3, "闪避", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Eva_Base] / 10000f * 100f));
-            self.ShowOtherStatItem(4, "命中", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Hit_Base] / 10000f * 100f));
-            self.ShowOtherStatItem(5, "伤害减免", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_HitDamageLessPro_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(1, 2, "暴击", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Cri_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(2, 1, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(3, 1, "闪避", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Eva_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(4, 2, "命中", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_Hit_Base] / 10000f * 100f));
+            self.ShowOtherStatItem(5, 1, "伤害减免", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_HitDamageLessPro_Base] / 10000f * 100f));
         }
 
-        private static void ShowBaseStatItem(this UIHeroAttributesComponent self, int index, string name, string value)
+        private static void ShowBaseStatItem(this UIHeroAttributesComponent self, int index, int icon, string name, string value)
         {
             Transform item = null;
             if (self.Content_UIBaseAttributeItem.childCount <= index)
@@ -71,19 +74,19 @@ namespace ET.Client
             item.gameObject.SetActive(true);
 
             ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
-            if (index % 2 == 0)
+            if (icon == 1)
             {
-                rc.Get<GameObject>("Image_Icon1").GetComponent<Image>().gameObject.SetActive(false);
+                rc.Get<GameObject>("Image_IconAtk").GetComponent<Image>().gameObject.SetActive(false);
             }
-            else
+            else if (icon == 2)
             {
-                rc.Get<GameObject>("Image_Icon2").GetComponent<Image>().gameObject.SetActive(false);
+                rc.Get<GameObject>("Image_IconDef").GetComponent<Image>().gameObject.SetActive(false);
             }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
         }
 
-        private static void ShowOtherStatItem(this UIHeroAttributesComponent self, int index, string name, string value)
+        private static void ShowOtherStatItem(this UIHeroAttributesComponent self, int index, int icon, string name, string value)
         {
             Transform item = null;
             if (self.Content_UIOtherAttributeItem.childCount <= index)
@@ -98,13 +101,13 @@ namespace ET.Client
             item.gameObject.SetActive(true);
 
             ReferenceCollector rc = item.GetComponent<ReferenceCollector>();
-            if (index % 2 == 0)
+            if (icon == 1)
             {
-                rc.Get<GameObject>("Image_Icon1").GetComponent<Image>().gameObject.SetActive(false);
+                rc.Get<GameObject>("Image_IconAtk").GetComponent<Image>().gameObject.SetActive(false);
             }
-            else
+            else if (icon == 2)
             {
-                rc.Get<GameObject>("Image_Icon2").GetComponent<Image>().gameObject.SetActive(false);
+                rc.Get<GameObject>("Image_IconDef").GetComponent<Image>().gameObject.SetActive(false);
             }
             rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>().SetText(name);
             rc.Get<GameObject>("Text_Value").GetComponent<TMP_Text>().SetText(value);
