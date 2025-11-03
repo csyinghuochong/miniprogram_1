@@ -13,6 +13,16 @@ namespace ET.Server
         /// <returns></returns>
         public static bool Fight(Unit attackUnit, Unit defendUnit, SkillS skill)
         {
+            if (attackUnit == null)
+            {
+                return false;
+            }
+
+            if (defendUnit == null)
+            {
+                return false;
+            }
+            
             SkillConfig skillConfig = skill.SkillConfig;
 
             //获取攻击方属性
@@ -42,7 +52,7 @@ namespace ET.Server
             // ...
 
             // 计算伤害
-            long damage = attack_MaxAct + skillConfig.DamgeValue - defend_MaxDef;
+            long damage = attack_MaxAct + skillConfig.DamgeValue;
             if (damage <= 0)
             {
                 return false;

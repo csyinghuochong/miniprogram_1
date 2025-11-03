@@ -90,7 +90,7 @@ namespace ET.Server
 
         public static void OnDead(this Unit self, Unit attack, bool nodrop = false)
         {
-            self.GetComponent<MoveComponent>()?.Stop(false);
+            // self.GetComponent<MoveComponent>()?.Stop(false);
             int waitRevive = self.OnWaitRevive();
 
             EventSystem.Instance.Publish(self.Scene(), new UnitKillEvent()

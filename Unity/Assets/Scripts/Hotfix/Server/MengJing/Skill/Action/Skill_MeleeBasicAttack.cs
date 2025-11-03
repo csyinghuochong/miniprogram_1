@@ -21,7 +21,7 @@
 
             if (skill.TriggerTime <= 0)
             {
-                Function_Fight.Fight(skill.TheUnitTarget, skill.TheUnitFrom, skill);
+                Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill);
 
                 skill.SkillState = SkillState.Finished;
             }

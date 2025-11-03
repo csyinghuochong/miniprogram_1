@@ -20,9 +20,9 @@
             Unit attack = unit.GetParent<UnitComponent>().Get(args.AttackId);
             if (args.NewValue <= 0 && numericComponentDefend.GetAsInt(NumericType.Now_Dead) == 0)
             {
-                if (attack == null || attack.IsDisposed)
+                if (attack == null)
                 {
-                    Log.Warning($"NumericWatcher_Now_Hp.args.NewValue <= 0: {attack.Type}");
+                    Log.Warning($"NumericWatcher_Now_Hp.args.NewValue <= 0");
                 }
 
                 unit.OnDead(attack);

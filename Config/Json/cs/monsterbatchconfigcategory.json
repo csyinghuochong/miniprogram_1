@@ -3,7 +3,7 @@
     "Id": 1010101,
     "SpawnTime": 0.5,
     "SpawnPosition": {
-      "x": 0,
+      "x": -5,
       "y": 5
     },
     "MonsterId": 10000001
@@ -12,7 +12,7 @@
     "Id": 1010102,
     "SpawnTime": 0.2,
     "SpawnPosition": {
-      "x": 1,
+      "x": 5,
       "y": 5
     },
     "MonsterId": 10000001
