@@ -55,11 +55,11 @@ namespace ET.Client
         }
 
         
-        public static async ETTask MoveToAsync(this Unit unit, List<float3> path)
+        public static void MoveToAsync(this Unit unit, List<float3> path)
         {
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-            await moveComponent.MoveToAsync(path, speed);
+            Move2DComponent moveComponent = unit.GetComponent<Move2DComponent>();
+            moveComponent.MoveTo(path, speed);
         }
 
         public static void Stop(Scene root)

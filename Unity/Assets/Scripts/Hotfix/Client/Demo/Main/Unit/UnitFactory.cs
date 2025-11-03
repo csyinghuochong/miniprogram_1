@@ -71,7 +71,7 @@ namespace ET.Client
                     list.Add(unit.Position);
                     list.AddRange(unitInfo.MoveInfo.Points);
 
-                    unit.MoveToAsync(list).Coroutine();
+                    unit.MoveToAsync(list);
                 }
             }
 

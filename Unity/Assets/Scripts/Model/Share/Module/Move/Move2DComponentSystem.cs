@@ -28,12 +28,6 @@ namespace ET
         private static void Awake(this Move2DComponent self)
         {
             self.Unit = self.GetParent<Unit>();
-
-#if DOTNET
-            self.TimeInterval = 100;
-#else
-            self.TimeInterval = 20;
-#endif
         }
 
         [EntitySystem]
@@ -50,7 +44,9 @@ namespace ET
                 return;
             }
 
-            float deltaTime = self.TimeInterval / 1000f * self.Scene().TimeScale;
+            long now = TimeInfo.Instance.ClientNow();
+            float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
+            self.LastUpdateTime = now;
 
             float3 target = self.Targets[0];
             float3 direction = target - self.Unit.Position;
@@ -73,6 +69,15 @@ namespace ET
             return self.Targets.Count == 0;
         }
 
+        private static void StartTimer(this Move2DComponent self)
+        {
+            if (self.Timer == 0)
+            {
+                self.LastUpdateTime = TimeInfo.Instance.ClientNow();
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.Move2DTimer, self);
+            }
+        }
+
         public static void MoveTo(this Move2DComponent self, float3 target, float speed)
         {
             self.Targets.Clear();
@@ -81,10 +86,7 @@ namespace ET
 
             self.Speed = speed;
 
-            if (self.Timer == 0)
-            {
-                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.Move2DTimer, self);
-            }
+            self.StartTimer();
         }
 
         public static void MoveTo(this Move2DComponent self, List<float3> target, float speed)
@@ -98,10 +100,7 @@ namespace ET
 
             self.Speed = speed;
 
-            if (self.Timer == 0)
-            {
-                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.Move2DTimer, self);
-            }
+            self.StartTimer();
         }
 
         public static void Stop(this Move2DComponent self)
@@ -116,7 +115,7 @@ namespace ET
         {
             float3 direction = target - self.Unit.Position;
             float distanceToTarget = math.length(direction);
-            if (distanceToTarget > 5f)
+            if (distanceToTarget > 2f)
             {
                 self.Targets.Clear();
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
@@ -127,6 +126,8 @@ namespace ET
             {
                 self.Targets.Clear();
                 self.Targets.Add(target);
+
+                self.StartTimer();
             }
         }
     }

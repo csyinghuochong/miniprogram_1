@@ -10,7 +10,8 @@ namespace ET
         public Unit Unit { get => unit; set => unit = value; }
 
         public long Timer;
-        public int TimeInterval;
+        public long LastUpdateTime; // 上次更新的时间戳
+
         public float Speed { get; set; }
         public List<float3> Targets { get; set; } = new();
     }

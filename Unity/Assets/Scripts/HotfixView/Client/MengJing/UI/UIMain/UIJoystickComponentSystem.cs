@@ -116,8 +116,13 @@ namespace ET.Client
         {
             self.IsDrag = false;
             self.LastDirection = Vector3.zero;
-            C2M_Stop c2MStop = C2M_Stop.Create();
+
+            C2M_StopResult c2MStop = C2M_StopResult.Create();
+            c2MStop.Position = self.MyUnit.Position;
             self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
+
+            self.MyUnit.GetComponent<Move2DComponent>().Stop();
+
             self.ResetUI();
 
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
@@ -219,6 +224,9 @@ namespace ET.Client
             C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
             c2MPathfindingResult.Position.Add(target);
             self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
+
+            float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
+            self.MyUnit.GetComponent<Move2DComponent>().MoveTo(target, speed);
         }
 
         private static void ResetUI(this UIJoystickComponent self)

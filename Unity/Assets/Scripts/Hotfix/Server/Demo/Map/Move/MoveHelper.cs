@@ -38,7 +38,7 @@ namespace ET.Server
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
             unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
-            
+
             M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
             m2CPathfindingResult.Id = unit.Id;
             m2CPathfindingResult.Points.Add(target);
@@ -61,7 +61,7 @@ namespace ET.Server
         }
 
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask BulletMoveToAsync(this Unit unit,  float3 target)
+        public static async ETTask BulletMoveToAsync(this Unit unit, float3 target)
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
             if (speed < 0.01)
@@ -129,15 +129,16 @@ namespace ET.Server
             m2CStop.Rotation = unit.Rotation;
             MapMessageHelper.Broadcast(unit, m2CStop);
         }
-        
-        public static void StopResult(this Unit unit, float3 position,  int error)
+
+        public static void StopResult(this Unit unit, float3 position, int error)
         {
-            unit.GetComponent<MoveComponent>().Stop(error == 0);
+            // unit.GetComponent<MoveComponent>().Stop(error == 0);
+            unit.GetComponent<Move2DComponent>().Stop();
             unit.Position = position;
             M2C_StopResult m2CStop = M2C_StopResult.Create();
             m2CStop.Error = error;
             m2CStop.Id = unit.Id;
-            m2CStop.Position = unit.Position;
+            m2CStop.Position = position;
             m2CStop.Rotation = unit.Rotation;
             MapMessageHelper.Broadcast(unit, m2CStop);
         }
