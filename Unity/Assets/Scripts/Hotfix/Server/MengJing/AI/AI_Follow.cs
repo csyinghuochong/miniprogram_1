@@ -55,8 +55,9 @@ namespace ET.Server
                     speedProp = 150;
                 }
 
-                if (distacne < 3f) //距离小于停止追
+                if (distacne < 7f) //距离小于停止追
                 {
+                    
                     speedProp = 0;
                 }
 

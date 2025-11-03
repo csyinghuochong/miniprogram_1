@@ -49,7 +49,7 @@ namespace ET.Server
             }
 
             // 结算伤害
-            numericComponentDefend.ApplyChange(NumericType.Now_Hp, damage);
+            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage);
 
             return true;
         }

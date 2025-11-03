@@ -43,8 +43,7 @@ namespace ET.Server
         {
             Unit unit = aiComponent.GetParent<Unit>();
 
-            float offsetDistance = 2.0f; //偏移距离
-            long checkTime = 200;
+            float offsetDistance = aiComponent.ActDistance - 0.1f; //偏移距离
 
             for (int i = 0; i < 10000; i++)
             {
@@ -70,7 +69,7 @@ namespace ET.Server
                     }
                 }
 
-                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(checkTime, cancellationToken);
+                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(300, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     return;
