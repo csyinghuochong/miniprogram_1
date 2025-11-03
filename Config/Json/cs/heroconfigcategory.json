@@ -21,7 +21,7 @@
       30000002,
       30000003
     ],
-    "Base_Hp": 1400,
+    "Base_Hp": 14000,
     "Base_Act": 60,
     "Base_Def": 50,
     "Base_Adf": 50,
@@ -61,7 +61,7 @@
       30000005,
       30000006
     ],
-    "Base_Hp": 800,
+    "Base_Hp": 8000,
     "Base_Act": 100,
     "Base_Def": 30,
     "Base_Adf": 30,
@@ -101,7 +101,7 @@
       30000008,
       30000009
     ],
-    "Base_Hp": 800,
+    "Base_Hp": 8000,
     "Base_Act": 100,
     "Base_Def": 30,
     "Base_Adf": 30,
@@ -141,7 +141,7 @@
       30000014,
       30000015
     ],
-    "Base_Hp": 1000,
+    "Base_Hp": 10000,
     "Base_Act": 80,
     "Base_Def": 40,
     "Base_Adf": 40,
@@ -181,7 +181,7 @@
       30000011,
       30000012
     ],
-    "Base_Hp": 800,
+    "Base_Hp": 8000,
     "Base_Act": 100,
     "Base_Def": 30,
     "Base_Adf": 30,
@@ -221,7 +221,7 @@
       30000017,
       30000018
     ],
-    "Base_Hp": 1000,
+    "Base_Hp": 10000,
     "Base_Act": 80,
     "Base_Def": 40,
     "Base_Adf": 40,

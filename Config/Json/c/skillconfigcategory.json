@@ -6,7 +6,7 @@
     "SkillActType": 0,
     "DamageType": 1,
     "SkillAddAnger": 5,
-    "SkillHandler": "Skill_SingleTarget",
+    "SkillHandler": "Skill_MeleeBasicAttack",
     "GameObjectParameter": "",
     "UnlockStar": 0,
     "SkillType": 1,
