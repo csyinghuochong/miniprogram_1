@@ -6,7 +6,7 @@ namespace ET.Client
     public class EffectViewComponent : Entity, IAwake, IDestroy
     {
         public long Timer;
-        public int TimeInterval;
+        public long LastUpdateTime;
 
         public List<Effect> Effects { get; set; } = new();
     }
