@@ -11,7 +11,7 @@ namespace ET.Client
         {
             Unit unit = args.Unit;
 
-            unit?.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmRunState);
+            unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmRunState);
 
             await ETTask.CompletedTask;
         }
@@ -24,7 +24,7 @@ namespace ET.Client
         {
             Unit unit = args.Unit;
 
-            unit?.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
+            unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
 
             await ETTask.CompletedTask;
         }
@@ -96,7 +96,7 @@ namespace ET.Client
             }
         }
 
-        public static void ChangeState(this FsmComponent self, int targetFsm, int skillid = 0)
+        public static void ChangeState(this FsmComponent self, int targetFsm, int skillId = 0)
         {
             Unit unit = self.GetParent<Unit>();
             SkeletonAnimation skeletonAnimation = unit.GetComponent<GameObjectComponent>().SkeletonAnimation;
@@ -114,23 +114,23 @@ namespace ET.Client
             switch (targetFsm)
             {
                 case FsmStateEnum.FsmDeathState:
-                    skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Death, false);
+                    skeletonAnimation.AnimationState.SetAnimation(0, "die", false);
                     break;
                 case FsmStateEnum.FsmIdleState:
-                    skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Idle, true);
+                    skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
                     break;
                 case FsmStateEnum.FsmRunState:
                     var currentAnimation = skeletonAnimation.AnimationState.GetCurrent(0);
-                    if (currentAnimation == null || currentAnimation.Animation.Name != AnimationName.Run)
+                    if (currentAnimation == null || currentAnimation.Animation.Name != "run")
                     {
-                        skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Run, true);
+                        skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
                     }
 
                     break;
-                case FsmStateEnum.FsmAttackState:
-                    skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Attack, true);
+                case FsmStateEnum.FsmSkillState:
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                    skeletonAnimation.AnimationState.SetAnimation(0, skillConfig.SkillAnimation, true);
                     break;
-
                 default:
                     break;
             }

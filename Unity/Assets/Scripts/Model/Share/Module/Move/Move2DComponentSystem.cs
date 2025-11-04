@@ -86,7 +86,10 @@ namespace ET
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
-            EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.Unit });
+            if (self.Unit != null)
+            {
+                EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.Unit });
+            }
         }
 
         public static void MoveTo(this Move2DComponent self, float3 target, float speed)

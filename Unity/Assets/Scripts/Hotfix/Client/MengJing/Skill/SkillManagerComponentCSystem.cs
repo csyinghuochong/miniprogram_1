@@ -72,7 +72,7 @@ namespace ET.Client
             {
                 self.PublicCD = 0;
             }
-            
+
             bool hasActiveSkills = self.Skills.Count > 0;
             bool hasActiveCDs = self.PublicCD > 0 || self.SkillCDs.Exists(item => item.CD > 0);
 
@@ -128,29 +128,23 @@ namespace ET.Client
             self.Skills.Add(skill);
             skill.OnInit(useSkillInfo, unit);
             skill.OnExecute();
-            
+
             if (self.Timer == 0)
             {
                 self.LastUpdateTime = TimeInfo.Instance.ClientNow();
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerC, self);
             }
-            
+
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(message.SkillConfigId);
-            
+
             if (!string.IsNullOrEmpty(skillConfig.SkillAnimation))
             {
-                // int fsmType = skillConfig.ComboSkillID > 0 ? 5 : 4;
-                // if (ConfigData.NotCombatSkill.Contains(skillConfig.SkillAnimation))
-                // {
-                //     fsmType = 4;
-                // }
-                //
-                // EventSystem.Instance.Publish(self.Root(), new FsmChange()
-                // {
-                //     FsmHandlerType = fsmType,
-                //     SkillId = skillcmd.SkillInfos[0].WeaponSkillID,
-                //     Unit = unit
-                // });
+                EventSystem.Instance.Publish(self.Root(), new FsmChange()
+                {
+                    FsmHandlerType = 4,
+                    SkillId = message.SkillConfigId,
+                    Unit = unit
+                });
             }
         }
 

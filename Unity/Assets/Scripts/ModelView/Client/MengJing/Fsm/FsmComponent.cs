@@ -1,15 +1,12 @@
-﻿using Spine.Unity;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
-    public static class AnimationName
+    public static class FsmStateEnum
     {
-        public const string Attack = "attack";
-        public const string BeAttack = "beattack";
-        public const string Death = "die";
-        public const string Idle = "idle";
-        public const string Magic = "magic";
-        public const string Run = "run";
+        public const int FsmNullState = 0;
+        public const int FsmIdleState = 1;
+        public const int FsmRunState = 2;
+        public const int FsmDeathState = 3;
+        public const int FsmSkillState = 4;
     }
 
     [ComponentOf(typeof(Unit))]
