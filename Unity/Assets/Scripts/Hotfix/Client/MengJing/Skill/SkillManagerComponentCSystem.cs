@@ -26,8 +26,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this SkillManagerComponentC self)
         {
-            self.TimeInterval = 33;
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.SkillTimerC, self);
         }
 
         [EntitySystem]
@@ -42,7 +40,9 @@ namespace ET.Client
 
         private static void Update(this SkillManagerComponentC self)
         {
-            float deltaTime = self.TimeInterval / 1000f * self.Scene().TimeScale;
+            long now = TimeInfo.Instance.ClientNow();
+            float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
+            self.LastUpdateTime = now;
 
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
@@ -71,6 +71,14 @@ namespace ET.Client
             if (self.PublicCD < 0)
             {
                 self.PublicCD = 0;
+            }
+            
+            bool hasActiveSkills = self.Skills.Count > 0;
+            bool hasActiveCDs = self.PublicCD > 0 || self.SkillCDs.Exists(item => item.CD > 0);
+
+            if (!hasActiveSkills && !hasActiveCDs)
+            {
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             }
         }
 
@@ -120,6 +128,12 @@ namespace ET.Client
             self.Skills.Add(skill);
             skill.OnInit(useSkillInfo, unit);
             skill.OnExecute();
+            
+            if (self.Timer == 0)
+            {
+                self.LastUpdateTime = TimeInfo.Instance.ClientNow();
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerC, self);
+            }
         }
 
         public static int IsCanUseSkill(this SkillManagerComponentC self, int skillConfigId)
