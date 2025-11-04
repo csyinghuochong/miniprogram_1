@@ -12,7 +12,6 @@
         [EntitySystem]
         private static void Destroy(this SkillS self)
         {
-            self.OnFinished();
         }
 
         public static void OnInit(this SkillS self, UseSkillInfo useSkillInfo, Unit theUnitFrom)

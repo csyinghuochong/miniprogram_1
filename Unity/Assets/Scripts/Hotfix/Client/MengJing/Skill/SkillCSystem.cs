@@ -14,7 +14,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this SkillC self)
         {
-            self.OnFinished();
         }
 
         public static void OnInit(this SkillC self, UseSkillInfo useSkillInfo, Unit theUnitFrom)

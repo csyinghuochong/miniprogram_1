@@ -33,7 +33,7 @@ namespace ET
         [EntitySystem]
         private static void Destroy(this Move2DComponent self)
         {
-            self.EndTimer();
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         private static void Update(this Move2DComponent self)
@@ -86,10 +86,7 @@ namespace ET
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
-            if (self.Unit != null)
-            {
-                EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.Unit });
-            }
+            EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.Unit });
         }
 
         public static void MoveTo(this Move2DComponent self, float3 target, float speed)
