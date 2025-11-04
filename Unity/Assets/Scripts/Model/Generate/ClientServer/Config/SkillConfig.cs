@@ -38,6 +38,7 @@ namespace ET
             SkillTargetType = _buf.ReadInt();
             DamageRangeType = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); DamageRange = new double[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { double __e0;__e0 = _buf.ReadDouble(); DamageRange[__index0] = __e0;}}
+            SkillEffectID = _buf.ReadInt();
             SkillHitEffectID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); InitBuffID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); InitBuffID[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); BuffID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); BuffID[__index0] = __e0;}}
@@ -164,6 +165,11 @@ namespace ET
         /// <summary>
         /// 技能特效Id
         /// </summary>
+        public readonly int SkillEffectID;
+
+        /// <summary>
+        /// 技能命中特效Id
+        /// </summary>
         public readonly int SkillHitEffectID;
 
         /// <summary>
@@ -187,6 +193,7 @@ namespace ET
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -240,6 +247,7 @@ namespace ET
             + "SkillTargetType:" + SkillTargetType + ","
             + "DamageRangeType:" + DamageRangeType + ","
             + "DamageRange:" + Luban.StringUtil.CollectionToString(DamageRange) + ","
+            + "SkillEffectID:" + SkillEffectID + ","
             + "SkillHitEffectID:" + SkillHitEffectID + ","
             + "InitBuffID:" + Luban.StringUtil.CollectionToString(InitBuffID) + ","
             + "BuffID:" + Luban.StringUtil.CollectionToString(BuffID) + ","

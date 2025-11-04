@@ -66,7 +66,7 @@ namespace ET.Client
                 return;
             }
 
-            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillHitEffectID);
+            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID);
 
             if (string.IsNullOrEmpty(effectConfig.EffectName))
             {

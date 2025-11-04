@@ -2,6 +2,18 @@
 
 namespace ET.Client
 {
+    [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
+    public class NumericWatcher_Hp_HitEffect : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            Unit unitDefend = args.Defend;
+            Unit unitAttack = unitDefend.GetParent<UnitComponent>().Get(args.AttackId);
+
+            EffectHelper.PlayHitEffect(unitAttack, unitDefend, args.SkillId);
+        }
+    }
+
     [Event(SceneType.Demo)]
     public class Skill_OnSkillEffect : AEvent<Scene, SkillEffect>
     {

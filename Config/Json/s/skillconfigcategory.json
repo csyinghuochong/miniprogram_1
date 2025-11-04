@@ -24,7 +24,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -58,7 +59,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000002,
+    "SkillEffectID": 10000002,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -92,7 +94,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000003,
+    "SkillEffectID": 10000003,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -126,7 +129,8 @@
     "DamageRange": [
       4
     ],
-    "SkillHitEffectID": 10000004,
+    "SkillEffectID": 10000004,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -160,7 +164,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -194,7 +199,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       10000006,
       10000012
@@ -229,7 +235,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       10000002
     ],
@@ -263,7 +270,8 @@
     "DamageRange": [
       6
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -297,7 +305,8 @@
     "DamageRange": [
       3
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -332,7 +341,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -366,7 +376,8 @@
     "DamageRange": [
       2
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -401,7 +412,8 @@
     "DamageRange": [
       3
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -435,7 +447,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -470,7 +483,8 @@
     "DamageRange": [
       3
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -504,7 +518,8 @@
     "DamageRange": [
       2
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -538,7 +553,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -574,7 +590,8 @@
     "DamageRange": [
       3
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -608,7 +625,8 @@
     "DamageRange": [
       4
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -642,7 +660,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       10000015,
       10000016
@@ -677,7 +696,8 @@
     "DamageRange": [
       3
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -712,7 +732,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -747,7 +768,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -781,7 +803,8 @@
     "DamageRange": [
       3
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -815,7 +838,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -849,7 +873,8 @@
     "DamageRange": [
       4
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
@@ -884,7 +909,8 @@
     "DamageRange": [
       0
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [],
     "BuffID": [],
     "SkillDescribe": "将敌方所有目标链接到一起,其中任意一个受到伤害,其他所有单位都额外承受当前伤害的10%,持续5秒。"
@@ -912,7 +938,8 @@
     "SkillTargetType": 0,
     "DamageRangeType": 0,
     "DamageRange": [],
-    "SkillHitEffectID": 0,
+    "SkillEffectID": 0,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [],
     "BuffID": [],
     "SkillDescribe": "释放强大的魔法治疗一个队友或伤害一个敌人,使其每秒造成60%伤害或每秒恢复2.5%最大生命生命,持续5秒。"
@@ -942,7 +969,8 @@
     "DamageRange": [
       4
     ],
-    "SkillHitEffectID": 10000001,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],

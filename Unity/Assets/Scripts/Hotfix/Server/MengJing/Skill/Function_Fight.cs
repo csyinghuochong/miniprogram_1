@@ -62,7 +62,7 @@ namespace ET.Server
             defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);
 
             // 结算伤害
-            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage);
+            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage, true, false, attackUnit.Id, skillConfig.Id);
 
             return true;
         }

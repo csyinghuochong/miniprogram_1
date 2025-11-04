@@ -83,31 +83,31 @@
     "Id": 20000001,
     "Name": "受击特效",
     "EffectType": 2,
-    "EffectName": "Eff_Test3",
+    "EffectName": "Eff_Test14",
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParent": 1,
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 20000002,
     "Name": "受击特效",
     "EffectType": 2,
-    "EffectName": "Eff_Test4",
+    "EffectName": "Eff_Test14",
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParent": 1,
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 20000003,
     "Name": "受击特效",
     "EffectType": 2,
-    "EffectName": "Eff_Test5",
+    "EffectName": "Eff_Test14",
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParent": 1,
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 20000004,
@@ -116,8 +116,8 @@
     "EffectName": "Eff_Test6",
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParent": 1,
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 20000005,
@@ -126,7 +126,7 @@
     "EffectName": "Eff_Test1",
     "SkillEffectLiveTime": 3,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParent": 1,
+    "SkillParentPosition": "Center"
   }
 ]
