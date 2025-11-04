@@ -29,7 +29,6 @@
 
             self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
             self.TargetPosition = useSkillInfo.Position;
-            self.NowPosition = self.TargetPosition;
 
             self.SkillHandler.OnInit(self);
         }

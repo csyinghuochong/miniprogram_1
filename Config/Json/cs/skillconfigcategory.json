@@ -24,6 +24,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -41,7 +42,7 @@
     "SkillActType": 0,
     "DamageType": 1,
     "SkillAddAnger": 5,
-    "SkillHandler": "Skill_Projectile_Track",
+    "SkillHandler": "Skill_RangedBasicAttack",
     "GameObjectParameter": "",
     "UnlockStar": 0,
     "SkillType": 1,
@@ -59,6 +60,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 3,
     "SkillEffectID": 10000002,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -76,7 +78,7 @@
     "SkillActType": 0,
     "DamageType": 2,
     "SkillAddAnger": 5,
-    "SkillHandler": "Skill_Projectile_Track",
+    "SkillHandler": "Skill_RangedBasicAttack",
     "GameObjectParameter": "",
     "UnlockStar": 0,
     "SkillType": 1,
@@ -94,6 +96,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 3,
     "SkillEffectID": 10000003,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -129,6 +132,7 @@
     "DamageRange": [
       4
     ],
+    "Speed": 0,
     "SkillEffectID": 10000004,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -164,6 +168,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -199,6 +204,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -235,6 +241,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -270,6 +277,7 @@
     "DamageRange": [
       6
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -305,6 +313,7 @@
     "DamageRange": [
       3
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -341,6 +350,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -376,6 +386,7 @@
     "DamageRange": [
       2
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -412,6 +423,7 @@
     "DamageRange": [
       3
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -447,6 +459,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -483,6 +496,7 @@
     "DamageRange": [
       3
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -518,6 +532,7 @@
     "DamageRange": [
       2
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -553,6 +568,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -590,6 +606,7 @@
     "DamageRange": [
       3
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -625,6 +642,7 @@
     "DamageRange": [
       4
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -660,6 +678,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -696,6 +715,7 @@
     "DamageRange": [
       3
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -732,6 +752,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -768,6 +789,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -803,6 +825,7 @@
     "DamageRange": [
       3
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -838,6 +861,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -873,6 +897,7 @@
     "DamageRange": [
       4
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -909,6 +934,7 @@
     "DamageRange": [
       0
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [],
@@ -938,6 +964,7 @@
     "SkillTargetType": 0,
     "DamageRangeType": 0,
     "DamageRange": [],
+    "Speed": 0,
     "SkillEffectID": 0,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [],
@@ -969,6 +996,7 @@
     "DamageRange": [
       4
     ],
+    "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [

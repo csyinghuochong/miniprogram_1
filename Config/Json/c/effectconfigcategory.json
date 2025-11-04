@@ -14,7 +14,7 @@
     "Name": "箭手普通攻击",
     "EffectType": 1,
     "EffectName": "Eff_Test2",
-    "SkillEffectLiveTime": 1,
+    "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
     "SkillParentPosition": ""
@@ -24,7 +24,7 @@
     "Name": "法师普通攻击",
     "EffectType": 1,
     "EffectName": "Eff_Test3",
-    "SkillEffectLiveTime": 1,
+    "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
     "SkillParentPosition": ""

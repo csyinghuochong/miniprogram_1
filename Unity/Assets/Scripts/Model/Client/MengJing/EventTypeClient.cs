@@ -84,6 +84,14 @@ namespace ET.Client
         public Unit Unit;
     }
 
+    public struct SkillEffectMove
+    {
+        public long EffectInstanceId;
+        public float3 Postion;
+        public float Angle;
+        public Unit Unit;
+    }
+
     public struct FsmChange
     {
         public int FsmHandlerType;

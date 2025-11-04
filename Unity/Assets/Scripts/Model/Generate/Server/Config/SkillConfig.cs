@@ -38,6 +38,7 @@ namespace ET
             SkillTargetType = _buf.ReadInt();
             DamageRangeType = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); DamageRange = new double[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { double __e0;__e0 = _buf.ReadDouble(); DamageRange[__index0] = __e0;}}
+            Speed = _buf.ReadFloat();
             SkillEffectID = _buf.ReadInt();
             SkillHitEffectID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); InitBuffID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); InitBuffID[__index0] = __e0;}}
@@ -163,6 +164,11 @@ namespace ET
         public readonly double[] DamageRange;
 
         /// <summary>
+        /// 速度
+        /// </summary>
+        public readonly float Speed;
+
+        /// <summary>
         /// 技能特效Id
         /// </summary>
         public readonly int SkillEffectID;
@@ -220,6 +226,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -247,6 +254,7 @@ namespace ET
             + "SkillTargetType:" + SkillTargetType + ","
             + "DamageRangeType:" + DamageRangeType + ","
             + "DamageRange:" + Luban.StringUtil.CollectionToString(DamageRange) + ","
+            + "Speed:" + Speed + ","
             + "SkillEffectID:" + SkillEffectID + ","
             + "SkillHitEffectID:" + SkillHitEffectID + ","
             + "InitBuffID:" + Luban.StringUtil.CollectionToString(InitBuffID) + ","

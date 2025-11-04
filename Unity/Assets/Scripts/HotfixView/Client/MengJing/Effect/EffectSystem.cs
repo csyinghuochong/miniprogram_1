@@ -173,10 +173,10 @@ namespace ET.Client
                 return;
             }
 
-            if (angle != -1)
-            {
-                self.EffectObj.transform.rotation = Quaternion.Euler(0, angle, 0);
-            }
+            // if (angle != -1)
+            // {
+            //     self.EffectObj.transform.rotation = Quaternion.Euler(0, angle, 0);
+            // }
 
             self.EffectObj.transform.position = vec3;
         }
