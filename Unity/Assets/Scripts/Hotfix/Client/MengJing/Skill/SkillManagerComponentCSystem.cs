@@ -203,5 +203,18 @@ namespace ET.Client
 
             self.PublicCD = publicCD;
         }
+
+        public static void OnFinish(this SkillManagerComponentC self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+
+            for (int i = self.Skills.Count - 1; i >= 0; i--)
+            {
+                SkillC skill = self.Skills[i];
+                skill.OnFinished();
+                skill.Dispose();
+                self.Skills.RemoveAt(i);
+            }
+        }
     }
 }

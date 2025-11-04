@@ -11,10 +11,13 @@
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             int sceneId = mapComponent.SceneId;
             int sceneTypeEnum = mapComponent.MapType;
+
             // 角色要过几秒才销毁，先停止一些组件
             // defendUnit.GetComponent<MoveComponent>()?.Stop(false);
             defendUnit.GetComponent<Move2DComponent>()?.Stop();
             defendUnit.GetComponent<AIComponent>()?.Stop();
+            defendUnit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
+
             NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             switch (sceneTypeEnum)
             {

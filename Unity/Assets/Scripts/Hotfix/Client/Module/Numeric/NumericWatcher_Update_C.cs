@@ -7,17 +7,22 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            // if (args.NewValue == 0) //复活
-            // {
-            //     unit.Position = unit.GetBornPostion();
-            //     EventSystem.Instance.Publish(args.Defend.Root(), new UnitRevive() { Unit = args.Defend });
-            // }
-            //
-            // if (args.NewValue == 1) //死亡
-            // {
-            //     unit.GetComponent<HeroDataComponentC>().OnDead();
-            //     EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend, Wait =  true});
-            // }
+            if (args.NewValue == 0) //复活
+            {
+                // unit.Position = unit.GetBornPostion();
+
+                EventSystem.Instance.Publish(args.Defend.Root(), new UnitRevive() { Unit = args.Defend });
+            }
+
+            if (args.NewValue == 1) //死亡
+            {
+                // unit.GetComponent<StateComponentC>().Reset();
+                unit.GetComponent<Move2DComponent>()?.Stop();
+                unit.GetComponent<SkillManagerComponentC>()?.OnFinish();
+                // unit.GetComponent<BuffManagerComponentC>()?.OnDead();
+
+                EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend, Wait = true });
+            }
         }
     }
 

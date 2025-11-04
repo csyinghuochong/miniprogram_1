@@ -204,5 +204,26 @@ namespace ET.Server
 
             return skillCDItem.CD;
         }
+
+        public static void OnFinish(this SkillManagerComponentS self, bool notice)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+
+            for (int i = self.Skills.Count - 1; i >= 0; i--)
+            {
+                SkillS skill = self.Skills[i];
+                skill.OnFinished();
+                skill.Dispose();
+                self.Skills.RemoveAt(i);
+            }
+
+            // Unit unit = self.GetParent<Unit>();
+            // if (notice && unit != null && !unit.IsDisposed)
+            // {
+            //     M2C_UnitFinishSkill M2C_UnitFinishSkill = M2C_UnitFinishSkill.Create();
+            //     M2C_UnitFinishSkill.UnitId = unit.Id;
+            //     MapMessageHelper.Broadcast(unit, M2C_UnitFinishSkill);
+            // }
+        }
     }
 }

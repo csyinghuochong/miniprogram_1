@@ -760,4 +760,8 @@ message M2C_OnUseSkill // IMessage
 	float CD = 6;
 	float PublicCD = 7;
 }
-	
+
+message M2C_UnitFinishSkill // IMessage
+{
+	int64 UnitId = 1;
+}

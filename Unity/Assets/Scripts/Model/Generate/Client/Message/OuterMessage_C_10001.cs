@@ -3456,6 +3456,31 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_UnitFinishSkill)]
+    public partial class M2C_UnitFinishSkill : MessageObject, IMessage
+    {
+        public static M2C_UnitFinishSkill Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_UnitFinishSkill), isFromPool) as M2C_UnitFinishSkill;
+        }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3551,5 +3576,6 @@ namespace ET
         public const ushort C2M_TryUseSkill = 10092;
         public const ushort M2C_TryUseSkill = 10093;
         public const ushort M2C_OnUseSkill = 10094;
+        public const ushort M2C_UnitFinishSkill = 10095;
     }
 }
