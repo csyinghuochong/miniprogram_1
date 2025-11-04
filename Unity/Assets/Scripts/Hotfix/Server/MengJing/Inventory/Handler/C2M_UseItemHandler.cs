@@ -41,21 +41,24 @@ namespace ET.Server
                     addItems.Add(new RewardItem() { ItemId = 1, ItemNum = int.Parse(itemConfig.ItemUsePar) });
                     inventoryComponent.AddItemData(addItems);
                 }
-                
+
                 // 随机宝箱
                 if (itemConfig.ItemSubType == (int)ItemConsumeType.BaoXian)
                 {
                     inventoryComponent.RemoveItem(request.ItemId, request.Num);
-                    
+
                     string[] itemList = itemConfig.ItemUsePar.Split(',');
                     int index = RandomHelper.RandomNumber(0, itemList.Length);
                     int itemId = int.Parse(itemList[index]);
-                    
+
                     List<RewardItem> addItems = new List<RewardItem>();
                     addItems.Add(new RewardItem() { ItemId = itemId, ItemNum = 1 });
                     inventoryComponent.AddItemData(addItems);
                 }
+            }
 
+            if (itemConfig.ItemType == (int)ItemType.Material)
+            {
                 // 英雄经验
                 if (itemConfig.ItemSubType == (int)ItemConsumeType.HeroExp)
                 {
