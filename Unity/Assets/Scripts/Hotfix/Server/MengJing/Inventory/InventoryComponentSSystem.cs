@@ -212,7 +212,7 @@ namespace ET.Server
                 }
 
                 List<EntityRef<Item>> items = self.Items.Values.ToList();
-                for (int j = items.Count - 1; j > 0; j--)
+                for (int j = items.Count - 1; j >= 0; j--)
                 {
                     Item item = items[j];
                     if ((int)containerType == item.ContainerType && itemConfigId == item.ConfigId)
