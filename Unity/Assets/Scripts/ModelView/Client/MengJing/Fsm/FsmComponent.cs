@@ -15,8 +15,6 @@ namespace ET.Client
     [ComponentOf(typeof(Unit))]
     public class FsmComponent : Entity, IAwake, IDestroy
     {
-        public SkeletonAnimation SkeletonAnimation;
-
         public int CurrentFsm;
         public long Timer;
         public long WaitIdleTime;

@@ -11,5 +11,6 @@ namespace ET
     public struct ChangeRotation
     {
         public Unit Unit;
+        public float X;
     }
 }

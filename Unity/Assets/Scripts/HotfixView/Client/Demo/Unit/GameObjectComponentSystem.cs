@@ -1,4 +1,5 @@
 ﻿using Cysharp.Text;
+using Spine.Unity;
 using UnityEngine;
 
 namespace ET.Client
@@ -61,6 +62,7 @@ namespace ET.Client
             }
 
             self.GameObject = null;
+            self.SkeletonAnimation = null;
         }
 
         private static void LoadGameObject(this GameObjectComponent self)
@@ -117,7 +119,18 @@ namespace ET.Client
         {
             if (self.GameObject != null)
             {
-                // self.GameObject.transform.rotation = quaternion;
+                self.GameObject.transform.rotation = quaternion;
+            }
+        }
+
+        public static void UpdateScaleX(this GameObjectComponent self, float scale)
+        {
+            if (self.GameObject != null && self.SkeletonAnimation != null)
+            {
+                if (scale != 0)
+                {
+                    self.SkeletonAnimation.Skeleton.ScaleX = scale > 0 ? -1 : 1;
+                }
             }
         }
 
@@ -143,8 +156,9 @@ namespace ET.Client
                 return;
             }
 
-            self.GameObject = go;
             go.transform.SetParent(self.Root().GetComponent<GlobalComponent>().Unit);
+            self.GameObject = go;
+            self.SkeletonAnimation = self.GameObject.GetComponent<SkeletonAnimation>();
             self.GameObject.SetActive(true);
 
             Unit unit = self.GetParent<Unit>();

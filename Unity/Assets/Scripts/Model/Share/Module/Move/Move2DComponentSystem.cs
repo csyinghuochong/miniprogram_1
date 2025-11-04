@@ -62,6 +62,8 @@ namespace ET
             {
                 self.Unit.Position += math.normalize(direction) * moveStep;
             }
+
+            EventSystem.Instance.Publish(self.Scene(), new ChangeRotation() { Unit = self.Unit, X = direction.x });
         }
 
         public static bool IsArrived(this Move2DComponent self)

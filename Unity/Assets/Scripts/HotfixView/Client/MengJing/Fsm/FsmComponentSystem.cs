@@ -11,7 +11,7 @@ namespace ET.Client
         {
             Unit unit = args.Unit;
 
-            unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmRunState);
+            unit?.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmRunState);
 
             await ETTask.CompletedTask;
         }
@@ -24,7 +24,7 @@ namespace ET.Client
         {
             Unit unit = args.Unit;
 
-            unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
+            unit?.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
 
             await ETTask.CompletedTask;
         }
@@ -66,8 +66,6 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
 
-            self.SkeletonAnimation = unit.GetComponent<GameObjectComponent>().GameObject.GetComponent<SkeletonAnimation>();
-
             Move2DComponent moveComponent = unit.GetComponent<Move2DComponent>();
             bool idle = moveComponent == null || moveComponent.IsArrived();
             self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
@@ -101,6 +99,7 @@ namespace ET.Client
         public static void ChangeState(this FsmComponent self, int targetFsm, int skillid = 0)
         {
             Unit unit = self.GetParent<Unit>();
+            SkeletonAnimation skeletonAnimation = unit.GetComponent<GameObjectComponent>().SkeletonAnimation;
 
             switch (self.CurrentFsm)
             {
@@ -115,22 +114,21 @@ namespace ET.Client
             switch (targetFsm)
             {
                 case FsmStateEnum.FsmDeathState:
-                    // self.SkeletonAnimation.Skeleton.ScaleX = -1;  // X 轴缩放为 -1 实现翻转
-                    self.SkeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Death, false);
+                    skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Death, false);
                     break;
                 case FsmStateEnum.FsmIdleState:
-                    self.SkeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Idle, true);
+                    skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Idle, true);
                     break;
                 case FsmStateEnum.FsmRunState:
-                    var currentAnimation = self.SkeletonAnimation.AnimationState.GetCurrent(0);
+                    var currentAnimation = skeletonAnimation.AnimationState.GetCurrent(0);
                     if (currentAnimation == null || currentAnimation.Animation.Name != AnimationName.Run)
                     {
-                        self.SkeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Run, true);
+                        skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Run, true);
                     }
 
                     break;
                 case FsmStateEnum.FsmAttackState:
-                    self.SkeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Attack, true);
+                    skeletonAnimation.AnimationState.SetAnimation(0, AnimationName.Attack, true);
                     break;
 
                 default:

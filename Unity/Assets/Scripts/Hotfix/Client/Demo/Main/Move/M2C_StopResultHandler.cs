@@ -13,7 +13,8 @@ namespace ET.Client
                 return;
             }
 
-            unit.GetComponent<Move2DComponent>().Stop(message.Position);
+            unit.GetComponent<Move2DComponent>().Stop();
+            unit.Position = message.Position;
             
             // if(!unit.MainHero)
             // {
