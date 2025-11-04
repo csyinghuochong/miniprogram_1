@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_UseItemHandler : MessageLocationHandler<Unit, C2M_UseItem, M2C_UseItem>
@@ -30,6 +32,30 @@
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
             if (itemConfig.ItemType == (int)ItemType.Consume)
             {
+                // 获取金币
+                if (itemConfig.ItemSubType == (int)ItemConsumeType.GetGold)
+                {
+                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
+
+                    List<RewardItem> addItems = new List<RewardItem>();
+                    addItems.Add(new RewardItem() { ItemId = 1, ItemNum = int.Parse(itemConfig.ItemUsePar) });
+                    inventoryComponent.AddItemData(addItems);
+                }
+                
+                // 随机宝箱
+                if (itemConfig.ItemSubType == (int)ItemConsumeType.BaoXian)
+                {
+                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
+                    
+                    string[] itemList = itemConfig.ItemUsePar.Split(',');
+                    int index = RandomHelper.RandomNumber(0, itemList.Length);
+                    int itemId = int.Parse(itemList[index]);
+                    
+                    List<RewardItem> addItems = new List<RewardItem>();
+                    addItems.Add(new RewardItem() { ItemId = itemId, ItemNum = 1 });
+                    inventoryComponent.AddItemData(addItems);
+                }
+
                 // 英雄经验
                 if (itemConfig.ItemSubType == (int)ItemConsumeType.HeroExp)
                 {

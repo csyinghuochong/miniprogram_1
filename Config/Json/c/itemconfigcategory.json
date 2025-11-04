@@ -86,7 +86,7 @@
     "SellMoneyValue": 600,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10003001,10003002,10003003",
     "ItemDescription": "打开后从以下红色技能中随机获取一件"
   },
   {
@@ -101,7 +101,7 @@
     "SellMoneyValue": 700,
     "ItemPileSum": 99,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10003004,10003005,10003006",
     "ItemDescription": "打开后从以下红色技能中自选一件"
   },
   {

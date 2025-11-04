@@ -50,7 +50,7 @@ namespace ET.Client
             if (item != null)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-                
+
                 string color = itemConfig.ItemQuality switch
                 {
                     1 => "#0e832a",
@@ -60,26 +60,27 @@ namespace ET.Client
                     5 => "#e200af",
                     6 => "#d01a06",
                 };
-                
+
                 Color nowColor;
                 ColorUtility.TryParseHtmlString(color, out nowColor);
-                
+
                 self.Text_ItemName.SetText(itemConfig.ItemName);
                 self.Text_ItemName.color = nowColor;
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
                 self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
-                
+
                 string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
                 self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
-                
+
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
             }
         }
-        
+
         private static void OnButton_Use(this UIItemTip_ConsumeComponent self)
-        { 
+        {
             ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.ItemId, 1, 0).Coroutine();
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
     }
 }
