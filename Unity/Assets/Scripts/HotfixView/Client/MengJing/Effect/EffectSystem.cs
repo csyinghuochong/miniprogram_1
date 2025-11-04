@@ -135,7 +135,7 @@ namespace ET.Client
                     self.EffectObj.transform.localPosition = Vector3.zero;
                     self.EffectObj.transform.localScale = Vector3.one;
                     float angle = self.EffectData.TargetAngle != 0 ? self.EffectData.TargetAngle : 0;
-                    // self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
+                    self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
                     break;
                 }
                 //实时跟随玩家位置,但是不跟随旋转
@@ -144,12 +144,12 @@ namespace ET.Client
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
                     self.EffectObj.transform.position = self.TheUnitBelongTo.Position;
                     self.EffectObj.transform.localScale = Vector3.one;
-                    // self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, self.EffectData.TargetAngle);
+                    self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, self.EffectData.TargetAngle);
                     break;
                 }
             }
 
-            self.EffectObj.GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "animation", false);
+            self.EffectObj.GetComponentInChildren<SkeletonAnimation>()?.AnimationState.SetAnimation(0, "animation", false);
             self.EffectObj.SetActive(true);
         }
 
@@ -173,10 +173,10 @@ namespace ET.Client
                 return;
             }
 
-            // if (angle != -1)
-            // {
-            //     self.EffectObj.transform.rotation = Quaternion.Euler(0, angle, 0);
-            // }
+            if (!Mathf.Approximately(angle, -1))
+            {
+                self.EffectObj.transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
 
             self.EffectObj.transform.position = vec3;
         }

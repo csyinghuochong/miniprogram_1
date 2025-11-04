@@ -158,7 +158,7 @@ namespace ET.Client
 
             go.transform.SetParent(self.Root().GetComponent<GlobalComponent>().Unit);
             self.GameObject = go;
-            self.SkeletonAnimation = self.GameObject.GetComponent<SkeletonAnimation>();
+            self.SkeletonAnimation = self.GameObject.GetComponentInChildren<SkeletonAnimation>();
             self.GameObject.SetActive(true);
 
             Unit unit = self.GetParent<Unit>();

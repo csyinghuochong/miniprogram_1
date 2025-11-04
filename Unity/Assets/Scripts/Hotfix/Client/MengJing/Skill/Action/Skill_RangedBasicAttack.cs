@@ -30,22 +30,28 @@ namespace ET.Client
             if (distanceToTarget <= moveStep)
             {
                 skill.SkillState = SkillState.Finished;
-                skill.NowPosition = skill.TheUnitTarget.Position;
             }
             else
             {
                 skill.NowPosition += math.normalize(direction) * moveStep;
-            }
-            
-            if (skill.SkillConfig.SkillEffectID != 0)
-            {
-                EventSystem.Instance.Publish(skill.Root(), new SkillEffectMove()
+
+                float rotationAngle = 0;
+                if (distanceToTarget > 0.001f)
                 {
-                    EffectInstanceId = skill.EffectInstanceId[0],
-                    Unit = skill.TheUnitFrom,
-                    Postion = skill.NowPosition,
-                    Angle = direction.x
-                });
+                    float radian = math.atan2(direction.y, direction.x);
+                    rotationAngle = math.degrees(radian);
+                }
+
+                if (skill.SkillConfig.SkillEffectID != 0)
+                {
+                    EventSystem.Instance.Publish(skill.Root(), new SkillEffectMove()
+                    {
+                        EffectInstanceId = skill.EffectInstanceId[0],
+                        Unit = skill.TheUnitFrom,
+                        Postion = skill.NowPosition,
+                        Angle = rotationAngle
+                    });
+                }
             }
         }
 
