@@ -8,9 +8,8 @@ namespace ET.Client
         public void Run(Unit unit, NumbericChange args)
         {
             Unit unitDefend = args.Defend;
-            Unit unitAttack = unitDefend.GetParent<UnitComponent>().Get(args.AttackId);
 
-            EffectHelper.PlayHitEffect(unitAttack, unitDefend, args.SkillId);
+            EffectHelper.PlayHitEffect(unitDefend, args.SkillId);
         }
     }
 

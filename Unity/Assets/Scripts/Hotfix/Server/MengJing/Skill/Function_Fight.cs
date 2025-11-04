@@ -23,6 +23,11 @@ namespace ET.Server
                 return false;
             }
 
+            if (!attackUnit.IsCanAttackUnit(defendUnit))
+            {
+                return false;
+            }
+
             SkillConfig skillConfig = skill.SkillConfig;
 
             //获取攻击方属性

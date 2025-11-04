@@ -4,7 +4,7 @@ namespace ET.Client
 {
     public static class EffectHelper
     {
-        public static void PlayHitEffect(Unit attack, Unit unit, int skillID)
+        public static void PlayHitEffect(Unit unit, int skillID)
         {
             //Log.Info("播放受击特效PlayHitEffect:" + skillID);
             //播放受击特效
