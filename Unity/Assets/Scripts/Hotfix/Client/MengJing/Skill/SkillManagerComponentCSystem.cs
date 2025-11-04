@@ -134,6 +134,24 @@ namespace ET.Client
                 self.LastUpdateTime = TimeInfo.Instance.ClientNow();
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerC, self);
             }
+            
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(message.SkillConfigId);
+            
+            if (!string.IsNullOrEmpty(skillConfig.SkillAnimation))
+            {
+                // int fsmType = skillConfig.ComboSkillID > 0 ? 5 : 4;
+                // if (ConfigData.NotCombatSkill.Contains(skillConfig.SkillAnimation))
+                // {
+                //     fsmType = 4;
+                // }
+                //
+                // EventSystem.Instance.Publish(self.Root(), new FsmChange()
+                // {
+                //     FsmHandlerType = fsmType,
+                //     SkillId = skillcmd.SkillInfos[0].WeaponSkillID,
+                //     Unit = unit
+                // });
+            }
         }
 
         public static int IsCanUseSkill(this SkillManagerComponentC self, int skillConfigId)

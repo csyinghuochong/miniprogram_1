@@ -161,6 +161,7 @@ namespace ET.Client
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
+                    unit.AddComponent<FsmComponent>();
                     break;
                 }
                 case UnitType.Hero:
@@ -170,6 +171,7 @@ namespace ET.Client
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
+                    unit.AddComponent<FsmComponent>();
                     break;
                 }
                 case UnitType.Monster:
@@ -179,6 +181,7 @@ namespace ET.Client
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
+                    unit.AddComponent<FsmComponent>();
                     break;
                 }
                 default:
@@ -197,6 +200,7 @@ namespace ET.Client
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIPlayerHpComponent>();
                     unit.RemoveComponent<EffectViewComponent>();
+                    unit.RemoveComponent<FsmComponent>();
                     break;
                 }
                 case UnitType.Hero:
@@ -204,6 +208,7 @@ namespace ET.Client
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIHeroHpComponent>();
                     unit.RemoveComponent<EffectViewComponent>();
+                    unit.RemoveComponent<FsmComponent>();
                     break;
                 }
                 case UnitType.Monster:
@@ -211,6 +216,7 @@ namespace ET.Client
                     unit.RemoveComponent<UnitBoneComponent>();
                     unit.RemoveComponent<UIMonsterHpComponent>();
                     unit.RemoveComponent<EffectViewComponent>();
+                    unit.RemoveComponent<FsmComponent>();
                     break;
                 }
             }

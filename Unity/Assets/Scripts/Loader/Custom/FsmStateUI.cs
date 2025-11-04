@@ -8,14 +8,8 @@ namespace ET
         public const int FsmIdleState = 1;
         public const int FsmRunState = 2;
         public const int FsmDeathState = 3;
-        public const int FsmSkillState = 4;
-        public const int FsmComboState = 5;
-        public const int FsmShiQuItem = 6;
-        public const int FsmNpcSpeak = 7;
-        public const int FsmSinging = 8;
-        public const int FsmOpenBox = 9;
-        public const int FsmHui = 10;
-        public const int FsmHorse = 11;
+        public const int FsmAttackState = 4;
+        public const int FsmBeAttackState = 5;
     }
 }
 //

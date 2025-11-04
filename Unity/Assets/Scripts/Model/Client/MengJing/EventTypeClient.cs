@@ -83,4 +83,11 @@ namespace ET.Client
         public long EffectInstanceId;
         public Unit Unit;
     }
+
+    public struct FsmChange
+    {
+        public int FsmHandlerType;
+        public int SkillId;
+        public Unit Unit;
+    }
 }

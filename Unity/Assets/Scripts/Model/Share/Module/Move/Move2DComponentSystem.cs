@@ -33,14 +33,14 @@ namespace ET
         [EntitySystem]
         private static void Destroy(this Move2DComponent self)
         {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.EndTimer();
         }
 
         private static void Update(this Move2DComponent self)
         {
             if (self.Targets.Count == 0)
             {
-                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+                self.EndTimer();
                 return;
             }
 
@@ -76,6 +76,15 @@ namespace ET
                 self.LastUpdateTime = TimeInfo.Instance.ClientNow();
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.Move2DTimer, self);
             }
+
+            EventSystem.Instance.Publish(self.Scene(), new MoveStart() { Unit = self.Unit });
+        }
+
+        private static void EndTimer(this Move2DComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+
+            EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.Unit });
         }
 
         public static void MoveTo(this Move2DComponent self, float3 target, float speed)
@@ -107,7 +116,7 @@ namespace ET
         {
             self.Targets.Clear();
 
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.EndTimer();
         }
 
         // 距离差距过大，直接同步，否则平滑移动过去
@@ -118,7 +127,7 @@ namespace ET
             if (distanceToTarget > 2f)
             {
                 self.Targets.Clear();
-                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+                self.EndTimer();
 
                 self.Unit.Position = target;
             }
