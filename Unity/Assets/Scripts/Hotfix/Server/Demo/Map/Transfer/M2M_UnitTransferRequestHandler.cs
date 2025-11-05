@@ -68,7 +68,7 @@ namespace ET.Server
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
-                    unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+                    unit.AddComponent<AOIEntity, int, float3>(100 * 1000, unit.Position);
 
                     // 创建英雄队列
                     HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();

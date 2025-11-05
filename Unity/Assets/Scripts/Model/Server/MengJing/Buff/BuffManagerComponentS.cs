@@ -9,6 +9,5 @@ namespace ET.Server
         public long LastUpdateTime;
 
         public List<EntityRef<BuffS>> Buffs = new();
-        public bool Checking { get; set; }
     }
 }

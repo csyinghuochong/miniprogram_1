@@ -188,7 +188,7 @@ namespace ET
         //buff角度
         public int TargetAngle;
 
-        public long BuffEndTime;
+        public float BuffEndTime;
 
         public string Spellcaster;
         public int UnitType;

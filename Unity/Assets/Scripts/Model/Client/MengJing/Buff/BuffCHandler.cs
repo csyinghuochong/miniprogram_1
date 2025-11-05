@@ -6,25 +6,16 @@
 
     [EnableClass]
     [BuffCHandler]
-    public abstract class BuffHandler
+    public abstract class BuffCHandler
     {
-        /// <summary>
-        /// 初始化buff数据
-        /// </summary>
-        /// <param name="buffC">Buff数据</param>
-        /// <param name="theUnitFrom">来自哪个Unit</param>
-        /// <param name="theUnitBelongTo">寄生于哪个Unit</param>
-        /// <param name="skillC"></param>
-        public abstract void OnInit(BuffC buffC, Unit theUnitFrom, Unit theUnitBelongTo, SkillC skillC);
+        public abstract void OnInit(BuffC buffc);
 
-        /// <summary>
-        /// Buff持续
-        /// </summary>
-        public abstract void OnUpdate(BuffC buffC);
+        public abstract void OnReset(BuffC buffc, float endTime);
 
-        /// <summary>
-        /// 重置Buff用
-        /// </summary>
-        public abstract void OnFinished(BuffC buffC);
+        public abstract void OnExecute(BuffC buffc);
+
+        public abstract void OnUpdate(BuffC buffc);
+
+        public abstract void OnFinished(BuffC buffc);
     }
 }

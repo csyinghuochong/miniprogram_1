@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -6,81 +7,141 @@ namespace ET.Client
     [FriendOf(typeof(BuffManagerComponentC))]
     public static partial class BuffManagerComponentCSystem
     {
+        [Invoke(TimerInvokeType.BuffTimerC)]
+        public class BuffTimerC : ATimer<BuffManagerComponentC>
+        {
+            protected override void Run(BuffManagerComponentC self)
+            {
+                try
+                {
+                    self.Update();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this BuffManagerComponentC self)
         {
         }
 
-        [EntitySystem]
         private static void Update(this BuffManagerComponentC self)
         {
+            long now = TimeInfo.Instance.ClientNow();
+            float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
+            self.LastUpdateTime = now;
+
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                BuffC buffC = self.Buffs[i];
+                BuffC buff = self.Buffs[i];
 
-                if (buffC.BuffState == BuffState.WaitRemove)
+                if (buff.BuffState == BuffState.Finished)
                 {
-                    // self.OnRemoveBuffItem(buff);
-                    buffC.BuffState = BuffState.Finished;
-                }
-
-                if (buffC.BuffState == BuffState.Finished)
-                {
-                    buffC.Dispose();
+                    buff.OnFinished();
+                    buff.Dispose();
                     self.Buffs.RemoveAt(i);
                     continue;
                 }
 
-                buffC.OnUpdate();
+                buff.OnUpdate(deltaTime);
+            }
+
+            if (self.Buffs.Count == 0)
+            {
+                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }
         }
 
         [EntitySystem]
         private static void Destroy(this BuffManagerComponentC self)
         {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             self.Buffs.Clear();
-            self.Buffs = null;
         }
 
-        public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData, Unit from, SkillC skillC)
+        public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData)
         {
-            Unit unit = self.GetParent<Unit>();
-            BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
+            BuffC buff = self.AddChild<BuffC>();
+            buff.OnInit(buffData, self.GetParent<Unit>());
+            self.Buffs.Add(buff);
 
-            // 判断一些状态。。。
+            if (self.Timer == 0)
+            {
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BuffTimerC, self);
+            }
+        }
 
-            int addBufStatus = 1; //1新增buff  2 移除 3 重置 4同状态返回
-
-            // 移除互斥
+        public static void RemoveBuff(this BuffManagerComponentC self, int buffConfigId)
+        {
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                BuffC buffC = self.Buffs[i];
-                bool remove = false;
+                BuffC buff = self.Buffs[i];
 
-                BuffConfig oldBuffConfig = buffC.BuffConfig;
-                if (oldBuffConfig.Id == newBuffConfig.Id && newBuffConfig.IsBuffStackable == 0)
+                if (buff.BuffData.BuffConfigId == buffConfigId)
                 {
-                    remove = true;
-                }
-
-                if (remove)
-                {
-                    buffC.BuffState = BuffState.WaitRemove;
+                    buff.BuffState = BuffState.Finished;
                 }
             }
+        }
 
-            if (addBufStatus == 4)
+        public static int GetBuffNumber(this BuffManagerComponentC self, int buffConfigId)
+        {
+            int number = 0;
+            for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                return;
+                BuffC buff = self.Buffs[i];
+                if (buff.BuffData.BuffConfigId == buffConfigId)
+                {
+                    number++;
+                }
             }
 
-            // 添加Buff
-            if (addBufStatus == 1)
+            return number;
+        }
+
+        public static int GetBuffSourceNumber(this BuffManagerComponentC self, long formId, int buffConfigId)
+        {
+            int buffNumber = 0;
+
+            for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                BuffC buffC = self.AddChild<BuffC>();
-                self.Buffs.Add(buffC);
-                buffC.OnInit(buffData, from, unit, skillC);
+                BuffC buff = self.Buffs[i];
+                if (buff.BuffData.BuffConfigId != buffConfigId)
+                {
+                    continue;
+                }
+
+                if (formId != 0 && formId != buff.BuffData.UnitIdFrom)
+                {
+                    continue;
+                }
+
+                buffNumber++;
             }
+
+            return buffNumber;
+        }
+
+        /// <summary>
+        /// 通过标识ID获得Buff
+        /// </summary>
+        public static List<BuffC> GetBuffByConfigId(this BuffManagerComponentC self, int buffConfigId)
+        {
+            List<BuffC> list = new List<BuffC>();
+            for (int i = self.Buffs.Count - 1; i >= 0; i--)
+            {
+                BuffC buff = self.Buffs[i];
+
+                if (buff.BuffConfig.Id == buffConfigId)
+                {
+                    list.Add(buff);
+                }
+            }
+
+            return list;
         }
     }
 }

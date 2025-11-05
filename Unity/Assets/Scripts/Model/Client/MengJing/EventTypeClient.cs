@@ -92,6 +92,12 @@ namespace ET.Client
         public Unit Unit;
     }
 
+    public struct AddBuff
+    {
+        public Unit Unit;
+        public int BuffId;
+    }
+
     public struct FsmChange
     {
         public int FsmHandlerType;

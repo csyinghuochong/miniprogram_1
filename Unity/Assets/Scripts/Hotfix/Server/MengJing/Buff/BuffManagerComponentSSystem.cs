@@ -37,8 +37,6 @@ namespace ET.Server
 
         private static void Update(this BuffManagerComponentS self)
         {
-            self.Checking = true;
-
             long now = TimeInfo.Instance.ClientNow();
             float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
             self.LastUpdateTime = now;
@@ -68,8 +66,6 @@ namespace ET.Server
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }
-
-            self.Checking = false;
         }
 
         public static void BuffFactory(this BuffManagerComponentS self, BuffData buffData, Unit from, SkillS skill, bool notice = true)
@@ -111,7 +107,8 @@ namespace ET.Server
                     remove = true;
                 }
 
-                if (oldBuffConfig.BuffType == 2 && oldBuffConfig.BuffType == newBuffConfig.BuffType && oldBuffConfig.BuffParameterType == newBuffConfig.BuffParameterType)
+                if (oldBuffConfig.BuffType == 2 && oldBuffConfig.BuffType == newBuffConfig.BuffType &&
+                    oldBuffConfig.BuffParameterType == newBuffConfig.BuffParameterType)
                 {
                     if (buff.BuffEndTime > 0)
                     {

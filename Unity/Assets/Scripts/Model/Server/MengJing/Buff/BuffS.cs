@@ -12,11 +12,15 @@ namespace ET.Server
 
         public BuffConfig BuffConfig { get; set; }
 
+        private EntityRef<Unit> theUnitFrom;
+
         // 来自哪个Unit
-        public Unit TheUnitFrom { get; set; }
+        public Unit TheUnitFrom { get => this.theUnitFrom; set => this.theUnitFrom = value; }
+
+        private EntityRef<Unit> theUnitBelongTo;
 
         // 寄生于哪个Unit，并不代表当前Buff实际寄居者，需要通过GetBuffTarget来获取，因为它赋值于Buff链起源的地方，具体值取决于那个起源Buff
-        public Unit TheUnitBelongTo { get; set; }
+        public Unit TheUnitBelongTo { get => this.theUnitBelongTo; set => this.theUnitBelongTo = value; }
 
         public bool IsTrigger { get; set; }
         public float RunTime { get; set; }
