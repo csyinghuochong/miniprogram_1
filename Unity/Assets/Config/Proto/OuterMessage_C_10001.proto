@@ -770,7 +770,7 @@ message M2C_UnitBuffUpdate // IMessage
 {
 	int32 BuffID = 1;
 	int64 UnitIdBelongTo = 2;
-	int32 BuffOperateType = 4;
+	int32 BuffOperateType = 4; //1新增  2移除 3重置
 	repeated float TargetPostion = 5;
 	float BuffEndTime = 6;
 	string Spellcaster = 7;

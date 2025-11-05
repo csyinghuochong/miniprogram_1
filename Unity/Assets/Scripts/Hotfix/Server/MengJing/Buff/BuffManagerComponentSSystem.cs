@@ -77,9 +77,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
 
-            int addBufStatus = 1; //1新增buff  2 移除 3 重置 4同状态返回
-
-            // 判断叠加上限
+            // 叠加
             if (newBuffConfig.BuffMaxStackCount != 0)
             {
                 int curNumber = 0;
@@ -100,23 +98,24 @@ namespace ET.Server
                 }
             }
 
-            // 先移除互斥
+            // 移除
+            bool addSameState = false; // 添加相同角色状态
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
                 bool remove = false;
                 BuffS buff = self.Buffs[i];
                 BuffConfig oldBuffConfig = buff.BuffConfig;
+
                 if (oldBuffConfig.Id == newBuffConfig.Id && newBuffConfig.IsBuffStackable == 0)
                 {
                     remove = true;
                 }
 
-                if (oldBuffConfig.BuffType == 2 && oldBuffConfig.BuffType == newBuffConfig.BuffType &&
-                    oldBuffConfig.BuffParameterType == newBuffConfig.BuffParameterType)
+                if (oldBuffConfig.BuffType == 2 && oldBuffConfig.BuffType == newBuffConfig.BuffType && oldBuffConfig.BuffParameterType == newBuffConfig.BuffParameterType)
                 {
                     if (buff.BuffEndTime > 0)
                     {
-                        addBufStatus = 4;
+                        addSameState = true;
                     }
                     else
                     {
@@ -130,7 +129,7 @@ namespace ET.Server
                 }
             }
 
-            if (addBufStatus == 4)
+            if (addSameState)
             {
                 return;
             }
@@ -150,7 +149,7 @@ namespace ET.Server
                 M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create();
                 m2C_UnitBuffUpdate.UnitIdBelongTo = unit.Id;
                 m2C_UnitBuffUpdate.BuffID = newBuffConfig.Id;
-                m2C_UnitBuffUpdate.BuffOperateType = addBufStatus;
+                m2C_UnitBuffUpdate.BuffOperateType = 1;
                 m2C_UnitBuffUpdate.BuffEndTime = newBuff.BuffEndTime;
                 m2C_UnitBuffUpdate.TargetPostion.Clear();
                 m2C_UnitBuffUpdate.TargetPostion.Add(newBuff.TargetPosition.x);

@@ -18,7 +18,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             BuffName = _buf.ReadString();
-            BuffTime = _buf.ReadInt();
+            BuffTime = _buf.ReadFloat();
             BuffDelayTime = _buf.ReadInt();
             TargetType = _buf.ReadInt();
             BuffScript = _buf.ReadString();
@@ -54,7 +54,7 @@ namespace ET
         /// <summary>
         /// Buff存在时间
         /// </summary>
-        public readonly int BuffTime;
+        public readonly float BuffTime;
 
         /// <summary>
         /// Buff延迟生效时间

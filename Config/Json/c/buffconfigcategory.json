@@ -2,7 +2,7 @@
   {
     "Id": 10000001,
     "BuffName": "嘲讽",
-    "BuffTime": 3000,
+    "BuffTime": 3,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -20,7 +20,7 @@
   {
     "Id": 10000002,
     "BuffName": "无敌",
-    "BuffTime": 2000,
+    "BuffTime": 2,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -38,7 +38,7 @@
   {
     "Id": 10000003,
     "BuffName": "免疫物理攻击",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 2,
     "BuffScript": "",
@@ -56,7 +56,7 @@
   {
     "Id": 10000004,
     "BuffName": "持续生命恢复",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 2,
     "BuffScript": "",
@@ -74,7 +74,7 @@
   {
     "Id": 10000005,
     "BuffName": "伤害减免",
-    "BuffTime": 3000,
+    "BuffTime": 3,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -92,7 +92,7 @@
   {
     "Id": 10000006,
     "BuffName": "攻击提升",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -110,7 +110,7 @@
   {
     "Id": 10000007,
     "BuffName": "伤害降低",
-    "BuffTime": 4000,
+    "BuffTime": 4,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -128,7 +128,7 @@
   {
     "Id": 10000008,
     "BuffName": "眩晕",
-    "BuffTime": 1000,
+    "BuffTime": 1,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -146,7 +146,7 @@
   {
     "Id": 10000009,
     "BuffName": "攻速提升",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -164,7 +164,7 @@
   {
     "Id": 10000010,
     "BuffName": "移速提升",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -182,7 +182,7 @@
   {
     "Id": 10000011,
     "BuffName": "伤害减免",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -200,7 +200,7 @@
   {
     "Id": 10000012,
     "BuffName": "溅射",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -218,7 +218,7 @@
   {
     "Id": 10000013,
     "BuffName": "流血状态",
-    "BuffTime": 4000,
+    "BuffTime": 4,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -236,7 +236,7 @@
   {
     "Id": 10000014,
     "BuffName": "生命图腾",
-    "BuffTime": 5000,
+    "BuffTime": 5,
     "BuffDelayTime": 0,
     "TargetType": 2,
     "BuffScript": "",
@@ -254,7 +254,7 @@
   {
     "Id": 10000015,
     "BuffName": "攻速提升",
-    "BuffTime": 3600000,
+    "BuffTime": 3600,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -272,7 +272,7 @@
   {
     "Id": 10000016,
     "BuffName": "暴击率提升",
-    "BuffTime": 3600000,
+    "BuffTime": 3600,
     "BuffDelayTime": 0,
     "TargetType": 1,
     "BuffScript": "",
@@ -290,7 +290,7 @@
   {
     "Id": 10000017,
     "BuffName": "移速降低",
-    "BuffTime": 4000,
+    "BuffTime": 4,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -308,7 +308,7 @@
   {
     "Id": 10000018,
     "BuffName": "攻速降低",
-    "BuffTime": 4000,
+    "BuffTime": 4,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -326,7 +326,7 @@
   {
     "Id": 10000019,
     "BuffName": "冰冻",
-    "BuffTime": 3000,
+    "BuffTime": 3,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -344,7 +344,7 @@
   {
     "Id": 10000020,
     "BuffName": "冻伤",
-    "BuffTime": 3000,
+    "BuffTime": 3,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -362,7 +362,7 @@
   {
     "Id": 10000021,
     "BuffName": "恢复怒气",
-    "BuffTime": 3600000,
+    "BuffTime": 3600,
     "BuffDelayTime": 0,
     "TargetType": 2,
     "BuffScript": "",
@@ -380,7 +380,7 @@
   {
     "Id": 10000022,
     "BuffName": "恢复血量",
-    "BuffTime": 30000,
+    "BuffTime": 30,
     "BuffDelayTime": 0,
     "TargetType": 2,
     "BuffScript": "",
@@ -416,7 +416,7 @@
   {
     "Id": 10000024,
     "BuffName": "移速降低",
-    "BuffTime": 3600000,
+    "BuffTime": 3600,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -434,7 +434,7 @@
   {
     "Id": 10000025,
     "BuffName": "伤害降低",
-    "BuffTime": 3600000,
+    "BuffTime": 3600,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -452,7 +452,7 @@
   {
     "Id": 10000026,
     "BuffName": "攻速降低",
-    "BuffTime": 3000,
+    "BuffTime": 3,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",
@@ -470,7 +470,7 @@
   {
     "Id": 10000027,
     "BuffName": "移速降低",
-    "BuffTime": 3000,
+    "BuffTime": 3,
     "BuffDelayTime": 0,
     "TargetType": 3,
     "BuffScript": "",

@@ -3496,6 +3496,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public long UnitIdBelongTo { get; set; }
 
+        /// <summary>
+        /// 1新增  2移除 3重置
+        /// </summary>
         [MemoryPackOrder(3)]
         public int BuffOperateType { get; set; }
 

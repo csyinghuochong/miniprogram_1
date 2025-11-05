@@ -29,29 +29,29 @@
             self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
             self.TargetPosition = useSkillInfo.Position;
 
-            self.SkillHandler.OnInit(self);
+            self.SkillHandler?.OnInit(self);
         }
 
         public static void OnExecute(this SkillS self)
         {
-            self.SkillHandler.OnExecute(self);
+            self.SkillHandler?.OnExecute(self);
         }
 
         public static void OnUpdate(this SkillS self, float deltaTime)
         {
-            self.ElapsedTime += deltaTime;
-            if (self.ElapsedTime >= self.SkillConfig.SkillLiveTime)
+            self.RunTime += deltaTime;
+            if (self.RunTime >= self.SkillConfig.SkillLiveTime)
             {
                 self.SkillState = SkillState.Finished;
                 return;
             }
 
-            self.SkillHandler.OnUpdate(self, deltaTime);
+            self.SkillHandler?.OnUpdate(self, deltaTime);
         }
 
         public static void OnFinished(this SkillS self)
         {
-            self.SkillHandler.OnFinished(self);
+            self.SkillHandler?.OnFinished(self);
         }
 
         public static void InitSelfBuff(this SkillS self)
