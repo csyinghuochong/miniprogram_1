@@ -158,7 +158,7 @@ namespace ET.Server
                 m2C_UnitBuffUpdate.Spellcaster = from.GetComponent<UnitInfoComponent>().UnitName;
                 m2C_UnitBuffUpdate.UnitType = from.Type;
                 m2C_UnitBuffUpdate.UnitConfigId = from.ConfigId;
-                m2C_UnitBuffUpdate.SkillId = buffData.SkillId;
+                m2C_UnitBuffUpdate.SkillId = buffData.SkillConfigId;
                 m2C_UnitBuffUpdate.UnitIdFrom = from.Id;
 
                 MapMessageHelper.Broadcast(unit, m2C_UnitBuffUpdate);

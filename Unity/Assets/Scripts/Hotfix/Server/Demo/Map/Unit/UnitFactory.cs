@@ -60,6 +60,7 @@ namespace ET.Server
             }
 
             unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<BuffManagerComponentS>();
             unit.AddComponent<UnitInfoComponent>();
             // unit.AddComponent<MoveComponent>();
             unit.AddComponent<Move2DComponent>();
@@ -82,6 +83,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
 
             unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().PlayerName;
@@ -125,6 +127,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, monsterConfig.HitLess, false);
 
             unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 

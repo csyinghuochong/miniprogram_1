@@ -193,7 +193,7 @@ namespace ET
         public string Spellcaster;
         public int UnitType;
         public int UnitConfigId;
-        public int SkillId;
+        public int SkillConfigId;
         public int BuffConfigId;
         public long UnitIdFrom;
         public float3 TargetPostion;

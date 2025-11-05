@@ -88,6 +88,12 @@ namespace ET.Server
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().RobotId > 0;
         }
 
+        public static bool IsTeam(this Unit self, Unit other)
+        {
+            // 先这样，英雄是一队，怪物是一队
+            return self.Type == other.Type;
+        }
+        
         public static void OnDead(this Unit self, Unit attack, bool nodrop = false)
         {
             // self.GetComponent<MoveComponent>()?.Stop(false);
@@ -117,6 +123,11 @@ namespace ET.Server
 
             // 玩家不能被攻击
             if (defend.Type == UnitType.Player)
+            {
+                return false;
+            }
+
+            if (self.IsTeam(defend))
             {
                 return false;
             }

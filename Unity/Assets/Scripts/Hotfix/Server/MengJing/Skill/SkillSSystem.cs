@@ -56,6 +56,65 @@
 
         public static void InitSelfBuff(this SkillS self)
         {
+            if (self.SkillConfig.InitBuffID != null && self.SkillConfig.InitBuffID[0] != 0)
+            {
+                for (int i = 0; i < self.SkillConfig.InitBuffID.Length; i++)
+                {
+                    self.SkillBuff(self.SkillConfig.InitBuffID[i], self.TheUnitFrom);
+                }
+            }
+        }
+
+        public static void SkillBuff(this SkillS self, int buffId, Unit uu)
+        {
+            if (uu == null)
+            {
+                return;
+            }
+
+            if (!BuffConfigCategory.Instance.DataMap.ContainsKey(buffId))
+            {
+                Log.Warning($"config==null： buffId{buffId}");
+                return;
+            }
+
+            BuffConfig buffConfig = BuffConfigCategory.Instance.Get(buffId);
+
+            //1：自身
+            //2：队友
+            //3: 敌方
+            bool canBuff = false;
+            switch (buffConfig.TargetType)
+            {
+                case 1:
+                {
+                    canBuff = uu.Id == self.TheUnitFrom.Id;
+
+                    break;
+                }
+                case 2:
+                {
+                    canBuff = self.TheUnitFrom.IsTeam(uu);
+
+                    break;
+                }
+                case 3:
+                {
+                    canBuff = self.TheUnitFrom.IsCanAttackUnit(uu);
+
+                    break;
+                }
+            }
+
+            if (!canBuff)
+            {
+                return;
+            }
+
+            BuffData buffData = new BuffData();
+            buffData.SkillConfigId = self.SkillConfig.Id;
+            buffData.BuffConfigId = buffConfig.Id;
+            uu.GetComponent<BuffManagerComponentS>().BuffFactory(buffData, self.TheUnitFrom, self);
         }
     }
 }

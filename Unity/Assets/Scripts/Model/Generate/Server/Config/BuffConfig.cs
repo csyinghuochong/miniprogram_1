@@ -19,13 +19,13 @@ namespace ET
             Id = _buf.ReadInt();
             BuffName = _buf.ReadString();
             BuffTime = _buf.ReadFloat();
-            BuffDelayTime = _buf.ReadInt();
+            BuffDelayTime = _buf.ReadFloat();
             TargetType = _buf.ReadInt();
             BuffHandler = _buf.ReadString();
             BuffBenefitType = _buf.ReadInt();
             BuffType = _buf.ReadInt();
             BuffParameterType = _buf.ReadInt();
-            BuffParameterValue = _buf.ReadDouble();
+            BuffParameterValue = _buf.ReadLong();
             DamageType = _buf.ReadInt();
             DamagePro = _buf.ReadDouble();
             IsBuffStackable = _buf.ReadInt();
@@ -59,7 +59,7 @@ namespace ET
         /// <summary>
         /// Buff延迟生效时间
         /// </summary>
-        public readonly int BuffDelayTime;
+        public readonly float BuffDelayTime;
 
         /// <summary>
         /// Buff目标类型
@@ -89,7 +89,7 @@ namespace ET
         /// <summary>
         /// Buff参数操作值
         /// </summary>
-        public readonly double BuffParameterValue;
+        public readonly long BuffParameterValue;
 
         /// <summary>
         /// 伤害类型
