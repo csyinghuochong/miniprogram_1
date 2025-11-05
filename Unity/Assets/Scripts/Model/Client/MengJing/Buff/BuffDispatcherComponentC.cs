@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Code]
-    public class BuffDispatcherComponent : Singleton<BuffDispatcherComponent>, ISingletonAwake
+    public class BuffDispatcherComponentC : Singleton<BuffDispatcherComponentC>, ISingletonAwake
     {
         private readonly Dictionary<string, BuffHandler> handlers = new();
 
         public void Awake()
         {
-            var types = CodeTypes.Instance.GetTypes(typeof(BuffHandlerAttribute));
+            var types = CodeTypes.Instance.GetTypes(typeof(BuffCHandlerAttribute));
             foreach (Type type in types)
             {
                 BuffHandler handler = Activator.CreateInstance(type) as BuffHandler;

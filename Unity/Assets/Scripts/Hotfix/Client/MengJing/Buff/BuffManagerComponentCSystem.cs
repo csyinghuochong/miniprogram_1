@@ -2,47 +2,47 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(BuffManagerComponent))]
-    [FriendOf(typeof(BuffManagerComponent))]
-    public static partial class BuffManagerComponentSystem
+    [EntitySystemOf(typeof(BuffManagerComponentC))]
+    [FriendOf(typeof(BuffManagerComponentC))]
+    public static partial class BuffManagerComponentCSystem
     {
         [EntitySystem]
-        private static void Awake(this BuffManagerComponent self)
+        private static void Awake(this BuffManagerComponentC self)
         {
         }
 
         [EntitySystem]
-        private static void Update(this BuffManagerComponent self)
+        private static void Update(this BuffManagerComponentC self)
         {
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                Buff buff = self.Buffs[i];
+                BuffC buffC = self.Buffs[i];
 
-                if (buff.BuffState == BuffState.WaitRemove)
+                if (buffC.BuffState == BuffState.WaitRemove)
                 {
                     // self.OnRemoveBuffItem(buff);
-                    buff.BuffState = BuffState.Finished;
+                    buffC.BuffState = BuffState.Finished;
                 }
 
-                if (buff.BuffState == BuffState.Finished)
+                if (buffC.BuffState == BuffState.Finished)
                 {
-                    buff.Dispose();
+                    buffC.Dispose();
                     self.Buffs.RemoveAt(i);
                     continue;
                 }
 
-                buff.OnUpdate();
+                buffC.OnUpdate();
             }
         }
 
         [EntitySystem]
-        private static void Destroy(this BuffManagerComponent self)
+        private static void Destroy(this BuffManagerComponentC self)
         {
             self.Buffs.Clear();
             self.Buffs = null;
         }
 
-        public static void BuffFactory(this BuffManagerComponent self, BuffData buffData, Unit from, SkillC skillC)
+        public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData, Unit from, SkillC skillC)
         {
             Unit unit = self.GetParent<Unit>();
             BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
@@ -54,10 +54,10 @@ namespace ET.Client
             // 移除互斥
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                Buff buff = self.Buffs[i];
+                BuffC buffC = self.Buffs[i];
                 bool remove = false;
 
-                BuffConfig oldBuffConfig = buff.BuffConfig;
+                BuffConfig oldBuffConfig = buffC.BuffConfig;
                 if (oldBuffConfig.Id == newBuffConfig.Id && newBuffConfig.IsBuffStackable == 0)
                 {
                     remove = true;
@@ -65,7 +65,7 @@ namespace ET.Client
 
                 if (remove)
                 {
-                    buff.BuffState = BuffState.WaitRemove;
+                    buffC.BuffState = BuffState.WaitRemove;
                 }
             }
 
@@ -77,9 +77,9 @@ namespace ET.Client
             // 添加Buff
             if (addBufStatus == 1)
             {
-                Buff buff = self.AddChild<Buff>();
-                self.Buffs.Add(buff);
-                buff.OnInit(buffData, from, unit, skillC);
+                BuffC buffC = self.AddChild<BuffC>();
+                self.Buffs.Add(buffC);
+                buffC.OnInit(buffData, from, unit, skillC);
             }
         }
     }

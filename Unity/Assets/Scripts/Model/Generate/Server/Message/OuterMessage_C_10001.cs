@@ -3481,6 +3481,96 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_UnitBuffUpdate)]
+    public partial class M2C_UnitBuffUpdate : MessageObject, IMessage
+    {
+        public static M2C_UnitBuffUpdate Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_UnitBuffUpdate), isFromPool) as M2C_UnitBuffUpdate;
+        }
+
+        [MemoryPackOrder(0)]
+        public int BuffID { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitIdBelongTo { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int BuffOperateType { get; set; }
+
+        [MemoryPackOrder(4)]
+        public List<float> TargetPostion { get; set; } = new();
+
+        [MemoryPackOrder(5)]
+        public float BuffEndTime { get; set; }
+
+        [MemoryPackOrder(6)]
+        public string Spellcaster { get; set; }
+
+        [MemoryPackOrder(7)]
+        public int UnitType { get; set; }
+
+        [MemoryPackOrder(8)]
+        public int UnitConfigId { get; set; }
+
+        [MemoryPackOrder(9)]
+        public int SkillId { get; set; }
+
+        [MemoryPackOrder(10)]
+        public long UnitIdFrom { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.BuffID = default;
+            this.UnitIdBelongTo = default;
+            this.BuffOperateType = default;
+            this.TargetPostion.Clear();
+            this.BuffEndTime = default;
+            this.Spellcaster = default;
+            this.UnitType = default;
+            this.UnitConfigId = default;
+            this.SkillId = default;
+            this.UnitIdFrom = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_UnitBuffRemove)]
+    public partial class M2C_UnitBuffRemove : MessageObject, IMessage
+    {
+        public static M2C_UnitBuffRemove Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_UnitBuffRemove), isFromPool) as M2C_UnitBuffRemove;
+        }
+
+        [MemoryPackOrder(0)]
+        public int BuffID { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitIdBelongTo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.BuffID = default;
+            this.UnitIdBelongTo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3577,5 +3667,7 @@ namespace ET
         public const ushort M2C_TryUseSkill = 10093;
         public const ushort M2C_OnUseSkill = 10094;
         public const ushort M2C_UnitFinishSkill = 10095;
+        public const ushort M2C_UnitBuffUpdate = 10096;
+        public const ushort M2C_UnitBuffRemove = 10097;
     }
 }

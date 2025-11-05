@@ -5,24 +5,9 @@ namespace ET
 {
     public enum BuffState
     {
-        /// <summary>
-        /// 回收
-        /// </summary>
         None,
-
-        /// <summary>
-        /// 等待移除
-        /// </summary>
         WaitRemove,
-
-        /// <summary>
-        /// 正在执行
-        /// </summary>
         Running,
-
-        /// <summary>
-        /// Buff使命完成
-        /// </summary>
         Finished,
     }
 
@@ -206,11 +191,10 @@ namespace ET
         public long BuffEndTime;
 
         public string Spellcaster;
-
         public int UnitType;
         public int UnitConfigId;
         public int SkillId;
-        public int BuffId;
+        public int BuffConfigId;
         public long UnitIdFrom;
         public float3 TargetPostion;
     }

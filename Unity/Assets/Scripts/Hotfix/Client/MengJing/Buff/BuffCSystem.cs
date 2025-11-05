@@ -1,21 +1,21 @@
 ﻿namespace ET.Client
 {
-    [EntitySystemOf(typeof(Buff))]
-    [FriendOf(typeof(Buff))]
-    public static partial class BuffSystem
+    [EntitySystemOf(typeof(BuffC))]
+    [FriendOf(typeof(BuffC))]
+    public static partial class BuffCSystem
     {
         [EntitySystem]
-        private static void Awake(this Buff self)
+        private static void Awake(this BuffC self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this Buff self)
+        private static void Destroy(this BuffC self)
         {
             self.OnFinished();
         }
 
-        public static void OnInit(this Buff self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongto, SkillC skillC)
+        public static void OnInit(this BuffC self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongto, SkillC skillC)
         {
             // self.PassTime = 0;
             // self.IsTrigger = false;
@@ -35,11 +35,11 @@
             // self.NowBuffValue = 0f;
         }
 
-        public static void OnUpdate(this Buff self)
+        public static void OnUpdate(this BuffC self)
         {
         }
 
-        public static void OnFinished(this Buff self)
+        public static void OnFinished(this BuffC self)
         {
         }
     }

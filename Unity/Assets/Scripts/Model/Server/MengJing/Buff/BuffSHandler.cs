@@ -1,12 +1,12 @@
-﻿namespace ET.Client
+﻿namespace ET.Server
 {
-    public class BuffHandlerAttribute : BaseAttribute
+    public class BuffSHandlerAttribute : BaseAttribute
     {
     }
 
     [EnableClass]
-    [BuffHandler]
-    public abstract class BuffHandler
+    [BuffSHandler]
+    public abstract class BuffSHandler
     {
         /// <summary>
         /// 初始化buff数据
@@ -14,17 +14,17 @@
         /// <param name="buff">Buff数据</param>
         /// <param name="theUnitFrom">来自哪个Unit</param>
         /// <param name="theUnitBelongTo">寄生于哪个Unit</param>
-        /// <param name="skillC"></param>
-        public abstract void OnInit(Buff buff, Unit theUnitFrom, Unit theUnitBelongTo, SkillC skillC);
+        /// <param name="skill"></param>
+        public abstract void OnInit(BuffS buff, Unit theUnitFrom, Unit theUnitBelongTo, SkillS skill);
 
         /// <summary>
         /// Buff持续
         /// </summary>
-        public abstract void OnUpdate(Buff buff);
+        public abstract void OnUpdate(BuffS buff);
 
         /// <summary>
         /// 重置Buff用
         /// </summary>
-        public abstract void OnFinished(Buff buff);
+        public abstract void OnFinished(BuffS buff);
     }
 }

@@ -17,6 +17,7 @@
             defendUnit.GetComponent<Move2DComponent>()?.Stop();
             defendUnit.GetComponent<AIComponent>()?.Stop();
             defendUnit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
+            defendUnit.GetComponent<BuffManagerComponentS>()?.OnDead();
 
             NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             switch (sceneTypeEnum)
