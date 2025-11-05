@@ -78,6 +78,11 @@ namespace ET.Client
                 return;
             }
 
+            if (self.HeroId == 0)
+            {
+                return;
+            }
+
             self.GetParent<UIHeroFormationComponent>().OnUnloadHero(self.HeroId, self.SlotIndex).Coroutine();
         }
 
