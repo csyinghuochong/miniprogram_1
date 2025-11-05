@@ -18,7 +18,7 @@
         {
             self.BuffData = buffData;
             self.BuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
-            self.BuffHandler = BuffDispatcherComponentS.Instance.Get(self.BuffConfig.BuffScript);
+            self.BuffHandler = BuffDispatcherComponentS.Instance.Get(self.BuffConfig.BuffHandler);
             self.TheUnitFrom = theUnitFrom;
             self.TheUnitBelongTo = theUnitBelongTo;
             self.BuffEndTime = self.BuffConfig.BuffTime;

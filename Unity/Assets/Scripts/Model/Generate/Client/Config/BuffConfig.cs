@@ -21,7 +21,7 @@ namespace ET
             BuffTime = _buf.ReadFloat();
             BuffDelayTime = _buf.ReadInt();
             TargetType = _buf.ReadInt();
-            BuffScript = _buf.ReadString();
+            BuffHandler = _buf.ReadString();
             BuffBenefitType = _buf.ReadInt();
             BuffType = _buf.ReadInt();
             BuffParameterType = _buf.ReadInt();
@@ -69,7 +69,7 @@ namespace ET
         /// <summary>
         /// Buff脚本
         /// </summary>
-        public readonly string BuffScript;
+        public readonly string BuffHandler;
 
         /// <summary>
         /// Buff增益减益
@@ -153,7 +153,7 @@ namespace ET
             + "BuffTime:" + BuffTime + ","
             + "BuffDelayTime:" + BuffDelayTime + ","
             + "TargetType:" + TargetType + ","
-            + "BuffScript:" + BuffScript + ","
+            + "BuffHandler:" + BuffHandler + ","
             + "BuffBenefitType:" + BuffBenefitType + ","
             + "BuffType:" + BuffType + ","
             + "BuffParameterType:" + BuffParameterType + ","
