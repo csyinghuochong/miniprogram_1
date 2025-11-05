@@ -16,5 +16,6 @@ namespace ET.Client
         public float RunTime { get; set; }
 
         public EffectData EffectData { get; set; }
+        public long EffectInstanceId { get; set; }
     }
 }

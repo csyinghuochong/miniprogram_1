@@ -28,10 +28,12 @@
 
         public static void OnUpdate(this BuffS self, float deltaTime)
         {
-            self.BuffEndTime -= deltaTime;
-            if (self.BuffEndTime <= 0)
+            self.RunTime += deltaTime;
+
+            if (self.RunTime >= self.BuffEndTime)
             {
                 self.BuffState = BuffState.Finished;
+                return;
             }
 
             self.BuffHandler?.OnUpdate(self, deltaTime);

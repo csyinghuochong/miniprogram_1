@@ -92,6 +92,12 @@ namespace ET.Client
         public Unit Unit;
     }
 
+    public struct SkillEffectReset
+    {
+        public long EffectInstanceId;
+        public Unit Unit;
+    }
+
     public struct AddBuff
     {
         public Unit Unit;

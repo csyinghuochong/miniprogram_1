@@ -8,14 +8,14 @@
     [BuffCHandler]
     public abstract class BuffCHandler
     {
-        public abstract void OnInit(BuffC buffc);
+        public abstract void OnInit(BuffC buff);
 
-        public abstract void OnReset(BuffC buffc, float endTime);
+        public abstract void OnReset(BuffC buff, float endTime);
 
-        public abstract void OnExecute(BuffC buffc);
+        public abstract void OnExecute(BuffC buff);
 
-        public abstract void OnUpdate(BuffC buffc);
+        public abstract void OnUpdate(BuffC buff);
 
-        public abstract void OnFinished(BuffC buffc);
+        public abstract void OnFinished(BuffC buff);
     }
 }

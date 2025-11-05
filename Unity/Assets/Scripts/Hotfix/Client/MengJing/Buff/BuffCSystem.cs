@@ -34,6 +34,12 @@
         public static void OnUpdate(this BuffC self, float deltaTime)
         {
             self.RunTime += deltaTime;
+            
+            if (self.RunTime >= self.BuffEndTime)
+            {
+                self.BuffState = BuffState.Finished;
+                return;
+            }
 
             self.BuffHandler?.OnUpdate(self);
         }
