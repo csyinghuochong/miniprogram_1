@@ -1,7 +1,5 @@
 namespace ET
 {
-
-
     public static class StateTypeEnum
     {
         public const long None = 1 << 0;
@@ -9,17 +7,15 @@ namespace ET
         /// <summary>
         /// 被拉扯
         /// </summary>
-        public const long BePulled = 1 << 1;    
-
+        public const long BePulled = 1 << 1;
 
         /// <summary>
         /// 冲锋
         /// </summary>
-        public const long ChongJi = 1 << 2; 
-
+        public const long ChongJi = 1 << 2;
 
         //恐惧
-        public const long Fear = 1 << 3;    
+        public const long Fear = 1 << 3;
 
         /// <summary>
         /// 击退
@@ -39,7 +35,7 @@ namespace ET
         /// <summary>
         /// 眩晕 不能放技能不能移动
         /// </summary>
-        public const long Dizziness = 1 << 7; 
+        public const long Dizziness = 1 << 7;
 
         /// <summary>
         /// 吟唱
@@ -54,7 +50,7 @@ namespace ET
         /// <summary>
         /// 嘲讽
         /// </summary>
-        public const long ChaoFeng = 1<< 10;    
+        public const long ChaoFeng = 1 << 10;
 
         /// <summary>
         /// 禁锢 不能移动
@@ -74,13 +70,12 @@ namespace ET
         /// <summary>
         /// 眩晕免疫
         /// </summary>
-        public const long DizzinessImmune = 1 << 14; 
+        public const long DizzinessImmune = 1 << 14;
 
         /// <summary>
         /// 沉睡状态
         /// </summary>
         public const long Sleep = 1 << 15;
-
 
         /// <summary>
         /// 悬空状态
@@ -90,12 +85,13 @@ namespace ET
         /// <summary>
         /// 地图不能移动
         /// </summary>
-        public const long NoMove = 1 << 17; 
+        public const long NoMove = 1 << 17;
 
         /// <summary>
         /// 无敌 （对怪有效）
         /// </summary>
         public const long WuDi = 1 << 18;
+
         /// <summary>
         /// 秒杀
         /// </summary>
@@ -114,13 +110,11 @@ namespace ET
         /// <summary>
         /// 隐藏状态
         /// </summary>
+        public const long Hide = 1 << 22;
 
-        public const long Hide = 1 << 22;   
-        
-        
         /// <summary>
         /// 传送状态
         /// </summary>
-        public const long Transfer = 1 << 23;   
+        public const long Transfer = 1 << 23;
     }
 }

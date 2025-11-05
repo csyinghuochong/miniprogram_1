@@ -59,6 +59,7 @@ namespace ET.Server
                 HeroComponentS heroComponentS = unit.AddComponent<HeroComponentS>();
             }
 
+            unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<BuffManagerComponentS>();
             unit.AddComponent<UnitInfoComponent>();
@@ -82,6 +83,7 @@ namespace ET.Server
             }
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
 
+            unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
@@ -126,6 +128,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
             numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, monsterConfig.HitLess, false);
 
+            unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
