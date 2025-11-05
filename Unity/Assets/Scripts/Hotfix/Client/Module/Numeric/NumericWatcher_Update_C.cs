@@ -19,7 +19,7 @@ namespace ET.Client
                 // unit.GetComponent<StateComponentC>().Reset();
                 unit.GetComponent<Move2DComponent>()?.Stop();
                 unit.GetComponent<SkillManagerComponentC>()?.OnFinish();
-                // unit.GetComponent<BuffManagerComponentC>()?.OnDead();
+                unit.GetComponent<BuffManagerComponentC>()?.OnDead();
 
                 EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend, Wait = true });
             }

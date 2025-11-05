@@ -28,6 +28,13 @@ namespace ET.Client
         {
         }
 
+        [EntitySystem]
+        private static void Destroy(this BuffManagerComponentC self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.Buffs.Clear();
+        }
+
         private static void Update(this BuffManagerComponentC self)
         {
             long now = TimeInfo.Instance.ClientNow();
@@ -53,13 +60,6 @@ namespace ET.Client
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }
-        }
-
-        [EntitySystem]
-        private static void Destroy(this BuffManagerComponentC self)
-        {
-            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-            self.Buffs.Clear();
         }
 
         public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData)
@@ -125,9 +125,6 @@ namespace ET.Client
             return buffNumber;
         }
 
-        /// <summary>
-        /// 通过标识ID获得Buff
-        /// </summary>
         public static List<BuffC> GetBuffByConfigId(this BuffManagerComponentC self, int buffConfigId)
         {
             List<BuffC> list = new List<BuffC>();
@@ -142,6 +139,16 @@ namespace ET.Client
             }
 
             return list;
+        }
+
+        public static void OnDead(this BuffManagerComponentC self)
+        {
+            for (int i = self.Buffs.Count - 1; i >= 0; i--)
+            {
+                BuffC buff = self.Buffs[i];
+
+                buff.BuffState = BuffState.Finished;
+            }
         }
     }
 }
