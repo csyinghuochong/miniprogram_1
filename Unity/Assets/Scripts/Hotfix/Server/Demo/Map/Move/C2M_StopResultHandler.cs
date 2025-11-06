@@ -9,7 +9,7 @@ namespace ET.Server
         {
             float3 stopPos;
             // 不能完全相信客户端
-            if (math.distance(unit.Position, message.Position) > 1f)
+            if (math.distance(unit.Position, message.Position) > 2f)
             {
                 stopPos = unit.Position;
             }
