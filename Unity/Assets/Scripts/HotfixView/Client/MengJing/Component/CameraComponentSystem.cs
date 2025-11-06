@@ -18,7 +18,7 @@ namespace ET.Client
         [EntitySystem]
         private static void LateUpdate(this CameraComponent self)
         {
-            self.MainCamera.transform.position = new Vector3(self.LookAtUnit.Position.x, self.LookAtUnit.Position.y, -10f);
+            self.MainCamera.transform.position = new Vector3(self.LookAtUnit.Position.x, self.LookAtUnit.Position.y, -100f);
         }
 
         [EntitySystem]

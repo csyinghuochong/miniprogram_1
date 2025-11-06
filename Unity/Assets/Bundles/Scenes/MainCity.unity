@@ -270,6 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 500347135}
   - component: {fileID: 500347136}
+  - component: {fileID: 500347137}
   m_Layer: 0
   m_Name: FarmCrop_WhiteFlower_5_Bumper
   m_TagString: Untagged
@@ -344,6 +345,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &500347137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500347134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &929459218
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 929459219}
   - component: {fileID: 929459220}
+  - component: {fileID: 929459221}
   m_Layer: 0
   m_Name: Icon_DST_Tree
   m_TagString: Untagged
@@ -416,7 +430,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 88a709b9d52de8746857a86808bd7532, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -428,6 +442,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &929459221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929459218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &947418866
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 947418867}
   - component: {fileID: 947418868}
+  - component: {fileID: 947418869}
   m_Layer: 0
   m_Name: BerryBushCombined
   m_TagString: Untagged
@@ -500,7 +527,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b0f729b6acbef8041a7c039827faac8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -512,6 +539,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &947418869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947418866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049519323
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082976913}
   - component: {fileID: 1082976914}
+  - component: {fileID: 1082976915}
   m_Layer: 0
   m_Name: FarmCrop_WhiteFlower_3
   m_TagString: Untagged
@@ -680,6 +720,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &1082976915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082976912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1339837601
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,6 +742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339837602}
   - component: {fileID: 1339837603}
+  - component: {fileID: 1339837604}
   m_Layer: 0
   m_Name: BigbushDark1_Berries
   m_TagString: Untagged
@@ -752,7 +805,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a5bfa5397d1e1344fb567a2e92ccc0a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -764,6 +817,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &1339837604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339837601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1677196803
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1677196804}
   - component: {fileID: 1677196805}
+  - component: {fileID: 1677196806}
   m_Layer: 0
   m_Name: BloodstoneMine_Back
   m_TagString: Untagged
@@ -836,7 +902,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 67a64660dd2064346814090673314c23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -848,6 +914,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &1677196806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677196803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1886481790
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1914813974}
   - component: {fileID: 1914813975}
+  - component: {fileID: 1914813976}
   m_Layer: 0
   m_Name: FarmCrop_Grapes_3_1
   m_TagString: Untagged
@@ -971,6 +1050,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &1914813976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914813973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
