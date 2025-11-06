@@ -94,15 +94,15 @@ namespace ET.Server
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
+            if (string.IsNullOrEmpty(skillConfig.SkillHandler) || SkillDispatcherComponentS.Instance.Get(skillConfig.SkillHandler) == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
             int errorCode = self.IsCanUseSkill(skillConfigId);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;
-            }
-
-            if (string.IsNullOrEmpty(skillConfig.SkillHandler))
-            {
-                return ErrorCode.ERR_ModifyData;
             }
 
             UseSkillInfo useSkillInfo = new UseSkillInfo();

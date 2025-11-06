@@ -105,7 +105,8 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             self.ActDistance = monsterConfig.ActDistance / 10000f;
-            self.AISkillIDList.Add(10000004);
+            self.AISkillIDList.Add(monsterConfig.ActSkillID);
+            // self.AISkillIDList.AddRange(monsterConfig.SkillID);
         }
 
         public static void InitHero(this AIComponent self)
@@ -117,6 +118,7 @@ namespace ET.Server
             self.FollowDistance = 10f;
             self.ActDistance = heroConfig.AtkDistance / 10000f;
             self.AISkillIDList.Add(heroConfig.AtkID);
+            // self.AISkillIDList.AddRange(heroConfig.SkillID);
         }
 
         public static bool HaveSkillId(this AIComponent self, int skillId)
