@@ -15,14 +15,7 @@
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int lastSceneType = mapComponent.MapType;
             int lastChapterid = mapComponent.SceneId;
-            // if (sceneType == SceneTypeEnum.PetMing)
-            // {
-            //     mapComponent.SetMapInfo(sceneType, sceneId, 0);
-            // }
-            // else
-            // {
-            //     
-            // }
+
             mapComponent.SetMapInfo(sceneType, sceneId);
 
             // 可以订阅这个事件中创建Loading界面
