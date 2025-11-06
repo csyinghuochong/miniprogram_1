@@ -138,7 +138,7 @@ namespace ET.Client
         {
             if (self.GameObject != null)
             {
-                self.GameObject.transform.position = vector;
+                self.GameObject.transform.position = new Vector3(vector.x, vector.y, vector.y);
             }
         }
 

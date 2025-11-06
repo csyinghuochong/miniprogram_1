@@ -168,7 +168,7 @@ namespace ET.Client
         {
             if (self.EffectObj == null)
             {
-                self.EffectPosition = vec3;
+                self.EffectPosition = new Vector3(vec3.x, vec3.y, vec3.y);
                 self.EffectAngle = angle;
                 return;
             }
