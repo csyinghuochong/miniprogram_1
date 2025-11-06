@@ -83,6 +83,7 @@ namespace ET.Client
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
+            self.UIMainSkill = rc.Get<GameObject>("UIMainSkill");
             self.Button_Boss = rc.Get<GameObject>("Button_Boss").GetComponent<Button>();
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
@@ -113,6 +114,10 @@ namespace ET.Client
         // 场景和角色都加载完成后
         public static void AfterEnterScene(this UIMainComponent self, int sceneType)
         {
+            self.Button_StartLevel.gameObject.SetActive(sceneType == MapTypeEnum.MainCityScene);
+            self.Button_Recall.gameObject.SetActive(sceneType == MapTypeEnum.LocalLevel);
+            self.UIMainSkill.SetActive(sceneType == MapTypeEnum.LocalLevel);
+            
             self.UpdatePlayerName();
             self.UpdatePlayerLv();
             self.UpdateGold();

@@ -60,7 +60,7 @@
     "DamageRange": [
       0
     ],
-    "Speed": 5,
+    "Speed": 8,
     "SkillEffectID": 10000002,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
@@ -96,7 +96,7 @@
     "DamageRange": [
       0
     ],
-    "Speed": 5,
+    "Speed": 8,
     "SkillEffectID": 10000003,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
