@@ -5,8 +5,8 @@
     {
         protected override async ETTask Run(Scene root, M2C_UnitStateUpdate message)
         {
-            Unit nowNunt = root.CurrentScene().GetComponent<UnitComponent>().Get(message.UnitId);
-            if (nowNunt == null)
+            Unit unit = root.CurrentScene().GetComponent<UnitComponent>().Get(message.UnitId);
+            if (unit == null)
             {
                 return;
             }
@@ -14,16 +14,16 @@
             // 添加状态
             if (message.StateOperateType == 1)
             {
-                nowNunt.GetComponent<StateComponentC>().StateTypeAdd(message.StateType);
+                unit.GetComponent<StateComponentC>().StateTypeAdd(message.StateType);
             }
 
             //移除状态
             if (message.StateOperateType == 2)
             {
-                nowNunt.GetComponent<StateComponentC>().StateTypeRemove(message.StateType);
+                unit.GetComponent<StateComponentC>().StateTypeRemove(message.StateType);
             }
 
-            EventSystem.Instance.Publish(root, new StateChange() { Unit = nowNunt, m2C_UnitStateUpdate = message });
+            EventSystem.Instance.Publish(root, new StateChange() { Unit = unit, m2C_UnitStateUpdate = message });
 
             await ETTask.CompletedTask;
         }
