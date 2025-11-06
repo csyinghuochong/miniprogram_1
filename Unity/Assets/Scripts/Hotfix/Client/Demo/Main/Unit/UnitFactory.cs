@@ -46,17 +46,14 @@ namespace ET.Client
             unit.MainHero = mainHero;
             unit.Type = unitInfo.Type;
             unit.ConfigId = unitInfo.ConfigId;
+            unit.Position = unitInfo.Position;
+            unit.Forward = unitInfo.Forward;
 
             unit.AddComponent<ObjectWait>();
-            // unit.AddComponent<MoveComponent>();
-            unit.AddComponent<Move2DComponent>();
-            
+
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = unitInfo.UnitName;
             unitInfoComponent.MasterName = unitInfo.MasterName;
-
-            unit.Position = unitInfo.Position;
-            unit.Forward = unitInfo.Forward;
 
             NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>();
             foreach (var kv in unitInfo.KV)
@@ -64,6 +61,8 @@ namespace ET.Client
                 numericComponent.ApplyValue(kv.Key, kv.Value, false);
             }
 
+            unit.AddComponent<StateComponentC>();
+            unit.AddComponent<Move2DComponent>();
             if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
             {
                 using (ListComponent<float3> list = ListComponent<float3>.Create())

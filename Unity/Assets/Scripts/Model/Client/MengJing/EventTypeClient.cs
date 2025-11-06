@@ -110,4 +110,10 @@ namespace ET.Client
         public int SkillId;
         public Unit Unit;
     }
+
+    public struct StateChange
+    {
+        public M2C_UnitStateUpdate m2C_UnitStateUpdate;
+        public Unit Unit;
+    }
 }
