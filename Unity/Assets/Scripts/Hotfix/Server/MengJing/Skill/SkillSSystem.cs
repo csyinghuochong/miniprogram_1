@@ -14,7 +14,6 @@ namespace ET.Server
         [EntitySystem]
         private static void Destroy(this SkillS self)
         {
-            self.ICheckShape = null;
         }
 
         public static void OnInit(this SkillS self, UseSkillInfo useSkillInfo, Unit theUnitFrom)
@@ -29,7 +28,7 @@ namespace ET.Server
                 self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(useSkillInfo.TargetId);
             }
 
-            self.TargetPosition = useSkillInfo.Position;
+            self.TargetPosition = useSkillInfo.TargetPosition;
 
             self.SkillHandler?.OnInit(self);
         }

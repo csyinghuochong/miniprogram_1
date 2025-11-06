@@ -90,7 +90,7 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            Unit unit = self.GetParent<Unit>();
+            Unit myUnit = self.GetParent<Unit>();
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
@@ -105,17 +105,37 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            float cd = self.AddSkillCD(skillConfigId);
-
             UseSkillInfo useSkillInfo = new UseSkillInfo();
             useSkillInfo.SkillConfigId = skillConfigId;
             useSkillInfo.TargetId = targetId;
             useSkillInfo.Angle = angle;
-            useSkillInfo.Position = position;
+            useSkillInfo.TargetPosition = position;
+
+            Unit targetUnit = myUnit.GetParent<UnitComponent>().Get(targetId);
+
+            switch (skillConfig.SkillTargetType)
+            {
+                case (int)SkillTargetType.SelfPosition:
+                {
+                    useSkillInfo.TargetPosition = myUnit.Position;
+                    break;
+                }
+                case (int)SkillTargetType.TargetPositon:
+                {
+                    if (targetUnit != null)
+                    {
+                        useSkillInfo.TargetPosition = targetUnit.Position;
+                    }
+
+                    break;
+                }
+            }
+
+            float cd = self.AddSkillCD(skillConfigId);
 
             SkillS skill = self.AddChild<SkillS>();
             self.Skills.Add(skill);
-            skill.OnInit(useSkillInfo, unit);
+            skill.OnInit(useSkillInfo, myUnit);
             skill.OnExecute();
 
             if (self.Timer == 0)
@@ -125,7 +145,7 @@ namespace ET.Server
             }
 
             M2C_OnUseSkill message = M2C_OnUseSkill.Create();
-            message.UnitId = unit.Id;
+            message.UnitId = myUnit.Id;
             message.SkillConfigId = skillConfigId;
             message.TargetId = targetId;
             message.Angle = angle;

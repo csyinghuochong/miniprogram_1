@@ -23,14 +23,14 @@ namespace ET.Server
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = entities.Count - 1; i >= 0; i--)
             {
-                Unit uu = entities[i];
+                Unit defendUnit = entities[i];
 
-                if (!skill.ICheckShape.Contains(uu.Position))
+                if (!skill.ICheckShape.Contains(defendUnit.Position))
                 {
                     continue;
                 }
 
-                Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill);
+                Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
             }
 
             skill.SkillState = SkillState.Finished;

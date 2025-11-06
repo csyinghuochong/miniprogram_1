@@ -123,7 +123,7 @@ namespace ET.Client
             useSkillInfo.SkillConfigId = message.SkillConfigId;
             useSkillInfo.TargetId = message.TargetId;
             useSkillInfo.Angle = message.Angle;
-            useSkillInfo.Position = message.Position;
+            useSkillInfo.TargetPosition = message.Position;
 
             SkillC skill = self.AddChild<SkillC>();
             self.Skills.Add(skill);

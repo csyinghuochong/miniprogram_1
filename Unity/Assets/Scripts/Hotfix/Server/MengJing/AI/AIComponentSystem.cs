@@ -105,7 +105,7 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             self.ActDistance = monsterConfig.ActDistance / 10000f;
-            self.AISkillIDList.Add(monsterConfig.ActSkillID);
+            self.AISkillIDList.Add(10000004);
         }
 
         public static void InitHero(this AIComponent self)

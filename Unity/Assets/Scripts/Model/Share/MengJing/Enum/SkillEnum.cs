@@ -73,35 +73,6 @@ namespace ET
         PassiveAddProSkillNoFight = 8, //被动附加属性技能
     }
 
-    //0  自身中心点
-    //1  指定目标位置
-    //2  定点位置
-    //3  自身中心点随机
-    //4  目标中心点随机
-    //5  定点位置随机
-    //6  跟随目标随机
-    //7  指定目标
-    //8  指定自己
-    //9  跟随自己
-    //10 多个目标(自身为中心随机)
-    //11 多个目标(目标为中心随机)
-
-    public static class SkillTargetType
-    {
-        public const int SelfPosition = 0;
-        public const int TargetPositon = 1;
-        public const int FixedPosition = 2;
-        public const int SelfRandom = 3;
-        public const int TargetRandom = 4;
-        public const int PositionRandom = 5;
-        public const int TargetFollow = 6;
-        public const int TargetOnly = 7;
-        public const int SelfOnly = 8;
-        public const int SelfFollow = 9;
-        public const int MulTarget = 10;
-        public const int MulTarget_11 = 11;
-    }
-
     //0：
     //1：表示需要释放前需要选中释放范围
     //2: 直线释放.弹道
@@ -204,7 +175,7 @@ namespace ET
         public int SkillConfigId;
         public long TargetId;
         public float Angle;
-        public float3 Position;
+        public float3 TargetPosition;
     }
 
     [EnableClass]

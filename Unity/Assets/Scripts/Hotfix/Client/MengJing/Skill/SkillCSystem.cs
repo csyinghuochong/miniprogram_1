@@ -28,7 +28,7 @@ namespace ET.Client
                 self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(useSkillInfo.TargetId);
             }
 
-            self.TargetPosition = useSkillInfo.Position;
+            self.TargetPosition = useSkillInfo.TargetPosition;
 
             self.SkillHandler?.OnInit(self);
         }

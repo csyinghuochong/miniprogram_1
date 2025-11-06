@@ -114,7 +114,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_Circle",
+    "SkillHandler": "Skill_AreaDamage",
     "GameObjectParameter": "",
     "UnlockStar": 0,
     "SkillType": 1,
