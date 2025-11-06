@@ -30,14 +30,14 @@ namespace ET
             PassiveSkillPro = _buf.ReadDouble();
             PassiveSkillTriggerOnce = _buf.ReadInt();
             SkillCD = _buf.ReadDouble();
-            SkillLiveTime = _buf.ReadInt();
+            SkillLiveTime = _buf.ReadFloat();
             ActDamage = _buf.ReadDouble();
             DamgeValue = _buf.ReadInt();
             SkillAnimation = _buf.ReadString();
             SkillMusic = _buf.ReadString();
             SkillTargetType = _buf.ReadInt();
             DamageRangeType = _buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); DamageRange = new double[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { double __e0;__e0 = _buf.ReadDouble(); DamageRange[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); DamageRange = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); DamageRange[__index0] = __e0;}}
             Speed = _buf.ReadFloat();
             SkillEffectID = _buf.ReadInt();
             SkillHitEffectID = _buf.ReadInt();
@@ -124,9 +124,9 @@ namespace ET
         public readonly double SkillCD;
 
         /// <summary>
-        /// 技能存在时间[毫秒]
+        /// 技能存在时间
         /// </summary>
-        public readonly int SkillLiveTime;
+        public readonly float SkillLiveTime;
 
         /// <summary>
         /// 攻击系数
@@ -161,7 +161,7 @@ namespace ET
         /// <summary>
         /// 伤害范围
         /// </summary>
-        public readonly double[] DamageRange;
+        public readonly float[] DamageRange;
 
         /// <summary>
         /// 速度

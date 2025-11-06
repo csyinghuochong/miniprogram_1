@@ -28,7 +28,6 @@ namespace ET.Client
                 self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(useSkillInfo.TargetId);
             }
 
-            self.SkillLiveTime = self.SkillConfig.SkillLiveTime * 1f / 1000;
             self.TargetPosition = useSkillInfo.Position;
 
             self.SkillHandler?.OnInit(self);
@@ -39,15 +38,17 @@ namespace ET.Client
             self.SkillHandler?.OnExecute(self);
         }
 
-        public static void OnUpdate(this SkillC self, float deltaTime)
+        public static void BaseUpdate(this SkillC self, float deltaTime)
         {
             self.RunTime += deltaTime;
             if (self.RunTime >= self.SkillConfig.SkillLiveTime)
             {
                 self.SkillState = SkillState.Finished;
-                return;
             }
+        }
 
+        public static void OnUpdate(this SkillC self, float deltaTime)
+        {
             self.SkillHandler?.OnUpdate(self, deltaTime);
         }
 

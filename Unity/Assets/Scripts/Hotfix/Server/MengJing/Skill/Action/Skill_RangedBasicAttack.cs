@@ -4,7 +4,7 @@ namespace ET.Server
 {
     /// <summary>
     /// 远程普通攻击  例如射手射出一只箭，这个箭是追踪敌人的
-    /// Speed 弹体移动速度
+    /// Speed 箭的移动速度
     /// </summary>
     public class Skill_RangedBasicAttack : SkillHandlerS
     {

@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -9,7 +10,6 @@ namespace ET.Server
         public SkillConfig SkillConfig { get; set; }
         public SkillHandlerS SkillHandler { get; set; }
         public SkillState SkillState { get; set; }
-        public float SkillLiveTime { get; set; }
         private EntityRef<Unit> theUnitFrom; //来自哪个Unit
         public Unit TheUnitFrom { get => this.theUnitFrom; set => this.theUnitFrom = value; }
         private EntityRef<Unit> theUnitTarget;
@@ -20,5 +20,6 @@ namespace ET.Server
         public float TriggerTime { get; set; }
         public float IntervalTime { get; set; }
         public float Speed { get; set; }
+        public Shape ICheckShape { get; set; }
     }
 }
