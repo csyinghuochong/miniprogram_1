@@ -18,16 +18,15 @@ namespace ET
         {
             Id = _buf.ReadInt();
             TaskName = _buf.ReadString();
-            TaskType = _buf.ReadInt();
+            TaskType = (TaskType)_buf.ReadInt();
             TriggerType = _buf.ReadInt();
             TriggerValue = _buf.ReadInt();
             TaskExp = _buf.ReadInt();
             TaskGold = _buf.ReadInt();
-            ItemID = _buf.ReadString();
+            {int __n0 = _buf.ReadSize(); RewardItem = new ET.RewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { ET.RewardItem __e0;__e0 = ExternalTypeUtil.NewRewardItem(global::ET.rewardItem.DeserializerewardItem(_buf)); RewardItem[__index0] = __e0;}}
             TargetType = (TaskTargetType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); Target = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Target[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); TargetValue = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); TargetValue[__index0] = __e0;}}
-            ItemNum = _buf.ReadString();
             TaskDes = _buf.ReadString();
 
             PostInit();
@@ -51,7 +50,7 @@ namespace ET
         /// <summary>
         /// 任务类型
         /// </summary>
-        public readonly int TaskType;
+        public readonly TaskType TaskType;
 
         /// <summary>
         /// 触发类型
@@ -76,7 +75,7 @@ namespace ET
         /// <summary>
         /// 奖励道具ID
         /// </summary>
-        public readonly string ItemID;
+        public readonly ET.RewardItem[] RewardItem;
 
         /// <summary>
         /// 目标类型
@@ -92,11 +91,6 @@ namespace ET
         /// 目标值
         /// </summary>
         public readonly int[] TargetValue;
-
-        /// <summary>
-        /// 奖励道具数量
-        /// </summary>
-        public readonly string ItemNum;
 
         /// <summary>
         /// 任务描述
@@ -121,7 +115,6 @@ namespace ET
             
             
             
-            
         }
 
         public override string ToString()
@@ -134,11 +127,10 @@ namespace ET
             + "TriggerValue:" + TriggerValue + ","
             + "TaskExp:" + TaskExp + ","
             + "TaskGold:" + TaskGold + ","
-            + "ItemID:" + ItemID + ","
+            + "RewardItem:" + Luban.StringUtil.CollectionToString(RewardItem) + ","
             + "TargetType:" + TargetType + ","
             + "Target:" + Luban.StringUtil.CollectionToString(Target) + ","
             + "TargetValue:" + Luban.StringUtil.CollectionToString(TargetValue) + ","
-            + "ItemNum:" + ItemNum + ","
             + "TaskDes:" + TaskDes + ","
             + "}";
         }

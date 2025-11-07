@@ -810,3 +810,17 @@ message M2C_TaskUpdate // IMessage
 	repeated TaskProInfo TaskProInfoList = 2;
 	repeated int32 CompleteTaskList = 3;
 }
+
+// ResponseType M2C_TaskCommit
+message C2M_TaskCommit // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 TaskConfigId = 2;
+}
+
+message M2C_TaskCommit // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}

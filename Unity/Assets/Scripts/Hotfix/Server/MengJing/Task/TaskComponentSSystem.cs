@@ -204,10 +204,11 @@ namespace ET.Server
             {
                 m2C_TaskUpdate.TaskProInfoList.Add(taskPro.ToMessage());
             }
+
             m2C_TaskUpdate.CompleteTaskList.AddRange(self.CompleteTaskList);
             MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
         }
-        
+
         private static void NoticeUpdateAllTask(this TaskComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
@@ -217,8 +218,48 @@ namespace ET.Server
             {
                 m2C_TaskUpdate.TaskProInfoList.Add(taskPro.ToMessage());
             }
+
             m2C_TaskUpdate.CompleteTaskList.AddRange(self.CompleteTaskList);
             MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+        }
+
+        public static int OnCommitTask(this TaskComponentS self, int taskConfigId)
+        {
+            if (self.CompleteTaskList.Contains(taskConfigId))
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskConfigId);
+
+            TaskPro taskPro = self.GetTaskByConfigId(taskConfigId);
+            if (taskPro == null)
+            {
+                return ErrorCode.ERR_TaskCommited;
+            }
+            
+            Unit unit = self.GetParent<Unit>();
+            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+
+            if (taskConfig.TaskType == TaskType.Main)
+            {
+                
+            }
+            
+            return ErrorCode.ERR_Success;
+        }
+
+        public static TaskPro GetTaskByConfigId(this TaskComponentS self, int taskConfigId)
+        {
+            foreach (TaskPro taskPro in self.TaskProList)
+            {
+                if (taskPro.ConfigId == taskConfigId)
+                {
+                    return taskPro;
+                }
+            }
+
+            return null;
         }
     }
 }

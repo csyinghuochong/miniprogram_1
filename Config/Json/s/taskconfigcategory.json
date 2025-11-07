@@ -7,7 +7,12 @@
     "TriggerValue": 1,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10002001",
+    "RewardItem": [
+      {
+        "ItemId": 10002001,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 1,
     "Target": [
       0
@@ -15,7 +20,6 @@
     "TargetValue": [
       1
     ],
-    "ItemNum": "1",
     "TaskDes": "升级到1级"
   },
   {
@@ -26,7 +30,12 @@
     "TriggerValue": 10010000,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10002002",
+    "RewardItem": [
+      {
+        "ItemId": 10002002,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 2,
     "Target": [
       0
@@ -34,7 +43,6 @@
     "TargetValue": [
       5
     ],
-    "ItemNum": "1",
     "TaskDes": "击杀任意5只怪物"
   },
   {
@@ -45,7 +53,12 @@
     "TriggerValue": 10010001,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10002003",
+    "RewardItem": [
+      {
+        "ItemId": 10002003,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 1,
     "Target": [
       0
@@ -53,7 +66,6 @@
     "TargetValue": [
       3
     ],
-    "ItemNum": "1",
     "TaskDes": "升级到3级"
   },
   {
@@ -64,7 +76,12 @@
     "TriggerValue": 10010002,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10002004",
+    "RewardItem": [
+      {
+        "ItemId": 10002004,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 3,
     "Target": [
       0
@@ -72,7 +89,6 @@
     "TargetValue": [
       1
     ],
-    "ItemNum": "1",
     "TaskDes": "击杀任意一只Boss"
   },
   {
@@ -83,7 +99,12 @@
     "TriggerValue": 10010003,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10002005",
+    "RewardItem": [
+      {
+        "ItemId": 10002005,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 4,
     "Target": [
       10000001
@@ -91,7 +112,6 @@
     "TargetValue": [
       1
     ],
-    "ItemNum": "1",
     "TaskDes": "击杀一只哥布林"
   },
   {
@@ -102,7 +122,12 @@
     "TriggerValue": 10010004,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10002006",
+    "RewardItem": [
+      {
+        "ItemId": 10002006,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 6,
     "Target": [
       0
@@ -110,7 +135,6 @@
     "TargetValue": [
       100
     ],
-    "ItemNum": "1",
     "TaskDes": "提升战力到100"
   },
   {
@@ -121,7 +145,12 @@
     "TriggerValue": 10010005,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10003001",
+    "RewardItem": [
+      {
+        "ItemId": 10003001,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 1,
     "Target": [
       0
@@ -129,7 +158,6 @@
     "TargetValue": [
       5
     ],
-    "ItemNum": "1",
     "TaskDes": "升级到5级"
   },
   {
@@ -140,7 +168,12 @@
     "TriggerValue": 10010006,
     "TaskExp": 30,
     "TaskGold": 20,
-    "ItemID": "10003002",
+    "RewardItem": [
+      {
+        "ItemId": 10003002,
+        "ItemNum": 1
+      }
+    ],
     "TargetType": 6,
     "Target": [
       0
@@ -148,7 +181,6 @@
     "TargetValue": [
       200
     ],
-    "ItemNum": "1",
     "TaskDes": "提升战力到200"
   }
 ]

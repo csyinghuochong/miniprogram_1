@@ -3692,6 +3692,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_TaskCommit)]
+    [ResponseType(nameof(M2C_TaskCommit))]
+    public partial class C2M_TaskCommit : MessageObject, ILocationRequest
+    {
+        public static C2M_TaskCommit Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_TaskCommit), isFromPool) as C2M_TaskCommit;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int TaskConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.TaskConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_TaskCommit)]
+    public partial class M2C_TaskCommit : MessageObject, ILocationResponse
+    {
+        public static M2C_TaskCommit Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_TaskCommit), isFromPool) as M2C_TaskCommit;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3793,5 +3856,7 @@ namespace ET
         public const ushort M2C_UnitStateUpdate = 10098;
         public const ushort TaskProInfo = 10099;
         public const ushort M2C_TaskUpdate = 10100;
+        public const ushort C2M_TaskCommit = 10101;
+        public const ushort M2C_TaskCommit = 10102;
     }
 }

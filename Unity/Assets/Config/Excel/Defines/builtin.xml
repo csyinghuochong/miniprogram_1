@@ -26,4 +26,12 @@
             <option name="constructor" value="ExternalTypeUtil.NewVector4"/>
         </mapper>
     </bean>
+    <bean name="rewardItem" valueType="1" sep=";">
+        <var name="ItemId" type="int"/>
+        <var name="ItemNum" type="int"/>
+        <mapper target="all" codeTarget="cs-bin,cs-dotnet-json">
+            <option name="type" value="ET.RewardItem"/>
+            <option name="constructor" value="ExternalTypeUtil.NewRewardItem"/>
+        </mapper>
+    </bean>
 </module>
