@@ -1,0 +1,34 @@
+﻿namespace ET
+{
+    [EntitySystemOf(typeof(TaskPro))]
+    [FriendOf(typeof(TaskPro))]
+    public static partial class TaskProSystem
+    {
+        [EntitySystem]
+        private static void Awake(this TaskPro self)
+        {
+        }
+
+        [EntitySystem]
+        private static void Destroy(this TaskPro self)
+        {
+        }
+
+        public static TaskProInfo ToMessage(this TaskPro self)
+        {
+            TaskProInfo taskProInfo = TaskProInfo.Create();
+            taskProInfo.Id = self.Id;
+            taskProInfo.ConfigId = self.ConfigId;
+            taskProInfo.TaskTargetNum_1 = self.TaskTargetNum_1;
+
+            return taskProInfo;
+        }
+
+        public static void FromMessage(this TaskProInfo self, TaskProInfo taskProInfo)
+        {
+            self.ConfigId = taskProInfo.ConfigId;
+            self.TaskState = taskProInfo.TaskState;
+            self.TaskTargetNum_1 = taskProInfo.TaskTargetNum_1;
+        }
+    }
+}

@@ -24,7 +24,7 @@ namespace ET
             TaskExp = _buf.ReadInt();
             TaskGold = _buf.ReadInt();
             ItemID = _buf.ReadString();
-            TargetType = _buf.ReadInt();
+            TargetType = (TaskTargetType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); Target = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Target[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); TargetValue = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); TargetValue[__index0] = __e0;}}
             ItemNum = _buf.ReadString();
@@ -81,7 +81,7 @@ namespace ET
         /// <summary>
         /// 目标类型
         /// </summary>
-        public readonly int TargetType;
+        public readonly TaskTargetType TargetType;
 
         /// <summary>
         /// 目标ID

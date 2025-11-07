@@ -59,6 +59,11 @@ namespace ET.Server
                 HeroComponentS heroComponentS = unit.AddComponent<HeroComponentS>();
             }
 
+            if (unit.GetComponent<TaskComponentS>() == null)
+            {
+                TaskComponentS taskComponentS = unit.AddComponent<TaskComponentS>();
+            }
+
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<BuffManagerComponentS>();

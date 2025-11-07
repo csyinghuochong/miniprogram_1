@@ -796,3 +796,11 @@ message M2C_UnitStateUpdate // IMessage
 	int32 StateTime = 4;
 	string StateValue = 5;
 }
+
+message TaskProInfo
+{
+	int64 Id = 1;
+	int32 ConfigId = 2;
+	int32 TaskState = 3;
+	int32 TaskTargetNum_1 = 4;
+}

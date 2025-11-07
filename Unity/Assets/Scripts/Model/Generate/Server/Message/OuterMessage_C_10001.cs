@@ -3623,6 +3623,43 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.TaskProInfo)]
+    public partial class TaskProInfo : MessageObject
+    {
+        public static TaskProInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(TaskProInfo), isFromPool) as TaskProInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public long Id { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int TaskState { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int TaskTargetNum_1 { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Id = default;
+            this.ConfigId = default;
+            this.TaskState = default;
+            this.TaskTargetNum_1 = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -3722,5 +3759,6 @@ namespace ET
         public const ushort M2C_UnitBuffUpdate = 10096;
         public const ushort M2C_UnitBuffRemove = 10097;
         public const ushort M2C_UnitStateUpdate = 10098;
+        public const ushort TaskProInfo = 10099;
     }
 }
