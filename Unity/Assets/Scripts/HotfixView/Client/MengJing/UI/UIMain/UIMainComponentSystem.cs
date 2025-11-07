@@ -95,8 +95,10 @@ namespace ET.Client
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
             self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
+            self.Image_TaskCompleted = rc.Get<GameObject>("Image_TaskCompleted").GetComponent<Image>();
             self.Text_TaskName = rc.Get<GameObject>("Text_TaskName").GetComponent<TMP_Text>();
             self.Text_TaskProgress = rc.Get<GameObject>("Text_TaskProgress").GetComponent<TMP_Text>();
+            self.Button_TaskCommit = rc.Get<GameObject>("Button_TaskCommit").GetComponent<Button>();
             self.Button_TaskReward = rc.Get<GameObject>("Button_TaskReward").GetComponent<Button>();
             self.Button_Recall = rc.Get<GameObject>("Button_Recall").GetComponent<Button>();
             self.Button_StartLevel = rc.Get<GameObject>("Button_StartLevel").GetComponent<Button>();
@@ -110,7 +112,8 @@ namespace ET.Client
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(self.UIJoystick);
-            self.Button_TaskReward.AddListener(() => { });
+            self.Button_TaskCommit.AddListener(() => { self.OnButton_TaskCommit(); });
+            self.Button_TaskReward.AddListener(() => { self.OnButton_TaskReward().Coroutine(); });
             self.Button_Recall.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.MainCityScene).Coroutine(); });
             self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalLevel).Coroutine(); });
             self.Button_Speed.AddListener(() => { self.OnButton_Speed(); });
@@ -247,9 +250,39 @@ namespace ET.Client
             }
 
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.ConfigId);
+
             self.Text_TaskName.SetText(taskConfig.TaskName);
             self.Text_TaskProgress.SetTextFormat("{0}/{1}", taskPro.TaskTargetNum_1, taskConfig.TargetValue[0]); //先这样，后面应该根据不同的目标类型显示会有所调整
-            self.Button_TaskReward.gameObject.SetActive(taskPro.TaskState == (int)TaskState.Completed);
+            self.Image_TaskCompleted.gameObject.SetActive(taskPro.TaskState == (int)TaskState.Completed);
+            self.Button_TaskCommit.gameObject.SetActive(taskPro.TaskState == (int)TaskState.Completed);
+        }
+
+        private static void OnButton_TaskCommit(this UIMainComponent self)
+        {
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            TaskPro taskPro = taskComponent.GetMainTask();
+            if (taskPro == null)
+            {
+                return;
+            }
+
+            ClientTaskHelper.TaskCommit(self.Root(), taskPro.ConfigId).Coroutine();
+        }
+
+        private static async ETTask OnButton_TaskReward(this UIMainComponent self)
+        {
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            TaskPro taskPro = taskComponent.GetMainTask();
+            if (taskPro == null)
+            {
+                return;
+            }
+
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.ConfigId);
+
+            Log.Warning($"显示任务奖励道具 {taskConfig.RewardItem}");
+
+            await ETTask.CompletedTask;
         }
 
         public static void UpdateExp(this UIMainComponent self)
