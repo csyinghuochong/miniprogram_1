@@ -18,7 +18,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             SpawnTime = _buf.ReadFloat();
-            SpawnPosition = global::ET.vector2.Deserializevector2(_buf);
+            SpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             MonsterId = _buf.ReadInt();
 
             PostInit();
@@ -42,7 +42,7 @@ namespace ET
         /// <summary>
         /// 生成位置
         /// </summary>
-        public readonly vector2 SpawnPosition;
+        public readonly System.Numerics.Vector2 SpawnPosition;
 
         /// <summary>
         /// 怪物Id

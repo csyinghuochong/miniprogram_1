@@ -23,7 +23,7 @@ namespace ET
             TriggerValue = _buf.ReadInt();
             TaskExp = _buf.ReadInt();
             TaskGold = _buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); RewardItem = new rewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { rewardItem __e0;__e0 = global::ET.rewardItem.DeserializerewardItem(_buf); RewardItem[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); RewardItem = new ET.RewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { ET.RewardItem __e0;__e0 = ExternalTypeUtil.NewRewardItem(global::ET.rewardItem.DeserializerewardItem(_buf)); RewardItem[__index0] = __e0;}}
             TargetType = (TaskTargetType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); TargetId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); TargetId[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); TargetValue = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); TargetValue[__index0] = __e0;}}
@@ -75,7 +75,7 @@ namespace ET
         /// <summary>
         /// 奖励道具ID
         /// </summary>
-        public readonly rewardItem[] RewardItem;
+        public readonly ET.RewardItem[] RewardItem;
 
         /// <summary>
         /// 目标类型

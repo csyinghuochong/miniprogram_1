@@ -6,7 +6,7 @@ set CONF_ROOT=%WORKSPACE%\Unity\Assets\Config\Excel
 ::Client
 dotnet %LUBAN_DLL% ^
     --customTemplateDir CustomTemplate ^
-    -t client ^
+    -t all ^
     -c cs-bin ^
     -d bin ^
     -d json ^
