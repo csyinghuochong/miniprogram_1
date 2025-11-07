@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, TriggerTask args)
         {
-            args.Unit.GetComponent<TaskComponentS>()?.TriggerTaskEvent(args.TargetType, args.Target, args.TargetValue);
+            args.Unit.GetComponent<TaskComponentS>()?.TriggerTaskEvent(args.TargetType, args.TargetId, args.TargetValue);
 
             await ETTask.CompletedTask;
         }
@@ -50,6 +50,10 @@ namespace ET.Server
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(mainTaskId);
                 TaskPro TaskPro = self.CreateTask(mainTaskId);
             }
+            
+            // 重新触发一些任务
+            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+            self.TriggerTaskEvent(TaskTargetType.PlayerLv, 0, userInfoComponent.Lv);
         }
         
         public static bool IsHaveTask(this TaskComponentS self, int taskConfigId)
@@ -120,7 +124,7 @@ namespace ET.Server
         {
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.ConfigId);
 
-            for (int i = 0; i < taskConfig.Target.Length; i++)
+            for (int i = 0; i < taskConfig.TargetId.Length; i++)
             {
                 if (i == 0 && taskConfig.TargetValue[i] > taskPro.TaskTargetNum_1)
                 {
@@ -136,7 +140,7 @@ namespace ET.Server
             return true;
         }
 
-        public static void TriggerTaskEvent(this TaskComponentS self, TaskTargetType targetType, int target, int targetValue, bool notice = true)
+        public static void TriggerTaskEvent(this TaskComponentS self, TaskTargetType targetType, int targetId, int targetValue, bool notice = true)
         {
             List<TaskPro> noticeTaskList = new();
 
@@ -176,7 +180,7 @@ namespace ET.Server
                     }
                     case TaskTargetType.KillMonsterId:
                     {
-                        if (taskConfig.Target[0] == target)
+                        if (taskConfig.TargetId[0] == targetId)
                         {
                             taskPro.TaskTargetNum_1++;
                         }

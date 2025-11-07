@@ -62,6 +62,24 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class TaskUpdate_UIMainRefresh : AEvent<Scene, TaskUpdate>
+    {
+        protected override async ETTask Run(Scene scene, TaskUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateMainTask();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIMainComponent))]
     [FriendOf(typeof(UIMainComponent))]
     public static partial class UIMainComponentSystem
@@ -77,6 +95,9 @@ namespace ET.Client
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
             self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
+            self.Text_TaskName = rc.Get<GameObject>("Text_TaskName").GetComponent<TMP_Text>();
+            self.Text_TaskProgress = rc.Get<GameObject>("Text_TaskProgress").GetComponent<TMP_Text>();
+            self.Button_TaskReward = rc.Get<GameObject>("Button_TaskReward").GetComponent<Button>();
             self.Button_Recall = rc.Get<GameObject>("Button_Recall").GetComponent<Button>();
             self.Button_StartLevel = rc.Get<GameObject>("Button_StartLevel").GetComponent<Button>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
@@ -89,6 +110,7 @@ namespace ET.Client
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(self.UIJoystick);
+            self.Button_TaskReward.AddListener(() => { });
             self.Button_Recall.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.MainCityScene).Coroutine(); });
             self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalLevel).Coroutine(); });
             self.Button_Speed.AddListener(() => { self.OnButton_Speed(); });
@@ -117,13 +139,14 @@ namespace ET.Client
             self.Button_StartLevel.gameObject.SetActive(sceneType == MapTypeEnum.MainCityScene);
             self.Button_Recall.gameObject.SetActive(sceneType == MapTypeEnum.LocalLevel);
             self.UIMainSkill.SetActive(sceneType == MapTypeEnum.LocalLevel);
-            
+
             self.UpdatePlayerName();
             self.UpdatePlayerLv();
             self.UpdateGold();
             self.UpdateDiamond();
             self.UpdateExp();
-            
+            self.UpdateMainTask();
+
             self.UIJoystickComponent.AfterEnterScene(sceneType);
         }
 
@@ -212,6 +235,21 @@ namespace ET.Client
             {
                 self.Text_Diamond.SetTextFormat("{0}K", userInfoComponent.Diamond / 1000);
             }
+        }
+
+        public static void UpdateMainTask(this UIMainComponent self)
+        {
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+            TaskPro taskPro = taskComponent.GetMainTask();
+            if (taskPro == null)
+            {
+                return;
+            }
+
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.ConfigId);
+            self.Text_TaskName.SetText(taskConfig.TaskName);
+            self.Text_TaskProgress.SetTextFormat("{0}/{1}", taskPro.TaskTargetNum_1, taskConfig.TargetValue[0]); //先这样，后面应该根据不同的目标类型显示会有所调整
+            self.Button_TaskReward.gameObject.SetActive(taskPro.TaskState == (int)TaskState.Completed);
         }
 
         public static void UpdateExp(this UIMainComponent self)

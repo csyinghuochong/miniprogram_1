@@ -25,7 +25,7 @@ namespace ET
             TaskGold = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); RewardItem = new rewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { rewardItem __e0;__e0 = global::ET.rewardItem.DeserializerewardItem(_buf); RewardItem[__index0] = __e0;}}
             TargetType = (TaskTargetType)_buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); Target = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); Target[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); TargetId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); TargetId[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); TargetValue = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); TargetValue[__index0] = __e0;}}
             TaskDes = _buf.ReadString();
 
@@ -85,7 +85,7 @@ namespace ET
         /// <summary>
         /// 目标ID
         /// </summary>
-        public readonly int[] Target;
+        public readonly int[] TargetId;
 
         /// <summary>
         /// 目标值
@@ -129,7 +129,7 @@ namespace ET
             + "TaskGold:" + TaskGold + ","
             + "RewardItem:" + Luban.StringUtil.CollectionToString(RewardItem) + ","
             + "TargetType:" + TargetType + ","
-            + "Target:" + Luban.StringUtil.CollectionToString(Target) + ","
+            + "TargetId:" + Luban.StringUtil.CollectionToString(TargetId) + ","
             + "TargetValue:" + Luban.StringUtil.CollectionToString(TargetValue) + ","
             + "TaskDes:" + TaskDes + ","
             + "}";

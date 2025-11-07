@@ -35,9 +35,9 @@ RectTransform:
   - {fileID: 816958558919681862}
   - {fileID: 3276087073645315445}
   - {fileID: 8986032202065159847}
+  - {fileID: 1548175801698220174}
   - {fileID: 6822206981165467528}
   - {fileID: 6825102058386347864}
-  - {fileID: 1548175801698220174}
   - {fileID: 3198267218093514893}
   - {fileID: 4152468698242975453}
   - {fileID: 3675870774036113858}
@@ -131,10 +131,16 @@ MonoBehaviour:
     gameObject: {fileID: 7379980397126928414}
   - key: Text_Diamond
     gameObject: {fileID: 1893285141822115623}
-  - key: Text_FPS
-    gameObject: {fileID: 3523739314070148987}
   - key: UIJoystick
     gameObject: {fileID: 4683740165286688662}
+  - key: Text_TaskName
+    gameObject: {fileID: 5031807913019344503}
+  - key: Text_TaskProgress
+    gameObject: {fileID: 215732630590926164}
+  - key: Button_TaskReward
+    gameObject: {fileID: 1859914392152582337}
+  - key: Text_FPS
+    gameObject: {fileID: 3523739314070148987}
   - key: Button_Recall
     gameObject: {fileID: 672110121185644835}
   - key: Button_StartLevel

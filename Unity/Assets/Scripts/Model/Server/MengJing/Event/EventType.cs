@@ -31,7 +31,7 @@ namespace ET.Server
     {
         public Unit Unit;
         public TaskTargetType TargetType;
-        public int Target;
+        public int TargetId;
         public int TargetValue;
     }
 }

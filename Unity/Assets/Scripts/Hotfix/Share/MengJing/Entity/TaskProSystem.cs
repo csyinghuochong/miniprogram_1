@@ -19,6 +19,7 @@
             TaskProInfo taskProInfo = TaskProInfo.Create();
             taskProInfo.Id = self.Id;
             taskProInfo.ConfigId = self.ConfigId;
+            taskProInfo.TaskState = self.TaskState;
             taskProInfo.TaskTargetNum_1 = self.TaskTargetNum_1;
             taskProInfo.TaskTargetNum_2 = self.TaskTargetNum_2;
 

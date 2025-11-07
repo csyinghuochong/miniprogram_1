@@ -44,6 +44,8 @@
 
             heroComponentC.CompleteTaskList = response.CompleteTaskList;
 
+            EventSystem.Instance.Publish(root, new TaskUpdate());
+            
             return response.Error;
         }
     }
