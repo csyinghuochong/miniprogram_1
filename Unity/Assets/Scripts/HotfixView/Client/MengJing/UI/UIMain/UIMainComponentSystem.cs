@@ -1,6 +1,8 @@
-﻿using Cysharp.Text;
+﻿using System.Linq;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -99,7 +101,7 @@ namespace ET.Client
             self.Text_TaskName = rc.Get<GameObject>("Text_TaskName").GetComponent<TMP_Text>();
             self.Text_TaskProgress = rc.Get<GameObject>("Text_TaskProgress").GetComponent<TMP_Text>();
             self.Button_TaskCommit = rc.Get<GameObject>("Button_TaskCommit").GetComponent<Button>();
-            self.Button_TaskReward = rc.Get<GameObject>("Button_TaskReward").GetComponent<Button>();
+            self.EventTrigger_TaskReward = rc.Get<GameObject>("EventTrigger_TaskReward").GetComponent<EventTrigger>();
             self.Button_Recall = rc.Get<GameObject>("Button_Recall").GetComponent<Button>();
             self.Button_StartLevel = rc.Get<GameObject>("Button_StartLevel").GetComponent<Button>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
@@ -113,7 +115,8 @@ namespace ET.Client
 
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(self.UIJoystick);
             self.Button_TaskCommit.AddListener(() => { self.OnButton_TaskCommit(); });
-            self.Button_TaskReward.AddListener(() => { self.OnButton_TaskReward().Coroutine(); });
+            self.EventTrigger_TaskReward.AddEventTrigger((p) => { self.OnTaskRewardPointerDown(p).Coroutine(); }, EventTriggerType.PointerDown);
+            self.EventTrigger_TaskReward.AddEventTrigger(self.OnTaskRewardPointerUp, EventTriggerType.PointerUp);
             self.Button_Recall.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.MainCityScene).Coroutine(); });
             self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalLevel).Coroutine(); });
             self.Button_Speed.AddListener(() => { self.OnButton_Speed(); });
@@ -269,7 +272,7 @@ namespace ET.Client
             ClientTaskHelper.TaskCommit(self.Root(), taskPro.ConfigId).Coroutine();
         }
 
-        private static async ETTask OnButton_TaskReward(this UIMainComponent self)
+        private static async ETTask OnTaskRewardPointerDown(this UIMainComponent self, PointerEventData pdata)
         {
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
             TaskPro taskPro = taskComponent.GetMainTask();
@@ -280,9 +283,18 @@ namespace ET.Client
 
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.ConfigId);
 
-            Log.Warning($"显示任务奖励道具 {taskConfig.RewardItem}");
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemRewardTip);
 
-            await ETTask.CompletedTask;
+            Vector2 localPoint;
+            RectTransform canvas = self.GetParent<UI>().GameObject.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            ui.GetComponent<UIItemRewardTipComponent>().OnInit(new Vector3(localPoint.x, localPoint.y, 0f), taskConfig.RewardItem);
+        }
+
+        private static void OnTaskRewardPointerUp(this UIMainComponent self, PointerEventData pdata)
+        {
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemRewardTip);
         }
 
         public static void UpdateExp(this UIMainComponent self)

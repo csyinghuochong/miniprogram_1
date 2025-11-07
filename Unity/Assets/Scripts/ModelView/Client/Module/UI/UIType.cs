@@ -20,5 +20,6 @@ namespace ET
         public const string UIHeroLvUp = "UIHeroLvUp/UIHeroLvUp";
         public const string UIHeroAttributes = "UIHeroAttributes/UIHeroAttributes";
         public const string UIHeroStarUp =  "UIHeroStarUp/UIHeroStarUp";
+        public const string  UIItemRewardTip  = "UIItemRewardTip/UIItemRewardTip";
     }
 }

@@ -26,7 +26,7 @@ namespace ET.Client
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
             self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
             self.Image_Equipped = rc.Get<GameObject>("Image_Equipped").GetComponent<Image>();
-            
+
             self.Image_On.gameObject.SetActive(false);
             self.Image_Equipped.gameObject.SetActive(false);
             self.Image_Selected.gameObject.SetActive(false);
@@ -45,7 +45,20 @@ namespace ET.Client
             self.OnItemClick = onItemClick;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-            self.Text_ItemNum.SetTextFormat("{0}", item.Num);
+            self.Text_ItemNum.SetText(item.Num);
+
+            string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
+            self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+        }
+
+        public static async ETTask UpdateInfo(this UICommonItem self, int itemConfigId, int num)
+        {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
+
+            self.Text_ItemNum.SetText(num);
 
             string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
             self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
@@ -63,7 +76,5 @@ namespace ET.Client
         {
             self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
         }
-        
-        
     }
 }

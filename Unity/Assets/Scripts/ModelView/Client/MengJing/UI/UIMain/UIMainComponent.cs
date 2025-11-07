@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -25,7 +26,7 @@ namespace ET.Client
         public TMP_Text Text_TaskName;
         public TMP_Text Text_TaskProgress;
         public Button Button_TaskCommit;
-        public Button Button_TaskReward;
+        public EventTrigger EventTrigger_TaskReward;
         public Button Button_Recall;
         public Button Button_StartLevel;
         public Button Button_Speed;
