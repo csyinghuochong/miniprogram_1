@@ -25,7 +25,7 @@
             return taskProInfo;
         }
 
-        public static void FromMessage(this TaskProInfo self, TaskProInfo taskProInfo)
+        public static void FromMessage(this TaskPro self, TaskProInfo taskProInfo)
         {
             self.ConfigId = taskProInfo.ConfigId;
             self.TaskState = taskProInfo.TaskState;

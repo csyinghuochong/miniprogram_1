@@ -116,4 +116,8 @@ namespace ET.Client
         public M2C_UnitStateUpdate m2C_UnitStateUpdate;
         public Unit Unit;
     }
+    
+    public struct TaskUpdate
+    {
+    }
 }
