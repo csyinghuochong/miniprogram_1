@@ -40,36 +40,6 @@
             }
         }
 
-        // 直接设置
-        public static void UpdateRoleData(this UserInfoComponentS self, UserDataType type, long value, bool notice = true)
-        {
-            switch (type)
-            {
-                case UserDataType.Gold:
-                    self.Gold = value;
-                    break;
-                case UserDataType.Diamond:
-                    self.Diamond = value;
-                    break;
-                case UserDataType.Exp:
-                    self.Exp = value;
-                    break;
-                case UserDataType.Lv:
-                    self.Lv = (int)value;
-                    break;
-                default:
-                    return;
-            }
-
-            if (notice)
-            {
-                M2C_RoleDataUpdate m2C_RoleDataUpdate = M2C_RoleDataUpdate.Create();
-                m2C_RoleDataUpdate.UpdateType = (int)type;
-                m2C_RoleDataUpdate.UpdateValueLong = value;
-                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RoleDataUpdate);
-            }
-        }
-
         // 加上
         public static void ChangeRoleData(this UserInfoComponentS self, UserDataType type, long value, bool notice = true)
         {
@@ -91,6 +61,10 @@
                 case UserDataType.Lv:
                     self.Lv += (int)value;
                     newValue = self.Lv;
+                    EventSystem.Instance.Publish(self.Scene(), new TriggerTask()
+                    {
+                        Unit = self.GetParent<Unit>(), TargetType = TaskTargetType.PlayerLv, TargetId = 0, TargetValue = self.Lv
+                    });
                     break;
                 default:
                     return;

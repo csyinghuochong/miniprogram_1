@@ -50,12 +50,12 @@ namespace ET.Server
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(mainTaskId);
                 TaskPro TaskPro = self.CreateTask(mainTaskId);
             }
-            
+
             // 重新触发一些任务
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
             self.TriggerTaskEvent(TaskTargetType.PlayerLv, 0, userInfoComponent.Lv);
         }
-        
+
         public static bool IsHaveTask(this TaskComponentS self, int taskConfigId)
         {
             if (self.CompleteTaskList.Contains(taskConfigId))
@@ -277,7 +277,7 @@ namespace ET.Server
                 {
                     self.CompleteTaskList.Add(taskConfigId);
                 }
-                
+
                 // 自动接取下一个主线任务
                 foreach (TaskConfig config in TaskConfigCategory.Instance.DataList)
                 {
@@ -324,6 +324,15 @@ namespace ET.Server
             }
 
             return null;
+        }
+
+        public static void OnKillUnit(this TaskComponentS self, Unit defendUnit, int mapType)
+        {
+            if (defendUnit.Type == UnitType.Monster)
+            {
+                self.TriggerTaskEvent(TaskTargetType.KillMonster, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.KillMonsterId, defendUnit.ConfigId, 1);
+            }
         }
     }
 }

@@ -71,7 +71,7 @@ namespace ET.Server
                             return;
                         }
 
-                        userInfoComponent.UpdateRoleData(UserDataType.Lv, lv);
+                        userInfoComponent.ChangeRoleData(UserDataType.Lv, lv - userInfoComponent.Lv);
                         break;
                     }
                     default:
