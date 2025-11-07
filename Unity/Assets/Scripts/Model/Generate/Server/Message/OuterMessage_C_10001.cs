@@ -3657,6 +3657,73 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_GetAllTask)]
+    [ResponseType(nameof(M2C_GetAllTask))]
+    public partial class C2M_GetAllTask : MessageObject, ILocationRequest
+    {
+        public static C2M_GetAllTask Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetAllTask), isFromPool) as C2M_GetAllTask;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetAllTask)]
+    public partial class M2C_GetAllTask : MessageObject, ILocationResponse
+    {
+        public static M2C_GetAllTask Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetAllTask), isFromPool) as M2C_GetAllTask;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<TaskProInfo> TaskProInfoList { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<int> CompleteTaskList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.TaskProInfoList.Clear();
+            this.CompleteTaskList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.M2C_TaskUpdate)]
     public partial class M2C_TaskUpdate : MessageObject, IMessage
     {
@@ -3740,6 +3807,12 @@ namespace ET
         [MemoryPackOrder(2)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(3)]
+        public List<TaskProInfo> TaskProInfoList { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<int> CompleteTaskList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3750,6 +3823,8 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.TaskProInfoList.Clear();
+            this.CompleteTaskList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -3855,8 +3930,10 @@ namespace ET
         public const ushort M2C_UnitBuffRemove = 10097;
         public const ushort M2C_UnitStateUpdate = 10098;
         public const ushort TaskProInfo = 10099;
-        public const ushort M2C_TaskUpdate = 10100;
-        public const ushort C2M_TaskCommit = 10101;
-        public const ushort M2C_TaskCommit = 10102;
+        public const ushort C2M_GetAllTask = 10100;
+        public const ushort M2C_GetAllTask = 10101;
+        public const ushort M2C_TaskUpdate = 10102;
+        public const ushort C2M_TaskCommit = 10103;
+        public const ushort M2C_TaskCommit = 10104;
     }
 }

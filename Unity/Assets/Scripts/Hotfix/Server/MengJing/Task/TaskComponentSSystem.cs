@@ -41,6 +41,17 @@ namespace ET.Server
             }
         }
 
+        public static void OnLogin(this TaskComponentS self)
+        {
+            // 领取主线任务
+            int mainTaskId = 10010000;
+            if (!self.IsHaveTask(mainTaskId))
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(mainTaskId);
+                TaskPro TaskPro = self.CreateTask(mainTaskId);
+            }
+        }
+        
         public static bool IsHaveTask(this TaskComponentS self, int taskConfigId)
         {
             if (self.CompleteTaskList.Contains(taskConfigId))
@@ -237,15 +248,64 @@ namespace ET.Server
             {
                 return ErrorCode.ERR_TaskCommited;
             }
-            
+
+            if (taskPro.TaskState != (int)TaskState.Completed)
+            {
+                return ErrorCode.ERR_TaskNoCompleted;
+            }
+
             Unit unit = self.GetParent<Unit>();
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
 
             if (taskConfig.TaskType == TaskType.Main)
             {
+                for (int i = self.TaskProList.Count - 1; i >= 0; i--)
+                {
+                    TaskPro t = self.TaskProList[i];
+                    if (t.ConfigId == taskConfigId)
+                    {
+                        t.TaskState = (int)TaskState.Commited;
+                        t.Dispose();
+                        self.TaskProList.RemoveAt(i);
+                    }
+                }
+
+                if (!self.CompleteTaskList.Contains(taskConfigId))
+                {
+                    self.CompleteTaskList.Add(taskConfigId);
+                }
                 
+                // 自动接取下一个主线任务
+                foreach (TaskConfig config in TaskConfigCategory.Instance.DataList)
+                {
+                    if (config.Id > taskConfigId && config.TaskType == TaskType.Main)
+                    {
+                        self.CreateTask(config.Id);
+                        break;
+                    }
+                }
             }
-            
+            else
+            {
+                for (int i = self.TaskProList.Count - 1; i >= 0; i--)
+                {
+                    TaskPro t = self.TaskProList[i];
+                    if (t.ConfigId == taskConfigId)
+                    {
+                        t.TaskState = (int)TaskState.Commited;
+                        t.Dispose();
+                        self.TaskProList.RemoveAt(i);
+                    }
+                }
+            }
+
+            List<RewardItem> rewardItems = new();
+            rewardItems.Add(new RewardItem() { ItemId = ConfigData.Item_Gold, ItemNum = taskConfig.TaskGold });
+            rewardItems.Add(new RewardItem() { ItemId = ConfigData.Item_Exp, ItemNum = taskConfig.TaskExp });
+            rewardItems.AddRange(taskConfig.RewardItem);
+
+            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            inventoryComponent.AddItemData(rewardItems);
+
             return ErrorCode.ERR_Success;
         }
 

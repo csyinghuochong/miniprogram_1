@@ -57,13 +57,13 @@ namespace ET.Server
                     UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
                     switch (itemConfig.Id)
                     {
-                        case 1:
+                        case ConfigData.Item_Gold:
                             userInfoComponent.ChangeRoleData(UserDataType.Gold, leftNum);
                             break;
-                        case 2:
+                        case ConfigData.Item_Diamond:
                             userInfoComponent.ChangeRoleData(UserDataType.Diamond, leftNum);
                             break;
-                        case 3:
+                        case ConfigData.Item_Exp:
                             userInfoComponent.ChangeRoleData(UserDataType.Exp, leftNum);
                             break;
                     }
@@ -200,10 +200,10 @@ namespace ET.Server
                     UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
                     switch (itemConfig.Id)
                     {
-                        case 1:
+                        case ConfigData.Item_Gold:
                             userInfoComponent.ChangeRoleData(UserDataType.Gold, -leftNum);
                             break;
-                        case 2:
+                        case ConfigData.Item_Diamond:
                             userInfoComponent.ChangeRoleData(UserDataType.Diamond, -leftNum);
                             break;
                     }

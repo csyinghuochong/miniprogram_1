@@ -67,5 +67,6 @@ namespace ET
         public const int ERR_NotSkillHandler = 20145; //技能没有配置SkillHandler
         public const int ERR_UseSkillInPublicCD = 20146; //技能公共CD
         public const int ERR_TaskCommited = 20147; //任务已经提交
+        public const int ERR_TaskNoCompleted = 20148; //任务没有完成
     }
 }

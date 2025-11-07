@@ -804,6 +804,21 @@ message TaskProInfo
 	int32 TaskTargetNum_2 = 5;
 }
 
+// ResponseType M2C_GetAllTask
+message C2M_GetAllTask // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetAllTask // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated TaskProInfo TaskProInfoList = 4;
+	repeated int32 CompleteTaskList = 5;
+}
+
 message M2C_TaskUpdate // IMessage
 {
 	int32 UpdateMode = 1; //0全量  2增量
@@ -823,4 +838,6 @@ message M2C_TaskCommit // ILocationResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
+	repeated TaskProInfo TaskProInfoList = 4;
+	repeated int32 CompleteTaskList = 5;
 }
