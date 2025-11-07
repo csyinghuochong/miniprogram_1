@@ -1,0 +1,154 @@
+[
+  {
+    "Id": 10010000,
+    "TaskName": "达到1级",
+    "TaskType": 1,
+    "TriggerType": 1,
+    "TriggerValue": 1,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10002001",
+    "TargetType": 1,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      1
+    ],
+    "ItemNum": "1",
+    "TaskDes": "升级到1级"
+  },
+  {
+    "Id": 10010001,
+    "TaskName": "杀5只怪",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010000,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10002002",
+    "TargetType": 2,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      5
+    ],
+    "ItemNum": "1",
+    "TaskDes": "击杀任意5只怪物"
+  },
+  {
+    "Id": 10010002,
+    "TaskName": "达到3级",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010001,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10002003",
+    "TargetType": 1,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      3
+    ],
+    "ItemNum": "1",
+    "TaskDes": "升级到3级"
+  },
+  {
+    "Id": 10010003,
+    "TaskName": "杀一个Boss",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010002,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10002004",
+    "TargetType": 3,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      1
+    ],
+    "ItemNum": "1",
+    "TaskDes": "击杀任意一只Boss"
+  },
+  {
+    "Id": 10010004,
+    "TaskName": "杀一个哥布林",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010003,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10002005",
+    "TargetType": 4,
+    "Target": [
+      10000001
+    ],
+    "TargetValue": [
+      1
+    ],
+    "ItemNum": "1",
+    "TaskDes": "击杀一只哥布林"
+  },
+  {
+    "Id": 10010005,
+    "TaskName": "战力达到100",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010004,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10002006",
+    "TargetType": 6,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      100
+    ],
+    "ItemNum": "1",
+    "TaskDes": "提升战力到100"
+  },
+  {
+    "Id": 10010006,
+    "TaskName": "达到5级",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010005,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10003001",
+    "TargetType": 1,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      5
+    ],
+    "ItemNum": "1",
+    "TaskDes": "升级到5级"
+  },
+  {
+    "Id": 10010007,
+    "TaskName": "战力达到200",
+    "TaskType": 1,
+    "TriggerType": 2,
+    "TriggerValue": 10010006,
+    "TaskExp": 30,
+    "TaskGold": 20,
+    "ItemID": "10003002",
+    "TargetType": 6,
+    "Target": [
+      0
+    ],
+    "TargetValue": [
+      200
+    ],
+    "ItemNum": "1",
+    "TaskDes": "提升战力到200"
+  }
+]
