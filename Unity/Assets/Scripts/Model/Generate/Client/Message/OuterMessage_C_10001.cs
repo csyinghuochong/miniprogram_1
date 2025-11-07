@@ -3583,12 +3583,6 @@ namespace ET
             return ObjectPool.Instance.Fetch(typeof(M2C_UnitStateUpdate), isFromPool) as M2C_UnitStateUpdate;
         }
 
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(92)]
-        public long ActorId { get; set; }
-
         [MemoryPackOrder(0)]
         public long UnitId { get; set; }
 
@@ -3611,8 +3605,6 @@ namespace ET
                 return;
             }
 
-            this.RpcId = default;
-            this.ActorId = default;
             this.UnitId = default;
             this.StateType = default;
             this.StateOperateType = default;
@@ -3644,6 +3636,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public int TaskTargetNum_1 { get; set; }
 
+        [MemoryPackOrder(4)]
+        public int TaskTargetNum_2 { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3655,6 +3650,43 @@ namespace ET
             this.ConfigId = default;
             this.TaskState = default;
             this.TaskTargetNum_1 = default;
+            this.TaskTargetNum_2 = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_TaskUpdate)]
+    public partial class M2C_TaskUpdate : MessageObject, IMessage
+    {
+        public static M2C_TaskUpdate Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_TaskUpdate), isFromPool) as M2C_TaskUpdate;
+        }
+
+        /// <summary>
+        /// 0全量  2增量
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int UpdateMode { get; set; }
+
+        [MemoryPackOrder(1)]
+        public List<TaskProInfo> TaskProInfoList { get; set; } = new();
+
+        [MemoryPackOrder(2)]
+        public List<int> CompleteTaskList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UpdateMode = default;
+            this.TaskProInfoList.Clear();
+            this.CompleteTaskList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -3760,5 +3792,6 @@ namespace ET
         public const ushort M2C_UnitBuffRemove = 10097;
         public const ushort M2C_UnitStateUpdate = 10098;
         public const ushort TaskProInfo = 10099;
+        public const ushort M2C_TaskUpdate = 10100;
     }
 }

@@ -14,5 +14,6 @@
         public int ConfigId { get; set; }
         public int TaskState { get; set; }
         public int TaskTargetNum_1 { get; set; }
+        public int TaskTargetNum_2 { get; set; }
     }
 }

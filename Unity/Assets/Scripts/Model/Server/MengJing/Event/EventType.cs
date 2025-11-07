@@ -1,11 +1,10 @@
 namespace ET.Server
 {
-  
     public struct GMCommonRequest
     {
         public string Context;
     }
-    
+
     public struct UnitKillEvent
     {
         public int WaitRevive;
@@ -13,7 +12,7 @@ namespace ET.Server
         public Unit UnitDefend;
         public bool NoDrop;
     }
-    
+
     public struct StateTypeAdd
     {
         public Unit UnitDefend;
@@ -28,9 +27,11 @@ namespace ET.Server
         public string stateValue;
     }
 
-    public struct GenerateSerials
+    public struct TriggerTask
     {
-        public Scene Scene;
+        public Unit Unit;
+        public TaskTargetType TargetType;
+        public int Target;
+        public int TargetValue;
     }
-    
 }

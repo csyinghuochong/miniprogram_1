@@ -20,6 +20,7 @@
             taskProInfo.Id = self.Id;
             taskProInfo.ConfigId = self.ConfigId;
             taskProInfo.TaskTargetNum_1 = self.TaskTargetNum_1;
+            taskProInfo.TaskTargetNum_2 = self.TaskTargetNum_2;
 
             return taskProInfo;
         }
@@ -29,6 +30,7 @@
             self.ConfigId = taskProInfo.ConfigId;
             self.TaskState = taskProInfo.TaskState;
             self.TaskTargetNum_1 = taskProInfo.TaskTargetNum_1;
+            self.TaskTargetNum_2 = taskProInfo.TaskTargetNum_2;
         }
     }
 }
