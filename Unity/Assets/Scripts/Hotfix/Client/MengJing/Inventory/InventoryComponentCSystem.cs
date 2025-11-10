@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -14,64 +14,126 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this InventoryComponentC self)
         {
-            self.Items.Clear();
-            self.Items = null;
+            foreach (var containerItems in self.ItemsByContainer.Values)
+            {
+                containerItems.Clear();
+            }
+            self.ItemsByContainer.Clear();
+            self.ItemsByContainer = null;
         }
 
+        /// <summary>
+        /// 将道具添加到容器列表中
+        /// </summary>
+        private static void AddItemToContainer(this InventoryComponentC self, Item item)
+        {
+            if (!self.ItemsByContainer.TryGetValue(item.ContainerType, out List<EntityRef<Item>> containerItems))
+            {
+                containerItems = new List<EntityRef<Item>>();
+                self.ItemsByContainer[item.ContainerType] = containerItems;
+            }
+
+            if (!containerItems.Contains(item))
+            {
+                containerItems.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// 从容器列表中移除道具
+        /// </summary>
+        private static void RemoveItemFromContainer(this InventoryComponentC self, Item item)
+        {
+            if (self.ItemsByContainer.TryGetValue(item.ContainerType, out List<EntityRef<Item>> containerItems))
+            {
+                containerItems.Remove(item);
+            }
+        }
+
+        /// <summary>
+        /// 通过ItemId查找道具（遍历所有容器）
+        /// </summary>
         public static Item GetItem(this InventoryComponentC self, long itemId)
         {
-            self.Items.TryGetValue(itemId, out EntityRef<Item> item);
-            return item;
+            foreach (var containerItems in self.ItemsByContainer.Values)
+            {
+                foreach (EntityRef<Item> itemRef in containerItems)
+                {
+                    Item item = itemRef;
+                    if (item.Id == itemId)
+                    {
+                        return item;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public static void AddItemFromMessage(this InventoryComponentC self, ItemInfo itemInfo)
         {
             Item item = self.AddChildWithId<Item>(itemInfo.Id);
             item.FromMessage(itemInfo);
-            self.Items.Add(item.Id, item);
+            self.AddItemToContainer(item);
         }
 
         public static void RemoveItemById(this InventoryComponentC self, long itemId)
         {
-            if (!self.Items.TryGetValue(itemId, out EntityRef<Item> itemRef))
+            Item item = self.GetItem(itemId);
+            if (item == null)
             {
                 Log.Error($"itemId:{itemId} not found");
                 return;
             }
 
-            Item item = itemRef;
-            self.Items.Remove(itemId);
+            self.RemoveItemFromContainer(item);
             item?.Dispose();
         }
 
         public static void UpdateItem(this InventoryComponentC self, ItemInfo itemInfo)
         {
-            if (!self.Items.TryGetValue(itemInfo.Id, out EntityRef<Item> itemRef))
+            Item item = self.GetItem(itemInfo.Id);
+            if (item == null)
             {
                 Log.Error($"itemId:{itemInfo.Id} not found");
                 return;
             }
 
-            Item item = itemRef;
-            item.FromMessage(itemInfo);
+            if (item.ContainerType != itemInfo.ContainerType)
+            {
+                self.RemoveItemFromContainer(item);
+                item.FromMessage(itemInfo);
+                self.AddItemToContainer(item);
+            }
+            else
+            {
+                item.FromMessage(itemInfo);
+            }
         }
 
         public static void Clear(this InventoryComponentC self)
         {
-            foreach (Item item in self.Items.Values)
+            foreach (var containerItems in self.ItemsByContainer.Values)
             {
-                item?.Dispose();
+                foreach (EntityRef<Item> itemRef in containerItems)
+                {
+                    Item item = itemRef;
+                    item?.Dispose();
+                }
+                containerItems.Clear();
             }
-
-            self.Items.Clear();
+            self.ItemsByContainer.Clear();
         }
 
         public static List<Item> GetAllItems(this InventoryComponentC self)
         {
             List<Item> items = new List<Item>();
-            foreach (Item item in self.Items.Values)
+            foreach (var containerItems in self.ItemsByContainer.Values)
             {
-                items.Add(item);
+                foreach (EntityRef<Item> itemRef in containerItems)
+                {
+                    items.Add(itemRef);
+                }
             }
 
             return items;
@@ -80,14 +142,12 @@ namespace ET.Client
         public static List<Item> GetItemsByContainer(this InventoryComponentC self, InventoryContainerType containerType)
         {
             List<Item> items = new();
-            foreach (Item item in self.Items.Values)
+            if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
             {
-                if (item.ContainerType != (int)containerType)
+                foreach (EntityRef<Item> itemRef in containerItems)
                 {
-                    continue;
+                    items.Add(itemRef);
                 }
-
-                items.Add(item);
             }
 
             return items;
@@ -96,18 +156,17 @@ namespace ET.Client
         public static List<Item> GetItemsByType(this InventoryComponentC self, ItemType type, InventoryContainerType containerType)
         {
             List<Item> items = new();
-            foreach (Item item in self.Items.Values)
+            if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
             {
-                if (item.ContainerType != (int)containerType)
+                foreach (EntityRef<Item> itemRef in containerItems)
                 {
-                    continue;
-                }
+                    Item item = itemRef;
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-
-                if (itemConfig.ItemType == (int)type)
-                {
-                    items.Add(item);
+                    if (itemConfig.ItemType == (int)type)
+                    {
+                        items.Add(item);
+                    }
                 }
             }
 
@@ -117,18 +176,17 @@ namespace ET.Client
         public static List<Item> GetItemsBySubType(this InventoryComponentC self, ItemType type, int subType, InventoryContainerType containerType)
         {
             List<Item> items = new();
-            foreach (Item item in self.Items.Values)
+            if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
             {
-                if (item.ContainerType != (int)containerType)
+                foreach (EntityRef<Item> itemRef in containerItems)
                 {
-                    continue;
-                }
+                    Item item = itemRef;
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-
-                if (itemConfig.ItemType == (int)type && itemConfig.ItemSubType == subType)
-                {
-                    items.Add(item);
+                    if (itemConfig.ItemType == (int)type && itemConfig.ItemSubType == subType)
+                    {
+                        items.Add(item);
+                    }
                 }
             }
 
