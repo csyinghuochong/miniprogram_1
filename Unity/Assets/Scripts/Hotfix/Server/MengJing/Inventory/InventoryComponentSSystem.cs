@@ -111,8 +111,7 @@ namespace ET.Server
             ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
         }
 
-        public static void AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems,
-        InventoryContainerType containerType = InventoryContainerType.Bag)
+        public static void AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             // 创建批量同步消息
             M2C_ItemUpdateOp message = M2C_ItemUpdateOp.Create();
@@ -217,8 +216,7 @@ namespace ET.Server
             }
         }
 
-        public static bool HaveItemData(this InventoryComponentS self, List<RewardItem> rewardItems,
-        InventoryContainerType containerType = InventoryContainerType.Bag)
+        public static bool HaveItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             Dictionary<int, int> removeItems = new();
             foreach (RewardItem rewardItem in rewardItems)
@@ -283,8 +281,7 @@ namespace ET.Server
             return true;
         }
 
-        public static int RemoveItemData(this InventoryComponentS self, List<RewardItem> rewardItems,
-        InventoryContainerType containerType = InventoryContainerType.Bag)
+        public static int RemoveItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             if (!self.HaveItemData(rewardItems, containerType))
             {
