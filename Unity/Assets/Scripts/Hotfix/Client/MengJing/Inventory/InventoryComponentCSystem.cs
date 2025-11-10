@@ -29,8 +29,6 @@ namespace ET.Client
             Item item = self.AddChildWithId<Item>(itemInfo.Id);
             item.FromMessage(itemInfo);
             self.Items.Add(item.Id, item);
-
-            EventSystem.Instance.Publish(self.Root(), new InventoryUpdate());
         }
 
         public static void RemoveItemById(this InventoryComponentC self, long itemId)
@@ -44,8 +42,6 @@ namespace ET.Client
             Item item = itemRef;
             self.Items.Remove(itemId);
             item?.Dispose();
-
-            EventSystem.Instance.Publish(self.Root(), new InventoryUpdate());
         }
 
         public static void UpdateItem(this InventoryComponentC self, ItemInfo itemInfo)
@@ -58,8 +54,6 @@ namespace ET.Client
 
             Item item = itemRef;
             item.FromMessage(itemInfo);
-
-            EventSystem.Instance.Publish(self.Root(), new InventoryUpdate());
         }
 
         public static void Clear(this InventoryComponentC self)

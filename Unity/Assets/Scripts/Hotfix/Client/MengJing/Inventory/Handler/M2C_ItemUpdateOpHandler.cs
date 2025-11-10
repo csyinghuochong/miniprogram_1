@@ -7,19 +7,22 @@
         {
             InventoryComponentC inventoryComponentC = root.GetComponent<InventoryComponentC>();
 
-            if (message.ItemOpType == (int)ItemOpType.Add)
+            foreach (ItemInfo itemInfo in message.ItemInfoRemoveList)
             {
-                inventoryComponentC.AddItemFromMessage(message.ItemInfo);
-            }
-            else if (message.ItemOpType == (int)ItemOpType.Remove)
-            {
-                inventoryComponentC.RemoveItemById(message.ItemInfo.Id);
-            }
-            else if (message.ItemOpType == (int)ItemOpType.Update)
-            {
-                inventoryComponentC.UpdateItem(message.ItemInfo);
+                inventoryComponentC.RemoveItemById(itemInfo.Id);
             }
 
+            foreach (ItemInfo itemInfo in message.ItemInfoUpdateList)
+            {
+                inventoryComponentC.UpdateItem(itemInfo);
+            }
+
+            foreach (ItemInfo itemInfo in message.ItemInfoAddList)
+            {
+                inventoryComponentC.AddItemFromMessage(itemInfo);
+            }
+
+            EventSystem.Instance.Publish(root, new InventoryUpdate());
             await ETTask.CompletedTask;
         }
     }

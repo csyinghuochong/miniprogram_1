@@ -8,9 +8,9 @@
 
     public enum ItemOpType
     {
-        Add,
         Remove,
         Update,
+        Add,
     }
 
     public enum InventoryContainerType

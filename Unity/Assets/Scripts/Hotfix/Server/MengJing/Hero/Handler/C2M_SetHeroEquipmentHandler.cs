@@ -56,7 +56,7 @@ namespace ET.Server
                     if (oldItem != null)
                     {
                         oldItem.ContainerType = (int)InventoryContainerType.Bag;
-                        ItemNoticeHelper.SyncItemInfo(unit, oldItem, ItemOpType.Update);
+                        ItemHelper.SyncItemInfo(unit, oldItem, ItemOpType.Update);
                     }
 
                     hero.Equipments[(int)equipSlotType] = 0;
@@ -65,7 +65,7 @@ namespace ET.Server
                 hero.Equipments[(int)equipSlotType] = item.Id;
                 item.ContainerType = (int)InventoryContainerType.HeroEquipment;
 
-                ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
+                ItemHelper.SyncItemInfo(unit, item, ItemOpType.Update);
                 HeroHelper.UpdateHeroNumeric(unit, hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
@@ -98,7 +98,7 @@ namespace ET.Server
                 hero.Equipments[slot] = 0;
                 item.ContainerType = (int)InventoryContainerType.Bag;
 
-                ItemNoticeHelper.SyncItemInfo(unit, item, ItemOpType.Update);
+                ItemHelper.SyncItemInfo(unit, item, ItemOpType.Update);
                 HeroHelper.UpdateHeroNumeric(unit, hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }

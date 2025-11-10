@@ -574,8 +574,9 @@ message M2C_GetAllItem // ILocationResponse
 
 message M2C_ItemUpdateOp // IMessage
 {
-	ItemInfo ItemInfo = 1;
-	int32 ItemOpType = 2;
+	repeated ItemInfo ItemInfoRemoveList = 1;
+	repeated ItemInfo ItemInfoUpdateList = 2;
+	repeated ItemInfo ItemInfoAddList = 3;
 }
 
 // ResponseType M2C_SellItem

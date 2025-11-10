@@ -2611,10 +2611,13 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public ItemInfo ItemInfo { get; set; }
+        public List<ItemInfo> ItemInfoRemoveList { get; set; } = new();
 
         [MemoryPackOrder(1)]
-        public int ItemOpType { get; set; }
+        public List<ItemInfo> ItemInfoUpdateList { get; set; } = new();
+
+        [MemoryPackOrder(2)]
+        public List<ItemInfo> ItemInfoAddList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -2623,8 +2626,9 @@ namespace ET
                 return;
             }
 
-            this.ItemInfo = default;
-            this.ItemOpType = default;
+            this.ItemInfoRemoveList.Clear();
+            this.ItemInfoUpdateList.Clear();
+            this.ItemInfoAddList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

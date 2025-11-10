@@ -88,7 +88,7 @@ namespace ET.Server
                                 leftNum = 0;
                             }
 
-                            ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
+                            ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
                         }
                     }
                 }
@@ -222,7 +222,7 @@ namespace ET.Server
                             if (item.Num > leftNum)
                             {
                                 item.Num -= leftNum;
-                                ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
+                                ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
                                 break;
                             }
                             else
@@ -251,7 +251,7 @@ namespace ET.Server
             }
 
             self.Items.Add(item.Id, item);
-            ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Add);
+            ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Add);
         }
 
         // 直接消耗掉
@@ -264,7 +264,7 @@ namespace ET.Server
 
             Item item = itemRef;
             self.Items.Remove(itemId);
-            ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Remove);
+            ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Remove);
             item?.Dispose();
 
             return true;
@@ -282,12 +282,12 @@ namespace ET.Server
             if (item.Num > num)
             {
                 item.Num -= num;
-                ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
+                ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
                 return true;
             }
 
             self.Items.Remove(itemId);
-            ItemNoticeHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Remove);
+            ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Remove);
             item?.Dispose();
 
             return true;
