@@ -12,11 +12,10 @@ using Luban;
 namespace ET
 {
     [EnableClass]
-    public sealed partial class MonsterBatchConfig : BeanBase
+    public sealed partial class monsterSpawnInfo : BeanBase
     {
-        public MonsterBatchConfig(ByteBuf _buf)
+        public monsterSpawnInfo(ByteBuf _buf)
         {
-            Id = _buf.ReadInt();
             SpawnTime = _buf.ReadFloat();
             SpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             MonsterId = _buf.ReadInt();
@@ -24,15 +23,10 @@ namespace ET
             PostInit();
         }
 
-        public static MonsterBatchConfig DeserializeMonsterBatchConfig(ByteBuf _buf)
+        public static monsterSpawnInfo DeserializemonsterSpawnInfo(ByteBuf _buf)
         {
-            return new MonsterBatchConfig(_buf);
+            return new monsterSpawnInfo(_buf);
         }
-
-        /// <summary>
-        /// Id
-        /// </summary>
-        public readonly int Id;
 
         /// <summary>
         /// 生成时间
@@ -40,22 +34,21 @@ namespace ET
         public readonly float SpawnTime;
 
         /// <summary>
-        /// 生成位置
+        /// 生成位置，相对玩家
         /// </summary>
         public readonly System.Numerics.Vector2 SpawnPosition;
 
         /// <summary>
-        /// 怪物Id
+        /// 怪物配置Id
         /// </summary>
         public readonly int MonsterId;
 
 
-        public const int __ID__ = -2027945214;
+        public const int __ID__ = -1744395249;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
-            
             
             
             
@@ -64,7 +57,6 @@ namespace ET
         public override string ToString()
         {
             return "{ "
-            + "Id:" + Id + ","
             + "SpawnTime:" + SpawnTime + ","
             + "SpawnPosition:" + SpawnPosition + ","
             + "MonsterId:" + MonsterId + ","

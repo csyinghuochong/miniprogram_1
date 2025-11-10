@@ -26,19 +26,20 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this LocalLevelComponent self)
         {
-            self.TimeInterval = 100;
         }
 
         [EntitySystem]
         private static void Destroy(this LocalLevelComponent self)
         {
-            self.SpawnedMonsterBatchIds.Clear();
-            self.SpawnedMonsterBatchIds = null;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         private static void Update(this LocalLevelComponent self)
         {
+            long now = TimeInfo.Instance.ClientNow();
+            float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
+            self.LastUpdateTime = now;
+
             if (self.MainUnit == null)
             {
                 return;
@@ -49,29 +50,27 @@ namespace ET.Server
                 return;
             }
 
-            self.SpawnTime += self.TimeInterval / 1000f + self.Scene().TimeScale;
+            self.SpawnTime += deltaTime;
 
             NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             WaveConfig waveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[numericComponent.GetAsInt(NumericType.CurrentWaveIndex) - 1]);
 
-            foreach (int monsterBatchId in waveConfig.MonsterBatchIds)
+            if (self.SpawnedMonsterIndex >= waveConfig.MonsterSpawnInfos.Length)
             {
-                MonsterBatchConfig monsterBatchConfig = MonsterBatchConfigCategory.Instance.Get(monsterBatchId);
-                if (self.SpawnedMonsterBatchIds.Contains(monsterBatchConfig.Id))
-                {
-                    continue;
-                }
-
-                if (self.SpawnTime < monsterBatchConfig.SpawnTime)
-                {
-                    continue;
-                }
-                
-                self.SpawnedMonsterBatchIds.Add(monsterBatchConfig.Id);
-                float2 position = new float2(monsterBatchConfig.SpawnPosition.X, self.MainUnit.Position.y + monsterBatchConfig.SpawnPosition.Y);
-                UnitFactory.CreateMonster(self.Scene(), monsterBatchConfig.MonsterId, position);
+                return;
             }
+
+            monsterSpawnInfo monsterSpawnInfo = waveConfig.MonsterSpawnInfos[self.SpawnedMonsterIndex];
+            if (self.SpawnTime < monsterSpawnInfo.SpawnTime)
+            {
+                return;
+            }
+
+            self.SpawnedMonsterIndex++;
+
+            float2 position = new float2(monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
+            UnitFactory.CreateMonster(self.Scene(), monsterSpawnInfo.MonsterId, position);
         }
 
         public static void OnKillEvent(this LocalLevelComponent self, Unit unit)
@@ -92,7 +91,7 @@ namespace ET.Server
 
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             WaveConfig waveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[numericComponent.GetAsInt(NumericType.CurrentWaveIndex) - 1]);
-            if (numericComponent.GetAsInt(NumericType.CurrentWaveKillMonsterNum) >= waveConfig.MonsterBatchIds.Length)
+            if (numericComponent.GetAsInt(NumericType.CurrentWaveKillMonsterNum) >= waveConfig.MonsterSpawnInfos.Length)
             {
                 if (numericComponent.GetAsInt(NumericType.CurrentWaveIndex) >= levelConfig.WaveIds.Length)
                 {
@@ -111,7 +110,7 @@ namespace ET.Server
                         // 开始生成下一波怪物
                         numericComponent.ApplyChange(NumericType.CurrentWaveIndex, 1);
                         numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
-                        self.SpawnedMonsterBatchIds.Clear();
+                        self.SpawnedMonsterIndex = 0;
                         self.SpawnTime = 0;
                     }
                 }
@@ -129,7 +128,7 @@ namespace ET.Server
             {
                 return;
             }
-            
+
             NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             if (numericComponent.GetAsInt(NumericType.CurrentWaveIndex) >= levelConfig.WaveIds.Length)
@@ -142,7 +141,7 @@ namespace ET.Server
             {
                 numericComponent.ApplyChange(NumericType.CurrentWaveIndex, 1);
                 numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
-                self.SpawnedMonsterBatchIds.Clear();
+                self.SpawnedMonsterIndex = 0;
                 self.SpawnTime = 0;
                 self.WaitPlayerEnterBossRoom = false;
             }
@@ -169,38 +168,40 @@ namespace ET.Server
                 return;
             }
 
-            if (numericComponent.GetAsInt(NumericType.PassedLevelId) == 0)
-            {
-                // 第一关
-                numericComponent.ApplyValue(NumericType.CurrentLevelId, LevelConfigCategory.Instance.DataList[0].Id);
-            }
-            else
-            {
-                // 下一关
-                bool next = false;
-                foreach (LevelConfig config in LevelConfigCategory.Instance.DataList)
-                {
-                    if (next)
-                    {
-                        numericComponent.ApplyValue(NumericType.CurrentLevelId, config.Id);
-                        break;
-                    }
-
-                    if (config.Id == numericComponent.GetAsInt(NumericType.PassedLevelId))
-                    {
-                        next = true;
-                    }
-                }
-            }
+            // 先一直从第一关开始
+            numericComponent.ApplyValue(NumericType.CurrentLevelId, LevelConfigCategory.Instance.DataList[0].Id);
+            // if (numericComponent.GetAsInt(NumericType.PassedLevelId) == 0)
+            // {
+            //     // 第一关
+            //     numericComponent.ApplyValue(NumericType.CurrentLevelId, LevelConfigCategory.Instance.DataList[0].Id);
+            // }
+            // else
+            // {
+            //     // 下一关
+            //     bool next = false;
+            //     foreach (LevelConfig config in LevelConfigCategory.Instance.DataList)
+            //     {
+            //         if (next)
+            //         {
+            //             numericComponent.ApplyValue(NumericType.CurrentLevelId, config.Id);
+            //             break;
+            //         }
+            //
+            //         if (config.Id == numericComponent.GetAsInt(NumericType.PassedLevelId))
+            //         {
+            //             next = true;
+            //         }
+            //     }
+            // }
 
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
 
-            self.SpawnedMonsterBatchIds.Clear();
+            self.SpawnedMonsterIndex = 0;
             self.SpawnTime = 0;
             numericComponent.ApplyValue(NumericType.CurrentWaveIndex, 1);
             numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
 
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.TimeInterval, TimerInvokeType.LocalLevelTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.LocalLevelTimer, self);
         }
     }
 }

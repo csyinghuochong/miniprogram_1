@@ -82,6 +82,63 @@ namespace ET.Client
         }
     }
 
+    [NumericWatcher(SceneType.Current, NumericType.CurrentLevelId)]
+    public class NumericWatcher_CurrentLevelId_UIMainRefresh : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (!LevelConfigCategory.Instance.DataMap.ContainsKey((int)args.NewValue))
+            {
+                return;
+            }
+
+            LevelConfig levelConfig = LevelConfigCategory.Instance.Get((int)args.NewValue);
+            Log.Warning($"{levelConfig.LevelName}");
+
+            UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+        }
+    }
+
+    [NumericWatcher(SceneType.Current, NumericType.CurrentWaveIndex)]
+    public class NumericWatcher_CurrentWaveIndex_UIMainRefresh : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            Log.Warning($"第{args.NewValue}波");
+
+            UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+        }
+    }
+
+    [NumericWatcher(SceneType.Current, NumericType.CurrentWaveKillMonsterNum)]
+    public class NumericWatcher_CurrentWaveKillMonsterNum_UIMainRefresh : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            Log.Warning($"这一波已经击杀 {args.NewValue}");
+
+            UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+        }
+    }
+
     [EntitySystemOf(typeof(UIMainComponent))]
     [FriendOf(typeof(UIMainComponent))]
     public static partial class UIMainComponentSystem
