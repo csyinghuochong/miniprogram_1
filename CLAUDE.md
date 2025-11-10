@@ -215,3 +215,4 @@ Unity菜单：ET/ServerTools -> Benchmark
 4. 修改配置表后运行GenConfig.bat
 5. 修改协议后运行Proto2CS
 6. 提交代码前确保编译通过且服务器能正常启动
+- 只添加关键注释
