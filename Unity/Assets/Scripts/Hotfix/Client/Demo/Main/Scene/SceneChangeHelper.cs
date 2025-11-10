@@ -3,7 +3,7 @@
     public static partial class SceneChangeHelper
     {
         // 场景切换协程
-        public static async ETTask SceneChangeTo(Scene root, long sceneInstanceId, int sceneType, int sceneId, int difficulty, string pagramInfo)
+        public static async ETTask SceneChangeTo(Scene root, long sceneInstanceId, int sceneType, int sceneId)
         {
             //root.RemoveComponent<AIComponent>();
 

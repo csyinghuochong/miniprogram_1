@@ -40,8 +40,7 @@ namespace ET.Server
                 SceneInstanceId = scene.InstanceId,
                 SceneId = request.SceneId,
                 SceneType = request.SceneType,
-                Difficulty = request.Difficulty,
-                ParamInfo = request.ParamInfo
+                TimeScale = scene.TimeScale
             };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 

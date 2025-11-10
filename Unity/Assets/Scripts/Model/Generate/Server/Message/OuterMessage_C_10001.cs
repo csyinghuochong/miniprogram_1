@@ -369,10 +369,7 @@ namespace ET
         public int SceneId { get; set; }
 
         [MemoryPackOrder(3)]
-        public int Difficulty { get; set; }
-
-        [MemoryPackOrder(4)]
-        public string ParamInfo { get; set; }
+        public float TimeScale { get; set; }
 
         public override void Dispose()
         {
@@ -384,8 +381,7 @@ namespace ET
             this.SceneInstanceId = default;
             this.SceneType = default;
             this.SceneId = default;
-            this.Difficulty = default;
-            this.ParamInfo = default;
+            this.TimeScale = default;
 
             ObjectPool.Instance.Recycle(this);
         }

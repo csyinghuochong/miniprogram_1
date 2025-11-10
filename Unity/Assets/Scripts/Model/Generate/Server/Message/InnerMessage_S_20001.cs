@@ -1417,15 +1417,6 @@ namespace ET
         [MemoryPackOrder(5)]
         public int SceneId { get; set; }
 
-        [MemoryPackOrder(6)]
-        public int Difficulty { get; set; }
-
-        [MemoryPackOrder(7)]
-        public int FubenDifficulty { get; set; }
-
-        [MemoryPackOrder(8)]
-        public string ParamInfo { get; set; }
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1439,9 +1430,6 @@ namespace ET
             this.Entitys.Clear();
             this.SceneType = default;
             this.SceneId = default;
-            this.Difficulty = default;
-            this.FubenDifficulty = default;
-            this.ParamInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }

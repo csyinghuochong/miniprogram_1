@@ -5,7 +5,11 @@
 	{
 		protected override async ETTask Run(Scene root, M2C_StartSceneChange message)
 		{
-			await SceneChangeHelper.SceneChangeTo(root, message.SceneInstanceId, message.SceneType, message.SceneId, message.Difficulty, message.ParamInfo);
+			await SceneChangeHelper.SceneChangeTo(root, message.SceneInstanceId, message.SceneType, message.SceneId);
+			
+			root.CurrentScene().TimeScale = message.TimeScale;
+
+			EventSystem.Instance.Publish(root, new UpdateTimeScale() { TimeScale = message.TimeScale });
 		}
 	}
 }
