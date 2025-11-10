@@ -129,7 +129,7 @@ namespace ET.Client
                     break;
                 case FsmStateEnum.FsmSkillState:
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-                    skeletonAnimation.AnimationState.SetAnimation(0, skillConfig.SkillAnimation, true);
+                    skeletonAnimation.AnimationState.SetAnimation(0, skillConfig.SkillAnimation, false);
                     break;
                 default:
                     break;
