@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Cysharp.Text;
+﻿using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -102,6 +101,7 @@ namespace ET.Client
             }
 
             UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateLevelProgress();
         }
     }
 
@@ -119,6 +119,7 @@ namespace ET.Client
             }
 
             UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateLevelProgress();
         }
     }
 
@@ -136,6 +137,7 @@ namespace ET.Client
             }
 
             UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateLevelProgress();
         }
     }
 
@@ -165,6 +167,7 @@ namespace ET.Client
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
+            self.UILevelProgress = rc.Get<GameObject>("UILevelProgress");
             self.UIMainSkill = rc.Get<GameObject>("UIMainSkill");
             self.Button_Boss = rc.Get<GameObject>("Button_Boss").GetComponent<Button>();
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
@@ -201,6 +204,7 @@ namespace ET.Client
         {
             self.Button_StartLevel.gameObject.SetActive(sceneType == MapTypeEnum.MainCityScene);
             self.Button_Recall.gameObject.SetActive(sceneType == MapTypeEnum.LocalLevel);
+            self.UILevelProgress.gameObject.SetActive(sceneType == MapTypeEnum.LocalLevel);
             self.UIMainSkill.SetActive(sceneType == MapTypeEnum.LocalLevel);
 
             self.UpdatePlayerName();
@@ -298,6 +302,11 @@ namespace ET.Client
             {
                 self.Text_Diamond.SetTextFormat("{0}K", userInfoComponent.Diamond / 1000);
             }
+        }
+
+        public static void UpdateLevelProgress(this UIMainComponent self)
+        {
+            
         }
 
         public static void UpdateMainTask(this UIMainComponent self)
