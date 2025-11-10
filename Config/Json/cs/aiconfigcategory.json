@@ -11,6 +11,14 @@
     "Id": 102,
     "AIConfigId": 1,
     "Order": 2,
+    "Name": "AI_ZhuiJi",
+    "Desc": "追击",
+    "NodeParams": ""
+  },
+  {
+    "Id": 103,
+    "AIConfigId": 1,
+    "Order": 3,
     "Name": "AI_Attack",
     "Desc": "攻击",
     "NodeParams": ""

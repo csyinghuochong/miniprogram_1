@@ -10,14 +10,32 @@ namespace ET.Server
             Unit myUnit = aiComponent.GetParent<Unit>();
             UnitComponent unitComponent = myUnit.GetParent<UnitComponent>();
 
+            // 搜索最近的敌人
+            Unit closestEnemy = null;
+            float closestDistance = float.MaxValue;
+
             foreach (EntityRef<Unit> unitRef in unitComponent.GetAll())
             {
                 Unit u = unitRef;
                 if (myUnit.IsCanAttackUnit(u))
                 {
-                    aiComponent.TargetID = u.Id;
-                    break;
+                    float dist = math.distance(myUnit.Position, u.Position);
+                    if (dist < closestDistance)
+                    {
+                        closestDistance = dist;
+                        closestEnemy = u;
+                    }
                 }
+            }
+
+            // 更新目标为最近的敌人
+            if (closestEnemy != null)
+            {
+                aiComponent.TargetID = closestEnemy.Id;
+            }
+            else
+            {
+                aiComponent.TargetID = 0;
             }
 
             if (aiComponent.TargetID == 0)

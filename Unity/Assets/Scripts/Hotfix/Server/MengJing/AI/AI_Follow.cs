@@ -15,20 +15,23 @@ namespace ET.Server
                 return 1;
             }
 
-            float distance = math.distance(unit.Position, master.Position);
-            if (distance > aiComponent.FollowDistance)
+            float distanceToMaster = math.distance(unit.Position, master.Position);
+
+            // 距离主人太远（>15米），强制跟随，放弃战斗
+            if (distanceToMaster > 15f)
             {
                 aiComponent.TargetID = 0;
                 return 0;
             }
 
-            if (unitComponent.Get(aiComponent.BeAttackId) != null)
+            // 距离主人较远（>10米），需要跟随
+            if (distanceToMaster > aiComponent.FollowDistance)
             {
-                aiComponent.TargetID = aiComponent.BeAttackId;
-                return 1;
+                return 0;
             }
 
-            return aiComponent.TargetID != 0 ? 1 : 0;
+            // 距离主人不远，不需要跟随
+            return 1;
         }
 
         private static float3 GetFollowPosition(Unit unit, Unit master)
@@ -47,24 +50,22 @@ namespace ET.Server
             Unit master = unit.GetParent<UnitComponent>().Get(masterid);
 
             long oldSpeed = numericComponentS.GetAsLong(NumericType.Base_Speed_Base);
-
             long masterSpeed = master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MoveSpeed);
             numericComponentS.ApplyValue(NumericType.Base_Speed_Base, masterSpeed);
 
             for (int i = 0; i < 10000; i++)
             {
                 int speedProp = 100;
-                float distacne = math.distance(unit.Position, master.Position);
+                float distanceToMaster = math.distance(unit.Position, master.Position);
 
-                if (distacne > 10f) //距离大于加速追
+                if (distanceToMaster > 10f)
                 {
-                    speedProp = 150;
+                    speedProp = 150; // 距离大于10米加速
                 }
 
-                if (distacne < 7f) //距离小于停止追
+                if (distanceToMaster < 7f)
                 {
-                    
-                    speedProp = 0;
+                    speedProp = 0; // 距离小于7米停止
                 }
 
                 if (speedProp > 0)
