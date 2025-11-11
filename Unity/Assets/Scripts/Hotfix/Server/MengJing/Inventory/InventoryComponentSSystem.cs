@@ -238,7 +238,7 @@ namespace ET.Server
                 int leftNum = pair.Value;
                 if (itemConfigId == 1)
                 {
-                    if (userInfoComponent.Gold < leftNum)
+                    if (userInfoComponent.GetGold() < leftNum)
                     {
                         return false;
                     }
@@ -250,7 +250,7 @@ namespace ET.Server
 
                 if (itemConfigId == 2)
                 {
-                    if (userInfoComponent.Diamond < leftNum)
+                    if (userInfoComponent.GetDiamond() < leftNum)
                     {
                         return false;
                     }

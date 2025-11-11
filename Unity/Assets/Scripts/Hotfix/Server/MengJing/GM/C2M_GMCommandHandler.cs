@@ -61,7 +61,7 @@ namespace ET.Server
                         int lv = int.Parse(commands[1]);
                         UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
-                        if (lv < userInfoComponent.Lv)
+                        if (lv < userInfoComponent.GetLv())
                         {
                             return;
                         }
@@ -71,7 +71,7 @@ namespace ET.Server
                             return;
                         }
 
-                        userInfoComponent.ChangeRoleData(UserDataType.Lv, lv - userInfoComponent.Lv);
+                        userInfoComponent.ChangeRoleData(UserDataType.Lv, lv - userInfoComponent.GetLv());
                         break;
                     }
                     default:

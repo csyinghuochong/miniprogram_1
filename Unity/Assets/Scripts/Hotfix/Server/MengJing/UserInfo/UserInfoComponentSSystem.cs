@@ -19,6 +19,21 @@
         {
         }
 
+        public static long GetGold(this UserInfoComponentS self)
+        {
+            return self.Gold;
+        }
+
+        public static long GetDiamond(this UserInfoComponentS self)
+        {
+            return self.Diamond;
+        }
+
+        public static int GetLv(this UserInfoComponentS self)
+        {
+            return self.Lv;
+        }
+
         // 直接设置
         public static void UpdateRoleData(this UserInfoComponentS self, UserDataType type, string value, bool notice = true)
         {

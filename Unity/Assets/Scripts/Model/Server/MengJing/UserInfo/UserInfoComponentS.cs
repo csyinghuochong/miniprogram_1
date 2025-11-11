@@ -11,10 +11,10 @@ namespace ET.Server
         public long RobotId { get; set; }
 
         public string PlayerName { get; set; }
-        public long Gold { get; set; }
-        public long Diamond { get; set; }
-        public long Exp { get; set; }
-        public int Lv { get; set; }
+        public long Gold;
+        public long Diamond;
+        public long Exp;
+        public int Lv;
 
         [BsonIgnore]
         public readonly M2C_RoleDataBroadcast m2C_RoleDataBroadcast = M2C_RoleDataBroadcast.Create();
