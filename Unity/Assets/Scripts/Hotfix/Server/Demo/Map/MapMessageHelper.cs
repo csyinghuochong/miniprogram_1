@@ -63,7 +63,7 @@ namespace ET.Server
                 {
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
-                    unitInfo.UnitName = userInfoComponent.PlayerName;
+                    unitInfo.UnitName = userInfoComponent.GetPlayerName();
 
                     break;
                 }

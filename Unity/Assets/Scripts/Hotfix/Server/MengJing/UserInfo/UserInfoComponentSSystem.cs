@@ -19,6 +19,11 @@
         {
         }
 
+        public static string GetPlayerName(this UserInfoComponentS self)
+        {
+            return self.PlayerName;
+        }
+
         public static long GetGold(this UserInfoComponentS self)
         {
             return self.Gold;

@@ -5,12 +5,12 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class UserInfoComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
-        public string Account { get; set; }
-        public long UnitId { get; set; }
-        public long AccInfoID { get; set; }
+        public string Account;
+        public long UnitId;
+        public long AccInfoID;
         public long RobotId { get; set; }
 
-        public string PlayerName { get; set; }
+        public string PlayerName;
         public long Gold;
         public long Diamond;
         public long Exp;

@@ -36,7 +36,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.GetComponent<UserInfoComponentS>().Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().PlayerName} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}   登录";
             Log.Debug(offLineInfo);
 
@@ -50,7 +50,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().PlayerName} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}   二次登录";
             Log.Debug(offLineInfo);
 
@@ -65,7 +65,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().PlayerName} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}   离线";
             Log.Debug(offLineInfo);
 
@@ -83,7 +83,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().PlayerName} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}  移除";
             Log.Debug(offLineInfo);
 

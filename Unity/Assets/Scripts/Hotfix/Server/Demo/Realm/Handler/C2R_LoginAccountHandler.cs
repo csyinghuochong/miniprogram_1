@@ -202,7 +202,7 @@ namespace ET.Server
                         CreateRoleInfo roleList = CreateRoleInfo.Create();
                         
                         roleList.UnitId = centerAccountInfo.RoleList[i].UnitId;
-                        roleList.PlayerName = userinfoList[0].PlayerName;
+                        roleList.PlayerName = userinfoList[0].GetPlayerName();
 
                         List<NumericComponentS> numericComponentlist = await dbComponent.Query<NumericComponentS>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
                         if (numericComponentlist == null || numericComponentlist.Count == 0)

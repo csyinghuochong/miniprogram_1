@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
 {
+    [FriendOf(typeof(UserInfoComponentS))]
     public static partial class UnitFactory
     {
         public static async ETTask<Unit> LoadUnit(Player player, Scene scene, CreateRoleInfo createRoleInfo, string account, long accountId)
@@ -86,6 +86,7 @@ namespace ET.Server
             {
                 numericComponent.ApplyValue(keyValuePair.Key, keyValuePair.Value, false);
             }
+
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
 
             unit.AddComponent<StateComponentS>();
