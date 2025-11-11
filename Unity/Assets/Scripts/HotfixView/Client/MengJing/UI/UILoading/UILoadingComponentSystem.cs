@@ -68,12 +68,18 @@ namespace ET.Client
                 return;
             }
 
+            int mapType = self.Root().GetComponent<MapComponent>().MapType;
+
             UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui != null)
             {
                 ui.GetComponent<UIMainComponent>().AfterEnterScene(self.Root().GetComponent<MapComponent>().MapType);
             }
 
+            if (mapType == MapTypeEnum.LocalLevel)
+            {
+                self.Root().CurrentScene().AddComponent<MapLoopComponent>();
+            }
             // Camera camera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             // camera.GetComponent<Camera>().fieldOfView = 50;
 
