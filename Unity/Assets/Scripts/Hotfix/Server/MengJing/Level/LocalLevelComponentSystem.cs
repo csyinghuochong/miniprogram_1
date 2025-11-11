@@ -89,17 +89,20 @@ namespace ET.Server
 
             numericComponent.ApplyChange(NumericType.CurrentWaveKillMonsterNum, 1);
 
+            int currentWaveIndex = numericComponent.GetAsInt(NumericType.CurrentWaveIndex);
+            int currentWaveKillMonsterNum = numericComponent.GetAsInt(NumericType.CurrentWaveKillMonsterNum);
+
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
-            WaveConfig waveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[numericComponent.GetAsInt(NumericType.CurrentWaveIndex) - 1]);
-            if (numericComponent.GetAsInt(NumericType.CurrentWaveKillMonsterNum) >= waveConfig.MonsterSpawnInfos.Length)
+            WaveConfig waveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[currentWaveIndex - 1]);
+            if (currentWaveKillMonsterNum >= waveConfig.MonsterSpawnInfos.Length)
             {
-                if (numericComponent.GetAsInt(NumericType.CurrentWaveIndex) >= levelConfig.WaveIds.Length)
+                if (currentWaveIndex >= levelConfig.WaveIds.Length)
                 {
-                    // 击败最后一波怪物 看看是继续下一关还是直接返回
+                    // 击败最后一波怪物(包括Boss) 看看是继续下一关还是直接返回
                 }
                 else
                 {
-                    WaveConfig nextWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[numericComponent.GetAsInt(NumericType.CurrentWaveIndex)]);
+                    WaveConfig nextWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[currentWaveIndex]);
                     if (nextWaveConfig.HaveBoss)
                     {
                         // 等待玩家进入Boss房间

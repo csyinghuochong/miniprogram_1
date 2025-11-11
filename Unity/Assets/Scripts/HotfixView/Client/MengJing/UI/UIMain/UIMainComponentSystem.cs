@@ -355,7 +355,23 @@ namespace ET.Client
                 }
             }
 
-            self.Button_Boss.gameObject.SetActive(waveConfig.HaveBoss);
+            self.Button_Boss.gameObject.SetActive(false);
+            if (currentWaveKillMonsterNum >= waveConfig.MonsterSpawnInfos.Length)
+            {
+                if (currentWaveIndex >= levelConfig.WaveIds.Length)
+                {
+                    // 击败最后一波怪物(包括Boss) 看看是继续下一关还是直接返回
+                }
+                else
+                {
+                    WaveConfig nextWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[currentWaveIndex]);
+                    if (nextWaveConfig.HaveBoss)
+                    {
+                        // 等待玩家进入Boss房间
+                        self.Button_Boss.gameObject.SetActive(true);
+                    }
+                }
+            }
         }
 
         public static void UpdateMainTask(this UIMainComponent self)
