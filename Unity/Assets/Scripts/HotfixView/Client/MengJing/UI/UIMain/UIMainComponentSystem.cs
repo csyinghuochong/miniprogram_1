@@ -92,7 +92,8 @@ namespace ET.Client
             }
 
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get((int)args.NewValue);
-            Log.Warning($"{levelConfig.LevelName}");
+
+            unit.Root().GetComponent<FloatingTextComponent>().ShowTipText(levelConfig.LevelName);
 
             UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
@@ -110,7 +111,7 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            Log.Warning($"第{args.NewValue}波");
+            unit.Root().GetComponent<FloatingTextComponent>().ShowTipText(ZString.Format("第{0}波", args.NewValue));
 
             UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
@@ -128,7 +129,6 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            Log.Warning($"这一波已经击杀 {args.NewValue}");
 
             UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
@@ -306,7 +306,56 @@ namespace ET.Client
 
         public static void UpdateLevelProgress(this UIMainComponent self)
         {
-            
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+
+            int currentLevelId = numericComponent.GetAsInt(NumericType.CurrentLevelId);
+            int currentWaveIndex = numericComponent.GetAsInt(NumericType.CurrentWaveIndex);
+            int currentWaveKillMonsterNum = numericComponent.GetAsInt(NumericType.CurrentWaveKillMonsterNum);
+            if (!LevelConfigCategory.Instance.DataMap.ContainsKey(currentLevelId))
+            {
+                return;
+            }
+
+            LevelConfig levelConfig = LevelConfigCategory.Instance.Get(currentLevelId);
+
+            if (currentWaveIndex < 1 || currentWaveIndex > levelConfig.WaveIds.Length)
+            {
+                return;
+            }
+
+            WaveConfig waveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[currentWaveIndex - 1]);
+
+            for (int i = 1; i < 6; i++)
+            {
+                Transform progress = self.UILevelProgress.transform.Find(ZString.Format("Image_LevelProgress_{0}", i));
+                if (currentWaveIndex < i)
+                {
+                    progress.Find("Image_LevelProgress").GetComponent<Image>().fillAmount = 0;
+                    progress.Find("Image_StartOff").gameObject.SetActive(true);
+                    progress.Find("Image_StartOn").gameObject.SetActive(false);
+                    progress.Find("Image_EndOff").gameObject.SetActive(true);
+                    progress.Find("Image_EndOn").gameObject.SetActive(false);
+                }
+                else if (currentWaveIndex == i)
+                {
+                    progress.Find("Image_LevelProgress").GetComponent<Image>().fillAmount = currentWaveKillMonsterNum * 1f / waveConfig.MonsterSpawnInfos.Length;
+                    progress.Find("Image_StartOff").gameObject.SetActive(false);
+                    progress.Find("Image_StartOn").gameObject.SetActive(true);
+                    progress.Find("Image_EndOff").gameObject.SetActive(true);
+                    progress.Find("Image_EndOn").gameObject.SetActive(false);
+                }
+                else
+                {
+                    progress.Find("Image_LevelProgress").GetComponent<Image>().fillAmount = 1;
+                    progress.Find("Image_StartOff").gameObject.SetActive(false);
+                    progress.Find("Image_StartOn").gameObject.SetActive(true);
+                    progress.Find("Image_EndOff").gameObject.SetActive(false);
+                    progress.Find("Image_EndOn").gameObject.SetActive(true);
+                }
+            }
+
+            self.Button_Boss.gameObject.SetActive(waveConfig.HaveBoss);
         }
 
         public static void UpdateMainTask(this UIMainComponent self)

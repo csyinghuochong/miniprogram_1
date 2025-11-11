@@ -74,13 +74,18 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            
+
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
             self.Text_Name.text = unitInfoComponent.UnitName;
         }
 
         public static void UpdateBlood(this UIMonsterHpComponent self)
         {
+            if (self.GameObject == null)
+            {
+                return;
+            }
+
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
             long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);
             long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);

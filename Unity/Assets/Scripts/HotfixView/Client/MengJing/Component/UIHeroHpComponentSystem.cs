@@ -81,6 +81,11 @@ namespace ET.Client
 
         public static void UpdateBlood(this UIHeroHpComponent self)
         {
+            if (self.GameObject == null)
+            {
+                return;
+            }
+
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
             long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);
             long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
