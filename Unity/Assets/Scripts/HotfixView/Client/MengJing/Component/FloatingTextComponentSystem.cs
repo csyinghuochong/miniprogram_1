@@ -17,7 +17,11 @@ namespace ET.Client
                     return;
                 }
 
-                uiMonsterHpComponent.UpdateBlood();
+                if (uiMonsterHpComponent.GameObject == null)
+                {
+                    return;
+                }
+
                 unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(),
                     uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
             }
@@ -30,7 +34,11 @@ namespace ET.Client
                     return;
                 }
 
-                uiHeroHpComponent.UpdateBlood();
+                if (uiHeroHpComponent.GameObject == null)
+                {
+                    return;
+                }
+
                 unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(),
                     uiHeroHpComponent.GameObject.GetComponent<RectTransform>().localPosition);
             }
