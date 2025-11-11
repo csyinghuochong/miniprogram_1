@@ -61,8 +61,6 @@ namespace ET.Server
         {
             Unit unit = aiComponent.GetParent<Unit>();
 
-            float offsetDistance = aiComponent.ActDistance - 0.1f; //偏移距离
-
             for (int i = 0; i < 10000; i++)
             {
                 Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);
@@ -80,7 +78,7 @@ namespace ET.Server
                         if (currentDistance > 0.1f)
                         {
                             float3 direction = math.normalize(unit.Position - target.Position);
-                            float3 targetSidePosition = target.Position + direction * offsetDistance;
+                            float3 targetSidePosition = target.Position + direction * aiComponent.ActDistance;
 
                             MoveHelper.PathResultTo(unit, targetSidePosition);
                         }
