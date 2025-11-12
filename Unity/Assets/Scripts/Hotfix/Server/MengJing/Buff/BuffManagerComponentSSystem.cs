@@ -45,14 +45,9 @@ namespace ET.Server
             {
                 BuffS buffS = self.Buffs[i];
 
-                if (buffS.BuffState == BuffState.WaitRemove)
-                {
-                    self.OnRemoveBuffItem(buffS);
-                    buffS.BuffState = BuffState.Finished;
-                }
-
                 if (buffS.BuffState == BuffState.Finished)
                 {
+                    self.OnRemoveBuffItem(buffS);
                     buffS.OnFinished();
                     buffS.Dispose();
                     self.Buffs.RemoveAt(i);
@@ -122,7 +117,7 @@ namespace ET.Server
 
                 if (remove)
                 {
-                    buff.BuffState = BuffState.WaitRemove;
+                    buff.BuffState = BuffState.Finished;
                 }
             }
 
@@ -177,7 +172,7 @@ namespace ET.Server
             {
                 BuffS buff = self.Buffs[i];
 
-                buff.BuffState = BuffState.WaitRemove;
+                buff.BuffState = BuffState.Finished;
             }
         }
     }

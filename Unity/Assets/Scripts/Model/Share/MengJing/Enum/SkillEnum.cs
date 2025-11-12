@@ -6,7 +6,6 @@ namespace ET
     public enum BuffState
     {
         None,
-        WaitRemove,
         Running,
         Finished,
     }
