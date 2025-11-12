@@ -35,13 +35,13 @@ namespace ET.Server
 
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                if (itemConfig.ItemType != (int)ItemType.Equipment)
+                if (itemConfig.ItemType != ItemType.Equipment)
                 {
                     response.Error = ErrorCode.ERR_ModifyData;
                     return;
                 }
 
-                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)itemConfig.ItemSubType);
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, itemConfig.ItemSubType);
 
                 if (equipSlotType == EquipSlotType.None)
                 {

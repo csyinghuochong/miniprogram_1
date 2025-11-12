@@ -30,82 +30,77 @@ namespace ET.Server
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-            if (itemConfig.ItemType == (int)ItemType.Consume)
+
+            // 获取金币
+            if (itemConfig.ItemSubType == ItemSubType.GetGold)
             {
-                // 获取金币
-                if (itemConfig.ItemSubType == (int)ItemConsumeType.GetGold)
-                {
-                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
+                inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
-                    List<RewardItem> addItems = new List<RewardItem>();
-                    addItems.Add(new RewardItem() { ItemId = 1, ItemNum = int.Parse(itemConfig.ItemUsePar) });
-                    inventoryComponent.AddItemData(addItems);
-                }
-
-                // 随机宝箱
-                if (itemConfig.ItemSubType == (int)ItemConsumeType.BaoXian)
-                {
-                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
-
-                    string[] itemList = itemConfig.ItemUsePar.Split(',');
-                    int index = RandomHelper.RandomNumber(0, itemList.Length);
-                    int itemId = int.Parse(itemList[index]);
-
-                    List<RewardItem> addItems = new List<RewardItem>();
-                    addItems.Add(new RewardItem() { ItemId = itemId, ItemNum = 1 });
-                    inventoryComponent.AddItemData(addItems);
-                }
+                List<RewardItem> addItems = new List<RewardItem>();
+                addItems.Add(new RewardItem() { ItemId = 1, ItemNum = int.Parse(itemConfig.ItemUsePar) });
+                inventoryComponent.AddItemData(addItems);
             }
 
-            if (itemConfig.ItemType == (int)ItemType.Material)
+            // 随机宝箱
+            if (itemConfig.ItemSubType == ItemSubType.SuiJiBaoXian)
             {
-                // 英雄经验
-                if (itemConfig.ItemSubType == (int)ItemConsumeType.HeroExp)
+                inventoryComponent.RemoveItem(request.ItemId, request.Num);
+
+                string[] itemList = itemConfig.ItemUsePar.Split(',');
+                int index = RandomHelper.RandomNumber(0, itemList.Length);
+                int itemId = int.Parse(itemList[index]);
+
+                List<RewardItem> addItems = new List<RewardItem>();
+                addItems.Add(new RewardItem() { ItemId = itemId, ItemNum = 1 });
+                inventoryComponent.AddItemData(addItems);
+            }
+
+            // 英雄经验
+            if (itemConfig.ItemSubType == ItemSubType.HeroExp)
+            {
+                Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
+
+                if (hero == null)
                 {
-                    Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
-
-                    if (hero == null)
-                    {
-                        response.Error = ErrorCode.ERR_NotExistHero;
-                        return;
-                    }
-
-                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
-
-                    string[] expRange = itemConfig.ItemUsePar.Split(',');
-                    for (int i = 0; i < request.Num; i++)
-                    {
-                        int expValue = RandomHelper.RandomNumber(int.Parse(expRange[0]), int.Parse(expRange[1]));
-                        HeroHelper.AddHeroExp(hero, request.Num * expValue);
-                    }
-
-                    HeroHelper.UpdateHeroNumeric(unit, hero);
-                    HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+                    response.Error = ErrorCode.ERR_NotExistHero;
+                    return;
                 }
 
-                // 英雄星级
-                if (itemConfig.ItemSubType == (int)ItemConsumeType.HeroHunshi)
+                inventoryComponent.RemoveItem(request.ItemId, request.Num);
+
+                string[] expRange = itemConfig.ItemUsePar.Split(',');
+                for (int i = 0; i < request.Num; i++)
                 {
-                    Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
-
-                    if (hero == null)
-                    {
-                        response.Error = ErrorCode.ERR_NotExistHero;
-                        return;
-                    }
-
-                    inventoryComponent.RemoveItem(request.ItemId, request.Num);
-
-                    string[] hunShiRange = itemConfig.ItemUsePar.Split(',');
-                    for (int i = 0; i < request.Num; i++)
-                    {
-                        int hunShiValue = RandomHelper.RandomNumber(int.Parse(hunShiRange[0]), int.Parse(hunShiRange[1]));
-                        HeroHelper.AddHeroHunShi(hero, request.Num * hunShiValue);
-                    }
-
-                    HeroHelper.UpdateHeroNumeric(unit, hero);
-                    HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+                    int expValue = RandomHelper.RandomNumber(int.Parse(expRange[0]), int.Parse(expRange[1]));
+                    HeroHelper.AddHeroExp(hero, request.Num * expValue);
                 }
+
+                HeroHelper.UpdateHeroNumeric(unit, hero);
+                HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+            }
+
+            // 英雄星级
+            if (itemConfig.ItemSubType == ItemSubType.HeroHunshi)
+            {
+                Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
+
+                if (hero == null)
+                {
+                    response.Error = ErrorCode.ERR_NotExistHero;
+                    return;
+                }
+
+                inventoryComponent.RemoveItem(request.ItemId, request.Num);
+
+                string[] hunShiRange = itemConfig.ItemUsePar.Split(',');
+                for (int i = 0; i < request.Num; i++)
+                {
+                    int hunShiValue = RandomHelper.RandomNumber(int.Parse(hunShiRange[0]), int.Parse(hunShiRange[1]));
+                    HeroHelper.AddHeroHunShi(hero, request.Num * hunShiValue);
+                }
+
+                HeroHelper.UpdateHeroNumeric(unit, hero);
+                HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 
             await ETTask.CompletedTask;

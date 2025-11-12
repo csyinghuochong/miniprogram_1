@@ -116,12 +116,12 @@ namespace ET.Server
 
             switch (skillConfig.SkillTargetType)
             {
-                case (int)SkillTargetType.SelfPosition:
+                case SkillTargetType.SelfPosition:
                 {
                     initSkillData.TargetPosition = myUnit.Position;
                     break;
                 }
-                case (int)SkillTargetType.TargetPositon:
+                case SkillTargetType.TargetPositon:
                 {
                     if (targetUnit != null)
                     {

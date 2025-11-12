@@ -158,29 +158,29 @@ namespace ET
         /// 返回一个可以装备此类型道具的孔位
         /// </summary>
         /// <param name="equipments"></param>
-        /// <param name="itemEquipmentType"></param>
+        /// <param name="itemSubType"></param>
         /// <returns></returns>
-        public static EquipSlotType GetCanEquipSlot(Dictionary<int, long> equipments, ItemEquipmentType itemEquipmentType)
+        public static EquipSlotType GetCanEquipSlot(Dictionary<int, long> equipments, ItemSubType itemSubType)
         {
             EquipSlotType equipSlotType = EquipSlotType.None;
-            switch (itemEquipmentType)
+            switch (itemSubType)
             {
-                case ItemEquipmentType.Toukui:
+                case ItemSubType.Toukui:
                     equipSlotType = EquipSlotType.Toukui;
                     break;
-                case ItemEquipmentType.Yifu:
+                case ItemSubType.Yifu:
                     equipSlotType = EquipSlotType.Yifu;
                     break;
-                case ItemEquipmentType.Kuzi:
+                case ItemSubType.Kuzi:
                     equipSlotType = EquipSlotType.Kuzi;
                     break;
-                case ItemEquipmentType.Xiezi:
+                case ItemSubType.Xiezi:
                     equipSlotType = EquipSlotType.Xiezi;
                     break;
-                case ItemEquipmentType.Xianglian:
+                case ItemSubType.Xianglian:
                     equipSlotType = EquipSlotType.Xianglian;
                     break;
-                case ItemEquipmentType.Wuqi:
+                case ItemSubType.Wuqi:
                     equipSlotType = EquipSlotType.Wuqi;
 
                     // 如果有几个孔位都可以装备同一种装备，比如有2个武器孔位，3个宝石孔位

@@ -324,7 +324,7 @@ namespace ET.Client
 
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                if (itemConfig.ItemType != (int)ItemType.Equipment)
+                if (itemConfig.ItemType != ItemType.Equipment)
                 {
                     itemList.RemoveAt(i);
                 }

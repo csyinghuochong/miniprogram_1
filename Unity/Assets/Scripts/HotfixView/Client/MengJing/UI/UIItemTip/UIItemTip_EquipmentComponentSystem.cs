@@ -61,12 +61,12 @@ namespace ET.Client
 
             string type = newItemConfig.ItemSubType switch
             {
-                (int)ItemEquipmentType.Toukui => "头盔",
-                (int)ItemEquipmentType.Yifu => "衣服",
-                (int)ItemEquipmentType.Kuzi => "裤子",
-                (int)ItemEquipmentType.Xiezi => "鞋子",
-                (int)ItemEquipmentType.Xianglian => "项链",
-                (int)ItemEquipmentType.Wuqi => "武器",
+                ItemSubType.Toukui => "头盔",
+                ItemSubType.Yifu => "衣服",
+                ItemSubType.Kuzi => "裤子",
+                ItemSubType.Xiezi => "鞋子",
+                ItemSubType.Xianglian => "项链",
+                ItemSubType.Wuqi => "武器",
                 _ => ""
             };
 
@@ -102,7 +102,7 @@ namespace ET.Client
                 self.Button_Wear.gameObject.SetActive(true);
 
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
-                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)newItemConfig.ItemSubType);
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, newItemConfig.ItemSubType);
 
                 if (equipSlotType == EquipSlotType.None)
                 {
@@ -146,7 +146,7 @@ namespace ET.Client
                 self.Button_TakeOff.gameObject.SetActive(true);
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
                 HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
-                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, (ItemEquipmentType)newItemConfig.ItemSubType);
+                EquipSlotType equipSlotType = CommonHelp.GetCanEquipSlot(hero.Equipments, newItemConfig.ItemSubType);
 
                 self.Text_EquipHero.gameObject.SetActive(true);
                 self.Text_EquipHero.SetText(heroConfig.HeroName);

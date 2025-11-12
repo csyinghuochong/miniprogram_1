@@ -35,7 +35,7 @@ namespace ET
             DamgeValue = _buf.ReadInt();
             SkillAnimation = _buf.ReadString();
             SkillMusic = _buf.ReadString();
-            SkillTargetType = _buf.ReadInt();
+            SkillTargetType = (SkillTargetType)_buf.ReadInt();
             DamageRangeType = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); DamageRange = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); DamageRange[__index0] = __e0;}}
             Speed = _buf.ReadFloat();
@@ -151,7 +151,7 @@ namespace ET
         /// <summary>
         /// 技能目标类型
         /// </summary>
-        public readonly int SkillTargetType;
+        public readonly SkillTargetType SkillTargetType;
 
         /// <summary>
         /// 伤害范围类型

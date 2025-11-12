@@ -163,7 +163,7 @@ namespace ET.Client
                     Item item = itemRef;
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                    if (itemConfig.ItemType == (int)type)
+                    if (itemConfig.ItemType == type)
                     {
                         items.Add(item);
                     }
@@ -173,7 +173,7 @@ namespace ET.Client
             return items;
         }
 
-        public static List<Item> GetItemsBySubType(this InventoryComponentC self, ItemType type, int subType, InventoryContainerType containerType)
+        public static List<Item> GetItemsBySubType(this InventoryComponentC self, ItemType type, ItemSubType subType, InventoryContainerType containerType)
         {
             List<Item> items = new();
             if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
@@ -183,7 +183,7 @@ namespace ET.Client
                     Item item = itemRef;
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                    if (itemConfig.ItemType == (int)type && itemConfig.ItemSubType == subType)
+                    if (itemConfig.ItemType == type && itemConfig.ItemSubType == subType)
                     {
                         items.Add(item);
                     }

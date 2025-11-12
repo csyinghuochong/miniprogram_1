@@ -443,7 +443,7 @@ namespace ET.Server
                     Item item = itemRef;
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                    if (itemConfig.ItemType == (int)type)
+                    if (itemConfig.ItemType == type)
                     {
                         items.Add(item);
                     }
