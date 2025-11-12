@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            Vector2 startPos = Vector2.zero;
+            Transform head = null;
 
             if (unit.Type == UnitType.Monster)
             {
@@ -24,7 +24,7 @@ namespace ET.Client
                     return;
                 }
 
-                startPos = uiMonsterHpComponent.GameObject.GetComponent<RectTransform>().localPosition;
+                head = uiMonsterHpComponent.GameObject.GetComponent<Transform>();
             }
 
             if (unit.Type == UnitType.Hero)
@@ -40,22 +40,27 @@ namespace ET.Client
                     return;
                 }
 
-                startPos = uiHeroHpComponent.GameObject.GetComponent<RectTransform>().localPosition;
+                head = uiHeroHpComponent.GameObject.GetComponent<Transform>();
+            }
+
+            if (head == null)
+            {
+                return;
             }
 
             if (args.DamageType == DamageType.Normal)
             {
-                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), startPos);
+                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), head);
             }
 
             if (args.DamageType == DamageType.Critical)
             {
-                unit.Root().GetComponent<FloatingTextComponent>().ShowCriDamageText((args.OldValue - args.NewValue).ToString(), startPos);
+                unit.Root().GetComponent<FloatingTextComponent>().ShowCriDamageText((args.OldValue - args.NewValue).ToString(), head);
             }
 
             if (args.DamageType == DamageType.Recover)
             {
-                unit.Root().GetComponent<FloatingTextComponent>().ShowRecoverText((args.NewValue - args.OldValue).ToString(), startPos);
+                unit.Root().GetComponent<FloatingTextComponent>().ShowRecoverText((args.NewValue - args.OldValue).ToString(), head);
             }
         }
     }
@@ -74,7 +79,7 @@ namespace ET.Client
         {
         }
 
-        public static void ShowDamageText(this FloatingTextComponent self, string text, Vector2 startPos)
+        public static void ShowDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Damage.prefab";
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
@@ -93,7 +98,7 @@ namespace ET.Client
                     gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
                     gameObject.GetComponent<TMP_Text>().text = text;
-                    gameObject.transform.localPosition = startPos;
+                    gameObject.transform.localPosition = head.localPosition;
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
@@ -102,7 +107,7 @@ namespace ET.Client
                 });
         }
 
-        public static void ShowCriDamageText(this FloatingTextComponent self, string text, Vector2 startPos)
+        public static void ShowCriDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_CriDamage.prefab";
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
@@ -121,7 +126,7 @@ namespace ET.Client
                     gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
                     gameObject.GetComponent<TMP_Text>().text = text;
-                    gameObject.transform.localPosition = startPos;
+                    gameObject.transform.localPosition = head.localPosition;
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
@@ -130,7 +135,7 @@ namespace ET.Client
                 });
         }
 
-        public static void ShowRecoverText(this FloatingTextComponent self, string text, Vector2 startPos)
+        public static void ShowRecoverText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Recover.prefab";
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
@@ -149,7 +154,7 @@ namespace ET.Client
                     gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
                     gameObject.GetComponent<TMP_Text>().text = text;
-                    gameObject.transform.localPosition = startPos;
+                    gameObject.transform.localPosition = head.localPosition;
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
@@ -180,7 +185,8 @@ namespace ET.Client
                     gameObject.transform.localPosition = Vector3.zero;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 200f, 1.0f).SetEase(Ease.OutQuad))
+                    // 增强向上飘动效果，增加移动距离和时间
+                    seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 200f, 2.0f).SetEase(Ease.OutQuad))
                             // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
                             .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
                 });
