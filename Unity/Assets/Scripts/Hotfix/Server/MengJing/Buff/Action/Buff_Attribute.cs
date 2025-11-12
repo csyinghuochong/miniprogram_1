@@ -29,7 +29,14 @@
 
                     if (value != 0)
                     {
-                        numericComponent.ApplyChange(type, value);
+                        if (type == NumericType.Now_Hp)
+                        {
+                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
+                        }
+                        else
+                        {
+                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Normal);
+                        }
                     }
                 }
             }

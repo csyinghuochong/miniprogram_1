@@ -29,7 +29,7 @@ namespace ET
             m2C_UnitNumericUpdate.NewValue = args.NewValue;
             m2C_UnitNumericUpdate.OldValue = args.OldValue;
             m2C_UnitNumericUpdate.SkillId = args.SkillId;
-            m2C_UnitNumericUpdate.DamgeType = args.DamgeType;
+            m2C_UnitNumericUpdate.DamgeType = (int)args.DamageType;
             m2C_UnitNumericUpdate.AttackId = args.AttackId;
             MapMessageHelper.Broadcast(args.Defend, m2C_UnitNumericUpdate);
         }
@@ -58,7 +58,7 @@ namespace ET
             m2C_UnitNumericUpdate.NewValue = args.NewValue;
             m2C_UnitNumericUpdate.OldValue = args.OldValue;
             m2C_UnitNumericUpdate.SkillId = args.SkillId;
-            m2C_UnitNumericUpdate.DamgeType = args.DamgeType;
+            m2C_UnitNumericUpdate.DamgeType = (int)args.DamageType;
             m2C_UnitNumericUpdate.AttackId = 0;
             MapMessageHelper.SendToClient(args.Defend, m2C_UnitNumericUpdate);
         }

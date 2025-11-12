@@ -38,7 +38,7 @@
 
             numericComponentDefend.ApplyValue(NumericType.Now_Dead, 1);
 
-            long waitTime = 100;
+            long waitTime = 500;
             OnRemoveUnit(defendUnit.Root(), args, waitTime).Coroutine();
 
             await ETTask.CompletedTask;

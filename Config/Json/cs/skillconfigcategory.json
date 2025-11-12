@@ -295,14 +295,14 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
+    "SkillHandler": "Skill_BuffFriendly",
     "GameObjectParameter": "",
     "UnlockStar": 0,
     "SkillType": 1,
     "PassiveSkillType": 0,
     "PassiveSkillPro": 0,
     "PassiveSkillTriggerOnce": 0,
-    "SkillCD": 1,
+    "SkillCD": 6,
     "SkillLiveTime": 5,
     "ActDamage": 0,
     "DamgeValue": 0,
@@ -314,8 +314,8 @@
       3
     ],
     "Speed": 0,
-    "SkillEffectID": 10000001,
-    "SkillHitEffectID": 20000001,
+    "SkillEffectID": 0,
+    "SkillHitEffectID": 0,
     "InitBuffID": [
       0
     ],

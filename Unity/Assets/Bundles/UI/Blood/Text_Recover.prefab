@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4326471433660351793}
   - component: {fileID: 2758600186355186483}
   m_Layer: 5
-  m_Name: Text_Heal
+  m_Name: Text_Recover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

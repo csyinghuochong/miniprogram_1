@@ -31,7 +31,7 @@ namespace ET.Client
         }
 
         public static void ApplyValue(this NumericComponentC self, int numericType, long value, bool notice = true, bool check = true,
-        long attackid = 0, int skillId = 0, int damgeType = 0)
+        long attackId = 0, int skillId = 0, DamageType damageType = 0)
         {
             long old = self.GetByKey(numericType);
 
@@ -42,18 +42,18 @@ namespace ET.Client
                 //发送改变属性的相关消息
                 NumbericChange args = new NumbericChange();
                 args.Defend = self.Parent as Unit;
-                args.AttackId = attackid;
+                args.AttackId = attackId;
                 args.NumericType = numericType;
                 args.OldValue = old;
                 args.NewValue = self.NumericDic[numericType];
                 args.SkillId = skillId;
-                args.DamgeType = damgeType;
+                args.DamageType = damageType;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
         
         public static void ApplyChange(this NumericComponentC self, int numericType, long value, bool notice = true, bool check = true,
-        long attackid = 0, int skillId = 0, int damgeType = 0)
+        long attackId = 0, int skillId = 0, DamageType damageType = 0)
         {
             long old = self.GetByKey(numericType);
 
@@ -64,12 +64,12 @@ namespace ET.Client
                 //发送改变属性的相关消息
                 NumbericChange args = new NumbericChange();
                 args.Defend = self.Parent as Unit;
-                args.AttackId = attackid;
+                args.AttackId = attackId;
                 args.NumericType = numericType;
                 args.OldValue = old;
                 args.NewValue = self.NumericDic[numericType];
                 args.SkillId = skillId;
-                args.DamgeType = damgeType;
+                args.DamageType = damageType;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
@@ -83,9 +83,9 @@ namespace ET.Client
         /// <param name="value"></param>
         /// <param name="skillID"></param>
         /// <param name="notice"></param>
-        /// <param name="damgeType"></param>
+        /// <param name="damageType"></param>
         public static void ApplyValue(this NumericComponentC self, long attackId, int numericType, long value, int skillID, bool notice = true,
-        int damgeType = 0)
+        DamageType damageType = 0)
         {
             //是否超过指定上限值
             long old = self.GetByKey(numericType);
@@ -101,7 +101,7 @@ namespace ET.Client
                 args.OldValue = old;
                 args.NewValue = self.NumericDic[numericType];
                 args.SkillId = skillID;
-                args.DamgeType = damgeType;
+                args.DamageType = damageType;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }

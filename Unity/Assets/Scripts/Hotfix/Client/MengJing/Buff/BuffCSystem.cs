@@ -12,7 +12,6 @@
         [EntitySystem]
         private static void Destroy(this BuffC self)
         {
-            self.OnFinished();
         }
 
         public static void OnInit(this BuffC self, InitBuffData initBuffData, Unit theUnitBelongTo)

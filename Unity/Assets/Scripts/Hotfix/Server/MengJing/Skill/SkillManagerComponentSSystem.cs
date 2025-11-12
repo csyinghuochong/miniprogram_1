@@ -123,13 +123,16 @@ namespace ET.Server
                 }
                 case SkillTargetType.TargetPositon:
                 {
-                    if (targetUnit != null)
-                    {
-                        initSkillData.TargetPosition = targetUnit.Position;
-                    }
+                    initSkillData.TargetPosition = targetUnit != null ? targetUnit.Position : myUnit.Position;
 
                     break;
                 }
+                case SkillTargetType.TargetOnly:
+                case SkillTargetType.SelfOnly:
+                case SkillTargetType.MulTarget:
+                case SkillTargetType.AllTeam:
+                case SkillTargetType.AllEnemy:
+                    break;
             }
 
             float cd = self.AddSkillCD(skillConfigId);
@@ -151,7 +154,7 @@ namespace ET.Server
             message.SkillConfigId = skillConfigId;
             message.TargetId = targetId;
             message.Angle = angle;
-            message.Position = position;
+            message.Position = initSkillData.TargetPosition;
             message.CD = cd;
             message.PublicCD = self.PublicCD;
 

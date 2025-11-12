@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
     /// <summary>
-    /// 范围伤害
-    /// DamageRangeType
+    /// 给周围友方单位添加Buff
     /// DamageRange
     /// </summary>
-    public class Skill_AreaDamage : SkillHandlerS
+    public class Skill_BuffFriendly : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
-            skill.ICheckShape = skill.CreateCheckShape(0);
         }
 
         public override void OnExecute(SkillS skill)
@@ -24,18 +23,22 @@ namespace ET.Server
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Unit defendUnit = entities[i];
-                
-                if (!skill.TheUnitFrom.IsCanAttackUnit(defendUnit))
+
+                if (!UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit))
                 {
                     continue;
                 }
 
-                if (!skill.ICheckShape.Contains(defendUnit.Position))
+                // 直接距离判断
+                if (math.distance(skill.TheUnitFrom.Position, defendUnit.Position) > skill.SkillConfig.DamageRange[0])
                 {
                     continue;
                 }
 
-                Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
+                for (int j = 0; j < skill.SkillConfig.BuffID.Length; j++)
+                {
+                    skill.SkillBuff(skill.SkillConfig.BuffID[j], defendUnit);
+                }
             }
 
             skill.SkillState = SkillState.Finished;
