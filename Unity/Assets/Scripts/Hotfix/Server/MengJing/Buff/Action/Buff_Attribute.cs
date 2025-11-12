@@ -8,6 +8,14 @@
 
         public override void OnUpdate(BuffS buff, float deltaTime)
         {
+            buff.RunTime += deltaTime;
+
+            if (buff.RunTime >= buff.BuffEndTime)
+            {
+                buff.BuffState = BuffState.Finished;
+                return;
+            }
+            
             NumericComponentS numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponentS>();
             if (numericComponent == null)
             {
@@ -17,25 +25,37 @@
 
             buff.RunTime += deltaTime;
 
-            if (!buff.IsTrigger && buff.RunTime >= buff.BuffConfig.BuffDelayTime)
+            if (buff.RunTime >= buff.BuffConfig.BuffDelayTime)
             {
-                buff.IsTrigger = true;
-
-                // 添加属性
-                if (buff.BuffConfig.BuffType == 1)
+                if (buff.BuffConfig.BuffLoopTime > 0)
                 {
-                    int type = buff.BuffConfig.BuffParameterType;
-                    long value = buff.BuffConfig.BuffParameterValue;
-
-                    if (value != 0)
+                    
+                }
+                else
+                {
+                    if (!buff.IsTrigger)
                     {
-                        if (type == NumericType.Now_Hp)
+                        buff.IsTrigger = true;
+
+                        // 添加属性
+                        if (buff.BuffConfig.BuffType == 1)
                         {
-                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
-                        }
-                        else
-                        {
-                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Normal);
+                            int type = buff.BuffConfig.BuffParameterType;
+                            long value = buff.BuffConfig.BuffParameterValue;
+
+                            if (value != 0)
+                            {
+                                if (type == NumericType.Now_Hp)
+                                {
+                                    numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
+                                        DamageType.Recover);
+                                }
+                                else
+                                {
+                                    numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
+                                        DamageType.Normal);
+                                }
+                            }
                         }
                     }
                 }

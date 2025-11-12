@@ -44,9 +44,9 @@
     "Name": "治疗",
     "EffectType": 1,
     "EffectName": "Eff_Test5",
-    "SkillEffectLiveTime": 3,
+    "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
+    "SkillParent": 1,
     "SkillParentPosition": ""
   },
   {

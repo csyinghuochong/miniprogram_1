@@ -302,7 +302,7 @@
     "PassiveSkillType": 0,
     "PassiveSkillPro": 0,
     "PassiveSkillTriggerOnce": 0,
-    "SkillCD": 6,
+    "SkillCD": 5,
     "SkillLiveTime": 5,
     "ActDamage": 0,
     "DamgeValue": 0,

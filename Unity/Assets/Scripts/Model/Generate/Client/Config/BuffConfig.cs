@@ -20,6 +20,7 @@ namespace ET
             BuffName = _buf.ReadString();
             BuffTime = _buf.ReadFloat();
             BuffDelayTime = _buf.ReadFloat();
+            BuffLoopTime = _buf.ReadFloat();
             TargetType = _buf.ReadInt();
             BuffHandler = _buf.ReadString();
             BuffBenefitType = _buf.ReadInt();
@@ -60,6 +61,11 @@ namespace ET
         /// Buff延迟生效时间
         /// </summary>
         public readonly float BuffDelayTime;
+
+        /// <summary>
+        /// 循环触发时间
+        /// </summary>
+        public readonly float BuffLoopTime;
 
         /// <summary>
         /// Buff目标类型
@@ -143,6 +149,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -152,6 +159,7 @@ namespace ET
             + "BuffName:" + BuffName + ","
             + "BuffTime:" + BuffTime + ","
             + "BuffDelayTime:" + BuffDelayTime + ","
+            + "BuffLoopTime:" + BuffLoopTime + ","
             + "TargetType:" + TargetType + ","
             + "BuffHandler:" + BuffHandler + ","
             + "BuffBenefitType:" + BuffBenefitType + ","
