@@ -7,7 +7,7 @@
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 10000002,
@@ -17,7 +17,7 @@
     "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 10000003,
@@ -27,7 +27,7 @@
     "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 10000004,
@@ -37,7 +37,7 @@
     "SkillEffectLiveTime": 2,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 10000005,
@@ -47,7 +47,7 @@
     "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 1,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Bottom"
   },
   {
     "Id": 10000006,
@@ -57,7 +57,7 @@
     "SkillEffectLiveTime": 2,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 10000007,
@@ -67,7 +67,7 @@
     "SkillEffectLiveTime": 3,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 10000008,
@@ -77,7 +77,7 @@
     "SkillEffectLiveTime": 3,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": ""
+    "SkillParentPosition": "Center"
   },
   {
     "Id": 20000001,

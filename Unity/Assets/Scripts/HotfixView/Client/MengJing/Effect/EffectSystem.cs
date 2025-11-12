@@ -149,7 +149,7 @@ namespace ET.Client
                 }
             }
 
-            self.EffectObj.GetComponentInChildren<SkeletonAnimation>()?.AnimationState.SetAnimation(0, "animation", false);
+            self.EffectObj.GetComponentInChildren<SkeletonAnimation>()?.AnimationState.SetAnimation(0, "animation", true);
             self.EffectObj.SetActive(true);
         }
 

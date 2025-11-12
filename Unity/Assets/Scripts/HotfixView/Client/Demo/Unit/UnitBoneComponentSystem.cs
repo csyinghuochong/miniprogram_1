@@ -16,6 +16,7 @@ namespace ET.Client
             {
                 self.Hp = boneSet.Find("Hp");
                 self.Center = boneSet.Find("Center");
+                self.Bottom = boneSet.Find("Bottom");
             }
         }
 
@@ -31,10 +32,10 @@ namespace ET.Client
             {
                 case PosType.Hp:
                     return self.Hp;
-                    break;
                 case PosType.Center:
                     return self.Center;
-                    break;
+                case PosType.Bottom:
+                    return self.Bottom;
             }
 
             return null;

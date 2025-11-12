@@ -79,6 +79,7 @@ namespace ET.Client
             
             BuffC buff = self.AddChildWithId<BuffC>(message.BuffId);
             buff.OnInit(initBuffData, self.GetParent<Unit>());
+            buff.OnExecute();
             self.Buffs.Add(buff);
 
             if (self.Timer == 0)

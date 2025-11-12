@@ -23,6 +23,7 @@ namespace ET.Server
         public Unit TheUnitBelongTo { get => this.theUnitBelongTo; set => this.theUnitBelongTo = value; }
 
         public bool IsTrigger { get; set; }
+        public int TriggerCount { get; set; }
         public float RunTime { get; set; }
         public float3 TargetPosition { get; set; }
     }

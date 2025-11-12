@@ -1,4 +1,4 @@
-﻿namespace ET.Server
+namespace ET.Server
 {
     public class Buff_Attribute : BuffSHandler
     {
@@ -15,7 +15,7 @@
                 buff.BuffState = BuffState.Finished;
                 return;
             }
-            
+
             NumericComponentS numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponentS>();
             if (numericComponent == null)
             {
@@ -23,13 +23,20 @@
                 return;
             }
 
-            buff.RunTime += deltaTime;
-
             if (buff.RunTime >= buff.BuffConfig.BuffDelayTime)
             {
+                // 循环触发
                 if (buff.BuffConfig.BuffLoopTime > 0)
                 {
-                    
+                    float timeSinceDelay = buff.RunTime - buff.BuffConfig.BuffDelayTime;
+                    int expectedTriggerCount = (int)(timeSinceDelay / buff.BuffConfig.BuffLoopTime);
+
+                    if (expectedTriggerCount > buff.TriggerCount)
+                    {
+                        buff.TriggerCount = expectedTriggerCount;
+
+                        TriggerBuffEffect(buff, numericComponent);
+                    }
                 }
                 else
                 {
@@ -37,26 +44,30 @@
                     {
                         buff.IsTrigger = true;
 
-                        // 添加属性
-                        if (buff.BuffConfig.BuffType == 1)
-                        {
-                            int type = buff.BuffConfig.BuffParameterType;
-                            long value = buff.BuffConfig.BuffParameterValue;
+                        TriggerBuffEffect(buff, numericComponent);
+                    }
+                }
+            }
+        }
 
-                            if (value != 0)
-                            {
-                                if (type == NumericType.Now_Hp)
-                                {
-                                    numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
-                                        DamageType.Recover);
-                                }
-                                else
-                                {
-                                    numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
-                                        DamageType.Normal);
-                                }
-                            }
-                        }
+        private void TriggerBuffEffect(BuffS buff, NumericComponentS numericComponent)
+        {
+            if (buff.BuffConfig.BuffType == 1)
+            {
+                int type = buff.BuffConfig.BuffParameterType;
+                long value = buff.BuffConfig.BuffParameterValue;
+
+                if (value != 0)
+                {
+                    if (type == NumericType.Now_Hp)
+                    {
+                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
+                            DamageType.Recover);
+                    }
+                    else
+                    {
+                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
+                            DamageType.Normal);
                     }
                 }
             }
@@ -64,7 +75,7 @@
 
         public override void OnFinished(BuffS buff)
         {
-            if (!buff.IsTrigger)
+            if (!buff.IsTrigger && buff.BuffConfig.BuffLoopTime <= 0)
             {
                 return;
             }
@@ -79,7 +90,10 @@
 
                 if (value != 0)
                 {
-                    numericComponent.ApplyChange(type, value * -1);
+                    if (type > 100000)
+                    {
+                        numericComponent.ApplyChange(type, value * -1);
+                    }
                 }
             }
         }

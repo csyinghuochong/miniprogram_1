@@ -30,17 +30,14 @@
             self.BuffHandler?.OnReset(self, endTime);
         }
 
+        public static void OnExecute(this BuffC self)
+        {
+            self.BuffHandler?.OnExecute(self);
+        }
+
         public static void OnUpdate(this BuffC self, float deltaTime)
         {
-            self.RunTime += deltaTime;
-            
-            if (self.RunTime >= self.BuffEndTime)
-            {
-                self.BuffState = BuffState.Finished;
-                return;
-            }
-
-            self.BuffHandler?.OnUpdate(self);
+            self.BuffHandler?.OnUpdate(self, deltaTime);
         }
 
         public static void OnFinished(this BuffC self)

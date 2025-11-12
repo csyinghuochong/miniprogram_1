@@ -24,8 +24,15 @@
             buff.BuffState = BuffState.Running;
         }
 
-        public override void OnUpdate(BuffC buff)
+        public override void OnUpdate(BuffC buff, float deltaTime)
         {
+            buff.RunTime += deltaTime;
+
+            if (buff.RunTime >= buff.BuffEndTime)
+            {
+                buff.BuffState = BuffState.Finished;
+                return;
+            }
         }
 
         public override void OnFinished(BuffC buff)

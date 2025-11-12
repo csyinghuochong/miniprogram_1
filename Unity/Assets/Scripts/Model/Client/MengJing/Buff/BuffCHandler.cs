@@ -14,7 +14,7 @@
 
         public abstract void OnExecute(BuffC buff);
 
-        public abstract void OnUpdate(BuffC buff);
+        public abstract void OnUpdate(BuffC buff, float deltaTime);
 
         public abstract void OnFinished(BuffC buff);
     }
