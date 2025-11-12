@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace ET.Server
@@ -7,7 +7,7 @@ namespace ET.Server
     public class HeroComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
         [BsonIgnore]
-        public Dictionary<long, EntityRef<Hero>> Heros = new();
+        public List<EntityRef<Hero>> Heros = new();
 
         public List<long> Formation = new();
     }

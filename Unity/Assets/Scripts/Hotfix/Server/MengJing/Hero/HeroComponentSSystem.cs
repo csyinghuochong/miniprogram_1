@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -26,15 +26,21 @@ namespace ET.Server
             {
                 if (entity is Hero hero)
                 {
-                    self.Heros.Add(hero.Id, hero);
+                    self.Heros.Add(hero);
                 }
             }
         }
 
         public static Hero GetHero(this HeroComponentS self, long heroId)
         {
-            self.Heros.TryGetValue(heroId, out EntityRef<Hero> hero);
-            return hero;
+            foreach (Hero hero in self.Heros)
+            {
+                if (hero.Id == heroId)
+                {
+                    return hero;
+                }
+            }
+            return null;
         }
 
         public static void AddHeroByConfigId(this HeroComponentS self, int configId)
@@ -61,27 +67,36 @@ namespace ET.Server
                 self.AddChild(hero);
             }
 
-            if (self.Heros.ContainsKey(hero.Id))
+            if (self.Heros.Contains(hero))
             {
                 return;
             }
 
-            self.Heros.Add(hero.Id, hero);
+            self.Heros.Add(hero);
             HeroHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Add);
         }
 
         // 直接消耗掉
         public static bool RemoveHero(this HeroComponentS self, long heroId)
         {
-            if (!self.Heros.TryGetValue(heroId, out EntityRef<Hero> heroRef))
+            Hero heroToRemove = null;
+            foreach (Hero hero in self.Heros)
+            {
+                if (hero.Id == heroId)
+                {
+                    heroToRemove = hero;
+                    break;
+                }
+            }
+
+            if (heroToRemove == null)
             {
                 return false;
             }
 
-            Hero hero = heroRef;
-            self.Heros.Remove(heroId);
-            HeroHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Remove);
-            hero?.Dispose();
+            self.Heros.Remove(heroToRemove);
+            HeroHelper.SyncHeroInfo(self.GetParent<Unit>(), heroToRemove, HeroOpType.Remove);
+            heroToRemove?.Dispose();
 
             return true;
         }
@@ -89,7 +104,7 @@ namespace ET.Server
         public static List<Hero> GetAllHero(this HeroComponentS self)
         {
             List<Hero> heros = new List<Hero>();
-            foreach (Hero hero in self.Heros.Values)
+            foreach (Hero hero in self.Heros)
             {
                 heros.Add(hero);
             }
@@ -107,7 +122,7 @@ namespace ET.Server
                 }
             }
 
-            foreach (Hero hero in self.Heros.Values)
+            foreach (Hero hero in self.Heros)
             {
                 hero.Equipments.TryAdd((int)EquipSlotType.Toukui, 0);
                 hero.Equipments.TryAdd((int)EquipSlotType.Yifu, 0);
