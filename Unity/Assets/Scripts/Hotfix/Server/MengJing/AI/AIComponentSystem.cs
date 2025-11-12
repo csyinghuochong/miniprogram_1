@@ -117,8 +117,8 @@ namespace ET.Server
 
             self.FollowDistance = 10f;
             self.ActDistance = heroConfig.AtkDistance / 10000f;
-            self.AISkillIDList.Add(20000005);
             self.AISkillIDList.Add(heroConfig.AtkID);
+            self.AISkillIDList.Add(20000005);
             // self.AISkillIDList.AddRange(heroConfig.SkillID);
         }
 
