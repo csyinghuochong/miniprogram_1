@@ -27,6 +27,7 @@ namespace ET
             BuffType = _buf.ReadInt();
             BuffParameterType = _buf.ReadInt();
             BuffParameterValue = _buf.ReadLong();
+            BuffParameterValueType = _buf.ReadInt();
             DamageType = _buf.ReadInt();
             DamagePro = _buf.ReadDouble();
             IsBuffStackable = _buf.ReadInt();
@@ -98,6 +99,11 @@ namespace ET
         public readonly long BuffParameterValue;
 
         /// <summary>
+        /// Buff参数操作值x属性值
+        /// </summary>
+        public readonly int BuffParameterValueType;
+
+        /// <summary>
         /// 伤害类型
         /// </summary>
         public readonly int DamageType;
@@ -150,6 +156,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -166,6 +173,7 @@ namespace ET
             + "BuffType:" + BuffType + ","
             + "BuffParameterType:" + BuffParameterType + ","
             + "BuffParameterValue:" + BuffParameterValue + ","
+            + "BuffParameterValueType:" + BuffParameterValueType + ","
             + "DamageType:" + DamageType + ","
             + "DamagePro:" + DamagePro + ","
             + "IsBuffStackable:" + IsBuffStackable + ","

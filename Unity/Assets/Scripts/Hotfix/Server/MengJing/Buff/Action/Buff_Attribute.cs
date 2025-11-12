@@ -56,18 +56,20 @@ namespace ET.Server
             {
                 int type = buff.BuffConfig.BuffParameterType;
                 long value = buff.BuffConfig.BuffParameterValue;
+                if (buff.BuffConfig.BuffParameterValueType != 0)
+                {
+                    value = (long)(numericComponent.GetAsLong(buff.BuffConfig.BuffParameterValueType) * (value / 10000f));
+                }
 
                 if (value != 0)
                 {
                     if (type == NumericType.Now_Hp)
                     {
-                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
-                            DamageType.Recover);
+                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
                     }
                     else
                     {
-                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId,
-                            DamageType.Normal);
+                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Normal);
                     }
                 }
             }
