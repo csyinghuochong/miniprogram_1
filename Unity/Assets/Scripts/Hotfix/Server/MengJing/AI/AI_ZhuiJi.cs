@@ -52,7 +52,7 @@ namespace ET.Server
 
             // 不在攻击距离内追击敌人
             float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
-            bool zhuiji = distance >= aiComponent.ActDistance;
+            bool zhuiji = distance > aiComponent.ActDistance;
 
             return zhuiji ? 0 : 1;
         }
@@ -67,21 +67,17 @@ namespace ET.Server
                 if (target != null)
                 {
                     float currentDistance = math.distance(unit.Position, target.Position);
-                    bool needChase = currentDistance >= aiComponent.ActDistance;
 
-                    if (!needChase)
+                    if (currentDistance > aiComponent.ActDistance)
                     {
-                        unit.Stop();
+                        float3 direction = math.normalize(target.Position - unit.Position);
+                        float3 targetSidePosition = unit.Position + direction * (currentDistance - aiComponent.ActDistance + 0.1f);
+
+                        MoveHelper.PathResultTo(unit, targetSidePosition);
                     }
                     else
                     {
-                        if (currentDistance > 0.1f)
-                        {
-                            float3 direction = math.normalize(unit.Position - target.Position);
-                            float3 targetSidePosition = target.Position + direction * aiComponent.ActDistance;
-
-                            MoveHelper.PathResultTo(unit, targetSidePosition);
-                        }
+                        unit.Stop();
                     }
                 }
 
