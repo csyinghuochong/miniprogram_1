@@ -133,7 +133,8 @@ namespace ET.Server
 
             if (self.Timer == 0)
             {
-                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BuffTimerS, self);
+                self.LastUpdateTime = TimeInfo.Instance.ClientNow();
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.BuffTimerS, self);
             }
 
             if (notice)
