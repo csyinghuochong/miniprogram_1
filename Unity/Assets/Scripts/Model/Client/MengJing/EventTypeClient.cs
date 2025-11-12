@@ -61,20 +61,20 @@ namespace ET.Client
     {
     }
 
-    public struct EffectData
+    public struct InitEffectData
     {
         public int EffectTypeEnum;
         public int EffectId;
         public float3 EffectPosition;
         public float EffectAngle;
         public float TargetAngle;
-        public long TargetID;
+        public long TargetId;
         public long InstanceId;
     }
 
     public struct SkillEffect
     {
-        public EffectData EffectData;
+        public InitEffectData InitEffectData;
         public Unit Unit;
     }
 
@@ -101,7 +101,7 @@ namespace ET.Client
     public struct AddBuff
     {
         public Unit Unit;
-        public int BuffId;
+        public long BuffId;
     }
 
     public struct FsmChange

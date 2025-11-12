@@ -16,19 +16,19 @@ namespace ET.Client
         {
         }
 
-        public static void OnInit(this SkillC self, UseSkillInfo useSkillInfo, Unit theUnitFrom)
+        public static void OnInit(this SkillC self, InitSkillData initSkillData, Unit theUnitFrom)
         {
-            self.UseSkillInfo = useSkillInfo;
-            self.SkillConfig = SkillConfigCategory.Instance.Get(useSkillInfo.SkillConfigId);
+            self.InitSkillData = initSkillData;
+            self.SkillConfig = SkillConfigCategory.Instance.Get(initSkillData.SkillConfigId);
             self.SkillHandler = SkillDispatcherComponentC.Instance.Get(self.SkillConfig.SkillHandler);
             self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
-            if (useSkillInfo.TargetId != 0)
+            if (initSkillData.TargetId != 0)
             {
-                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(useSkillInfo.TargetId);
+                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(initSkillData.TargetId);
             }
 
-            self.TargetPosition = useSkillInfo.TargetPosition;
+            self.TargetPosition = initSkillData.TargetPosition;
 
             self.SkillHandler?.OnInit(self);
         }
@@ -72,20 +72,20 @@ namespace ET.Client
                 return;
             }
 
-            EffectData playEffectBuffData = new EffectData();
-            playEffectBuffData.TargetID = self.UseSkillInfo.TargetId;
-            playEffectBuffData.EffectId = effectConfig.Id; //特效相关配置
-            playEffectBuffData.EffectPosition = position; //技能目标点
-            playEffectBuffData.EffectAngle = angle;
-            playEffectBuffData.TargetAngle = self.UseSkillInfo.Angle; //技能角度
-            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect; //特效类型
-            playEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
+            InitEffectData playInitEffectBuffData = new InitEffectData();
+            playInitEffectBuffData.TargetId = self.InitSkillData.TargetId;
+            playInitEffectBuffData.EffectId = effectConfig.Id; //特效相关配置
+            playInitEffectBuffData.EffectPosition = position; //技能目标点
+            playInitEffectBuffData.EffectAngle = angle;
+            playInitEffectBuffData.TargetAngle = self.InitSkillData.Angle; //技能角度
+            playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect; //特效类型
+            playInitEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
 
-            self.EffectInstanceId.Add(playEffectBuffData.InstanceId);
+            self.EffectInstanceId.Add(playInitEffectBuffData.InstanceId);
 
             EventSystem.Instance.Publish(self.Root(), new SkillEffect()
             {
-                EffectData = playEffectBuffData,
+                InitEffectData = playInitEffectBuffData,
                 Unit = self.TheUnitFrom
             });
         }

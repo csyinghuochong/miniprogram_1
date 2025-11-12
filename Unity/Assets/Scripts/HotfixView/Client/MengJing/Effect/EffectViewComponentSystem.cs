@@ -40,7 +40,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, SkillEffect args)
         {
             EffectViewComponent effectViewComponent = args.Unit.GetComponent<EffectViewComponent>();
-            effectViewComponent?.EffectFactory(args.EffectData);
+            effectViewComponent?.EffectFactory(args.InitEffectData);
 
             await ETTask.CompletedTask;
         }
@@ -125,7 +125,7 @@ namespace ET.Client
         {
             for (int i = self.Effects.Count - 1; i >= 0; i--)
             {
-                if (self.Effects[i].EffectData.InstanceId == instanceId)
+                if (self.Effects[i].InitEffectData.InstanceId == instanceId)
                 {
                     self.Effects[i].EffectState = EffectState.Finished;
                 }
@@ -136,7 +136,7 @@ namespace ET.Client
         {
             for (int i = self.Effects.Count - 1; i >= 0; i--)
             {
-                if (self.Effects[i].EffectData.InstanceId == instanceId)
+                if (self.Effects[i].InitEffectData.InstanceId == instanceId)
                 {
                     return self.Effects[i];
                 }
@@ -145,14 +145,14 @@ namespace ET.Client
             return null;
         }
 
-        public static Effect EffectFactory(this EffectViewComponent self, EffectData effectData)
+        public static Effect EffectFactory(this EffectViewComponent self, InitEffectData initEffectData)
         {
             Unit unit = self.GetParent<Unit>();
 
-            self.RemoveSameBuffEffect(effectData);
+            self.RemoveSameBuffEffect(initEffectData);
 
             Effect resultEffect = self.AddChild<Effect>(true);
-            resultEffect.OnInit(effectData, unit);
+            resultEffect.OnInit(initEffectData, unit);
             self.Effects.Add(resultEffect);
 
             if (self.Timer == 0)
@@ -168,7 +168,7 @@ namespace ET.Client
         {
         }
 
-        private static void RemoveSameBuffEffect(this EffectViewComponent self, EffectData effectData)
+        private static void RemoveSameBuffEffect(this EffectViewComponent self, InitEffectData initEffectData)
         {
         }
 

@@ -68,10 +68,10 @@ namespace ET.Server
             }
         }
 
-        public static void BuffFactory(this BuffManagerComponentS self, BuffData buffData, Unit from, SkillS skill, bool notice = true)
+        public static void BuffFactory(this BuffManagerComponentS self, InitBuffData initBuffData, Unit from, SkillS skill, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();
-            BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
+            BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(initBuffData.BuffConfigId);
 
             // 叠加
             if (newBuffConfig.BuffMaxStackCount != 0)
@@ -132,7 +132,7 @@ namespace ET.Server
             }
 
             BuffS newBuff = self.AddChild<BuffS>();
-            newBuff.OnInit(buffData, from, unit, skill);
+            newBuff.OnInit(initBuffData, from, unit, skill);
 
             self.Buffs.Insert(0, newBuff);
 
@@ -144,8 +144,9 @@ namespace ET.Server
             if (notice)
             {
                 M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create();
-                m2C_UnitBuffUpdate.UnitIdBelongTo = unit.Id;
-                m2C_UnitBuffUpdate.BuffID = newBuffConfig.Id;
+                m2C_UnitBuffUpdate.UnitId = unit.Id;
+                m2C_UnitBuffUpdate.BuffId = newBuff.Id;
+                m2C_UnitBuffUpdate.BuffConfigId = newBuffConfig.Id;
                 m2C_UnitBuffUpdate.BuffOperateType = 1;
                 m2C_UnitBuffUpdate.BuffEndTime = newBuff.BuffEndTime;
                 m2C_UnitBuffUpdate.TargetPostion.Clear();
@@ -155,7 +156,7 @@ namespace ET.Server
                 m2C_UnitBuffUpdate.Spellcaster = from.GetComponent<UnitInfoComponent>().UnitName;
                 m2C_UnitBuffUpdate.UnitType = from.Type;
                 m2C_UnitBuffUpdate.UnitConfigId = from.ConfigId;
-                m2C_UnitBuffUpdate.SkillId = buffData.SkillConfigId;
+                m2C_UnitBuffUpdate.SkillConfigId = initBuffData.SkillConfigId;
                 m2C_UnitBuffUpdate.UnitIdFrom = from.Id;
 
                 MapMessageHelper.Broadcast(unit, m2C_UnitBuffUpdate);
@@ -165,8 +166,8 @@ namespace ET.Server
         private static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buff)
         {
             M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create();
-            m2C_UnitBuffUpdate.UnitIdBelongTo = self.GetParent<Unit>().Id;
-            m2C_UnitBuffUpdate.BuffID = buff.BuffConfig.Id;
+            m2C_UnitBuffUpdate.UnitId = self.GetParent<Unit>().Id;
+            m2C_UnitBuffUpdate.BuffId = buff.Id;
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffUpdate);
         }
 

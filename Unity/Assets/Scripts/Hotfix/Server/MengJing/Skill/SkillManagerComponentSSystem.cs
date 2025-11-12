@@ -50,6 +50,7 @@ namespace ET.Server
 
                 if (skill.SkillState == SkillState.Finished)
                 {
+                    self.OnRemoveSkillItem(skill);
                     skill.OnFinished();
                     skill.Dispose();
                     self.Skills.RemoveAt(i);
@@ -105,11 +106,11 @@ namespace ET.Server
                 return errorCode;
             }
 
-            UseSkillInfo useSkillInfo = new UseSkillInfo();
-            useSkillInfo.SkillConfigId = skillConfigId;
-            useSkillInfo.TargetId = targetId;
-            useSkillInfo.Angle = angle;
-            useSkillInfo.TargetPosition = position;
+            InitSkillData initSkillData = new InitSkillData();
+            initSkillData.SkillConfigId = skillConfigId;
+            initSkillData.TargetId = targetId;
+            initSkillData.Angle = angle;
+            initSkillData.TargetPosition = position;
 
             Unit targetUnit = myUnit.GetParent<UnitComponent>().Get(targetId);
 
@@ -117,14 +118,14 @@ namespace ET.Server
             {
                 case (int)SkillTargetType.SelfPosition:
                 {
-                    useSkillInfo.TargetPosition = myUnit.Position;
+                    initSkillData.TargetPosition = myUnit.Position;
                     break;
                 }
                 case (int)SkillTargetType.TargetPositon:
                 {
                     if (targetUnit != null)
                     {
-                        useSkillInfo.TargetPosition = targetUnit.Position;
+                        initSkillData.TargetPosition = targetUnit.Position;
                     }
 
                     break;
@@ -135,7 +136,7 @@ namespace ET.Server
 
             SkillS skill = self.AddChild<SkillS>();
             self.Skills.Add(skill);
-            skill.OnInit(useSkillInfo, myUnit);
+            skill.OnInit(initSkillData, myUnit);
             skill.OnExecute();
 
             if (self.Timer == 0)
@@ -146,6 +147,7 @@ namespace ET.Server
 
             M2C_OnUseSkill message = M2C_OnUseSkill.Create();
             message.UnitId = myUnit.Id;
+            message.SkillId = skill.Id;
             message.SkillConfigId = skillConfigId;
             message.TargetId = targetId;
             message.Angle = angle;
@@ -237,13 +239,21 @@ namespace ET.Server
                 self.Skills.RemoveAt(i);
             }
 
-            // Unit unit = self.GetParent<Unit>();
-            // if (notice && unit != null && !unit.IsDisposed)
-            // {
-            //     M2C_UnitFinishSkill M2C_UnitFinishSkill = M2C_UnitFinishSkill.Create();
-            //     M2C_UnitFinishSkill.UnitId = unit.Id;
-            //     MapMessageHelper.Broadcast(unit, M2C_UnitFinishSkill);
-            // }
+            Unit unit = self.GetParent<Unit>();
+            if (notice && unit != null && !unit.IsDisposed)
+            {
+                M2C_UnitFinishSkill message = M2C_UnitFinishSkill.Create();
+                message.UnitId = unit.Id;
+                MapMessageHelper.Broadcast(unit, message);
+            }
+        }
+
+        private static void OnRemoveSkillItem(this SkillManagerComponentS self, SkillS skill)
+        {
+            M2C_UnitSkillRemove message = M2C_UnitSkillRemove.Create();
+            message.UnitId = self.GetParent<Unit>().Id;
+            message.SkillId = skill.Id;
+            MapMessageHelper.Broadcast(self.GetParent<Unit>(), message);
         }
     }
 }

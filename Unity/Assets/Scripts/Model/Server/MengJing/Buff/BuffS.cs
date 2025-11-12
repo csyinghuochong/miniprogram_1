@@ -6,7 +6,7 @@ namespace ET.Server
     public class BuffS : Entity, IAwake, IDestroy
     {
         public float BuffEndTime { get; set; }
-        public BuffData BuffData { get; set; }
+        public InitBuffData InitBuffData { get; set; }
         public BuffState BuffState { get; set; }
         public BuffSHandler BuffHandler { get; set; }
 

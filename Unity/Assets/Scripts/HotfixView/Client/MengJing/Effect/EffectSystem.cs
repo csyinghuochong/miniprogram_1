@@ -20,14 +20,14 @@ namespace ET.Client
             self.OnFinished();
         }
 
-        public static void OnInit(this Effect self, EffectData effectData, Unit theUnitBelongTo)
+        public static void OnInit(this Effect self, InitEffectData initEffectData, Unit theUnitBelongTo)
         {
             self.EffectPath = string.Empty;
             self.EffectObj = null;
-            self.EffectData = effectData;
+            self.InitEffectData = initEffectData;
             self.EffectState = EffectState.Running;
             self.TheUnitBelongTo = theUnitBelongTo;
-            self.EffectConfig = EffectConfigCategory.Instance.Get(effectData.EffectId);
+            self.EffectConfig = EffectConfigCategory.Instance.Get(initEffectData.EffectId);
             self.ElapsedTime = 0;
             self.EffectAngle = -10000;
         }
@@ -52,7 +52,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.TheUnitBelongTo == null || self.TheUnitBelongTo.IsDisposed || self.EffectData.InstanceId == 0)
+            if (self.TheUnitBelongTo == null || self.TheUnitBelongTo.IsDisposed || self.InitEffectData.InstanceId == 0)
             {
                 self.EffectState = EffectState.Finished;
                 return;
@@ -81,7 +81,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.EffectData.InstanceId == 0 || gameObject == null)
+            if (self.InitEffectData.InstanceId == 0 || gameObject == null)
             {
                 self.EffectState = EffectState.Finished;
             }
@@ -107,8 +107,8 @@ namespace ET.Client
                 {
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
 
-                    float angle = self.EffectData.EffectAngle != 0 ? self.EffectData.EffectAngle : self.EffectData.TargetAngle;
-                    self.EffectObj.transform.position = new Vector3(self.EffectData.EffectPosition.x, self.EffectData.EffectPosition.y, self.EffectData.EffectPosition.y);
+                    float angle = self.InitEffectData.EffectAngle != 0 ? self.InitEffectData.EffectAngle : self.InitEffectData.TargetAngle;
+                    self.EffectObj.transform.position = new Vector3(self.InitEffectData.EffectPosition.x, self.InitEffectData.EffectPosition.y, self.InitEffectData.EffectPosition.y);
                     // self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
 
                     self.EffectObj.transform.localScale = Vector3.one;
@@ -134,7 +134,7 @@ namespace ET.Client
                     self.EffectObj.transform.SetParent(tParent);
                     self.EffectObj.transform.localPosition = Vector3.zero;
                     self.EffectObj.transform.localScale = Vector3.one;
-                    float angle = self.EffectData.TargetAngle != 0 ? self.EffectData.TargetAngle : 0;
+                    float angle = self.InitEffectData.TargetAngle != 0 ? self.InitEffectData.TargetAngle : 0;
                     self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
                     break;
                 }
@@ -144,7 +144,7 @@ namespace ET.Client
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
                     self.EffectObj.transform.position = new Vector3(self.TheUnitBelongTo.Position.x, self.TheUnitBelongTo.Position.y, self.TheUnitBelongTo.Position.y);
                     self.EffectObj.transform.localScale = Vector3.one;
-                    self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, self.EffectData.TargetAngle);
+                    self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, self.InitEffectData.TargetAngle);
                     break;
                 }
             }
@@ -155,7 +155,7 @@ namespace ET.Client
 
         public static void PlayEffect(this Effect self)
         {
-            if (self.EffectData.InstanceId == 0)
+            if (self.InitEffectData.InstanceId == 0)
             {
                 return;
             }

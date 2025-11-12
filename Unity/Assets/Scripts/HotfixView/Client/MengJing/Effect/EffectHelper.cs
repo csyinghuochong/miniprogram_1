@@ -28,46 +28,46 @@ namespace ET.Client
 
             EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillCof.SkillHitEffectID);
 
-            EffectData playEffectBuffData = new EffectData();
-            playEffectBuffData.EffectId = skillCof.SkillHitEffectID;
-            playEffectBuffData.EffectPosition = float3.zero;
-            playEffectBuffData.TargetAngle = angle;
-            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
-            playEffectBuffData.InstanceId = 1;
-            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playEffectBuffData);
+            InitEffectData playInitEffectBuffData = new InitEffectData();
+            playInitEffectBuffData.EffectId = skillCof.SkillHitEffectID;
+            playInitEffectBuffData.EffectPosition = float3.zero;
+            playInitEffectBuffData.TargetAngle = angle;
+            playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
+            playInitEffectBuffData.InstanceId = 1;
+            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playInitEffectBuffData);
         }
 
         public static void PlaySelfEffect(Unit unit, int effectID)
         {
-            EffectData playEffectBuffData = new EffectData();
-            playEffectBuffData.EffectId = effectID;
-            playEffectBuffData.EffectPosition = float3.zero;
-            playEffectBuffData.TargetAngle = 0;
-            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
-            playEffectBuffData.InstanceId = 1;
-            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playEffectBuffData);
+            InitEffectData playInitEffectBuffData = new InitEffectData();
+            playInitEffectBuffData.EffectId = effectID;
+            playInitEffectBuffData.EffectPosition = float3.zero;
+            playInitEffectBuffData.TargetAngle = 0;
+            playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
+            playInitEffectBuffData.InstanceId = 1;
+            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playInitEffectBuffData);
         }
 
         public static void PlayEffectPosition(Unit unit, int effectID, float3 position)
         {
-            EffectData playEffectBuffData = new EffectData();
-            playEffectBuffData.EffectId = effectID;
-            playEffectBuffData.EffectPosition = position;
-            playEffectBuffData.TargetAngle = 0;
-            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
-            playEffectBuffData.InstanceId = 1;
-            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playEffectBuffData);
+            InitEffectData playInitEffectBuffData = new InitEffectData();
+            playInitEffectBuffData.EffectId = effectID;
+            playInitEffectBuffData.EffectPosition = position;
+            playInitEffectBuffData.TargetAngle = 0;
+            playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
+            playInitEffectBuffData.InstanceId = 1;
+            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playInitEffectBuffData);
         }
 
         public static void PlayDropEffect(Unit unit, int effectID)
         {
-            EffectData playEffectBuffData = new EffectData();
-            playEffectBuffData.EffectId = effectID;
-            playEffectBuffData.EffectPosition = float3.zero;
-            playEffectBuffData.TargetAngle = 0;
-            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
-            playEffectBuffData.InstanceId = 1;
-            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playEffectBuffData);
+            InitEffectData playInitEffectBuffData = new InitEffectData();
+            playInitEffectBuffData.EffectId = effectID;
+            playInitEffectBuffData.EffectPosition = float3.zero;
+            playInitEffectBuffData.TargetAngle = 0;
+            playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
+            playInitEffectBuffData.InstanceId = 1;
+            unit.GetComponent<EffectViewComponent>()?.EffectFactory(playInitEffectBuffData);
         }
     }
 }

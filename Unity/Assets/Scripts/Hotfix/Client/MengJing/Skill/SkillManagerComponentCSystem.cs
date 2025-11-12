@@ -119,15 +119,15 @@ namespace ET.Client
 
             Unit unit = self.GetParent<Unit>();
 
-            UseSkillInfo useSkillInfo = new UseSkillInfo();
-            useSkillInfo.SkillConfigId = message.SkillConfigId;
-            useSkillInfo.TargetId = message.TargetId;
-            useSkillInfo.Angle = message.Angle;
-            useSkillInfo.TargetPosition = message.Position;
+            InitSkillData initSkillData = new InitSkillData();
+            initSkillData.SkillConfigId = message.SkillConfigId;
+            initSkillData.TargetId = message.TargetId;
+            initSkillData.Angle = message.Angle;
+            initSkillData.TargetPosition = message.Position;
 
-            SkillC skill = self.AddChild<SkillC>();
+            SkillC skill = self.AddChildWithId<SkillC>(message.SkillId);
             self.Skills.Add(skill);
-            skill.OnInit(useSkillInfo, unit);
+            skill.OnInit(initSkillData, unit);
             skill.OnExecute();
 
             if (self.Timer == 0)
@@ -214,6 +214,19 @@ namespace ET.Client
                 skill.OnFinished();
                 skill.Dispose();
                 self.Skills.RemoveAt(i);
+            }
+        }
+
+        public static void RemoveSkill(this SkillManagerComponentC self, long skillId)
+        {
+            for (int i = self.Skills.Count - 1; i >= 0; i--)
+            {
+                SkillC skill = self.Skills[i];
+
+                if (skill.Id == skillId)
+                {
+                    skill.SkillState = SkillState.Finished;
+                }
             }
         }
     }

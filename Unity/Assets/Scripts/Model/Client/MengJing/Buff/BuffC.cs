@@ -5,7 +5,7 @@ namespace ET.Client
     [ChildOf(typeof(BuffManagerComponentC))]
     public class BuffC : Entity, IAwake, IDestroy
     {
-        public BuffData BuffData { get; set; }
+        public InitBuffData InitBuffData { get; set; }
         public BuffState BuffState { get; set; }
         public BuffCHandler BuffHandler { get; set; }
         public BuffConfig BuffConfig { get; set; }
@@ -15,7 +15,7 @@ namespace ET.Client
         public float BuffEndTime { get; set; }
         public float RunTime { get; set; }
 
-        public EffectData EffectData { get; set; }
+        public InitEffectData InitEffectData { get; set; }
         public long EffectInstanceId { get; set; }
     }
 }

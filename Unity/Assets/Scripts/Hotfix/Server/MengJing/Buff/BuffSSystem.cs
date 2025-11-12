@@ -14,10 +14,10 @@
         {
         }
 
-        public static void OnInit(this BuffS self, BuffData buffData, Unit theUnitFrom, Unit theUnitBelongTo, SkillS skill)
+        public static void OnInit(this BuffS self, InitBuffData initBuffData, Unit theUnitFrom, Unit theUnitBelongTo, SkillS skill)
         {
-            self.BuffData = buffData;
-            self.BuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
+            self.InitBuffData = initBuffData;
+            self.BuffConfig = BuffConfigCategory.Instance.Get(initBuffData.BuffConfigId);
             self.BuffHandler = BuffDispatcherComponentS.Instance.Get(self.BuffConfig.BuffHandler);
             self.TheUnitFrom = theUnitFrom;
             self.TheUnitBelongTo = theUnitBelongTo;

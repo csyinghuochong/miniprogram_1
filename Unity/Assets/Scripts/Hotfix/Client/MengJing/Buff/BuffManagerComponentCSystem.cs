@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -62,10 +63,22 @@ namespace ET.Client
             }
         }
 
-        public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData)
+        public static void BuffFactory(this BuffManagerComponentC self, M2C_UnitBuffUpdate message)
         {
-            BuffC buff = self.AddChild<BuffC>();
-            buff.OnInit(buffData, self.GetParent<Unit>());
+            InitBuffData initBuffData = new InitBuffData();
+            initBuffData.TargetAngle = 0;
+            initBuffData.BuffConfigId = message.BuffConfigId;
+            initBuffData.Spellcaster = message.Spellcaster;
+            initBuffData.BuffEndTime = message.BuffEndTime;
+            initBuffData.UnitType = message.UnitType;
+            initBuffData.UnitConfigId = message.UnitConfigId;
+            initBuffData.SkillConfigId = message.SkillConfigId;
+            initBuffData.UnitIdFrom = message.UnitIdFrom;
+            initBuffData.TargetPostion = new float3(message.TargetPostion[0], message.TargetPostion[1], message.TargetPostion[2]);
+            
+            
+            BuffC buff = self.AddChildWithId<BuffC>(message.BuffId);
+            buff.OnInit(initBuffData, self.GetParent<Unit>());
             self.Buffs.Add(buff);
 
             if (self.Timer == 0)
@@ -74,13 +87,13 @@ namespace ET.Client
             }
         }
 
-        public static void RemoveBuff(this BuffManagerComponentC self, int buffConfigId)
+        public static void RemoveBuff(this BuffManagerComponentC self, long buffId)
         {
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
                 BuffC buff = self.Buffs[i];
 
-                if (buff.BuffData.BuffConfigId == buffConfigId)
+                if (buff.Id == buffId)
                 {
                     buff.BuffState = BuffState.Finished;
                 }
@@ -93,7 +106,7 @@ namespace ET.Client
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
                 BuffC buff = self.Buffs[i];
-                if (buff.BuffData.BuffConfigId == buffConfigId)
+                if (buff.InitBuffData.BuffConfigId == buffConfigId)
                 {
                     number++;
                 }
@@ -109,12 +122,12 @@ namespace ET.Client
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
                 BuffC buff = self.Buffs[i];
-                if (buff.BuffData.BuffConfigId != buffConfigId)
+                if (buff.InitBuffData.BuffConfigId != buffConfigId)
                 {
                     continue;
                 }
 
-                if (formId != 0 && formId != buff.BuffData.UnitIdFrom)
+                if (formId != 0 && formId != buff.InitBuffData.UnitIdFrom)
                 {
                     continue;
                 }

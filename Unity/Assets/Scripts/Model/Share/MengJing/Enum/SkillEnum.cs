@@ -154,7 +154,7 @@ namespace ET
         public const int BuffEffect = 2;
     }
 
-    public struct BuffData
+    public struct InitBuffData
     {
         //buff角度
         public int TargetAngle;
@@ -170,7 +170,7 @@ namespace ET
         public float3 TargetPostion;
     }
 
-    public struct UseSkillInfo
+    public struct InitSkillData
     {
         public int SkillConfigId;
         public long TargetId;

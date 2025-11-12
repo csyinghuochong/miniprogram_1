@@ -15,13 +15,13 @@
             self.OnFinished();
         }
 
-        public static void OnInit(this BuffC self, BuffData buffData, Unit theUnitBelongTo)
+        public static void OnInit(this BuffC self, InitBuffData initBuffData, Unit theUnitBelongTo)
         {
-            self.BuffData = buffData;
-            self.BuffConfig = BuffConfigCategory.Instance.Get(buffData.BuffConfigId);
+            self.InitBuffData = initBuffData;
+            self.BuffConfig = BuffConfigCategory.Instance.Get(initBuffData.BuffConfigId);
             self.BuffHandler = BuffDispatcherComponentC.Instance.Get(self.BuffConfig.BuffHandler);
             self.TheUnitBelongTo = theUnitBelongTo;
-            self.BuffEndTime = buffData.BuffEndTime;
+            self.BuffEndTime = initBuffData.BuffEndTime;
 
             self.BuffHandler?.OnInit(self);
         }
@@ -56,22 +56,22 @@
                 return 0;
             }
 
-            EffectData playEffectBuffData = new EffectData();
-            playEffectBuffData.EffectId = self.BuffConfig.BuffEffectID;
-            playEffectBuffData.TargetAngle = self.BuffData.TargetAngle;
-            playEffectBuffData.EffectTypeEnum = EffectTypeEnum.BuffEffect;
-            playEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
+            InitEffectData playInitEffectBuffData = new InitEffectData();
+            playInitEffectBuffData.EffectId = self.BuffConfig.BuffEffectID;
+            playInitEffectBuffData.TargetAngle = self.InitBuffData.TargetAngle;
+            playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.BuffEffect;
+            playInitEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
 
             //特效类型
 
             EventSystem.Instance.Publish(self.Root(), new SkillEffect()
             {
-                EffectData = playEffectBuffData,
+                InitEffectData = playInitEffectBuffData,
                 Unit = self.TheUnitBelongTo
             });
 
-            self.EffectData = playEffectBuffData;
-            return playEffectBuffData.InstanceId;
+            self.InitEffectData = playInitEffectBuffData;
+            return playInitEffectBuffData.InstanceId;
         }
     }
 }

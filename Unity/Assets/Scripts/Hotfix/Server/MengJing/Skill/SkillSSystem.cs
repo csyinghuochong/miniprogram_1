@@ -16,19 +16,19 @@ namespace ET.Server
         {
         }
 
-        public static void OnInit(this SkillS self, UseSkillInfo useSkillInfo, Unit theUnitFrom)
+        public static void OnInit(this SkillS self, InitSkillData initSkillData, Unit theUnitFrom)
         {
-            self.UseSkillInfo = useSkillInfo;
-            self.SkillConfig = SkillConfigCategory.Instance.Get(useSkillInfo.SkillConfigId);
+            self.InitSkillData = initSkillData;
+            self.SkillConfig = SkillConfigCategory.Instance.Get(initSkillData.SkillConfigId);
             self.SkillHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConfig.SkillHandler);
             self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
-            if (useSkillInfo.TargetId != 0)
+            if (initSkillData.TargetId != 0)
             {
-                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(useSkillInfo.TargetId);
+                self.TheUnitTarget = self.Scene().GetComponent<UnitComponent>().Get(initSkillData.TargetId);
             }
 
-            self.TargetPosition = useSkillInfo.TargetPosition;
+            self.TargetPosition = initSkillData.TargetPosition;
 
             self.SkillHandler?.OnInit(self);
         }
@@ -114,10 +114,10 @@ namespace ET.Server
                 return;
             }
 
-            BuffData buffData = new BuffData();
-            buffData.SkillConfigId = self.SkillConfig.Id;
-            buffData.BuffConfigId = buffConfig.Id;
-            uu.GetComponent<BuffManagerComponentS>().BuffFactory(buffData, self.TheUnitFrom, self);
+            InitBuffData initBuffData = new InitBuffData();
+            initBuffData.SkillConfigId = self.SkillConfig.Id;
+            initBuffData.BuffConfigId = buffConfig.Id;
+            uu.GetComponent<BuffManagerComponentS>().BuffFactory(initBuffData, self.TheUnitFrom, self);
         }
 
         public static Shape CreateCheckShape(this SkillS self, int targetAngle)

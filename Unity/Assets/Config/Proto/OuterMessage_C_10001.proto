@@ -752,12 +752,19 @@ message M2C_TryUseSkill // ILocationResponse
 message M2C_OnUseSkill // IMessage
 {
 	int64 UnitId = 1;
-	int32 SkillConfigId = 2;
-	int64 TargetId = 3;
-	float Angle = 4;
-	Unity.Mathematics.float3 Position = 5;
-	float CD = 6;
-	float PublicCD = 7;
+	int64 SkillId = 2;
+	int32 SkillConfigId = 3;
+	int64 TargetId = 4;
+	float Angle = 5;
+	Unity.Mathematics.float3 Position = 6;
+	float CD = 7;
+	float PublicCD = 8;
+}
+
+message M2C_UnitSkillRemove // IMessage
+{
+	int64 UnitId = 1;
+	int64 SkillId = 2;
 }
 
 message M2C_UnitFinishSkill // IMessage
@@ -767,22 +774,23 @@ message M2C_UnitFinishSkill // IMessage
 
 message M2C_UnitBuffUpdate // IMessage
 {
-	int32 BuffID = 1;
-	int64 UnitIdBelongTo = 2;
+	int64 UnitId = 1;
+	int64 BuffId = 2;
+	int32 BuffConfigId = 3;
 	int32 BuffOperateType = 4; //1新增  2移除 3重置
 	repeated float TargetPostion = 5;
 	float BuffEndTime = 6;
 	string Spellcaster = 7;
 	int32 UnitType = 8;
 	int32 UnitConfigId = 9;
-	int32 SkillId = 10;
+	int32 SkillConfigId = 10;
 	int64 UnitIdFrom = 11;
 }
 
 message M2C_UnitBuffRemove // IMessage
 {
-	int32 BuffID = 1;
-	int64 UnitIdBelongTo = 2;
+	int64 UnitId = 1;
+	int64 BuffId = 2;
 }
 
 message M2C_UnitStateUpdate // IMessage

@@ -16,7 +16,7 @@ namespace ET.Client
     {
         public EffectState EffectState { get; set; }
         public EffectConfig EffectConfig { get; set; }
-        public EffectData EffectData { get; set; }
+        public InitEffectData InitEffectData { get; set; }
 
         private EntityRef<Unit> theUnitBelongTo;
 

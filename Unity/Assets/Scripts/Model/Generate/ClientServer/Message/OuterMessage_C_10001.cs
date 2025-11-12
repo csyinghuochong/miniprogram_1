@@ -3420,21 +3420,24 @@ namespace ET
         public long UnitId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int SkillConfigId { get; set; }
+        public long SkillId { get; set; }
 
         [MemoryPackOrder(2)]
-        public long TargetId { get; set; }
+        public int SkillConfigId { get; set; }
 
         [MemoryPackOrder(3)]
-        public float Angle { get; set; }
+        public long TargetId { get; set; }
 
         [MemoryPackOrder(4)]
-        public Unity.Mathematics.float3 Position { get; set; }
+        public float Angle { get; set; }
 
         [MemoryPackOrder(5)]
-        public float CD { get; set; }
+        public Unity.Mathematics.float3 Position { get; set; }
 
         [MemoryPackOrder(6)]
+        public float CD { get; set; }
+
+        [MemoryPackOrder(7)]
         public float PublicCD { get; set; }
 
         public override void Dispose()
@@ -3445,12 +3448,42 @@ namespace ET
             }
 
             this.UnitId = default;
+            this.SkillId = default;
             this.SkillConfigId = default;
             this.TargetId = default;
             this.Angle = default;
             this.Position = default;
             this.CD = default;
             this.PublicCD = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_UnitSkillRemove)]
+    public partial class M2C_UnitSkillRemove : MessageObject, IMessage
+    {
+        public static M2C_UnitSkillRemove Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_UnitSkillRemove), isFromPool) as M2C_UnitSkillRemove;
+        }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long SkillId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitId = default;
+            this.SkillId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -3491,10 +3524,13 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public int BuffID { get; set; }
+        public long UnitId { get; set; }
 
         [MemoryPackOrder(1)]
-        public long UnitIdBelongTo { get; set; }
+        public long BuffId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int BuffConfigId { get; set; }
 
         /// <summary>
         /// 1新增  2移除 3重置
@@ -3518,7 +3554,7 @@ namespace ET
         public int UnitConfigId { get; set; }
 
         [MemoryPackOrder(9)]
-        public int SkillId { get; set; }
+        public int SkillConfigId { get; set; }
 
         [MemoryPackOrder(10)]
         public long UnitIdFrom { get; set; }
@@ -3530,15 +3566,16 @@ namespace ET
                 return;
             }
 
-            this.BuffID = default;
-            this.UnitIdBelongTo = default;
+            this.UnitId = default;
+            this.BuffId = default;
+            this.BuffConfigId = default;
             this.BuffOperateType = default;
             this.TargetPostion.Clear();
             this.BuffEndTime = default;
             this.Spellcaster = default;
             this.UnitType = default;
             this.UnitConfigId = default;
-            this.SkillId = default;
+            this.SkillConfigId = default;
             this.UnitIdFrom = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -3555,10 +3592,10 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public int BuffID { get; set; }
+        public long UnitId { get; set; }
 
         [MemoryPackOrder(1)]
-        public long UnitIdBelongTo { get; set; }
+        public long BuffId { get; set; }
 
         public override void Dispose()
         {
@@ -3567,8 +3604,8 @@ namespace ET
                 return;
             }
 
-            this.BuffID = default;
-            this.UnitIdBelongTo = default;
+            this.UnitId = default;
+            this.BuffId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -3925,15 +3962,16 @@ namespace ET
         public const ushort C2M_TryUseSkill = 10092;
         public const ushort M2C_TryUseSkill = 10093;
         public const ushort M2C_OnUseSkill = 10094;
-        public const ushort M2C_UnitFinishSkill = 10095;
-        public const ushort M2C_UnitBuffUpdate = 10096;
-        public const ushort M2C_UnitBuffRemove = 10097;
-        public const ushort M2C_UnitStateUpdate = 10098;
-        public const ushort TaskProInfo = 10099;
-        public const ushort C2M_GetAllTask = 10100;
-        public const ushort M2C_GetAllTask = 10101;
-        public const ushort M2C_TaskUpdate = 10102;
-        public const ushort C2M_TaskCommit = 10103;
-        public const ushort M2C_TaskCommit = 10104;
+        public const ushort M2C_UnitSkillRemove = 10095;
+        public const ushort M2C_UnitFinishSkill = 10096;
+        public const ushort M2C_UnitBuffUpdate = 10097;
+        public const ushort M2C_UnitBuffRemove = 10098;
+        public const ushort M2C_UnitStateUpdate = 10099;
+        public const ushort TaskProInfo = 10100;
+        public const ushort C2M_GetAllTask = 10101;
+        public const ushort M2C_GetAllTask = 10102;
+        public const ushort M2C_TaskUpdate = 10103;
+        public const ushort C2M_TaskCommit = 10104;
+        public const ushort M2C_TaskCommit = 10105;
     }
 }
