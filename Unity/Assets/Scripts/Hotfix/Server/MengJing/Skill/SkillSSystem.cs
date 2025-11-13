@@ -86,33 +86,33 @@ namespace ET.Server
             //1：自身
             //2：队友
             //3: 敌方
-            // bool canBuff = false;
-            // switch (buffConfig.TargetType)
-            // {
-            //     case 1:
-            //     {
-            //         canBuff = uu.Id == self.TheUnitFrom.Id;
-            //
-            //         break;
-            //     }
-            //     case 2:
-            //     {
-            //         canBuff = self.TheUnitFrom.IsTeam(uu);
-            //
-            //         break;
-            //     }
-            //     case 3:
-            //     {
-            //         canBuff = self.TheUnitFrom.IsCanAttackUnit(uu);
-            //
-            //         break;
-            //     }
-            // }
-            //
-            // if (!canBuff)
-            // {
-            //     return;
-            // }
+            bool canBuff = false;
+            switch (buffConfig.TargetType)
+            {
+                case 1:
+                {
+                    canBuff = uu.Id == self.TheUnitFrom.Id;
+            
+                    break;
+                }
+                case 2:
+                {
+                    canBuff = self.TheUnitFrom.IsTeam(uu);
+            
+                    break;
+                }
+                case 3:
+                {
+                    canBuff = self.TheUnitFrom.IsCanAttackUnit(uu);
+            
+                    break;
+                }
+            }
+            
+            if (!canBuff)
+            {
+                return;
+            }
 
             InitBuffData initBuffData = new InitBuffData();
             initBuffData.SkillConfigId = self.SkillConfig.Id;

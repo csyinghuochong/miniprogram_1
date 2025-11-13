@@ -115,6 +115,7 @@ namespace ET.Server
 
                     break;
                 }
+                // 移除状态
                 case 2:
                 {
                     buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeRemove((StateType)buff.BuffConfig.BuffParameterType);

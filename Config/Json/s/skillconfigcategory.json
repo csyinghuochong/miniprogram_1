@@ -295,7 +295,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_BuffFriendly",
+    "SkillHandler": "Skill_AddBuff",
     "GameObjectParameter": "",
     "UnlockStar": 0,
     "SkillType": 1,
@@ -311,7 +311,7 @@
     "SkillTargetType": 0,
     "DamageRangeType": 1,
     "DamageRange": [
-      3
+      6
     ],
     "Speed": 0,
     "SkillEffectID": 0,

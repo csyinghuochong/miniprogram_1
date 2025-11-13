@@ -1,6 +1,6 @@
 namespace ET.Client
 {
-    public class Skill_BuffFriendly : SkillHandlerC
+    public class Skill_AddBuff : SkillHandlerC
     {
         public override void OnInit(SkillC skill)
         {

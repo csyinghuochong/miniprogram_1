@@ -7,7 +7,7 @@ namespace ET.Server
     /// 给周围友方单位添加Buff
     /// DamageRange
     /// </summary>
-    public class Skill_BuffFriendly : SkillHandlerS
+    public class Skill_AddBuff : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
@@ -19,12 +19,17 @@ namespace ET.Server
 
         public override void OnUpdate(SkillS skill, float deltaTime)
         {
+            foreach (int id in skill.SkillConfig.InitBuffID)
+            {
+                skill.SkillBuff(id, skill.TheUnitFrom);
+            }
+
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Unit defendUnit = entities[i];
 
-                if (!UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit))
+                if (defendUnit.Id == skill.TheUnitFrom.Id)
                 {
                     continue;
                 }
@@ -35,9 +40,9 @@ namespace ET.Server
                     continue;
                 }
 
-                for (int j = 0; j < skill.SkillConfig.BuffID.Length; j++)
+                foreach (int id in skill.SkillConfig.BuffID)
                 {
-                    skill.SkillBuff(skill.SkillConfig.BuffID[j], defendUnit);
+                    skill.SkillBuff(id, defendUnit);
                 }
             }
 
