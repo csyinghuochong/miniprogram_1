@@ -97,13 +97,29 @@ namespace ET.Client
 
                     gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
-                    gameObject.GetComponent<TMP_Text>().text = text;
-                    gameObject.transform.localPosition = head.localPosition;
 
-                    Sequence seq = DOTween.Sequence();
-                    seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
-                            // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
-                            .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    Transform textTransform = gameObject.transform.Find("Text");
+                    if (textTransform != null)
+                    {
+                        textTransform.GetComponent<TMP_Text>().text = text;
+                    }
+
+                    gameObject.transform.position = head.position;
+
+                    if (textTransform != null)
+                    {
+                        textTransform.localPosition = Vector3.zero;
+                        Sequence seq = DOTween.Sequence();
+                        seq.Append(textTransform.DOLocalMoveY(100f, 1.0f).SetEase(Ease.OutQuad))
+                                .OnUpdate(() =>
+                                {
+                                    if (gameObject != null && head != null)
+                                    {
+                                        gameObject.transform.position = head.position;
+                                    }
+                                })
+                                .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    }
                 });
         }
 
@@ -125,13 +141,29 @@ namespace ET.Client
 
                     gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
-                    gameObject.GetComponent<TMP_Text>().text = text;
-                    gameObject.transform.localPosition = head.localPosition;
 
-                    Sequence seq = DOTween.Sequence();
-                    seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
-                            // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
-                            .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    Transform textTransform = gameObject.transform.Find("Text");
+                    if (textTransform != null)
+                    {
+                        textTransform.GetComponent<TMP_Text>().text = text;
+                    }
+
+                    gameObject.transform.position = head.position;
+
+                    if (textTransform != null)
+                    {
+                        textTransform.localPosition = Vector3.zero;
+                        Sequence seq = DOTween.Sequence();
+                        seq.Append(textTransform.DOLocalMoveY(100f, 1.0f).SetEase(Ease.OutQuad))
+                                .OnUpdate(() =>
+                                {
+                                    if (gameObject != null && head != null)
+                                    {
+                                        gameObject.transform.position = head.position;
+                                    }
+                                })
+                                .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    }
                 });
         }
 
@@ -153,13 +185,29 @@ namespace ET.Client
 
                     gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
-                    gameObject.GetComponent<TMP_Text>().text = text;
-                    gameObject.transform.localPosition = head.localPosition;
 
-                    Sequence seq = DOTween.Sequence();
-                    seq.Append(gameObject.transform.DOLocalMoveY(gameObject.transform.localPosition.y + 100f, 1.0f).SetEase(Ease.OutQuad))
-                            // .Join(gameObject.GetComponent<TMP_Text>().DOFade(0, 1.0f))
-                            .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    Transform textTransform = gameObject.transform.Find("Text");
+                    if (textTransform != null)
+                    {
+                        textTransform.GetComponent<TMP_Text>().text = text;
+                    }
+
+                    gameObject.transform.position = head.position;
+
+                    if (textTransform != null)
+                    {
+                        textTransform.localPosition = Vector3.zero;
+                        Sequence seq = DOTween.Sequence();
+                        seq.Append(textTransform.DOLocalMoveY(100f, 1.0f).SetEase(Ease.OutQuad))
+                                .OnUpdate(() =>
+                                {
+                                    if (gameObject != null && head != null)
+                                    {
+                                        gameObject.transform.position = head.position;
+                                    }
+                                })
+                                .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    }
                 });
         }
 
