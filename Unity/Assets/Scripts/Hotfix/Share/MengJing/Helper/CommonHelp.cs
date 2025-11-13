@@ -52,7 +52,7 @@ namespace ET
             return dateTime.Year * 10000 + dateTime.Month * 100 + dateTime.Day;
         }
 
-        // 计算英雄的各种属性、战斗力
+        // 计算英雄属性、战斗力
         public static Dictionary<int, long> CalculateHeroNumeric(Hero hero, List<Item> equipments)
         {
             Dictionary<int, long> numericDic = new Dictionary<int, long>();
@@ -62,6 +62,7 @@ namespace ET
             long base_MaxHp = heroConfig.BaseHp;
             long base_MinAct = heroConfig.BaseAct;
             long base_MaxAct = heroConfig.BaseAct;
+            long base_MageAct = heroConfig.BaseMage;
             long base_MinDef = heroConfig.BaseDef;
             long base_MaxDef = heroConfig.BaseDef;
             long base_MinAdf = heroConfig.BaseAdf;
@@ -138,6 +139,7 @@ namespace ET
             numericDic.Add(NumericType.Base_MaxHp_Base, base_MaxHp);
             numericDic.Add(NumericType.Base_MinAct_Base, base_MinAct);
             numericDic.Add(NumericType.Base_MaxAct_Base, base_MaxAct);
+            numericDic.Add(NumericType.Base_Mage_Base, base_MageAct);
             numericDic.Add(NumericType.Base_MinDef_Base, base_MinDef);
             numericDic.Add(NumericType.Base_MaxDef_Base, base_MaxDef);
             numericDic.Add(NumericType.Base_MinAdf_Base, base_MaxAdf);

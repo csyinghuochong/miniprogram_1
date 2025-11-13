@@ -19,9 +19,10 @@
     public enum DamageType
     {
         None = 0,
-        Normal = 1, //普通伤害
-        Critical = 2, //暴击
-        Dodge = 3, //闪避
-        Recover = 4 //恢复
+        Physical = 1, //物理伤害
+        Magic = 2, //法术伤害
+        Critical = 3, //暴击
+        Dodge = 4, //闪避
+        Recover = 5 //恢复
     }
 }

@@ -48,19 +48,20 @@ namespace ET.Client
                 return;
             }
 
-            if (args.DamageType == DamageType.Normal)
+            switch (args.DamageType)
             {
-                unit.Root().GetComponent<FloatingTextComponent>().ShowDamageText((args.OldValue - args.NewValue).ToString(), head);
-            }
-
-            if (args.DamageType == DamageType.Critical)
-            {
-                unit.Root().GetComponent<FloatingTextComponent>().ShowCriDamageText((args.OldValue - args.NewValue).ToString(), head);
-            }
-
-            if (args.DamageType == DamageType.Recover)
-            {
-                unit.Root().GetComponent<FloatingTextComponent>().ShowRecoverText((args.NewValue - args.OldValue).ToString(), head);
+                case DamageType.Physical:
+                    unit.Root().GetComponent<FloatingTextComponent>().ShowPhysicalDamageText((args.OldValue - args.NewValue).ToString(), head);
+                    break;
+                case DamageType.Magic:
+                    unit.Root().GetComponent<FloatingTextComponent>().ShowMagicDamageText((args.OldValue - args.NewValue).ToString(), head);
+                    break;
+                case DamageType.Critical:
+                    unit.Root().GetComponent<FloatingTextComponent>().ShowCriDamageText((args.OldValue - args.NewValue).ToString(), head);
+                    break;
+                case DamageType.Recover:
+                    unit.Root().GetComponent<FloatingTextComponent>().ShowRecoverText((args.NewValue - args.OldValue).ToString(), head);
+                    break;
             }
         }
     }
@@ -79,9 +80,53 @@ namespace ET.Client
         {
         }
 
-        public static void ShowDamageText(this FloatingTextComponent self, string text, Transform head)
+        public static void ShowPhysicalDamageText(this FloatingTextComponent self, string text, Transform head)
         {
-            string path = "Assets/Bundles/UI/Blood/Text_Damage.prefab";
+            string path = "Assets/Bundles/UI/Blood/Text_PhysicalDamage.prefab";
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
+                (gameObject, instanceId) =>
+                {
+                    if (instanceId != self.InstanceId)
+                    {
+                        if (gameObject != null)
+                        {
+                            UnityEngine.Object.DestroyImmediate(gameObject);
+                        }
+
+                        return;
+                    }
+
+                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.localScale = Vector3.one;
+
+                    Transform textTransform = gameObject.transform.Find("Text");
+                    if (textTransform != null)
+                    {
+                        textTransform.GetComponent<TMP_Text>().text = text;
+                    }
+
+                    gameObject.transform.position = head.position;
+
+                    if (textTransform != null)
+                    {
+                        textTransform.localPosition = Vector3.zero;
+                        Sequence seq = DOTween.Sequence();
+                        seq.Append(textTransform.DOLocalMoveY(100f, 1.0f).SetEase(Ease.OutQuad))
+                                .OnUpdate(() =>
+                                {
+                                    if (gameObject != null && head != null)
+                                    {
+                                        gameObject.transform.position = head.position;
+                                    }
+                                })
+                                .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    }
+                });
+        }
+
+        public static void ShowMagicDamageText(this FloatingTextComponent self, string text, Transform head)
+        {
+            string path = "Assets/Bundles/UI/Blood/Text_MagicDamage.prefab";
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
                 (gameObject, instanceId) =>
                 {

@@ -28,6 +28,7 @@ namespace ET
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
             BaseHp = _buf.ReadInt();
             BaseAct = _buf.ReadInt();
+            BaseMage = _buf.ReadInt();
             BaseDef = _buf.ReadInt();
             BaseAdf = _buf.ReadInt();
             BaseCri = _buf.ReadLong();
@@ -111,6 +112,11 @@ namespace ET
         /// 攻击
         /// </summary>
         public readonly int BaseAct;
+
+        /// <summary>
+        /// 法强
+        /// </summary>
+        public readonly int BaseMage;
 
         /// <summary>
         /// 物防
@@ -220,6 +226,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -237,6 +244,7 @@ namespace ET
             + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
             + "BaseHp:" + BaseHp + ","
             + "BaseAct:" + BaseAct + ","
+            + "BaseMage:" + BaseMage + ","
             + "BaseDef:" + BaseDef + ","
             + "BaseAdf:" + BaseAdf + ","
             + "BaseCri:" + BaseCri + ","

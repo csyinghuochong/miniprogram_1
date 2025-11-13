@@ -73,7 +73,7 @@ namespace ET.Server
                         }
                         else
                         {
-                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Normal);
+                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Physical);
                         }
                     }
 

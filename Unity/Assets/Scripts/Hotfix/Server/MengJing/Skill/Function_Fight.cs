@@ -57,7 +57,21 @@ namespace ET.Server
             // ...
 
             // 计算伤害
-            long damage = attack_MaxAct + skillConfig.DamgeValue;
+            long damage = 0;
+            DamageType damageType = DamageType.None;
+            if (skillConfig.DamageType == 1)
+            {
+                // 物理伤害
+                damage = (long)(attack_MaxAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
+                damageType = DamageType.Physical;
+            }
+            else
+            {
+                // 法术伤害
+                damage = (long)(attack_MageAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
+                damageType = DamageType.Magic;
+            }
+            
             if (damage <= 0)
             {
                 return false;
@@ -67,7 +81,7 @@ namespace ET.Server
             defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);
 
             // 结算伤害
-            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage, true, false, attackUnit.Id, skillConfig.Id, DamageType.Normal);
+            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage, true, false, attackUnit.Id, skillConfig.Id, damageType);
 
             return true;
         }
