@@ -3,6 +3,6 @@
     [ComponentOf(typeof(Unit))]
     public class StateComponentC : Entity, IAwake
     {
-        public long CurrentStateType;
+        public StateType CurrentStateType;
     }
 }

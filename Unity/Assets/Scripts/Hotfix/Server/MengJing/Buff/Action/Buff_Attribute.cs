@@ -52,25 +52,38 @@ namespace ET.Server
 
         private void TriggerBuffEffect(BuffS buff, NumericComponentS numericComponent)
         {
-            if (buff.BuffConfig.BuffType == 1)
+            switch (buff.BuffConfig.BuffType)
             {
-                int type = buff.BuffConfig.BuffParameterType;
-                long value = buff.BuffConfig.BuffParameterValue;
-                if (buff.BuffConfig.BuffParameterValueType != 0)
+                // 属性
+                case 1:
                 {
-                    value = (long)(numericComponent.GetAsLong(buff.BuffConfig.BuffParameterValueType) * (value / 10000f));
-                }
+                    int type = buff.BuffConfig.BuffParameterType;
+                    long value = buff.BuffConfig.BuffParameterValue;
+                    // x属性值
+                    if (buff.BuffConfig.BuffParameterValueType != 0)
+                    {
+                        value = (long)(numericComponent.GetAsLong(buff.BuffConfig.BuffParameterValueType) * (value / 10000f));
+                    }
 
-                if (value != 0)
+                    if (value != 0)
+                    {
+                        if (type == NumericType.Now_Hp)
+                        {
+                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
+                        }
+                        else
+                        {
+                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Normal);
+                        }
+                    }
+
+                    break;
+                }
+                // 状态
+                case 2:
                 {
-                    if (type == NumericType.Now_Hp)
-                    {
-                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
-                    }
-                    else
-                    {
-                        numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Normal);
-                    }
+                    buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeAdd((StateType)buff.BuffConfig.BuffParameterType);
+                    break;
                 }
             }
         }
@@ -82,20 +95,30 @@ namespace ET.Server
                 return;
             }
 
-            // 移除属性
-            if (buff.BuffConfig.BuffType == 1)
+            switch (buff.BuffConfig.BuffType)
             {
-                NumericComponentS numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponentS>();
-
-                int type = buff.BuffConfig.BuffParameterType;
-                long value = buff.BuffConfig.BuffParameterValue;
-
-                if (value != 0)
+                // 移除属性
+                case 1:
                 {
-                    if (type > 100000)
+                    NumericComponentS numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponentS>();
+
+                    int type = buff.BuffConfig.BuffParameterType;
+                    long value = buff.BuffConfig.BuffParameterValue;
+
+                    if (value != 0)
                     {
-                        numericComponent.ApplyChange(type, value * -1);
+                        if (type > 100000)
+                        {
+                            numericComponent.ApplyChange(type, value * -1);
+                        }
                     }
+
+                    break;
+                }
+                case 2:
+                {
+                    buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeRemove((StateType)buff.BuffConfig.BuffParameterType);
+                    break;
                 }
             }
         }

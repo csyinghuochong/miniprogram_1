@@ -16,14 +16,14 @@ namespace ET.Server
     public struct StateTypeAdd
     {
         public Unit UnitDefend;
-        public long nowStateType;
+        public StateType nowStateType;
         public string stateValue;
     }
 
     public struct StateTypeRemove
     {
         public Unit UnitDefend;
-        public long nowStateType;
+        public StateType nowStateType;
         public string stateValue;
     }
 

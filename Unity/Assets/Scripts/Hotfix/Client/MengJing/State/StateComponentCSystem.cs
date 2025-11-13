@@ -7,28 +7,28 @@
         [EntitySystem]
         private static void Awake(this StateComponentC self)
         {
-            self.CurrentStateType = StateTypeEnum.None;
+            self.CurrentStateType = StateType.None;
         }
 
         public static void Reset(this StateComponentC self)
         {
-            self.CurrentStateType = StateTypeEnum.None;
+            self.CurrentStateType = StateType.None;
         }
 
-        public static void StateTypeAdd(this StateComponentC self, long nowStateType)
+        public static void StateTypeAdd(this StateComponentC self, StateType nowStateType)
         {
             Unit unit = self.GetParent<Unit>();
             self.CurrentStateType = self.CurrentStateType | nowStateType;
         }
 
-        public static void StateTypeRemove(this StateComponentC self, long nowStateType)
+        public static void StateTypeRemove(this StateComponentC self, StateType nowStateType)
         {
             self.CurrentStateType = self.CurrentStateType & ~nowStateType;
         }
 
-        public static bool StateTypeGet(this StateComponentC self, long nowStateType)
+        public static bool StateTypeGet(this StateComponentC self, StateType nowStateType)
         {
-            long state = (self.CurrentStateType & nowStateType);
+            StateType state = (self.CurrentStateType & nowStateType);
 
             if (state > 0)
             {

@@ -13,7 +13,7 @@ namespace ET.Server
             if (stateComponent.IsStateBroadcastType(args.nowStateType))
             {
                 M2C_UnitStateUpdate.UnitId = unit.Id;
-                M2C_UnitStateUpdate.StateType = args.nowStateType;
+                M2C_UnitStateUpdate.StateType = (long)args.nowStateType;
                 M2C_UnitStateUpdate.StateValue = args.stateValue;
                 M2C_UnitStateUpdate.StateOperateType = 1;
                 M2C_UnitStateUpdate.StateTime = 0;
@@ -24,7 +24,7 @@ namespace ET.Server
                 if (unit.Type == UnitType.Player)
                 {
                     M2C_UnitStateUpdate.UnitId = unit.Id;
-                    M2C_UnitStateUpdate.StateType = args.nowStateType;
+                    M2C_UnitStateUpdate.StateType = (long)args.nowStateType;
                     M2C_UnitStateUpdate.StateOperateType = 1;
                     M2C_UnitStateUpdate.StateTime = 0;
 
