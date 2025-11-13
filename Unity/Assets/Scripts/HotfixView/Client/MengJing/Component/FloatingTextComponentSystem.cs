@@ -62,6 +62,9 @@ namespace ET.Client
                 case DamageType.Recover:
                     unit.Root().GetComponent<FloatingTextComponent>().ShowRecoverText((args.NewValue - args.OldValue).ToString(), head);
                     break;
+                case DamageType.Immune:
+                    unit.Root().GetComponent<FloatingTextComponent>().ShowNormalText("免疫", head);
+                    break;
             }
         }
     }
@@ -102,7 +105,7 @@ namespace ET.Client
                     Transform textTransform = gameObject.transform.Find("Text");
                     if (textTransform != null)
                     {
-                        textTransform.GetComponent<TMP_Text>().text = text;
+                        textTransform.GetComponent<TMP_Text>().SetText(text);
                     }
 
                     gameObject.transform.position = head.position;
@@ -146,7 +149,7 @@ namespace ET.Client
                     Transform textTransform = gameObject.transform.Find("Text");
                     if (textTransform != null)
                     {
-                        textTransform.GetComponent<TMP_Text>().text = text;
+                        textTransform.GetComponent<TMP_Text>().SetText(text);
                     }
 
                     gameObject.transform.position = head.position;
@@ -190,7 +193,7 @@ namespace ET.Client
                     Transform textTransform = gameObject.transform.Find("Text");
                     if (textTransform != null)
                     {
-                        textTransform.GetComponent<TMP_Text>().text = text;
+                        textTransform.GetComponent<TMP_Text>().SetText(text);
                     }
 
                     gameObject.transform.position = head.position;
@@ -234,7 +237,51 @@ namespace ET.Client
                     Transform textTransform = gameObject.transform.Find("Text");
                     if (textTransform != null)
                     {
-                        textTransform.GetComponent<TMP_Text>().text = text;
+                        textTransform.GetComponent<TMP_Text>().SetText(text);
+                    }
+
+                    gameObject.transform.position = head.position;
+
+                    if (textTransform != null)
+                    {
+                        textTransform.localPosition = Vector3.zero;
+                        Sequence seq = DOTween.Sequence();
+                        seq.Append(textTransform.DOLocalMoveY(100f, 1.0f).SetEase(Ease.OutQuad))
+                                .OnUpdate(() =>
+                                {
+                                    if (gameObject != null && head != null)
+                                    {
+                                        gameObject.transform.position = head.position;
+                                    }
+                                })
+                                .OnComplete(() => { self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, gameObject); });
+                    }
+                });
+        }
+
+        public static void ShowNormalText(this FloatingTextComponent self, string text, Transform head)
+        {
+            string path = "Assets/Bundles/UI/Blood/Text_Normal.prefab";
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,
+                (gameObject, instanceId) =>
+                {
+                    if (instanceId != self.InstanceId)
+                    {
+                        if (gameObject != null)
+                        {
+                            UnityEngine.Object.DestroyImmediate(gameObject);
+                        }
+
+                        return;
+                    }
+
+                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.localScale = Vector3.one;
+
+                    Transform textTransform = gameObject.transform.Find("Text");
+                    if (textTransform != null)
+                    {
+                        textTransform.GetComponent<TMP_Text>().SetText(text);
                     }
 
                     gameObject.transform.position = head.position;
@@ -274,7 +321,7 @@ namespace ET.Client
 
                     gameObject.transform.SetParent(GlobalComponent.Instance.PopUpRoot);
                     gameObject.transform.localScale = Vector3.one;
-                    gameObject.GetComponent<TMP_Text>().text = text;
+                    gameObject.GetComponent<TMP_Text>().SetText(text);
                     gameObject.transform.localPosition = Vector3.zero;
 
                     Sequence seq = DOTween.Sequence();

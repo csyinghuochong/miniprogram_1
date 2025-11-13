@@ -69,11 +69,11 @@ namespace ET.Server
                     {
                         if (type == NumericType.Now_Hp)
                         {
-                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
+                            numericComponent.ApplyChange(type, value, true, true, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
                         }
                         else
                         {
-                            numericComponent.ApplyChange(type, value, true, false, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Physical);
+                            numericComponent.ApplyChange(type, value, true, true, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Physical);
                         }
                     }
 

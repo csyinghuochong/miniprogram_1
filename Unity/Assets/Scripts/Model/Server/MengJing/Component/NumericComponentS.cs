@@ -183,17 +183,10 @@ namespace ET.Server
         /// <summary>
         /// 传入改变值,设置当前的属性值, 不走公式，一定会广播给客户端
         /// </summary>
-        /// <param name="self"></param>
-        /// <param name="attack"></param>
-        /// <param name="numericType"></param>
-        /// <param name="changedValue">变化值</param>
-        /// <param name="skillID"></param>
-        /// <param name="notice"></param>
-        /// <param name="DamgeType"></param>
         public static void ApplyChange(this NumericComponentS self, int numericType, long changedValue, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, DamageType damgeType = 0)
         {
             //改变值为0不做任何处理
-            if (changedValue == 0)
+            if (check && changedValue == 0)
             {
                 return;
             }
@@ -211,7 +204,7 @@ namespace ET.Server
             }
 
             long newvalue = self.GetAsLong(numericType) + changedValue;
-            self.ApplyValue(numericType, newvalue, notice, true, attackid, skillId, damgeType);
+            self.ApplyValue(numericType, newvalue, notice, check, attackid, skillId, damgeType);
         }
     }
 

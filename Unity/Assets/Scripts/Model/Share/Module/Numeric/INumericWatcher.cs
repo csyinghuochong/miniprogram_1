@@ -23,6 +23,7 @@
         Magic = 2, //法术伤害
         Critical = 3, //暴击
         Dodge = 4, //闪避
-        Recover = 5 //恢复
+        Recover = 5, //恢复
+        Immune = 6, //免疫
     }
 }

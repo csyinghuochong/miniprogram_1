@@ -64,17 +64,19 @@ namespace ET.Server
                 // 物理伤害
                 damage = (long)(attack_MaxAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
                 damageType = DamageType.Physical;
+
+                // 免疫物理伤害
+                if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateType.PhysicalImmune))
+                {
+                    damage = 0;
+                    damageType = DamageType.Immune;
+                }
             }
             else
             {
                 // 法术伤害
                 damage = (long)(attack_MageAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
                 damageType = DamageType.Magic;
-            }
-            
-            if (damage <= 0)
-            {
-                return false;
             }
 
             // AI

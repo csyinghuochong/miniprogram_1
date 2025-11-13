@@ -311,7 +311,7 @@
     "SkillTargetType": 0,
     "DamageRangeType": 1,
     "DamageRange": [
-      6
+      8
     ],
     "Speed": 0,
     "SkillEffectID": 0,
