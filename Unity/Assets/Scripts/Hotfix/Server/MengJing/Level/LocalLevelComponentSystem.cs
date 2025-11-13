@@ -69,7 +69,7 @@ namespace ET.Server
 
             self.SpawnedMonsterIndex++;
 
-            float2 position = new float2(monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
+            float2 position = new float2(self.MainUnit.Position.x + monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
             UnitFactory.CreateMonster(self.Scene(), monsterSpawnInfo.MonsterId, position);
         }
 
@@ -142,6 +142,19 @@ namespace ET.Server
             WaveConfig nextWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[numericComponent.GetAsInt(NumericType.CurrentWaveIndex)]);
             if (nextWaveConfig.HaveBoss)
             {
+                //传送到Boss房间
+                self.LastPlayerPosition = self.MainUnit.Position; //记录玩家在关卡中的位置，打完Boss后返回
+                self.MainUnit.Position = new float3(500f, 0f, 0f);
+                self.MainUnit.Stop();
+                foreach (Unit unit in self.Scene().GetComponent<UnitComponent>().GetAll())
+                {
+                    if (unit.Type == UnitType.Hero)
+                    {
+                        unit.Position = self.MainUnit.Position + (unit.Position - self.LastPlayerPosition);
+                        unit.Stop();
+                    }
+                }
+
                 numericComponent.ApplyChange(NumericType.CurrentWaveIndex, 1);
                 numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
                 self.SpawnedMonsterIndex = 0;

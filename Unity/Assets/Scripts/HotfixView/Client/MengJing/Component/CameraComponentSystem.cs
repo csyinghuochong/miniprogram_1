@@ -12,7 +12,7 @@ namespace ET.Client
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            self.MainCamera.orthographicSize = 20f;
+            self.MainCamera.orthographicSize = 25f;
         }
 
         [EntitySystem]

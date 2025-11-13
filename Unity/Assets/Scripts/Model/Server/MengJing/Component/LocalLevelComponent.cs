@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -14,5 +15,7 @@ namespace ET.Server
         public bool WaitPlayerEnterBossRoom;
         public int SpawnedMonsterIndex;
         public float SpawnTime;
+
+        public float3 LastPlayerPosition;
     }
 }
