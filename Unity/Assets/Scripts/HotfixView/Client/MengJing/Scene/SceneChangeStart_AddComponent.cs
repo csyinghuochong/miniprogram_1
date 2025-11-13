@@ -9,6 +9,15 @@ namespace ET.Client
         {
             try
             {
+                if (args.SceneType == MapTypeEnum.LocalLevel)
+                {
+                    GlobalComponent.Instance.ViewMode = 1;
+                }
+                else
+                {
+                    GlobalComponent.Instance.ViewMode = 0;
+                }
+                
                 root.GetComponent<SceneManagerComponent>().BeforeChangeScene();
 
                 UI ui = await root.GetComponent<UIComponent>().Create(UIType.UILoading);

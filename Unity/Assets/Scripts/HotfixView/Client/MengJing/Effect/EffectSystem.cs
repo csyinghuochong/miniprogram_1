@@ -108,7 +108,14 @@ namespace ET.Client
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
 
                     float angle = self.InitEffectData.EffectAngle != 0 ? self.InitEffectData.EffectAngle : self.InitEffectData.TargetAngle;
-                    self.EffectObj.transform.position = new Vector3(self.InitEffectData.EffectPosition.x, self.InitEffectData.EffectPosition.y, self.InitEffectData.EffectPosition.y);
+                    if (GlobalComponent.Instance.ViewMode == 0)
+                    {
+                        self.EffectObj.transform.position = new Vector3(self.InitEffectData.EffectPosition.x, self.InitEffectData.EffectPosition.y, self.InitEffectData.EffectPosition.y);
+                    }
+                    else
+                    {
+                        self.EffectObj.transform.position = new Vector3(self.InitEffectData.EffectPosition.x, self.InitEffectData.EffectPosition.y, 0);
+                    }
                     // self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
 
                     self.EffectObj.transform.localScale = Vector3.one;
@@ -142,7 +149,15 @@ namespace ET.Client
                 case 2:
                 {
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
-                    self.EffectObj.transform.position = new Vector3(self.TheUnitBelongTo.Position.x, self.TheUnitBelongTo.Position.y, self.TheUnitBelongTo.Position.y);
+                    if (GlobalComponent.Instance.ViewMode == 0)
+                    {
+                        self.EffectObj.transform.position = new Vector3(self.TheUnitBelongTo.Position.x, self.TheUnitBelongTo.Position.y, self.TheUnitBelongTo.Position.y);
+                    }
+                    else
+                    {
+                        self.EffectObj.transform.position = new Vector3(self.TheUnitBelongTo.Position.x, self.TheUnitBelongTo.Position.y, 0);
+                    }
+                    
                     self.EffectObj.transform.localScale = Vector3.one;
                     self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, self.InitEffectData.TargetAngle);
                     break;
@@ -168,7 +183,15 @@ namespace ET.Client
         {
             if (self.EffectObj == null)
             {
-                self.EffectPosition = new Vector3(vec3.x, vec3.y, vec3.y);
+                if (GlobalComponent.Instance.ViewMode == 0)
+                {
+                    self.EffectPosition = new Vector3(vec3.x, vec3.y, vec3.y);
+                }
+                else
+                {
+                    self.EffectPosition = new Vector3(vec3.x, vec3.y, 0);
+                }
+
                 self.EffectAngle = angle;
                 return;
             }

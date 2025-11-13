@@ -8,5 +8,6 @@ namespace ET.Client
         public Camera MainCamera;
         private EntityRef<Unit> lookAtUnit;
         public Unit LookAtUnit { get => this.lookAtUnit; set => this.lookAtUnit = value; }
+        public Vector3 Offset;
     }
 }

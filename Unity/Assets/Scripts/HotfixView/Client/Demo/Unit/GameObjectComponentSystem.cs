@@ -138,7 +138,16 @@ namespace ET.Client
         {
             if (self.GameObject != null)
             {
-                self.GameObject.transform.position = new Vector3(vector.x, vector.y, vector.y);
+                if (GlobalComponent.Instance.ViewMode == 0)
+                {
+                    self.GameObject.transform.position = new Vector3(vector.x, vector.y, vector.y);
+                    self.GameObject.transform.eulerAngles = Vector3.zero;
+                }
+                else
+                {
+                    self.GameObject.transform.position = new Vector3(vector.x, vector.y, 0);
+                    self.GameObject.transform.eulerAngles = new Vector3(-30f, 0, 0);
+                }
             }
         }
 
