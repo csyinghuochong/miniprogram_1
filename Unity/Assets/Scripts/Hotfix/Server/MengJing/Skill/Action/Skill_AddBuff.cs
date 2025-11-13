@@ -4,7 +4,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     /// <summary>
-    /// 给周围友方单位添加Buff
+    /// 给周围单位添加Buff
     /// DamageRange
     /// </summary>
     public class Skill_AddBuff : SkillHandlerS
