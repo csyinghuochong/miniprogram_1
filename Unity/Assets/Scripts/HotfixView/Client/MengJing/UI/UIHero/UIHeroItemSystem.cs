@@ -20,12 +20,22 @@ namespace ET.Client
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Transform_HeroStar = rc.Get<GameObject>("Transform_HeroStar").transform;
             self.Text_HeroCombatPower = rc.Get<GameObject>("Text_HeroCombatPower").GetComponent<TMP_Text>();
+            self.Slider_ShardNum = rc.Get<GameObject>("Slider_ShardNum").GetComponent<Slider>();
+            self.Text_ShardNum = rc.Get<GameObject>("Text_ShardNum").GetComponent<TMP_Text>();
+            self.Text_NotHave = rc.Get<GameObject>("Text_NotHave").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
         }
 
         public static async ETTask UpdateInfo(this UIHeroItem self, Hero hero)
         {
             self.HeroId = hero.Id;
+            
+            self.Transform_HeroStar.gameObject.SetActive(true);
+            self.Text_HeroCombatPower.gameObject.SetActive(true);
+            self.Slider_ShardNum.gameObject.SetActive(false);
+            self.Text_ShardNum.gameObject.SetActive(false);
+            self.Text_NotHave.gameObject.SetActive(false);
+            
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.text = heroConfig.HeroName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
@@ -51,6 +61,20 @@ namespace ET.Client
             }
 
             self.Text_HeroCombatPower.SetText(hero.NumericDic[NumericType.CombatPower]);
+        }
+        
+        public static async ETTask UpdateInfo(this UIHeroItem self, int heroConfigId)
+        { 
+            self.Transform_HeroStar.gameObject.SetActive(false);
+            self.Text_HeroCombatPower.gameObject.SetActive(true);
+            self.Slider_ShardNum.gameObject.SetActive(true);
+            self.Text_ShardNum.gameObject.SetActive(true);
+            self.Text_NotHave.gameObject.SetActive(true);
+            
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(heroConfigId);
+            self.Text_HeroName.text = heroConfig.HeroName;
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
+            self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
         }
     }
 }

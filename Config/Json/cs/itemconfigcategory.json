@@ -211,7 +211,7 @@
   },
   {
     "Id": 10002001,
-    "ItemName": "大熊猫碎片",
+    "ItemName": "斧王碎片",
     "Icon": "10000009",
     "ItemQuality": 2,
     "UseLv": 14,
@@ -221,12 +221,12 @@
     "SellMoneyValue": 1500,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10001001,30",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
     "Id": 10002002,
-    "ItemName": "大熊猫碎片",
+    "ItemName": "流浪剑客碎片",
     "Icon": "10000010",
     "ItemQuality": 3,
     "UseLv": 15,
@@ -236,7 +236,7 @@
     "SellMoneyValue": 1600,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10001002,30",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {

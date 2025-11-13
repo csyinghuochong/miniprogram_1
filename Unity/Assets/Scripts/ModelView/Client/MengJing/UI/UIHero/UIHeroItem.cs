@@ -15,6 +15,9 @@ namespace ET.Client
         public Image Image_HeroIcon;
         public Transform Transform_HeroStar;
         public TMP_Text Text_HeroCombatPower;
+        public Slider Slider_ShardNum;
+        public TMP_Text Text_ShardNum;
+        public TMP_Text Text_NotHave;
         public Button Button_Click;
     }
 }

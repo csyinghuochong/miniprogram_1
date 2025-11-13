@@ -64,7 +64,7 @@ namespace ET
         /// <summary>
         /// 英雄碎片
         /// </summary>
-        Type_10 = 10,
+        HeroShard = 10,
 
         /// <summary>
         /// 头盔
