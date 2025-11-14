@@ -15,7 +15,7 @@ namespace ET.Client
             }
 
             Session session = sessionComponent.Session;
-            if (request.MapType < MapTypeEnum.MainCityScene)
+            if (request.MapType < (int)MapType.MainCity)
             {
                 RealmPingComponent realmPingComponent = session.GetComponent<RealmPingComponent>();
                 if (realmPingComponent == null)

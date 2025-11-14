@@ -6,10 +6,10 @@
         protected override async ETTask Run(Scene root, AppStartInitFinish args)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            mapComponent.MapType = MapTypeEnum.LoginScene;
+            mapComponent.MapType = MapType.Login;
 
             await root.GetComponent<UIComponent>().Create(UIType.UILogin);
-            await root.GetComponent<SceneManagerComponent>().ChangeScene(MapTypeEnum.LoginScene, 0, 0);
+            await root.GetComponent<SceneManagerComponent>().ChangeScene(MapType.Login, 0, 0);
         }
     }
 }

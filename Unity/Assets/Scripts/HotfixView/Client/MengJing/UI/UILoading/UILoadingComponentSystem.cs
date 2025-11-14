@@ -68,7 +68,7 @@ namespace ET.Client
                 return;
             }
 
-            int mapType = self.Root().GetComponent<MapComponent>().MapType;
+            MapType mapType = self.Root().GetComponent<MapComponent>().MapType;
 
             UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui != null)
@@ -76,7 +76,7 @@ namespace ET.Client
                 ui.GetComponent<UIMainComponent>().AfterEnterScene(self.Root().GetComponent<MapComponent>().MapType);
             }
 
-            if (mapType == MapTypeEnum.LocalLevel)
+            if (mapType == MapType.LocalLevel)
             {
                 self.Root().CurrentScene().AddComponent<MapLoopComponent>();
             }

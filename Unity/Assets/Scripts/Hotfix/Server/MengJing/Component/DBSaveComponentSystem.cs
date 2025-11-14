@@ -89,8 +89,8 @@ namespace ET.Server
 
             Scene scene = unit.Scene();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
-            if (sceneTypeEnum == MapTypeEnum.MainCityScene)
+            MapType mapType = scene.GetComponent<MapComponent>().MapType;
+            if (mapType == MapType.MainCity)
             {
                 numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x);
                 numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y);
@@ -99,7 +99,7 @@ namespace ET.Server
 
             numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
             self.PlayerState = PlayerState.None;
-            TransferHelper.BeforeTransfer(unit, sceneTypeEnum);
+            TransferHelper.BeforeTransfer(unit, mapType);
 
             if (!unit.IsRobot())
             {

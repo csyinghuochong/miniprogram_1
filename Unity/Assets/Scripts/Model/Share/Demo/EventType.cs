@@ -10,15 +10,15 @@ namespace ET
     public struct SceneChangeStart
     {
         public Scene RootScene;
-        public int LastSceneType;
+        public MapType LastMapType;
         public int LastChapterId;
-        public int SceneType;
+        public MapType MapType;
         public int ChapterId;
     }
 
     public struct SceneChangeFinish
     {
-        public int SceneType;
+        public MapType MapType;
     }
 
     public struct AfterCreateClientScene

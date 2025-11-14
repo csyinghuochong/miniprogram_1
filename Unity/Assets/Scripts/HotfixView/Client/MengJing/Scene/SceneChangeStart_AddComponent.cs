@@ -9,7 +9,7 @@ namespace ET.Client
         {
             try
             {
-                if (args.SceneType == MapTypeEnum.LocalLevel)
+                if (args.MapType == MapType.LocalLevel)
                 {
                     root.GetComponent<GlobalComponent>().ViewMode = 1;
                 }
@@ -26,12 +26,12 @@ namespace ET.Client
                 ui = root.GetComponent<UIComponent>().Get(UIType.UIMain);
                 if (ui != null)
                 {
-                    ui.GetComponent<UIMainComponent>().BeforeEnterScene(args.LastSceneType);
+                    ui.GetComponent<UIMainComponent>().BeforeEnterScene(args.LastMapType);
                 }
 
-                Log.Debug($"SceneChangeStart:  {args.LastSceneType}");
+                Log.Debug($"SceneChangeStart:  {args.LastMapType}");
 
-                await root.GetComponent<SceneManagerComponent>().ChangeScene(args.SceneType, args.LastSceneType, args.ChapterId);
+                await root.GetComponent<SceneManagerComponent>().ChangeScene(args.MapType, args.LastMapType, args.ChapterId);
 
                 // root.AddComponent<OperaComponent>();
             }

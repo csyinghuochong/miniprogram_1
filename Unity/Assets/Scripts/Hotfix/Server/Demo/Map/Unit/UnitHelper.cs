@@ -139,7 +139,7 @@ namespace ET.Server
 
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
 
-            if (mapComponent.MapType != MapTypeEnum.LocalLevel)
+            if (mapComponent.MapType != MapType.LocalLevel)
             {
                 return false;
             }

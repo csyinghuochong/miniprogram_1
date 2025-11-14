@@ -39,15 +39,15 @@ namespace ET.Server
             {
                 SceneInstanceId = scene.InstanceId,
                 SceneId = request.SceneId,
-                SceneType = request.SceneType,
+                MapType = request.MapType,
                 TimeScale = scene.TimeScale
             };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
             M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
-            switch (request.SceneType)
+            switch (request.MapType)
             {
-                case MapTypeEnum.MainCityScene:
+                case (int)MapType.MainCity:
                 {
                     float x = numericComponent.GetAsFloat(NumericType.MainCity_X);
                     float y = numericComponent.GetAsFloat(NumericType.MainCity_Y);
@@ -60,7 +60,7 @@ namespace ET.Server
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
                     break;
                 }
-                case MapTypeEnum.LocalLevel:
+                case (int)MapType.LocalLevel:
                 {
                     unit.Position = float3.zero;
 
@@ -90,7 +90,7 @@ namespace ET.Server
                 }
             }
 
-            TransferHelper.AfterTransfer(unit, request.SceneType);
+            TransferHelper.AfterTransfer(unit, (MapType)request.MapType);
 
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());

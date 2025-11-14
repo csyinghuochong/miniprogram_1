@@ -326,7 +326,7 @@ namespace ET.Server
             return null;
         }
 
-        public static void OnKillUnit(this TaskComponentS self, Unit defendUnit, int mapType)
+        public static void OnKillUnit(this TaskComponentS self, Unit defendUnit, MapType mapType)
         {
             if (defendUnit.Type == UnitType.Monster)
             {

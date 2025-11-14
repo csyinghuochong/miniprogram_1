@@ -5,7 +5,7 @@
 	{
 		protected override async ETTask Run(Scene root, M2C_StartSceneChange message)
 		{
-			await SceneChangeHelper.SceneChangeTo(root, message.SceneInstanceId, message.SceneType, message.SceneId);
+			await SceneChangeHelper.SceneChangeTo(root, message.SceneInstanceId, (MapType)message.MapType, message.SceneId);
 			
 			root.CurrentScene().TimeScale = message.TimeScale;
 

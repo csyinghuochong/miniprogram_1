@@ -16,8 +16,6 @@ namespace ET
 
         public bool MainHero { get; set; }
 
-        public int SceneType { get; set; }
-
         [BsonIgnore]
         public int SpeedRate { get; set; }
 

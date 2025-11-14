@@ -16,7 +16,7 @@ namespace ET.Client
 
                 PlayerPrefsHelper.SetString(PlayerPrefsHelper.LastUserID, selected.UnitId.ToString());
                 playerInfoComponent.CurrentRoleId = selected.UnitId;
-                scene.GetComponent<MapComponent>().MapType = MapTypeEnum.LoginScene;
+                scene.GetComponent<MapComponent>().MapType = MapType.Login;
 
                 int errorCode = await LoginHelper.LoginGameAsync(scene, 0);
 

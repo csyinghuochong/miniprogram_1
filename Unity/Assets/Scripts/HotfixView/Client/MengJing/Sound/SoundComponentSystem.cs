@@ -157,18 +157,18 @@ namespace ET.Client
         /// 先释放所有的音效
         /// </summary>
         /// <param name="scene"></param>
-        /// <param name="sceneTypeEnum"></param>
-        public static void PlayBgmSound(this SoundComponent self, int sceneTypeEnum, int sceneId, int sonsceneid)
+        /// <param name="mapType"></param>
+        public static void PlayBgmSound(this SoundComponent self, MapType mapType, int sceneId, int sonsceneid)
         {
             self.DisposeAll();
 
             string music = "MainCity";
-            switch (sceneTypeEnum)
+            switch (mapType)
             {
-                case MapTypeEnum.LoginScene:
+                case MapType.Login:
                     music = "LoginBack";
                     break;
-                case MapTypeEnum.MainCityScene:
+                case MapType.MainCity:
                     music = "MainCity";
                     break;
                 default:

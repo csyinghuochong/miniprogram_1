@@ -1412,7 +1412,7 @@ namespace ET
         public List<byte[]> Entitys { get; set; } = new();
 
         [MemoryPackOrder(4)]
-        public int SceneType { get; set; }
+        public int MapType { get; set; }
 
         [MemoryPackOrder(5)]
         public int SceneId { get; set; }
@@ -1428,7 +1428,7 @@ namespace ET
             this.OldActorId = default;
             this.Unit = default;
             this.Entitys.Clear();
-            this.SceneType = default;
+            this.MapType = default;
             this.SceneId = default;
 
             ObjectPool.Instance.Recycle(this);

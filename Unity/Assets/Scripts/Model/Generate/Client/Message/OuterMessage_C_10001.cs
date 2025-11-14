@@ -363,7 +363,7 @@ namespace ET
         public long SceneInstanceId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int SceneType { get; set; }
+        public int MapType { get; set; }
 
         [MemoryPackOrder(2)]
         public int SceneId { get; set; }
@@ -379,7 +379,7 @@ namespace ET
             }
 
             this.SceneInstanceId = default;
-            this.SceneType = default;
+            this.MapType = default;
             this.SceneId = default;
             this.TimeScale = default;
 
@@ -2107,7 +2107,7 @@ namespace ET
         public int SceneId { get; set; }
 
         [MemoryPackOrder(2)]
-        public int SceneType { get; set; }
+        public int MapType { get; set; }
 
         [MemoryPackOrder(4)]
         public int Difficulty { get; set; }
@@ -2124,7 +2124,7 @@ namespace ET
 
             this.RpcId = default;
             this.SceneId = default;
-            this.SceneType = default;
+            this.MapType = default;
             this.Difficulty = default;
             this.paramInfo = default;
 

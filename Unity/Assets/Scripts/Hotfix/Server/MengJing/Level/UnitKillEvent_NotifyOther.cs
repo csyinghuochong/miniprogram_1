@@ -10,7 +10,7 @@
 
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             int sceneId = mapComponent.SceneId;
-            int maptype = mapComponent.MapType;
+            MapType mapType = mapComponent.MapType;
 
             // 角色要过几秒才销毁，先停止一些组件
             // defendUnit.GetComponent<MoveComponent>()?.Stop(false);
@@ -20,9 +20,9 @@
             defendUnit.GetComponent<BuffManagerComponentS>()?.OnDead();
 
             NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
-            switch (maptype)
+            switch (mapType)
             {
-                case MapTypeEnum.LocalLevel:
+                case MapType.LocalLevel:
                 {
                     scene.GetComponent<LocalLevelComponent>().OnKillEvent(defendUnit);
 
@@ -33,7 +33,7 @@
             if (attackUnit.Type == UnitType.Hero)
             {
                 Unit master = attackUnit.GetParent<UnitComponent>().Get(attackUnit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId));
-                master.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, maptype);
+                master.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, mapType);
             }
 
             numericComponentDefend.ApplyValue(NumericType.Now_Dead, 1);

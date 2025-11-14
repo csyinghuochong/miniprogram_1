@@ -19,7 +19,7 @@ namespace ET.Server
         public float ActDistance { get; set; } //攻击距离
         public List<int> AISkillIDList { get; set; } = new(); //当前所有技能
         public float3 TargetZhuiJi { get; set; }
-        public int SceneType { get; set; }
+        public MapType MapType { get; set; }
         public long AIDelay;
         public List<float3> TargetPoint { get; set; } = new();
     }

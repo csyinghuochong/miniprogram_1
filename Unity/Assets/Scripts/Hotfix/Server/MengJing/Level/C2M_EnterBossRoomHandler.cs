@@ -8,7 +8,7 @@
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
 
-            if (mapComponent.MapType != MapTypeEnum.LocalLevel)
+            if (mapComponent.MapType != MapType.LocalLevel)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;

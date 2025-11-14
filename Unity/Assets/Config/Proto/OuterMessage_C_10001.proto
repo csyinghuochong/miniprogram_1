@@ -81,7 +81,7 @@ message M2C_CreateMyUnit // IMessage
 message M2C_StartSceneChange // IMessage
 {
 	int64 SceneInstanceId = 1;
-	int32 SceneType = 2;
+	int32 MapType = 2;
 	int32 SceneId = 3;
 	float TimeScale = 4;
 }
@@ -464,7 +464,7 @@ message C2M_TransferMap // ILocationRequest
 	int32 RpcId = 1;
 
 	int32 SceneId = 2;
-	int32 SceneType = 3;
+	int32 MapType = 3;
 	int32 Difficulty = 5;
 	string paramInfo = 6;
 }

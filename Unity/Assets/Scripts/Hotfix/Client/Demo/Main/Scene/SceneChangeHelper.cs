@@ -3,7 +3,7 @@
     public static partial class SceneChangeHelper
     {
         // 场景切换协程
-        public static async ETTask SceneChangeTo(Scene root, long sceneInstanceId, int sceneType, int sceneId)
+        public static async ETTask SceneChangeTo(Scene root, long sceneInstanceId, MapType mapType, int sceneId)
         {
             //root.RemoveComponent<AIComponent>();
 
@@ -13,18 +13,18 @@
             UnitComponent unitComponent = currentScene.AddComponent<UnitComponent>();
 
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            int lastSceneType = mapComponent.MapType;
+            MapType lastMapType = mapComponent.MapType;
             int lastChapterid = mapComponent.SceneId;
 
-            mapComponent.SetMapInfo(sceneType, sceneId);
+            mapComponent.SetMapInfo(mapType, sceneId);
 
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(root, new SceneChangeStart()
             {
                 RootScene = root,
-                LastSceneType = lastSceneType,
+                LastMapType = lastMapType,
                 LastChapterId = lastChapterid,
-                SceneType = sceneType,
+                MapType = mapType,
                 ChapterId = sceneId,
             });
 
@@ -34,7 +34,7 @@
             Unit unit = UnitFactory.CreateUnit(currentScene, m2CCreateMyUnit.Unit, true);
             unitComponent.Add(unit);
 
-            EventSystem.Instance.Publish(root, new SceneChangeFinish() { SceneType = sceneType });
+            EventSystem.Instance.Publish(root, new SceneChangeFinish() { MapType = mapType });
 
             // 通知等待场景切换的协程
             root.GetComponent<ObjectWait>().Notify(new Wait_SceneChangeFinish());

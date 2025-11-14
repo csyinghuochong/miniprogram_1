@@ -9,7 +9,7 @@
 
             Scene scene = args.Defend.Scene();
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            int sceneTypeEnum = mapComponent.MapType;
+            MapType mapType = mapComponent.MapType;
             int sceneId = mapComponent.SceneId;
 
             if (args.NewValue <= 0 && numericComponentDefend.GetAsInt(NumericType.Now_Dead) == 1)

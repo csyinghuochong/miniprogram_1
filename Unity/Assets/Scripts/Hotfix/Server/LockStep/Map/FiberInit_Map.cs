@@ -20,7 +20,7 @@
             MapComponent mapComponent =  root.AddComponent<MapComponent>();
             mapComponent.NavMeshId = 101;
             mapComponent.SceneId = 101;
-            mapComponent.MapType = MapTypeEnum.MainCityScene;
+            mapComponent.MapType = MapType.MainCity;
             
             await ETTask.CompletedTask;
         }

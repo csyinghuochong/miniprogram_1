@@ -5,7 +5,7 @@ namespace ET.Client
     [FriendOf(typeof(PlayerInfoComponent))]
     public static partial class EnterMapHelper
     {
-        public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId = 0, string paraminfo = "0")
+        public static async ETTask<int> RequestTransfer(Scene root, MapType mapType, int sceneId = 0, string paraminfo = "0")
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             if (TimeHelper.ServerNow() - mapComponent.LastQuitTime < 2000)
@@ -16,7 +16,7 @@ namespace ET.Client
             mapComponent.LastQuitTime = TimeHelper.ServerNow();
 
             C2M_TransferMap request = C2M_TransferMap.Create();
-            request.SceneType = newsceneType;
+            request.MapType = (int)mapType;
             request.SceneId = sceneId;
             request.paramInfo = paraminfo;
 

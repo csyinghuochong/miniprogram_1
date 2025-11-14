@@ -26,21 +26,21 @@ namespace ET.Client
             GC.Collect();
         }
 
-        public static async ETTask ChangeScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
+        public static async ETTask ChangeScene(this SceneManagerComponent self, MapType mapType, MapType lastScene, int sceneid)
         {
             string paramss = "";
-            switch (sceneTypeEnum)
+            switch (mapType)
             {
-                case MapTypeEnum.InitScene:
+                case MapType.Init:
                     paramss = "Init";
                     break;
-                case MapTypeEnum.LoginScene:
+                case MapType.Login:
                     paramss = "Login";
                     break;
-                case MapTypeEnum.MainCityScene:
+                case MapType.MainCity:
                     paramss = "MainCity";
                     break;
-                case MapTypeEnum.LocalLevel:
+                case MapType.LocalLevel:
                     paramss = "Level";
                     break;
                 default:
@@ -79,7 +79,7 @@ namespace ET.Client
 
             Debug.Log("当前场景的名称是: " + scenename);
 
-            if (sceneTypeEnum != MapTypeEnum.LoginScene)
+            if (mapType != MapType.Login)
             {
                 ConfigData.LoadSceneFinished = true;
             }

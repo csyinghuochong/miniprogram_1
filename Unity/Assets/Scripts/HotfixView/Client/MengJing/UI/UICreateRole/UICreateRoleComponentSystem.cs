@@ -51,7 +51,7 @@ namespace ET.Client
             self.LastLoginTime = Time.time;
             PlayerPrefsHelper.SetString(PlayerPrefsHelper.LastUserID, selected.UnitId.ToString());
             playerInfoComponent.CurrentRoleId = selected.UnitId;
-            self.Root().GetComponent<MapComponent>().MapType = MapTypeEnum.LoginScene;
+            self.Root().GetComponent<MapComponent>().MapType = MapType.Login;
 
             int errorCode = await LoginHelper.LoginGameAsync(self.Root(), 0);
 

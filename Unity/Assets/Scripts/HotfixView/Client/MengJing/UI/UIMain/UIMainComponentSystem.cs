@@ -177,8 +177,8 @@ namespace ET.Client
             self.Button_TaskCommit.AddListener(() => { self.OnButton_TaskCommit(); });
             self.EventTrigger_TaskReward.AddEventTrigger((p) => { self.OnTaskRewardPointerDown(p).Coroutine(); }, EventTriggerType.PointerDown);
             self.EventTrigger_TaskReward.AddEventTrigger(self.OnTaskRewardPointerUp, EventTriggerType.PointerUp);
-            self.Button_Recall.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.MainCityScene).Coroutine(); });
-            self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalLevel).Coroutine(); });
+            self.Button_Recall.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapType.MainCity).Coroutine(); });
+            self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapType.LocalLevel).Coroutine(); });
             self.Button_Speed.AddListener(() => { self.OnButton_Speed(); });
             self.Button_GM.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
@@ -195,17 +195,17 @@ namespace ET.Client
         }
 
         // 加载场景之前
-        public static void BeforeEnterScene(this UIMainComponent self, int lastSceneType)
+        public static void BeforeEnterScene(this UIMainComponent self, MapType mapType)
         {
         }
 
         // 场景和角色都加载完成后
-        public static void AfterEnterScene(this UIMainComponent self, int sceneType)
+        public static void AfterEnterScene(this UIMainComponent self, MapType mapType)
         {
-            self.Button_StartLevel.gameObject.SetActive(sceneType == MapTypeEnum.MainCityScene);
-            self.Button_Recall.gameObject.SetActive(sceneType == MapTypeEnum.LocalLevel);
-            self.UILevelProgress.gameObject.SetActive(sceneType == MapTypeEnum.LocalLevel);
-            self.UIMainSkill.SetActive(sceneType == MapTypeEnum.LocalLevel);
+            self.Button_StartLevel.gameObject.SetActive(mapType == MapType.MainCity);
+            self.Button_Recall.gameObject.SetActive(mapType == MapType.LocalLevel);
+            self.UILevelProgress.gameObject.SetActive(mapType == MapType.LocalLevel);
+            self.UIMainSkill.SetActive(mapType == MapType.LocalLevel);
 
             self.UpdatePlayerName();
             self.UpdatePlayerLv();
@@ -214,7 +214,7 @@ namespace ET.Client
             self.UpdateExp();
             self.UpdateMainTask();
 
-            self.UIJoystickComponent.AfterEnterScene(sceneType);
+            self.UIJoystickComponent.AfterEnterScene(mapType);
         }
 
         private static void UpdateFPS(this UIMainComponent self)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -91,7 +92,7 @@ namespace ET
             base_MaxDef += hero.Lv * heroConfig.LvDef;
             base_MinAdf += hero.Lv * heroConfig.LvAdf;
             base_MaxAdf += hero.Lv * heroConfig.LvAdf;
-            
+
             // 星级
             base_MaxHp += hero.Star * 100;
             base_MinAct += hero.Star * 100;
@@ -127,7 +128,7 @@ namespace ET
                 base_ReCounterattack += equipConfig.EquipReCounterattack;
                 base_ReLifeSteal += equipConfig.EquipLifeSteal;
                 base_ReEva += equipConfig.EquipReEva;
-                
+
                 // TODO 装备词条属性
             }
 
@@ -155,7 +156,7 @@ namespace ET
 
             return numericDic;
         }
-        
+
         /// <summary>
         /// 返回一个可以装备此类型道具的孔位
         /// </summary>
@@ -211,13 +212,26 @@ namespace ET
 
                     break;
             }
-            
+
             if (!equipments.ContainsKey((int)equipSlotType))
             {
                 equipSlotType = EquipSlotType.None;
             }
 
             return equipSlotType;
+        }
+
+        // 限制单位的移动范围
+        public static float3 LimitMoveRange(float3 target, MapType mapType)
+        {
+            switch (mapType)
+            {
+                case MapType.LocalLevel:
+                    float x = math.clamp(target.x, -10, 10);
+                    return new float3(x, target.y, target.z);
+                default:
+                    return target;
+            }
         }
     }
 }
