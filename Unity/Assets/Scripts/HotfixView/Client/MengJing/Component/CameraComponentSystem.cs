@@ -9,10 +9,10 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this CameraComponent self)
         {
-            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
+            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
             self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             
-            if (GlobalComponent.Instance.ViewMode == 0)
+            if (self.Root().GetComponent<GlobalComponent>().ViewMode == 0)
             {
                 self.MainCamera.orthographic = true;
                 self.MainCamera.orthographicSize = 25f;

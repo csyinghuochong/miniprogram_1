@@ -8,7 +8,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this GlobalComponent self)
         {
-            GlobalComponent.Instance = self;
+            // GlobalComponent.Instance = self;
 
             self.Global = GameObject.Find("/Global").transform;
             self.Unit = GameObject.Find("/Global/Unit").transform;
@@ -20,8 +20,8 @@ namespace ET.Client
             self.FixedRoot = GameObject.Find("/Global/UI/FixedRoot").transform;
             self.OtherRoot = GameObject.Find("/Global/UI/OtherRoot").transform;
             self.PoolRoot = GameObject.Find("/Global/PoolRoot").transform;
-            self.MainCamera = GameObject.Find("/Global/MainCamera").transform;
-            self.UICamera = GameObject.Find("/Global/UICamera").transform;
+            self.MainCamera = GameObject.Find("/Global/MainCamera").GetComponent<Camera>();
+            self.UICamera = GameObject.Find("/Global/UICamera").GetComponent<Camera>();
             self.GlobalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
 
             self.BloodPlayer = new GameObject("BloodPlayer");
@@ -44,23 +44,24 @@ namespace ET.Client
             self.BloodText_Layer2.AddComponent<RectTransform>();
             SetParent(self.BloodText_Layer2, self.BloodText);
         }
+
         [EntitySystem]
         private static void Destroy(this GlobalComponent self)
         {
-            GameObject.DestroyImmediate(  self.BloodPlayer );
-            GameObject.DestroyImmediate(  self.BloodMonster );
-            GameObject.DestroyImmediate(  self.BloodText );
-            GameObject.DestroyImmediate(  self.BloodText_Layer0 );
-            GameObject.DestroyImmediate(  self.BloodText_Layer1 );
-            GameObject.DestroyImmediate(  self.BloodText_Layer2 );
-            self.BloodPlayer  = null;
-            self.BloodMonster= null;
+            UnityEngine.Object.DestroyImmediate(self.BloodPlayer);
+            UnityEngine.Object.DestroyImmediate(self.BloodMonster);
+            UnityEngine.Object.DestroyImmediate(self.BloodText);
+            UnityEngine.Object.DestroyImmediate(self.BloodText_Layer0);
+            UnityEngine.Object.DestroyImmediate(self.BloodText_Layer1);
+            UnityEngine.Object.DestroyImmediate(self.BloodText_Layer2);
+            self.BloodPlayer = null;
+            self.BloodMonster = null;
             self.BloodText = null;
             self.BloodText_Layer0 = null;
             self.BloodText_Layer1 = null;
             self.BloodText_Layer2 = null;
         }
-        
+
         public static void SetParent(GameObject son, GameObject parent)
         {
             if (son == null || parent == null)

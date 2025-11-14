@@ -61,8 +61,8 @@ namespace ET.Client
             headBarUI.enabled = true;
             headBarUI.HeadPos = unit.GetComponent<UnitBoneComponent>().Hp;
             headBarUI.HeadBar = self.GameObject;
-            headBarUI.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
-            headBarUI.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
+            headBarUI.UiCamera = globalComponent.UICamera;
+            headBarUI.MainCamera = globalComponent.MainCamera;
             headBarUI.Offset = new Vector2(0, 0);
             headBarUI.UpdatePostion();
 

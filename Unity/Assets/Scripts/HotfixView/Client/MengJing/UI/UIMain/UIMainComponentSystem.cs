@@ -418,7 +418,7 @@ namespace ET.Client
 
             Vector2 localPoint;
             RectTransform canvas = self.GetParent<UI>().GameObject.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
             ui.GetComponent<UIItemRewardTipComponent>().OnInit(new Vector3(localPoint.x, localPoint.y, 0f), taskConfig.RewardItem);
         }

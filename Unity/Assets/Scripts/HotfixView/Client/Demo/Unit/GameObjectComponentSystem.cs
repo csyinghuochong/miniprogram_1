@@ -138,15 +138,17 @@ namespace ET.Client
         {
             if (self.GameObject != null)
             {
-                if (GlobalComponent.Instance.ViewMode == 0)
+                GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+                if (globalComponent.ViewMode == 0)
                 {
-                    self.GameObject.transform.position = new Vector3(vector.x, vector.y, vector.y);
+                    
+                    self.GameObject.transform.position = new Vector3(vector.x, vector.y, vector.y);// 排序
                     self.GameObject.transform.eulerAngles = Vector3.zero;
                 }
                 else
                 {
                     self.GameObject.transform.position = new Vector3(vector.x, vector.y, 0);
-                    self.GameObject.transform.eulerAngles = new Vector3(-30f, 0, 0);
+                    self.GameObject.transform.eulerAngles = new Vector3(globalComponent.MainCamera.transform.eulerAngles.x, 0, 0);// 朝向摄像机
                 }
             }
         }

@@ -27,7 +27,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this OperaComponent self)
         {
-            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
+            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
             self.MapMask = (1 << LayerMask.NameToLayer(LayerEnum.Terrain.ToString())) | (1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
             self.NpcMask = 1 << LayerMask.NameToLayer(LayerEnum.NPC.ToString());
             self.BoxMask = 1 << LayerMask.NameToLayer(LayerEnum.Box.ToString());

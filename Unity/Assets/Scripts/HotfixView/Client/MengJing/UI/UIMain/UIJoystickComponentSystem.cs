@@ -44,8 +44,8 @@ namespace ET.Client
             self.JoystickBottomImg = self.JoystickBottom.GetComponent<Image>();
             self.JoystickThumbImg = self.JoystickThumb.GetComponent<Image>();
             self.RectTransform = self.StartArea.GetComponent<RectTransform>();
-            self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
+            self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera;
+            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
 
             // 事件触发顺序 如果拖拽 PointerDown、BeginDrag、Drag、PointerUp、EndDrag 未拖拽 PointerDown、PointerUp
             self.StartArea.GetComponent<EventTrigger>().AddEventTrigger(self.OnPointerDown, EventTriggerType.PointerDown);

@@ -66,7 +66,7 @@ namespace ET.Client
 
             Vector2 localPoint = new Vector2();
             RectTransform canvas = self.GameObject.transform.parent.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
             self.CopyModelGameObject.transform.localPosition = localPoint;
         }

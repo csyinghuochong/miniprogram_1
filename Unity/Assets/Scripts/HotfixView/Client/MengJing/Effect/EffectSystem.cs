@@ -108,7 +108,7 @@ namespace ET.Client
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
 
                     float angle = self.InitEffectData.EffectAngle != 0 ? self.InitEffectData.EffectAngle : self.InitEffectData.TargetAngle;
-                    if (GlobalComponent.Instance.ViewMode == 0)
+                    if (self.Root().GetComponent<GlobalComponent>().ViewMode == 0)
                     {
                         self.EffectObj.transform.position = new Vector3(self.InitEffectData.EffectPosition.x, self.InitEffectData.EffectPosition.y, self.InitEffectData.EffectPosition.y);
                     }
@@ -149,7 +149,7 @@ namespace ET.Client
                 case 2:
                 {
                     self.EffectObj.transform.SetParent(globalComponent.Unit);
-                    if (GlobalComponent.Instance.ViewMode == 0)
+                    if (self.Root().GetComponent<GlobalComponent>().ViewMode == 0)
                     {
                         self.EffectObj.transform.position = new Vector3(self.TheUnitBelongTo.Position.x, self.TheUnitBelongTo.Position.y, self.TheUnitBelongTo.Position.y);
                     }
@@ -183,7 +183,7 @@ namespace ET.Client
         {
             if (self.EffectObj == null)
             {
-                if (GlobalComponent.Instance.ViewMode == 0)
+                if (self.Root().GetComponent<GlobalComponent>().ViewMode == 0)
                 {
                     self.EffectPosition = new Vector3(vec3.x, vec3.y, vec3.y);
                 }

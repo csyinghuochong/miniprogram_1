@@ -5,8 +5,8 @@ namespace ET
     [ComponentOf(typeof(Scene))]
     public class GlobalComponent : Entity, IAwake, IDestroy
     {
-        [StaticField]
-        public static GlobalComponent Instance { get; set; }
+        // [StaticField]
+        // public static GlobalComponent Instance { get; set; }
 
         public Transform Global { get; set; }
         public Transform Unit { get; set; }
@@ -22,9 +22,9 @@ namespace ET
         public Transform PoolRoot { get; set; }
         public Transform OtherRoot { get; set; }
 
-        public Transform MainCamera { get; set; }
+        public Camera MainCamera { get; set; }
 
-        public Transform UICamera { get; set; }
+        public Camera UICamera { get; set; }
 
         public GameObject BloodPlayer { get; set; }
         public GameObject BloodMonster { get; set; }
@@ -35,7 +35,7 @@ namespace ET
         public GameObject BloodText_Layer2 { get; set; }
 
         /// <summary>
-        /// 0->2D 1->3D
+        /// 0->2D 1->2.5D
         /// </summary>
         public int ViewMode { get; set; }
     }

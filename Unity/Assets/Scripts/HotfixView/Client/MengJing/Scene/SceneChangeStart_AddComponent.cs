@@ -11,11 +11,11 @@ namespace ET.Client
             {
                 if (args.SceneType == MapTypeEnum.LocalLevel)
                 {
-                    GlobalComponent.Instance.ViewMode = 1;
+                    root.GetComponent<GlobalComponent>().ViewMode = 1;
                 }
                 else
                 {
-                    GlobalComponent.Instance.ViewMode = 0;
+                    root.GetComponent<GlobalComponent>().ViewMode = 0;
                 }
                 
                 root.GetComponent<SceneManagerComponent>().BeforeChangeScene();

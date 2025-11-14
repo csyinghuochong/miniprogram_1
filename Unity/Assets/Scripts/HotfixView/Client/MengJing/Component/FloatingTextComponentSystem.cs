@@ -99,7 +99,7 @@ namespace ET.Client
                         return;
                     }
 
-                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
 
                     Transform textTransform = gameObject.transform.Find("Text");
@@ -143,7 +143,7 @@ namespace ET.Client
                         return;
                     }
 
-                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
 
                     Transform textTransform = gameObject.transform.Find("Text");
@@ -187,7 +187,7 @@ namespace ET.Client
                         return;
                     }
 
-                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
 
                     Transform textTransform = gameObject.transform.Find("Text");
@@ -231,7 +231,7 @@ namespace ET.Client
                         return;
                     }
 
-                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
 
                     Transform textTransform = gameObject.transform.Find("Text");
@@ -275,7 +275,7 @@ namespace ET.Client
                         return;
                     }
 
-                    gameObject.transform.SetParent(GlobalComponent.Instance.BloodText_Layer0.transform);
+                    gameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
                     gameObject.transform.localScale = Vector3.one;
 
                     Transform textTransform = gameObject.transform.Find("Text");
@@ -319,7 +319,7 @@ namespace ET.Client
                         return;
                     }
 
-                    gameObject.transform.SetParent(GlobalComponent.Instance.PopUpRoot);
+                    gameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
                     gameObject.transform.localScale = Vector3.one;
                     gameObject.GetComponent<TMP_Text>().SetText(text);
                     gameObject.transform.localPosition = Vector3.zero;
