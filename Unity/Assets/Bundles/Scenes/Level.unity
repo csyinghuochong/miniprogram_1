@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 286791906}
   - component: {fileID: 286791908}
   - component: {fileID: 286791907}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +994,7 @@ GameObject:
   - component: {fileID: 690029381}
   - component: {fileID: 690029383}
   - component: {fileID: 690029382}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1553,7 @@ GameObject:
   - component: {fileID: 961948738}
   - component: {fileID: 961948740}
   - component: {fileID: 961948739}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1684,7 +1684,7 @@ GameObject:
   - component: {fileID: 974728056}
   - component: {fileID: 974728058}
   - component: {fileID: 974728057}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2020,7 @@ GameObject:
   - component: {fileID: 1779773487}
   - component: {fileID: 1779773489}
   - component: {fileID: 1779773488}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

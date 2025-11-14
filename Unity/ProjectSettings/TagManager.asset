@@ -14,18 +14,18 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
   - Map
-  - Hidden
-  - NPC
   - RenderTexture
   - Background
-  - Box
-  - Obstruct
-  - Building
   - Monster
   - Hero
+  - Drop
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

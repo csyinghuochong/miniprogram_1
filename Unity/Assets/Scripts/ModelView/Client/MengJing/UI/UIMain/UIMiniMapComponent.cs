@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -9,5 +10,7 @@ namespace ET.Client
         public GameObject GameObject;
 
         public TMP_Text Text_MiniMapName;
+        public RawImage RawImage_Map;
+        public GameObject MapCamera;
     }
 }

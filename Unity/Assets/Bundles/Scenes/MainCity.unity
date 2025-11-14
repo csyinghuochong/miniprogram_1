@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 1445496202}
   - component: {fileID: 1445496201}
   - component: {fileID: 1445496200}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

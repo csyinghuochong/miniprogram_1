@@ -20,6 +20,11 @@
             }
             
             gameObjectComponent.UpdatePositon(unit.Position);
+
+            if (unit.MainHero)
+            {
+                scene.Root().GetComponent<UIComponent>().Get(UIType.UIMain)?.GetComponent<UIMainComponent>()?.UIMiniMapComponent?.OnMainHeroMove();
+            }
             
             await ETTask.CompletedTask;
         }

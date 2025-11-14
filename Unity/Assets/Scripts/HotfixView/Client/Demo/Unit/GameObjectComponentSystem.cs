@@ -182,6 +182,7 @@ namespace ET.Client
                 case UnitType.Player:
                 {
                     self.GameObject.tag = TagHelper.Player;
+                    LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Player);
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
@@ -192,6 +193,7 @@ namespace ET.Client
                 case UnitType.Hero:
                 {
                     self.GameObject.tag = TagHelper.Hero;
+                    LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Hero);
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIHeroHpComponent>();
@@ -202,6 +204,7 @@ namespace ET.Client
                 case UnitType.Monster:
                 {
                     self.GameObject.tag = TagHelper.Monster;
+                    LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Monster);
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIMonsterHpComponent>();

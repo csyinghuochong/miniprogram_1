@@ -6,17 +6,10 @@ namespace ET.Client
     public class OperaComponent : Entity, IAwake, IUpdate
     {
         public bool IsPaused = false;
-        
+
         public Vector3 ClickPoint;
 
         public float LastSendTime;
-
-        public int MapMask;
-        public int NpcMask;
-        public int BoxMask;
-        public int PlayerMask;
-        public int MonsterMask;
-        public int BuildingMask;
 
         public int NpcId;
         public Vector3 UnitStartPosition;

@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -14,6 +15,7 @@ namespace ET.Client
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
             self.Text_MiniMapName = rc.Get<GameObject>("Text_MiniMapName").GetComponent<TMP_Text>();
+            self.RawImage_Map = rc.Get<GameObject>("RawImage_Map").GetComponent<RawImage>();
         }
 
         [EntitySystem]
@@ -42,6 +44,44 @@ namespace ET.Client
                 
                 self.Text_MiniMapName.SetText(levelConfig.LevelName);
             }
+            
+            self.LoadMapCamera().Coroutine();
+        }
+
+        private static async ETTask LoadMapCamera(this UIMiniMapComponent self)
+        {
+            GameObject mapCamera = GameObject.Find("Global/MapCamera");
+            if (mapCamera == null)
+            {
+                var path = ABPathHelper.GetUnitPath("Component", "MapCamera");
+                GameObject prefab = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
+                mapCamera = UnityEngine.Object.Instantiate(prefab, GameObject.Find("Global").transform);
+                mapCamera.name = "MapCamera";
+            }
+            
+            Camera camera = mapCamera.GetComponent<Camera>();
+            camera.enabled = true;
+            
+            self.MapCamera = mapCamera;
+        }
+        
+        public static void OnMainHeroMove(this UIMiniMapComponent self)
+        {
+            if (self.MapCamera == null)
+            {
+                return;
+            }
+            
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (unit == null || self.MapCamera == null)
+            {
+                return;
+            }
+
+            Vector3 old = self.MapCamera.transform.position;
+            old.x = unit.Position.x;
+            old.y = unit.Position.y;
+            self.MapCamera.transform.position = old;
         }
     }
 }
