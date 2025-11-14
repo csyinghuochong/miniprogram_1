@@ -14,8 +14,8 @@ namespace ET.Client
             self.GameObject = gameObject;
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
-            self.Text_MiniMapName = rc.Get<GameObject>("Text_MiniMapName").GetComponent<TMP_Text>();
             self.RawImage_Map = rc.Get<GameObject>("RawImage_Map").GetComponent<RawImage>();
+            self.Text_MiniMapName = rc.Get<GameObject>("Text_MiniMapName").GetComponent<TMP_Text>();
         }
 
         [EntitySystem]
@@ -41,10 +41,10 @@ namespace ET.Client
                 }
 
                 LevelConfig levelConfig = LevelConfigCategory.Instance.Get(currentLevelId);
-                
+
                 self.Text_MiniMapName.SetText(levelConfig.LevelName);
             }
-            
+
             self.LoadMapCamera().Coroutine();
         }
 
@@ -58,20 +58,20 @@ namespace ET.Client
                 mapCamera = UnityEngine.Object.Instantiate(prefab, GameObject.Find("Global").transform);
                 mapCamera.name = "MapCamera";
             }
-            
+
             Camera camera = mapCamera.GetComponent<Camera>();
             camera.enabled = true;
-            
+
             self.MapCamera = mapCamera;
         }
-        
+
         public static void OnMainHeroMove(this UIMiniMapComponent self)
         {
             if (self.MapCamera == null)
             {
                 return;
             }
-            
+
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit == null || self.MapCamera == null)
             {

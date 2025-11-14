@@ -8,9 +8,8 @@ namespace ET.Client
     public class UIMiniMapComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject;
-
-        public TMP_Text Text_MiniMapName;
         public RawImage RawImage_Map;
+        public TMP_Text Text_MiniMapName;
         public GameObject MapCamera;
     }
 }
