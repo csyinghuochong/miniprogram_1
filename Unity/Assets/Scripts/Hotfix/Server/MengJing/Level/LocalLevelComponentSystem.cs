@@ -69,7 +69,18 @@ namespace ET.Server
 
             self.SpawnedMonsterIndex++;
 
-            float2 position = new float2(self.MainUnit.Position.x + monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
+            float2 position;
+            if (!waveConfig.HaveBoss)
+            {
+                // Boss房间怪物生成相对玩家出生点
+                position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, waveConfig.PlayerSpawnPosition.Y + monsterSpawnInfo.SpawnPosition.Y);
+            }
+            else
+            {
+                // 循环路上怪物生成相对地图X坐标和玩家Y坐标
+                position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
+            }
+
             UnitFactory.CreateMonster(self.Scene(), monsterSpawnInfo.MonsterId, position);
         }
 
@@ -144,7 +155,7 @@ namespace ET.Server
             {
                 //传送到Boss房间
                 self.LastPlayerPosition = self.MainUnit.Position; //记录玩家在关卡中的位置，打完Boss后返回
-                self.MainUnit.Position = new float3(500f, 0f, 0f);
+                self.MainUnit.Position = new float3(nextWaveConfig.PlayerSpawnPosition.X, nextWaveConfig.PlayerSpawnPosition.Y, 0);
                 self.MainUnit.Stop();
                 foreach (Unit unit in self.Scene().GetComponent<UnitComponent>().GetAll())
                 {

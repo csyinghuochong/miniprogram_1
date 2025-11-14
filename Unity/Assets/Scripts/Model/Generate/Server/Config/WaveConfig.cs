@@ -19,6 +19,7 @@ namespace ET
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
             HaveBoss = _buf.ReadBool();
+            PlayerSpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             {int __n0 = _buf.ReadSize(); MonsterSpawnInfos = new monsterSpawnInfo[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { monsterSpawnInfo __e0;__e0 = global::ET.monsterSpawnInfo.DeserializemonsterSpawnInfo(_buf); MonsterSpawnInfos[__index0] = __e0;}}
 
             PostInit();
@@ -45,6 +46,11 @@ namespace ET
         public readonly bool HaveBoss;
 
         /// <summary>
+        /// 玩家出生点
+        /// </summary>
+        public readonly System.Numerics.Vector2 PlayerSpawnPosition;
+
+        /// <summary>
         /// 怪物生成
         /// </summary>
         public readonly monsterSpawnInfo[] MonsterSpawnInfos;
@@ -58,6 +64,7 @@ namespace ET
             
             
             
+            
             foreach (var _e in MonsterSpawnInfos) { _e?.ResolveRef(); }
         }
 
@@ -67,6 +74,7 @@ namespace ET
             + "Id:" + Id + ","
             + "Name:" + Name + ","
             + "HaveBoss:" + HaveBoss + ","
+            + "PlayerSpawnPosition:" + PlayerSpawnPosition + ","
             + "MonsterSpawnInfos:" + Luban.StringUtil.CollectionToString(MonsterSpawnInfos) + ","
             + "}";
         }

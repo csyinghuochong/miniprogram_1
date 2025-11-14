@@ -209,15 +209,15 @@ namespace ET.Server
 
                 float3 position = i switch
                 {
-                    0 => new float3(-4, 4, 0),
-                    1 => new float3(0, 4, 0),
-                    2 => new float3(4, 4, 0),
-                    3 => new float3(-4, 0, 0),
+                    0 => new float3(-2, 2, 0),
+                    1 => new float3(0, 2, 0),
+                    2 => new float3(2, 2, 0),
+                    3 => new float3(-2, 0, 0),
                     4 => new float3(0, 0, 0),
-                    5 => new float3(4, 0, 0),
-                    6 => new float3(-4, -4, 0),
-                    7 => new float3(0, -4, 0),
-                    8 => new float3(4, -4, 0),
+                    5 => new float3(2, 0, 0),
+                    6 => new float3(-2, -2, 0),
+                    7 => new float3(0, -2, 0),
+                    8 => new float3(2, -2, 0),
                     _ => float3.zero
                 };
 

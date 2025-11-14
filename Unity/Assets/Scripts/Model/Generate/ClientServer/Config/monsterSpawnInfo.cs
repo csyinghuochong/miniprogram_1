@@ -34,7 +34,7 @@ namespace ET
         public readonly float SpawnTime;
 
         /// <summary>
-        /// 生成位置，相对玩家
+        /// 生成位置
         /// </summary>
         public readonly System.Numerics.Vector2 SpawnPosition;
 
