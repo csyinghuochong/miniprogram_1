@@ -16,6 +16,9 @@ namespace ET.Client
 
             self.RawImage_Map = rc.Get<GameObject>("RawImage_Map").GetComponent<RawImage>();
             self.Text_MiniMapName = rc.Get<GameObject>("Text_MiniMapName").GetComponent<TMP_Text>();
+            self.Transform_HeadList = rc.Get<GameObject>("Transform_HeadList").transform;
+            self.Transform_HeadItem = rc.Get<GameObject>("Transform_HeadItem").transform;
+            self.Transform_HeadItem.gameObject.SetActive(false);
         }
 
         [EntitySystem]
