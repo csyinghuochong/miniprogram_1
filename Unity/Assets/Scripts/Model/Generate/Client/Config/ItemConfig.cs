@@ -28,6 +28,7 @@ namespace ET
             ItemPileSum = _buf.ReadInt();
             ItemEquipID = _buf.ReadInt();
             ItemUsePar = _buf.ReadString();
+            {int __n0 = _buf.ReadSize(); ItemUseParInt = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); ItemUseParInt[__index0] = __e0;}}
             ItemDescription = _buf.ReadString();
 
             PostInit();
@@ -99,6 +100,11 @@ namespace ET
         public readonly string ItemUsePar;
 
         /// <summary>
+        /// 道具使用参数int
+        /// </summary>
+        public readonly int[] ItemUseParInt;
+
+        /// <summary>
         /// 道具描述
         /// </summary>
         public readonly string ItemDescription;
@@ -109,6 +115,7 @@ namespace ET
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -139,6 +146,7 @@ namespace ET
             + "ItemPileSum:" + ItemPileSum + ","
             + "ItemEquipID:" + ItemEquipID + ","
             + "ItemUsePar:" + ItemUsePar + ","
+            + "ItemUseParInt:" + Luban.StringUtil.CollectionToString(ItemUseParInt) + ","
             + "ItemDescription:" + ItemDescription + ","
             + "}";
         }

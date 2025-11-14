@@ -37,7 +37,7 @@ namespace ET.Server
                 inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
                 List<RewardItem> addItems = new List<RewardItem>();
-                addItems.Add(new RewardItem() { ItemId = ConfigData.Item_Gold, ItemNum = int.Parse(itemConfig.ItemUsePar) });
+                addItems.Add(new RewardItem() { ItemId = ConfigData.Item_Gold, ItemNum = itemConfig.ItemUseParInt[0] });
                 inventoryComponent.AddItemData(addItems);
             }
 
@@ -46,9 +46,8 @@ namespace ET.Server
             {
                 inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
-                string[] itemList = itemConfig.ItemUsePar.Split(',');
-                int index = RandomHelper.RandomNumber(0, itemList.Length);
-                int itemId = int.Parse(itemList[index]);
+                int index = RandomHelper.RandomNumber(0, itemConfig.ItemUseParInt.Length);
+                int itemId = itemConfig.ItemUseParInt[index];
 
                 List<RewardItem> addItems = new List<RewardItem>();
                 addItems.Add(new RewardItem() { ItemId = itemId, ItemNum = 1 });
@@ -68,10 +67,9 @@ namespace ET.Server
 
                 inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
-                string[] expRange = itemConfig.ItemUsePar.Split(',');
                 for (int i = 0; i < request.Num; i++)
                 {
-                    int expValue = RandomHelper.RandomNumber(int.Parse(expRange[0]), int.Parse(expRange[1]));
+                    int expValue = RandomHelper.RandomNumber(itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);
                     HeroHelper.AddHeroExp(hero, request.Num * expValue);
                 }
 
@@ -92,10 +90,9 @@ namespace ET.Server
 
                 inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
-                string[] hunShiRange = itemConfig.ItemUsePar.Split(',');
                 for (int i = 0; i < request.Num; i++)
                 {
-                    int hunShiValue = RandomHelper.RandomNumber(int.Parse(hunShiRange[0]), int.Parse(hunShiRange[1]));
+                    int hunShiValue = RandomHelper.RandomNumber(itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);
                     HeroHelper.AddHeroHunShi(hero, request.Num * hunShiValue);
                 }
 
@@ -106,9 +103,8 @@ namespace ET.Server
             // 英雄碎片合成英雄
             if (itemConfig.ItemSubType == ItemSubType.HeroShard)
             {
-                string[] split = itemConfig.ItemUsePar.Split(',');
-                int heroConfigId = int.Parse(split[0]);
-                int needNum = int.Parse(split[1]);
+                int heroConfigId = itemConfig.ItemUseParInt[0];
+                int needNum = itemConfig.ItemUseParInt[1];
                 
                 List<RewardItem> removeItems = new List<RewardItem>();
                 removeItems.Add(new RewardItem() { ItemId = item.ConfigId, ItemNum = needNum });

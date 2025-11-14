@@ -116,8 +116,7 @@ namespace ET.Client
                 Item item = inventoryComponentC.GetItem(self.ItemId);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                string[] hunShiRange = itemConfig.ItemUsePar.Split(',');
-                self.Text_Tip.SetTextFormat("预计增加:{0}-{1}魂石", hunShiRange[0], hunShiRange[1]);
+                self.Text_Tip.SetTextFormat("预计增加:{0}-{1}魂石", itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);
 
                 uiCommonItem.SetSelected(self.ItemId);
             }

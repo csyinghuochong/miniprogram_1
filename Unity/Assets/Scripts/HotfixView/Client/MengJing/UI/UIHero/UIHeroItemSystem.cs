@@ -84,11 +84,10 @@ namespace ET.Client
             {
                 if (config.ItemSubType == ItemSubType.HeroShard)
                 {
-                    string[] split = config.ItemUsePar.Split(',');
-                    if (int.Parse(split[0]) == heroConfigId)
+                    if (config.ItemUseParInt[0] == heroConfigId)
                     {
                         itemConfigId = config.Id;
-                        needNum = int.Parse(split[1]);
+                        needNum = config.ItemUseParInt[1];
                         break;
                     }
                 }
@@ -110,8 +109,7 @@ namespace ET.Client
                 long itemId = 0;
                 foreach (Item item in self.Root().GetComponent<InventoryComponentC>().GetItemsBySubType(ItemSubType.HeroShard))
                 {
-                    string[] split = ItemConfigCategory.Instance.Get(item.ConfigId).ItemUsePar.Split(',');
-                    if (int.Parse(split[0]) == heroConfigId)
+                    if (ItemConfigCategory.Instance.Get(item.ConfigId).ItemUseParInt[0] == heroConfigId)
                     {
                         // 随便拿一个
                         itemId = item.Id;

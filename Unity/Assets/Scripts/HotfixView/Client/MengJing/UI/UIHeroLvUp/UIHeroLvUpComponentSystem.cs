@@ -97,8 +97,7 @@ namespace ET.Client
                 Item item = inventoryComponentC.GetItem(self.ItemId);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                string[] expRange = itemConfig.ItemUsePar.Split(',');
-                self.Text_Tip.SetTextFormat("预计增加{0}-{1}经验", expRange[0], expRange[1]);
+                self.Text_Tip.SetTextFormat("预计增加{0}-{1}经验", itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);
 
                 uiCommonItem.SetSelected(self.ItemId);
             }
