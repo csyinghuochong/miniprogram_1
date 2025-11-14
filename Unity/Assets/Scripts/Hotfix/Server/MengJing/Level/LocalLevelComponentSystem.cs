@@ -70,7 +70,7 @@ namespace ET.Server
             self.SpawnedMonsterIndex++;
 
             float2 position;
-            if (!waveConfig.HaveBoss)
+            if (waveConfig.HaveBoss)
             {
                 // Boss房间怪物生成相对玩家出生点
                 position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, waveConfig.PlayerSpawnPosition.Y + monsterSpawnInfo.SpawnPosition.Y);
