@@ -80,7 +80,34 @@ namespace ET.Client
                 return;
             }
 
-            while (self.UIHeroItemList.Count < heroList.Count)
+            List<int> notHaveHeroConfigIdList = new();
+            foreach (HeroConfig config in HeroConfigCategory.Instance.DataList)
+            {
+                if (page == 2)
+                {
+                    if (config.HeroType != (int)HeroType.Melee)
+                    {
+                        continue;
+                    }
+                }
+
+                if (page == 3)
+                {
+                    if (config.HeroType != (int)HeroType.Ranged)
+                    {
+                        continue;
+                    }
+                }
+                
+                if (heroList.Exists(x => x.ConfigId == config.Id))
+                {
+                    continue;
+                }
+                
+                notHaveHeroConfigIdList.Add(config.Id);
+            }
+
+            while (self.UIHeroItemList.Count < heroList.Count + notHaveHeroConfigIdList.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIHeroItem, self.Content_UIHeroItem);
                 UIHeroItem newItem = self.AddChild<UIHeroItem, GameObject>(go);
@@ -93,7 +120,13 @@ namespace ET.Client
                 self.UIHeroItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = heroList.Count; i < self.UIHeroItemList.Count; i++)
+            for (int i = heroList.Count; i < heroList.Count + notHaveHeroConfigIdList.Count; i++)
+            {
+                self.UIHeroItemList[i].UpdateInfo(notHaveHeroConfigIdList[i - heroList.Count]).Coroutine();
+                self.UIHeroItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = heroList.Count + notHaveHeroConfigIdList.Count; i < self.UIHeroItemList.Count; i++)
             {
                 self.UIHeroItemList[i].GameObject.SetActive(false);
             }

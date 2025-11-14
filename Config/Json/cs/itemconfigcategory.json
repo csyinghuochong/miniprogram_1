@@ -216,7 +216,7 @@
     "ItemQuality": 2,
     "UseLv": 14,
     "ItemType": 2,
-    "ItemSubType": 0,
+    "ItemSubType": 10,
     "SellMoneyType": 1,
     "SellMoneyValue": 1500,
     "ItemPileSum": 999,
@@ -231,7 +231,7 @@
     "ItemQuality": 3,
     "UseLv": 15,
     "ItemType": 2,
-    "ItemSubType": 0,
+    "ItemSubType": 10,
     "SellMoneyType": 1,
     "SellMoneyValue": 1600,
     "ItemPileSum": 999,
@@ -241,51 +241,66 @@
   },
   {
     "Id": 10002003,
-    "ItemName": "大熊猫碎片",
+    "ItemName": "剑圣碎片",
     "Icon": "10000011",
     "ItemQuality": 4,
     "UseLv": 16,
     "ItemType": 2,
-    "ItemSubType": 0,
+    "ItemSubType": 10,
     "SellMoneyType": 1,
     "SellMoneyValue": 1700,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10001003,30",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
     "Id": 10002004,
-    "ItemName": "大熊猫碎片",
+    "ItemName": "全能骑士碎片",
     "Icon": "10000012",
     "ItemQuality": 5,
     "UseLv": 17,
     "ItemType": 2,
-    "ItemSubType": 0,
+    "ItemSubType": 10,
     "SellMoneyType": 1,
     "SellMoneyValue": 1800,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10001004,30",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
     "Id": 10002005,
-    "ItemName": "大熊猫碎片",
+    "ItemName": "冰女碎片",
     "Icon": "10000013",
     "ItemQuality": 6,
     "UseLv": 18,
     "ItemType": 2,
-    "ItemSubType": 0,
+    "ItemSubType": 10,
     "SellMoneyType": 1,
     "SellMoneyValue": 1900,
     "ItemPileSum": 999,
     "ItemEquipID": 0,
-    "ItemUsePar": "",
+    "ItemUsePar": "10002001,30",
     "ItemDescription": "英雄碎片，合成英雄"
   },
   {
     "Id": 10002006,
+    "ItemName": "术士碎片",
+    "Icon": "10000013",
+    "ItemQuality": 6,
+    "UseLv": 18,
+    "ItemType": 2,
+    "ItemSubType": 10,
+    "SellMoneyType": 1,
+    "SellMoneyValue": 2000,
+    "ItemPileSum": 999,
+    "ItemEquipID": 0,
+    "ItemUsePar": "10002002,30",
+    "ItemDescription": "英雄碎片，合成英雄"
+  },
+  {
+    "Id": 10002101,
     "ItemName": "材料1",
     "Icon": "10000001",
     "ItemQuality": 1,
@@ -300,7 +315,7 @@
     "ItemDescription": "一种材料1"
   },
   {
-    "Id": 10002007,
+    "Id": 10002102,
     "ItemName": "材料2",
     "Icon": "10000002",
     "ItemQuality": 2,
@@ -315,7 +330,7 @@
     "ItemDescription": "一种材料2"
   },
   {
-    "Id": 10002008,
+    "Id": 10002103,
     "ItemName": "材料3",
     "Icon": "10000003",
     "ItemQuality": 3,
@@ -330,7 +345,7 @@
     "ItemDescription": "一种材料3"
   },
   {
-    "Id": 10002009,
+    "Id": 10002104,
     "ItemName": "材料4",
     "Icon": "10000004",
     "ItemQuality": 4,
@@ -345,7 +360,7 @@
     "ItemDescription": "一种材料4"
   },
   {
-    "Id": 10002010,
+    "Id": 10002105,
     "ItemName": "材料5",
     "Icon": "10000005",
     "ItemQuality": 5,
@@ -360,7 +375,7 @@
     "ItemDescription": "一种材料5"
   },
   {
-    "Id": 10002011,
+    "Id": 10002106,
     "ItemName": "材料6",
     "Icon": "10000006",
     "ItemQuality": 6,

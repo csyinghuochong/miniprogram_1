@@ -66,7 +66,7 @@ namespace ET.Client
         public static async ETTask UpdateInfo(this UIHeroItem self, int heroConfigId)
         { 
             self.Transform_HeroStar.gameObject.SetActive(false);
-            self.Text_HeroCombatPower.gameObject.SetActive(true);
+            self.Text_HeroCombatPower.gameObject.SetActive(false);
             self.Slider_ShardNum.gameObject.SetActive(true);
             self.Text_ShardNum.gameObject.SetActive(true);
             self.Text_NotHave.gameObject.SetActive(true);
@@ -75,6 +75,32 @@ namespace ET.Client
             self.Text_HeroName.text = heroConfig.HeroName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+
+            int itemConfigId = 0;
+            int needNum = 0;
+            foreach (ItemConfig config in ItemConfigCategory.Instance.DataList)
+            {
+                if (config.ItemSubType == ItemSubType.HeroShard)
+                {
+                    string[] split = config.ItemUsePar.Split(',');
+                    if(int.Parse(split[0]) == heroConfigId)
+                    {
+                        itemConfigId = config.Id;
+                        needNum = int.Parse(split[1]);
+                        break;   
+                    }
+                }
+            }
+
+            if (itemConfigId == 0)
+            {
+                Log.Error(ZString.Format("没有配置英雄碎片 HeroConfigId {0} !!!", heroConfigId));
+                return;
+            }
+
+            int num = self.Root().GetComponent<InventoryComponentC>().GetItemNum(itemConfigId, InventoryContainerType.Bag);
+            self.Slider_ShardNum.value = num / (float)needNum;
+            self.Text_ShardNum.SetTextFormat("{0}/{1}", num, needNum);
         }
     }
 }
