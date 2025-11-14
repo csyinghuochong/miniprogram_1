@@ -54,7 +54,9 @@ namespace ET.Client
             self.StartArea.GetComponent<EventTrigger>().AddEventTrigger(self.OnPointerUp, EventTriggerType.PointerUp);
             self.StartArea.GetComponent<EventTrigger>().AddEventTrigger(self.OnEndDrag, EventTriggerType.EndDrag);
 
-            self.MapMask = LayerMask.GetMask("Map");
+            self.MovableAreaMask = LayerMask.GetMask(nameof(LayerEnum.Map));
+            self.MaxSearchSteps = 16;
+            self.SearchStepDistance = 0.2f;
             self.JoystickModel = EJoystickModel.Fixed;
             self.Radius = 110f;
             self.ResetUI();
@@ -216,17 +218,74 @@ namespace ET.Client
             // 2D
             float3 start = self.MyUnit.Position;
             Vector2 dire = self.Direction * 5f;
-            float3 target = new float3(start.x + dire.x, start.y + dire.y, start.z);
+            float3 targetPosition = new float3(start.x + dire.x, start.y + dire.y, start.z);
+
+            // 检查目标点是否在可移动区域内
+            float3 finalTarget = self.GetValidMoveTarget(targetPosition);
+
+            if (math.distancesq(finalTarget, start) < 0.01f)
+            {
+                return;
+            }
 
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
 
             C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
-            c2MPathfindingResult.Position.Add(target);
+            c2MPathfindingResult.Position.Add(finalTarget);
             self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
 
             float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            self.MyUnit.GetComponent<Move2DComponent>().MoveTo(target, speed);
+            self.MyUnit.GetComponent<Move2DComponent>().MoveTo(finalTarget, speed);
+        }
+
+        private static bool IsInMovableArea(this UIJoystickComponent self, float3 position)
+        {
+            Vector2 pos2D = new Vector2(position.x, position.y);
+            Collider2D collider = Physics2D.OverlapPoint(pos2D, self.MovableAreaMask);
+            return collider != null;
+        }
+
+        private static float3 GetValidMoveTarget(this UIJoystickComponent self, float3 targetPosition)
+        {
+            // 如果目标点本身就在可移动区域内,直接返回
+            if (self.IsInMovableArea(targetPosition))
+            {
+                return targetPosition;
+            }
+
+            // 如果目标点不在可移动区域,尝试找到最近的可移动点
+            float3 startPos = self.MyUnit.Position;
+            Vector2 direction = new Vector2(targetPosition.x - startPos.x, targetPosition.y - startPos.y);
+            float totalDistance = direction.magnitude;
+            direction.Normalize();
+
+            // 从起点开始,沿着方向逐步搜索,找到最后一个在可移动区域内的点
+            float3 lastValidPosition = startPos;
+            for (int i = 1; i <= self.MaxSearchSteps; i++)
+            {
+                float distance = i * self.SearchStepDistance;
+                if (distance > totalDistance)
+                {
+                    break;
+                }
+
+                float3 testPosition = new float3(startPos.x + direction.x * distance,
+                    startPos.y + direction.y * distance,
+                    startPos.z);
+
+                if (self.IsInMovableArea(testPosition))
+                {
+                    lastValidPosition = testPosition;
+                }
+                else
+                {
+                    // 遇到第一个不可移动的点就停止
+                    break;
+                }
+            }
+
+            return lastValidPosition;
         }
 
         private static void ResetUI(this UIJoystickComponent self)

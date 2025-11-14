@@ -45,5 +45,9 @@ namespace ET.Client
         public Vector2 Target;
         public bool IsDrag;
         public float3 LastUnitPosition;
+
+        public LayerMask MovableAreaMask;
+        public int MaxSearchSteps;
+        public float SearchStepDistance;
     }
 }
