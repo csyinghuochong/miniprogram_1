@@ -14,9 +14,9 @@ namespace ET.Client
         public float TimeLeft; // 距离下次更新的时间
         public float FPS; // 当前帧率
 
+        public UIMiniMapComponent UIMiniMapComponent { get; set; }
         public UIJoystickComponent UIJoystickComponent { get; set; }
 
-        public GameObject UIJoystick;
         public TMP_Text Text_PlayerName;
         public TMP_Text Text_PlayerLv;
         public TMP_Text Text_FPS;

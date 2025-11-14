@@ -132,6 +132,8 @@ MonoBehaviour:
     gameObject: {fileID: 7379980397126928414}
   - key: Text_Diamond
     gameObject: {fileID: 1893285141822115623}
+  - key: UIMiniMap
+    gameObject: {fileID: 6144499396183489022}
   - key: UIJoystick
     gameObject: {fileID: 4683740165286688662}
   - key: Image_TaskCompleted
@@ -8227,6 +8229,7 @@ GameObject:
   - component: {fileID: 8986032202065159847}
   - component: {fileID: 8665017515152905466}
   - component: {fileID: 662428905953657227}
+  - component: {fileID: 3496362175828221721}
   m_Layer: 5
   m_Name: UIMiniMap
   m_TagString: Untagged
@@ -8292,6 +8295,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3496362175828221721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144499396183489022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: Text_MiniMapName
+    gameObject: {fileID: 3446868973294254827}
 --- !u!1 &6202448297831017511
 GameObject:
   m_ObjectHideFlags: 0

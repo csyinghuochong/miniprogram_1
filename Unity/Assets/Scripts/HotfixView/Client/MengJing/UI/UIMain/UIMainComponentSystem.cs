@@ -150,7 +150,6 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
-            self.UIJoystick = rc.Get<GameObject>("UIJoystick");
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_PlayerLv = rc.Get<GameObject>("Text_PlayerLv").GetComponent<TMP_Text>();
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
@@ -173,7 +172,8 @@ namespace ET.Client
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
-            self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(self.UIJoystick);
+            self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
+            self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
             self.Button_TaskCommit.AddListener(() => { self.OnButton_TaskCommit(); });
             self.EventTrigger_TaskReward.AddEventTrigger((p) => { self.OnTaskRewardPointerDown(p).Coroutine(); }, EventTriggerType.PointerDown);
             self.EventTrigger_TaskReward.AddEventTrigger(self.OnTaskRewardPointerUp, EventTriggerType.PointerUp);
@@ -214,6 +214,7 @@ namespace ET.Client
             self.UpdateExp();
             self.UpdateMainTask();
 
+            self.UIMiniMapComponent.AfterEnterScene(mapType);
             self.UIJoystickComponent.AfterEnterScene(mapType);
         }
 
