@@ -39,6 +39,8 @@ namespace ET.Client
 
         public static void SetShowType(this UIHeroListComponent self, int page)
         {
+            self.CurrentPage = page;
+            
             self.Button_Type_All.transform.Find("Image_On").gameObject.SetActive(page == 1);
             self.Button_Type_All.transform.Find("Image_Off").gameObject.SetActive(page != 1);
             self.Button_Type_Melee.transform.Find("Image_On").gameObject.SetActive(page == 2);

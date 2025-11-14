@@ -452,5 +452,23 @@ namespace ET.Server
 
             return items;
         }
+        
+        public static int GetItemNum(this InventoryComponentS self, int itemConfigId, InventoryContainerType containerType = InventoryContainerType.Bag)
+        {
+            int num = 0;
+            if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
+            {
+                foreach (EntityRef<Item> itemRef in containerItems)
+                {
+                    Item item = itemRef;
+                    if (item.ConfigId == itemConfigId)
+                    {
+                        num+=item.Num;
+                    }
+                }
+            }
+
+            return num;
+        }
     }
 }

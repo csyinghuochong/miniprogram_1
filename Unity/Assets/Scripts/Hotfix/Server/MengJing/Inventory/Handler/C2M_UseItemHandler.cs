@@ -37,7 +37,7 @@ namespace ET.Server
                 inventoryComponent.RemoveItem(request.ItemId, request.Num);
 
                 List<RewardItem> addItems = new List<RewardItem>();
-                addItems.Add(new RewardItem() { ItemId = 1, ItemNum = int.Parse(itemConfig.ItemUsePar) });
+                addItems.Add(new RewardItem() { ItemId = ConfigData.Item_Gold, ItemNum = int.Parse(itemConfig.ItemUsePar) });
                 inventoryComponent.AddItemData(addItems);
             }
 
@@ -101,6 +101,26 @@ namespace ET.Server
 
                 HeroHelper.UpdateHeroNumeric(unit, hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
+            }
+
+            // 英雄碎片合成英雄
+            if (itemConfig.ItemSubType == ItemSubType.HeroShard)
+            {
+                string[] split = itemConfig.ItemUsePar.Split(',');
+                int heroConfigId = int.Parse(split[0]);
+                int needNum = int.Parse(split[1]);
+                
+                List<RewardItem> removeItems = new List<RewardItem>();
+                removeItems.Add(new RewardItem() { ItemId = item.ConfigId, ItemNum = needNum });
+                int error = inventoryComponent.RemoveItemData(removeItems);
+                
+                if (error != ErrorCode.ERR_Success)
+                {
+                    response.Error = error;
+                    return;
+                }
+
+                unit.GetComponent<HeroComponentS>().AddHeroByConfigId(heroConfigId);
             }
 
             await ETTask.CompletedTask;

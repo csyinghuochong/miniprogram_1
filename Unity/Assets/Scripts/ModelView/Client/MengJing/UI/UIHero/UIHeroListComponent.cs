@@ -9,6 +9,7 @@ namespace ET.Client
     public class UIHeroListComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject { get; set; }
+        public int CurrentPage { get; set; }
 
         public List<UIHeroItem> UIHeroItemList { get; set; } = new();
 

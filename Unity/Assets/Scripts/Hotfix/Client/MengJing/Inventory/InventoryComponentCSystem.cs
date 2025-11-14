@@ -153,7 +153,7 @@ namespace ET.Client
             return items;
         }
 
-        public static List<Item> GetItemsByType(this InventoryComponentC self, ItemType type, InventoryContainerType containerType)
+        public static List<Item> GetItemsByType(this InventoryComponentC self, ItemType type, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             List<Item> items = new();
             if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
@@ -173,7 +173,7 @@ namespace ET.Client
             return items;
         }
 
-        public static List<Item> GetItemsBySubType(this InventoryComponentC self, ItemType type, ItemSubType subType, InventoryContainerType containerType)
+        public static List<Item> GetItemsBySubType(this InventoryComponentC self,ItemSubType subType, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             List<Item> items = new();
             if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
@@ -183,7 +183,7 @@ namespace ET.Client
                     Item item = itemRef;
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
-                    if (itemConfig.ItemType == type && itemConfig.ItemSubType == subType)
+                    if (itemConfig.ItemSubType == subType)
                     {
                         items.Add(item);
                     }
@@ -193,7 +193,7 @@ namespace ET.Client
             return items;
         }
 
-        public static int GetItemNum(this InventoryComponentC self, int itemConfigId, InventoryContainerType containerType)
+        public static int GetItemNum(this InventoryComponentC self, int itemConfigId, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             int num = 0;
             if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))

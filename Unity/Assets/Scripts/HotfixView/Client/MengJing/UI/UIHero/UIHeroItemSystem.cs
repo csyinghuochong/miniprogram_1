@@ -29,13 +29,14 @@ namespace ET.Client
         public static async ETTask UpdateInfo(this UIHeroItem self, Hero hero)
         {
             self.HeroId = hero.Id;
-            
+
             self.Transform_HeroStar.gameObject.SetActive(true);
             self.Text_HeroCombatPower.gameObject.SetActive(true);
             self.Slider_ShardNum.gameObject.SetActive(false);
             self.Text_ShardNum.gameObject.SetActive(false);
             self.Text_NotHave.gameObject.SetActive(false);
-            
+            self.Button_Click.gameObject.SetActive(false);
+
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
             self.Text_HeroName.text = heroConfig.HeroName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
@@ -62,15 +63,16 @@ namespace ET.Client
 
             self.Text_HeroCombatPower.SetText(hero.NumericDic[NumericType.CombatPower]);
         }
-        
+
         public static async ETTask UpdateInfo(this UIHeroItem self, int heroConfigId)
-        { 
+        {
             self.Transform_HeroStar.gameObject.SetActive(false);
             self.Text_HeroCombatPower.gameObject.SetActive(false);
             self.Slider_ShardNum.gameObject.SetActive(true);
             self.Text_ShardNum.gameObject.SetActive(true);
             self.Text_NotHave.gameObject.SetActive(true);
-            
+            self.Button_Click.gameObject.SetActive(false);
+
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(heroConfigId);
             self.Text_HeroName.text = heroConfig.HeroName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
@@ -83,11 +85,11 @@ namespace ET.Client
                 if (config.ItemSubType == ItemSubType.HeroShard)
                 {
                     string[] split = config.ItemUsePar.Split(',');
-                    if(int.Parse(split[0]) == heroConfigId)
+                    if (int.Parse(split[0]) == heroConfigId)
                     {
                         itemConfigId = config.Id;
                         needNum = int.Parse(split[1]);
-                        break;   
+                        break;
                     }
                 }
             }
@@ -98,9 +100,41 @@ namespace ET.Client
                 return;
             }
 
-            int num = self.Root().GetComponent<InventoryComponentC>().GetItemNum(itemConfigId, InventoryContainerType.Bag);
+            int num = self.Root().GetComponent<InventoryComponentC>().GetItemNum(itemConfigId);
             self.Slider_ShardNum.value = num / (float)needNum;
             self.Text_ShardNum.SetTextFormat("{0}/{1}", num, needNum);
+
+            if (num >= needNum)
+            {
+                self.Button_Click.gameObject.SetActive(true);
+                long itemId = 0;
+                foreach (Item item in self.Root().GetComponent<InventoryComponentC>().GetItemsBySubType(ItemSubType.HeroShard))
+                {
+                    string[] split = ItemConfigCategory.Instance.Get(item.ConfigId).ItemUsePar.Split(',');
+                    if (int.Parse(split[0]) == heroConfigId)
+                    {
+                        // 随便拿一个
+                        itemId = item.Id;
+                        break;
+                    }
+                }
+
+                self.Button_Click.AddListener(() => { self.OnHeChenHero(itemId).Coroutine(); });
+            }
+        }
+
+        private static async ETTask OnHeChenHero(this UIHeroItem self, long itemId)
+        {
+            int error = await ClientInventoryHelper.UseItem(self.Root(), itemId);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            UIHeroListComponent uiHeroListComponent = self.GetParent<UIHeroListComponent>();
+            uiHeroListComponent.SetShowType(uiHeroListComponent.CurrentPage);
+
+            self.Root().GetComponent<FloatingTextComponent>().ShowTipText("合成成功");
         }
     }
 }
