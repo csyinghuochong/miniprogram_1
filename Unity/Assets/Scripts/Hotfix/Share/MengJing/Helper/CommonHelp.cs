@@ -220,18 +220,5 @@ namespace ET
 
             return equipSlotType;
         }
-
-        // 限制单位的移动范围
-        public static float3 LimitMoveRange(float3 target, MapType mapType)
-        {
-            switch (mapType)
-            {
-                case MapType.LocalLevel:
-                    float x = math.clamp(target.x, -10, 10);
-                    return new float3(x, target.y, target.z);
-                default:
-                    return target;
-            }
-        }
     }
 }

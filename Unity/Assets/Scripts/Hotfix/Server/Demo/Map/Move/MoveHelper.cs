@@ -36,8 +36,6 @@ namespace ET.Server
 
         public static void PathResultTo(Unit unit, float3 target)
         {
-            target = CommonHelp.LimitMoveRange(target, unit.Scene().GetComponent<MapComponent>().MapType);
-            
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
             unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
 

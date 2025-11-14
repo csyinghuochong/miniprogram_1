@@ -217,7 +217,6 @@ namespace ET.Client
             float3 start = self.MyUnit.Position;
             Vector2 dire = self.Direction * 5f;
             float3 target = new float3(start.x + dire.x, start.y + dire.y, start.z);
-            target = CommonHelp.LimitMoveRange(target, self.Root().GetComponent<MapComponent>().MapType);
 
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
