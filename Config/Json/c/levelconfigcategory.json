@@ -2,7 +2,6 @@
   {
     "Id": 101,
     "LevelName": "关卡1-1",
-    "SceneName": "Level_1",
     "WaveIds": [
       10101,
       10102,
@@ -16,7 +15,6 @@
   {
     "Id": 102,
     "LevelName": "关卡1-2",
-    "SceneName": "Level_1",
     "WaveIds": [
       10201,
       10202,
@@ -30,7 +28,6 @@
   {
     "Id": 201,
     "LevelName": "关卡2-1",
-    "SceneName": "Level_1",
     "WaveIds": [
       20101,
       20102

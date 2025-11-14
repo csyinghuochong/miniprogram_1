@@ -45,7 +45,7 @@ namespace ET
         public readonly bool HaveBoss;
 
         /// <summary>
-        /// 怪物批次 Id
+        /// 怪物生成
         /// </summary>
         public readonly monsterSpawnInfo[] MonsterSpawnInfos;
 
