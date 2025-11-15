@@ -137,9 +137,8 @@ namespace ET
             string GetHostServerURL()
             {
                 //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
-                //string hostServerIP = "http://47.94.107.92";
                 // string hostServerIP = "http://weijinghot.weijinggame.com";
-                string hostServerIP = "http://49.235.169.53";
+                string hostServerIP = "http://115.190.237.40:8080";
                 string appVersion = "v1.0";
                 
 #if UNITY_EDITOR
