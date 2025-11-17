@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    # region 事件监听
+
     [Event(SceneType.Demo)]
     public class DataUpdate_UpdateUserData_UIMainRefresh : AEvent<Scene, UpdateUserData>
     {
@@ -129,7 +131,6 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-
             UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
             {
@@ -140,6 +141,8 @@ namespace ET.Client
             uiMainComponent.UpdateLevelProgress();
         }
     }
+
+    #endregion
 
     [EntitySystemOf(typeof(UIMainComponent))]
     [FriendOf(typeof(UIMainComponent))]
@@ -341,7 +344,8 @@ namespace ET.Client
                 }
                 else if (currentWaveIndex == i)
                 {
-                    progress.Find("Image_LevelProgress").GetComponent<Image>().fillAmount = currentWaveKillMonsterNum * 1f / waveConfig.MonsterSpawnInfos.Length;
+                    progress.Find("Image_LevelProgress").GetComponent<Image>().fillAmount =
+                            currentWaveKillMonsterNum * 1f / waveConfig.MonsterSpawnInfos.Length;
                     progress.Find("Image_StartOff").gameObject.SetActive(false);
                     progress.Find("Image_StartOn").gameObject.SetActive(true);
                     progress.Find("Image_EndOff").gameObject.SetActive(true);
