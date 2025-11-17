@@ -2179,7 +2179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windNoiseScale: 0.1
-  windNoiseSpeed: 0.2
+  windNoiseSpeed: 0.4
   windIntensityFrom: -0.4
   windIntensityTo: 0.4
 --- !u!4 &2023140117
