@@ -730,6 +730,7 @@ GameObject:
   - component: {fileID: 500347135}
   - component: {fileID: 500347136}
   - component: {fileID: 500347137}
+  - component: {fileID: 500347138}
   m_Layer: 12
   m_Name: FarmCrop_WhiteFlower_5_Bumper
   m_TagString: Untagged
@@ -772,7 +773,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4e513e3358d0ce2488b9bcfb5b5320b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -816,6 +817,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &500347138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500347134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40aeb343e89898458e2d3b1ee877bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationFactor: 1.5
+  bendInSpeed: 8
+  bendOutSpeed: 8
+  stayBent: 1
+  minBendSpeed: 1
+  hyperPerformanceMode: 0
+  randomOffsetZ: 1
+  customMaterial: 0
+  inactiveShader: Sprites/Default
+  inactiveMaterial: {fileID: 0}
 --- !u!1 &571230104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1568,9 @@ GameObject:
   - component: {fileID: 1339837602}
   - component: {fileID: 1339837603}
   - component: {fileID: 1339837604}
-  m_Layer: 12
+  - component: {fileID: 1339837605}
+  - component: {fileID: 1339837606}
+  m_Layer: 2
   m_Name: BigbushDark1_Berries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1587,7 +1612,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 05b737f5b213f37438682572b9ebeb32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1631,6 +1656,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1d2f18f00ceb346a5240e26f6dfcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1339837605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339837601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40aeb343e89898458e2d3b1ee877bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationFactor: 1.5
+  bendInSpeed: 8
+  bendOutSpeed: 8
+  stayBent: 1
+  minBendSpeed: 1
+  hyperPerformanceMode: 0
+  randomOffsetZ: 1
+  customMaterial: 0
+  inactiveShader: Sprites/Default
+  inactiveMaterial: {fileID: 0}
+--- !u!61 &1339837606
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339837601}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.6}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 6.04, y: 3.2}
+    newSize: {x: 6.04, y: 3.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.04, y: 3.2}
+  m_EdgeRadius: 0
 --- !u!1 &1445496199
 GameObject:
   m_ObjectHideFlags: 0
