@@ -153,6 +153,7 @@ namespace ET.Client
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_PlayerLv = rc.Get<GameObject>("Text_PlayerLv").GetComponent<TMP_Text>();
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
+            self.Text_Ping = rc.Get<GameObject>("Text_Ping").GetComponent<TMP_Text>();
             self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
             self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
             self.Image_TaskCompleted = rc.Get<GameObject>("Image_TaskCompleted").GetComponent<Image>();
@@ -192,6 +193,8 @@ namespace ET.Client
         private static void Update(this UIMainComponent self)
         {
             self.UpdateFPS();
+
+            self.Text_Ping.SetTextFormat("{0}ms", TimeInfo.Instance.Ping);
         }
 
         // 加载场景之前
