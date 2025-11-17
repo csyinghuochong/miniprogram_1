@@ -15,6 +15,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIMainSkillComponent self)
         {
+            self.UIMainSkillItemList.Clear();
         }
     }
 }
