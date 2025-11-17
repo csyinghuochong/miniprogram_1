@@ -19,6 +19,7 @@ namespace ET.Client
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Transform_HeroStar = rc.Get<GameObject>("Transform_HeroStar").transform;
+            self.Transform_CE = rc.Get<GameObject>("Transform_CE").transform;
             self.Text_HeroCombatPower = rc.Get<GameObject>("Text_HeroCombatPower").GetComponent<TMP_Text>();
             self.Slider_ShardNum = rc.Get<GameObject>("Slider_ShardNum").GetComponent<Slider>();
             self.Text_ShardNum = rc.Get<GameObject>("Text_ShardNum").GetComponent<TMP_Text>();
@@ -31,7 +32,7 @@ namespace ET.Client
             self.HeroId = hero.Id;
 
             self.Transform_HeroStar.gameObject.SetActive(true);
-            self.Text_HeroCombatPower.gameObject.SetActive(true);
+            self.Transform_CE.gameObject.SetActive(true);
             self.Slider_ShardNum.gameObject.SetActive(false);
             self.Text_ShardNum.gameObject.SetActive(false);
             self.Text_NotHave.gameObject.SetActive(false);
@@ -67,7 +68,7 @@ namespace ET.Client
         public static async ETTask UpdateInfo(this UIHeroItem self, int heroConfigId)
         {
             self.Transform_HeroStar.gameObject.SetActive(false);
-            self.Text_HeroCombatPower.gameObject.SetActive(false);
+            self.Transform_CE.gameObject.SetActive(false);
             self.Slider_ShardNum.gameObject.SetActive(true);
             self.Text_ShardNum.gameObject.SetActive(true);
             self.Text_NotHave.gameObject.SetActive(true);

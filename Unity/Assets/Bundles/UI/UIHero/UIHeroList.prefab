@@ -1222,6 +1222,8 @@ MonoBehaviour:
     gameObject: {fileID: 6847826035015720402}
   - key: Transform_HeroStar
     gameObject: {fileID: 9219955293189422838}
+  - key: Transform_CE
+    gameObject: {fileID: 5756541216702378299}
   - key: Text_HeroCombatPower
     gameObject: {fileID: 6407156658812743211}
   - key: Slider_ShardNum
@@ -2599,7 +2601,7 @@ GameObject:
   - component: {fileID: 2995529800759297819}
   - component: {fileID: 28081980921628202}
   m_Layer: 5
-  m_Name: BG_CE
+  m_Name: Transform_CE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
