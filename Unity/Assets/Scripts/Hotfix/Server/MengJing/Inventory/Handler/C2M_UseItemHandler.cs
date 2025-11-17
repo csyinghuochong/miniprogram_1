@@ -97,6 +97,7 @@ namespace ET.Server
                 }
 
                 HeroHelper.UpdateHeroNumeric(unit, hero);
+                HeroHelper.UpdateHeroSkill(hero);
                 HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Update);
             }
 
