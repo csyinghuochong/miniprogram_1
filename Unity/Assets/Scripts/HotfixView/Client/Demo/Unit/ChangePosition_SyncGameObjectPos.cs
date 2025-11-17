@@ -25,6 +25,10 @@
             {
                 scene.Root().GetComponent<UIComponent>().Get(UIType.UIMain)?.GetComponent<UIMainComponent>()?.UIMiniMapComponent?.OnMainHeroMove();
             }
+            else
+            {
+                scene.Root().GetComponent<UIComponent>().Get(UIType.UIMain)?.GetComponent<UIMainComponent>()?.UIMiniMapComponent?.OnUpdateMiniMapOneUnit(unit);
+            }
             
             await ETTask.CompletedTask;
         }

@@ -54,7 +54,7 @@ namespace ET.Client
             self.StartArea.GetComponent<EventTrigger>().AddEventTrigger(self.OnPointerUp, EventTriggerType.PointerUp);
             self.StartArea.GetComponent<EventTrigger>().AddEventTrigger(self.OnEndDrag, EventTriggerType.EndDrag);
 
-            self.MovableAreaMask = LayerMask.GetMask(nameof(LayerEnum.Map));
+            self.MovableAreaMask = LayerMask.GetMask(nameof(LayerEnum.MovableArea));
             self.MaxSearchSteps = 16;
             self.SearchStepDistance = 0.2f;
             self.JoystickModel = EJoystickModel.Fixed;

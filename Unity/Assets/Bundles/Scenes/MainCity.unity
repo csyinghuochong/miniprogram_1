@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 500347135}
   - component: {fileID: 500347136}
   - component: {fileID: 500347137}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FarmCrop_WhiteFlower_5_Bumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 929459219}
   - component: {fileID: 929459220}
   - component: {fileID: 929459221}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Icon_DST_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 947418867}
   - component: {fileID: 947418868}
   - component: {fileID: 947418869}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BerryBushCombined
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1049519324}
   - component: {fileID: 1049519325}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BuildingGrassFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 1082976913}
   - component: {fileID: 1082976914}
   - component: {fileID: 1082976915}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FarmCrop_WhiteFlower_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 1339837602}
   - component: {fileID: 1339837603}
   - component: {fileID: 1339837604}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BigbushDark1_Berries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 1445496202}
   - component: {fileID: 1445496201}
   - component: {fileID: 1445496200}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: MovableArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +971,7 @@ GameObject:
   - component: {fileID: 1677196804}
   - component: {fileID: 1677196805}
   - component: {fileID: 1677196806}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BloodstoneMine_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1066,7 +1066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1886481791}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1107,7 +1107,7 @@ GameObject:
   - component: {fileID: 1914813974}
   - component: {fileID: 1914813975}
   - component: {fileID: 1914813976}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FarmCrop_Grapes_3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

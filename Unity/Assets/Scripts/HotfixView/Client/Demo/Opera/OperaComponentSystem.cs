@@ -9,12 +9,10 @@ namespace ET.Client
     public enum LayerEnum
     {
         Player,
-        Map,
-        RenderTexture,
-        Background,
         Monster,
         Hero,
-        Drop,
+        Map,
+        MovableArea,
     }
 
     [EntitySystemOf(typeof(OperaComponent))]

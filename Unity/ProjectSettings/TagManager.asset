@@ -11,17 +11,17 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Map
-  - RenderTexture
-  - Background
+  - 
+  - 
+  - Player
   - Monster
   - Hero
-  - Drop
-  - 
-  - 
+  - Obstacle
+  - Map
+  - MovableArea
   - 
   - 
   - 
