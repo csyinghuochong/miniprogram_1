@@ -185,8 +185,6 @@ namespace ET.Client
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
             self.Button_Boss.AddListener(() => { ClientLevelHelper.EnterBossRoom(self.Root()).Coroutine(); });
-
-            Application.targetFrameRate = 60;
         }
 
         [EntitySystem]
