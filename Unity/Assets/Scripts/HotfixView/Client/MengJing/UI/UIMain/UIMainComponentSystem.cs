@@ -171,13 +171,13 @@ namespace ET.Client
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
             self.Button_Bag = rc.Get<GameObject>("Button_Bag").GetComponent<Button>();
             self.UILevelProgress = rc.Get<GameObject>("UILevelProgress");
-            self.UIMainSkill = rc.Get<GameObject>("UIMainSkill");
             self.Button_Boss = rc.Get<GameObject>("Button_Boss").GetComponent<Button>();
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
+            self.UIMainSkillComponent = self.AddComponent<UIMainSkillComponent, GameObject>(rc.Get<GameObject>("UIMainSkill"));
             self.Button_TaskCommit.AddListener(() => { self.OnButton_TaskCommit(); });
             self.EventTrigger_TaskReward.AddEventTrigger((p) => { self.OnTaskRewardPointerDown(p).Coroutine(); }, EventTriggerType.PointerDown);
             self.EventTrigger_TaskReward.AddEventTrigger(self.OnTaskRewardPointerUp, EventTriggerType.PointerUp);
@@ -209,7 +209,7 @@ namespace ET.Client
             self.Button_StartLevel.gameObject.SetActive(mapType == MapType.MainCity);
             self.Button_Recall.gameObject.SetActive(mapType == MapType.LocalLevel);
             self.UILevelProgress.gameObject.SetActive(mapType == MapType.LocalLevel);
-            self.UIMainSkill.SetActive(mapType == MapType.LocalLevel);
+            self.UIMainSkillComponent.GameObject.SetActive(mapType == MapType.LocalLevel);
 
             self.UpdatePlayerName();
             self.UpdatePlayerLv();

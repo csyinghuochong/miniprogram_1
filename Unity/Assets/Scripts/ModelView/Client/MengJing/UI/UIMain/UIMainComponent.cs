@@ -16,6 +16,7 @@ namespace ET.Client
 
         public UIMiniMapComponent UIMiniMapComponent { get; set; }
         public UIJoystickComponent UIJoystickComponent { get; set; }
+        public UIMainSkillComponent UIMainSkillComponent { get; set; }
 
         public TMP_Text Text_PlayerName;
         public TMP_Text Text_PlayerLv;
@@ -35,7 +36,6 @@ namespace ET.Client
         public Button Button_Hero;
         public Button Button_Bag;
         public GameObject UILevelProgress;
-        public GameObject UIMainSkill;
         public Button Button_Boss;
         public Slider Slider_Exp;
         public TMP_Text Text_Exp;
