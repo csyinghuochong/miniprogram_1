@@ -29,19 +29,19 @@ namespace ET.Client
         {
         }
 
-        public static async ETTask UpdateInfo(this UISkillItem self, int skillConfigId, int heroStar)
+        public static async ETTask UpdateInfo(this UISkillItem self, UnlockSkillInfo unlockSkillInfo, int heroStar)
         {
-            self.SkillConfigId = skillConfigId;
+            self.SkillConfigId = unlockSkillInfo.SkillConfigId;
 
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillConfigId);
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.SkillIcon, skillConfig.SkillIcon);
             self.Image_SkillIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
-            if (heroStar < skillConfig.UnlockStar)
+            if (heroStar < unlockSkillInfo.UnlockStar)
             {
                 self.Unlock.SetActive(true);
-                self.Text_Unlock.SetTextFormat("{0}星激活", skillConfig.UnlockStar);
+                self.Text_Unlock.SetTextFormat("{0}星激活", unlockSkillInfo.UnlockStar);
             }
             else
             {

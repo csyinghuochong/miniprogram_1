@@ -12,9 +12,9 @@ using Luban;
 namespace ET
 {
     [EnableClass]
-    public sealed partial class monsterSpawnInfo : BeanBase
+    public sealed partial class MonsterSpawnInfo : BeanBase
     {
-        public monsterSpawnInfo(ByteBuf _buf)
+        public MonsterSpawnInfo(ByteBuf _buf)
         {
             SpawnTime = _buf.ReadFloat();
             SpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
@@ -23,9 +23,9 @@ namespace ET
             PostInit();
         }
 
-        public static monsterSpawnInfo DeserializemonsterSpawnInfo(ByteBuf _buf)
+        public static MonsterSpawnInfo DeserializeMonsterSpawnInfo(ByteBuf _buf)
         {
-            return new monsterSpawnInfo(_buf);
+            return new MonsterSpawnInfo(_buf);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace ET
         public readonly int MonsterId;
 
 
-        public const int __ID__ = -1744395249;
+        public const int __ID__ = 1707796527;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()

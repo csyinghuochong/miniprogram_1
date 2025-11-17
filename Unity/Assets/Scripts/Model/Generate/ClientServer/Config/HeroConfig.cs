@@ -24,8 +24,8 @@ namespace ET
             HeroModelID = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); HeroUpStarNeed = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); HeroUpStarNeed[__index0] = __e0;}}
             DamageType = _buf.ReadInt();
-            AtkID = _buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
+            AtkId = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); UnlockSkillInfos = new UnlockSkillInfo[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { UnlockSkillInfo __e0;__e0 = global::ET.UnlockSkillInfo.DeserializeUnlockSkillInfo(_buf); UnlockSkillInfos[__index0] = __e0;}}
             BaseHp = _buf.ReadInt();
             BaseAct = _buf.ReadInt();
             BaseMage = _buf.ReadInt();
@@ -96,12 +96,12 @@ namespace ET
         /// <summary>
         /// 普通攻击ID
         /// </summary>
-        public readonly int AtkID;
+        public readonly int AtkId;
 
         /// <summary>
         /// 英雄技能ID
         /// </summary>
-        public readonly int[] SkillID;
+        public readonly UnlockSkillInfo[] UnlockSkillInfos;
 
         /// <summary>
         /// 血量
@@ -208,7 +208,7 @@ namespace ET
             
             
             
-            
+            foreach (var _e in UnlockSkillInfos) { _e?.ResolveRef(); }
             
             
             
@@ -240,8 +240,8 @@ namespace ET
             + "HeroModelID:" + HeroModelID + ","
             + "HeroUpStarNeed:" + Luban.StringUtil.CollectionToString(HeroUpStarNeed) + ","
             + "DamageType:" + DamageType + ","
-            + "AtkID:" + AtkID + ","
-            + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
+            + "AtkId:" + AtkId + ","
+            + "UnlockSkillInfos:" + Luban.StringUtil.CollectionToString(UnlockSkillInfos) + ","
             + "BaseHp:" + BaseHp + ","
             + "BaseAct:" + BaseAct + ","
             + "BaseMage:" + BaseMage + ","

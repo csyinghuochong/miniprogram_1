@@ -229,20 +229,20 @@ namespace ET.Client
             self.ShowOtherStatItem(2, 1, "抗暴", ZString.Format("{0:0.#}%", hero.NumericDic[NumericType.Base_ReCri_Base] / 10000f * 100f));
 
             // 技能
-            while (self.UISkillItemList.Count < heroConfig.SkillID.Length)
+            while (self.UISkillItemList.Count < heroConfig.UnlockSkillInfos.Length)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UISkillItem, self.Content_UISkillItem);
                 UISkillItem newItem = self.AddChild<UISkillItem, GameObject>(go);
                 self.UISkillItemList.Add(newItem);
             }
 
-            for (int i = 0; i < heroConfig.SkillID.Length; i++)
+            for (int i = 0; i < heroConfig.UnlockSkillInfos.Length; i++)
             {
-                self.UISkillItemList[i].UpdateInfo(heroConfig.SkillID[i], hero.Star).Coroutine();
+                self.UISkillItemList[i].UpdateInfo(heroConfig.UnlockSkillInfos[i], hero.Star).Coroutine();
                 self.UISkillItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = heroConfig.SkillID.Length; i < self.UISkillItemList.Count; i++)
+            for (int i = heroConfig.UnlockSkillInfos.Length; i < self.UISkillItemList.Count; i++)
             {
                 self.UISkillItemList[i].GameObject.SetActive(false);
             }

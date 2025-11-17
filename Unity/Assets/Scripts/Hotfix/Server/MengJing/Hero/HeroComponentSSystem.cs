@@ -130,6 +130,8 @@ namespace ET.Server
                 hero.Equipments.TryAdd((int)EquipSlotType.Xiezi, 0);
                 hero.Equipments.TryAdd((int)EquipSlotType.Xianglian, 0);
                 hero.Equipments.TryAdd((int)EquipSlotType.Wuqi, 0);
+                
+                HeroHelper.UpdateHeroSkill(hero);
             }
         }
 

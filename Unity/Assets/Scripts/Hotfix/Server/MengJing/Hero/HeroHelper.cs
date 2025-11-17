@@ -82,5 +82,10 @@ namespace ET.Server
                 hero.Star += 1;
             }
         }
+
+        public static void UpdateHeroSkill(Hero hero)
+        {
+            
+        }
     }
 }

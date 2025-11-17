@@ -25,6 +25,7 @@
             heroInfo.HunShi = self.HunShi;
             heroInfo.Equipments = self.Equipments;
             heroInfo.NumericDic = self.NumericDic;
+            heroInfo.Skills = self.Skills;
 
             return heroInfo;
         }
@@ -38,6 +39,7 @@
             self.HunShi = heroInfo.HunShi;
             self.Equipments = heroInfo.Equipments;
             self.NumericDic = heroInfo.NumericDic;
+            self.Skills = heroInfo.Skills;
         }
     }
 }

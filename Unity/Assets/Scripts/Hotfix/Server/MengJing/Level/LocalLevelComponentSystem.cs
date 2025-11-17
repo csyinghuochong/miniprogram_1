@@ -61,7 +61,7 @@ namespace ET.Server
                 return;
             }
 
-            monsterSpawnInfo monsterSpawnInfo = waveConfig.MonsterSpawnInfos[self.SpawnedMonsterIndex];
+            MonsterSpawnInfo monsterSpawnInfo = waveConfig.MonsterSpawnInfos[self.SpawnedMonsterIndex];
             if (self.SpawnTime < monsterSpawnInfo.SpawnTime)
             {
                 return;

@@ -14,12 +14,24 @@
       800
     ],
     "DamageType": 1,
-    "AtkID": 10000001,
-    "SkillID": [
-      20000001,
-      30000001,
-      30000002,
-      30000003
+    "AtkId": 10000001,
+    "UnlockSkillInfos": [
+      {
+        "UnlockStar": 0,
+        "SkillConfigId": 20000001
+      },
+      {
+        "UnlockStar": 1,
+        "SkillConfigId": 30000001
+      },
+      {
+        "UnlockStar": 2,
+        "SkillConfigId": 30000002
+      },
+      {
+        "UnlockStar": 3,
+        "SkillConfigId": 30000003
+      }
     ],
     "Base_Hp": 14000,
     "Base_Act": 60,
@@ -55,12 +67,24 @@
       800
     ],
     "DamageType": 1,
-    "AtkID": 10000001,
-    "SkillID": [
-      20000002,
-      30000004,
-      30000005,
-      30000006
+    "AtkId": 10000001,
+    "UnlockSkillInfos": [
+      {
+        "UnlockStar": 0,
+        "SkillConfigId": 20000002
+      },
+      {
+        "UnlockStar": 1,
+        "SkillConfigId": 30000004
+      },
+      {
+        "UnlockStar": 2,
+        "SkillConfigId": 30000005
+      },
+      {
+        "UnlockStar": 3,
+        "SkillConfigId": 30000006
+      }
     ],
     "Base_Hp": 8000,
     "Base_Act": 100,
@@ -96,12 +120,24 @@
       800
     ],
     "DamageType": 1,
-    "AtkID": 10000001,
-    "SkillID": [
-      20000003,
-      30000007,
-      30000008,
-      30000009
+    "AtkId": 10000001,
+    "UnlockSkillInfos": [
+      {
+        "UnlockStar": 0,
+        "SkillConfigId": 20000003
+      },
+      {
+        "UnlockStar": 1,
+        "SkillConfigId": 30000007
+      },
+      {
+        "UnlockStar": 2,
+        "SkillConfigId": 30000008
+      },
+      {
+        "UnlockStar": 3,
+        "SkillConfigId": 30000009
+      }
     ],
     "Base_Hp": 8000,
     "Base_Act": 100,
@@ -137,12 +173,24 @@
       800
     ],
     "DamageType": 1,
-    "AtkID": 10000001,
-    "SkillID": [
-      20000005,
-      30000013,
-      30000014,
-      30000015
+    "AtkId": 10000001,
+    "UnlockSkillInfos": [
+      {
+        "UnlockStar": 0,
+        "SkillConfigId": 20000005
+      },
+      {
+        "UnlockStar": 1,
+        "SkillConfigId": 30000013
+      },
+      {
+        "UnlockStar": 2,
+        "SkillConfigId": 30000014
+      },
+      {
+        "UnlockStar": 3,
+        "SkillConfigId": 30000015
+      }
     ],
     "Base_Hp": 10000,
     "Base_Act": 80,
@@ -178,12 +226,24 @@
       800
     ],
     "DamageType": 2,
-    "AtkID": 10000002,
-    "SkillID": [
-      20000004,
-      30000010,
-      30000011,
-      30000012
+    "AtkId": 10000002,
+    "UnlockSkillInfos": [
+      {
+        "UnlockStar": 0,
+        "SkillConfigId": 20000004
+      },
+      {
+        "UnlockStar": 1,
+        "SkillConfigId": 30000010
+      },
+      {
+        "UnlockStar": 2,
+        "SkillConfigId": 30000011
+      },
+      {
+        "UnlockStar": 3,
+        "SkillConfigId": 30000012
+      }
     ],
     "Base_Hp": 8000,
     "Base_Act": 100,
@@ -219,12 +279,24 @@
       800
     ],
     "DamageType": 2,
-    "AtkID": 10000003,
-    "SkillID": [
-      20000006,
-      30000016,
-      30000017,
-      30000018
+    "AtkId": 10000003,
+    "UnlockSkillInfos": [
+      {
+        "UnlockStar": 0,
+        "SkillConfigId": 20000006
+      },
+      {
+        "UnlockStar": 1,
+        "SkillConfigId": 30000016
+      },
+      {
+        "UnlockStar": 2,
+        "SkillConfigId": 30000017
+      },
+      {
+        "UnlockStar": 3,
+        "SkillConfigId": 30000018
+      }
     ],
     "Base_Hp": 10000,
     "Base_Act": 80,

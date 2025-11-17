@@ -2801,6 +2801,9 @@ namespace ET
         [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(7)]
         public Dictionary<int, long> NumericDic { get; set; } = new();
+        [MemoryPackOrder(8)]
+        public List<int> Skills { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2816,6 +2819,7 @@ namespace ET
             this.HunShi = default;
             this.Equipments.Clear();
             this.NumericDic.Clear();
+            this.Skills.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

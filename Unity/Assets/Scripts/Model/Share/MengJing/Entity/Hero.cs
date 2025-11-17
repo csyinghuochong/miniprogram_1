@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
 
@@ -24,12 +24,14 @@ namespace ET
         public int Lv { get; set; }
         public int Exp { get; set; }
         public int Star { get; set; }
-        public int HunShi{ get; set; }
+        public int HunShi { get; set; }
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, long> Equipments { get; set; } = new();
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, long> NumericDic { get; set; } = new();
+
+        public List<int> Skills { get; set; } = new();
     }
 }

@@ -20,7 +20,7 @@ namespace ET
             Name = _buf.ReadString();
             HaveBoss = _buf.ReadBool();
             PlayerSpawnPosition = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
-            {int __n0 = _buf.ReadSize(); MonsterSpawnInfos = new monsterSpawnInfo[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { monsterSpawnInfo __e0;__e0 = global::ET.monsterSpawnInfo.DeserializemonsterSpawnInfo(_buf); MonsterSpawnInfos[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); MonsterSpawnInfos = new MonsterSpawnInfo[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { MonsterSpawnInfo __e0;__e0 = global::ET.MonsterSpawnInfo.DeserializeMonsterSpawnInfo(_buf); MonsterSpawnInfos[__index0] = __e0;}}
 
             PostInit();
         }
@@ -53,7 +53,7 @@ namespace ET
         /// <summary>
         /// 怪物生成
         /// </summary>
-        public readonly monsterSpawnInfo[] MonsterSpawnInfos;
+        public readonly MonsterSpawnInfo[] MonsterSpawnInfos;
 
 
         public const int __ID__ = 1814560699;

@@ -618,6 +618,7 @@ message HeroInfo
 	int32 HunShi = 6;
 	map<int32,int64> Equipments = 7;
 	map<int32,int64> NumericDic = 8;
+	repeated int32 Skills = 9;
 }
 
 // ResponseType M2C_GetAllHero
