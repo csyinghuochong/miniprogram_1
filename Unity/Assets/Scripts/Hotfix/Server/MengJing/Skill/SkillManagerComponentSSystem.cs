@@ -50,7 +50,6 @@ namespace ET.Server
 
                 if (skill.SkillState == SkillState.Finished)
                 {
-                    self.OnRemoveSkillItem(skill);
                     skill.OnFinished();
                     skill.Dispose();
                     self.Skills.RemoveAt(i);

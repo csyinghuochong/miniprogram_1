@@ -38,15 +38,6 @@ namespace ET.Server
             self.SkillHandler?.OnExecute(self);
         }
 
-        public static void BaseUpdate(this SkillS self, float deltaTime)
-        {
-            self.RunTime += deltaTime;
-            if (self.RunTime >= self.SkillConfig.SkillLiveTime)
-            {
-                self.SkillState = SkillState.Finished;
-            }
-        }
-
         public static void OnUpdate(this SkillS self, float deltaTime)
         {
             self.SkillHandler?.OnUpdate(self, deltaTime);
