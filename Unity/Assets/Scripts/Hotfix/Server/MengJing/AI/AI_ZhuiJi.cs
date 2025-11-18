@@ -31,22 +31,22 @@ namespace ET.Server
             // 更新目标为最近的敌人
             if (closestEnemy != null)
             {
-                aiComponent.TargetID = closestEnemy.Id;
+                aiComponent.TargetId = closestEnemy.Id;
             }
             else
             {
-                aiComponent.TargetID = 0;
+                aiComponent.TargetId = 0;
             }
 
-            if (aiComponent.TargetID == 0)
+            if (aiComponent.TargetId == 0)
             {
                 return 1;
             }
 
-            Unit target = aiComponent.Scene().GetComponent<UnitComponent>().Get(aiComponent.TargetID);
+            Unit target = aiComponent.Scene().GetComponent<UnitComponent>().Get(aiComponent.TargetId);
             if (target == null)
             {
-                aiComponent.TargetID = 0;
+                aiComponent.TargetId = 0;
                 return 1;
             }
 
@@ -63,7 +63,7 @@ namespace ET.Server
 
             for (int i = 0; i < 10000; i++)
             {
-                Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);
+                Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetId);
                 if (target != null)
                 {
                     float currentDistance = math.distance(unit.Position, target.Position);

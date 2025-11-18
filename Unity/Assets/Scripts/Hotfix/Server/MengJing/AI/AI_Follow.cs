@@ -20,7 +20,7 @@ namespace ET.Server
             // 距离主人太远（>15米），强制跟随，放弃战斗
             if (distanceToMaster > 15f)
             {
-                aiComponent.TargetID = 0;
+                aiComponent.TargetId = 0;
                 return 0;
             }
 

@@ -6,10 +6,10 @@ namespace ET.Server
     {
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
-            Unit target = aiComponent.Scene().GetComponent<UnitComponent>().Get(aiComponent.TargetID);
+            Unit target = aiComponent.Scene().GetComponent<UnitComponent>().Get(aiComponent.TargetId);
             if (target == null || target.IsDisposed)
             {
-                aiComponent.TargetID = 0;
+                aiComponent.TargetId = 0;
                 return 1;
             }
 
@@ -31,21 +31,22 @@ namespace ET.Server
                     break;
                 }
 
-                Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);
+                Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetId);
                 if (target == null || !target.IsCanBeAttack())
                 {
-                    aiComponent.TargetID = 0;
+                    aiComponent.TargetId = 0;
                 }
 
-                if (aiComponent.TargetID != 0 && target != null)
+                if (aiComponent.TargetId != 0 && target != null)
                 {
                     float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
                     if (distance <= aiComponent.ActDistance && skillManagerComponent.IsCanUseSkill(skillId) == ErrorCode.ERR_Success)
                     {
                         SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
                         float3 direction = target.Position - unit.Position;
+                        float angle = math.degrees(math.atan2(direction.x, direction.y));
 
-                        skillManagerComponent.TryUseSkill(skillId, target.Id, math.degrees(math.atan2(direction.x, direction.y)), target.Position);
+                        skillManagerComponent.TryUseSkill(skillId, target.Id, angle, target.Position);
                     }
                 }
 

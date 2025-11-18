@@ -150,7 +150,7 @@ namespace ET.Server
 
         public static void Stop(this AIComponent self)
         {
-            self.TargetID = 0;
+            self.TargetId = 0;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
