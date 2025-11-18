@@ -2976,6 +2976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1929521517813409606}
   - component: {fileID: 1095849006474235975}
+  - component: {fileID: 4287490056089831331}
   m_Layer: 5
   m_Name: UIMainSkill
   m_TagString: Untagged
@@ -3013,6 +3014,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2528909739565110689}
   m_CullTransparentMesh: 1
+--- !u!114 &4287490056089831331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2528909739565110689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: Transform_SkillList
+    gameObject: {fileID: 4736762403700523562}
+  - key: UIMainSkillItem
+    gameObject: {fileID: 4484126725654175194}
 --- !u!1 &2754373750909052700
 GameObject:
   m_ObjectHideFlags: 0
@@ -4876,6 +4894,7 @@ GameObject:
   - component: {fileID: 7910184728984480926}
   - component: {fileID: 3931483124601387284}
   - component: {fileID: 3686650476435224052}
+  - component: {fileID: 4341894746742160805}
   m_Layer: 5
   m_Name: UIMainSkillItem
   m_TagString: Untagged
@@ -4944,6 +4963,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4341894746742160805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484126725654175194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: Image_SkillIcon
+    gameObject: {fileID: 5109068205334911977}
+  - key: Image_SkillCd
+    gameObject: {fileID: 6106118618822685773}
+  - key: Text_SkillCd
+    gameObject: {fileID: 4701130436319341015}
+  - key: EventTrigger_Click
+    gameObject: {fileID: 559754883176931847}
 --- !u!1 &4616367878488053723
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,20 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof(UIMainSkillComponent))]
+    [ChildOf(typeof(UIMainSkillComponent))]
     public class UIMainSkillItem : Entity, IAwake<GameObject>, IDestroy
     {
+        public long UnitId;
+        public int SkillId;
+
         public GameObject GameObject { get; set; }
+        public Image Image_SkillIcon;
+        public Image Image_SkillCd;
+        public TMP_Text Text_SkillCd;
+        public EventTrigger EventTrigger_Click;
     }
 }

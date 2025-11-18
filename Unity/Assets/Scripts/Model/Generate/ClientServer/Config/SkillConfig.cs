@@ -28,7 +28,7 @@ namespace ET
             PassiveSkillType = _buf.ReadInt();
             PassiveSkillPro = _buf.ReadDouble();
             PassiveSkillTriggerOnce = _buf.ReadInt();
-            SkillCD = _buf.ReadDouble();
+            SkillCD = _buf.ReadFloat();
             SkillLiveTime = _buf.ReadFloat();
             ActDamage = _buf.ReadDouble();
             DamgeValue = _buf.ReadInt();
@@ -115,7 +115,7 @@ namespace ET
         /// <summary>
         /// 技能CD
         /// </summary>
-        public readonly double SkillCD;
+        public readonly float SkillCD;
 
         /// <summary>
         /// 技能存在时间

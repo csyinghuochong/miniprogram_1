@@ -203,6 +203,19 @@ namespace ET.Client
 
             self.PublicCD = publicCD;
         }
+        
+        public static float GetSkillCD(this SkillManagerComponentC self, int skillConfigId)
+        {
+            foreach (SkillCDItem skillCDItem in self.SkillCDs)
+            {
+                if (skillCDItem.SkillConfigId == skillConfigId)
+                {
+                    return skillCDItem.CD;
+                }
+            }
+
+            return 0;
+        }
 
         public static void OnFinish(this SkillManagerComponentC self)
         {

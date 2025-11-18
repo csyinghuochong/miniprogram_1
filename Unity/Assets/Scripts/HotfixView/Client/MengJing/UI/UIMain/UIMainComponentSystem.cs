@@ -201,6 +201,7 @@ namespace ET.Client
         // 加载场景之前
         public static void BeforeEnterScene(this UIMainComponent self, MapType mapType)
         {
+            self.UIMainSkillComponent.BeforeEnterScene(mapType);
         }
 
         // 场景和角色都加载完成后
@@ -209,7 +210,6 @@ namespace ET.Client
             self.Button_StartLevel.gameObject.SetActive(mapType == MapType.MainCity);
             self.Button_Recall.gameObject.SetActive(mapType == MapType.LocalLevel);
             self.UILevelProgress.gameObject.SetActive(mapType == MapType.LocalLevel);
-            self.UIMainSkillComponent.GameObject.SetActive(mapType == MapType.LocalLevel);
 
             self.UpdatePlayerName();
             self.UpdatePlayerLv();
@@ -220,6 +220,7 @@ namespace ET.Client
 
             self.UIMiniMapComponent.AfterEnterScene(mapType);
             self.UIJoystickComponent.AfterEnterScene(mapType);
+            self.UIMainSkillComponent.AfterEnterScene(mapType);
         }
 
         private static void UpdateFPS(this UIMainComponent self)

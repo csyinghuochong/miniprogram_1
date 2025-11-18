@@ -109,7 +109,7 @@ namespace ET.Server
             // self.AISkillIDList.AddRange(monsterConfig.SkillID);
         }
 
-        public static void InitHero(this AIComponent self)
+        public static void InitHero(this AIComponent self, Hero hero)
         {
             Unit unit = self.GetParent<Unit>();
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
@@ -117,9 +117,7 @@ namespace ET.Server
 
             self.FollowDistance = 10f;
             self.ActDistance = heroConfig.AtkDistance / 10000f;
-            self.AISkillIDList.Add(heroConfig.AtkId);
-            self.AISkillIDList.Add(20000005);
-            // self.AISkillIDList.AddRange(heroConfig.SkillID);
+            self.AISkillIDList.AddRange(hero.Skills);
         }
 
         public static bool HaveSkillId(this AIComponent self, int skillId)

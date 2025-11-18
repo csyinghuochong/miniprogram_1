@@ -100,7 +100,7 @@ namespace ET.Server
             unit.AddComponent<Move2DComponent>();
 
             AIComponent aiComponent = unit.AddComponent<AIComponent, int>(1);
-            aiComponent.InitHero();
+            aiComponent.InitHero(hero);
             aiComponent.Begin();
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
