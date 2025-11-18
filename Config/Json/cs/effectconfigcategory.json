@@ -53,7 +53,7 @@
     "Id": 10000006,
     "Name": "岩石爆",
     "EffectType": 1,
-    "EffectName": "Eff_Test6",
+    "EffectName": "Eff_Test1",
     "SkillEffectLiveTime": 2,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
