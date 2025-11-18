@@ -66,6 +66,7 @@ namespace ET.Server
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<SkillPassiveComponent>();
             unit.AddComponent<BuffManagerComponentS>();
             unit.AddComponent<UnitInfoComponent>();
             // unit.AddComponent<MoveComponent>();
@@ -91,6 +92,7 @@ namespace ET.Server
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<SkillPassiveComponent>();
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
@@ -136,6 +138,7 @@ namespace ET.Server
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<SkillPassiveComponent>();
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
