@@ -25,7 +25,7 @@ namespace ET
             SkillHandler = _buf.ReadString();
             GameObjectParameter = _buf.ReadString();
             SkillType = (SkillType)_buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); PassiveSkillType = new PassiveSkillType[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { PassiveSkillType __e0;__e0 = (PassiveSkillType)_buf.ReadInt(); PassiveSkillType[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); SkillPassiveType = new SkillPassiveType[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { SkillPassiveType __e0;__e0 = (SkillPassiveType)_buf.ReadInt(); SkillPassiveType[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); PassiveSkillPro = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); PassiveSkillPro[__index0] = __e0;}}
             PassiveSkillTriggerOnce = _buf.ReadInt();
             SkillCD = _buf.ReadFloat();
@@ -100,7 +100,7 @@ namespace ET
         /// <summary>
         /// 被动技能触发类型
         /// </summary>
-        public readonly PassiveSkillType[] PassiveSkillType;
+        public readonly SkillPassiveType[] SkillPassiveType;
 
         /// <summary>
         /// 被动技能触发参数
@@ -234,7 +234,7 @@ namespace ET
             + "SkillHandler:" + SkillHandler + ","
             + "GameObjectParameter:" + GameObjectParameter + ","
             + "SkillType:" + SkillType + ","
-            + "PassiveSkillType:" + Luban.StringUtil.CollectionToString(PassiveSkillType) + ","
+            + "SkillPassiveType:" + Luban.StringUtil.CollectionToString(SkillPassiveType) + ","
             + "PassiveSkillPro:" + Luban.StringUtil.CollectionToString(PassiveSkillPro) + ","
             + "PassiveSkillTriggerOnce:" + PassiveSkillTriggerOnce + ","
             + "SkillCD:" + SkillCD + ","

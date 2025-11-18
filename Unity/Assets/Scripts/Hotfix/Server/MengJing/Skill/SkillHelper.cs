@@ -2,7 +2,7 @@
 {
     public static class SkillHelper
     {
-        public static bool havePassiveSkillType(PassiveSkillType[] typeList, PassiveSkillType passType)
+        public static bool havePassiveSkillType(SkillPassiveType[] typeList, SkillPassiveType passType)
         {
             if (typeList == null)
             {

@@ -5,17 +5,17 @@ namespace ET.Server
     [EnableClass]
     public class SkillPassiveInfo
     {
-        public int SkillId;
-        public List<PassiveSkillType> SkillPassiveTypeEnum;
+        public int SkillConfigId;
+        public List<SkillPassiveType> SkillPassiveTypeEnum;
         public List<float> SkillPro;
         public int TriggerOnce;
         public long TriggerInterval;
         public long LastTriggerTime;
         public int TriggerNumber;
 
-        public SkillPassiveInfo(int skillId, List<PassiveSkillType> skillPassiveTypeEnum, List<float> skillPro, int triggerOnce, double triggerTime)
+        public SkillPassiveInfo(int skillConfigId, List<SkillPassiveType> skillPassiveTypeEnum, List<float> skillPro, int triggerOnce, double triggerTime)
         {
-            this.SkillId = skillId;
+            this.SkillConfigId = skillConfigId;
             this.SkillPassiveTypeEnum = skillPassiveTypeEnum;
             this.SkillPro = skillPro;
             this.TriggerOnce = triggerOnce;

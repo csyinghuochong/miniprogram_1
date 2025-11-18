@@ -12,7 +12,7 @@ namespace ET
     /// <summary>
     /// 被动技能触发类型
     /// </summary>
-    public enum PassiveSkillType
+    public enum SkillPassiveType
     {
         /// <summary>
         /// 无视

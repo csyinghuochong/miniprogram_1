@@ -45,24 +45,24 @@ namespace ET.Server
         {
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
-            if (skillConfig.SkillType != SkillType.Passive || SkillHelper.havePassiveSkillType(skillConfig.PassiveSkillType, PassiveSkillType.None))
+            if (skillConfig.SkillType != SkillType.Passive || SkillHelper.havePassiveSkillType(skillConfig.SkillPassiveType, SkillPassiveType.None))
             {
                 return;
             }
 
             for (int i = 0; i < self.SkillPassiveInfos.Count; i++)
             {
-                if (self.SkillPassiveInfos[i].SkillId == skillConfig.Id)
+                if (self.SkillPassiveInfos[i].SkillConfigId == skillConfig.Id)
                 {
                     return;
                 }
             }
 
-            List<PassiveSkillType> passiveSkillType = new();
+            List<SkillPassiveType> passiveSkillType = new();
             List<float> passiveSkillPro = new();
-            for (int i = 0; i < skillConfig.PassiveSkillType.Length; i++)
+            for (int i = 0; i < skillConfig.SkillPassiveType.Length; i++)
             {
-                passiveSkillType.Add(skillConfig.PassiveSkillType[i]);
+                passiveSkillType.Add(skillConfig.SkillPassiveType[i]);
                 passiveSkillPro.Add((float)skillConfig.PassiveSkillPro[i]);
             }
 
@@ -70,6 +70,25 @@ namespace ET.Server
             self.SkillPassiveInfos.Add(skillPassiveInfo);
         }
 
+        public static void RemovePassiveSkill(this SkillPassiveComponent self, int skillConfigId)
+        {
+            for (int i = self.SkillPassiveInfos.Count - 1; i >= 0; i--)
+            {
+                if (self.SkillPassiveInfos[i].SkillConfigId != skillConfigId)
+                {
+                    continue;
+                }
+
+                self.SkillPassiveInfos.RemoveAt(i);
+                break;
+            }
+        }
+
+        public static void OnTriggerPassiveSkill(this SkillPassiveComponent self, SkillPassiveType skillPassiveType)
+        {
+            
+        }
+        
         public static void Stop(this SkillPassiveComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
