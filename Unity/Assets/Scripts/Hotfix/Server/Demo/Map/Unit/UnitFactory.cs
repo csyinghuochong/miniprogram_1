@@ -92,7 +92,11 @@ namespace ET.Server
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
-            unit.AddComponent<SkillPassiveComponent>();
+            SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
+            foreach (int id in hero.Skills)
+            {
+                skillPassiveComponent.AddPassiveSkill(id);
+            }
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
@@ -138,7 +142,11 @@ namespace ET.Server
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
-            unit.AddComponent<SkillPassiveComponent>();
+            SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
+            foreach (int id in monsterConfig.SkillID)
+            {
+                skillPassiveComponent.AddPassiveSkill(id);
+            }
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;

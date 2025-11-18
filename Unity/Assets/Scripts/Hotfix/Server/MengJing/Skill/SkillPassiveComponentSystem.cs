@@ -65,8 +65,14 @@ namespace ET.Server
 
             List<SkillPassiveType> passiveSkillType = new();
             List<float> passiveSkillPro = new();
+            bool selfCheck = false;
             for (int i = 0; i < skillConfig.SkillPassiveType.Length; i++)
             {
+                if (!selfCheck)
+                {
+                    selfCheck = self.IsSelfCheck(skillConfig.SkillPassiveType[i]);
+                }
+
                 passiveSkillType.Add(skillConfig.SkillPassiveType[i]);
                 passiveSkillPro.Add(skillConfig.PassiveSkillPro[i]);
             }
@@ -74,10 +80,20 @@ namespace ET.Server
             SkillPassiveInfo skillPassiveInfo = new SkillPassiveInfo(skillConfig.Id, passiveSkillType, passiveSkillPro, skillConfig.PassiveSkillTriggerOnce, skillConfig.SkillCD);
             self.SkillPassiveInfos.Add(skillPassiveInfo);
 
-            if (self.Timer == 0)
+            if (self.Timer == 0 && selfCheck)
             {
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.SkillPassive, self);
             }
+        }
+
+        private static bool IsSelfCheck(this SkillPassiveComponent self, SkillPassiveType skillPassiveType)
+        {
+            if (skillPassiveType == SkillPassiveType.Type_3)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public static void RemovePassiveSkill(this SkillPassiveComponent self, int skillConfigId)
@@ -91,6 +107,23 @@ namespace ET.Server
 
                 self.SkillPassiveInfos.RemoveAt(i);
                 break;
+            }
+
+            bool selfCheck = false;
+            foreach (SkillPassiveInfo skillPassiveInfo in self.SkillPassiveInfos)
+            {
+                foreach (SkillPassiveType skillPassiveType in skillPassiveInfo.SkillPassiveTypes)
+                {
+                    if (!selfCheck)
+                    {
+                        selfCheck = self.IsSelfCheck(skillPassiveType);
+                    }
+                }
+            }
+
+            if (self.Timer != 0 && !selfCheck)
+            {
+                self.Stop();
             }
         }
 
