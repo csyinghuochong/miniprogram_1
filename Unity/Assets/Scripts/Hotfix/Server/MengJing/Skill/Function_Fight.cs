@@ -59,7 +59,7 @@ namespace ET.Server
             // 计算伤害
             long damage = 0;
             DamageType damageType = DamageType.None;
-            if (skillConfig.DamageType == 1)
+            if (skillConfig.DamageType == DamageType.Physical)
             {
                 // 物理伤害
                 damage = (long)(attack_MaxAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
@@ -76,7 +76,7 @@ namespace ET.Server
             {
                 // 法术伤害
                 damage = (long)(attack_MageAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
-                damageType = DamageType.Magic;
+                damageType = DamageType.Magical;
             }
 
             // AI

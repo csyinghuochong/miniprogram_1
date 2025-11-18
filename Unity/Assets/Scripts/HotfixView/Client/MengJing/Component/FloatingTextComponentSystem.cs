@@ -53,7 +53,7 @@ namespace ET.Client
                 case DamageType.Physical:
                     unit.Root().GetComponent<FloatingTextComponent>().ShowPhysicalDamageText((args.OldValue - args.NewValue).ToString(), head);
                     break;
-                case DamageType.Magic:
+                case DamageType.Magical:
                     unit.Root().GetComponent<FloatingTextComponent>().ShowMagicDamageText((args.OldValue - args.NewValue).ToString(), head);
                     break;
                 case DamageType.Critical:

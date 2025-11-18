@@ -19,14 +19,14 @@ namespace ET
             Id = _buf.ReadInt();
             SkillName = _buf.ReadString();
             SkillIcon = _buf.ReadString();
-            SkillActType = _buf.ReadInt();
-            DamageType = _buf.ReadInt();
+            SkillActType = (SkillActType)_buf.ReadInt();
+            DamageType = (DamageType)_buf.ReadInt();
             SkillAddAnger = _buf.ReadInt();
             SkillHandler = _buf.ReadString();
             GameObjectParameter = _buf.ReadString();
-            SkillType = _buf.ReadInt();
-            PassiveSkillType = _buf.ReadInt();
-            PassiveSkillPro = _buf.ReadDouble();
+            SkillType = (SkillType)_buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); PassiveSkillType = new PassiveSkillType[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { PassiveSkillType __e0;__e0 = (PassiveSkillType)_buf.ReadInt(); PassiveSkillType[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); PassiveSkillPro = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); PassiveSkillPro[__index0] = __e0;}}
             PassiveSkillTriggerOnce = _buf.ReadInt();
             SkillCD = _buf.ReadFloat();
             SkillLiveTime = _buf.ReadFloat();
@@ -70,12 +70,12 @@ namespace ET
         /// <summary>
         /// 技能攻击类型
         /// </summary>
-        public readonly int SkillActType;
+        public readonly SkillActType SkillActType;
 
         /// <summary>
         /// 伤害类型
         /// </summary>
-        public readonly int DamageType;
+        public readonly DamageType DamageType;
 
         /// <summary>
         /// 增加怒气值
@@ -95,17 +95,17 @@ namespace ET
         /// <summary>
         /// 技能类型
         /// </summary>
-        public readonly int SkillType;
+        public readonly SkillType SkillType;
 
         /// <summary>
         /// 被动技能触发类型
         /// </summary>
-        public readonly int PassiveSkillType;
+        public readonly PassiveSkillType[] PassiveSkillType;
 
         /// <summary>
         /// 被动技能触发参数
         /// </summary>
-        public readonly double PassiveSkillPro;
+        public readonly float[] PassiveSkillPro;
 
         /// <summary>
         /// 被动技能触发一次
@@ -234,8 +234,8 @@ namespace ET
             + "SkillHandler:" + SkillHandler + ","
             + "GameObjectParameter:" + GameObjectParameter + ","
             + "SkillType:" + SkillType + ","
-            + "PassiveSkillType:" + PassiveSkillType + ","
-            + "PassiveSkillPro:" + PassiveSkillPro + ","
+            + "PassiveSkillType:" + Luban.StringUtil.CollectionToString(PassiveSkillType) + ","
+            + "PassiveSkillPro:" + Luban.StringUtil.CollectionToString(PassiveSkillPro) + ","
             + "PassiveSkillTriggerOnce:" + PassiveSkillTriggerOnce + ","
             + "SkillCD:" + SkillCD + ","
             + "SkillLiveTime:" + SkillLiveTime + ","

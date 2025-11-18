@@ -79,7 +79,7 @@ namespace ET.Client
                         {
                             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skill);
 
-                            if (skillConfig.SkillActType == 1 && skillConfig.SkillType == 1)
+                            if (skillConfig.SkillActType == SkillActType.Skill && skillConfig.SkillType == SkillType.Active)
                             {
                                 showSkills.Add((unit.Id, skill));
                             }

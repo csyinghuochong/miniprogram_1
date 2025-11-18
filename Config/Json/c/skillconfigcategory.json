@@ -9,8 +9,12 @@
     "SkillHandler": "Skill_MeleeBasicAttack",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 3,
@@ -44,8 +48,12 @@
     "SkillHandler": "Skill_RangedBasicAttack",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 3,
@@ -79,8 +87,12 @@
     "SkillHandler": "Skill_RangedBasicAttack",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 3,
@@ -114,8 +126,12 @@
     "SkillHandler": "Skill_AreaDamage",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 11,
     "SkillLiveTime": 5,
@@ -149,8 +165,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 3,
@@ -184,8 +204,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 5,
@@ -220,8 +244,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 2,
@@ -255,8 +283,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 3,
@@ -290,8 +322,12 @@
     "SkillHandler": "Skill_AddBuff",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 5,
     "SkillLiveTime": 5,
@@ -326,8 +362,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 1,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [
+      0
+    ],
+    "PassiveSkillPro": [
+      0
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 1,
     "SkillLiveTime": 5,
@@ -361,8 +401,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 9,
     "SkillLiveTime": 3,
@@ -397,8 +441,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 1,
-    "PassiveSkillPro": 0.17,
+    "PassiveSkillType": [
+      1
+    ],
+    "PassiveSkillPro": [
+      0.17
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 3,
     "SkillLiveTime": 2,
@@ -432,8 +480,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 4,
@@ -468,8 +520,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 2,
@@ -503,8 +559,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 1,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      1
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 0,
     "SkillLiveTime": 3,
@@ -538,8 +598,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 1,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      1
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 5,
@@ -575,8 +639,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 3,
@@ -610,8 +678,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 3,
-    "PassiveSkillPro": 0.8,
+    "PassiveSkillType": [
+      3
+    ],
+    "PassiveSkillPro": [
+      0.8
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 5,
@@ -645,8 +717,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 4,
-    "PassiveSkillPro": 1,
+    "PassiveSkillType": [
+      4
+    ],
+    "PassiveSkillPro": [
+      1
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 0,
     "SkillLiveTime": 3600,
@@ -681,8 +757,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 4,
@@ -717,8 +797,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 3,
@@ -753,8 +837,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 4,
-    "PassiveSkillPro": 1,
+    "PassiveSkillType": [
+      4
+    ],
+    "PassiveSkillPro": [
+      1
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 0,
     "SkillLiveTime": 3600,
@@ -788,8 +876,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 5,
-    "PassiveSkillPro": 0.6,
+    "PassiveSkillType": [
+      5
+    ],
+    "PassiveSkillPro": [
+      0.6
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 3,
@@ -823,8 +915,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 5,
-    "PassiveSkillPro": 0.3,
+    "PassiveSkillType": [
+      5
+    ],
+    "PassiveSkillPro": [
+      0.3
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 3,
@@ -858,8 +954,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 4,
-    "PassiveSkillPro": 1,
+    "PassiveSkillType": [
+      4
+    ],
+    "PassiveSkillPro": [
+      1
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 0,
     "SkillLiveTime": 3600,
@@ -894,8 +994,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 5,
@@ -925,8 +1029,8 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 0,
-    "PassiveSkillType": 0,
-    "PassiveSkillPro": 0,
+    "PassiveSkillType": [],
+    "PassiveSkillPro": [],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 5,
@@ -954,8 +1058,12 @@
     "SkillHandler": "",
     "GameObjectParameter": "",
     "SkillType": 2,
-    "PassiveSkillType": 2,
-    "PassiveSkillPro": 0.2,
+    "PassiveSkillType": [
+      2
+    ],
+    "PassiveSkillPro": [
+      0.2
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 3,

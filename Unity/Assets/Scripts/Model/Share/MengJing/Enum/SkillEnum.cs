@@ -189,11 +189,4 @@ namespace ET
         Running, //正在执行
         Finished, //完成
     }
-
-    public enum SkillActType
-    {
-        Normal = 0, //普通攻击
-        Active = 1, //主动技能
-        Passive = 2, //被动
-    }
 }
