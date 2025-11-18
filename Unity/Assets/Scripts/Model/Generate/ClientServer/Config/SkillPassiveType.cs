@@ -22,27 +22,27 @@ namespace ET
         /// <summary>
         /// 受到伤害触发概率
         /// </summary>
-        Type_1 = 1,
+        OnDamagedByChance = 1,
 
         /// <summary>
         /// 普通攻击触发概率
         /// </summary>
-        Type_2 = 2,
+        OnNormalAttackByChance = 2,
 
         /// <summary>
         /// 血量低于多少百分比触发
         /// </summary>
-        Type_3 = 3,
+        OnSelfHpBelowPercent = 3,
 
         /// <summary>
         /// 开始战斗就触发
         /// </summary>
-        Type_4 = 4,
+        OnBattleStart = 4,
 
         /// <summary>
         /// 队友血量低于多少百分比触发
         /// </summary>
-        Type_5 = 5,
+        OnTeamHpBelowPercent = 5,
 
     }
 }

@@ -43,7 +43,8 @@ namespace ET.Server
 
             Unit unit = self.GetParent<Unit>();
 
-            self.OnTriggerPassiveSkill(SkillPassiveType.Type_3, unit.Id);
+            self.OnTriggerPassiveSkill(SkillPassiveType.OnSelfHpBelowPercent, unit.Id);
+            self.OnTriggerPassiveSkill(SkillPassiveType.OnTeamHpBelowPercent, unit.Id);
         }
 
         public static void AddPassiveSkill(this SkillPassiveComponent self, int skillConfigId)
@@ -88,7 +89,7 @@ namespace ET.Server
 
         private static bool IsSelfCheck(this SkillPassiveComponent self, SkillPassiveType skillPassiveType)
         {
-            if (skillPassiveType == SkillPassiveType.Type_3)
+            if (skillPassiveType == SkillPassiveType.OnSelfHpBelowPercent || skillPassiveType == SkillPassiveType.OnTeamHpBelowPercent)
             {
                 return true;
             }
@@ -127,9 +128,9 @@ namespace ET.Server
             }
         }
 
-        public static void OnTriggerPassiveSkill(this SkillPassiveComponent self, SkillPassiveType skillPassiveType, long targetId = 0, int skillId = 0)
+        public static void OnTriggerPassiveSkill(this SkillPassiveComponent self, SkillPassiveType skillPassiveType, long targetId = 0)
         {
-            Unit unit = self.GetParent<Unit>();
+            Unit myUnit = self.GetParent<Unit>();
 
             List<SkillPassiveInfo> skillPassiveInfos = new();
 
@@ -167,15 +168,15 @@ namespace ET.Server
                 bool trigger = false;
                 switch (skillPassiveType)
                 {
-                    case SkillPassiveType.Type_1:
-                    case SkillPassiveType.Type_2:
+                    case SkillPassiveType.OnDamagedByChance:
+                    case SkillPassiveType.OnNormalAttackByChance:
                     {
                         trigger = skillProValue >= RandomHelper.RandFloat01();
                         break;
                     }
-                    case SkillPassiveType.Type_3:
+                    case SkillPassiveType.OnSelfHpBelowPercent:
                     {
-                        NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+                        NumericComponentS numericComponent = myUnit.GetComponent<NumericComponentS>();
 
                         long nowHp = numericComponent.GetAsLong(NumericType.Now_Hp);
                         long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
@@ -184,16 +185,36 @@ namespace ET.Server
 
                         break;
                     }
-                    case SkillPassiveType.Type_4:
+                    case SkillPassiveType.OnBattleStart:
                     {
                         trigger = true;
                         
                         break;
                     }
-                    case SkillPassiveType.Type_5:
+                    case SkillPassiveType.OnTeamHpBelowPercent:
                     {
-                        trigger = true;
-                        
+                        List<EntityRef<Unit>> allUnits = myUnit.GetParent<UnitComponent>().GetAll();
+
+                        foreach (Unit u in allUnits)
+                        {
+                            if (!UnitHelper.IsTeam(myUnit, u))
+                            {
+                                continue;
+                            }
+
+                            NumericComponentS numericComponent = u.GetComponent<NumericComponentS>();
+
+                            long nowHp = numericComponent.GetAsLong(NumericType.Now_Hp);
+                            long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+                            float hpPro = nowHp * 1f / maxHp;
+
+                            if (hpPro <= skillProValue)
+                            {
+                                trigger = true;
+                                break;
+                            }
+                        }
+
                         break;
                     }
                 }
@@ -203,7 +224,7 @@ namespace ET.Server
                     continue;
                 }
                 
-                SkillManagerComponentS skillManagerComponent = unit.GetComponent<SkillManagerComponentS>();
+                SkillManagerComponentS skillManagerComponent = myUnit.GetComponent<SkillManagerComponentS>();
                 if (skillManagerComponent.IsCanUseSkill(skillPassiveInfo.SkillConfigId) != ErrorCode.ERR_Success)
                 {
                     continue;

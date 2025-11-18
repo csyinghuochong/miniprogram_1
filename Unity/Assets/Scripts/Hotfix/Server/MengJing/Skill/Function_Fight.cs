@@ -79,6 +79,9 @@ namespace ET.Server
                 damageType = DamageType.Magical;
             }
 
+
+            defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
+            
             // AI
             defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);
 

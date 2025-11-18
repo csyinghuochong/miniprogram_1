@@ -160,6 +160,11 @@ namespace ET.Server
 
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), message);
 
+            if (skillConfig.SkillActType == SkillActType.Normal)
+            {
+                myUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnNormalAttackByChance, initSkillData.TargetId);
+            }
+
             return ErrorCode.ERR_Success;
         }
 
