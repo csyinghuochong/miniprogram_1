@@ -454,7 +454,7 @@
     "DamgeValue": 0,
     "SkillAnimation": "attack",
     "SkillMusic": "dao",
-    "SkillTargetType": 1,
+    "SkillTargetType": 0,
     "DamageRangeType": 1,
     "DamageRange": [
       3

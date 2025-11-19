@@ -78,7 +78,7 @@ namespace ET.Server
                 passiveSkillPro.Add(skillConfig.PassiveSkillPro[i]);
             }
 
-            SkillPassiveInfo skillPassiveInfo = new SkillPassiveInfo(skillConfig.Id, passiveSkillType, passiveSkillPro, skillConfig.PassiveSkillTriggerOnce, skillConfig.SkillCD);
+            SkillPassiveInfo skillPassiveInfo = new SkillPassiveInfo(skillConfig.Id, passiveSkillType, passiveSkillPro, skillConfig.PassiveSkillTriggerOnce, 0);
             self.SkillPassiveInfos.Add(skillPassiveInfo);
 
             if (self.Timer == 0 && selfCheck)

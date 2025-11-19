@@ -117,7 +117,19 @@ namespace ET.Server
 
             self.FollowDistance = 10f;
             self.ActDistance = heroConfig.AtkDistance / 10000f;
-            self.AISkillIDList.AddRange(hero.Skills);
+            foreach (int skillConfigId in hero.Skills)
+            {
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
+                if (skillConfig.SkillActType == SkillActType.Normal)
+                {
+                    self.AISkillIDList.Add(skillConfigId);
+                }
+
+                if (skillConfig.SkillActType == SkillActType.Skill && skillConfig.SkillType == SkillType.Active)
+                {
+                    self.AISkillIDList.Add(skillConfigId);
+                }
+            }
         }
 
         public static bool HaveSkillId(this AIComponent self, int skillId)
