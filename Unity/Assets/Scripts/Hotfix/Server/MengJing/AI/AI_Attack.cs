@@ -25,7 +25,25 @@ namespace ET.Server
 
             for (int i = 0; i < 100000; ++i)
             {
-                int skillId = aiComponent.GetActSkillId();
+                int skillId = 0;
+
+                if (!aiComponent.AutoUseSkill)
+                {
+                    foreach (int id in aiComponent.AISkillIDList)
+                    {
+                        SkillConfig skillConfig = SkillConfigCategory.Instance.Get(id);
+                        if (skillConfig.SkillActType == SkillActType.Normal)
+                        {
+                            skillId = id;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    skillId = aiComponent.AISkillIDList[RandomHelper.RandomNumber(0, aiComponent.AISkillIDList.Count)];
+                }
+
                 if (skillId == 0)
                 {
                     break;
@@ -40,7 +58,7 @@ namespace ET.Server
                 if (aiComponent.TargetId != 0 && target != null)
                 {
                     float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
-                    if (distance <= aiComponent.ActDistance && skillManagerComponent.IsCanUseSkill(skillId) == ErrorCode.ERR_Success)
+                    if (distance <= aiComponent.ActDistance)
                     {
                         SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
                         float3 direction = target.Position - unit.Position;

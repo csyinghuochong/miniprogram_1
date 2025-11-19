@@ -13,11 +13,12 @@ namespace ET.Server
         public long Timer;
         public int Current;
         public long TargetId { get; set; } //攻击目标
-        public long BeAttackId{ get; set; } //被谁打了
+        public long BeAttackId { get; set; } //被谁打了
         public float FollowDistance { get; set; } //跟随距离，超过这个距离要马上跟上主人
         public bool IsRetreat { get; set; }
         public float ActDistance { get; set; } //攻击距离
         public List<int> AISkillIDList { get; set; } = new(); //当前所有技能
+        public bool AutoUseSkill { get; set; } = true; //自动释放技能
         public float3 TargetZhuiJi { get; set; }
         public MapType MapType { get; set; }
         public long AIDelay;

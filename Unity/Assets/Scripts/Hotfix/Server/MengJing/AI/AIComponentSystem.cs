@@ -137,11 +137,6 @@ namespace ET.Server
             return self.AISkillIDList.Contains(skillId);
         }
 
-        public static int GetActSkillId(this AIComponent self)
-        {
-            return self.AISkillIDList[RandomHelper.RandomNumber(0, self.AISkillIDList.Count)];
-        }
-
         public static void BeAttack(this AIComponent self, Unit attackUnit)
         {
             self.BeAttackId = attackUnit.Id;

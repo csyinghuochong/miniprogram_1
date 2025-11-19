@@ -733,6 +733,20 @@ message M2C_EnterBossRoom // ILocationResponse
 	string Message = 3;
 }
 
+// ResponseType M2C_SetAutoFight
+message C2M_SetAutoFight // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 Value = 2;
+}
+
+message M2C_SetAutoFight // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 // ResponseType M2C_TryUseSkill
 message C2M_TryUseSkill // ILocationRequest
 {

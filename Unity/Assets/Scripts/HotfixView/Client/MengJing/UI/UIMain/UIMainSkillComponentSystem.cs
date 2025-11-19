@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -31,9 +32,12 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
+            self.Button_AutoFight = rc.Get<GameObject>("Button_AutoFight").GetComponent<Button>();
             self.Transform_SkillList = rc.Get<GameObject>("Transform_SkillList").transform;
             self.UIMainSkillItem = rc.Get<GameObject>("UIMainSkillItem");
             self.UIMainSkillItem.SetActive(false);
+
+            self.Button_AutoFight.AddListener(() => { self.OnAutoFight().Coroutine(); });
         }
 
         [EntitySystem]
@@ -63,6 +67,8 @@ namespace ET.Client
             {
                 self.GameObject.SetActive(true);
 
+                self.UpdateAutoFight(true);
+                
                 HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
                 List<EntityRef<Unit>> allUnits = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
                 foreach (Unit unit in allUnits)
@@ -114,6 +120,27 @@ namespace ET.Client
             {
                 self.GameObject.SetActive(false);
             }
+        }
+
+        private static async ETTask OnAutoFight(this UIMainSkillComponent self)
+        {
+            int error = await ClientLevelHelper.SetAutoFight(self.Root(), !self.AutoFight);
+            
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+            
+            self.UpdateAutoFight(!self.AutoFight);
+
+            await ETTask.CompletedTask;
+        }
+
+        private static void UpdateAutoFight(this UIMainSkillComponent self, bool value)
+        {
+            self.AutoFight = value;
+            self.Button_AutoFight.transform.Find("Image_On").gameObject.SetActive(self.AutoFight);
+            self.Button_AutoFight.transform.Find("Image_Off").gameObject.SetActive(!self.AutoFight);
         }
     }
 }

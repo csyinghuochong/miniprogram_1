@@ -10,5 +10,15 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> SetAutoFight(Scene root, bool value)
+        {
+            C2M_SetAutoFight request = C2M_SetAutoFight.Create();
+            request.Value = value ? 1 : 0;
+
+            M2C_SetAutoFight response = (M2C_SetAutoFight)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

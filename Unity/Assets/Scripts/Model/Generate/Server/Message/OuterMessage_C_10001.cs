@@ -3337,6 +3337,69 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_SetAutoFight)]
+    [ResponseType(nameof(M2C_SetAutoFight))]
+    public partial class C2M_SetAutoFight : MessageObject, ILocationRequest
+    {
+        public static C2M_SetAutoFight Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SetAutoFight), isFromPool) as C2M_SetAutoFight;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Value { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Value = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SetAutoFight)]
+    public partial class M2C_SetAutoFight : MessageObject, ILocationResponse
+    {
+        public static M2C_SetAutoFight Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SetAutoFight), isFromPool) as M2C_SetAutoFight;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_TryUseSkill)]
     [ResponseType(nameof(M2C_TryUseSkill))]
     public partial class C2M_TryUseSkill : MessageObject, ILocationRequest
@@ -3963,19 +4026,21 @@ namespace ET
         public const ushort M2C_UpdateTimeScale = 10089;
         public const ushort C2M_EnterBossRoom = 10090;
         public const ushort M2C_EnterBossRoom = 10091;
-        public const ushort C2M_TryUseSkill = 10092;
-        public const ushort M2C_TryUseSkill = 10093;
-        public const ushort M2C_OnUseSkill = 10094;
-        public const ushort M2C_UnitSkillRemove = 10095;
-        public const ushort M2C_UnitFinishSkill = 10096;
-        public const ushort M2C_UnitBuffUpdate = 10097;
-        public const ushort M2C_UnitBuffRemove = 10098;
-        public const ushort M2C_UnitStateUpdate = 10099;
-        public const ushort TaskProInfo = 10100;
-        public const ushort C2M_GetAllTask = 10101;
-        public const ushort M2C_GetAllTask = 10102;
-        public const ushort M2C_TaskUpdate = 10103;
-        public const ushort C2M_TaskCommit = 10104;
-        public const ushort M2C_TaskCommit = 10105;
+        public const ushort C2M_SetAutoFight = 10092;
+        public const ushort M2C_SetAutoFight = 10093;
+        public const ushort C2M_TryUseSkill = 10094;
+        public const ushort M2C_TryUseSkill = 10095;
+        public const ushort M2C_OnUseSkill = 10096;
+        public const ushort M2C_UnitSkillRemove = 10097;
+        public const ushort M2C_UnitFinishSkill = 10098;
+        public const ushort M2C_UnitBuffUpdate = 10099;
+        public const ushort M2C_UnitBuffRemove = 10100;
+        public const ushort M2C_UnitStateUpdate = 10101;
+        public const ushort TaskProInfo = 10102;
+        public const ushort C2M_GetAllTask = 10103;
+        public const ushort M2C_GetAllTask = 10104;
+        public const ushort M2C_TaskUpdate = 10105;
+        public const ushort C2M_TaskCommit = 10106;
+        public const ushort M2C_TaskCommit = 10107;
     }
 }

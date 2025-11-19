@@ -3027,6 +3027,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: Button_AutoFight
+    gameObject: {fileID: 372928884827066011}
   - key: Transform_SkillList
     gameObject: {fileID: 4736762403700523562}
   - key: UIMainSkillItem
