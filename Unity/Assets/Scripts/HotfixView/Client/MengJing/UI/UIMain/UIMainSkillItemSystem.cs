@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Text;
 using TMPro;
 using Unity.Mathematics;
@@ -97,6 +98,7 @@ namespace ET.Client
         private static void OnPointerDown(this UIMainSkillItem self, PointerEventData pdata)
         {
             self.IsDrag = false;
+            self.TargetId = 0;
 
             if (self.GetParent<UIMainSkillComponent>().AutoFight)
             {
@@ -178,9 +180,9 @@ namespace ET.Client
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.AssetsPath, self.IndicatorGameObject);
                 self.IndicatorGameObject = null;
             }
-            
+
             Unit myUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.UnitId);
-            
+
             SkillManagerComponentC skillManagerComponent = myUnit.GetComponent<SkillManagerComponentC>();
             float cd = skillManagerComponent.GetSkillCD(self.SkillId);
 
@@ -190,7 +192,7 @@ namespace ET.Client
                 return;
             }
 
-            ClientSkillHelper.HeroUseSkill(self.Root(), self.UnitId, self.SkillId, 0, 0, float3.zero).Coroutine();
+            ClientSkillHelper.HeroUseSkill(self.Root(), self.UnitId, self.SkillId, self.TargetId, 0, float3.zero).Coroutine();
         }
 
         private static void OnEndDrag(this UIMainSkillItem self, PointerEventData pdata)
@@ -242,6 +244,43 @@ namespace ET.Client
             }
 
             self.IndicatorGameObject.transform.position = myUnit.Position;
+
+            Unit closestEnemy = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (EntityRef<Unit> unitRef in self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll())
+            {
+                Unit u = unitRef;
+                if (myUnit.IsCanAttackUnit(u))
+                {
+                    float dist = math.distance(myUnit.Position, u.Position);
+                    if (dist < closestDistance)
+                    {
+                        closestDistance = dist;
+                        closestEnemy = u;
+                    }
+                }
+            }
+
+            if (closestEnemy == null)
+            {
+                return;
+            }
+
+            self.TargetId = closestEnemy.Id;
+
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillId);
+
+            if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
+            {
+            }
+            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
+            {
+                self.IndicatorGameObject.transform.Find("Skill_InnerArea").position = closestEnemy.Position;
+            }
+            else
+            {
+            }
         }
     }
 }

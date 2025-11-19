@@ -10,6 +10,7 @@ namespace ET.Client
     {
         public long UnitId;
         public int SkillId;
+        public long TargetId;
         public long Timer;
         public bool IsDrag;
         public string AssetsPath;

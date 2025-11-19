@@ -101,6 +101,7 @@ namespace ET.Server
             //先这样测试
             hero.Skills.Add(20000005);
             // hero.Skills.Add(30000002);
+            hero.Skills.Add(10000004);
         }
     }
 }

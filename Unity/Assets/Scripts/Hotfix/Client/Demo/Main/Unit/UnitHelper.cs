@@ -125,5 +125,58 @@ namespace ET.Client
 
             return list;
         }
+
+        public static bool IsTeam(this Unit self, Unit other)
+        {
+            // 先这样，英雄是一队，怪物是一队
+            return self.Type == other.Type;
+        }
+
+        public static bool IsCanAttackUnit(this Unit self, Unit defend, bool checkDead = true)
+        {
+            if (self.Id == defend.Id)
+            {
+                return false;
+            }
+
+            // 玩家不能被攻击
+            if (defend.Type == UnitType.Player)
+            {
+                return false;
+            }
+
+            if (self.IsTeam(defend))
+            {
+                return false;
+            }
+
+            if (!defend.IsCanBeAttack(checkDead))
+            {
+                return false;
+            }
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+
+            if (mapComponent.MapType != MapType.LocalLevel)
+            {
+                return false;
+            }
+
+            return self.Type != defend.Type;
+        }
+
+        public static bool IsCanBeAttack(this Unit self, bool checkDead = true)
+        {
+            if (checkDead)
+            {
+                NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
+                if (numericComponent.GetAsLong(NumericType.Now_Hp) <= 0 || numericComponent.GetAsLong(NumericType.Now_Dead) == 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
