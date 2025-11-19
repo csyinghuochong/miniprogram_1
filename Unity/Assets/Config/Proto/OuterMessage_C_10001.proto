@@ -764,6 +764,24 @@ message M2C_TryUseSkill // ILocationResponse
 	string Message = 3;
 }
 
+// ResponseType M2C_HeroUseSkill
+message C2M_HeroUseSkill // ILocationRequest
+{
+	int32 RpcId = 1;
+	int64 HeroUnitId = 2;
+	int32 SkillConfigId = 3;
+	int64 TargetId = 4;
+	float Angle = 5;
+	Unity.Mathematics.float3 Position = 6;
+}
+
+message M2C_HeroUseSkill // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 message M2C_OnUseSkill // IMessage
 {
 	int64 UnitId = 1;

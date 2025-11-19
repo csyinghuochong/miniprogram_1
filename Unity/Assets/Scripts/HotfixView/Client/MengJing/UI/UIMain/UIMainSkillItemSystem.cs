@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Text;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -116,7 +117,7 @@ namespace ET.Client
             {
                 self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_SelfPosition");
             }
-            else if(skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
+            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
             {
                 self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_TargetPositon");
             }
@@ -177,6 +178,19 @@ namespace ET.Client
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.AssetsPath, self.IndicatorGameObject);
                 self.IndicatorGameObject = null;
             }
+            
+            Unit myUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.UnitId);
+            
+            SkillManagerComponentC skillManagerComponent = myUnit.GetComponent<SkillManagerComponentC>();
+            float cd = skillManagerComponent.GetSkillCD(self.SkillId);
+
+            if (cd > 0)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("技能冷却中！！！");
+                return;
+            }
+
+            ClientSkillHelper.HeroUseSkill(self.Root(), self.UnitId, self.SkillId, 0, 0, float3.zero).Coroutine();
         }
 
         private static void OnEndDrag(this UIMainSkillItem self, PointerEventData pdata)
@@ -205,7 +219,7 @@ namespace ET.Client
             {
                 self.IndicatorGameObject.transform.Find("Skill_Area").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
             }
-            else if(skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
+            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
             {
                 self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
             }
@@ -226,7 +240,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             self.IndicatorGameObject.transform.position = myUnit.Position;
         }
     }
