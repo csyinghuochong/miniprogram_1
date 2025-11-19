@@ -114,11 +114,15 @@ namespace ET.Client
 
             if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
             {
-                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_CommonAttack");
+                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_SelfPosition");
+            }
+            else if(skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
+            {
+                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_TargetPositon");
             }
             else
             {
-                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_CommonAttack");
+                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_SelfPosition");
             }
 
             if (!string.IsNullOrEmpty(self.AssetsPath) && self.IndicatorGameObject == null)
@@ -200,6 +204,10 @@ namespace ET.Client
             if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
             {
                 self.IndicatorGameObject.transform.Find("Skill_Area").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
+            }
+            else if(skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
+            {
+                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
             }
             else
             {
