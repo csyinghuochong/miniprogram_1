@@ -10,6 +10,10 @@ namespace ET.Client
     {
         public long UnitId;
         public int SkillId;
+        public long Timer;
+        public bool IsDrag;
+        public string AssetsPath;
+        public GameObject IndicatorGameObject;
 
         public GameObject GameObject { get; set; }
         public Image Image_SkillIcon;

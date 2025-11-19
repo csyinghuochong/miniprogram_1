@@ -12,7 +12,7 @@ namespace ET.Client
         public Transform Transform_SkillList;
         public GameObject UIMainSkillItem;
 
-        public bool AutoFight;
+        public bool AutoFight { get; set; }
         public long Timer;
         public List<UIMainSkillItem> UIMainSkillItemList { get; set; } = new();
     }

@@ -130,7 +130,7 @@ namespace ET
             return prefabPath;
         }
 
-        public static string GetEffetPath(string fileName)
+        public static string GetEffectPath(string fileName)
         {
             string prefabPath = ZString.Format("Assets/Bundles/Effect/{0}.prefab", fileName);
 
@@ -138,15 +138,22 @@ namespace ET
         }
 
         //技能特效
-        public static string GetSkillEffetPath(string fileName)
+        public static string GetSkillEffectPath(string fileName)
         {
             string prefabPath = ZString.Format("Assets/Bundles/Effect/SkillEffect/{0}.prefab", fileName);
 
             return prefabPath;
         }
 
+        public static string GetSkillIndicatorPath(string fileName)
+        {
+            string prefabPath = ZString.Format("Assets/Bundles/Effect/SkillIndicator/{0}.prefab", fileName);
+
+            return prefabPath;
+        }
+
         //技能受击特效
-        public static string GetSkillHitEffetPath(string fileName)
+        public static string GetSkillHitEffectPath(string fileName)
         {
             string prefabPath = ZString.Format("Assets/Bundles/Effect/SkillHitEffect/{0}.prefab", fileName);
 

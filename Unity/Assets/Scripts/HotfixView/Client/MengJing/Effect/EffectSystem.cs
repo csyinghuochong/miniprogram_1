@@ -175,7 +175,7 @@ namespace ET.Client
                 return;
             }
 
-            self.EffectPath = ABPathHelper.GetSkillEffetPath(self.EffectConfig.EffectName);
+            self.EffectPath = ABPathHelper.GetSkillEffectPath(self.EffectConfig.EffectName);
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, true, self.OnLoadGameObject);
         }
 

@@ -88,9 +88,8 @@ namespace ET.Server
             hero.Skills.Clear();
 
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
-
+            
             hero.Skills.Add(heroConfig.AtkId);
-            hero.Skills.Add(20000005); //先这样测试
             // foreach (UnlockSkillInfo info in heroConfig.UnlockSkillInfos)
             // {
             //     if (hero.Star >= info.UnlockStar)
@@ -98,6 +97,10 @@ namespace ET.Server
             //         hero.Skills.Add(info.SkillConfigId);
             //     }
             // }
+            
+            //先这样测试
+            hero.Skills.Add(20000005);
+            // hero.Skills.Add(30000002);
         }
     }
 }

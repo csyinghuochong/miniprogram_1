@@ -123,5 +123,6 @@
         public const int UIGuideTimer = 380;
         public const int LocalLevelTimer = 381;
         public const int UIMainSkillTimer = 382;
+        public const int UIMainSkillItemTimer = 383;
     }
 }
