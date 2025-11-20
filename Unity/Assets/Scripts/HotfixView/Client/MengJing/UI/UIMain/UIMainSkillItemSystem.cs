@@ -223,6 +223,8 @@ namespace ET.Client
             }
             else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
             {
+                self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
+                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
                 self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
             }
             else
