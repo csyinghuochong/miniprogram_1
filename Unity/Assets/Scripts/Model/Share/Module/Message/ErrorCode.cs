@@ -81,6 +81,8 @@ namespace ET
         public const int ERR_UseSkillInCD = 20131;
         public const int ERR_UseSkillInPublicCD = 20146; //技能公共CD
         public const int ERR_NotSkillHandler = 20145; //技能没有配置SkillHandler
+        public const int ERR_TargetUnitIsNull = 20147; //目标单位不存在
+        public const int ERR_TargetUnitCantBeAttack = 20148; //目标被不能攻击
 
         // 场景相关错误 20144
         public const int ERR_SceneCantSetTimeScale = 20144; //当前Scene不能设置TimeScale

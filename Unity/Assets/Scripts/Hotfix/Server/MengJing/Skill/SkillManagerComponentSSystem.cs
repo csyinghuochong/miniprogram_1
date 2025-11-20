@@ -91,6 +91,7 @@ namespace ET.Server
             }
 
             Unit myUnit = self.GetParent<Unit>();
+            UnitComponent unitComponent = myUnit.GetParent<UnitComponent>();
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
@@ -127,6 +128,19 @@ namespace ET.Server
                     break;
                 }
                 case SkillTargetType.TargetOnly:
+                {
+                    if (targetUnit == null)
+                    {
+                        return ErrorCode.ERR_TargetUnitIsNull;
+                    }
+
+                    if (!myUnit.IsCanAttackUnit(targetUnit))
+                    {
+                        return ErrorCode.ERR_TargetUnitIsNull;
+                    }
+                    
+                    break;
+                }
                 case SkillTargetType.SelfOnly:
                 case SkillTargetType.MulTarget:
                 case SkillTargetType.AllTeam:
