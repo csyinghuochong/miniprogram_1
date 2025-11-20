@@ -27,5 +27,10 @@ namespace ET
         /// </summary>
         PhysicalImmune = 2,
 
+        /// <summary>
+        /// 无敌
+        /// </summary>
+        Invincibility = 3,
+
     }
 }

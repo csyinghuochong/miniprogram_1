@@ -29,7 +29,7 @@
     "BuffHandler": "Buff_Attribute",
     "BuffBenefitType": 1,
     "BuffType": 2,
-    "BuffParameterType": 0,
+    "BuffParameterType": 3,
     "BuffParameterValue": 0,
     "BuffParameterValueType": 0,
     "DamageType": 1,
