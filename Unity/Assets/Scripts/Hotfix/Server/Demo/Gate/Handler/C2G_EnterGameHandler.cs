@@ -88,7 +88,7 @@ namespace ET.Server
                         catch (Exception e)
                         {
                             Log.Error("二次登录失败  " + e);
-                            response.Error = ErrorCode.ERR_ReEnterGameError2;
+                            response.Error = ErrorCode.ERR_ReEnterGameError;
                             await DisconnectHelper.KickPlayerNoLock(player, 2);
                             session.Disconnect().Coroutine();
                         }
