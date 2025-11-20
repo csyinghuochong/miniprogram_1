@@ -25,11 +25,11 @@
         "SkillConfigId": 30000001
       },
       {
-        "UnlockStar": 2,
+        "UnlockStar": 3,
         "SkillConfigId": 30000002
       },
       {
-        "UnlockStar": 3,
+        "UnlockStar": 5,
         "SkillConfigId": 30000003
       }
     ],
@@ -78,11 +78,11 @@
         "SkillConfigId": 30000004
       },
       {
-        "UnlockStar": 2,
+        "UnlockStar": 3,
         "SkillConfigId": 30000005
       },
       {
-        "UnlockStar": 3,
+        "UnlockStar": 5,
         "SkillConfigId": 30000006
       }
     ],
@@ -131,11 +131,11 @@
         "SkillConfigId": 30000007
       },
       {
-        "UnlockStar": 2,
+        "UnlockStar": 3,
         "SkillConfigId": 30000008
       },
       {
-        "UnlockStar": 3,
+        "UnlockStar": 5,
         "SkillConfigId": 30000009
       }
     ],
@@ -184,11 +184,11 @@
         "SkillConfigId": 30000013
       },
       {
-        "UnlockStar": 2,
+        "UnlockStar": 3,
         "SkillConfigId": 30000014
       },
       {
-        "UnlockStar": 3,
+        "UnlockStar": 5,
         "SkillConfigId": 30000015
       }
     ],
@@ -237,11 +237,11 @@
         "SkillConfigId": 30000010
       },
       {
-        "UnlockStar": 2,
+        "UnlockStar": 3,
         "SkillConfigId": 30000011
       },
       {
-        "UnlockStar": 3,
+        "UnlockStar": 5,
         "SkillConfigId": 30000012
       }
     ],
@@ -290,11 +290,11 @@
         "SkillConfigId": 30000016
       },
       {
-        "UnlockStar": 2,
+        "UnlockStar": 3,
         "SkillConfigId": 30000017
       },
       {
-        "UnlockStar": 3,
+        "UnlockStar": 5,
         "SkillConfigId": 30000018
       }
     ],
