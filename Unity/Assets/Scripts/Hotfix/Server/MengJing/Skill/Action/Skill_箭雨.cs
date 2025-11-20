@@ -1,16 +1,16 @@
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using System.Collections.Generic;
 
 namespace ET.Server
 {
     /// <summary>
-    /// 给周围单位添加Buff
+    /// DamageRangeType
     /// DamageRange
     /// </summary>
-    public class Skill_AddBuff : SkillHandlerS
+    public class Skill_箭雨 : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
+            skill.ICheckShape = skill.CreateCheckShape(0);
         }
 
         public override void OnExecute(SkillS skill)
@@ -19,31 +19,22 @@ namespace ET.Server
 
         public override void OnUpdate(SkillS skill, float deltaTime)
         {
-            foreach (int id in skill.SkillConfig.InitBuffID)
-            {
-                skill.SkillBuff(id, skill.TheUnitFrom);
-            }
-
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Unit defendUnit = entities[i];
-
-                if (defendUnit.Id == skill.TheUnitFrom.Id)
+                
+                if (!skill.TheUnitFrom.IsCanAttackUnit(defendUnit))
                 {
                     continue;
                 }
 
-                // 直接距离判断
-                if (math.distance(skill.TheUnitFrom.Position, defendUnit.Position) > skill.SkillConfig.DamageRange[0])
+                if (!skill.ICheckShape.Contains(defendUnit.Position))
                 {
                     continue;
                 }
 
-                foreach (int id in skill.SkillConfig.BuffID)
-                {
-                    skill.SkillBuff(id, defendUnit);
-                }
+                Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
             }
 
             skill.SkillState = SkillState.Finished;

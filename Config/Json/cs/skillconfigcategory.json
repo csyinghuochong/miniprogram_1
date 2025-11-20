@@ -123,7 +123,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_AreaDamage",
+    "SkillHandler": "Skill_箭雨",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -206,7 +206,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_AddBuff",
+    "SkillHandler": "Skill_神之力量",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -326,7 +326,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_AddBuff",
+    "SkillHandler": "Skill_守护天使",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
