@@ -18,7 +18,7 @@ namespace ET
         None = 0,
 
         /// <summary>
-        /// 免疫所有伤害
+        /// 无敌
         /// </summary>
         AllDamageImmune = 1,
 
@@ -26,11 +26,6 @@ namespace ET
         /// 免疫物理攻击
         /// </summary>
         PhysicalImmune = 2,
-
-        /// <summary>
-        /// 无敌
-        /// </summary>
-        Invincibility = 3,
 
     }
 }

@@ -13,6 +13,10 @@ namespace ET.Server
 
         public override void OnExecute(SkillS skill)
         {
+            foreach (int id in skill.SkillConfig.InitBuffID)
+            {
+                skill.SkillBuff(id, skill.TheUnitFrom);
+            }
         }
 
         public override void OnUpdate(SkillS skill, float deltaTime)

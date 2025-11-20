@@ -1,9 +1,83 @@
+using Cysharp.Text;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
 namespace ET.Client
 {
+    # region 事件监听
+
+    [Event(SceneType.Demo)]
+    public class StateChange_ShowTip : AEvent<Scene, StateChange>
+    {
+        protected override async ETTask Run(Scene scene, StateChange args)
+        {
+            Transform head = null;
+            Unit unit = args.Unit;
+
+            if (unit.Type == UnitType.Monster)
+            {
+                UIMonsterHpComponent uiMonsterHpComponent = unit.GetComponent<UIMonsterHpComponent>();
+                if (uiMonsterHpComponent == null)
+                {
+                    return;
+                }
+
+                if (uiMonsterHpComponent.GameObject == null)
+                {
+                    return;
+                }
+
+                head = uiMonsterHpComponent.GameObject.GetComponent<Transform>();
+            }
+
+            if (unit.Type == UnitType.Hero)
+            {
+                UIHeroHpComponent uiHeroHpComponent = unit.GetComponent<UIHeroHpComponent>();
+                if (uiHeroHpComponent == null)
+                {
+                    return;
+                }
+
+                if (uiHeroHpComponent.GameObject == null)
+                {
+                    return;
+                }
+
+                head = uiHeroHpComponent.GameObject.GetComponent<Transform>();
+            }
+
+            if (head == null)
+            {
+                return;
+            }
+
+            string name = "状态";
+            if ((StateType)args.m2C_UnitStateUpdate.StateType == StateType.AllDamageImmune)
+            {
+                name = "无敌";
+            }
+            else if ((StateType)args.m2C_UnitStateUpdate.StateType == StateType.PhysicalImmune)
+            {
+                name = "免疫物理伤害";
+            }
+
+            // 添加状态
+            if (args.m2C_UnitStateUpdate.StateOperateType == 1)
+            {
+                unit.Root().GetComponent<FloatingTextComponent>().ShowNormalText(ZString.Format("+{0}", name), head);
+            }
+
+            //移除状态
+            if (args.m2C_UnitStateUpdate.StateOperateType == 2)
+            {
+                unit.Root().GetComponent<FloatingTextComponent>().ShowNormalText(ZString.Format("-{0}", name), head);
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
     public class NumericWatcher_ShowDamageText : INumericWatcher
     {
@@ -69,6 +143,8 @@ namespace ET.Client
         }
     }
 
+    # endregion
+    
     [EntitySystemOf(typeof(FloatingTextComponent))]
     [FriendOf(typeof(FloatingTextComponent))]
     public static partial class FloatingTextComponentSystem

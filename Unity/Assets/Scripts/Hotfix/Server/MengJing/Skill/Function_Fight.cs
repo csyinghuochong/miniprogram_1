@@ -77,6 +77,12 @@ namespace ET.Server
                 damageType = DamageType.Magical;
             }
 
+            // 无敌
+            if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateType.AllDamageImmune))
+            {
+                damage = 0;
+                damageType = DamageType.Immune;
+            }
 
             defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
             
