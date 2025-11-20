@@ -18,7 +18,6 @@ namespace ET.Server
         public float3 TargetPosition { get; set; }
         public float RunTime { get; set; }
         public float TriggerTime { get; set; }
-        public float IntervalTime { get; set; }
         public float Speed { get; set; }
         public Shape ICheckShape { get; set; }
     }

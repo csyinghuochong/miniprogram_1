@@ -287,8 +287,10 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
-    "GameObjectParameter": [],
+    "SkillHandler": "Skill_极寒领域",
+    "GameObjectParameter": [
+      10000
+    ],
     "SkillType": 1,
     "SkillPassiveType": [
       0
