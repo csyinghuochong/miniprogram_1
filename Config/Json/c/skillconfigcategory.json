@@ -7,7 +7,7 @@
     "DamageType": 1,
     "SkillAddAnger": 5,
     "SkillHandler": "Skill_MeleeBasicAttack",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -46,7 +46,7 @@
     "DamageType": 1,
     "SkillAddAnger": 5,
     "SkillHandler": "Skill_RangedBasicAttack",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -85,7 +85,7 @@
     "DamageType": 2,
     "SkillAddAnger": 5,
     "SkillHandler": "Skill_RangedBasicAttack",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -124,7 +124,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "Skill_AreaDamage",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -162,8 +162,13 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
-    "GameObjectParameter": "",
+    "SkillHandler": "Skill_淘汰之刃",
+    "GameObjectParameter": [
+      3.5,
+      0.3,
+      4,
+      0.5
+    ],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -202,7 +207,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "Skill_AddBuff",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -242,7 +247,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -281,7 +286,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -320,7 +325,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "Skill_AddBuff",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -360,7 +365,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
       0
@@ -399,7 +404,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -439,7 +444,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "Skill_AreaDamage",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       1
@@ -478,7 +483,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -518,7 +523,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -557,7 +562,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -596,7 +601,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       1
@@ -637,7 +642,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -676,7 +681,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       3
@@ -715,7 +720,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       4
@@ -755,7 +760,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -795,7 +800,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -835,7 +840,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       4
@@ -874,7 +879,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       5
@@ -913,7 +918,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       5
@@ -952,7 +957,7 @@
     "DamageType": 1,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       4
@@ -992,7 +997,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2
@@ -1027,7 +1032,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 0,
     "SkillPassiveType": [],
     "PassiveSkillPro": [],
@@ -1056,7 +1061,7 @@
     "DamageType": 2,
     "SkillAddAnger": 0,
     "SkillHandler": "",
-    "GameObjectParameter": "",
+    "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
       2

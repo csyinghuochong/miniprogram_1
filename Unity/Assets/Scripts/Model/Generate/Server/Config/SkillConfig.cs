@@ -23,14 +23,14 @@ namespace ET
             DamageType = (DamageType)_buf.ReadInt();
             SkillAddAnger = _buf.ReadInt();
             SkillHandler = _buf.ReadString();
-            GameObjectParameter = _buf.ReadString();
+            {int __n0 = _buf.ReadSize(); GameObjectParameter = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); GameObjectParameter[__index0] = __e0;}}
             SkillType = (SkillType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillPassiveType = new SkillPassiveType[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { SkillPassiveType __e0;__e0 = (SkillPassiveType)_buf.ReadInt(); SkillPassiveType[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); PassiveSkillPro = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); PassiveSkillPro[__index0] = __e0;}}
             PassiveSkillTriggerOnce = _buf.ReadInt();
             SkillCD = _buf.ReadFloat();
             SkillLiveTime = _buf.ReadFloat();
-            ActDamage = _buf.ReadDouble();
+            ActDamage = _buf.ReadFloat();
             DamgeValue = _buf.ReadInt();
             SkillAnimation = _buf.ReadString();
             SkillMusic = _buf.ReadString();
@@ -90,7 +90,7 @@ namespace ET
         /// <summary>
         /// 脚本参数
         /// </summary>
-        public readonly string GameObjectParameter;
+        public readonly float[] GameObjectParameter;
 
         /// <summary>
         /// 技能类型
@@ -125,7 +125,7 @@ namespace ET
         /// <summary>
         /// 攻击系数
         /// </summary>
-        public readonly double ActDamage;
+        public readonly float ActDamage;
 
         /// <summary>
         /// 固定伤害值
@@ -232,7 +232,7 @@ namespace ET
             + "DamageType:" + DamageType + ","
             + "SkillAddAnger:" + SkillAddAnger + ","
             + "SkillHandler:" + SkillHandler + ","
-            + "GameObjectParameter:" + GameObjectParameter + ","
+            + "GameObjectParameter:" + Luban.StringUtil.CollectionToString(GameObjectParameter) + ","
             + "SkillType:" + SkillType + ","
             + "SkillPassiveType:" + Luban.StringUtil.CollectionToString(SkillPassiveType) + ","
             + "PassiveSkillPro:" + Luban.StringUtil.CollectionToString(PassiveSkillPro) + ","

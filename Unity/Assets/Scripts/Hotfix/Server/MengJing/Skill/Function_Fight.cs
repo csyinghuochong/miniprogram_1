@@ -7,11 +7,7 @@ namespace ET.Server
         /// <summary>
         /// 伤害计算
         /// </summary>
-        /// <param name="attackUnit">攻击方</param>
-        /// <param name="defendUnit">受击方</param>
-        /// <param name="skill"></param>
-        /// <returns></returns>
-        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillS skill)
+        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillS skill, float customActDamage = 0)
         {
             if (attackUnit == null)
             {
@@ -58,12 +54,13 @@ namespace ET.Server
 
             // 计算伤害
             long damage = 0;
+            float actDamage = customActDamage != 0 ? customActDamage : skillConfig.ActDamage;
             DamageType damageType = DamageType.None;
             if (skillConfig.DamageType == DamageType.Physical)
             {
                 // 物理伤害
                 long act = attack_MinAct < attack_MaxAct ? RandomHelper.NextLong(attack_MinAct, attack_MaxAct) : attack_MinAct;
-                damage = (long)(act * skillConfig.ActDamage) + skillConfig.DamgeValue;
+                damage = (long)(act * actDamage) + skillConfig.DamgeValue;
                 damageType = DamageType.Physical;
 
                 // 免疫物理伤害
@@ -76,7 +73,7 @@ namespace ET.Server
             else
             {
                 // 法术伤害
-                damage = (long)(attack_MageAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
+                damage = (long)(attack_MageAct * actDamage) + skillConfig.DamgeValue;
                 damageType = DamageType.Magical;
             }
 
