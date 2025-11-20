@@ -125,11 +125,11 @@ namespace ET
         public const int Fail = 2;
     }
 
-    public static class CampEnum
+    public enum CampType
     {
-        public const int CampMonster1 = 0;
-        public const int CampPlayer_1 = 1;
-        public const int CampPlayer_2 = 2;
+        CampMonster1 = 0,
+        CampPlayer_1 = 1,
+        CampPlayer_2 = 2,
     }
 
     public static class LoginTypeEnum

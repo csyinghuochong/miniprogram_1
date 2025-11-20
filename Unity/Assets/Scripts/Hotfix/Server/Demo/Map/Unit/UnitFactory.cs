@@ -89,6 +89,7 @@ namespace ET.Server
             }
 
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
+            numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
@@ -114,7 +115,7 @@ namespace ET.Server
             return unit;
         }
 
-        public static Unit CreateMonster(Scene scene, int monsterConfigId, float2 position)
+        public static Unit CreateMonster(Scene scene, int monsterConfigId, float2 position, CampType campType = CampType.CampMonster1)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), monsterConfigId);
             scene.GetComponent<UnitComponent>().Add(unit);
@@ -139,6 +140,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_Eva_Base, monsterConfig.Eva, false);
             numericComponent.ApplyValue(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
             numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, monsterConfig.HitLess, false);
+            numericComponent.ApplyValue(NumericType.BattleCamp, (int)campType);
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();

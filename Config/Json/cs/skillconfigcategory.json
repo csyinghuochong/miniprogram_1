@@ -368,8 +368,11 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
-    "GameObjectParameter": [],
+    "SkillHandler": "Skill_混乱之雨",
+    "GameObjectParameter": [
+      2,
+      50000
+    ],
     "SkillType": 1,
     "SkillPassiveType": [
       0

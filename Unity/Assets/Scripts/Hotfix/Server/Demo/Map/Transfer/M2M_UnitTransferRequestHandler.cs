@@ -67,6 +67,8 @@ namespace ET.Server
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
+                    numericComponent.ApplyValue(NumericType.BattleCamp, (int)CampType.CampPlayer_1, false);
+                    
                     unit.AddComponent<AOIEntity, int, float3>(100 * 1000, unit.Position);
 
                     // 创建英雄队列

@@ -49,6 +49,7 @@
         public const int DragonChuansongTimer = 241;
         public const int CellChuansongTimer = 242;
         public const int Move2DTimer = 243;
+        public const int DeathTimer = 244;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

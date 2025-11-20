@@ -87,11 +87,16 @@ namespace ET.Server
         {
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().RobotId > 0;
         }
+        
+        public static int GetBattleCamp(this Unit self)
+        {
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            return numericComponent.GetAsInt(NumericType.BattleCamp);
+        }
 
         public static bool IsTeam(this Unit self, Unit other)
         {
-            // 先这样，英雄是一队，怪物是一队
-            return self.Type == other.Type;
+            return self.GetBattleCamp() == other.GetBattleCamp();
         }
         
         public static void OnDead(this Unit self, Unit attack, bool nodrop = false)
@@ -144,7 +149,7 @@ namespace ET.Server
                 return false;
             }
 
-            return self.Type != defend.Type;
+            return true;
         }
 
         public static bool IsCanBeAttack(this Unit self, bool checkDead = true)

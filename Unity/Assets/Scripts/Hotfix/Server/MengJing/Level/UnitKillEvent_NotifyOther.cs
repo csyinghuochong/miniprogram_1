@@ -31,7 +31,7 @@
                 }
             }
 
-            if (attackUnit.Type == UnitType.Hero)
+            if (attackUnit != null && attackUnit.Type == UnitType.Hero)
             {
                 Unit master = attackUnit.GetParent<UnitComponent>().Get(attackUnit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId));
                 master.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, mapType);
