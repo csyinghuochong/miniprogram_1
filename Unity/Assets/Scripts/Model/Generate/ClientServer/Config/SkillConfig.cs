@@ -23,7 +23,7 @@ namespace ET
             DamageType = (DamageType)_buf.ReadInt();
             SkillAddAnger = _buf.ReadInt();
             SkillHandler = _buf.ReadString();
-            {int __n0 = _buf.ReadSize(); GameObjectParameter = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); GameObjectParameter[__index0] = __e0;}}
+            {int __n0 = _buf.ReadSize(); GameObjectParameter = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); GameObjectParameter[__index0] = __e0;}}
             SkillType = (SkillType)_buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillPassiveType = new SkillPassiveType[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { SkillPassiveType __e0;__e0 = (SkillPassiveType)_buf.ReadInt(); SkillPassiveType[__index0] = __e0;}}
             {int __n0 = _buf.ReadSize(); PassiveSkillPro = new float[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { float __e0;__e0 = _buf.ReadFloat(); PassiveSkillPro[__index0] = __e0;}}
@@ -90,7 +90,7 @@ namespace ET
         /// <summary>
         /// 脚本参数
         /// </summary>
-        public readonly float[] GameObjectParameter;
+        public readonly int[] GameObjectParameter;
 
         /// <summary>
         /// 技能类型

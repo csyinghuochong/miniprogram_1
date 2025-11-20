@@ -235,7 +235,7 @@ namespace ET.Client
             {
                 self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
                 self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one;
+                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * 2;
             }
             else
             {

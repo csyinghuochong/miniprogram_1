@@ -103,7 +103,8 @@ namespace ET.Server
             // hero.Skills.Add(30000002);
             // hero.Skills.Add(10000004);
             // hero.Skills.Add(20000002);
-            hero.Skills.Add(20000001);
+            // hero.Skills.Add(20000001);
+            hero.Skills.Add(20000003);
         }
     }
 }

@@ -164,10 +164,10 @@
     "SkillAddAnger": 0,
     "SkillHandler": "Skill_淘汰之刃",
     "GameObjectParameter": [
-      3.5,
-      0.3,
-      4,
-      0.5
+      35000,
+      3000,
+      40000,
+      5000
     ],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -246,8 +246,10 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
-    "GameObjectParameter": [],
+    "SkillHandler": "Skill_无敌击",
+    "GameObjectParameter": [
+      5
+    ],
     "SkillType": 1,
     "SkillPassiveType": [
       0

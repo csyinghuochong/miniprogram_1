@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
     /// <summary>
-    /// GameObjectParameter 3.5,0.3,4,0.5 对敌人造成350%物理伤害，如果敌人生命值低于30%，造成400%物理伤害；若成功击杀，将额外恢复50%的怒气。
+    /// GameObjectParameter 35000,3000,40000,5000 对敌人造成350%物理伤害，如果敌人生命值低于30%，造成400%物理伤害；若成功击杀，将额外恢复50%的怒气。
     /// </summary>
     public class Skill_淘汰之刃 : SkillHandlerS
     {
@@ -24,13 +24,13 @@
             NumericComponentS defendNumeric = skill.TheUnitTarget.GetComponent<NumericComponentS>();
             int nowHp = defendNumeric.GetAsInt(NumericType.Now_Hp);
             int maxHp = defendNumeric.GetAsInt(NumericType.Now_MaxHp);
-            if (nowHp * 1f / maxHp > skill.SkillConfig.GameObjectParameter[1])
+            if (nowHp * 1f / maxHp > skill.SkillConfig.GameObjectParameter[1] / 10000f)
             {
-                Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill, skill.SkillConfig.GameObjectParameter[0]);
+                Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill, skill.SkillConfig.GameObjectParameter[0] / 10000f);
             }
             else
             {
-                Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill, skill.SkillConfig.GameObjectParameter[2]);
+                Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill, skill.SkillConfig.GameObjectParameter[2] / 10000f);
             }
 
             // 击杀恢复怒气
