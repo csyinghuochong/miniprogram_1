@@ -149,11 +149,13 @@ namespace ET.Server
             }
 
             int nowValue = numericType / 100;
-            int add = nowValue * 100 + 1;
+            int baseValue = nowValue * 100 + 1;
             int mul = nowValue * 100 + 2;
             int finalAdd = nowValue * 100 + 3;
+            int buffAdd = nowValue * 100 + 11;
+            int buffMul = nowValue * 100 + 12;
 
-            long nowPropertyValue = (long)(self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd));
+            long nowPropertyValue = (long)((self.GetByKey(baseValue) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) + self.GetByKey(buffAdd));
 
             return nowPropertyValue / 10000f;
         }

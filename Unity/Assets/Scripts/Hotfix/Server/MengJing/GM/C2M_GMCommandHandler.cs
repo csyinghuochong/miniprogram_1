@@ -56,6 +56,26 @@ namespace ET.Server
                         unit.GetComponent<HeroComponentS>().AddHeroByConfigId(heroId);
                         break;
                     }
+                    case 3: //创建怪物
+                    {
+                        float posX = float.Parse(commands[1]);
+                        float posY = float.Parse(commands[2]); 
+                        int monsterId = int.Parse(commands[3]);
+                        int number = int.Parse(commands[4]);
+                        if (number > 100)
+                        {
+                            Log.Error("number > 100");
+                            return;
+                        }
+
+                        for (int c = 0; c < number; c++)
+                        {
+                            await unit.Root().GetComponent<TimerComponent>().WaitAsync(1);
+                            float2 vector2 = new float2(posX + RandomHelper.RandomNumberFloat(-1, 1), posY);
+                            Unit monster = UnitFactory.CreateMonster(unit.Scene(), monsterId, vector2);
+                        }
+                        break;
+                    }
                     case 6:
                     {
                         int lv = int.Parse(commands[1]);

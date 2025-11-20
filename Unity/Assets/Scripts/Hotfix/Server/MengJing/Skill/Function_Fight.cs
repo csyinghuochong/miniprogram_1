@@ -62,7 +62,8 @@ namespace ET.Server
             if (skillConfig.DamageType == DamageType.Physical)
             {
                 // 物理伤害
-                damage = (long)(attack_MaxAct * skillConfig.ActDamage) + skillConfig.DamgeValue;
+                long act = attack_MinAct < attack_MaxAct ? RandomHelper.NextLong(attack_MinAct, attack_MaxAct) : attack_MinAct;
+                damage = (long)(act * skillConfig.ActDamage) + skillConfig.DamgeValue;
                 damageType = DamageType.Physical;
 
                 // 免疫物理伤害

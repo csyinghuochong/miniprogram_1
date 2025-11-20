@@ -201,7 +201,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
+    "SkillHandler": "Skill_AddBuff",
     "GameObjectParameter": "",
     "SkillType": 1,
     "SkillPassiveType": [
