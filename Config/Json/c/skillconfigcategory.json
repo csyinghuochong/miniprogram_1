@@ -6,7 +6,7 @@
     "SkillActType": 0,
     "DamageType": 1,
     "SkillAddAnger": 5,
-    "SkillHandler": "Skill_MeleeBasicAttack",
+    "SkillHandler": "Skill_近战普通攻击",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -45,7 +45,7 @@
     "SkillActType": 0,
     "DamageType": 1,
     "SkillAddAnger": 5,
-    "SkillHandler": "Skill_RangedBasicAttack",
+    "SkillHandler": "Skill_远程普通攻击",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -84,7 +84,7 @@
     "SkillActType": 0,
     "DamageType": 2,
     "SkillAddAnger": 5,
-    "SkillHandler": "Skill_RangedBasicAttack",
+    "SkillHandler": "Skill_远程普通攻击",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [

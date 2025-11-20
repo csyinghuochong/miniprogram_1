@@ -3,7 +3,7 @@
     /// <summary>
     /// 近战普通攻击
     /// </summary>
-    public class Skill_MeleeBasicAttack : SkillHandlerS
+    public class Skill_近战普通攻击 : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {

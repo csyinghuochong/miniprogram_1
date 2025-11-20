@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    public class Skill_RangedBasicAttack : SkillHandlerC
+    public class Skill_远程普通攻击 : SkillHandlerC
     {
         public override void OnInit(SkillC skill)
         {

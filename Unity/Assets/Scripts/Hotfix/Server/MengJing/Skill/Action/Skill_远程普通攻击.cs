@@ -6,7 +6,7 @@ namespace ET.Server
     /// 远程普通攻击  例如射手射出一只箭，这个箭是追踪敌人的
     /// Speed 箭的移动速度
     /// </summary>
-    public class Skill_RangedBasicAttack : SkillHandlerS
+    public class Skill_远程普通攻击 : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
