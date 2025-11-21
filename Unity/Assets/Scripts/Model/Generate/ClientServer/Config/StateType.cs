@@ -42,5 +42,10 @@ namespace ET
         /// </summary>
         Stun = 16,
 
+        /// <summary>
+        /// 冰冻
+        /// </summary>
+        Freeze = 32,
+
     }
 }

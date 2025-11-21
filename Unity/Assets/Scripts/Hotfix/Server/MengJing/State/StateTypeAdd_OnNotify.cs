@@ -9,7 +9,7 @@ namespace ET.Server
 
             StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
 
-            if (args.nowStateType == StateType.Stun)
+            if (args.nowStateType == StateType.Stun || args.nowStateType == StateType.Freeze)
             {
                 unit.GetComponent<Move2DComponent>()?.Stop();
                 unit.GetComponent<SkillManagerComponentS>()?.OnBreak();

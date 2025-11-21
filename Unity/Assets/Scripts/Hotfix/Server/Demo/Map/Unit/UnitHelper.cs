@@ -174,6 +174,11 @@ namespace ET.Server
             {
                 return ErrorCode.ERR_Stun;
             }
+            
+            if (stateComponent.StateTypeGet(StateType.Freeze))
+            {
+                return ErrorCode.ERR_Freeze;
+            }
 
             return ErrorCode.ERR_Success;
         }
