@@ -15,6 +15,12 @@ namespace ET.Client
             Transform head = null;
             Unit unit = args.Unit;
 
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.SkillConfigId);
+            if (skillConfig.SkillActType == SkillActType.Normal)
+            {
+                return;
+            }
+            
             if (unit.Type == UnitType.Monster)
             {
                 UIMonsterHpComponent uiMonsterHpComponent = unit.GetComponent<UIMonsterHpComponent>();
@@ -51,8 +57,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.SkillConfigId);
 
             unit.Root().GetComponent<FloatingTextComponent>().ShowNormalText(skillConfig.SkillName, head);
 

@@ -99,7 +99,7 @@ namespace ET.Server
             // }
             
             //先这样测试
-            hero.Skills.Add(30000002);
+            hero.Skills.Add(30000003);
         }
     }
 }
