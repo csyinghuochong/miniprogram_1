@@ -645,8 +645,10 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
-    "GameObjectParameter": [],
+    "SkillHandler": "Skill_剑刃风暴",
+    "GameObjectParameter": [
+      0.5
+    ],
     "SkillType": 2,
     "SkillPassiveType": [
       2
