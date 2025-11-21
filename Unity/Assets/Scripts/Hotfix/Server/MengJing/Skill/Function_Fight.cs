@@ -39,6 +39,8 @@ namespace ET.Server
             long attack_MaxAdf = numericComponentAttack.GetAsLong(NumericType.Now_MaxAdf);
             long attack_AtkDamageAddPro = numericComponentAttack.GetAsLong(NumericType.Now_AtkDamageAddPro);
             long attack_MageActAddPro = numericComponentAttack.GetAsLong(NumericType.Now_HitDamageLessPro);
+            long attack_Cri = numericComponentAttack.GetAsLong(NumericType.Now_Cri);
+            long attack_ReCri = numericComponentAttack.GetAsLong(NumericType.Now_ReCri);
             // ......
 
             //获取受击方属性
@@ -54,6 +56,8 @@ namespace ET.Server
             long defend_MaxAdf = numericComponentDefend.GetAsLong(NumericType.Now_MaxAdf);
             long defend_AtkDamageAddPro = numericComponentDefend.GetAsLong(NumericType.Now_AtkDamageAddPro);
             long defend_MageActAddPro = numericComponentDefend.GetAsLong(NumericType.Now_HitDamageLessPro);
+            long defend_Cri = numericComponentDefend.GetAsLong(NumericType.Now_Cri);
+            long defend_ReCri = numericComponentDefend.GetAsLong(NumericType.Now_ReCri);
             // ...
 
             // 计算伤害
@@ -87,6 +91,13 @@ namespace ET.Server
                 damage = (long)(damage * (1 + (attack_AtkDamageAddPro / 10000f) - (defend_MageActAddPro / 10000f)));
             }
             
+            // 暴击
+            if (skillConfig.SkillActType == SkillActType.Normal && RandomHelper.RandFloat01() <= (attack_Cri - defend_ReCri) / 10000f)
+            {
+                damage = damage * 2;
+                damageType = DamageType.Critical;
+            }
+
             // 无敌
             if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateType.AllDamageImmune))
             {

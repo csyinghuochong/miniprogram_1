@@ -111,6 +111,8 @@ namespace ET.Server
             aiComponent.Begin();
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
+            
+            skillPassiveComponent.OnTriggerPassiveSkill(SkillPassiveType.OnBattleStart);
 
             return unit;
         }
