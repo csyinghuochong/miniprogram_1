@@ -9,6 +9,12 @@ namespace ET.Server
 
             StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
 
+            if (args.nowStateType == StateType.Stun)
+            {
+                unit.GetComponent<Move2DComponent>()?.Stop();
+                unit.GetComponent<SkillManagerComponentS>()?.OnBreak();
+            }
+
             M2C_UnitStateUpdate M2C_UnitStateUpdate = M2C_UnitStateUpdate.Create();
             if (stateComponent.IsStateBroadcastType(args.nowStateType))
             {

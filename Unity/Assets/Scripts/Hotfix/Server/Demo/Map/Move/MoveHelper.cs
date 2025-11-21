@@ -36,6 +36,11 @@ namespace ET.Server
 
         public static void PathResultTo(Unit unit, float3 target)
         {
+            if (unit.IsCanMove() != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+            
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
             unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
 

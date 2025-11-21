@@ -87,7 +87,7 @@ namespace ET.Server
         {
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().RobotId > 0;
         }
-        
+
         public static int GetBattleCamp(this Unit self)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
@@ -98,7 +98,7 @@ namespace ET.Server
         {
             return self.GetBattleCamp() == other.GetBattleCamp();
         }
-        
+
         public static void OnDead(this Unit self, Unit attack, bool nodrop = false)
         {
             // self.GetComponent<MoveComponent>()?.Stop(false);
@@ -164,6 +164,18 @@ namespace ET.Server
             }
 
             return true;
+        }
+
+        public static int IsCanMove(this Unit self)
+        {
+            StateComponentS stateComponent = self.GetComponent<StateComponentS>();
+
+            if (stateComponent.StateTypeGet(StateType.Stun))
+            {
+                return ErrorCode.ERR_Stun;
+            }
+
+            return ErrorCode.ERR_Success;
         }
     }
 }

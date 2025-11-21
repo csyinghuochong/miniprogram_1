@@ -173,11 +173,6 @@ namespace ET.Server
 
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), message);
 
-            if (skillConfig.SkillActType == SkillActType.Normal)
-            {
-                myUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnNormalAttackByChance, initSkillData.TargetId);
-            }
-
             return ErrorCode.ERR_Success;
         }
 
@@ -207,6 +202,12 @@ namespace ET.Server
             if (self.PublicCD > 0)
             {
                 return ErrorCode.ERR_UseSkillInPublicCD;
+            }
+
+            int error = self.GetParent<Unit>().IsCanMove();
+            if (error != ErrorCode.ERR_Success)
+            {
+                return error;
             }
 
             return ErrorCode.ERR_Success;
@@ -266,6 +267,17 @@ namespace ET.Server
                 M2C_UnitFinishSkill message = M2C_UnitFinishSkill.Create();
                 message.UnitId = unit.Id;
                 MapMessageHelper.Broadcast(unit, message);
+            }
+        }
+
+        public static void OnBreak(this SkillManagerComponentS self)
+        {
+            for (int i = self.Skills.Count - 1; i >= 0; i--)
+            {
+                SkillS skill = self.Skills[i];
+                skill.OnFinished();
+                skill.Dispose();
+                self.Skills.RemoveAt(i);
             }
         }
 

@@ -84,6 +84,7 @@ namespace ET
         public const int ERR_NotSkillHandler = 200903; //技能没有配置SkillHandler
         public const int ERR_TargetUnitIsNull = 200904; //目标单位不存在
         public const int ERR_TargetUnitCantBeAttack = 200905; //目标不能被攻击
+        public const int ERR_Stun = 200906; //眩晕状态中
 
         // 场景相关错误 201001-201099
         public const int ERR_SceneCantSetTimeScale = 201001; //当前Scene不能设置TimeScale

@@ -30,12 +30,17 @@ namespace ET
         /// <summary>
         /// 免疫魔法攻击
         /// </summary>
-        MagicalImmune = 3,
+        MagicalImmune = 4,
 
         /// <summary>
         /// 嘲讽
         /// </summary>
-        Taunt = 4,
+        Taunt = 8,
+
+        /// <summary>
+        /// 眩晕
+        /// </summary>
+        Stun = 16,
 
     }
 }

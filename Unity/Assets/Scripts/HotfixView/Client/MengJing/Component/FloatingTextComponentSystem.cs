@@ -126,6 +126,10 @@ namespace ET.Client
             {
                 name = "嘲讽";
             }
+            else if ((StateType)args.m2C_UnitStateUpdate.StateType == StateType.Stun)
+            {
+                name = "眩晕";
+            }
 
             // 添加状态
             if (args.m2C_UnitStateUpdate.StateOperateType == 1)

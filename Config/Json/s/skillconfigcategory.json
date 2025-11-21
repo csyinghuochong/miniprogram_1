@@ -528,7 +528,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
+    "SkillHandler": "Skill_巨力挥舞",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -558,7 +558,7 @@
     "BuffID": [
       10000008
     ],
-    "SkillDescribe": "攻击有20%概率释放,向目标区域的敌人投掷风暴之锤,造成200%伤害,并使其造成眩晕效果,持续1秒。"
+    "SkillDescribe": "攻击有20%概率释放,向目标区域的敌人投掷风暴之锤,造成200%伤害,并使其造成眩晕效果,持续3秒。"
   },
   {
     "Id": 30000005,
