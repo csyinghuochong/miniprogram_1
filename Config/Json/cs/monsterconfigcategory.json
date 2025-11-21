@@ -13,7 +13,7 @@
     "ActDistance": 10000,
     "AtkSpeed": 20000,
     "Hp": 1000000,
-    "Act": 1,
+    "Act": 10,
     "Def": 20,
     "Adf": 10,
     "Cri": 500,

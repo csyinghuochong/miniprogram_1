@@ -37,6 +37,8 @@ namespace ET.Server
             long attack_MaxDef = numericComponentAttack.GetAsLong(NumericType.Now_MaxDef);
             long attack_MinAdf = numericComponentAttack.GetAsLong(NumericType.Now_MinAdf);
             long attack_MaxAdf = numericComponentAttack.GetAsLong(NumericType.Now_MaxAdf);
+            long attack_AtkDamageAddPro = numericComponentAttack.GetAsLong(NumericType.Now_AtkDamageAddPro);
+            long attack_MageActAddPro = numericComponentAttack.GetAsLong(NumericType.Now_HitDamageLessPro);
             // ......
 
             //获取受击方属性
@@ -50,6 +52,8 @@ namespace ET.Server
             long defend_MaxDef = numericComponentDefend.GetAsLong(NumericType.Now_MaxDef);
             long defend_MinAdf = numericComponentDefend.GetAsLong(NumericType.Now_MinAdf);
             long defend_MaxAdf = numericComponentDefend.GetAsLong(NumericType.Now_MaxAdf);
+            long defend_AtkDamageAddPro = numericComponentDefend.GetAsLong(NumericType.Now_AtkDamageAddPro);
+            long defend_MageActAddPro = numericComponentDefend.GetAsLong(NumericType.Now_HitDamageLessPro);
             // ...
 
             // 计算伤害
@@ -77,6 +81,12 @@ namespace ET.Server
                 damageType = DamageType.Magical;
             }
 
+            // 伤害加成和伤害减免
+            if (damage != 0)
+            {
+                damage = (long)(damage * (1 + (attack_AtkDamageAddPro / 10000f) - (defend_MageActAddPro / 10000f)));
+            }
+            
             // 无敌
             if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateType.AllDamageImmune))
             {
