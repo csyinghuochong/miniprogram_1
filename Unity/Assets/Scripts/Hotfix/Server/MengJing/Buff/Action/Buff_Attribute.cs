@@ -82,6 +82,11 @@ namespace ET.Server
                 // 状态
                 case 2:
                 {
+                    if ((StateType)buff.BuffConfig.BuffParameterType == StateType.Taunt)
+                    {
+                        buff.TheUnitBelongTo.GetComponent<AIComponent>()?.SetTarget(buff.TheUnitFrom.Id);
+                    }
+                    
                     buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeAdd((StateType)buff.BuffConfig.BuffParameterType);
                     break;
                 }

@@ -167,5 +167,10 @@ namespace ET.Server
             self.Current = -1;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
+
+        public static void SetTarget(this AIComponent self, long targetId)
+        {
+            self.TargetId = targetId;
+        }
     }
 }
