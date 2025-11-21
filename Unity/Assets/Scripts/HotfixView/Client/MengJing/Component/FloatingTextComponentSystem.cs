@@ -61,6 +61,14 @@ namespace ET.Client
             {
                 name = "免疫物理伤害";
             }
+            else if ((StateType)args.m2C_UnitStateUpdate.StateType == StateType.MagicalImmune)
+            {
+                name = "免疫法术伤害";
+            }
+            else if ((StateType)args.m2C_UnitStateUpdate.StateType == StateType.Taunt)
+            {
+                name = "嘲讽";
+            }
 
             // 添加状态
             if (args.m2C_UnitStateUpdate.StateOperateType == 1)

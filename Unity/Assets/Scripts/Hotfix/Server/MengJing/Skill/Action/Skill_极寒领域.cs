@@ -3,7 +3,7 @@
 namespace ET.Server
 {
     /// <summary>
-    /// GameObjectParameter 10000 触发时间间隔
+    /// GameObjectParameter 1 触发时间间隔
     /// </summary>
     public class Skill_极寒领域 : SkillHandlerS
     {
@@ -31,7 +31,7 @@ namespace ET.Server
             {
                 return;
             }
-            skill.TriggerTime = skill.SkillConfig.GameObjectParameter[0] / 10000f;
+            skill.TriggerTime = skill.SkillConfig.GameObjectParameter[0];
             
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = entities.Count - 1; i >= 0; i--)

@@ -11,13 +11,10 @@ namespace ET.Server
     {
         public override void OnInit(SkillS skill)
         {
+            skill.ICheckShape = skill.CreateCheckShape(0);
         }
 
         public override void OnExecute(SkillS skill)
-        {
-        }
-
-        public override void OnUpdate(SkillS skill, float deltaTime)
         {
             foreach (int id in skill.SkillConfig.InitBuffID)
             {
@@ -34,8 +31,7 @@ namespace ET.Server
                     continue;
                 }
 
-                // 直接距离判断
-                if (math.distance(skill.TheUnitFrom.Position, defendUnit.Position) > skill.SkillConfig.DamageRange[0])
+                if (!skill.ICheckShape.Contains(defendUnit.Position))
                 {
                     continue;
                 }
@@ -47,6 +43,10 @@ namespace ET.Server
             }
 
             skill.SkillState = SkillState.Finished;
+        }
+
+        public override void OnUpdate(SkillS skill, float deltaTime)
+        {
         }
 
         public override void OnFinished(SkillS skill)

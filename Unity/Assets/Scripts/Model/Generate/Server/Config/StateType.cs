@@ -27,5 +27,15 @@ namespace ET
         /// </summary>
         PhysicalImmune = 2,
 
+        /// <summary>
+        /// 免疫魔法攻击
+        /// </summary>
+        MagicalImmune = 3,
+
+        /// <summary>
+        /// 嘲讽
+        /// </summary>
+        Taunt = 4,
+
     }
 }

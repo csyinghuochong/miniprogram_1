@@ -17,11 +17,8 @@ namespace ET.Server
             {
                 skill.SkillBuff(id, skill.TheUnitFrom);
             }
-        }
-
-        public override void OnUpdate(SkillS skill, float deltaTime)
-        {
-            int num = skill.SkillConfig.GameObjectParameter[0];
+            
+            int num = (int)skill.SkillConfig.GameObjectParameter[0];
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
 
             for (int i = 0; i < skill.SkillConfig.GameObjectParameter[0]; i++)
@@ -51,6 +48,10 @@ namespace ET.Server
             }
 
             skill.SkillState = SkillState.Finished;
+        }
+
+        public override void OnUpdate(SkillS skill, float deltaTime)
+        {
         }
 
         public override void OnFinished(SkillS skill)

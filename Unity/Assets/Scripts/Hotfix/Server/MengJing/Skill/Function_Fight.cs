@@ -84,7 +84,14 @@ namespace ET.Server
                 damageType = DamageType.Immune;
             }
 
+            // 受到伤害触发被动
             defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
+
+            // 普通攻击触发被动
+            if (skillConfig.SkillActType == SkillActType.Normal)
+            {
+                attackUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnNormalAttackByChance, attackUnit.Id);
+            }
             
             // AI
             defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);

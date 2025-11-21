@@ -2,11 +2,7 @@
 
 namespace ET.Server
 {
-    /// <summary>
-    /// DamageRangeType
-    /// DamageRange
-    /// </summary>
-    public class Skill_箭雨 : SkillHandlerS
+    public class Skill_怒吼 : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
@@ -15,12 +11,17 @@ namespace ET.Server
 
         public override void OnExecute(SkillS skill)
         {
+            foreach (int id in skill.SkillConfig.InitBuffID)
+            {
+                skill.SkillBuff(id, skill.TheUnitFrom);
+            }
+
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Unit defendUnit = entities[i];
-                
-                if (!skill.TheUnitFrom.IsCanAttackUnit(defendUnit))
+
+                if (defendUnit.Id == skill.TheUnitFrom.Id)
                 {
                     continue;
                 }
@@ -30,9 +31,12 @@ namespace ET.Server
                     continue;
                 }
 
-                Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
+                foreach (int id in skill.SkillConfig.BuffID)
+                {
+                    skill.SkillBuff(id, defendUnit);
+                }
             }
-
+            
             skill.SkillState = SkillState.Finished;
         }
 
