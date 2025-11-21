@@ -763,7 +763,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
+    "SkillHandler": "Skill_冰霜新星",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
