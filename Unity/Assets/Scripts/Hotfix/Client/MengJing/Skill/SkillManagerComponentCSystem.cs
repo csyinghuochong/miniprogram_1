@@ -147,6 +147,12 @@ namespace ET.Client
                     Unit = unit
                 });
             }
+
+            EventSystem.Instance.Publish(self.Root(), new OnUseSkill()
+            {
+                Unit = unit,
+                SkillConfigId = message.SkillConfigId
+            });
         }
 
         public static int IsCanUseSkill(this SkillManagerComponentC self, int skillConfigId)

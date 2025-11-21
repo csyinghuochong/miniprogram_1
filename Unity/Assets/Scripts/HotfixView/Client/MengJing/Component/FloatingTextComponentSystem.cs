@@ -8,6 +8,59 @@ namespace ET.Client
     # region 事件监听
 
     [Event(SceneType.Demo)]
+    public class OnUseSkill_ShowTip : AEvent<Scene, OnUseSkill>
+    {
+        protected override async ETTask Run(Scene scene, OnUseSkill args)
+        {
+            Transform head = null;
+            Unit unit = args.Unit;
+
+            if (unit.Type == UnitType.Monster)
+            {
+                UIMonsterHpComponent uiMonsterHpComponent = unit.GetComponent<UIMonsterHpComponent>();
+                if (uiMonsterHpComponent == null)
+                {
+                    return;
+                }
+
+                if (uiMonsterHpComponent.GameObject == null)
+                {
+                    return;
+                }
+
+                head = uiMonsterHpComponent.GameObject.GetComponent<Transform>();
+            }
+
+            if (unit.Type == UnitType.Hero)
+            {
+                UIHeroHpComponent uiHeroHpComponent = unit.GetComponent<UIHeroHpComponent>();
+                if (uiHeroHpComponent == null)
+                {
+                    return;
+                }
+
+                if (uiHeroHpComponent.GameObject == null)
+                {
+                    return;
+                }
+
+                head = uiHeroHpComponent.GameObject.GetComponent<Transform>();
+            }
+
+            if (head == null)
+            {
+                return;
+            }
+
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.SkillConfigId);
+
+            unit.Root().GetComponent<FloatingTextComponent>().ShowNormalText(skillConfig.SkillName, head);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class StateChange_ShowTip : AEvent<Scene, StateChange>
     {
         protected override async ETTask Run(Scene scene, StateChange args)

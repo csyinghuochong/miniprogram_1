@@ -72,6 +72,12 @@ namespace ET.Client
         public long InstanceId;
     }
 
+    public struct OnUseSkill
+    {
+        public Unit Unit;
+        public int SkillConfigId;
+    }
+    
     public struct SkillEffect
     {
         public InitEffectData InitEffectData;
