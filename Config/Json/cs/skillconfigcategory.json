@@ -449,7 +449,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_AreaDamage",
+    "SkillHandler": "Skill_反击螺旋",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
