@@ -105,6 +105,13 @@ namespace ET.Server
                 damageType = DamageType.Immune;
             }
 
+            // 保护 免受伤害
+            if (damage > 0 && numericComponentDefend.GetAsInt(NumericType.InvulnerableCount) > 0)
+            {
+                damage = 0;
+                numericComponentDefend.ApplyChange(NumericType.InvulnerableCount, -1, false);
+            }
+
             // 受到伤害触发被动
             defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
 

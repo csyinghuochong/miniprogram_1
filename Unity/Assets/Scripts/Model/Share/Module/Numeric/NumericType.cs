@@ -17,6 +17,7 @@
         public const int MasterId = 3009;                                       //主人
         public const int BattleCamp = 3010;                                     //战斗阵容
         public const int Now_AngerValue = 3011;                                 //当前怒气值
+        public const int InvulnerableCount = 3012;                              //免疫伤害次数
         
         // 闯关相关
         public const int PassedLevelId = 3100;                                  //通关的关卡Id
