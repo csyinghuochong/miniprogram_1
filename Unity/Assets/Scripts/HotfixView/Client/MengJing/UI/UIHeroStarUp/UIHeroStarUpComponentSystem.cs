@@ -58,7 +58,7 @@ namespace ET.Client
             self.Text_HeroHunShi.SetTextFormat("{0}/{1}", hero.HunShi, maxExp);
 
             UICommonHelper.HideChild(self.Transform_HeroStar.gameObject);
-            for (int i = 0; i < heroConfig.HeroUpStarNeed.Length; i++)
+            for (int i = 0; i < heroConfig.HeroUpStarNeed.Length - 1; i++)
             {
                 if (i < self.Transform_HeroStar.childCount)
                 {

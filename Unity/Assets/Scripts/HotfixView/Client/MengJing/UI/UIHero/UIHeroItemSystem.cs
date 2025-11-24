@@ -44,7 +44,7 @@ namespace ET.Client
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
             UICommonHelper.HideChild(self.Transform_HeroStar.gameObject);
-            for (int i = 0; i < heroConfig.HeroUpStarNeed.Length; i++)
+            for (int i = 0; i < heroConfig.HeroUpStarNeed.Length - 1; i++)
             {
                 if (i < self.Transform_HeroStar.childCount)
                 {
