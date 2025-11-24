@@ -130,6 +130,10 @@ namespace ET.Client
             {
                 name = "眩晕";
             }
+            else if ((StateType)args.m2C_UnitStateUpdate.StateType == StateType.Freeze)
+            {
+                name = "冰冻";
+            }
 
             // 添加状态
             if (args.m2C_UnitStateUpdate.StateOperateType == 1)

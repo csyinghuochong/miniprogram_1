@@ -803,7 +803,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
+    "SkillHandler": "Skill_冰封禁制",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [

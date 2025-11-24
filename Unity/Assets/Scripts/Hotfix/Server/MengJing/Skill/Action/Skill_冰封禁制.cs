@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    public class Skill_战斗饥渴 : SkillHandlerS
+    public class Skill_冰封禁制 : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
@@ -18,7 +18,7 @@
             {
                 skill.SkillBuff(id, skill.TheUnitTarget);
             }
-            
+
             skill.SkillState = SkillState.Finished;
         }
 
