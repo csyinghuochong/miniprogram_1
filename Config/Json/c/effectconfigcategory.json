@@ -7,7 +7,7 @@
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 10000002,
@@ -17,7 +17,7 @@
     "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 10000003,
@@ -27,17 +27,17 @@
     "SkillEffectLiveTime": 5,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 10000004,
     "Name": "箭雨",
     "EffectType": 1,
-    "EffectName": "Eff_Test4",
+    "EffectName": "Eff_Test1",
     "SkillEffectLiveTime": 2,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 10000005,
@@ -57,27 +57,27 @@
     "SkillEffectLiveTime": 2,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 10000007,
     "Name": "通用持续性加血特效",
     "EffectType": 1,
-    "EffectName": "Eff_Test1",
+    "EffectName": "Eff_Test5",
     "SkillEffectLiveTime": 3,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParent": 1,
+    "SkillParentPosition": "Bottom"
   },
   {
     "Id": 10000008,
     "Name": "通用瞬间加血特效",
     "EffectType": 1,
-    "EffectName": "Eff_Test2",
+    "EffectName": "Eff_Test5",
     "SkillEffectLiveTime": 3,
     "SkillEffectDelayTime": 0,
-    "SkillParent": 0,
-    "SkillParentPosition": "Center"
+    "SkillParent": 1,
+    "SkillParentPosition": "Bottom"
   },
   {
     "Id": 20000001,
@@ -87,7 +87,7 @@
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 1,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 20000002,
@@ -97,7 +97,7 @@
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 1,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 20000003,
@@ -107,26 +107,26 @@
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 1,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 20000004,
     "Name": "眩晕特效",
     "EffectType": 2,
-    "EffectName": "Eff_Test6",
+    "EffectName": "Eff_Test14",
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 1,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   },
   {
     "Id": 20000005,
     "Name": "减速特效",
     "EffectType": 2,
-    "EffectName": "Eff_Test1",
+    "EffectName": "Eff_Test14",
     "SkillEffectLiveTime": 3,
     "SkillEffectDelayTime": 0,
     "SkillParent": 1,
-    "SkillParentPosition": "Center"
+    "SkillParentPosition": ""
   }
 ]
