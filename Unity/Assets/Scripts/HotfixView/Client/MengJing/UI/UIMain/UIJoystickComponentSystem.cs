@@ -71,6 +71,11 @@ namespace ET.Client
         public static void AfterEnterScene(this UIJoystickComponent self, MapType mapType)
         {
             self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            
+            // 。。。解决传送到关卡或者返回主城时第一次拖动摇杆后会瞬移回来 先这样吧，还不太明确是什么问题
+            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
+            c2MPathfindingResult.Position.Add(self.MyUnit.Position);
+            self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
         }
 
         private static void OnPointerDown(this UIJoystickComponent self, PointerEventData pdata)
