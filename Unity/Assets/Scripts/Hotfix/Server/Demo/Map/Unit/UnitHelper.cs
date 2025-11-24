@@ -96,6 +96,11 @@ namespace ET.Server
 
         public static bool IsTeam(this Unit self, Unit other)
         {
+            if (self.Id == other.Id)
+            {
+                return false;
+            }
+            
             return self.GetBattleCamp() == other.GetBattleCamp();
         }
 

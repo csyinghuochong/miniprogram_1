@@ -16,6 +16,7 @@
         public const int MainCity_Z = 3008;
         public const int MasterId = 3009;                                       //主人
         public const int BattleCamp = 3010;                                     //战斗阵容
+        public const int Now_AngerValue = 3011;                                 //当前怒气值
         
         // 闯关相关
         public const int PassedLevelId = 3100;                                  //通关的关卡Id
@@ -242,14 +243,7 @@
         public const int Extra_Buff_AtkMonsterDamageAddPro_Add = Now_AtkMonsterDamageAddPro * 100 + 11;           //属性Buff附加加法
         public const int Extra_Buff_AtkMonsterDamageAddPro_Mul = Now_AtkMonsterDamageAddPro * 100 + 12;           //属性Buff附加乘法
         
-        public const int Now_AngerValue = 1034;          //当前怒气值
-        public const int Base_AngerValue_Base = Now_AngerValue * 100 + 1;                 //属性累加
-        public const int Base_AngerValue_Mul = Now_AngerValue * 100 + 2;                  //属性乘法
-        public const int Base_AngerValue_Add = Now_AngerValue * 100 + 3;                  //属性附加
-        public const int Extra_Buff_AngerValue_Add = Now_AngerValue * 100 + 11;           //属性Buff附加加法
-        public const int Extra_Buff_AngerValue_Mul = Now_AngerValue * 100 + 12;           //属性Buff附加乘法
-        
-        public const int Now_MaxAngerValue = 1035;          //最大怒气值
+        public const int Now_MaxAngerValue = 1034;          //最大怒气值
         public const int Base_MaxAngerValue_Base = Now_MaxAngerValue * 100 + 1;                 //属性累加
         public const int Base_MaxAngerValue_Mul = Now_MaxAngerValue * 100 + 2;                  //属性乘法
         public const int Base_MaxAngerValue_Add = Now_MaxAngerValue * 100 + 3;                  //属性附加
