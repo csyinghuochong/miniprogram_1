@@ -210,6 +210,7 @@ namespace ET.Server
 
                             if (hpPro <= skillProValue)
                             {
+                                targetId = u.Id;
                                 trigger = true;
                                 break;
                             }

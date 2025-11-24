@@ -6,39 +6,19 @@ namespace ET.Server
     {
         public override void OnInit(SkillS skill)
         {
-            skill.ICheckShape = skill.CreateCheckShape(0);
         }
 
         public override void OnExecute(SkillS skill)
         {
-            bool triggerTeam = false;
-            
-            List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
-            for (int i = entities.Count - 1; i >= 0; i--)
+            if (skill.TheUnitTarget == null)
             {
-                Unit defendUnit = entities[i];
+                skill.SkillState = SkillState.Finished;
+                return;
+            }
 
-                if (!triggerTeam && UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit))
-                {
-                    foreach (int id in skill.SkillConfig.BuffID)
-                    {
-                        skill.SkillBuff(id, defendUnit);
-                    }
-
-                    triggerTeam = true;
-                }
-
-                if (!skill.TheUnitFrom.IsCanAttackUnit(defendUnit))
-                {
-                    continue;
-                }
-
-                if (!skill.ICheckShape.Contains(defendUnit.Position))
-                {
-                    continue;
-                }
-
-                Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
+            foreach (int id in skill.SkillConfig.BuffID)
+            {
+                skill.SkillBuff(id, skill.TheUnitTarget);
             }
 
             skill.SkillState = SkillState.Finished;
