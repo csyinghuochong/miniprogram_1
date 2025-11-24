@@ -123,7 +123,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_箭雨",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -206,7 +206,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_神之力量",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -287,7 +287,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_极寒领域",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [
       1
     ],
@@ -328,7 +328,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_守护天使",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 1,
     "SkillPassiveType": [
@@ -410,7 +410,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_怒吼",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -449,7 +449,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_反击螺旋",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -488,7 +488,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_战斗饥渴",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -528,7 +528,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_巨力挥舞",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -567,7 +567,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_溅射",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -606,7 +606,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_战吼",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -645,7 +645,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_剑刃风暴",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [
       0.5
     ],
@@ -686,7 +686,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_治疗守卫",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -723,7 +723,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_剑舞",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -763,7 +763,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_冰霜新星",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -803,7 +803,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_冰封禁制",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -843,7 +843,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_辉煌光环",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -882,7 +882,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_洗礼",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -921,7 +921,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_驱逐",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -960,7 +960,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_退化光环",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -1064,7 +1064,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_剧变",
+    "SkillHandler": "Skill_Common",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
