@@ -960,7 +960,7 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "",
+    "SkillHandler": "Skill_退化光环",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
