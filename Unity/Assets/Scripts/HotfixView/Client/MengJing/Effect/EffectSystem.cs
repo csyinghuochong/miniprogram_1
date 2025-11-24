@@ -69,7 +69,7 @@ namespace ET.Client
             self.ElapsedTime = 0;
         }
 
-        public static void OnLoadGameObject(this Effect self, GameObject gameObject, long instanceId)
+        private static void OnLoadGameObject(this Effect self, GameObject gameObject, long instanceId)
         {
             if (self.EffectState != EffectState.Running || instanceId != self.InstanceId)
             {
