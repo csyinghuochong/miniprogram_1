@@ -132,7 +132,7 @@ namespace ET.Server
         {
             Unit myUnit = self.GetParent<Unit>();
 
-            List<SkillPassiveInfo> skillPassiveInfos = new();
+            using ListComponent<SkillPassiveInfo> skillPassiveInfos = ListComponent<SkillPassiveInfo>.Create();
 
             foreach (SkillPassiveInfo skillPassiveInfo in self.SkillPassiveInfos)
             {
