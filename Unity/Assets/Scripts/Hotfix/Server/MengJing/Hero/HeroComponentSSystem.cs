@@ -132,6 +132,7 @@ namespace ET.Server
                 hero.Equipments.TryAdd((int)EquipSlotType.Wuqi, 0);
                 
                 HeroHelper.UpdateHeroSkill(hero);
+                HeroHelper.UpdateHeroNumeric(self.GetParent<Unit>(), hero);
             }
         }
 

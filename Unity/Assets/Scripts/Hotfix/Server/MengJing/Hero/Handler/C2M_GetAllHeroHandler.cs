@@ -12,7 +12,6 @@ namespace ET.Server
 
             foreach (var hero in heroComponentS.GetAllHero())
             {
-                HeroHelper.UpdateHeroNumeric(unit, hero); //更新一下
                 response.HeroList.Add(hero.ToMessage());
             }
 
