@@ -56,8 +56,22 @@ namespace ET.Server
             hero.ConfigId = configId;
             hero.Lv = 1;
 
-            HeroHelper.UpdateHeroNumeric(self.GetParent<Unit>(), hero);
+            self.RefreshHero(hero);
+
             self.AddHero(hero);
+        }
+
+        private static void RefreshHero(this HeroComponentS self, Hero hero)
+        {
+            hero.Equipments.TryAdd((int)EquipSlotType.Toukui, 0);
+            hero.Equipments.TryAdd((int)EquipSlotType.Yifu, 0);
+            hero.Equipments.TryAdd((int)EquipSlotType.Kuzi, 0);
+            hero.Equipments.TryAdd((int)EquipSlotType.Xiezi, 0);
+            hero.Equipments.TryAdd((int)EquipSlotType.Xianglian, 0);
+            hero.Equipments.TryAdd((int)EquipSlotType.Wuqi, 0);
+                
+            HeroHelper.UpdateHeroSkill(hero);
+            HeroHelper.UpdateHeroNumeric(self.GetParent<Unit>(), hero);
         }
 
         public static void AddHero(this HeroComponentS self, Hero hero)
@@ -124,15 +138,7 @@ namespace ET.Server
 
             foreach (Hero hero in self.Heros)
             {
-                hero.Equipments.TryAdd((int)EquipSlotType.Toukui, 0);
-                hero.Equipments.TryAdd((int)EquipSlotType.Yifu, 0);
-                hero.Equipments.TryAdd((int)EquipSlotType.Kuzi, 0);
-                hero.Equipments.TryAdd((int)EquipSlotType.Xiezi, 0);
-                hero.Equipments.TryAdd((int)EquipSlotType.Xianglian, 0);
-                hero.Equipments.TryAdd((int)EquipSlotType.Wuqi, 0);
-                
-                HeroHelper.UpdateHeroSkill(hero);
-                HeroHelper.UpdateHeroNumeric(self.GetParent<Unit>(), hero);
+                self.RefreshHero(hero);
             }
         }
 
