@@ -186,6 +186,10 @@ namespace ET.Client
             }
 
             Unit myUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.UnitId);
+            if (myUnit == null)
+            {
+                return;
+            }
 
             SkillManagerComponentC skillManagerComponent = myUnit.GetComponent<SkillManagerComponentC>();
             float cd = skillManagerComponent.GetSkillCD(self.SkillId);
