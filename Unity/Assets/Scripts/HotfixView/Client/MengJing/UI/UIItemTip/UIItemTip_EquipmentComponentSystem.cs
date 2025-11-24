@@ -78,6 +78,7 @@ namespace ET.Client
                 4 => "#be5e10",
                 5 => "#e200af",
                 6 => "#d01a06",
+                _ => "#ffffff"
             };
 
             Color nowColor;
