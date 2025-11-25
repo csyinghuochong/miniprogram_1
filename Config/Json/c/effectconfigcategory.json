@@ -80,6 +80,16 @@
     "SkillParentPosition": "Bottom"
   },
   {
+    "Id": 10000009,
+    "Name": "燃烧",
+    "EffectType": 1,
+    "EffectName": "Eff_Test1",
+    "SkillEffectLiveTime": 9999,
+    "SkillEffectDelayTime": 0,
+    "SkillParent": 1,
+    "SkillParentPosition": "Bottom"
+  },
+  {
     "Id": 20000001,
     "Name": "受击特效",
     "EffectType": 2,

@@ -21,10 +21,7 @@ namespace ET.Server
                 // 从主城传送到其他地图，保存在主城的坐标
                 if (oldMapType == MapType.MainCity && request.MapType != (int)MapType.MainCity)
                 {
-                    NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-                    numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x);
-                    numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y);
-                    numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z);
+                    UnitHelper.SaveUnitMainCityPos(unit);
                 }
 
                 switch (request.MapType)

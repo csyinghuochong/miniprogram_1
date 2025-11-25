@@ -141,8 +141,7 @@ namespace ET.Client
                     self.EffectObj.transform.SetParent(tParent);
                     self.EffectObj.transform.localPosition = Vector3.zero;
                     self.EffectObj.transform.localScale = Vector3.one;
-                    float angle = self.InitEffectData.TargetAngle != 0 ? self.InitEffectData.TargetAngle : 0;
-                    self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
+                    self.EffectObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     break;
                 }
                 //实时跟随玩家位置,但是不跟随旋转

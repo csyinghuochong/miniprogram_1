@@ -92,9 +92,7 @@ namespace ET.Server
             MapType mapType = scene.GetComponent<MapComponent>().MapType;
             if (mapType == MapType.MainCity)
             {
-                numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x);
-                numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y);
-                numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z);
+                UnitHelper.SaveUnitMainCityPos(unit);
             }
 
             numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);

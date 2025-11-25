@@ -124,6 +124,10 @@ namespace ET.Server
                 attackUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnNormalAttackByChance, attackUnit.Id);
             }
             
+            // 开始战斗触发被动
+            attackUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnBattleStart);
+            defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnBattleStart);
+            
             // AI
             defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);
 

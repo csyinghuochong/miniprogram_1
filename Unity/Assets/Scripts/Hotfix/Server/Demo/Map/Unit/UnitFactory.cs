@@ -112,8 +112,6 @@ namespace ET.Server
             aiComponent.Begin();
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            
-            skillPassiveComponent.OnTriggerPassiveSkill(SkillPassiveType.OnBattleStart);
 
             return unit;
         }
@@ -189,6 +187,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_MaxHp_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxHp_Base), false);
             numericComponent.ApplyValue(NumericType.Base_MinAct_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MinAct_Base), false);
             numericComponent.ApplyValue(NumericType.Base_MaxAct_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxAct_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_Mage_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_Mage_Base), false);
             numericComponent.ApplyValue(NumericType.Base_MinDef_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MinDef_Base), false);
             numericComponent.ApplyValue(NumericType.Base_MaxDef_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxDef_Base), false);
             numericComponent.ApplyValue(NumericType.Base_MinAdf_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MinAdf_Base), false);

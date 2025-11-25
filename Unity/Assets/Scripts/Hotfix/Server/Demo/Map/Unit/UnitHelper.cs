@@ -188,7 +188,7 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        public static void AddAnger(this Unit self, int value)
+        public static void AddAnger(Unit self, int value)
         {
             if (value <= 0)
             {
@@ -208,7 +208,7 @@ namespace ET.Server
             }
         }
 
-        public static void AddAngerByPer(this Unit self, float value)
+        public static void AddAngerByPer(Unit self, float value)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
             int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
@@ -221,6 +221,15 @@ namespace ET.Server
             {
                 numericComponent.ApplyValue(NumericType.Now_AngerValue, now + (int)(max * value));
             }
+        }
+
+        public static void SaveUnitMainCityPos(Unit unit)
+        {
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+
+            numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x, false);
+            numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y, false);
+            numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z, false);
         }
     }
 }

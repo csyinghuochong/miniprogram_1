@@ -73,12 +73,14 @@ namespace ET.Server
             if (waveConfig.HaveBoss)
             {
                 // Boss房间怪物生成相对玩家出生点
-                position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, waveConfig.PlayerSpawnPosition.Y + monsterSpawnInfo.SpawnPosition.Y);
+                position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X,
+                    waveConfig.PlayerSpawnPosition.Y + monsterSpawnInfo.SpawnPosition.Y);
             }
             else
             {
                 // 循环路上怪物生成相对地图X坐标和玩家Y坐标
-                position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
+                position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X,
+                    self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
             }
 
             UnitFactory.CreateMonster(self.Scene(), monsterSpawnInfo.MonsterId, position);
@@ -91,7 +93,7 @@ namespace ET.Server
                 return;
             }
 
-            if (unit.Type != UnitType.Monster)
+            if (unit.Type != UnitType.Monster || unit.GetBattleCamp() != (int)CampType.CampMonster1)
             {
                 return;
             }

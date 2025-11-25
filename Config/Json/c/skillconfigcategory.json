@@ -1104,7 +1104,7 @@
     "SkillActType": 1,
     "DamageType": 2,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_Common",
+    "SkillHandler": "Skill_燃烧",
     "GameObjectParameter": [],
     "SkillType": 2,
     "SkillPassiveType": [
@@ -1126,14 +1126,13 @@
       4
     ],
     "Speed": 0,
-    "SkillEffectID": 10000001,
+    "SkillEffectID": 10000009,
     "SkillHitEffectID": 20000001,
     "InitBuffID": [
       0
     ],
     "BuffID": [
-      10000026,
-      10000027
+      0
     ],
     "SkillDescribe": "持续对附近单位每秒造成100%伤害，类似阿木木的W?"
   }
