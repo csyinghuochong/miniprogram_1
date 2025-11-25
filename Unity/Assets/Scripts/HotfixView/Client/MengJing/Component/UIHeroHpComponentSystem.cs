@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
-    public class NumericWatcher_UpdateUIHeroHp : INumericWatcher
+    public class NumericWatcher_Now_Hp_UpdateUIHeroHp : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
@@ -16,6 +16,20 @@ namespace ET.Client
             }
 
             unit.GetComponent<UIHeroHpComponent>()?.UpdateBlood();
+        }
+    }
+
+    [NumericWatcher(SceneType.Current, NumericType.Now_AngerValue)]
+    public class NumericWatcher_Now_AngerValue_UpdateUIHeroHp : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (unit.Type != UnitType.Hero)
+            {
+                return;
+            }
+
+            unit.GetComponent<UIHeroHpComponent>()?.UpdateAnger();
         }
     }
 
@@ -51,6 +65,7 @@ namespace ET.Client
 
             self.Text_Name = rc.Get<GameObject>("Text_Name").GetComponent<TMP_Text>();
             self.Image_Hp = rc.Get<GameObject>("Image_Hp").GetComponent<Image>();
+            self.Image_Anger = rc.Get<GameObject>("Image_Anger").GetComponent<Image>();
 
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             GameObject bloodparent = globalComponent.BloodPlayer;
@@ -68,6 +83,7 @@ namespace ET.Client
 
             self.UpdateShow();
             self.UpdateBlood();
+            self.UpdateAnger();
         }
 
         public static void UpdateShow(this UIHeroHpComponent self)
@@ -89,10 +105,36 @@ namespace ET.Client
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
             long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);
             long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            float blood = currentHp * 1f / maxHp;
-            blood = Mathf.Max(blood, 0f);
 
-            self.Image_Hp.fillAmount = blood;
+            if (maxHp == 0)
+            {
+                self.Image_Hp.fillAmount = 0;
+            }
+            else
+            {
+                self.Image_Hp.fillAmount = currentHp * 1f / maxHp;
+            }
+        }
+
+        public static void UpdateAnger(this UIHeroHpComponent self)
+        {
+            if (self.GameObject == null)
+            {
+                return;
+            }
+
+            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
+            long currentHp = numericComponent.GetAsLong(NumericType.Now_AngerValue);
+            long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxAngerValue);
+
+            if (maxHp == 0)
+            {
+                self.Image_Anger.fillAmount = 0;
+            }
+            else
+            {
+                self.Image_Anger.fillAmount = currentHp * 1f / maxHp;
+            }
         }
     }
 }

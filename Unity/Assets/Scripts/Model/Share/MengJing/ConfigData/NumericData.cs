@@ -14,7 +14,9 @@ namespace ET
              NumericType.Now_Dead,
              NumericType.Now_MoveSpeed,
              NumericType.Now_MaxHp,
-             NumericType.ShowHeroId
+             NumericType.ShowHeroId,
+             NumericType.Now_AngerValue,
+             NumericType.Now_MaxAngerValue
          };
 
          //1 整数  2 浮点数

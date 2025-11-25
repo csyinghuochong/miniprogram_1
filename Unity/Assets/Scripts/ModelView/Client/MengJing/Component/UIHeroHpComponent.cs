@@ -12,5 +12,6 @@ namespace ET.Client
         public GameObject GameObject { get; set; }
         public TMP_Text Text_Name;
         public Image Image_Hp;
+        public Image Image_Anger;
     }
 }

@@ -194,10 +194,33 @@ namespace ET.Server
             {
                 return;
             }
+
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
+            int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
+            if (now + value > max)
+            {
+                numericComponent.ApplyValue(NumericType.Now_AngerValue, max);
+            }
+            else
+            {
+                numericComponent.ApplyValue(NumericType.Now_AngerValue, now + value);
+            }
         }
 
         public static void AddAngerByPer(this Unit self, float value)
         {
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
+            int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
+            if (now + (int)(max * value) > max)
+            {
+                numericComponent.ApplyValue(NumericType.Now_AngerValue, max);
+            }
+            else
+            {
+                numericComponent.ApplyValue(NumericType.Now_AngerValue, now + (int)(max * value));
+            }
         }
     }
 }
