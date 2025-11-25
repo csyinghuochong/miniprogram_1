@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using Cysharp.Text;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -29,6 +30,11 @@ namespace ET.Client
             }
 
             self.TargetPosition = initSkillData.TargetPosition;
+
+            if (!string.IsNullOrEmpty(self.SkillConfig.SkillMusic) && self.SkillConfig.SkillMusic != "0")
+            {
+                EventSystem.Instance.Publish(self.Root(), new SkillSound() { Asset = ZString.Format("SkillAudio/{0}", self.SkillConfig.SkillMusic) });
+            }
 
             self.SkillHandler?.OnInit(self);
         }

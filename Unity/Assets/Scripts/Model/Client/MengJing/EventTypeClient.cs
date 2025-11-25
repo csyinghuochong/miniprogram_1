@@ -77,7 +77,7 @@ namespace ET.Client
         public Unit Unit;
         public int SkillConfigId;
     }
-    
+
     public struct SkillEffect
     {
         public InitEffectData InitEffectData;
@@ -122,8 +122,13 @@ namespace ET.Client
         public M2C_UnitStateUpdate m2C_UnitStateUpdate;
         public Unit Unit;
     }
-    
+
     public struct TaskUpdate
     {
+    }
+
+    public struct SkillSound
+    {
+        public string Asset;
     }
 }

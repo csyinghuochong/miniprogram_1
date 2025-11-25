@@ -1,7 +1,18 @@
-﻿using UnityEngine;
+﻿using Cysharp.Text;
+using UnityEngine;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class Skill_OnSkillSound : AEvent<Scene, SkillSound>
+    {
+        protected override async ETTask Run(Scene scene, SkillSound args)
+        {
+            scene.GetComponent<SoundComponent>().PlayClip(args.Asset, "mp3").Coroutine();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof(SoundComponent))]
     [EntitySystemOf(typeof(SoundComponent))]
     public static partial class SoundComponentSystem
@@ -9,17 +20,21 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this SoundComponent self)
         {
-            SoundComponent.Instance = self;
-
-            self.root = self.Root().GetComponent<GlobalComponent>().PoolRoot;
-            self.m_soundclips.Clear();
-            self.m_musciclips.Clear();
-            self.m_loadinglist.Clear();
+            self.Root = self.Root().GetComponent<GlobalComponent>().PoolRoot;
+            self.SoundClips.Clear();
+            self.MusicClips.Clear();
+            self.LoadingList.Clear();
 
             self.InitMusicVolume();
         }
 
-        public static void InitMusicVolume(this SoundComponent self)
+        [EntitySystem]
+        private static void Destroy(this SoundComponent self)
+        {
+            self.DisposeAll();
+        }
+
+        private static void InitMusicVolume(this SoundComponent self)
         {
             string music = PlayerPrefsHelper.GetString(PlayerPrefsHelper.MusicVolume);
             string sound = PlayerPrefsHelper.GetString(PlayerPrefsHelper.SoundVolume);
@@ -42,14 +57,14 @@ namespace ET.Client
             }
         }
 
-        public static string GetAudioOggPath(this SoundComponent self, string fileName)
+        private static string GetAudioOggPath(this SoundComponent self, string fileName)
         {
-            return $"Assets/Bundles/Audio/{fileName}.ogg";
+            return ZString.Format("Assets/Bundles/Audio/{0}.ogg", fileName);
         }
 
-        public static string GetAudioPath(this SoundComponent self, string fileName)
+        private static string GetAudioPath(this SoundComponent self, string fileName)
         {
-            return $"Assets/Bundles/Audio/{fileName}.mp3";
+            return ZString.Format("Assets/Bundles/Audio/{0}.mp3", fileName);
         }
 
         /// <summary>
@@ -65,21 +80,21 @@ namespace ET.Client
             }
 
             GameObject gameObject = null;
-            for (int i = 0; i < self.m_soundclips.Count; i++)
+            for (int i = 0; i < self.SoundClips.Count; i++)
             {
-                if (self.m_soundclips[i].name != clipName)
+                if (self.SoundClips[i].name != clipName)
                 {
                     continue;
                 }
 
-                bool isplaying = self.m_soundclips[i].GetComponent<AudioSource>().isPlaying;
+                bool isplaying = self.SoundClips[i].GetComponent<AudioSource>().isPlaying;
                 if (isplaying)
                 {
                     return;
                 }
                 else
                 {
-                    gameObject = self.m_soundclips[i];
+                    gameObject = self.SoundClips[i];
                     break;
                 }
             }
@@ -91,32 +106,23 @@ namespace ET.Client
                 return;
             }
 
-            if (!self.m_loadinglist.Contains(clipName))
+            if (!self.LoadingList.Contains(clipName))
             {
-                self.m_loadinglist.Add(clipName);
+                self.LoadingList.Add(clipName);
                 gameObject = new GameObject(clipName);
-                AudioClip audioClip;
-                string assetpath = string.Empty;
-                if (musicType == "ogg")
-                {
-                    assetpath = self.GetAudioOggPath(clipName); //ogg
-                }
-                else
-                {
-                    assetpath = self.GetAudioPath(clipName); //mp3
-                }
+                string assetPath = musicType == "ogg" ? self.GetAudioOggPath(clipName) : self.GetAudioPath(clipName);
 
-                audioClip = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<AudioClip>(assetpath);
+                AudioClip audioClip = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<AudioClip>(assetPath);
                 if (gameObject == null)
                 {
                     return;
                 }
 
-                self.m_assetlist.Add(assetpath);
-                self.m_loadinglist.Remove(clipName);
+                self.AssetList.Add(assetPath);
+                self.LoadingList.Remove(clipName);
                 AudioSource audio = gameObject.AddComponent<AudioSource>();
-                gameObject.transform.SetParent(self.root);
-                self.m_soundclips.Add(gameObject);
+                gameObject.transform.SetParent(self.Root);
+                self.SoundClips.Add(gameObject);
                 audio.clip = audioClip;
                 gameObject.GetComponent<AudioSource>().volume = volume * self.SoundVolume;
                 gameObject.GetComponent<AudioSource>().Play();
@@ -126,13 +132,12 @@ namespace ET.Client
         /// <summary>
         /// 背景音效
         /// </summary>
-        /// <param name="volume"></param>
         public static void ChangeSoundVolume(this SoundComponent self, float volume)
         {
             self.SoundVolume = volume;
-            for (int i = 0; i < self.m_soundclips.Count; i++)
+            for (int i = 0; i < self.SoundClips.Count; i++)
             {
-                self.m_soundclips[i].GetComponent<AudioSource>().volume = volume;
+                self.SoundClips[i].GetComponent<AudioSource>().volume = volume;
             }
 
             PlayerPrefsHelper.SetString(PlayerPrefsHelper.SoundVolume, volume.ToString());
@@ -141,48 +146,41 @@ namespace ET.Client
         /// <summary>
         /// 音乐
         /// </summary>
-        /// <param name="volume"></param>
         public static void ChangeMusicVolume(this SoundComponent self, float volume)
         {
             self.MusicVolume = volume;
-            for (int i = 0; i < self.m_musciclips.Count; i++)
+            for (int i = 0; i < self.MusicClips.Count; i++)
             {
-                self.m_musciclips[i].audio.volume = volume;
+                self.MusicClips[i].audio.volume = volume;
             }
 
             PlayerPrefsHelper.SetString(PlayerPrefsHelper.MusicVolume, volume.ToString());
         }
 
-        /// <summary>
-        /// 先释放所有的音效
-        /// </summary>
-        /// <param name="scene"></param>
-        /// <param name="mapType"></param>
         public static void PlayBgmSound(this SoundComponent self, MapType mapType, int sceneId, int sonsceneid)
         {
             self.DisposeAll();
 
-            string music = "MainCity";
-            switch (mapType)
-            {
-                case MapType.Login:
-                    music = "LoginBack";
-                    break;
-                case MapType.MainCity:
-                    music = "MainCity";
-                    break;
-                default:
-                    music = "Fight_1";
-                    break;
-            }
-            
-            if (music != "")
-            {
-                self.PlayMusic(music).Coroutine();
-            }
+            // string music = "MainCity";
+            // switch (mapType)
+            // {
+            //     case MapType.Login:
+            //         music = "LoginBack";
+            //         break;
+            //     case MapType.MainCity:
+            //         music = "MainCity";
+            //         break;
+            //     default:
+            //         music = "Fight_1";
+            //         break;
+            // }
+            //
+            // if (music != "")
+            // {
+            //     self.PlayMusic(music).Coroutine();
+            // }
         }
 
-        //播放SoundData
         public static async ETTask PlayMusic(this SoundComponent self, string clipName, float volume = 0.5f)
         {
             if (!SettingData.PlaySound || self.SoundVolume <= 0f)
@@ -191,24 +189,15 @@ namespace ET.Client
             }
 
             string assetpath = ABPathHelper.GetSoundPath(clipName);
-            self.m_assetlist.Add(assetpath);
+            self.AssetList.Add(assetpath);
             GameObject bundleGameObject = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(assetpath);
-            GameObject prefab = UnityEngine.Object.Instantiate(bundleGameObject);
+            GameObject prefab = UnityEngine.Object.Instantiate(bundleGameObject, self.Root, true);
             SoundData soundData = prefab.GetComponent<SoundData>();
-            prefab.transform.SetParent(self.root);
 
-            self.m_musciclips.Add(soundData);
+            self.MusicClips.Add(soundData);
             soundData.audio.volume = volume * self.MusicVolume;
             soundData.audio.loop = true;
             soundData.audio.Play();
-        }
-
-        /// <summary>
-        /// 停止并销毁音乐
-        /// </summary>
-        /// <param name="clipName"></param>
-        public static void Stop(this SoundComponent self, string clipName)
-        {
         }
 
         /// <summary>
@@ -216,34 +205,29 @@ namespace ET.Client
         /// </summary>
         public static void DisposeAll(this SoundComponent self)
         {
-            self.m_loadinglist.Clear();
+            self.LoadingList.Clear();
 
-            for (int i = 0; i < self.m_soundclips.Count; i++)
+            for (int i = 0; i < self.SoundClips.Count; i++)
             {
-                GameObject.DestroyImmediate(self.m_soundclips[i]);
+                UnityEngine.Object.DestroyImmediate(self.SoundClips[i]);
             }
 
-            self.m_soundclips.Clear();
+            self.SoundClips.Clear();
 
-            for (int i = 0; i < self.m_musciclips.Count; i++)
+            for (int i = 0; i < self.MusicClips.Count; i++)
             {
-                self.m_musciclips[i].Dispose();
+                self.MusicClips[i].Dispose();
             }
 
-            self.m_musciclips.Clear();
+            self.MusicClips.Clear();
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-            for (int i = 0; i < self.m_assetlist.Count; i++)
+            for (int i = 0; i < self.AssetList.Count; i++)
             {
-                resourcesLoaderComponent.UnLoadAsset(self.m_assetlist[i]);
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
             }
 
-            self.m_assetlist.Clear();
-        }
-        [EntitySystem]
-        private static void Destroy(this ET.Client.SoundComponent self)
-        {
-            self.DisposeAll();
+            self.AssetList.Clear();
         }
     }
 }

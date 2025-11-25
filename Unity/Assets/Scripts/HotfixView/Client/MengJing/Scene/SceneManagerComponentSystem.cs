@@ -85,7 +85,7 @@ namespace ET.Client
             }
 
             int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
-            // self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, sceneid, sousceneid);
+            self.Root().GetComponent<SoundComponent>().PlayBgmSound(mapType, sceneid, sousceneid);
         }
 
         public static void BeforeChangeScene(this SceneManagerComponent self)
