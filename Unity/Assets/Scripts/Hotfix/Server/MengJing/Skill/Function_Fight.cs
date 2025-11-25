@@ -4,10 +4,25 @@ namespace ET.Server
 {
     public static class Function_Fight
     {
-        /// <summary>
-        /// 伤害计算
-        /// </summary>
-        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillS skill, float customActDamage = 0)
+        public static void Fight(Unit attackUnit, Unit defendUnit, SkillS skill, float customActDamage = 0)
+        {
+            if (customActDamage == 0)
+            {
+                customActDamage = skill.SkillConfig.ActDamage;
+            }
+
+            FightInternal(attackUnit, defendUnit, skill.SkillConfig.DamageType, skill.SkillConfig.DamgeValue, skill.SkillConfig.SkillActType, customActDamage, skill.SkillConfig.Id);
+            
+            // 增加怒气
+            UnitHelper.AddAnger(attackUnit, skill.SkillConfig.SkillAddAnger);
+        }
+
+        public static void Fight(Unit attackUnit, Unit defendUnit, BuffS buff)
+        {
+            FightInternal(attackUnit, defendUnit, buff.BuffConfig.DamageType, 0, SkillActType.Skill, buff.BuffConfig.DamagePro, buff.InitBuffData.SkillConfigId);
+        }
+
+        private static bool FightInternal(Unit attackUnit, Unit defendUnit, DamageType damageType, int damageValue, SkillActType skillActType, float customActDamage, int skillConfigId)
         {
             if (attackUnit == null)
             {
@@ -23,8 +38,6 @@ namespace ET.Server
             {
                 return false;
             }
-
-            SkillConfig skillConfig = skill.SkillConfig;
 
             //获取攻击方属性
             NumericComponentS numericComponentAttack = attackUnit.GetComponent<NumericComponentS>();
@@ -62,13 +75,12 @@ namespace ET.Server
 
             // 计算伤害
             long damage = 0;
-            float actDamage = customActDamage != 0 ? customActDamage : skillConfig.ActDamage;
-            DamageType damageType = DamageType.None;
-            if (skillConfig.DamageType == DamageType.Physical)
+            float actDamage = customActDamage;
+            if (damageType == DamageType.Physical)
             {
                 // 物理伤害
                 long act = attack_MinAct < attack_MaxAct ? RandomHelper.NextLong(attack_MinAct, attack_MaxAct) : attack_MinAct;
-                damage = (long)(act * actDamage) + skillConfig.DamgeValue;
+                damage = (long)(act * actDamage) + damageValue;
                 damageType = DamageType.Physical;
 
                 // 免疫物理伤害
@@ -81,7 +93,7 @@ namespace ET.Server
             else
             {
                 // 法术伤害
-                damage = (long)(attack_MageAct * actDamage) + skillConfig.DamgeValue;
+                damage = (long)(attack_MageAct * actDamage) + damageValue;
                 damageType = DamageType.Magical;
             }
 
@@ -90,9 +102,9 @@ namespace ET.Server
             {
                 damage = (long)(damage * (1 + (attack_AtkDamageAddPro / 10000f) - (defend_MageActAddPro / 10000f)));
             }
-            
+
             // 暴击
-            if (skillConfig.SkillActType == SkillActType.Normal && RandomHelper.RandFloat01() <= (attack_Cri - defend_ReCri) / 10000f)
+            if (skillActType == SkillActType.Normal && RandomHelper.RandFloat01() <= (attack_Cri - defend_ReCri) / 10000f)
             {
                 damage = damage * 2;
                 damageType = DamageType.Critical;
@@ -112,27 +124,24 @@ namespace ET.Server
                 numericComponentDefend.ApplyChange(NumericType.InvulnerableCount, -1, false);
             }
 
-            // 增加怒气
-            UnitHelper.AddAnger(attackUnit, skillConfig.SkillAddAnger);
-            
             // 受到伤害触发被动
             defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
 
             // 普通攻击触发被动
-            if (skillConfig.SkillActType == SkillActType.Normal)
+            if (skillActType == SkillActType.Normal)
             {
                 attackUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnNormalAttackByChance, attackUnit.Id);
             }
-            
+
             // 开始战斗触发被动
             attackUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnBattleStart);
             defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnBattleStart);
-            
+
             // AI
             defendUnit.GetComponent<AIComponent>()?.BeAttack(attackUnit);
 
             // 结算伤害
-            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage, true, false, attackUnit.Id, skillConfig.Id, damageType);
+            numericComponentDefend.ApplyChange(NumericType.Now_Hp, -damage, true, false, attackUnit.Id, skillConfigId, damageType);
 
             return true;
         }

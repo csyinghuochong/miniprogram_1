@@ -28,8 +28,8 @@ namespace ET
             BuffParameterType = _buf.ReadInt();
             BuffParameterValue = _buf.ReadLong();
             BuffParameterValueType = _buf.ReadInt();
-            DamageType = _buf.ReadInt();
-            DamagePro = _buf.ReadDouble();
+            DamageType = (DamageType)_buf.ReadInt();
+            DamagePro = _buf.ReadFloat();
             IsBuffStackable = _buf.ReadInt();
             BuffMaxStackCount = _buf.ReadInt();
             BuffEffectID = _buf.ReadInt();
@@ -106,12 +106,12 @@ namespace ET
         /// <summary>
         /// 伤害类型
         /// </summary>
-        public readonly int DamageType;
+        public readonly DamageType DamageType;
 
         /// <summary>
         /// 伤害系数
         /// </summary>
-        public readonly double DamagePro;
+        public readonly float DamagePro;
 
         /// <summary>
         /// Buff是否叠加
