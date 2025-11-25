@@ -581,7 +581,7 @@
     "SkillLiveTime": 3,
     "ActDamage": 0.5,
     "DamgeValue": 0,
-    "SkillAnimation": "attack",
+    "SkillAnimation": "",
     "SkillMusic": "dao",
     "SkillTargetType": 1,
     "DamageRangeType": 1,

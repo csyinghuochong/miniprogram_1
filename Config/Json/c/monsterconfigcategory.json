@@ -46,8 +46,8 @@
     "Eva": 500,
     "Hit": 0,
     "HitLess": 0,
-    "MonsterDescription": "一只哥布林。",
-    "AI": 2
+    "MonsterDescription": "召唤地狱火",
+    "AI": 1
   },
   {
     "Id": 10000001,
