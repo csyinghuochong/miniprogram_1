@@ -108,7 +108,7 @@ namespace ET.Server
             InitBuffData initBuffData = new InitBuffData();
             initBuffData.SkillConfigId = self.SkillConfig.Id;
             initBuffData.BuffConfigId = buffConfig.Id;
-            uu.GetComponent<BuffManagerComponentS>().BuffFactory(initBuffData, self.TheUnitFrom, self);
+            uu.GetComponent<BuffManagerComponentS>()?.BuffFactory(initBuffData, self.TheUnitFrom, self);
         }
 
         public static Shape CreateCheckShape(this SkillS self, int targetAngle)
