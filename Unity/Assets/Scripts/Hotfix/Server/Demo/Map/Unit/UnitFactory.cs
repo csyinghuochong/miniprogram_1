@@ -158,9 +158,12 @@ namespace ET.Server
             // unit.AddComponent<MoveComponent>();
             unit.AddComponent<Move2DComponent>();
 
-            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(2);
-            aiComponent.InitMonster();
-            aiComponent.Begin();
+            if (monsterConfig.AI != 0)
+            {
+                AIComponent aiComponent = unit.AddComponent<AIComponent, int>(monsterConfig.AI);
+                aiComponent.InitMonster();
+                aiComponent.Begin();
+            }
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
 

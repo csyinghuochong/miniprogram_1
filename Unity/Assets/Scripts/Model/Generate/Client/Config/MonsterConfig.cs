@@ -38,6 +38,7 @@ namespace ET
             Hit = _buf.ReadLong();
             HitLess = _buf.ReadLong();
             MonsterDescription = _buf.ReadString();
+            AI = _buf.ReadInt();
 
             PostInit();
         }
@@ -157,12 +158,18 @@ namespace ET
         /// </summary>
         public readonly string MonsterDescription;
 
+        /// <summary>
+        /// AI
+        /// </summary>
+        public readonly int AI;
+
 
         public const int __ID__ = -55174244;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -212,6 +219,7 @@ namespace ET
             + "Hit:" + Hit + ","
             + "HitLess:" + HitLess + ","
             + "MonsterDescription:" + MonsterDescription + ","
+            + "AI:" + AI + ","
             + "}";
         }
 

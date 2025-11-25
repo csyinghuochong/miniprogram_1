@@ -21,7 +21,8 @@
     "Eva": 500,
     "Hit": 0,
     "HitLess": 0,
-    "MonsterDescription": "木桩"
+    "MonsterDescription": "木桩",
+    "AI": 0
   },
   {
     "Id": 2,
@@ -45,7 +46,8 @@
     "Eva": 500,
     "Hit": 0,
     "HitLess": 0,
-    "MonsterDescription": "一只哥布林。"
+    "MonsterDescription": "一只哥布林。",
+    "AI": 2
   },
   {
     "Id": 10000001,
@@ -69,7 +71,8 @@
     "Eva": 500,
     "Hit": 0,
     "HitLess": 0,
-    "MonsterDescription": "一只哥布林。"
+    "MonsterDescription": "一只哥布林。",
+    "AI": 2
   },
   {
     "Id": 10000002,
@@ -93,7 +96,8 @@
     "Eva": 500,
     "Hit": 0,
     "HitLess": 0,
-    "MonsterDescription": "哥布林投手，会远程攻击。"
+    "MonsterDescription": "哥布林投手，会远程攻击。",
+    "AI": 2
   },
   {
     "Id": 10000003,
@@ -119,6 +123,7 @@
     "Eva": 1000,
     "Hit": 500,
     "HitLess": 500,
-    "MonsterDescription": "超级大的骷髅。"
+    "MonsterDescription": "超级大的骷髅。",
+    "AI": 2
   }
 ]
