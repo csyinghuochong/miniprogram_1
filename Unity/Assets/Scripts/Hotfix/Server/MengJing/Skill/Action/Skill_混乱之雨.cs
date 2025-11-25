@@ -14,7 +14,7 @@ namespace ET.Server
         public override void OnExecute(SkillS skill)
         {
             float2 pos = new float2(skill.TheUnitFrom.Position.x, skill.TheUnitFrom.Position.y);
-            Unit unit = UnitFactory.CreateMonster(skill.Scene(), (int)skill.SkillConfig.GameObjectParameter[0], pos, (CampType)skill.TheUnitFrom.GetBattleCamp());
+            Unit unit = UnitFactory.CreateZhaoHuan(skill.Scene(), (int)skill.SkillConfig.GameObjectParameter[0], pos, skill.TheUnitFrom);
             unit.AddComponent<DeathTimeComponent, float>(skill.SkillConfig.GameObjectParameter[1]);
             
             skill.SkillState = SkillState.Finished;

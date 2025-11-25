@@ -11,7 +11,7 @@ namespace ET.Server
             UnitComponent unitComponent = myUnit.GetParent<UnitComponent>();
 
             // 怪物被打了才还手
-            if (myUnit.Type == UnitType.Monster && aiComponent.BeAttackId == 0)
+            if (myUnit.Type == UnitType.Monster && myUnit.GetBattleCamp() == (int)CampType.CampMonster1 && aiComponent.BeAttackId == 0)
             {
                 return 1;
             }

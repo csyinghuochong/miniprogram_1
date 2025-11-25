@@ -1096,5 +1096,45 @@
       10000027
     ],
     "SkillDescribe": "对一个区域进行施法,使其攻击速度和移动速度降低至50%,持续3秒。"
+  },
+  {
+    "Id": 30000019,
+    "SkillName": "燃烧",
+    "SkillIcon": "10000007",
+    "SkillActType": 1,
+    "DamageType": 2,
+    "SkillAddAnger": 0,
+    "SkillHandler": "Skill_Common",
+    "GameObjectParameter": [],
+    "SkillType": 2,
+    "SkillPassiveType": [
+      4
+    ],
+    "PassiveSkillPro": [
+      1
+    ],
+    "PassiveSkillTriggerOnce": 0,
+    "SkillCD": 9999,
+    "SkillLiveTime": 9999,
+    "ActDamage": 1,
+    "DamgeValue": 0,
+    "SkillAnimation": "attack",
+    "SkillMusic": "dao",
+    "SkillTargetType": 1,
+    "DamageRangeType": 1,
+    "DamageRange": [
+      4
+    ],
+    "Speed": 0,
+    "SkillEffectID": 10000001,
+    "SkillHitEffectID": 20000001,
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      10000026,
+      10000027
+    ],
+    "SkillDescribe": "持续对附近单位每秒造成100%伤害，类似阿木木的W?"
   }
 ]

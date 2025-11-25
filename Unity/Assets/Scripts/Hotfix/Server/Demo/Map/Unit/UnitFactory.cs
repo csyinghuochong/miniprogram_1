@@ -143,7 +143,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_Eva_Base, monsterConfig.Eva, false);
             numericComponent.ApplyValue(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
             numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, monsterConfig.HitLess, false);
-            numericComponent.ApplyValue(NumericType.BattleCamp, (int)campType);
+            numericComponent.ApplyValue(NumericType.BattleCamp, (int)campType, false);
 
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
@@ -157,6 +157,61 @@ namespace ET.Server
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
             // unit.AddComponent<MoveComponent>();
+            unit.AddComponent<Move2DComponent>();
+
+            if (monsterConfig.AI != 0)
+            {
+                AIComponent aiComponent = unit.AddComponent<AIComponent, int>(monsterConfig.AI);
+                aiComponent.InitMonster();
+                aiComponent.Begin();
+            }
+
+            unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
+
+            return unit;
+        }
+
+        public static Unit CreateZhaoHuan(Scene scene, int monsterConfigId, float2 position, Unit fromUnit)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), monsterConfigId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.Position = new float3(position.x, position.y, 0);
+            unit.Type = UnitType.Monster;
+
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
+
+            NumericComponentS fromUnitNumericComponent = fromUnit.GetComponent<NumericComponentS>();
+
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_Speed_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_AtkSpeed_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_AtkSpeed_Base), false);
+            numericComponent.ApplyValue(NumericType.Now_Hp, fromUnitNumericComponent.GetAsLong(NumericType.Now_Hp), false);
+            numericComponent.ApplyValue(NumericType.Base_MaxHp_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxHp_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_MinAct_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MinAct_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_MaxAct_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxAct_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_MinDef_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MinDef_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_MaxDef_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxDef_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_MinAdf_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MinAdf_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_MaxAdf_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_MaxAdf_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_Cri_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_Cri_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_ReCri_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_ReCri_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_Eva_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_Eva_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_Hit_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_Hit_Base), false);
+            numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_HitDamageLessPro_Base), false);
+            numericComponent.ApplyValue(NumericType.BattleCamp, fromUnitNumericComponent.GetAsLong(NumericType.BattleCamp), false);
+
+            unit.AddComponent<StateComponentS>();
+            unit.AddComponent<SkillManagerComponentS>();
+            SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
+            foreach (int id in monsterConfig.SkillID)
+            {
+                skillPassiveComponent.AddPassiveSkill(id);
+            }
+
+            unit.AddComponent<BuffManagerComponentS>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unitInfoComponent.UnitName = monsterConfig.MonsterName;
+
             unit.AddComponent<Move2DComponent>();
 
             if (monsterConfig.AI != 0)
