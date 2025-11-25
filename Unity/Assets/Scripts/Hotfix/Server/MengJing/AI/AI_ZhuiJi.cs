@@ -10,6 +10,12 @@ namespace ET.Server
             Unit myUnit = aiComponent.GetParent<Unit>();
             UnitComponent unitComponent = myUnit.GetParent<UnitComponent>();
 
+            // 怪物被打了才还手
+            if (myUnit.Type == UnitType.Monster && aiComponent.BeAttackId == 0)
+            {
+                return 1;
+            }
+
             // 搜索最近的敌人
             Unit closestEnemy = null;
             float closestDistance = float.MaxValue;
