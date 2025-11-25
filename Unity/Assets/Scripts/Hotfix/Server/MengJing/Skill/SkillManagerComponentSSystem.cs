@@ -118,12 +118,24 @@ namespace ET.Server
             {
                 case SkillTargetType.SelfPosition:
                 {
+                    initSkillData.TargetId = myUnit.Id;
                     initSkillData.TargetPosition = myUnit.Position;
                     break;
                 }
                 case SkillTargetType.TargetPositon:
                 {
-                    initSkillData.TargetPosition = targetUnit != null ? targetUnit.Position : myUnit.Position;
+                    if (targetUnit == null)
+                    {
+                        return ErrorCode.ERR_TargetUnitIsNull;
+                    }
+
+                    if (!myUnit.IsCanAttackUnit(targetUnit))
+                    {
+                        return ErrorCode.ERR_TargetUnitCantBeAttack;
+                    }
+
+                    initSkillData.TargetId = targetUnit.Id;
+                    initSkillData.TargetPosition = targetUnit.Position;
 
                     break;
                 }
@@ -136,16 +148,28 @@ namespace ET.Server
 
                     if (!myUnit.IsCanAttackUnit(targetUnit))
                     {
-                        return ErrorCode.ERR_TargetUnitIsNull;
+                        return ErrorCode.ERR_TargetUnitCantBeAttack;
                     }
-                    
+
+                    initSkillData.TargetId = targetUnit.Id;
+                    initSkillData.TargetPosition = targetUnit.Position;
+
                     break;
                 }
                 case SkillTargetType.SelfOnly:
+                {
+                    initSkillData.TargetId = myUnit.Id;
+                    initSkillData.TargetPosition = myUnit.Position;
+
+                    break;
+                }
                 case SkillTargetType.MulTarget:
                 case SkillTargetType.AllTeam:
                 case SkillTargetType.AllEnemy:
+                {
+                    initSkillData.TargetPosition = myUnit.Position;
                     break;
+                }
             }
 
             float cd = self.AddSkillCD(skillConfigId);
@@ -164,9 +188,9 @@ namespace ET.Server
             M2C_OnUseSkill message = M2C_OnUseSkill.Create();
             message.UnitId = myUnit.Id;
             message.SkillId = skill.Id;
-            message.SkillConfigId = skillConfigId;
-            message.TargetId = targetId;
-            message.Angle = angle;
+            message.SkillConfigId = initSkillData.SkillConfigId;
+            message.TargetId = initSkillData.TargetId;
+            message.Angle = initSkillData.Angle;
             message.Position = initSkillData.TargetPosition;
             message.CD = cd;
             message.PublicCD = self.PublicCD;

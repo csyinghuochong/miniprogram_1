@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 4482231541898470}
   - component: {fileID: 5715000103098982246}
   m_Layer: 2
-  m_Name: Skill_TargetPositon
+  m_Name: Skill_Common
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,7 +12,6 @@ namespace ET.Client
         public int SkillId;
         public long TargetId;
         public long Timer;
-        public bool IsDrag;
         public string AssetsPath;
         public GameObject IndicatorGameObject;
 

@@ -36,7 +36,7 @@ namespace ET.Server
 
         public override void OnExecute(SkillS skill)
         {
-            // 1. 给自己加InitBuff
+            // 给自己加InitBuff
             if (skill.SkillConfig.InitBuffID != null && skill.SkillConfig.InitBuffID[0] != 0)
             {
                 foreach (int id in skill.SkillConfig.InitBuffID)
@@ -45,7 +45,7 @@ namespace ET.Server
                 }
             }
 
-            // 2. 单体目标技能
+            // 单体目标技能
             if (skill.SkillConfig.SkillTargetType == SkillTargetType.TargetOnly)
             {
                 if (skill.TheUnitTarget == null)
@@ -54,7 +54,6 @@ namespace ET.Server
                     return;
                 }
 
-                // 给目标加Buff
                 if (skill.SkillConfig.BuffID != null && skill.SkillConfig.BuffID[0] != 0)
                 {
                     foreach (int id in skill.SkillConfig.BuffID)
@@ -63,11 +62,16 @@ namespace ET.Server
                     }
                 }
 
+                if (skill.SkillConfig.ActDamage > 0 || skill.SkillConfig.DamgeValue > 0)
+                {
+                    Function_Fight.Fight(skill.TheUnitFrom, skill.TheUnitTarget, skill);
+                }
+
                 skill.SkillState = SkillState.Finished;
                 return;
             }
 
-            // 3. AOE技能（范围伤害/范围Buff）
+            // AOE技能（范围伤害/范围Buff）
             if (skill.SkillConfig.DamageRangeType > 0)
             {
                 // 如果有生命周期且有触发间隔，说明是周期性技能，不在Execute阶段触发
@@ -78,13 +82,12 @@ namespace ET.Server
                     return;
                 }
 
-                // 立即执行AOE逻辑
                 ExecuteAOELogic(skill);
                 skill.SkillState = SkillState.Finished;
                 return;
             }
 
-            // 4. 全体队友Buff (AllTeam)
+            // 全体队友
             if (skill.SkillConfig.SkillTargetType == SkillTargetType.AllTeam)
             {
                 List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
@@ -106,7 +109,34 @@ namespace ET.Server
                 return;
             }
 
-            // 5. 空技能（立即结束）
+            // 全体敌人
+            if (skill.SkillConfig.SkillTargetType == SkillTargetType.AllEnemy)
+            {
+                List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+                for (int i = entities.Count - 1; i >= 0; i--)
+                {
+                    Unit unit = entities[i];
+                    if (!skill.TheUnitFrom.IsCanAttackUnit(unit))
+                    {
+                        continue;
+                    }
+
+                    foreach (int id in skill.SkillConfig.BuffID)
+                    {
+                        skill.SkillBuff(id, unit);
+                    }
+
+                    if (skill.SkillConfig.ActDamage > 0 || skill.SkillConfig.DamgeValue > 0)
+                    {
+                        Function_Fight.Fight(skill.TheUnitFrom, unit, skill);
+                    }
+                }
+
+                skill.SkillState = SkillState.Finished;
+                return;
+            }
+
+            // 空技能（立即结束）
             skill.SkillState = SkillState.Finished;
         }
 
@@ -114,7 +144,6 @@ namespace ET.Server
         {
             skill.RunTime += deltaTime;
 
-            // 生命周期检查
             if (skill.RunTime >= skill.SkillConfig.SkillLiveTime)
             {
                 skill.SkillState = SkillState.Finished;
@@ -150,41 +179,16 @@ namespace ET.Server
             {
                 Unit defendUnit = entities[i];
 
-                // 排除自己
                 if (defendUnit.Id == skill.TheUnitFrom.Id)
                 {
                     continue;
                 }
 
-                // 根据目标类型过滤
-                bool isValidTarget = false;
-                switch (skill.SkillConfig.SkillTargetType)
-                {
-                    case SkillTargetType.AllEnemy:
-                    case SkillTargetType.MulTarget:
-                        isValidTarget = skill.TheUnitFrom.IsCanAttackUnit(defendUnit);
-                        break;
-                    case SkillTargetType.AllTeam:
-                        isValidTarget = UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit);
-                        break;
-                    default:
-                        // 其他类型默认攻击敌人
-                        isValidTarget = skill.TheUnitFrom.IsCanAttackUnit(defendUnit);
-                        break;
-                }
-
-                if (!isValidTarget)
-                {
-                    continue;
-                }
-
-                // 范围检测
                 if (skill.ICheckShape != null && !skill.ICheckShape.Contains(defendUnit.Position))
                 {
                     continue;
                 }
 
-                // 应用Buff
                 if (skill.SkillConfig.BuffID != null && skill.SkillConfig.BuffID[0] != 0)
                 {
                     foreach (int id in skill.SkillConfig.BuffID)
@@ -193,10 +197,12 @@ namespace ET.Server
                     }
                 }
 
-                // 造成伤害
-                if (skill.SkillConfig.ActDamage > 0 || skill.SkillConfig.DamgeValue > 0)
+                if (skill.TheUnitFrom.IsCanAttackUnit(defendUnit))
                 {
-                    Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
+                    if (skill.SkillConfig.ActDamage > 0 || skill.SkillConfig.DamgeValue > 0)
+                    {
+                        Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
+                    }
                 }
             }
         }

@@ -178,5 +178,27 @@ namespace ET.Client
 
             return true;
         }
+
+        public static Unit GetClosestEnemy(Unit myUnit)
+        {
+            Unit closestEnemy = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (EntityRef<Unit> unitRef in myUnit.GetParent<UnitComponent>().GetAll())
+            {
+                Unit u = unitRef;
+                if (myUnit.IsCanAttackUnit(u))
+                {
+                    float dist = math.distance(myUnit.Position, u.Position);
+                    if (dist < closestDistance)
+                    {
+                        closestDistance = dist;
+                        closestEnemy = u;
+                    }
+                }
+            }
+
+            return closestEnemy;
+        }
     }
 }

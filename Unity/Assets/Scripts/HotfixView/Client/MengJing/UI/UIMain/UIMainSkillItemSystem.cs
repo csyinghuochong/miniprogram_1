@@ -80,7 +80,7 @@ namespace ET.Client
             {
                 self.Image_SkillCd.gameObject.SetActive(true);
                 self.Image_SkillCd.fillAmount = cd / skillConfig.SkillCD;
-                self.Text_SkillCd.SetTextFormat("{0:0.#}", cd);
+                self.Text_SkillCd.SetTextFormat(cd >= 1 ? "{0:0}" : "{0:0.#}", cd);
             }
         }
 
@@ -97,7 +97,6 @@ namespace ET.Client
 
         private static void OnPointerDown(this UIMainSkillItem self, PointerEventData pdata)
         {
-            self.IsDrag = false;
             self.TargetId = 0;
 
             if (self.GetParent<UIMainSkillComponent>().AutoFight)
@@ -106,8 +105,6 @@ namespace ET.Client
                 return;
             }
 
-            self.IsDrag = true;
-
             if (self.Timer == 0)
             {
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIMainSkillItemTimer, self);
@@ -115,21 +112,11 @@ namespace ET.Client
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillId);
 
-            if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
+            switch (skillConfig.SkillTargetType)
             {
-                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_SelfPosition");
-            }
-            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
-            {
-                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_TargetPositon");
-            }
-            else if(skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
-            {
-                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_TargetPositon");
-            }
-            else
-            {
-                self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_SelfPosition");
+                default:
+                    self.AssetsPath = ABPathHelper.GetSkillIndicatorPath("Skill_Common");
+                    break;
             }
 
             if (!string.IsNullOrEmpty(self.AssetsPath) && self.IndicatorGameObject == null)
@@ -144,34 +131,10 @@ namespace ET.Client
 
         private static void OnDrag(this UIMainSkillItem self, PointerEventData pdata)
         {
-            if (self.IsDrag == false)
-            {
-                return;
-            }
-
-            Unit myUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.UnitId);
-            if (myUnit == null)
-            {
-                return;
-            }
-
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillId);
-
-            if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
-            {
-            }
-            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
-            {
-            }
-            else
-            {
-            }
         }
 
         private static void OnPointerUp(this UIMainSkillItem self, PointerEventData pdata)
         {
-            self.IsDrag = false;
-
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
             if (self.GetParent<UIMainSkillComponent>().AutoFight)
@@ -225,24 +188,53 @@ namespace ET.Client
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillId);
 
-            if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
+            switch (skillConfig.SkillTargetType)
             {
-                self.IndicatorGameObject.transform.Find("Skill_Area").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
-            }
-            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
-            {
-                self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
-            }
-            else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
-            {
-                self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * 2;
-            }
-            else
-            {
+                case SkillTargetType.SelfPosition:
+                {
+                    self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(true);
+                    self.IndicatorGameObject.transform.Find("Skill_Area").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
+
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").gameObject.SetActive(false);
+                    break;
+                }
+                case SkillTargetType.TargetPositon:
+                {
+                    self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
+
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").gameObject.SetActive(true);
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * skillConfig.DamageRange[0] * 2;
+                    break;
+                }
+                case SkillTargetType.TargetOnly:
+                {
+                    self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
+
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").gameObject.SetActive(true);
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * 2;
+                    break;
+                }
+                case SkillTargetType.SelfOnly:
+                {
+                    self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
+
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").gameObject.SetActive(true);
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").localPosition = Vector3.zero;
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").localScale = Vector3.one * 2;
+                    break;
+                }
+                case SkillTargetType.MulTarget:
+                case SkillTargetType.AllTeam:
+                case SkillTargetType.AllEnemy:
+                {
+                    self.IndicatorGameObject.transform.Find("Skill_Area").gameObject.SetActive(false);
+
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").gameObject.SetActive(false);
+
+                    break;
+                }
             }
         }
 
@@ -259,47 +251,35 @@ namespace ET.Client
                 return;
             }
 
-            self.IndicatorGameObject.transform.position = myUnit.Position;
-
-            Unit closestEnemy = null;
-            float closestDistance = float.MaxValue;
-
-            foreach (EntityRef<Unit> unitRef in self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll())
-            {
-                Unit u = unitRef;
-                if (myUnit.IsCanAttackUnit(u))
-                {
-                    float dist = math.distance(myUnit.Position, u.Position);
-                    if (dist < closestDistance)
-                    {
-                        closestDistance = dist;
-                        closestEnemy = u;
-                    }
-                }
-            }
-
-            if (closestEnemy == null)
-            {
-                return;
-            }
-
-            self.TargetId = closestEnemy.Id;
-
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillId);
 
-            if (skillConfig.SkillTargetType == SkillTargetType.SelfPosition)
+            self.IndicatorGameObject.transform.position = myUnit.Position;
+
+            switch (skillConfig.SkillTargetType)
             {
-            }
-            else if (skillConfig.SkillTargetType == SkillTargetType.TargetPositon)
-            {
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").position = closestEnemy.Position;
-            }
-            else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
-            {
-                self.IndicatorGameObject.transform.Find("Skill_InnerArea").position = closestEnemy.Position;
-            }
-            else
-            {
+                case SkillTargetType.SelfPosition:
+                {
+                    self.TargetId = myUnit.Id;
+                    break;
+                }
+                case SkillTargetType.TargetPositon:
+                case SkillTargetType.TargetOnly:
+                {
+                    Unit closestEnemy = UnitHelper.GetClosestEnemy(myUnit);
+                    if (closestEnemy != null)
+                    {
+                        self.TargetId = closestEnemy.Id;
+                        self.IndicatorGameObject.transform.Find("Skill_InnerArea").position = closestEnemy.Position;
+                    }
+
+                    break;
+                }
+                case SkillTargetType.SelfOnly:
+                {
+                    self.TargetId = myUnit.Id;
+                    self.IndicatorGameObject.transform.Find("Skill_InnerArea").position = myUnit.Position;
+                    break;
+                }
             }
         }
     }

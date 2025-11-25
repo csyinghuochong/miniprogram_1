@@ -139,10 +139,10 @@
     "DamgeValue": 100,
     "SkillAnimation": "attack",
     "SkillMusic": "jianyu",
-    "SkillTargetType": 1,
-    "DamageRangeType": 1,
+    "SkillTargetType": 6,
+    "DamageRangeType": 0,
     "DamageRange": [
-      4
+      0
     ],
     "Speed": 0,
     "SkillEffectID": 10000004,
