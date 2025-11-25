@@ -90,6 +90,12 @@ namespace ET.Server
                     buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeAdd((StateType)buff.BuffConfig.BuffParameterType);
                     break;
                 }
+                // 技能
+                case 3:
+                {
+                    buff.TheUnitBelongTo.GetComponent<SkillPassiveComponent>().AddPassiveSkill(buff.BuffConfig.BuffParameterType);
+                    break;
+                }
             }
         }
 
@@ -124,6 +130,12 @@ namespace ET.Server
                 case 2:
                 {
                     buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeRemove((StateType)buff.BuffConfig.BuffParameterType);
+                    break;
+                }
+                // 移除技能
+                case 3:
+                {
+                    buff.TheUnitBelongTo.GetComponent<SkillPassiveComponent>().RemovePassiveSkill(buff.BuffConfig.BuffParameterType);
                     break;
                 }
             }
