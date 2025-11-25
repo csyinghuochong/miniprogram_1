@@ -112,6 +112,9 @@ namespace ET.Server
                 numericComponentDefend.ApplyChange(NumericType.InvulnerableCount, -1, false);
             }
 
+            // 增加怒气
+            UnitHelper.AddAnger(attackUnit, skillConfig.SkillAddAnger);
+            
             // 受到伤害触发被动
             defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
 

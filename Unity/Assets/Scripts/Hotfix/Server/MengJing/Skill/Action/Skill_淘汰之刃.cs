@@ -32,7 +32,7 @@
             // 击杀恢复怒气
             if (defendNumeric.GetAsInt(NumericType.Now_Dead) == 1)
             {
-                Log.Warning("淘汰之刃 击杀目标恢复怒气");
+                UnitHelper.AddAngerByPer(skill.TheUnitFrom, skill.SkillConfig.GameObjectParameter[3]);
             }
 
             skill.SkillState = SkillState.Finished;

@@ -100,7 +100,7 @@ namespace ET.Server
             {
                 return false;
             }
-            
+
             return self.GetBattleCamp() == other.GetBattleCamp();
         }
 
@@ -179,13 +179,25 @@ namespace ET.Server
             {
                 return ErrorCode.ERR_Stun;
             }
-            
+
             if (stateComponent.StateTypeGet(StateType.Freeze))
             {
                 return ErrorCode.ERR_Freeze;
             }
 
             return ErrorCode.ERR_Success;
+        }
+
+        public static void AddAnger(this Unit self, int value)
+        {
+            if (value <= 0)
+            {
+                return;
+            }
+        }
+
+        public static void AddAngerByPer(this Unit self, float value)
+        {
         }
     }
 }
