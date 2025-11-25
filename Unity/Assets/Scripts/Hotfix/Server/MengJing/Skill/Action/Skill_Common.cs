@@ -189,7 +189,7 @@ namespace ET.Server
                     continue;
                 }
 
-                if (skill.SkillConfig.BuffID != null && skill.SkillConfig.BuffID[0] != 0)
+                if (skill.SkillConfig.BuffID.Length > 0 && skill.SkillConfig.BuffID[0] != 0)
                 {
                     foreach (int id in skill.SkillConfig.BuffID)
                     {
