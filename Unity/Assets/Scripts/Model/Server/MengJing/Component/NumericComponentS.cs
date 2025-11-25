@@ -83,9 +83,7 @@ namespace ET.Server
                 int buffMul = nowValue * 100 + 12;
 
                 old = self.GetByKey(nowValue);
-                nowPropertyValue =
-                        (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) +
-                            self.GetByKey(buffAdd));
+                nowPropertyValue = (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) + self.GetByKey(buffAdd));
 
                 self.NumericDic[nowValue] = nowPropertyValue;
             }
