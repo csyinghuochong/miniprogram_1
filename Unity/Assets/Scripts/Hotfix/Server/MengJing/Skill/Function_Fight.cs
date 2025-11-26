@@ -124,8 +124,42 @@ namespace ET.Server
                 numericComponentDefend.ApplyChange(NumericType.InvulnerableCount, -1, false);
             }
 
-            // 受到伤害触发被动
-            defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
+            if (damage > 0)
+            {
+                // 链接技能
+                string linkSkillHandler = "Buff_链接";
+                BuffS buff = UnitHelper.HaveBuffByHandler(defendUnit, linkSkillHandler);
+                if (buff != null)
+                {
+                    foreach (Unit u in defendUnit.GetParent<UnitComponent>().GetAll())
+                    {
+                        if (defendUnit.Id == u.Id)
+                        {
+                            continue;
+                        }
+
+                        if (!UnitHelper.IsTeam(defendUnit, u))
+                        {
+                            continue;
+                        }
+
+                        if (!attackUnit.IsCanAttackUnit(u))
+                        {
+                            continue;
+                        }
+
+                        if (UnitHelper.HaveBuffByHandler(u, linkSkillHandler) == null)
+                        {
+                            continue;
+                        }
+
+                        u.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, (long)(-damage * buff.BuffConfig.BuffParameterValue / 10000f), true, false, attackUnit.Id, skillConfigId, damageType);
+                    }
+                }
+
+                // 受到伤害触发被动
+                defendUnit.GetComponent<SkillPassiveComponent>().OnTriggerPassiveSkill(SkillPassiveType.OnDamagedByChance, attackUnit.Id);
+            }
 
             // 普通攻击触发被动
             if (skillActType == SkillActType.Normal)

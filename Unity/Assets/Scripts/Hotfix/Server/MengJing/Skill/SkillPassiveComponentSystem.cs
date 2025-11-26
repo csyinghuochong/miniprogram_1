@@ -197,6 +197,11 @@ namespace ET.Server
 
                         foreach (Unit u in allUnits)
                         {
+                            if (myUnit.Id == u.Id)
+                            {
+                                continue;
+                            }
+                            
                             if (!UnitHelper.IsTeam(myUnit, u))
                             {
                                 continue;

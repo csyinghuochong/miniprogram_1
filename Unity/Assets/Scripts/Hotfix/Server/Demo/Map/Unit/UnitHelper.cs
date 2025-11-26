@@ -5,6 +5,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
+    [FriendOf(typeof(BuffManagerComponentS))]
     [FriendOf(typeof(MoveComponent))]
     [FriendOf(typeof(NumericComponentS))]
     public static partial class UnitHelper
@@ -96,11 +97,6 @@ namespace ET.Server
 
         public static bool IsTeam(this Unit self, Unit other)
         {
-            if (self.Id == other.Id)
-            {
-                return false;
-            }
-
             return self.GetBattleCamp() == other.GetBattleCamp();
         }
 
@@ -195,6 +191,19 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x, false);
             numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y, false);
             numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z, false);
+        }
+        
+        public static BuffS HaveBuffByHandler(Unit unit, string name)
+        {
+            foreach (BuffS buff in unit.GetComponent<BuffManagerComponentS>().Buffs)
+            {
+                if (buff.BuffConfig.BuffHandler == name)
+                {
+                    return buff;
+                }
+            }
+            
+            return null;
         }
     }
 }

@@ -538,5 +538,25 @@
     "BuffMaxStackCount": 0,
     "BuffEffectID": 0,
     "BuffDescribe": "移动速度降低至50%"
+  },
+  {
+    "Id": 10000028,
+    "BuffName": "链接",
+    "BuffTime": 5,
+    "BuffDelayTime": 0,
+    "BuffLoopTime": 0,
+    "TargetType": 3,
+    "BuffHandler": "Buff_链接",
+    "BuffBenefitType": 2,
+    "BuffType": 1,
+    "BuffParameterType": 0,
+    "BuffParameterValue": 1000,
+    "BuffParameterValueType": 0,
+    "DamageType": 1,
+    "DamagePro": 0,
+    "IsBuffStackable": 0,
+    "BuffMaxStackCount": 0,
+    "BuffEffectID": 0,
+    "BuffDescribe": "链接到一起,其中任意一个受到伤害,其他所有单位都额外承受当前伤害的10%"
   }
 ]

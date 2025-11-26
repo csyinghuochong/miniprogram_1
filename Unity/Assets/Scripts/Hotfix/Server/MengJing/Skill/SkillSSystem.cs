@@ -88,7 +88,7 @@ namespace ET.Server
                 }
                 case 2:
                 {
-                    canBuff = self.TheUnitFrom.IsTeam(uu);
+                    canBuff = uu.Id != self.TheUnitFrom.Id && self.TheUnitFrom.IsTeam(uu);
             
                     break;
                 }

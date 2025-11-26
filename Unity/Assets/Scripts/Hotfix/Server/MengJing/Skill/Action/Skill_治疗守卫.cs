@@ -36,7 +36,7 @@ namespace ET.Server
                 {
                     Unit defendUnit = entities[i];
 
-                    if (skill.TheUnitFrom.Id != defendUnit.Id && !UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit))
+                    if (!UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit))
                     {
                         continue;
                     }

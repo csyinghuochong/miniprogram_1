@@ -37,7 +37,7 @@ namespace ET.Server
         public override void OnExecute(SkillS skill)
         {
             // 给自己加InitBuff
-            if (skill.SkillConfig.InitBuffID != null && skill.SkillConfig.InitBuffID[0] != 0)
+            if (skill.SkillConfig.InitBuffID.Length > 0 && skill.SkillConfig.InitBuffID[0] != 0)
             {
                 foreach (int id in skill.SkillConfig.InitBuffID)
                 {
@@ -54,7 +54,7 @@ namespace ET.Server
                     return;
                 }
 
-                if (skill.SkillConfig.BuffID != null && skill.SkillConfig.BuffID[0] != 0)
+                if (skill.SkillConfig.BuffID.Length > 0 && skill.SkillConfig.BuffID[0] != 0)
                 {
                     foreach (int id in skill.SkillConfig.BuffID)
                     {
@@ -71,22 +71,6 @@ namespace ET.Server
                 return;
             }
 
-            // AOE技能（范围伤害/范围Buff）
-            if (skill.SkillConfig.DamageRangeType > 0)
-            {
-                // 如果有生命周期且有触发间隔，说明是周期性技能，不在Execute阶段触发
-                if (skill.SkillConfig.SkillLiveTime > 0 &&
-                    skill.SkillConfig.GameObjectParameter != null &&
-                    skill.SkillConfig.GameObjectParameter.Length > 0)
-                {
-                    return;
-                }
-
-                ExecuteAOELogic(skill);
-                skill.SkillState = SkillState.Finished;
-                return;
-            }
-
             // 全体队友
             if (skill.SkillConfig.SkillTargetType == SkillTargetType.AllTeam)
             {
@@ -94,6 +78,12 @@ namespace ET.Server
                 for (int i = entities.Count - 1; i >= 0; i--)
                 {
                     Unit unit = entities[i];
+
+                    if (skill.TheUnitFrom.Id == unit.Id)
+                    {
+                        continue;
+                    }
+                    
                     if (!UnitHelper.IsTeam(skill.TheUnitFrom, unit))
                     {
                         continue;
@@ -136,6 +126,22 @@ namespace ET.Server
                 return;
             }
 
+            // AOE技能（范围伤害/范围Buff）
+            if (skill.SkillConfig.DamageRangeType > 0)
+            {
+                // 如果有生命周期且有触发间隔，说明是周期性技能，不在Execute阶段触发
+                if (skill.SkillConfig.SkillLiveTime > 0 &&
+                    skill.SkillConfig.GameObjectParameter != null &&
+                    skill.SkillConfig.GameObjectParameter.Length > 0)
+                {
+                    return;
+                }
+
+                ExecuteAOELogic(skill);
+                skill.SkillState = SkillState.Finished;
+                return;
+            }
+            
             // 空技能（立即结束）
             skill.SkillState = SkillState.Finished;
         }
