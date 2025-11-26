@@ -114,6 +114,11 @@ namespace ET
             self.StartTimer();
         }
 
+        public static void ChangeSpeed(this Move2DComponent self, float speed)
+        {
+            self.Speed = speed;
+        }
+        
         public static void Stop(this Move2DComponent self)
         {
             self.Targets.Clear();
