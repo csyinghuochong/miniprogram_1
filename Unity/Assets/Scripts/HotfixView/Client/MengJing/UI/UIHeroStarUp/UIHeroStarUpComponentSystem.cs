@@ -124,6 +124,15 @@ namespace ET.Client
 
         private static async ETTask OnButton_Use(this UIHeroStarUpComponent self, int num)
         {
+            Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.HeroId);
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+
+            if (hero.Star == heroConfig.HeroUpStarNeed.Length - 1 && hero.HunShi >= heroConfig.HeroUpStarNeed[hero.Star])
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("已经达到最高星级");
+                return;
+            }
+
             Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.ItemId);
             if (item == null)
             {
