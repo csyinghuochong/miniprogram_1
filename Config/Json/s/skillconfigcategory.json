@@ -686,8 +686,10 @@
     "SkillActType": 1,
     "DamageType": 1,
     "SkillAddAnger": 0,
-    "SkillHandler": "Skill_Common",
-    "GameObjectParameter": [],
+    "SkillHandler": "Skill_治疗守卫",
+    "GameObjectParameter": [
+      1.5
+    ],
     "SkillType": 2,
     "SkillPassiveType": [
       3
@@ -708,11 +710,9 @@
       4
     ],
     "Speed": 0,
-    "SkillEffectID": 10000001,
+    "SkillEffectID": 10000005,
     "SkillHitEffectID": 20000001,
-    "InitBuffID": [
-      10000014
-    ],
+    "InitBuffID": [],
     "BuffID": [],
     "SkillDescribe": "在自己身后附带一个生命图腾,图腾每秒恢复附近己方单位最大生命值的1.5%,持续5秒。"
   },

@@ -4,6 +4,7 @@ namespace ET.Server
 {
     public interface Shape
     {
+        public float3 s_position { get; set; } //检测体坐标
         bool Contains(float3 t_point);
     }
 

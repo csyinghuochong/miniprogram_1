@@ -266,7 +266,7 @@
     "BuffDelayTime": 0,
     "BuffLoopTime": 1,
     "TargetType": 1,
-    "BuffHandler": "Buff_生命图腾",
+    "BuffHandler": "Buff_Attribute",
     "BuffBenefitType": 1,
     "BuffType": 1,
     "BuffParameterType": 3001,

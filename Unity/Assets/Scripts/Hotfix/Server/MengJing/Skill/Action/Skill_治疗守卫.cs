@@ -2,7 +2,7 @@
 
 namespace ET.Server
 {
-    public class Skill_燃烧 : SkillHandlerS
+    public class Skill_治疗守卫 : SkillHandlerS
     {
         public override void OnInit(SkillS skill)
         {
@@ -36,7 +36,7 @@ namespace ET.Server
                 {
                     Unit defendUnit = entities[i];
 
-                    if (defendUnit.Id == skill.TheUnitFrom.Id)
+                    if (skill.TheUnitFrom.Id != defendUnit.Id && !UnitHelper.IsTeam(skill.TheUnitFrom, defendUnit))
                     {
                         continue;
                     }
@@ -46,13 +46,9 @@ namespace ET.Server
                         continue;
                     }
 
-                    if (skill.TheUnitFrom.IsCanAttackUnit(defendUnit))
-                    {
-                        if (skill.SkillConfig.ActDamage > 0 || skill.SkillConfig.DamgeValue > 0)
-                        {
-                            Function_Fight.Fight(skill.TheUnitFrom, defendUnit, skill);
-                        }
-                    }
+                    NumericComponentS numericComponent = defendUnit.GetComponent<NumericComponentS>();
+                    long value = (long)(skill.SkillConfig.GameObjectParameter[0] * numericComponent.GetAsLong(NumericType.Now_MaxHp));
+                    numericComponent.ApplyChange(NumericType.Now_Hp, value, true, true, skill.TheUnitFrom.Id, skill.SkillConfig.Id, DamageType.Recover);
                 }
             }
         }
