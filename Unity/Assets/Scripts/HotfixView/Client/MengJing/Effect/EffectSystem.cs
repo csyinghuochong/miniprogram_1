@@ -175,13 +175,13 @@ namespace ET.Client
         {
             if (self.InitEffectData.Radius > 0)
             {
-                if (self.EffectObj.GetComponent<SphereCollider>() == null)
+                if (self.EffectObj.GetComponent<CircleCollider2D>() == null)
                 {
-                    self.EffectObj.AddComponent<SphereCollider>();
+                    self.EffectObj.AddComponent<CircleCollider2D>();
                 }
                 
-                self.EffectObj.GetComponent<SphereCollider>().radius = self.InitEffectData.Radius;
-                self.EffectObj.GetComponent<SphereCollider>().isTrigger = true;
+                self.EffectObj.GetComponent<CircleCollider2D>().radius = self.InitEffectData.Radius;
+                self.EffectObj.GetComponent<CircleCollider2D>().isTrigger = true;
             }
         }
 
