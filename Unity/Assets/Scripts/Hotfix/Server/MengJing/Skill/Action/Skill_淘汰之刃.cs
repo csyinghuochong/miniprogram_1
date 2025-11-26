@@ -32,12 +32,27 @@
             // 击杀恢复怒气
             if (defendNumeric.GetAsInt(NumericType.Now_Dead) == 1)
             {
-                UnitHelper.AddAngerByPer(skill.TheUnitFrom, skill.SkillConfig.GameObjectParameter[3]);
+                AddAngerByPer(skill.TheUnitFrom, skill.SkillConfig.GameObjectParameter[3]);
             }
 
             skill.SkillState = SkillState.Finished;
         }
 
+        private void AddAngerByPer(Unit self, float value)
+        {
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
+            int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
+            if (now + (int)(max * value) > max)
+            {
+                numericComponent.ApplyValue(NumericType.Now_AngerValue, max);
+            }
+            else
+            {
+                numericComponent.ApplyValue(NumericType.Now_AngerValue, now + (int)(max * value));
+            }
+        }
+        
         public override void OnUpdate(SkillS skill, float deltaTime)
         {
         }

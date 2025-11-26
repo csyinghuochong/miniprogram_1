@@ -188,41 +188,6 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        public static void AddAnger(Unit self, int value)
-        {
-            if (value <= 0)
-            {
-                return;
-            }
-
-            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
-            int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
-            int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
-            if (now + value > max)
-            {
-                numericComponent.ApplyValue(NumericType.Now_AngerValue, max);
-            }
-            else
-            {
-                numericComponent.ApplyValue(NumericType.Now_AngerValue, now + value);
-            }
-        }
-
-        public static void AddAngerByPer(Unit self, float value)
-        {
-            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
-            int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
-            int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
-            if (now + (int)(max * value) > max)
-            {
-                numericComponent.ApplyValue(NumericType.Now_AngerValue, max);
-            }
-            else
-            {
-                numericComponent.ApplyValue(NumericType.Now_AngerValue, now + (int)(max * value));
-            }
-        }
-
         public static void SaveUnitMainCityPos(Unit unit)
         {
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();

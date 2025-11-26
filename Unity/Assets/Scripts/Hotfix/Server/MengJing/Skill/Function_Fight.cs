@@ -14,7 +14,7 @@ namespace ET.Server
             FightInternal(attackUnit, defendUnit, skill.SkillConfig.DamageType, skill.SkillConfig.DamgeValue, skill.SkillConfig.SkillActType, customActDamage, skill.SkillConfig.Id);
             
             // 增加怒气
-            UnitHelper.AddAnger(attackUnit, skill.SkillConfig.SkillAddAnger);
+            attackUnit.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_AngerValue, skill.SkillConfig.SkillAddAnger);
         }
 
         public static void Fight(Unit attackUnit, Unit defendUnit, BuffS buff)

@@ -195,12 +195,25 @@ namespace ET.Server
             switch (numericType)
             {
                 case NumericType.Now_Hp:
+                {
                     long nowCostHp = self.GetAsLong(NumericType.Now_MaxHp) - self.GetAsLong(NumericType.Now_Hp);
                     if (changedValue >= nowCostHp)
                     {
                         changedValue = nowCostHp;
                     }
+
                     break;
+                }
+                case NumericType.Now_AngerValue:
+                {
+                    long nowCostAnger = self.GetAsLong(NumericType.Now_MaxAngerValue) - self.GetAsLong(NumericType.Now_AngerValue);
+                    if (changedValue >= nowCostAnger)
+                    {
+                        changedValue = nowCostAnger;
+                    }
+                    
+                    break;
+                }
             }
 
             long newvalue = self.GetAsLong(numericType) + changedValue;
