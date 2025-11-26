@@ -70,6 +70,9 @@ namespace ET.Client
         public float TargetAngle;
         public long TargetId;
         public long InstanceId;
+        
+        // 显示范围 测试
+        public float Radius;
     }
 
     public struct OnUseSkill

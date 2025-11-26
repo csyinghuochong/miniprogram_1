@@ -77,6 +77,10 @@ namespace ET.Client
             playInitEffectBuffData.TargetAngle = self.InitSkillData.Angle; //技能角度
             playInitEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect; //特效类型
             playInitEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
+            if (skillConfig.DamageRangeType == 1)
+            {
+                playInitEffectBuffData.Radius = skillConfig.DamageRange[0];
+            }
 
             self.EffectInstanceId.Add(playInitEffectBuffData.InstanceId);
 

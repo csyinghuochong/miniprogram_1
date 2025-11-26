@@ -165,6 +165,24 @@ namespace ET.Client
 
             self.EffectObj.GetComponentInChildren<SkeletonAnimation>()?.AnimationState.SetAnimation(0, "animation", true);
             self.EffectObj.SetActive(true);
+
+#if UNITY_EDITOR
+            self.AddCollider();
+#endif
+        }
+
+        private static void AddCollider(this Effect self)
+        {
+            if (self.InitEffectData.Radius > 0)
+            {
+                if (self.EffectObj.GetComponent<SphereCollider>() == null)
+                {
+                    self.EffectObj.AddComponent<SphereCollider>();
+                }
+                
+                self.EffectObj.GetComponent<SphereCollider>().radius = self.InitEffectData.Radius;
+                self.EffectObj.GetComponent<SphereCollider>().isTrigger = true;
+            }
         }
 
         public static void PlayEffect(this Effect self)
