@@ -25,11 +25,6 @@ namespace ET.Client
 
             self.Button_OnClick.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMailContent).Coroutine(); });
         }
-
-        [EntitySystem]
-        private static void Destroy(this UIMailItem self)
-        {
-        }
-
+        
     }
 }

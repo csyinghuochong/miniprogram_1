@@ -23,11 +23,6 @@ namespace ET.Client
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMail); });
         }
 
-        [EntitySystem]
-        private static void Destroy(this UIMailComponent self)
-        {
-        }
-
         private static void OnDeleteAll(this UIMailComponent self)
         {
             Log.Warning("删除了所有邮件");

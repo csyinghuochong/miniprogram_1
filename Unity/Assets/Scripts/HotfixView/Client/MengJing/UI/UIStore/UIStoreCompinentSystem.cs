@@ -25,10 +25,5 @@ namespace ET.Client
             
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
         }
-
-        [EntitySystem]
-        private static void Destroy(this UIStoreComponent self)
-        {
-        }
     }
 }

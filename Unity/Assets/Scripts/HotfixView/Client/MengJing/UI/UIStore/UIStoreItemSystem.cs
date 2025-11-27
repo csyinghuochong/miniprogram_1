@@ -24,11 +24,6 @@ namespace ET.Client
             self.Transform_Item = rc.Get<GameObject>("Transform_Item").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
         }
-
-        [EntitySystem]
-        private static void Destroy(this UIStoreItem self)
-        {
-        }
         
     }
 }

@@ -27,11 +27,7 @@ namespace ET.Client
             self.Button_Get.onClick.AddListener(() => { self.OnGet(); });
             self.Button_Delete.onClick.AddListener(()=>{self.OnDelete();});
         }
-
-        [EntitySystem]
-        private static void Destroy(this UIMailContentComponent self)
-        {
-        }
+        
 
         private static void OnDelete(this UIMailContentComponent self)
         {

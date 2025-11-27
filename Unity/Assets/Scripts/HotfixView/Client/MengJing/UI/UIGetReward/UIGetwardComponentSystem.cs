@@ -18,10 +18,5 @@ namespace ET.Client
             
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIGetReward); });
         }
-
-        [EntitySystem]
-        private static void Destroy(this UIGetRewardComponent self)
-        {
-        }
     }
 }
