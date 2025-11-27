@@ -176,6 +176,10 @@ namespace ET.Client
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
 
+            self.Button_Store = rc.Get<GameObject>("Button_Store").GetComponent<Button>();
+            self.Button_Warehouse = rc.Get<GameObject>("Button_Warehouse").GetComponent<Button>();
+            self.Button_Mail = rc.Get<GameObject>("Button_Mail").GetComponent<Button>();
+            
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
             self.UIMainSkillComponent = self.AddComponent<UIMainSkillComponent, GameObject>(rc.Get<GameObject>("UIMainSkill"));
@@ -189,6 +193,10 @@ namespace ET.Client
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
             self.Button_Boss.AddListener(() => { self.OnBoss().Coroutine(); });
+
+            self.Button_Store.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIStore).Coroutine(); });
+            self.Button_Warehouse.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIWarehouse).Coroutine(); });
+            self.Button_Mail.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMail).Coroutine(); });
         }
 
         [EntitySystem]
