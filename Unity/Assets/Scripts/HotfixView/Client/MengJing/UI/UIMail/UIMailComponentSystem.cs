@@ -32,5 +32,7 @@ namespace ET.Client
         {
             Log.Warning("领取了所有邮件");
         }
+        
+        
     }
 }
