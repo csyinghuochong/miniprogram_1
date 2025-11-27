@@ -1,0 +1,36 @@
+[
+  {
+    "Id": 1001,
+    "DropItemInfos": [
+      {
+        "Weight": 100,
+        "ItemId": 1,
+        "MinNum": 100,
+        "MaxNum": 800
+      },
+      {
+        "Weight": 100,
+        "ItemId": 2,
+        "MinNum": 50,
+        "MaxNum": 100
+      }
+    ]
+  },
+  {
+    "Id": 1002,
+    "DropItemInfos": [
+      {
+        "Weight": 100,
+        "ItemId": 10003001,
+        "MinNum": 1,
+        "MaxNum": 1
+      },
+      {
+        "Weight": 100,
+        "ItemId": 10003002,
+        "MinNum": 1,
+        "MaxNum": 1
+      }
+    ]
+  }
+]

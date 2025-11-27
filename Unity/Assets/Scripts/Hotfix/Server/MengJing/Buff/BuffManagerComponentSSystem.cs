@@ -43,18 +43,18 @@ namespace ET.Server
 
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                BuffS buffS = self.Buffs[i];
+                BuffS buff = self.Buffs[i];
 
-                if (buffS.BuffState == BuffState.Finished)
+                if (buff.BuffState == BuffState.Finished)
                 {
-                    self.OnRemoveBuffItem(buffS);
-                    buffS.OnFinished();
-                    buffS.Dispose();
+                    self.OnRemoveBuffItem(buff);
+                    buff.OnFinished();
+                    buff.Dispose();
                     self.Buffs.RemoveAt(i);
                     continue;
                 }
 
-                buffS.OnUpdate(deltaTime);
+                buff.OnUpdate(deltaTime);
             }
 
             if (self.Buffs.Count == 0)
@@ -167,13 +167,17 @@ namespace ET.Server
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffUpdate);
         }
 
-        public static void OnDead(this BuffManagerComponentS self)
+        public static void OnFinish(this BuffManagerComponentS self)
         {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
                 BuffS buff = self.Buffs[i];
-
-                buff.BuffState = BuffState.Finished;
+                self.OnRemoveBuffItem(buff);
+                buff.OnFinished();
+                buff.Dispose();
+                self.Buffs.RemoveAt(i);
             }
         }
     }

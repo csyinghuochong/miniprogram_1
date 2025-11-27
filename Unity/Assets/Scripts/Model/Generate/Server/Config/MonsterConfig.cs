@@ -39,6 +39,7 @@ namespace ET
             HitLess = _buf.ReadLong();
             MonsterDescription = _buf.ReadString();
             AI = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); DropId = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); DropId[__index0] = __e0;}}
 
             PostInit();
         }
@@ -163,12 +164,18 @@ namespace ET
         /// </summary>
         public readonly int AI;
 
+        /// <summary>
+        /// 掉落物
+        /// </summary>
+        public readonly int[] DropId;
+
 
         public const int __ID__ = -55174244;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -220,6 +227,7 @@ namespace ET
             + "HitLess:" + HitLess + ","
             + "MonsterDescription:" + MonsterDescription + ","
             + "AI:" + AI + ","
+            + "DropId:" + Luban.StringUtil.CollectionToString(DropId) + ","
             + "}";
         }
 

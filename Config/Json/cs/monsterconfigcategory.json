@@ -22,7 +22,11 @@
     "Hit": 0,
     "HitLess": 0,
     "MonsterDescription": "木桩",
-    "AI": 0
+    "AI": 0,
+    "DropId": [
+      1001,
+      1002
+    ]
   },
   {
     "Id": 2,
@@ -49,7 +53,11 @@
     "Hit": 0,
     "HitLess": 0,
     "MonsterDescription": "召唤地狱火",
-    "AI": 2
+    "AI": 2,
+    "DropId": [
+      1001,
+      1002
+    ]
   },
   {
     "Id": 10000001,
@@ -74,7 +82,11 @@
     "Hit": 0,
     "HitLess": 0,
     "MonsterDescription": "一只哥布林。",
-    "AI": 2
+    "AI": 2,
+    "DropId": [
+      1001,
+      1002
+    ]
   },
   {
     "Id": 10000002,
@@ -99,7 +111,11 @@
     "Hit": 0,
     "HitLess": 0,
     "MonsterDescription": "哥布林投手，会远程攻击。",
-    "AI": 2
+    "AI": 2,
+    "DropId": [
+      1001,
+      1002
+    ]
   },
   {
     "Id": 10000003,
@@ -126,6 +142,10 @@
     "Hit": 500,
     "HitLess": 500,
     "MonsterDescription": "超级大的骷髅。",
-    "AI": 2
+    "AI": 2,
+    "DropId": [
+      1001,
+      1002
+    ]
   }
 ]

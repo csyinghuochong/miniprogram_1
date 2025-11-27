@@ -18,7 +18,7 @@
             defendUnit.GetComponent<AIComponent>()?.Stop();
             defendUnit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
             defendUnit.GetComponent<SkillPassiveComponent>()?.Stop();
-            defendUnit.GetComponent<BuffManagerComponentS>()?.OnDead();
+            defendUnit.GetComponent<BuffManagerComponentS>()?.OnFinish();
 
             switch (mapType)
             {
