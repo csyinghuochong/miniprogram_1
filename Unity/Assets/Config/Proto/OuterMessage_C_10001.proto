@@ -881,3 +881,17 @@ message M2C_TaskCommit // ILocationResponse
 	repeated TaskProInfo TaskProInfoList = 4;
 	repeated int32 CompleteTaskList = 5;
 }
+
+// ResponseType M2C_PickUpDropItem
+message C2M_PickUpDropItem // ILocationRequest
+{
+	int32 RpcId = 1;
+	repeated int64 UnitIdList = 2;
+}
+
+message M2C_PickUpDropItem // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}

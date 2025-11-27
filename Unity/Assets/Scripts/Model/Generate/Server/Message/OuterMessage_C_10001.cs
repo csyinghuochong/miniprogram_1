@@ -4013,6 +4013,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PickUpDropItem)]
+    [ResponseType(nameof(M2C_PickUpDropItem))]
+    public partial class C2M_PickUpDropItem : MessageObject, ILocationRequest
+    {
+        public static C2M_PickUpDropItem Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PickUpDropItem), isFromPool) as C2M_PickUpDropItem;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public List<long> UnitIdList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitIdList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PickUpDropItem)]
+    public partial class M2C_PickUpDropItem : MessageObject, ILocationResponse
+    {
+        public static M2C_PickUpDropItem Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PickUpDropItem), isFromPool) as M2C_PickUpDropItem;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -4123,5 +4186,7 @@ namespace ET
         public const ushort M2C_TaskUpdate = 10107;
         public const ushort C2M_TaskCommit = 10108;
         public const ushort M2C_TaskCommit = 10109;
+        public const ushort C2M_PickUpDropItem = 10110;
+        public const ushort M2C_PickUpDropItem = 10111;
     }
 }
