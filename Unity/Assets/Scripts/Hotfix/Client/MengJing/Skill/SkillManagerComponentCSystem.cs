@@ -153,6 +153,18 @@ namespace ET.Client
                 Unit = unit,
                 SkillConfigId = message.SkillConfigId
             });
+
+            Unit target = unit.GetParent<UnitComponent>().Get(message.TargetId);
+            float3 direction = message.Position - unit.Forward;
+            if (target != null)
+            {
+                direction = target.Position - unit.Position;
+            }
+            else
+            {
+                direction = message.Position - unit.Forward;
+            }
+            EventSystem.Instance.Publish(self.Scene(), new ChangeRotation() { Unit = unit, X = direction.x });
         }
 
         public static int IsCanUseSkill(this SkillManagerComponentC self, int skillConfigId)
