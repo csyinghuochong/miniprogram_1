@@ -187,7 +187,7 @@ namespace ET.Client
             self.Button_GM.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
-            self.Button_Boss.AddListener(() => { ClientLevelHelper.EnterBossRoom(self.Root()).Coroutine(); });
+            self.Button_Boss.AddListener(() => { self.OnBoss().Coroutine(); });
         }
 
         [EntitySystem]
@@ -379,6 +379,16 @@ namespace ET.Client
                     }
                 }
             }
+        }
+
+        public static async ETTask OnBoss(this UIMainComponent self)
+        {
+            int error = await ClientLevelHelper.EnterBossRoom(self.Root());
+            // if (error == ErrorCode.ERR_Success)
+            // {
+            //     string path = ABPathHelper.GetScenePath("LevelTest");
+            //     await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Additive);
+            // }
         }
 
         public static void UpdateMainTask(this UIMainComponent self)

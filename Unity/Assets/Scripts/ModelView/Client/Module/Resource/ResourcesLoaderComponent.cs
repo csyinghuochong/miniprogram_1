@@ -154,7 +154,7 @@ namespace ET.Client
             //     return;
             // }
 
-            handler = self.Package.LoadSceneAsync(location);
+            handler = self.Package.LoadSceneAsync(location, loadSceneMode);
 
             await handler.Task;
             // self.handlers.Add(location, handler);
