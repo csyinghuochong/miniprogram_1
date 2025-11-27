@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [UIEvent(UIType.UISkillTip)]
+    [UIEvent(UIType.UIWarehouse)]
     public class UIWarehouseEvent : AUIEvent
     {
         public override async ETTask<UI> OnCreate(Scene scene, UIComponent uiComponent)

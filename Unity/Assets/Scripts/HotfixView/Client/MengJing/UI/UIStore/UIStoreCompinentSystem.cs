@@ -18,7 +18,7 @@ namespace ET.Client
             self.Button_AddGold = rc.Get<GameObject>("Button_AddGold").GetComponent<Button>();
             self.Button_AddDiamond = rc.Get<GameObject>("Button_AddDiamond").GetComponent<Button>();
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
-            self.Text_RefreshTime = rc.Get<GameObject>("Text_RefreshTIme").GetComponent<TMP_Text>();
+            self.Text_RefreshTime = rc.Get<GameObject>("Text_RefreshTime").GetComponent<TMP_Text>();
             self.Button_RefreshTime = rc.Get<GameObject>("Button_Refresh").GetComponent<Button>();
             self.Content_UIStoreITem = rc.Get<GameObject>("Content_UIStoreItem").transform;
             self.UIStoreItem = rc.Get<GameObject>("UIStoreItem");
