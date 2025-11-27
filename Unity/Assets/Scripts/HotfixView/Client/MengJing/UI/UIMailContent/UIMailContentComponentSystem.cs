@@ -22,18 +22,24 @@ namespace ET.Client
             self.Button_Delete = rc.Get<GameObject>("Button_Delete").GetComponent<Button>();
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
-            
+
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMail); });
             self.Button_Get.onClick.AddListener(() => { self.OnGet(); });
-            self.Button_Delete.onClick.AddListener(()=>{self.OnDelete();});
+            self.Button_Delete.onClick.AddListener(() => { self.OnDelete(); });
         }
         
+        [EntitySystem]
+        private static void Destroy(this UIMailContentComponent self)
+        {
+            self.UICommonItemList.Clear();
+            self.UICommonItem = null;
+        }
 
         private static void OnDelete(this UIMailContentComponent self)
         {
             Log.Warning("删除了一个邮件");
         }
-        
+
         private static void OnGet(this UIMailContentComponent self)
         {
             Log.Warning("领取了一个邮件");

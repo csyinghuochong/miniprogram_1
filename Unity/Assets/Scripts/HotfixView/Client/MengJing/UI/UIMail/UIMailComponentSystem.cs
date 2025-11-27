@@ -22,6 +22,8 @@ namespace ET.Client
             self.Button_DeleteAll.onClick.AddListener(() => { self.OnDeleteAll(); });
             self.Button_GetAll.onClick.AddListener(() => { self.OnGetAll(); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMail); });
+            
+            self.UpdateMailList();
         }
 
         [EntitySystem]

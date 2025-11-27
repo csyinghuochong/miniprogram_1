@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,10 +6,12 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ChildOf]
-    public class UIMailItem : Entity, IAwake<GameObject>
+    public class UIMailItem : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject { get; set; }
-        
+
+        public List<UIMailItem> UICommonItemList { get; set; } = new();
+
         public TMP_Text Text_State;
         public TMP_Text Text_Title;
         public TMP_Text Text_Time;

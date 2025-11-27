@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,8 +6,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UIStoreComponent : Entity, IAwake
+    public class UIStoreComponent : Entity, IAwake, IDestroy
     {
+        public List<UIMailItem> UIStoreItemList { get; set; } = new();
+        
         public TMP_Text Text_Type_Gold;
         public TMP_Text Text_Type_Diamond;
         public Button Button_AddGold;

@@ -22,8 +22,23 @@ namespace ET.Client
             self.Button_RefreshTime = rc.Get<GameObject>("Button_Refresh").GetComponent<Button>();
             self.Content_UIStoreITem = rc.Get<GameObject>("Content_UIStoreItem").transform;
             self.UIStoreItem = rc.Get<GameObject>("UIStoreItem");
+            self.UIStoreItem.SetActive(false);
             
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
+            
+            self.UpdateStoreList();
+        }
+        
+        [EntitySystem]
+        private static void Destroy(this UIStoreComponent self)
+        {
+            self.UIStoreItemList.Clear();
+            self.UIStoreItem = null;
+        }
+
+        private static void UpdateStoreList(this UIStoreComponent self)
+        {
+            
         }
     }
 }

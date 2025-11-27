@@ -19,6 +19,13 @@ namespace ET.Client
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIWarehouse); });
         }
-
+        
+        [EntitySystem]
+        private static void Destroy(this UIWarehouseComponent self)
+        {
+            self.UIWarehouseItemList.Clear();
+            self.UIBagItemList.Clear();
+            self.UICommonItem = null;
+        }
     }
 }
