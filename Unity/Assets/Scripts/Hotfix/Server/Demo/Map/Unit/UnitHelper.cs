@@ -192,7 +192,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y, false);
             numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z, false);
         }
-        
+
         public static BuffS HaveBuffByHandler(Unit unit, string name)
         {
             foreach (BuffS buff in unit.GetComponent<BuffManagerComponentS>().Buffs)
@@ -202,8 +202,16 @@ namespace ET.Server
                     return buff;
                 }
             }
-            
+
             return null;
+        }
+
+        public static void CreateNPC(Scene scene)
+        {
+            foreach (NPCConfig npcConfig in NPCConfigCategory.Instance.DataList)
+            {
+                UnitFactory.CreateNPC(scene, npcConfig.Id);
+            }
         }
     }
 }

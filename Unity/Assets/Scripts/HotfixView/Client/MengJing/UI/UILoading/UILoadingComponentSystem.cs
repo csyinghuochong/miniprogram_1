@@ -76,6 +76,10 @@ namespace ET.Client
                 ui.GetComponent<UIMainComponent>().AfterEnterScene(self.Root().GetComponent<MapComponent>().MapType);
             }
 
+            // 场景和角色都加载完成了
+            self.Root().CurrentScene().AddComponent<OperaComponent>();
+            self.Root().CurrentScene().AddComponent<CameraComponent>();
+            
             if (mapType == MapType.LocalLevel)
             {
                 self.Root().CurrentScene().AddComponent<MapLoopComponent>();

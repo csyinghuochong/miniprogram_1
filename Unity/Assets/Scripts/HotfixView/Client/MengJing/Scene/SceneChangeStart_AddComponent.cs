@@ -32,8 +32,6 @@ namespace ET.Client
                 Log.Debug($"SceneChangeStart:  {args.LastMapType}");
 
                 await root.GetComponent<SceneManagerComponent>().ChangeScene(args.MapType, args.LastMapType, args.ChapterId);
-
-                // root.AddComponent<OperaComponent>();
             }
             catch (Exception e)
             {

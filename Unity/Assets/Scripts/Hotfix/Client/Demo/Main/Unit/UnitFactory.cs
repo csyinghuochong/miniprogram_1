@@ -27,7 +27,7 @@ namespace ET.Client
             bool selfpet = false;
             bool mainScene = currentScene.Name.Equals(StringBuilderData.MainCity);
 
-            if (unitInfo.Type == UnitType.Npc)
+            if (unitInfo.Type == UnitType.NPC)
             {
                 selfpet = true;
             }

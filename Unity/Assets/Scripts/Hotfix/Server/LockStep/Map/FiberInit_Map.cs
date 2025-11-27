@@ -22,6 +22,8 @@
             mapComponent.SceneId = 101;
             mapComponent.MapType = MapType.MainCity;
             
+            UnitHelper.CreateNPC(root);
+            
             await ETTask.CompletedTask;
         }
     }

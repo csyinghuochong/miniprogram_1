@@ -18,6 +18,7 @@ namespace ET
         {
             Id = _buf.ReadInt();
             Name = _buf.ReadString();
+            Model = _buf.ReadString();
             Position = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             OpenUI = _buf.ReadString();
 
@@ -40,6 +41,11 @@ namespace ET
         public readonly string Name;
 
         /// <summary>
+        /// 模型
+        /// </summary>
+        public readonly string Model;
+
+        /// <summary>
         /// 位置
         /// </summary>
         public readonly System.Numerics.Vector2 Position;
@@ -59,6 +65,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -66,6 +73,7 @@ namespace ET
             return "{ "
             + "Id:" + Id + ","
             + "Name:" + Name + ","
+            + "Model:" + Model + ","
             + "Position:" + Position + ","
             + "OpenUI:" + OpenUI + ","
             + "}";

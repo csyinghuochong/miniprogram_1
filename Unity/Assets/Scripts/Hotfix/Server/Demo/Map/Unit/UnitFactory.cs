@@ -240,5 +240,20 @@ namespace ET.Server
             
             return unit;
         }
+
+        public static Unit CreateNPC(Scene scene, int npcId)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), npcId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            
+            NPCConfig npcConfig = NPCConfigCategory.Instance.Get(npcId);
+
+            unit.Position = new float3(npcConfig.Position.X, npcConfig.Position.Y, 0);
+            unit.Type = UnitType.NPC;
+            
+            unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
+
+            return unit;
+        }
     }
 }

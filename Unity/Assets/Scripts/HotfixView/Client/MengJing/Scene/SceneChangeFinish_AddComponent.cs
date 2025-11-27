@@ -5,7 +5,6 @@
     {
         protected override async ETTask Run(Scene root, SceneChangeFinish args)
         {
-            root.CurrentScene().AddComponent<CameraComponent>();
             
             await ETTask.CompletedTask;
         }

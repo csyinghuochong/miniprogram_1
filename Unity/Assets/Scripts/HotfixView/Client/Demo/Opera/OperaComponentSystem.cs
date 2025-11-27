@@ -13,6 +13,7 @@ namespace ET.Client
         Hero,
         Map,
         MovableArea,
+        NPC
     }
 
     [EntitySystemOf(typeof(OperaComponent))]
