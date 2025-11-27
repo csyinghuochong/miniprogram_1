@@ -3,6 +3,14 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
+    public enum LocalLevelState
+    {
+        None,               // 未开始
+        Fighting,           // 战斗中(生成怪物+战斗)
+        WaitEnterBoss,      // 等待玩家进入Boss房间
+        Completed,          // 全部关卡完成
+    }
+
     [ComponentOf(typeof(Scene))]
     public class LocalLevelComponent : Entity, IAwake, IDestroy
     {
@@ -12,10 +20,14 @@ namespace ET.Server
         private EntityRef<Unit> mainUnit;
         public Unit MainUnit { get => this.mainUnit; set => this.mainUnit = value; }
 
-        public bool WaitPlayerEnterBossRoom;
+        public LocalLevelState LevelState;
+
         public int SpawnedMonsterIndex;
         public float SpawnTime;
 
         public float3 LastPlayerPosition;
+
+        // 记录生成的英雄Unit,用于检测英雄死亡
+        public List<long> HeroUnitIds = new();
     }
 }

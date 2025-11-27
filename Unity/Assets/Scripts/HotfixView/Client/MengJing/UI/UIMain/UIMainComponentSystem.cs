@@ -95,7 +95,7 @@ namespace ET.Client
 
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get((int)args.NewValue);
 
-            unit.Root().GetComponent<FloatingTextComponent>().ShowTipText(levelConfig.LevelName);
+            // unit.Root().GetComponent<FloatingTextComponent>().ShowTipText(levelConfig.LevelName);
 
             UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)
@@ -105,6 +105,7 @@ namespace ET.Client
 
             UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
             uiMainComponent.UpdateLevelProgress();
+            uiMainComponent.UIMiniMapComponent?.UpdateLevelName();
         }
     }
 
@@ -113,7 +114,7 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            unit.Root().GetComponent<FloatingTextComponent>().ShowTipText(ZString.Format("第{0}波", args.NewValue));
+            // unit.Root().GetComponent<FloatingTextComponent>().ShowTipText(ZString.Format("第{0}波", args.NewValue));
 
             UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
             if (ui == null)

@@ -71,21 +71,8 @@ namespace ET.Server
                     
                     unit.AddComponent<AOIEntity, int, float3>(100 * 1000, unit.Position);
 
-                    // 创建英雄队列
-                    HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
-                    for (int i = 0; i < heroComponent.Formation.Count; i++)
-                    {
-                        Hero hero = heroComponent.GetHero(heroComponent.Formation[i]);
-                        if (hero == null)
-                        {
-                            continue;
-                        }
-
-                        float3 position = heroComponent.GetHeroPosition(hero.Id);
-
-                        UnitFactory.CreateHero(scene, unit, hero, position);
-                    }
-
+                    // 测试一直从第一关开始
+                    numericComponent.ApplyValue(NumericType.PassedLevelId, 0, false);
                     scene.GetComponent<LocalLevelComponent>().MainUnit = unit;
                     scene.GetComponent<LocalLevelComponent>().GenerateLevel();
                     break;

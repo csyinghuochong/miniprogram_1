@@ -36,20 +36,25 @@ namespace ET.Client
 
             if (mapType == MapType.LocalLevel)
             {
-                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-                int currentLevelId = numericComponent.GetAsInt(NumericType.CurrentLevelId);
-                if (!LevelConfigCategory.Instance.DataMap.ContainsKey(currentLevelId))
-                {
-                    return;
-                }
-
-                LevelConfig levelConfig = LevelConfigCategory.Instance.Get(currentLevelId);
-
-                self.Text_MiniMapName.SetText(levelConfig.LevelName);
+                self.UpdateLevelName();
             }
 
             self.LoadMapCamera().Coroutine();
+        }
+
+        public static void UpdateLevelName(this UIMiniMapComponent self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            int currentLevelId = numericComponent.GetAsInt(NumericType.CurrentLevelId);
+            if (!LevelConfigCategory.Instance.DataMap.ContainsKey(currentLevelId))
+            {
+                return;
+            }
+
+            LevelConfig levelConfig = LevelConfigCategory.Instance.Get(currentLevelId);
+
+            self.Text_MiniMapName.SetText(levelConfig.LevelName);
         }
 
         private static async ETTask LoadMapCamera(this UIMiniMapComponent self)

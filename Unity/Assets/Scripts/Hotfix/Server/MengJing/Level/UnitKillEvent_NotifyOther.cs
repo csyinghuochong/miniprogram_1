@@ -20,23 +20,29 @@
             defendUnit.GetComponent<SkillPassiveComponent>()?.Stop();
             defendUnit.GetComponent<BuffManagerComponentS>()?.OnDead();
 
-            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             switch (mapType)
             {
                 case MapType.LocalLevel:
                 {
-                    scene.GetComponent<LocalLevelComponent>().OnKillEvent(defendUnit);
+                    if (defendUnit.Type == UnitType.Monster)
+                    {
+                        scene.GetComponent<LocalLevelComponent>().OnKillEvent(defendUnit);
+                    }
 
                     break;
                 }
             }
 
-            if (attackUnit != null && attackUnit.Type == UnitType.Hero)
+            if (attackUnit != null && !attackUnit.IsDisposed)
             {
-                Unit master = attackUnit.GetParent<UnitComponent>().Get(attackUnit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId));
-                master.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, mapType);
+                if (attackUnit.Type == UnitType.Hero)
+                {
+                    Unit master = attackUnit.GetParent<UnitComponent>().Get(attackUnit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId));
+                    master.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, mapType);
+                }
             }
 
+            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             numericComponentDefend.ApplyValue(NumericType.Now_Dead, 1);
 
             long waitTime = 500;
