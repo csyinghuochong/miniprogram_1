@@ -385,11 +385,6 @@ namespace ET.Client
         public static async ETTask OnBoss(this UIMainComponent self)
         {
             int error = await ClientLevelHelper.EnterBossRoom(self.Root());
-            // if (error == ErrorCode.ERR_Success)
-            // {
-            //     string path = ABPathHelper.GetScenePath("LevelTest");
-            //     await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Additive);
-            // }
         }
 
         public static void UpdateMainTask(this UIMainComponent self)
