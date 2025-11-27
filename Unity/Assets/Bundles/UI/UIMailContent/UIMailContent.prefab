@@ -1042,7 +1042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -600}
+  m_AnchoredPosition: {x: -120, y: -600}
   m_SizeDelta: {x: 220, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8750078322282284936
@@ -1656,17 +1656,17 @@ MonoBehaviour:
     gameObject: {fileID: 5006062491106155665}
   - key: Text_Content
     gameObject: {fileID: 9052822202974934232}
-  - key: Content_UICommonItem
-    gameObject: {fileID: 1678022152435843403}
-  - key: UICommonItem
-    gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
-      type: 3}
   - key: Button_Close
     gameObject: {fileID: 1322284540470387468}
   - key: Button_Get
     gameObject: {fileID: 3686489264705291655}
   - key: Button_Delete
     gameObject: {fileID: 8124165145662336359}
+  - key: Content_UICommonItem
+    gameObject: {fileID: 1678022152435843403}
+  - key: UICommonItem
+    gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
+      type: 3}
 --- !u!1 &8124165145662336359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,7 +1703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -600}
+  m_AnchoredPosition: {x: 120, y: -600}
   m_SizeDelta: {x: 220, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8889200298097469835

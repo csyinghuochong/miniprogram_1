@@ -21,5 +21,10 @@ namespace ET
         public const string UIHeroAttributes = "UIHeroAttributes/UIHeroAttributes";
         public const string UIHeroStarUp =  "UIHeroStarUp/UIHeroStarUp";
         public const string  UIItemRewardTip  = "UIItemRewardTip/UIItemRewardTip";
+        public const string UIStore = "UIStore/UIStore";
+        public const string UIWarehouse = "UIWarehouse/UIWarehouse";
+        public const string UIMail = "UIMail/UIMail";
+        public const string UIMailContent = "UIMailContent/UIMailContent";
+        public const string UIGetReward = "UIGetReward/UIGetReward";
     }
 }

@@ -113,14 +113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+  - key: Button_Close
+    gameObject: {fileID: 5093631322424876208}
   - key: UICommonItem
     gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
       type: 3}
-  - key: Button_Close
-    gameObject: {fileID: 5093631322424876208}
-  - key: Content_UICommonItemWarehouse
+  - key: Content_WarehouseItem
     gameObject: {fileID: 1485068836293457744}
-  - key: Content_UICommonItemBag
+  - key: Content_BagItem
     gameObject: {fileID: 2421920868184555142}
 --- !u!1 &365696702858654632
 GameObject:
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 9208245785885106562}
   - component: {fileID: 138143259533323141}
   m_Layer: 5
-  m_Name: Content_UICommonItemWarehouse
+  m_Name: Content_WarehouseItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 5024200626320086822}
   - component: {fileID: 7283520367932761232}
   m_Layer: 5
-  m_Name: Content_UICommonItemBag
+  m_Name: Content_BagItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
