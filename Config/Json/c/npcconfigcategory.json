@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1001,
+    "Name": "商人",
+    "Position": {
+      "x": 0,
+      "y": 0
+    },
+    "OpenUI": "UIStore"
+  },
+  {
+    "Id": 1002,
+    "Name": "邮件",
+    "Position": {
+      "x": 4,
+      "y": 0
+    },
+    "OpenUI": "UIWarehouse"
+  },
+  {
+    "Id": 1003,
+    "Name": "仓库",
+    "Position": {
+      "x": 8,
+      "y": 0
+    },
+    "OpenUI": "UIMail"
+  },
+  {
+    "Id": 1004,
+    "Name": "路人张三",
+    "Position": {
+      "x": 12,
+      "y": 0
+    },
+    "OpenUI": ""
+  }
+]
