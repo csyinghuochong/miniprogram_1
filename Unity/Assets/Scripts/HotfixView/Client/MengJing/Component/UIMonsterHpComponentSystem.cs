@@ -26,7 +26,16 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this UIMonsterHpComponent self)
         {
-            self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
+            Unit unit = self.GetParent<Unit>();
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+            if (monsterConfig.MonsterType == 3)
+            {
+                self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIBossHp");
+            }
+            else
+            {
+                self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
+            }
 
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, true, self.OnLoadGameObject);
         }
