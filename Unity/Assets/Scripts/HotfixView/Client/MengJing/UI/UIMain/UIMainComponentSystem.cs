@@ -166,6 +166,7 @@ namespace ET.Client
             self.Button_TaskCommit = rc.Get<GameObject>("Button_TaskCommit").GetComponent<Button>();
             self.EventTrigger_TaskReward = rc.Get<GameObject>("EventTrigger_TaskReward").GetComponent<EventTrigger>();
             self.Button_Recall = rc.Get<GameObject>("Button_Recall").GetComponent<Button>();
+            self.Button_PickUpDropItem = rc.Get<GameObject>("Button_PickUpDropItem").GetComponent<Button>();
             self.Button_StartLevel = rc.Get<GameObject>("Button_StartLevel").GetComponent<Button>();
             self.Button_Speed = rc.Get<GameObject>("Button_Speed").GetComponent<Button>();
             self.Button_GM = rc.Get<GameObject>("Button_GM").GetComponent<Button>();
@@ -187,6 +188,7 @@ namespace ET.Client
             self.EventTrigger_TaskReward.AddEventTrigger((p) => { self.OnTaskRewardPointerDown(p).Coroutine(); }, EventTriggerType.PointerDown);
             self.EventTrigger_TaskReward.AddEventTrigger(self.OnTaskRewardPointerUp, EventTriggerType.PointerUp);
             self.Button_Recall.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapType.MainCity).Coroutine(); });
+            self.Button_PickUpDropItem.AddListener(() => { self.OnButton_PickUpDropItem(); });
             self.Button_StartLevel.AddListener(() => { EnterMapHelper.RequestTransfer(self.Root(), MapType.LocalLevel).Coroutine(); });
             self.Button_Speed.AddListener(() => { self.OnButton_Speed(); });
             self.Button_GM.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIGM).Coroutine(); });
@@ -455,6 +457,11 @@ namespace ET.Client
             int max = ExpConfigCategory.Instance.Get(userInfoComponent.Lv).PlayerUpExp;
             self.Slider_Exp.value = userInfoComponent.Exp * 1f / max;
             self.Text_Exp.SetTextFormat("{0}/{1}", userInfoComponent.Exp, max);
+        }
+
+        private static void OnButton_PickUpDropItem(this UIMainComponent self)
+        {
+            ClientLevelHelper.PickUpDropItem(self.Root()).Coroutine();
         }
     }
 }

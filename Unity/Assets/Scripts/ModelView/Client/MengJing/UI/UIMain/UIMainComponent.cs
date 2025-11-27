@@ -30,6 +30,7 @@ namespace ET.Client
         public Button Button_TaskCommit;
         public EventTrigger EventTrigger_TaskReward;
         public Button Button_Recall;
+        public Button Button_PickUpDropItem;
         public Button Button_StartLevel;
         public Button Button_Speed;
         public Button Button_GM;

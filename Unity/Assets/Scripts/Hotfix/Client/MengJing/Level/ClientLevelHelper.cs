@@ -20,5 +20,22 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> PickUpDropItem(Scene root)
+        {
+            C2M_PickUpDropItem request = C2M_PickUpDropItem.Create();
+
+            foreach (Unit unit in root.CurrentScene().GetComponent<UnitComponent>().GetAll())
+            {
+                if (unit.Type == UnitType.DropItem)
+                {
+                    request.UnitIdList.Add(unit.Id);
+                }
+            }
+
+            M2C_PickUpDropItem response = (M2C_PickUpDropItem)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
