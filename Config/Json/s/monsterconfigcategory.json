@@ -116,7 +116,7 @@
     "MoveSpeed": 50000,
     "ActDistance": 80000,
     "AtkSpeed": 20000,
-    "Hp": 2000,
+    "Hp": 20000,
     "Act": 130,
     "Def": 50,
     "Adf": 30,

@@ -140,7 +140,7 @@
     "HaveBoss": true,
     "PlayerSpawnPosition": {
       "x": 500,
-      "y": -20
+      "y": 0
     },
     "MonsterSpawnInfos": [
       {
@@ -294,7 +294,7 @@
     "HaveBoss": true,
     "PlayerSpawnPosition": {
       "x": 500,
-      "y": -20
+      "y": 0
     },
     "MonsterSpawnInfos": [
       {
@@ -448,7 +448,7 @@
     "HaveBoss": true,
     "PlayerSpawnPosition": {
       "x": 500,
-      "y": -20
+      "y": 0
     },
     "MonsterSpawnInfos": [
       {

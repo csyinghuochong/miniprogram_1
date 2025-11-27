@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,7 @@ namespace ET.Client
         public static async ETTask ChangeScene(this SceneManagerComponent self, MapType mapType, MapType lastScene, int sceneid)
         {
             string paramss = "";
+            List<string> subScene = new();
             switch (mapType)
             {
                 case MapType.Init:
@@ -42,6 +44,7 @@ namespace ET.Client
                     break;
                 case MapType.LocalLevel:
                     paramss = "Level";
+                    subScene.Add("LevelTest");
                     break;
                 default:
                     break;
@@ -72,6 +75,10 @@ namespace ET.Client
             path = ABPathHelper.GetScenePath(paramss);
 
             await resourcesLoaderComponent.LoadSceneAsync(path, LoadSceneMode.Single);
+            foreach (string s in subScene)
+            {
+                await resourcesLoaderComponent.LoadSceneAsync(ABPathHelper.GetScenePath(s), LoadSceneMode.Additive);
+            }
 
             Debug.Log("切换场景" + path);
 
