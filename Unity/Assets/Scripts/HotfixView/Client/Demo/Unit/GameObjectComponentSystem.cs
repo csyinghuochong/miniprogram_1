@@ -105,6 +105,12 @@ namespace ET.Client
 
                     break;
                 }
+                case UnitType.DropItem:
+                {
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.DropItem, "DropItem");
+
+                    break;
+                }
                 default:
                     break;
             }
@@ -210,6 +216,11 @@ namespace ET.Client
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<FsmComponent>();
+                    break;
+                }
+                case UnitType.DropItem:
+                {
+                    unit.AddComponent<UIDropItemComponent>();
                     break;
                 }
                 default:

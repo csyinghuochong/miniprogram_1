@@ -224,5 +224,21 @@ namespace ET.Server
 
             return unit;
         }
+
+        public static Unit CreateDropItem(Scene scene,int itemConfigId,int num, float3 position)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), itemConfigId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.Position = position;
+            unit.Type = UnitType.DropItem;
+            
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            numericComponent.ApplyValue(NumericType.DropItemId, itemConfigId, false);
+            numericComponent.ApplyValue(NumericType.DropItemNum, num, false);
+
+            unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
+            
+            return unit;
+        }
     }
 }

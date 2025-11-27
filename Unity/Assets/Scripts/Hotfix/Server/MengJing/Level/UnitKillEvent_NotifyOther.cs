@@ -27,6 +27,7 @@
                     if (defendUnit.Type == UnitType.Monster)
                     {
                         scene.GetComponent<LocalLevelComponent>().OnKillEvent(defendUnit);
+                        DropHelper.MonsterDropItem(defendUnit);
                     }
 
                     break;

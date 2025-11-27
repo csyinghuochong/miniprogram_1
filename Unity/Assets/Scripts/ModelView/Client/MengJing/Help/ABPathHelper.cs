@@ -17,6 +17,7 @@ namespace ET
     {
         public const string Hero = "Hero";
         public const string Monster = "Monster";
+        public const string DropItem = "DropItem";
     }
 
     /// <summary>

@@ -84,13 +84,7 @@ namespace ET.Client
         public static Unit CreateDropItem(Scene currentScene, UnitInfo unitInfo)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            long unitId = unitInfo.UnitId == 0 ? IdGenerater.Instance.GenerateId() : unitInfo.UnitId;
-            if (unitComponent.Get(unitId) != null)
-            {
-                return null;
-            }
-
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1);
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, unitInfo.ConfigId);
             unit.Type = UnitType.DropItem;
             unitComponent.Add(unit);
 

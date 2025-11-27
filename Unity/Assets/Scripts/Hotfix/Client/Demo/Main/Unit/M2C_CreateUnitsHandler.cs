@@ -21,7 +21,14 @@ namespace ET.Client
                     continue;
                 }
 
-                UnitFactory.CreateUnit(currentScene, unitInfo);
+                if (unitInfo.Type == UnitType.DropItem)
+                {
+                    UnitFactory.CreateDropItem(currentScene, unitInfo);
+                }
+                else
+                {
+                    UnitFactory.CreateUnit(currentScene, unitInfo);
+                }
             }
 
             if (message.UpdateAll == 1)
@@ -57,7 +64,7 @@ namespace ET.Client
         {
             if (unitComponent.Get(unitid) != null)
             {
-                unitComponent.Get(unitid).Position =new float3(x, y, z);
+                unitComponent.Get(unitid).Position = new float3(x, y, z);
                 return true;
             }
 
