@@ -2,6 +2,7 @@
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -24,6 +25,8 @@ namespace ET.Client
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Text_ItemNum = rc.Get<GameObject>("Text_ItemNum").GetComponent<TMP_Text>();
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
+            self.Image_Pressed = rc.Get<GameObject>("Image_Pressed").GetComponent<Image>();
+            self.EventTrigger_Click = rc.Get<GameObject>("EventTrigger_Click").GetComponent<EventTrigger>();
             self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
             self.Image_Equipped = rc.Get<GameObject>("Image_Equipped").GetComponent<Image>();
 

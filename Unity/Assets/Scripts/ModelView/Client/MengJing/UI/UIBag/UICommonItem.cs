@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -20,6 +21,8 @@ namespace ET.Client
         public Image Image_ItemIcon;
         public TMP_Text Text_ItemNum;
         public Button Button_Click;
+        public Image Image_Pressed;
+        public EventTrigger EventTrigger_Click;
         public Image Image_Selected { get; set; }
         public Image Image_Equipped { get; set; }
         
