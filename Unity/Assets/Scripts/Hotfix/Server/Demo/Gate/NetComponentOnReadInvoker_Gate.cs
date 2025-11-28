@@ -92,10 +92,10 @@ namespace ET.Server
                         response = await root.GetComponent<MessageSender>().Call(friendServerId, iFriendActorRequest);
                     }
                     
-                    if (actorRequest is IMailActorRequest iMailActorRequest)
+                    if (actorRequest is IMailRequest iMailRequest)
                     {
                         ActorId mailServerID = player.MailServerID;
-                        response = await root.GetComponent<MessageSender>().Call(mailServerID, iMailActorRequest);
+                        response = await root.GetComponent<MessageSender>().Call(mailServerID, iMailRequest);
                     }
                     
                     if (actorRequest is IRankActorRequest iRankActorRequest)

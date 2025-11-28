@@ -40,6 +40,14 @@
     "Port": 0
   },
   {
+    "Id": 114,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Mail",
+    "Name": "Mail",
+    "Port": 0
+  },
+  {
     "Id": 1000201,
     "Zone": 1000,
     "Process": 1,

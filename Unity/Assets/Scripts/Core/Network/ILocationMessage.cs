@@ -68,16 +68,16 @@
     {
 
     }
-    
-    public interface IMailActorRequest : IRequest
+
+    public interface IMailRequest : IRequest
     {
     }
 
-    public interface IMailActorResponse : IResponse
+    public interface IMailResponse : IResponse
     {
 
     }
-    
+
     public interface IRankActorRequest : IRequest
     {
     }

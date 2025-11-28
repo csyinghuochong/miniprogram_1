@@ -28,6 +28,7 @@ namespace ET
         Queue = 1L << 24,
         LoginCenter = 1L << 26,
         RobotManager = 1L << 28,
+        Mail = 1L << 29,
 
         // 客户端
         Demo = 1L << 50,
