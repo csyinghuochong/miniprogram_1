@@ -35,11 +35,109 @@ namespace ET.Client
             self.Image_Selected.gameObject.SetActive(false);
 
             self.Button_Click.AddListener(self.OnClick);
+
+            self.EventTrigger_Click.AddEventTrigger(self.OnPointerDown, EventTriggerType.PointerDown);
+            self.EventTrigger_Click.AddEventTrigger(self.OnBeginDrag, EventTriggerType.BeginDrag);
+            self.EventTrigger_Click.AddEventTrigger(self.OnDrag, EventTriggerType.Drag);
+            self.EventTrigger_Click.AddEventTrigger(self.OnPointerUp, EventTriggerType.PointerUp);
+            self.EventTrigger_Click.AddEventTrigger(self.OnEndDrag, EventTriggerType.EndDrag);
         }
 
         private static void OnClick(this UICommonItem self)
         {
-            self.OnItemClick?.Invoke(self.ItemId);
+        }
+
+        private static void OnPointerDown(this UICommonItem self, PointerEventData eventData)
+        {
+            self.IsDrag = false;
+            self.IsPressing = true;
+            self.LongPressing().Coroutine();
+        }
+
+        private static async ETTask LongPressing(this UICommonItem self)
+        {
+            self.PressedTime = 0;
+            self.Image_Pressed.fillAmount = 0;
+            long lastTime = TimeInfo.Instance.ClientNow();
+            while (true)
+            {
+                await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+
+                if (self.IsDisposed)
+                {
+                    return;
+                }
+
+                if (self.IsDrag)
+                {
+                    // 提前拖动了
+                    self.Image_Pressed.fillAmount = 0;
+                    return;
+                }
+
+                if (!self.IsPressing)
+                {
+                    // 提前松开了
+                    self.Image_Pressed.fillAmount = 0;
+                    return;
+                }
+
+                long currentTime = TimeInfo.Instance.ClientNow();
+                self.PressedTime += currentTime - lastTime;
+                lastTime = currentTime;
+
+                self.Image_Pressed.fillAmount = self.PressedTime * 1f / self.PressedTriggerTime;
+
+                if (self.PressedTime >= self.PressedTriggerTime)
+                {
+                    Log.Warning("长按");
+                    self.OnLongPressed?.Invoke();
+                    self.Image_Pressed.fillAmount = 0;
+                    self.IsPressing = false;
+                    return;
+                }
+            }
+        }
+
+        private static void OnBeginDrag(this UICommonItem self, PointerEventData eventData)
+        {
+            self.IsDrag = true;
+
+            ScrollRect scrollRect = self.GameObject.GetComponentInParent<ScrollRect>();
+            if (scrollRect != null)
+            {
+                scrollRect.OnBeginDrag(eventData);
+            }
+        }
+
+        private static void OnDrag(this UICommonItem self, PointerEventData eventData)
+        {
+            ScrollRect scrollRect = self.GameObject.GetComponentInParent<ScrollRect>();
+            if (scrollRect != null)
+            {
+                scrollRect.OnDrag(eventData);
+            }
+        }
+
+        private static void OnPointerUp(this UICommonItem self, PointerEventData eventData)
+        {
+            if (!self.IsDrag && self.IsPressing)
+            {
+                Log.Warning("短按");
+                self.OnItemPointerUp?.Invoke();
+            }
+
+            self.IsDrag = false;
+            self.IsPressing = false;
+        }
+
+        private static void OnEndDrag(this UICommonItem self, PointerEventData eventData)
+        {
+            ScrollRect scrollRect = self.GameObject.GetComponentInParent<ScrollRect>();
+            if (scrollRect != null)
+            {
+                scrollRect.OnEndDrag(eventData);
+            }
         }
 
         public static async ETTask UpdateInfo(this UICommonItem self, Item item, Action<long> onItemClick = null)
