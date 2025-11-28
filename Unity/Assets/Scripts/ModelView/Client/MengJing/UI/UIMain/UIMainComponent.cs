@@ -40,9 +40,5 @@ namespace ET.Client
         public Button Button_Boss;
         public Slider Slider_Exp;
         public TMP_Text Text_Exp;
-
-        public Button Button_Store;
-        public Button Button_Warehouse;
-        public Button Button_Mail;
     }
 }
