@@ -164,7 +164,11 @@ namespace ET.Client
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)
             {
-                uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData() { ItemId = itemId });
+                uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
+                {
+                    ItemId = itemId,
+                    UIItemTipOpType = UIItemTipOpType.OnRoleBag
+                });
             }
         }
 

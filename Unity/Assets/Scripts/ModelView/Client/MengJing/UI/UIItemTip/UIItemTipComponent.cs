@@ -11,7 +11,7 @@ namespace ET.Client
         UIHero_TakeOff,
         OnWarehouse,
         OnWarehouseBag,
-        OnlyView,
+        OnRoleBag,
     }
 
     public struct UIItemTipData

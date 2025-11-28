@@ -31,6 +31,11 @@ namespace ET.Client
             self.UICommonItem = null;
         }
 
+        public static void UpdateWarehouseItemList(this UIWarehouseComponent self)
+        {
+            
+        }
+
         public static void UpdateBagItemList(this UIWarehouseComponent self)
         {
             InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
@@ -47,7 +52,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UIBagItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UIBagItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnBagItemClick(itemId).Coroutine(); }).Coroutine();
                 self.UIBagItemList[i].GameObject.SetActive(true);
                 self.UIBagItemList[i].Item.SetActive(true);
             }
@@ -60,7 +65,7 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnItemClick(this UIWarehouseComponent self, long itemId)
+        private static async ETTask OnBagItemClick(this UIWarehouseComponent self, long itemId)
         {
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)

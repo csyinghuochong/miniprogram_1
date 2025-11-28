@@ -167,7 +167,7 @@ namespace ET.Client
                 self.Button_Save.gameObject.SetActive(true);
             }
 
-            if (uiItemTipData.UIItemTipOpType == 0)
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
             {
                 self.Button_Sell.gameObject.SetActive(true);
             }
