@@ -17,5 +17,7 @@ namespace ET.Client
         public Image Image_ItemQuality;
         public Image Image_ItemIcon;
         public Button Button_Sell;
+        public Button Button_Save;
+        public Button Button_Take;
     }
 }

@@ -9,6 +9,9 @@ namespace ET.Client
         None = 0,
         UIHero_Wear,
         UIHero_TakeOff,
+        OnWarehouse,
+        OnWarehouseBag,
+        OnlyView,
     }
 
     public struct UIItemTipData

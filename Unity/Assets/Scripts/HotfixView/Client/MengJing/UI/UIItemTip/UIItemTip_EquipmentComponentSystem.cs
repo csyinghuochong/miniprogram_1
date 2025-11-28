@@ -34,11 +34,15 @@ namespace ET.Client
             self.Button_Wear = rc.Get<GameObject>("Button_Wear").GetComponent<Button>();
             self.Button_TakeOff = rc.Get<GameObject>("Button_TakeOff").GetComponent<Button>();
             self.Text_EquipHero = rc.Get<GameObject>("Text_EquipHero").GetComponent<TMP_Text>();
+            self.Button_Save = rc.Get<GameObject>("Button_Save").GetComponent<Button>();
+            self.Button_Take = rc.Get<GameObject>("Button_Take").GetComponent<Button>();
 
             self.Button_Sell.gameObject.SetActive(false);
             self.Button_Wear.gameObject.SetActive(false);
             self.Button_TakeOff.gameObject.SetActive(false);
             self.Text_EquipHero.gameObject.SetActive(false);
+            self.Button_Save.gameObject.SetActive(false);
+            self.Button_Take.gameObject.SetActive(false);
 
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
             self.Button_Wear.AddListener(self.OnButton_Wear);
@@ -151,6 +155,16 @@ namespace ET.Client
 
                 self.Text_EquipHero.gameObject.SetActive(true);
                 self.Text_EquipHero.SetText(heroConfig.HeroName);
+            }
+
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
+            {
+                self.Button_Take.gameObject.SetActive(true);
+            }
+
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+            {
+                self.Button_Save.gameObject.SetActive(true);
             }
 
             if (uiItemTipData.UIItemTipOpType == 0)

@@ -23,7 +23,13 @@ namespace ET.Client
             self.Image_ItemQuality = rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>();
             self.Image_ItemIcon = rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>();
             self.Button_Sell = rc.Get<GameObject>("Button_Sell").GetComponent<Button>();
-            
+            self.Button_Save = rc.Get<GameObject>("Button_Save").GetComponent<Button>();
+            self.Button_Take = rc.Get<GameObject>("Button_Take").GetComponent<Button>();
+
+            self.Button_Sell.gameObject.SetActive(false);
+            self.Button_Save.gameObject.SetActive(false);
+            self.Button_Take.gameObject.SetActive(false);
+
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
         }
 
@@ -49,7 +55,7 @@ namespace ET.Client
             if (item != null)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-                
+
                 string color = itemConfig.ItemQuality switch
                 {
                     1 => "#0e832a",
@@ -60,20 +66,36 @@ namespace ET.Client
                     6 => "#d01a06",
                     _ => "#ffffff"
                 };
-                
+
                 Color nowColor;
                 ColorUtility.TryParseHtmlString(color, out nowColor);
-                
+
                 self.Text_ItemName.SetText(itemConfig.ItemName);
                 self.Text_ItemName.color = nowColor;
                 self.Text_ItemDescription.text = itemConfig.ItemDescription;
                 self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
-                
+
                 string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
-                self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
-                
+                self.Image_ItemQuality.overrideSprite =
+                        await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+
+                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
+                {
+                    self.Button_Take.gameObject.SetActive(true);
+                }
+
+                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+                {
+                    self.Button_Save.gameObject.SetActive(true);
+                }
+
+                if (uiItemTipData.UIItemTipOpType == 0)
+                {
+                    self.Button_Sell.gameObject.SetActive(true);
+                }
             }
         }
     }
