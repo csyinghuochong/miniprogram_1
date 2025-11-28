@@ -45,6 +45,7 @@ namespace ET.Client
 
         private static void OnClick(this UICommonItem self)
         {
+            self.OnItemClick?.Invoke(self.ItemId);
         }
 
         private static void OnPointerDown(this UICommonItem self, PointerEventData eventData)
