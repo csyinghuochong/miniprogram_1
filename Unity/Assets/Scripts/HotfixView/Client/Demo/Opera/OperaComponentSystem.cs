@@ -97,6 +97,13 @@ namespace ET.Client
             {
                 await self.Root().GetComponent<UIComponent>().Create(npcConfig.OpenUI);
             }
+
+            if (!string.IsNullOrEmpty(npcConfig.DialogueText))
+            {
+                UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIDialogue);
+                UIDialogueComponent uiDialogueComponent = ui.GetComponent<UIDialogueComponent>();
+                uiDialogueComponent.UpdateDialogue(npcId).Coroutine();
+            }
         }
 
         // 检测是否点击UI

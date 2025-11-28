@@ -7,7 +7,8 @@
       "x": 0,
       "y": 0
     },
-    "OpenUI": "UIStore/UIStore"
+    "OpenUI": "UIStore/UIStore",
+    "DialogueText": ""
   },
   {
     "Id": 1002,
@@ -17,7 +18,8 @@
       "x": 4,
       "y": 0
     },
-    "OpenUI": "UIMail/UIMail"
+    "OpenUI": "UIMail/UIMail",
+    "DialogueText": ""
   },
   {
     "Id": 1003,
@@ -27,7 +29,8 @@
       "x": 8,
       "y": 0
     },
-    "OpenUI": "UIWarehouse/UIWarehouse"
+    "OpenUI": "UIWarehouse/UIWarehouse",
+    "DialogueText": ""
   },
   {
     "Id": 1004,
@@ -37,6 +40,7 @@
       "x": 12,
       "y": 0
     },
-    "OpenUI": ""
+    "OpenUI": "",
+    "DialogueText": "你好啊，勇士。去战斗吧。"
   }
 ]

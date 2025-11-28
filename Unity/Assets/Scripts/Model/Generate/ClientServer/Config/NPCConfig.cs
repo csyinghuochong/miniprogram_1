@@ -21,6 +21,7 @@ namespace ET
             Model = _buf.ReadString();
             Position = ExternalTypeUtil.NewVector2(global::ET.vector2.Deserializevector2(_buf));
             OpenUI = _buf.ReadString();
+            DialogueText = _buf.ReadString();
 
             PostInit();
         }
@@ -55,12 +56,18 @@ namespace ET
         /// </summary>
         public readonly string OpenUI;
 
+        /// <summary>
+        /// 对话内容
+        /// </summary>
+        public readonly string DialogueText;
+
 
         public const int __ID__ = -199374493;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -76,6 +83,7 @@ namespace ET
             + "Model:" + Model + ","
             + "Position:" + Position + ","
             + "OpenUI:" + OpenUI + ","
+            + "DialogueText:" + DialogueText + ","
             + "}";
         }
 
