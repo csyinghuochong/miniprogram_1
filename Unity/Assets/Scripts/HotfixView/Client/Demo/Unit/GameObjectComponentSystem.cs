@@ -186,8 +186,10 @@ namespace ET.Client
 
             Unit unit = self.GetParent<Unit>();
             self.UpdatePositon(unit.Position);
+
             UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
             unitId.Id = unit.Id;
+
             int unitType = unit.Type;
             switch (unitType)
             {
@@ -232,6 +234,8 @@ namespace ET.Client
                 case UnitType.NPC:
                 {
                     LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.NPC);
+
+                    self.GameObject.name = unit.ConfigId.ToString();
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UINPCHpComponent>();

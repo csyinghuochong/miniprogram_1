@@ -21,5 +21,7 @@ namespace ET.Client
 
         private EntityRef<Unit> unit;
         public Unit MainUnit { get => this.unit; set => this.unit = value; }
+        
+        public LayerMask NPCMask;
     }
 }

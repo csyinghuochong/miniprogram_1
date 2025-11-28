@@ -7,7 +7,7 @@
       "x": 0,
       "y": 0
     },
-    "OpenUI": "UIStore"
+    "OpenUI": "UIStore/UIStore"
   },
   {
     "Id": 1002,
@@ -17,7 +17,7 @@
       "x": 4,
       "y": 0
     },
-    "OpenUI": "UIWarehouse"
+    "OpenUI": "UIMail/UIMail"
   },
   {
     "Id": 1003,
@@ -27,7 +27,7 @@
       "x": 8,
       "y": 0
     },
-    "OpenUI": "UIMail"
+    "OpenUI": "UIWarehouse/UIWarehouse"
   },
   {
     "Id": 1004,
