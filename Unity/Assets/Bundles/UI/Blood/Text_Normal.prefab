@@ -68,8 +68,7 @@ MonoBehaviour:
   m_text: "\u514D\u75AB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2a97cb8eea3b2f4eb56795117d7c939, type: 2}
-  m_sharedMaterial: {fileID: 6509247359724258812, guid: a2a97cb8eea3b2f4eb56795117d7c939,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 99a687fd11aa6234ca8ab9c3bb701914, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
