@@ -53,6 +53,12 @@ TagManager:
   - name: Environment
     uniqueID: 1118842515
     locked: 0
+  - name: DropItem
+    uniqueID: 196243179
+    locked: 0
+  - name: Monster
+    uniqueID: 1550107941
+    locked: 0
   - name: Player
     uniqueID: 3305902609
     locked: 0
