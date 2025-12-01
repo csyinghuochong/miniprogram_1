@@ -11,12 +11,12 @@ namespace ET.Server
             // 测试
             Mail mailInfoEntity1 = self.AddChild<Mail>();
             mailInfoEntity1.Title = "第一封邮件";
-            mailInfoEntity1.Message = "第一封邮件的具体内容";
+            mailInfoEntity1.Content = "第一封邮件的具体内容";
             self.MailInfosList.Add(mailInfoEntity1);
 
             Mail mailInfoEntity2 = self.AddChild<Mail>();
             mailInfoEntity2.Title = "第二封邮件";
-            mailInfoEntity2.Message = "第二封邮件的具体内容";
+            mailInfoEntity2.Content = "第二封邮件的具体内容";
             self.MailInfosList.Add(mailInfoEntity2);
         }
 

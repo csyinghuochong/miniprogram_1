@@ -4086,13 +4086,22 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public long MailId { get; set; }
+        public long Id { get; set; }
 
         [MemoryPackOrder(1)]
-        public string Title { get; set; }
+        public int State { get; set; }
 
         [MemoryPackOrder(2)]
-        public string Message { get; set; }
+        public string Title { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string Content { get; set; }
+
+        [MemoryPackOrder(4)]
+        public long Time { get; set; }
+
+        [MemoryPackOrder(5)]
+        public long DeleteTime { get; set; }
 
         public override void Dispose()
         {
@@ -4101,9 +4110,12 @@ namespace ET
                 return;
             }
 
-            this.MailId = default;
+            this.Id = default;
+            this.State = default;
             this.Title = default;
-            this.Message = default;
+            this.Content = default;
+            this.Time = default;
+            this.DeleteTime = default;
 
             ObjectPool.Instance.Recycle(this);
         }
