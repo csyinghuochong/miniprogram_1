@@ -11,11 +11,7 @@ namespace ET.Server
 
             foreach (Mail mail in mailComponentS.MailList)
             {
-                // MailInfo mailInfo = MailInfo.Create();
-                // mailInfo.MailId = mail.Id;
-                // mailInfo.Title = mail.Title;
-                // mailInfo.Message = mail.Content;
-                // response.MailInfoList.Add(mailInfo);
+                response.MailInfoList.Add(mail.ToMessage());
             }
 
             await ETTask.CompletedTask;

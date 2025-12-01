@@ -18,7 +18,7 @@ namespace ET.Server
                 {
                     return;
                 }
-                
+
                 // 击杀所有怪物
                 if (message.GMMsg == "#killall")
                 {
@@ -59,7 +59,7 @@ namespace ET.Server
                     case 3: //创建怪物
                     {
                         float posX = float.Parse(commands[1]);
-                        float posY = float.Parse(commands[2]); 
+                        float posY = float.Parse(commands[2]);
                         int monsterId = int.Parse(commands[3]);
                         int number = int.Parse(commands[4]);
                         if (number > 100)
@@ -74,6 +74,35 @@ namespace ET.Server
                             float2 vector2 = new float2(posX + RandomHelper.RandomNumberFloat(-1, 1), posY);
                             Unit monster = UnitFactory.CreateMonster(unit.Scene(), monsterId, vector2);
                         }
+
+                        break;
+                    }
+                    case 4: //邮件
+                    {
+                        string title = commands[1];
+                        string content = commands[2];
+                        string rewards = commands[3];
+
+                        MailInfo mailInfo = MailInfo.Create();
+                        mailInfo.Title = title;
+                        mailInfo.Content = content;
+                        mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
+                        foreach (string reward in rewards.Split('@'))
+                        {
+                            string[] rewardInfo = reward.Split(',');
+                            int itemId = int.Parse(rewardInfo[0]);
+                            int itemNum = int.Parse(rewardInfo[1]);
+                            ItemInfo itemInfo = ItemInfo.Create();
+                            itemInfo.ConfigId = itemId;
+                            itemInfo.Num = itemNum;
+                            mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
+                        }
+
+                        M2Mail_AddMail request = M2Mail_AddMail.Create();
+                        request.MailInfo = mailInfo;
+
+                        unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Mail).Call(unit.Id, request).Coroutine();
+
                         break;
                     }
                     case 6:

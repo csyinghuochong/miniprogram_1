@@ -27,5 +27,13 @@ namespace ET.Server
                 }
             }
         }
+
+        public static void AddMail(this MailComponentS self, MailInfo mailInfo)
+        {
+            Mail mail = self.AddChild<Mail>();
+            mail.FromMessage(mailInfo);
+
+            self.MailList.Add(mail);
+        }
     }
 }

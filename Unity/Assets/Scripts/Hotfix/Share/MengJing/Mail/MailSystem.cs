@@ -19,6 +19,7 @@ namespace ET
         [EntitySystem]
         private static void Deserialize(this Mail self)
         {
+            self.AddComponent<MailRewardComponent>();
         }
 
         public static MailInfo ToMessage(this Mail self)
@@ -37,6 +38,7 @@ namespace ET
             {
                 mailRewardComponentInfo.ItemInfoList.Add(item.ToMessage());
             }
+
             mailInfo.MailRewardComponentInfo = mailRewardComponentInfo;
 
             return mailInfo;

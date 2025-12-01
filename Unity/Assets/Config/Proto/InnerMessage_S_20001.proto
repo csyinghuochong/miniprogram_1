@@ -471,6 +471,20 @@ message Mail2G_ExitMailServer // ILocationResponse
     string Message = 3;
 }
 
+//ResponseType Mail2M_AddMail
+message M2Mail_AddMail // ILocationRequest
+{
+    int32 RpcId = 1;
+	MailInfo MailInfo = 2;
+}
+
+message Mail2M_AddMail // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
 //ResponseType A2A_BroadcastSceneResponse
 message A2A_BroadcastSceneRequest // IRequest
 {
