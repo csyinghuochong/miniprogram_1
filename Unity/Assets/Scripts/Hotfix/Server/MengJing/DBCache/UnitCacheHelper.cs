@@ -20,8 +20,7 @@ namespace ET.Server
             Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
             message.UnitId = unitId;
 
-            UnitCache2Other_GetUnit queryUnit =
-                    (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
+            UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
             if (queryUnit.Error != ErrorCode.ERR_Success )
             {
                 return null;
@@ -270,6 +269,11 @@ namespace ET.Server
         public static ActorId MainCityServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Map101").ActorId;
+        }
+        
+        public static ActorId GetMailServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Mail)).ActorId;
         }
         
         public static ActorId GetRobotServerId()

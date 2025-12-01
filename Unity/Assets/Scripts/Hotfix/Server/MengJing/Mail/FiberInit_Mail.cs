@@ -15,6 +15,9 @@
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
 
+            root.AddComponent<MailCenterComponent>();
+            root.AddComponent<MailUnitComponent>();
+
             await ETTask.CompletedTask;
         }
     }

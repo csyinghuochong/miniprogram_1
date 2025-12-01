@@ -1912,6 +1912,128 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(InnerMessage.G2Mail_LoginMailServer)]
+    [ResponseType(nameof(Mail2G_LoginMailServer))]
+    public partial class G2Mail_LoginMailServer : MessageObject, IRequest
+    {
+        public static G2Mail_LoginMailServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Mail_LoginMailServer), isFromPool) as G2Mail_LoginMailServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Mail2G_LoginMailServer)]
+    public partial class Mail2G_LoginMailServer : MessageObject, IResponse
+    {
+        public static Mail2G_LoginMailServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Mail2G_LoginMailServer), isFromPool) as Mail2G_LoginMailServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.G2Mail_ExitMailServer)]
+    [ResponseType(nameof(Mail2G_ExitMailServer))]
+    public partial class G2Mail_ExitMailServer : MessageObject, ILocationRequest
+    {
+        public static G2Mail_ExitMailServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Mail_ExitMailServer), isFromPool) as G2Mail_ExitMailServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Mail2G_ExitMailServer)]
+    public partial class Mail2G_ExitMailServer : MessageObject, ILocationResponse
+    {
+        public static Mail2G_ExitMailServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Mail2G_ExitMailServer), isFromPool) as Mail2G_ExitMailServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(InnerMessage.A2A_BroadcastSceneRequest)]
     [ResponseType(nameof(A2A_BroadcastSceneResponse))]
     public partial class A2A_BroadcastSceneRequest : MessageObject, IRequest
@@ -2035,7 +2157,11 @@ namespace ET
         public const ushort L2A_LoginAccountResponse = 20054;
         public const ushort M2L_CenterServerInfoReuest = 20055;
         public const ushort L2M_CenterServerInfoRespone = 20056;
-        public const ushort A2A_BroadcastSceneRequest = 20057;
-        public const ushort A2A_BroadcastSceneResponse = 20058;
+        public const ushort G2Mail_LoginMailServer = 20057;
+        public const ushort Mail2G_LoginMailServer = 20058;
+        public const ushort G2Mail_ExitMailServer = 20059;
+        public const ushort Mail2G_ExitMailServer = 20060;
+        public const ushort A2A_BroadcastSceneRequest = 20061;
+        public const ushort A2A_BroadcastSceneResponse = 20062;
     }
 }

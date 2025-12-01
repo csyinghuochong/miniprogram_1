@@ -39,7 +39,10 @@ namespace ET.Server
                     break;
                 case PlayerState.Game:
                     //通知游戏逻辑服下线Unit角色逻辑，并将数据存入数据库
-                    var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, G2M_RequestExitGame.Create());
+                    await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, G2M_RequestExitGame.Create());
+                    
+                    // 通知邮件服下线邮件Unit
+                    await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Mail).Call(player.Id, G2Mail_ExitMailServer.Create());
                     
                     // //通知组队服
                     // await BroadCastHelper.SendServerMessage(player.Root(), UnitCacheHelper.GetTeamServerId(player.Zone()) , NoticeType.PlayerExit, player.UnitId.ToString());
@@ -68,6 +71,7 @@ namespace ET.Server
             // 不加这俩段的话，重连发送的第一条C2M服务器不处理，会报actor not found mailbox
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.GateSession)?.Remove(player.Id);
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Unit)?.Remove(player.Id);
+            player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Mail)?.Remove(player.Id);
             
             player.Root().GetComponent<PlayerComponent>()?.Remove(player);
             player?.Dispose();

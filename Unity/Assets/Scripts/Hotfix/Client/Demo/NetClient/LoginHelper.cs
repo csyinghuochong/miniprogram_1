@@ -106,6 +106,7 @@ namespace ET.Client
                     await ClientInventoryHelper.GetAllItem(root);
                     await ClientHeroHelper.GetAllHero(root);
                     await ClientTaskHelper.GetAllTask(root);
+                    await ClientMailHelper.GetAllMail(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

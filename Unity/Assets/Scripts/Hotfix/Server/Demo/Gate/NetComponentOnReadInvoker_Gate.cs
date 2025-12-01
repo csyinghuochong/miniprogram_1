@@ -53,6 +53,29 @@ namespace ET.Server
                     }
                     break;
                 }
+                case IMailRequest actorMailRequest:
+                {
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    int rpcId = actorMailRequest.RpcId;
+                    long instanceId = session.InstanceId;
+
+                    IMailResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Mail).Call(player.Id, actorMailRequest) as IMailResponse;
+                    iResponse.RpcId = rpcId;
+
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Send(iResponse);
+                    }
+
+                    break;
+                }
+                case IMailMessage actorMailMessage:
+                {
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Mail).Send(player.Id, actorMailMessage);
+
+                    break;
+                }
                 case ILocationMessage actorLocationMessage:
                 {
                     long unitId = session.GetComponent<SessionPlayerComponent>().Player.Id;
@@ -90,12 +113,6 @@ namespace ET.Server
                     {
                         ActorId friendServerId = player.FriendServerId;
                         response = await root.GetComponent<MessageSender>().Call(friendServerId, iFriendActorRequest);
-                    }
-                    
-                    if (actorRequest is IMailRequest iMailRequest)
-                    {
-                        ActorId mailServerID = player.MailServerID;
-                        response = await root.GetComponent<MessageSender>().Call(mailServerID, iMailRequest);
                     }
                     
                     if (actorRequest is IRankActorRequest iRankActorRequest)

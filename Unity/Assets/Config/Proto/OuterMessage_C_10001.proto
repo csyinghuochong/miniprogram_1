@@ -895,3 +895,24 @@ message M2C_PickUpDropItem // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+message MailInfo
+{
+	int64 MailId = 1;
+	string Title = 2;
+	string Message = 3;
+}
+
+//ResponseType Mail2C_GetAllMailList
+message C2Mail_GetAllMailList // IMailRequest
+{
+	int32 RpcId = 90;
+}
+
+message Mail2C_GetAllMailList // IMailResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated MailInfo MailInfoList = 1;
+}
