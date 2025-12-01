@@ -9,16 +9,17 @@ namespace ET.Server
         {
             //Unit角色下线业务逻辑，然后保存Unit及组件数据至数据库
             Scene root = unit.Root();
-            long untid = unit.Id;
+            long unitId = unit.Id;
             //正式释放Unit
             await RemoveUnit(unit);
-            await RemoveLocation(root, untid);
+            await RemoveLocation(root, unitId);
             await ETTask.CompletedTask;
         }
 
         private async ETTask RemoveLocation(Scene root, long untid)
         {
             await root.GetComponent<TimerComponent>().WaitFrameAsync();
+            // 重新登录可能登录不同Gate
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(untid);
         }
 

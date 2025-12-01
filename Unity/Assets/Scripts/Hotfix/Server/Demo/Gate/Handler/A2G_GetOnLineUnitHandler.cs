@@ -20,7 +20,7 @@ namespace ET.Server
                 
                 if (player.GetComponent<PlayerOfflineOutTimeComponent>() == null)
                 {
-                    response.OnLineUnits.Add(player.UnitId);
+                    response.OnLineUnits.Add(player.Id);
                 }
             }
             await ETTask.CompletedTask;

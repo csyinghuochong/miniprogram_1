@@ -53,7 +53,7 @@ namespace ET.Server
 
             // 重新触发一些任务
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
-            self.TriggerTaskEvent(TaskTargetType.PlayerLv, 0, userInfoComponent.GetLv());
+            self.TriggerTaskEvent(TaskTargetType.PlayerLv, 0, userInfoComponent.GetLv(), false);
         }
 
         public static bool IsHaveTask(this TaskComponentS self, int taskConfigId)

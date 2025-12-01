@@ -48,7 +48,6 @@ namespace ET.Server
 
                 //通知登录中心服 记录本次登录的服务器Zone
                 G2L_AddLoginRecord g2LAddLoginRecord = G2L_AddLoginRecord.Create();
-
                 g2LAddLoginRecord.AccountName = request.AccountName;
                 g2LAddLoginRecord.ServerId = root.Zone();
 
@@ -67,9 +66,8 @@ namespace ET.Server
                 if (player == null)
                 {
                     Console.WriteLine($"C2G_LoginGameGate: player == null  {account}  {session.Id}");
-                    
+
                     player = playerComponent.AddChildWithId<Player, string>(request.RoleId, account);
-                    player.UnitId = request.RoleId;
 
                     playerComponent.Add(player);
                     PlayerSessionComponent playerSessionComponent = player.AddComponent<PlayerSessionComponent>();

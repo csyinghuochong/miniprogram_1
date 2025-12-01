@@ -32,7 +32,7 @@ namespace ET.Server
             foreach (var item in self.dictionary.Values)
             {
                 Player player = item;
-                if (player.UnitId == id)
+                if (player.Id == id)
                 {
                     return player;
                 }

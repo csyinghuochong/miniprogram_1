@@ -39,8 +39,7 @@ namespace ET.Server
                     break;
                 case PlayerState.Game:
                     //通知游戏逻辑服下线Unit角色逻辑，并将数据存入数据库
-                    var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
-                            .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
+                    var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, G2M_RequestExitGame.Create());
                     
                     // //通知组队服
                     // await BroadCastHelper.SendServerMessage(player.Root(), UnitCacheHelper.GetTeamServerId(player.Zone()) , NoticeType.PlayerExit, player.UnitId.ToString());

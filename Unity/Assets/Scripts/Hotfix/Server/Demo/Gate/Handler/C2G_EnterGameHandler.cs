@@ -31,13 +31,14 @@ namespace ET.Server
 
             Player player = sessionPlayerComponent.Player;
 
-            if (player == null )
+            if (player == null)
             {
                 Console.WriteLine($"C2G_EnterGame: player == null  {request.UnitId}  {session.Id}");
                 response.Error = ErrorCode.ERR_NonePlayerError;
                 return;
             }
-            if ( player.IsDisposed)
+
+            if (player.IsDisposed)
             {
                 Console.WriteLine($"C2G_EnterGame: player.IsDisposed  {request.UnitId}  {session.Id}");
                 response.Error = ErrorCode.ERR_NonePlayerError;
@@ -59,16 +60,16 @@ namespace ET.Server
                     if (player.PlayerState == PlayerState.Game && request.ReLink == 0)
                     {
                         Console.WriteLine($"G2M_RequestExitGame:  {player.Id} ");
-                        var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
+                        var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, G2M_RequestExitGame.Create());
                         player.RemoveComponent<GateMapComponent>();
                         player.PlayerState = PlayerState.Gate;
                     }
-                    if (player.PlayerState == PlayerState.Game&& request.ReLink > 0)
+                    if (player.PlayerState == PlayerState.Game && request.ReLink > 0)
                     {
                         try
                         {
                             G2M_SecondLogin g2MSecondLogin = G2M_SecondLogin.Create();
-                            M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin) as M2G_SecondLogin;
+                            M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, g2MSecondLogin) as M2G_SecondLogin;
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
                                 Console.WriteLine($"二次登陆逻辑，补全下发切换场景消息:{request.UnitId}");
@@ -119,7 +120,6 @@ namespace ET.Server
 
                         Scene scene = gateMapComponent.Scene;
 
-                        player.UnitId = request.UnitId;
                         // player.ActivityServerId = UnitCacheHelper.GetActivityServerId(session.Zone());
                         // player.FriendServerId = UnitCacheHelper.GetFriendServerId(session.Zone());
                         // player.MailServerID = UnitCacheHelper.GetMailServerId(session.Zone());
@@ -133,7 +133,7 @@ namespace ET.Server
                         player.PlayerState = PlayerState.Game;
                         Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
-                        response.MyId = request.UnitId;
+                        response.MyId = player.Id;
                         
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 

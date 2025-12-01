@@ -8,7 +8,7 @@ namespace ET.Server
     {
         public static async ETTask<Unit> LoadUnit(Player player, Scene scene, CreateRoleInfo createRoleInfo, string account, long accountId)
         {
-            Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.UnitId);
+            Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.Id);
 
             bool isNewUnit = unit == null;
 
@@ -19,7 +19,7 @@ namespace ET.Server
             //     UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             // }
 
-            CreatePlayer(scene, unit, player.UnitId, createRoleInfo, account, accountId);
+            CreatePlayer(scene, unit, player.Id, createRoleInfo, account, accountId);
 
             //UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
 
