@@ -4103,6 +4103,9 @@ namespace ET
         [MemoryPackOrder(5)]
         public long DeleteTime { get; set; }
 
+        [MemoryPackOrder(6)]
+        public MailRewardComponentInfo MailRewardComponentInfo { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -4116,6 +4119,32 @@ namespace ET
             this.Content = default;
             this.Time = default;
             this.DeleteTime = default;
+            this.MailRewardComponentInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.MailRewardComponentInfo)]
+    public partial class MailRewardComponentInfo : MessageObject
+    {
+        public static MailRewardComponentInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(MailRewardComponentInfo), isFromPool) as MailRewardComponentInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public List<ItemInfo> ItemInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ItemInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -4297,7 +4326,8 @@ namespace ET
         public const ushort C2M_PickUpDropItem = 10110;
         public const ushort M2C_PickUpDropItem = 10111;
         public const ushort MailInfo = 10112;
-        public const ushort C2Mail_GetAllMailList = 10113;
-        public const ushort Mail2C_GetAllMailList = 10114;
+        public const ushort MailRewardComponentInfo = 10113;
+        public const ushort C2Mail_GetAllMailList = 10114;
+        public const ushort Mail2C_GetAllMailList = 10115;
     }
 }

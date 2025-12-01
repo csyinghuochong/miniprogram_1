@@ -1,9 +1,10 @@
-using System.Collections.Generic;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace ET.Server
+namespace ET
 {
-    [ChildOf(typeof(MailComponentS))]
+    public enum MainState
+    {
+    }
+    
+    [ChildOf]
     public class Mail : Entity, IAwake, IDestroy, ISerializeToEntity, IDeserialize
     {
         public int State;
@@ -11,8 +12,5 @@ namespace ET.Server
         public string Content;
         public long Time;
         public long DeleteTime;
-
-        [BsonIgnore]
-        public List<EntityRef<Item>> Items = new();
     }
 }

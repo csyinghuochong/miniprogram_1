@@ -904,6 +904,12 @@ message MailInfo
 	string Content = 4;
 	int64 Time = 5;
 	int64 DeleteTime = 6;
+	MailRewardComponentInfo MailRewardComponentInfo = 7;
+}
+
+message MailRewardComponentInfo
+{
+	repeated ItemInfo ItemInfoList = 1;
 }
 
 //ResponseType Mail2C_GetAllMailList
