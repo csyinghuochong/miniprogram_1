@@ -7,6 +7,6 @@ namespace ET.Server
     public class MailComponentS : Entity, IAwake, IDestroy, IDeserialize
     {
         [BsonIgnore]
-        public List<EntityRef<Mail>> MailInfosList = new();
+        public List<EntityRef<Mail>> MailList = new();
     }
 }

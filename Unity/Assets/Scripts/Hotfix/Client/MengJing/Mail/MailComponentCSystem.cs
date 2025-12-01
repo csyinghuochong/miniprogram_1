@@ -1,0 +1,54 @@
+﻿namespace ET.Client
+{
+    [EntitySystemOf(typeof(MailComponentC))]
+    [FriendOf(typeof(MailComponentC))]
+    public static partial class MailComponentCSystem
+    {
+        [EntitySystem]
+        private static void Awake(this MailComponentC self)
+        {
+        }
+
+        [EntitySystem]
+        private static void Destroy(this MailComponentC self)
+        {
+        }
+
+        public static void UpdateMail(this MailComponentC self, MailInfo mailInfo)
+        {
+            Mail targetMail = null;
+            foreach (Mail mail in self.MailList)
+            {
+                if (mail.Id == mailInfo.Id)
+                {
+                    targetMail = mail;
+                    break;
+                }
+            }
+
+            if (targetMail == null)
+            {
+                return;
+            }
+
+            targetMail.FromMessage(mailInfo);
+        }
+
+        public static void AddMailFromMessage(this MailComponentC self, MailInfo mailInfo)
+        {
+            Mail mail = self.AddChildWithId<Mail>(mailInfo.Id);
+            mail.FromMessage(mailInfo);
+            self.MailList.Add(mail);
+        }
+
+        public static void Clear(this MailComponentC self)
+        {
+            foreach (Mail mail in self.MailList)
+            {
+                mail?.Dispose();
+            }
+
+            self.MailList.Clear();
+        }
+    }
+}

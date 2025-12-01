@@ -4,7 +4,7 @@ namespace ET.Client
 {
     public static class ClientMailHelper
     {
-        public static async ETTask<List<MailInfo>> GetAllMail(Scene root)
+        public static async ETTask<int> GetAllMail(Scene root)
         {
             C2Mail_GetAllMailList request = C2Mail_GetAllMailList.Create();
 
@@ -12,10 +12,17 @@ namespace ET.Client
 
             if (response.Error != ErrorCode.ERR_Success)
             {
-                return null;
+                return response.Error;
             }
 
-            return response.MailInfoList;
+            MailComponentC mailComponentC = root.GetComponent<MailComponentC>();
+            mailComponentC.Clear();
+            foreach (MailInfo mailInfo in response.MailInfoList)
+            {
+                mailComponentC.AddMailFromMessage(mailInfo);
+            }
+
+            return response.Error;
         }
     }
 }

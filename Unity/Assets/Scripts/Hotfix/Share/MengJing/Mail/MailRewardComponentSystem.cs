@@ -25,5 +25,15 @@ namespace ET
                 }
             }
         }
+
+        public static void Clear(this MailRewardComponent self)
+        {
+            foreach (Item item in self.ItemList)
+            {
+                item?.Dispose();
+            }
+
+            self.ItemList.Clear();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace ET.Server
         {
             MailComponentS mailComponentS = mailUnit.GetComponent<MailComponentS>();
 
-            foreach (Mail mail in mailComponentS.MailInfosList)
+            foreach (Mail mail in mailComponentS.MailList)
             {
                 // MailInfo mailInfo = MailInfo.Create();
                 // mailInfo.MailId = mail.Id;

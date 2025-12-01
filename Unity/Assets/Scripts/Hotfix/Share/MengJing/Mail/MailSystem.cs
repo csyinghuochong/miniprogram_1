@@ -24,11 +24,14 @@ namespace ET
         public static MailInfo ToMessage(this Mail self)
         {
             MailInfo mailInfo = MailInfo.Create();
-            mailInfo.State = self.State;
             mailInfo.Title = self.Title;
             mailInfo.Content = self.Content;
             mailInfo.Time = self.Time;
             mailInfo.DeleteTime = self.DeleteTime;
+            mailInfo.MailReadState = self.MailReadState;
+            mailInfo.MailRewardState = self.MailRewardState;
+            mailInfo.MailDeleteState = self.MailDeleteState;
+
             MailRewardComponentInfo mailRewardComponentInfo = MailRewardComponentInfo.Create();
             foreach (Item item in self.GetComponent<MailRewardComponent>().ItemList)
             {
@@ -41,13 +44,16 @@ namespace ET
 
         public static void FromMessage(this Mail self, MailInfo mailInfo)
         {
-            self.State = mailInfo.State;
             self.Content = mailInfo.Content;
             self.Title = mailInfo.Title;
             self.Time = mailInfo.Time;
             self.DeleteTime = mailInfo.DeleteTime;
+            self.MailReadState = mailInfo.MailReadState;
+            self.MailRewardState = mailInfo.MailRewardState;
+            self.MailDeleteState = mailInfo.MailDeleteState;
 
             MailRewardComponent mailRewardComponent = self.GetComponent<MailRewardComponent>();
+            mailRewardComponent.Clear();
             foreach (ItemInfo itemInfo in mailInfo.MailRewardComponentInfo.ItemInfoList)
             {
                 Item item = mailRewardComponent.AddChildWithId<Item>(itemInfo.Id);

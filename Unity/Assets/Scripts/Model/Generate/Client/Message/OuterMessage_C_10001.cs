@@ -4089,21 +4089,27 @@ namespace ET
         public long Id { get; set; }
 
         [MemoryPackOrder(1)]
-        public int State { get; set; }
-
-        [MemoryPackOrder(2)]
         public string Title { get; set; }
 
-        [MemoryPackOrder(3)]
+        [MemoryPackOrder(2)]
         public string Content { get; set; }
 
-        [MemoryPackOrder(4)]
+        [MemoryPackOrder(3)]
         public long Time { get; set; }
 
-        [MemoryPackOrder(5)]
+        [MemoryPackOrder(4)]
         public long DeleteTime { get; set; }
 
+        [MemoryPackOrder(5)]
+        public int MailReadState { get; set; }
+
         [MemoryPackOrder(6)]
+        public int MailRewardState { get; set; }
+
+        [MemoryPackOrder(7)]
+        public int MailDeleteState { get; set; }
+
+        [MemoryPackOrder(7)]
         public MailRewardComponentInfo MailRewardComponentInfo { get; set; }
 
         public override void Dispose()
@@ -4114,11 +4120,13 @@ namespace ET
             }
 
             this.Id = default;
-            this.State = default;
             this.Title = default;
             this.Content = default;
             this.Time = default;
             this.DeleteTime = default;
+            this.MailReadState = default;
+            this.MailRewardState = default;
+            this.MailDeleteState = default;
             this.MailRewardComponentInfo = default;
 
             ObjectPool.Instance.Recycle(this);

@@ -23,6 +23,7 @@ namespace ET.Client
             root.AddComponent<HeroComponentC>();
             root.AddComponent<UserInfoComponentC>();
             root.AddComponent<TaskComponentC>();
+            root.AddComponent<MailComponentC>();
             root.AddComponent<FloatingTextComponent>();
             
             // 根据配置修改掉Main Fiber的SceneType
