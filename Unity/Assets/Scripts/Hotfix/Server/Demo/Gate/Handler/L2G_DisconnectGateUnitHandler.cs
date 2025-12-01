@@ -18,7 +18,7 @@ namespace ET.Server
                 }
 
                 scene.GetComponent<GateSessionKeyComponent>().Remove(request.AccountName.GetLongHashCode());
-                
+
                 Session gateSession = player.GetComponent<PlayerSessionComponent>()?.Session;
                 if (gateSession != null && !gateSession.IsDisposed)
                 {
@@ -28,17 +28,18 @@ namespace ET.Server
                     gateSession?.Disconnect().Coroutine();
                 }
 
-                if ( player.GetComponent<PlayerSessionComponent>()?.Session != null)
+                if (player.GetComponent<PlayerSessionComponent>()?.Session != null)
                 {
                     player.GetComponent<PlayerSessionComponent>().Session = null;
                 }
+
                 player.RemoveComponent<PlayerOfflineOutTimeComponent>();
                 player.AddComponent<PlayerOfflineOutTimeComponent>();
-                
+
                 if (request.ReLink == 0)
                 {
                     //非重连流程 直接踢下线。  客户端要延迟一帧entergame
-                    await  DisconnectHelper.KickPlayerNoLock(player, 4);
+                    await DisconnectHelper.KickPlayerNoLock(player, 4);
                 }
             }
         }

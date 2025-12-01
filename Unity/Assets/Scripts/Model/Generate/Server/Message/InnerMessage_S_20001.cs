@@ -1911,6 +1911,73 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.A2A_BroadcastSceneRequest)]
+    [ResponseType(nameof(A2A_BroadcastSceneResponse))]
+    public partial class A2A_BroadcastSceneRequest : MessageObject, IRequest
+    {
+        public static A2A_BroadcastSceneRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastSceneRequest), isFromPool) as A2A_BroadcastSceneRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.A2A_BroadcastSceneResponse)]
+    public partial class A2A_BroadcastSceneResponse : MessageObject, IResponse
+    {
+        public static A2A_BroadcastSceneResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastSceneResponse), isFromPool) as A2A_BroadcastSceneResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -1968,5 +2035,7 @@ namespace ET
         public const ushort L2A_LoginAccountResponse = 20054;
         public const ushort M2L_CenterServerInfoReuest = 20055;
         public const ushort L2M_CenterServerInfoRespone = 20056;
+        public const ushort A2A_BroadcastSceneRequest = 20057;
+        public const ushort A2A_BroadcastSceneResponse = 20058;
     }
 }

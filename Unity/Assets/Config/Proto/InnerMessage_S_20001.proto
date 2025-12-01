@@ -442,3 +442,18 @@ message L2M_CenterServerInfoRespone // IResponse
 	string Message = 92;
 	string Value = 1;
 }
+
+//ResponseType A2A_BroadcastSceneResponse
+message A2A_BroadcastSceneRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+}
+
+message A2A_BroadcastSceneResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

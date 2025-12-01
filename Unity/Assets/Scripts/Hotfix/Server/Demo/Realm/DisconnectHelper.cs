@@ -24,13 +24,13 @@ namespace ET.Server
             self.Dispose();
         }
 
-        public static async ETTask  KickPlayerNoLock(Player player, int ftype)
+        public static async ETTask KickPlayerNoLock(Player player, int type)
         { 
             if (player == null || player.IsDisposed)
             {
                 return;
             }
-            Console.WriteLine($"KickPlayerNoLock:  {player.Id}  {ftype}");
+            Console.WriteLine($"KickPlayerNoLock:  {player.Id}  {type}");
             switch (player.PlayerState)
             {
                 case PlayerState.Disconnect:
@@ -54,21 +54,39 @@ namespace ET.Server
                     var L2G_RemoveLoginRecord = (L2G_RemoveLoginRecord) await player.Root().GetComponent<MessageSender>().Call(StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId, g2LRemoveLoginRecord);
                     
                     // await ExitWorldChatServer(player.Scene(), player.ChatInfoInstanceId);
-                    // await ExitOtherServer(  player.Scene(), player.UnitId);
+                    // await ExitOtherServer(player.Scene(), player.Id);
 
                     break;
             }
     
             TimerComponent timerComponent = player.Root().GetComponent<TimerComponent>();
             player.PlayerState = PlayerState.Disconnect;
+            
             await player.GetComponent<PlayerSessionComponent>().RemoveLocation(LocationType.GateSession);
             await player.RemoveLocation(LocationType.Player);
+            
+            // 不加这俩段的话，重连发送的第一条C2M服务器不处理，会报actor not found mailbox
+            player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.GateSession)?.Remove(player.Id);
+            player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Unit)?.Remove(player.Id);
+            
             player.Root().GetComponent<PlayerComponent>()?.Remove(player);
             player?.Dispose();
     
             await timerComponent.WaitAsync(300);
         }
-        
+
+        public static async ETTask ExitOtherServer(Scene root, long unitId)
+        {
+            A2A_BroadcastSceneRequest broadcastSceneRequest = A2A_BroadcastSceneRequest.Create();
+            broadcastSceneRequest.UnitId = unitId;
+            List<StartSceneConfig> otherScenes = BroadCastHelper.GetAllScene(root.Zone());
+
+            for (int i = 0; i < otherScenes.Count; i++)
+            {
+                await root.GetComponent<MessageSender>().Call(otherScenes[i].ActorId, broadcastSceneRequest);
+            }
+        }
+
         public static async ETTask KickPlayer(Player player, bool isException = false)
         {
             if (player == null || player.IsDisposed)
