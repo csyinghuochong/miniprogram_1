@@ -24,16 +24,17 @@ namespace ET.Client
 
             if (self.GameObject != null && self.HeadTransform != null)
             {
-                self.GameObject.transform.position = self.HeadTransform.position;
+                self.GameObject.transform.localPosition = self.HeadTransform.localPosition + self.Offset;
             }
         }
 
-        public static void Init(this FloatingText self, string text, float time, string path, Transform head = null)
+        public static void Init(this FloatingText self, string text, float time, string path, Vector3 offset, Transform head = null)
         {
             self.Text = text;
             self.Time = time;
             self.HeadTransform = head;
             self.Path = path;
+            self.Offset = offset;
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true, self.OnLoadGameObject);
         }
 

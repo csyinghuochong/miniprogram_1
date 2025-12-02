@@ -253,7 +253,8 @@ namespace ET.Client
         {
             string path = "Assets/Bundles/UI/Blood/Text_PhysicalDamage.prefab";
             FloatingText floatingText = self.AddChild<FloatingText>();
-            floatingText.Init(text, 1.0f, path, head);
+            Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-30, 30), 0, 0);
+            floatingText.Init(text, 1.0f, path, offset, head);
 
             self.FloatingTexts.Add(floatingText);
         }
@@ -262,7 +263,8 @@ namespace ET.Client
         {
             string path = "Assets/Bundles/UI/Blood/Text_MagicDamage.prefab";
             FloatingText floatingText = self.AddChild<FloatingText>();
-            floatingText.Init(text, 1.0f, path, head);
+            Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-30, 30), 0, 0);
+            floatingText.Init(text, 1.0f, path, offset, head);
 
             self.FloatingTexts.Add(floatingText);
         }
@@ -271,7 +273,8 @@ namespace ET.Client
         {
             string path = "Assets/Bundles/UI/Blood/Text_CriDamage.prefab";
             FloatingText floatingText = self.AddChild<FloatingText>();
-            floatingText.Init(text, 1.0f, path, head);
+            Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-30, 30), 0, 0);
+            floatingText.Init(text, 1.0f, path, offset, head);
 
             self.FloatingTexts.Add(floatingText);
         }
@@ -280,7 +283,8 @@ namespace ET.Client
         {
             string path = "Assets/Bundles/UI/Blood/Text_Recover.prefab";
             FloatingText floatingText = self.AddChild<FloatingText>();
-            floatingText.Init(text, 1.0f, path, head);
+            Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-30, 30), 0, 0);
+            floatingText.Init(text, 1.0f, path, offset, head);
 
             self.FloatingTexts.Add(floatingText);
         }
@@ -289,7 +293,8 @@ namespace ET.Client
         {
             string path = "Assets/Bundles/UI/Blood/Text_Normal.prefab";
             FloatingText floatingText = self.AddChild<FloatingText>();
-            floatingText.Init(text, 1.0f, path, head);
+            Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-30, 30), 0, 0);
+            floatingText.Init(text, 1.0f, path, offset, head);
 
             self.FloatingTexts.Add(floatingText);
         }
@@ -298,7 +303,7 @@ namespace ET.Client
         {
             string path = "Assets/Bundles/UI/Blood/Text_Tip.prefab";
             FloatingText floatingText = self.AddChild<FloatingText>();
-            floatingText.Init(text, 1.0f, path);
+            floatingText.Init(text, 1.0f, path, Vector3.zero);
 
             self.FloatingTexts.Add(floatingText);
         }

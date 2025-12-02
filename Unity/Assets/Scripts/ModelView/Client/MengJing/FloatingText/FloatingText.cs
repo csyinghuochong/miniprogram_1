@@ -8,6 +8,7 @@ namespace ET.Client
         public string Text;
         public float Time;
         public string Path;
+        public Vector3 Offset;
         public Transform HeadTransform;
 
         public GameObject GameObject;
