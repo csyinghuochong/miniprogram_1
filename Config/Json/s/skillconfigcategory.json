@@ -581,7 +581,7 @@
     "SkillLiveTime": 3,
     "ActDamage": 0.5,
     "DamgeValue": 0,
-    "SkillAnimation": "",
+    "SkillAnimation": "attack",
     "SkillMusic": "dao",
     "SkillTargetType": 1,
     "DamageRangeType": 1,
@@ -635,7 +635,9 @@
       10000010,
       10000011
     ],
-    "BuffID": [],
+    "BuffID": [
+      0
+    ],
     "SkillDescribe": "受到攻击有20%概率触发,提升自身的30%攻击速度和移动速度,并使自身的受到的伤害降低30%,持续5秒。"
   },
   {
@@ -712,8 +714,12 @@
     "Speed": 0,
     "SkillEffectID": 10000005,
     "SkillHitEffectID": 20000001,
-    "InitBuffID": [],
-    "BuffID": [],
+    "InitBuffID": [
+      0
+    ],
+    "BuffID": [
+      0
+    ],
     "SkillDescribe": "在自己身后附带一个生命图腾,图腾每秒恢复附近己方单位最大生命值的1.5%,持续5秒。"
   },
   {
@@ -1024,7 +1030,9 @@
     "Speed": 0,
     "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
-    "InitBuffID": [],
+    "InitBuffID": [
+      0
+    ],
     "BuffID": [
       10000028
     ],
@@ -1039,25 +1047,37 @@
     "SkillAddAnger": 0,
     "SkillHandler": "",
     "GameObjectParameter": [],
-    "SkillType": 0,
-    "SkillPassiveType": [],
-    "PassiveSkillPro": [],
+    "SkillType": 2,
+    "SkillPassiveType": [
+      2,
+      5
+    ],
+    "PassiveSkillPro": [
+      0.2,
+      0.6
+    ],
     "PassiveSkillTriggerOnce": 0,
     "SkillCD": 10,
     "SkillLiveTime": 5,
-    "ActDamage": 0,
+    "ActDamage": 0.6,
     "DamgeValue": 0,
     "SkillAnimation": "attack",
-    "SkillMusic": "",
+    "SkillMusic": "dao",
     "SkillTargetType": 0,
-    "DamageRangeType": 0,
-    "DamageRange": [],
+    "DamageRangeType": 1,
+    "DamageRange": [
+      1
+    ],
     "Speed": 0,
-    "SkillEffectID": 0,
+    "SkillEffectID": 10000001,
     "SkillHitEffectID": 20000001,
-    "InitBuffID": [],
-    "BuffID": [],
-    "SkillDescribe": "释放强大的魔法治疗一个队友或伤害一个敌人,使其每秒造成60%伤害或每秒恢复2.5%最大生命生命,持续5秒。"
+    "InitBuffID": [
+      10000029
+    ],
+    "BuffID": [
+      10000030
+    ],
+    "SkillDescribe": "释放强大的魔法伤害一个敌人或治疗一个队友,使其每秒造成60%伤害或每秒恢复2.5%最大生命生命,持续5秒。"
   },
   {
     "Id": 30000018,
@@ -1136,6 +1156,6 @@
     "BuffID": [
       0
     ],
-    "SkillDescribe": "持续对附近单位每秒造成100%伤害，类似阿木木的W?"
+    "SkillDescribe": "持续对附近单位每秒造成100%伤害，类似阿木木的W。"
   }
 ]
