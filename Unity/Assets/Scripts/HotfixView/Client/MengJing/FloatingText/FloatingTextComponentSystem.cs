@@ -249,6 +249,7 @@ namespace ET.Client
             self.FloatingTexts.Clear();
         }
 
+        // 物理
         public static void ShowPhysicalDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_PhysicalDamage.prefab";
@@ -259,6 +260,7 @@ namespace ET.Client
             self.FloatingTexts.Add(floatingText);
         }
 
+        // 魔法
         public static void ShowMagicDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_MagicDamage.prefab";
@@ -269,6 +271,7 @@ namespace ET.Client
             self.FloatingTexts.Add(floatingText);
         }
 
+        // 暴击
         public static void ShowCriDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_CriDamage.prefab";
@@ -279,6 +282,7 @@ namespace ET.Client
             self.FloatingTexts.Add(floatingText);
         }
 
+        // 恢复
         public static void ShowRecoverText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Recover.prefab";
@@ -299,6 +303,7 @@ namespace ET.Client
             self.FloatingTexts.Add(floatingText);
         }
 
+        // 提示
         public static void ShowTipText(this FloatingTextComponent self, string text)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Tip.prefab";
