@@ -472,13 +472,13 @@ message Mail2G_ExitMailServer // ILocationResponse
 }
 
 //ResponseType Mail2M_AddMail
-message M2Mail_AddMail // ILocationRequest
+message M2Mail_AddMail // IRequest
 {
     int32 RpcId = 1;
 	MailInfo MailInfo = 2;
 }
 
-message Mail2M_AddMail // ILocationResponse
+message Mail2M_AddMail // IResponse
 {
     int32 RpcId = 1;
     int32 Error = 2;

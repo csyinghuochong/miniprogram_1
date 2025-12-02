@@ -2036,7 +2036,7 @@ namespace ET
     [MemoryPackable]
     [Message(InnerMessage.M2Mail_AddMail)]
     [ResponseType(nameof(Mail2M_AddMail))]
-    public partial class M2Mail_AddMail : MessageObject, ILocationRequest
+    public partial class M2Mail_AddMail : MessageObject, IRequest
     {
         public static M2Mail_AddMail Create(bool isFromPool = false)
         {
@@ -2065,7 +2065,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.Mail2M_AddMail)]
-    public partial class Mail2M_AddMail : MessageObject, ILocationResponse
+    public partial class Mail2M_AddMail : MessageObject, IResponse
     {
         public static Mail2M_AddMail Create(bool isFromPool = false)
         {

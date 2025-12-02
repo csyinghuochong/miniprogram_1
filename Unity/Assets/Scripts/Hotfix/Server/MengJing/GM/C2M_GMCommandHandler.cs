@@ -101,7 +101,7 @@ namespace ET.Server
                         M2Mail_AddMail request = M2Mail_AddMail.Create();
                         request.MailInfo = mailInfo;
 
-                        unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Mail).Call(unit.Id, request).Coroutine();
+                        Mail2M_AddMail response = (Mail2M_AddMail) await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request);
 
                         break;
                     }

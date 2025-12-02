@@ -186,6 +186,7 @@ namespace ET.Server
                     Item newItem = self.AddChild<Item>();
                     newItem.ConfigId = itemConfigId;
                     newItem.ContainerType = (int)containerType;
+                    ItemHelper.InitItem(newItem);
 
                     if (leftNum > itemConfig.ItemPileSum)
                     {

@@ -22,5 +22,11 @@
 
             MapMessageHelper.SendToClient(unit, message);
         }
+
+        // 先预留
+        // 如果物体是武器之类的，初始化时可能会存在根据角色的幸运值等等来生成一些属性
+        public static void InitItem(Item item)
+        {
+        }
     }
 }

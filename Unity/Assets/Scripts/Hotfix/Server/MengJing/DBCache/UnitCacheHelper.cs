@@ -242,7 +242,7 @@ namespace ET.Server
 
         public static ActorId GetDbCacheId(int zone)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.DBCache.ToString()).ActorId;
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.DBCache)).ActorId;
         }
         
         public static ActorId GetChatServerId(int zone)
@@ -263,7 +263,7 @@ namespace ET.Server
         
         public static ActorId GetQueueServerId(int zone)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Queue.ToString()).ActorId;
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Queue)).ActorId;
         }
         
         public static ActorId MainCityServerId(int zone)
