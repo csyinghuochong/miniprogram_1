@@ -471,14 +471,15 @@ message Mail2G_ExitMailServer // ILocationResponse
     string Message = 3;
 }
 
-//ResponseType Mail2M_AddMail
-message M2Mail_AddMail // IRequest
+//ResponseType Mail2M_SendMail
+message M2Mail_SendMail // IRequest
 {
     int32 RpcId = 1;
-	MailInfo MailInfo = 2;
+	int64 UnitId = 2;
+	MailInfo MailInfo = 3;
 }
 
-message Mail2M_AddMail // IResponse
+message Mail2M_SendMail // IResponse
 {
     int32 RpcId = 1;
     int32 Error = 2;

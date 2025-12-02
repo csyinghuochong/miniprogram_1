@@ -37,6 +37,35 @@ namespace ET.Server
                     return;
                 }
 
+                if (commands[0] == "mail")
+                {
+                    long unitId = long.Parse(commands[1]);
+                    string title = commands[2];
+                    string content = commands[3];
+                    string rewards = commands[4];
+
+                    MailInfo mailInfo = MailInfo.Create();
+                    mailInfo.Title = title;
+                    mailInfo.Content = content;
+                    mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
+                    foreach (string reward in rewards.Split('@'))
+                    {
+                        string[] rewardInfo = reward.Split(';');
+                        int itemId = int.Parse(rewardInfo[0]);
+                        int itemNum = int.Parse(rewardInfo[1]);
+                        ItemInfo itemInfo = ItemInfo.Create();
+                        itemInfo.ConfigId = itemId;
+                        itemInfo.Num = itemNum;
+                        mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
+                    }
+
+                    M2Mail_SendMail request = M2Mail_SendMail.Create();
+                    request.UnitId = unitId;
+                    request.MailInfo = mailInfo;
+
+                    Mail2M_SendMail response = (Mail2M_SendMail)await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request);
+                }
+
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】
@@ -74,34 +103,6 @@ namespace ET.Server
                             float2 vector2 = new float2(posX + RandomHelper.RandomNumberFloat(-1, 1), posY);
                             Unit monster = UnitFactory.CreateMonster(unit.Scene(), monsterId, vector2);
                         }
-
-                        break;
-                    }
-                    case 4: //邮件
-                    {
-                        string title = commands[1];
-                        string content = commands[2];
-                        string rewards = commands[3];
-
-                        MailInfo mailInfo = MailInfo.Create();
-                        mailInfo.Title = title;
-                        mailInfo.Content = content;
-                        mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
-                        foreach (string reward in rewards.Split('@'))
-                        {
-                            string[] rewardInfo = reward.Split(',');
-                            int itemId = int.Parse(rewardInfo[0]);
-                            int itemNum = int.Parse(rewardInfo[1]);
-                            ItemInfo itemInfo = ItemInfo.Create();
-                            itemInfo.ConfigId = itemId;
-                            itemInfo.Num = itemNum;
-                            mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
-                        }
-
-                        M2Mail_AddMail request = M2Mail_AddMail.Create();
-                        request.MailInfo = mailInfo;
-
-                        Mail2M_AddMail response = (Mail2M_AddMail) await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request);
 
                         break;
                     }

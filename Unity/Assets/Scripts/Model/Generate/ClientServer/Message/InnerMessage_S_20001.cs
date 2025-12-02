@@ -2034,19 +2034,22 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2Mail_AddMail)]
-    [ResponseType(nameof(Mail2M_AddMail))]
-    public partial class M2Mail_AddMail : MessageObject, IRequest
+    [Message(InnerMessage.M2Mail_SendMail)]
+    [ResponseType(nameof(Mail2M_SendMail))]
+    public partial class M2Mail_SendMail : MessageObject, IRequest
     {
-        public static M2Mail_AddMail Create(bool isFromPool = false)
+        public static M2Mail_SendMail Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2Mail_AddMail), isFromPool) as M2Mail_AddMail;
+            return ObjectPool.Instance.Fetch(typeof(M2Mail_SendMail), isFromPool) as M2Mail_SendMail;
         }
 
         [MemoryPackOrder(0)]
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(2)]
         public MailInfo MailInfo { get; set; }
 
         public override void Dispose()
@@ -2057,6 +2060,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.UnitId = default;
             this.MailInfo = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -2064,12 +2068,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.Mail2M_AddMail)]
-    public partial class Mail2M_AddMail : MessageObject, IResponse
+    [Message(InnerMessage.Mail2M_SendMail)]
+    public partial class Mail2M_SendMail : MessageObject, IResponse
     {
-        public static Mail2M_AddMail Create(bool isFromPool = false)
+        public static Mail2M_SendMail Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(Mail2M_AddMail), isFromPool) as Mail2M_AddMail;
+            return ObjectPool.Instance.Fetch(typeof(Mail2M_SendMail), isFromPool) as Mail2M_SendMail;
         }
 
         [MemoryPackOrder(0)]
@@ -2224,8 +2228,8 @@ namespace ET
         public const ushort Mail2G_LoginMailServer = 20058;
         public const ushort G2Mail_ExitMailServer = 20059;
         public const ushort Mail2G_ExitMailServer = 20060;
-        public const ushort M2Mail_AddMail = 20061;
-        public const ushort Mail2M_AddMail = 20062;
+        public const ushort M2Mail_SendMail = 20061;
+        public const ushort Mail2M_SendMail = 20062;
         public const ushort A2A_BroadcastSceneRequest = 20063;
         public const ushort A2A_BroadcastSceneResponse = 20064;
     }
