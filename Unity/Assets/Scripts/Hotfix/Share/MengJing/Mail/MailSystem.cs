@@ -25,6 +25,7 @@ namespace ET
         public static MailInfo ToMessage(this Mail self)
         {
             MailInfo mailInfo = MailInfo.Create();
+            mailInfo.Id = self.Id;
             mailInfo.Title = self.Title;
             mailInfo.Content = self.Content;
             mailInfo.Time = self.Time;
