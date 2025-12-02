@@ -47,6 +47,8 @@ namespace ET.Server
                     MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Title = title;
                     mailInfo.Content = content;
+                    mailInfo.Time = TimeHelper.ServerNow();
+                    mailInfo.DeleteTime = TimeHelper.ServerNow() + TimeHelper.OneDay * 7;
                     mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
                     foreach (string reward in rewards.Split('@'))
                     {
