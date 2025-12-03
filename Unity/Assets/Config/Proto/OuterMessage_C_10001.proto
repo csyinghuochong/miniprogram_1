@@ -927,3 +927,23 @@ message Mail2C_GetAllMailList // IMailResponse
 	string Message = 92;
 	repeated MailInfo MailInfoList = 1;
 }
+
+//ResponseType Mail2C_OpeMail
+message C2Mail_OpeMail // IMailRequest
+{
+	int32 RpcId = 90;
+	int32 MailOpType = 1;
+	int64 MailId = 2;
+}
+
+message Mail2C_OpeMail // IMailResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message Mail2C_ReceiveMail // IMessage
+{
+	MailInfo MailInfo = 1;
+}

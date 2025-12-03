@@ -45,6 +45,7 @@ namespace ET.Server
                     string rewards = commands[4];
 
                     MailInfo mailInfo = MailInfo.Create();
+                    mailInfo.Id = IdGenerater.Instance.GenerateId();
                     mailInfo.Title = title;
                     mailInfo.Content = content;
                     mailInfo.Time = TimeHelper.ServerNow();
@@ -56,6 +57,7 @@ namespace ET.Server
                         int itemId = int.Parse(rewardInfo[0]);
                         int itemNum = int.Parse(rewardInfo[1]);
                         ItemInfo itemInfo = ItemInfo.Create();
+                        itemInfo.Id = IdGenerater.Instance.GenerateId();
                         itemInfo.ConfigId = itemId;
                         itemInfo.Num = itemNum;
                         mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
@@ -66,6 +68,8 @@ namespace ET.Server
                     request.MailInfo = mailInfo;
 
                     Mail2M_SendMail response = (Mail2M_SendMail)await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request);
+                    
+                    return;
                 }
 
                 switch (int.Parse(commands[0]))

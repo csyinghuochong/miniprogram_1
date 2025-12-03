@@ -23,6 +23,9 @@
                     if (mailComponentS != null)
                     {
                         mailComponentS.AddMail(request.MailInfo);
+                        Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
+                        message.MailInfo = request.MailInfo;
+                        MapMessageHelper.SendToClient(targetMailUnit.Root(), targetMailUnit.Id, message);
                     }
                 }
                 else

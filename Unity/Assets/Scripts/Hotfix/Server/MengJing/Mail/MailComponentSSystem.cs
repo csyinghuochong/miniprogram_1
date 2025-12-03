@@ -30,12 +30,12 @@ namespace ET.Server
 
         public static void AddMail(this MailComponentS self, MailInfo mailInfo)
         {
-            Mail mail = self.AddChild<Mail>();
+            Mail mail = self.AddChildWithId<Mail>(mailInfo.Id);
             mail.FromMessage(mailInfo);
 
             self.MailList.Add(mail);
         }
-        
+
         public static async ETTask SaveToDatabase(this MailComponentS self)
         {
             await UnitCacheHelper.SaveComponent(self.Root(), self);

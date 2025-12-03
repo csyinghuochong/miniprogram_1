@@ -1,5 +1,14 @@
 namespace ET
 {
+    public enum MailOpType
+    {
+        Read, //阅读
+        Received, //领取
+        Delete, //删除
+        ReceivedAll, //领取全部
+        DeleteAllRead, //删除已读(如果有道具未领取不删除)
+    }
+
     public enum MailReadState
     {
         Unread = 0,
@@ -8,9 +17,8 @@ namespace ET
 
     public enum MailRewardState
     {
-        NoReward = 0, // 无附件
-        NotReceived = 1, // 有附件未领取
-        Received = 2 // 已领取
+        NotReceived = 0,
+        Received = 1
     }
 
     public enum MailDeleteState

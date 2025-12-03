@@ -4221,6 +4221,98 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2Mail_OpeMail)]
+    [ResponseType(nameof(Mail2C_OpeMail))]
+    public partial class C2Mail_OpeMail : MessageObject, IMailRequest
+    {
+        public static C2Mail_OpeMail Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Mail_OpeMail), isFromPool) as C2Mail_OpeMail;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int MailOpType { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long MailId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.MailOpType = default;
+            this.MailId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Mail2C_OpeMail)]
+    public partial class Mail2C_OpeMail : MessageObject, IMailResponse
+    {
+        public static Mail2C_OpeMail Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Mail2C_OpeMail), isFromPool) as Mail2C_OpeMail;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Mail2C_ReceiveMail)]
+    public partial class Mail2C_ReceiveMail : MessageObject, IMessage
+    {
+        public static Mail2C_ReceiveMail Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Mail2C_ReceiveMail), isFromPool) as Mail2C_ReceiveMail;
+        }
+
+        [MemoryPackOrder(0)]
+        public MailInfo MailInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.MailInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -4337,5 +4429,8 @@ namespace ET
         public const ushort MailRewardComponentInfo = 10113;
         public const ushort C2Mail_GetAllMailList = 10114;
         public const ushort Mail2C_GetAllMailList = 10115;
+        public const ushort C2Mail_OpeMail = 10116;
+        public const ushort Mail2C_OpeMail = 10117;
+        public const ushort Mail2C_ReceiveMail = 10118;
     }
 }
