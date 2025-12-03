@@ -16,7 +16,7 @@ namespace ET.Server
                     continue;
                 }
 
-                if (mail.EndTime >= TimeHelper.ServerNow())
+                if (mail.EndTime < TimeHelper.ServerNow())
                 {
                     continue;
                 }

@@ -42,7 +42,7 @@ namespace ET.Server
             for (int i = self.MailList.Count - 1; i >= 0; i--)
             {
                 Mail mail = self.MailList[i];
-                if (mail.MailDeleteState == (int)MailDeleteState.Deleted || TimeInfo.Instance.ServerNow() >= mail.EndTime)
+                if (mail.MailDeleteState == (int)MailDeleteState.Deleted || mail.EndTime < TimeHelper.ServerNow())
                 {
                     mail.Dispose();
                     self.MailList.RemoveAt(i);
