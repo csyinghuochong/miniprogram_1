@@ -154,6 +154,7 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
+            self.Text_UID = rc.Get<GameObject>("Text_UID").GetComponent<TMP_Text>();
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_PlayerLv = rc.Get<GameObject>("Text_PlayerLv").GetComponent<TMP_Text>();
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
@@ -275,6 +276,9 @@ namespace ET.Client
 
         public static void UpdatePlayerName(this UIMainComponent self)
         {
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            self.Text_UID.SetTextFormat("ID:{0}", playerInfoComponent.CurrentRoleId);
+            
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.Text_PlayerName.SetText(userInfoComponent.PlayerName);
         }

@@ -18,6 +18,7 @@ namespace ET.Client
         public UIJoystickComponent UIJoystickComponent { get; set; }
         public UIMainSkillComponent UIMainSkillComponent { get; set; }
 
+        public TMP_Text Text_UID;
         public TMP_Text Text_PlayerName;
         public TMP_Text Text_PlayerLv;
         public TMP_Text Text_FPS;
