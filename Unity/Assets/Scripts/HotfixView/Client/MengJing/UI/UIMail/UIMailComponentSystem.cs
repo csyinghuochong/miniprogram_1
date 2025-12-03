@@ -4,6 +4,24 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class MailUpdate_UIMailRefresh : AEvent<Scene, MailUpdate>
+    {
+        protected override async ETTask Run(Scene scene, MailUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMail);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMailComponent uiMailComponent = ui.GetComponent<UIMailComponent>();
+            uiMailComponent.UpdateMailList();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIMailComponent))]
     [FriendOf(typeof(UIMailComponent))]
     [FriendOf(typeof(MailComponentC))]
@@ -36,7 +54,7 @@ namespace ET.Client
             self.UIMailItem = null;
         }
 
-        private static void UpdateMailList(this UIMailComponent self)
+        public static void UpdateMailList(this UIMailComponent self)
         {
             MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
 

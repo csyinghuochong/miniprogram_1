@@ -26,6 +26,7 @@ namespace ET
         {
             MailInfo mailInfo = MailInfo.Create();
             mailInfo.Id = self.Id;
+            mailInfo.From = self.From;
             mailInfo.Title = self.Title;
             mailInfo.Content = self.Content;
             mailInfo.Time = self.Time;
@@ -47,8 +48,9 @@ namespace ET
 
         public static void FromMessage(this Mail self, MailInfo mailInfo)
         {
-            self.Content = mailInfo.Content;
+            self.From = mailInfo.From;
             self.Title = mailInfo.Title;
+            self.Content = mailInfo.Content;
             self.Time = mailInfo.Time;
             self.EndTime = mailInfo.EndTime;
             self.MailReadState = mailInfo.MailReadState;

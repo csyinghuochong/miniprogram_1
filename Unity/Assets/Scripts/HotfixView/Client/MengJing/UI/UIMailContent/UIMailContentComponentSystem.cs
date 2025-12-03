@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +9,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(UIMailContentComponent))]
     [FriendOf(typeof(UIMailContentComponent))]
+    [FriendOf(typeof(Mail))]
     public static partial class UIMailContentComponentSystem
     {
         [EntitySystem]
@@ -23,16 +27,36 @@ namespace ET.Client
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
 
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMail); });
+            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMailContent); });
             self.Button_Get.onClick.AddListener(() => { self.OnGet(); });
             self.Button_Delete.onClick.AddListener(() => { self.OnDelete(); });
         }
-        
+
         [EntitySystem]
         private static void Destroy(this UIMailContentComponent self)
         {
             self.UICommonItemList.Clear();
             self.UICommonItem = null;
+        }
+
+        public static void Init(this UIMailContentComponent self, long mailId)
+        {
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+            Mail mail = mailComponent.GetMail(mailId);
+
+            self.Text_From.SetTextFormat("来自:{0}", mail.From);
+
+            self.Text_Title.SetText(mail.Title);
+
+            DateTime time = TimeInfo.Instance.ToDateTime(mail.Time);
+            self.Text_Time.SetTextFormat("时间:{0}-{1}-{2}", time.Year, time.Month, time.Day);
+
+            self.Text_Content.SetText(mail.Content);
+
+            if (mail.MailReadState == (int)MailReadState.Unread)
+            {
+                ClientMailHelper.OpeMail(self.Root(), MailOpType.Read, new List<long>() { mailId }).Coroutine();
+            }
         }
 
         private static void OnDelete(this UIMailContentComponent self)

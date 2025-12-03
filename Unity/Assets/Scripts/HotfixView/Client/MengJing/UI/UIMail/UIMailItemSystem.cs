@@ -25,7 +25,7 @@ namespace ET.Client
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
             self.Button_OnClick = rc.Get<GameObject>("Button_OnClick").GetComponent<Button>();
 
-            self.Button_OnClick.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMailContent).Coroutine(); });
+            self.Button_OnClick.onClick.AddListener(() => { self.OnClickHandler().Coroutine(); });
         }
 
         [EntitySystem]
@@ -56,6 +56,15 @@ namespace ET.Client
             {
                 self.Text_DeleteTime.SetTextFormat("{0}小时后删除", Math.Round(timeSpan.TotalHours));
             }
+
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask OnClickHandler(this UIMailItem self)
+        {
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIMailContent);
+            UIMailContentComponent uIMailContentComponent = ui.GetComponent<UIMailContentComponent>();
+            uIMailContentComponent.Init(self.MailId);
         }
     }
 }

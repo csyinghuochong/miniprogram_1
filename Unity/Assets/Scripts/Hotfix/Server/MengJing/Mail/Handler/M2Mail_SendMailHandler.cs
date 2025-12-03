@@ -24,6 +24,7 @@ namespace ET.Server
 
                 MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Id = IdGenerater.Instance.GenerateId();
+                mailInfo.From = "官方";//默认先这个吧
                 mailInfo.Title = title;
                 mailInfo.Content = content;
                 mailInfo.Time = TimeHelper.ServerNow();

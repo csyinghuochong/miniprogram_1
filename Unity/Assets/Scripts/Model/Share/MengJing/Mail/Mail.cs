@@ -29,6 +29,7 @@ namespace ET
     [ChildOf]
     public class Mail : Entity, IAwake, IDestroy, ISerializeToEntity, IDeserialize
     {
+        public string From;
         public string Title;
         public string Content;
         public long Time;

@@ -41,6 +41,40 @@
             self.MailList.Add(mail);
         }
 
+        public static Mail GetMail(this MailComponentC self, long mailId)
+        {
+            foreach (Mail mail in self.MailList)
+            {
+                if (mail.Id == mailId)
+                {
+                    return mail;
+                }
+            }
+
+            return null;
+        }
+
+        public static void RemoveMail(this MailComponentC self, long mailId)
+        {
+            Mail remove = null;
+            foreach (Mail mail in self.MailList)
+            {
+                if (mail.Id == mailId)
+                {
+                    remove = mail;
+                    break;
+                }
+            }
+
+            if (remove == null)
+            {
+                return;
+            }
+
+            self.MailList.Remove(remove);
+            remove?.Dispose();
+        }
+
         public static void Clear(this MailComponentC self)
         {
             foreach (Mail mail in self.MailList)

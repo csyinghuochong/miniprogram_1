@@ -4089,27 +4089,30 @@ namespace ET
         public long Id { get; set; }
 
         [MemoryPackOrder(1)]
-        public string Title { get; set; }
+        public string From { get; set; }
 
         [MemoryPackOrder(2)]
-        public string Content { get; set; }
+        public string Title { get; set; }
 
         [MemoryPackOrder(3)]
-        public long Time { get; set; }
+        public string Content { get; set; }
 
         [MemoryPackOrder(4)]
-        public long EndTime { get; set; }
+        public long Time { get; set; }
 
         [MemoryPackOrder(5)]
-        public int MailReadState { get; set; }
+        public long EndTime { get; set; }
 
         [MemoryPackOrder(6)]
+        public int MailReadState { get; set; }
+
+        [MemoryPackOrder(7)]
         public int MailRewardState { get; set; }
 
-        [MemoryPackOrder(7)]
+        [MemoryPackOrder(8)]
         public int MailDeleteState { get; set; }
 
-        [MemoryPackOrder(7)]
+        [MemoryPackOrder(9)]
         public MailRewardComponentInfo MailRewardComponentInfo { get; set; }
 
         public override void Dispose()
@@ -4120,6 +4123,7 @@ namespace ET
             }
 
             this.Id = default;
+            this.From = default;
             this.Title = default;
             this.Content = default;
             this.Time = default;
@@ -4273,6 +4277,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public List<MailInfo> MailInfoList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -4283,6 +4290,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.MailInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

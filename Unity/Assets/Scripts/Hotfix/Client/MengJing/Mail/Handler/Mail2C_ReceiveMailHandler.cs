@@ -9,6 +9,8 @@
 
             mailComponentC.AddMailFromMessage(message.MailInfo);
 
+            EventSystem.Instance.Publish(root, new MailUpdate());
+
             await ETTask.CompletedTask;
         }
     }
