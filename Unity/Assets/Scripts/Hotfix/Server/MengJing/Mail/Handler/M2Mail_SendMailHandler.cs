@@ -40,6 +40,7 @@ namespace ET.Server
                     itemInfo.Num = itemNum;
                     mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
                 }
+                mailInfo.MailRewardState = mailInfo.MailRewardComponentInfo.ItemInfoList.Count > 0 ? (int)MailRewardState.NotReceived : (int)MailRewardState.NotReward;
 
                 if (type == (int)MailReceiveType.PlayerId)
                 {

@@ -933,7 +933,7 @@ message C2Mail_OpeMail // IMailRequest
 {
 	int32 RpcId = 90;
 	int32 MailOpType = 1;
-	int64 MailId = 2;
+	repeated int64 MailId = 2;
 }
 
 message Mail2C_OpeMail // IMailResponse

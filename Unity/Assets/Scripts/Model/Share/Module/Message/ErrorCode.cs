@@ -93,5 +93,10 @@ namespace ET
         // 任务相关错误 201101-201199
         public const int ERR_TaskCommited = 201101; //任务已经提交
         public const int ERR_TaskNoCompleted = 201102; //任务没有完成
+        
+        public const int ERR_MailNotExist = 201201; //邮件不存在
+        public const int ERR_MailDeleted = 201202; //邮件已删除
+        public const int ERR_MailRewardAlreadyReceived = 201203; //邮件道具已领取
+        public const int ERR_MailNotReward = 201204; //邮件没有奖励
     }
 }

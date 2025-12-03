@@ -5,8 +5,6 @@ namespace ET
         Read, //阅读
         Received, //领取
         Delete, //删除
-        ReceivedAll, //领取全部
-        DeleteAllRead, //删除已读(如果有道具未领取不删除)
     }
 
     public enum MailReadState
@@ -17,8 +15,9 @@ namespace ET
 
     public enum MailRewardState
     {
-        NotReceived = 0,
-        Received = 1
+        NotReward = 0,
+        NotReceived = 1,
+        Received = 2
     }
 
     public enum MailDeleteState

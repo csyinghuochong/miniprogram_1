@@ -4238,7 +4238,7 @@ namespace ET
         public int MailOpType { get; set; }
 
         [MemoryPackOrder(1)]
-        public long MailId { get; set; }
+        public List<long> MailId { get; set; } = new();
 
         public override void Dispose()
         {
@@ -4249,7 +4249,7 @@ namespace ET
 
             this.RpcId = default;
             this.MailOpType = default;
-            this.MailId = default;
+            this.MailId.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
