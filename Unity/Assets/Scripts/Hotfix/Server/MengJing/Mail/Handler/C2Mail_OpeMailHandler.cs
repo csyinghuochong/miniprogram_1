@@ -29,6 +29,12 @@
                         return;
                     }
 
+                    if (mail.EndTime >= TimeInfo.Instance.ServerNow())
+                    {
+                        response.Error = ErrorCode.ERR_MailTimeOut;
+                        return;
+                    }
+
                     if (request.MailOpType == (int)MailOpType.Read)
                     {
                         mail.MailReadState = (int)MailReadState.Read;
@@ -54,7 +60,8 @@
                             mail2MReceiveReward.ItemInfoList.Add(item.ToMessage());
                         }
 
-                        M2Mail_ReceiveReward m2MailReceiveReward = (M2Mail_ReceiveReward)await mailUnit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(mailUnit.Id, mail2MReceiveReward);
+                        M2Mail_ReceiveReward m2MailReceiveReward = (M2Mail_ReceiveReward)await mailUnit.Root()
+                                .GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(mailUnit.Id, mail2MReceiveReward);
                         if (m2MailReceiveReward.Error != ErrorCode.ERR_Success)
                         {
                             response.Error = m2MailReceiveReward.Error;

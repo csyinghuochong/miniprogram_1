@@ -32,7 +32,7 @@ namespace ET
         public string Title;
         public string Content;
         public long Time;
-        public long DeleteTime;
+        public long EndTime;
         public int MailReadState;
         public int MailRewardState;
         public int MailDeleteState;

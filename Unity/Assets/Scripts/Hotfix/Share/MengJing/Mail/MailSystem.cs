@@ -29,7 +29,7 @@ namespace ET
             mailInfo.Title = self.Title;
             mailInfo.Content = self.Content;
             mailInfo.Time = self.Time;
-            mailInfo.DeleteTime = self.DeleteTime;
+            mailInfo.EndTime = self.EndTime;
             mailInfo.MailReadState = self.MailReadState;
             mailInfo.MailRewardState = self.MailRewardState;
             mailInfo.MailDeleteState = self.MailDeleteState;
@@ -50,7 +50,7 @@ namespace ET
             self.Content = mailInfo.Content;
             self.Title = mailInfo.Title;
             self.Time = mailInfo.Time;
-            self.DeleteTime = mailInfo.DeleteTime;
+            self.EndTime = mailInfo.EndTime;
             self.MailReadState = mailInfo.MailReadState;
             self.MailRewardState = mailInfo.MailRewardState;
             self.MailDeleteState = mailInfo.MailDeleteState;

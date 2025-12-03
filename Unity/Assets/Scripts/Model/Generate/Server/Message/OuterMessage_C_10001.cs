@@ -4098,7 +4098,7 @@ namespace ET
         public long Time { get; set; }
 
         [MemoryPackOrder(4)]
-        public long DeleteTime { get; set; }
+        public long EndTime { get; set; }
 
         [MemoryPackOrder(5)]
         public int MailReadState { get; set; }
@@ -4123,7 +4123,7 @@ namespace ET
             this.Title = default;
             this.Content = default;
             this.Time = default;
-            this.DeleteTime = default;
+            this.EndTime = default;
             this.MailReadState = default;
             this.MailRewardState = default;
             this.MailDeleteState = default;

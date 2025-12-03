@@ -98,5 +98,6 @@ namespace ET
         public const int ERR_MailDeleted = 201202; //邮件已删除
         public const int ERR_MailRewardAlreadyReceived = 201203; //邮件道具已领取
         public const int ERR_MailNotReward = 201204; //邮件没有奖励
+        public const int ERR_MailTimeOut = 201205; //邮件过期
     }
 }
