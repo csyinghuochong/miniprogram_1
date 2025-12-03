@@ -2097,6 +2097,69 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(InnerMessage.Mail2M_ReceiveReward)]
+    [ResponseType(nameof(Mail2M_ReceiveReward))]
+    public partial class Mail2M_ReceiveReward : MessageObject, IRequest
+    {
+        public static Mail2M_ReceiveReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Mail2M_ReceiveReward), isFromPool) as Mail2M_ReceiveReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public List<ItemInfo> ItemInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ItemInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.M2Mail_ReceiveReward)]
+    public partial class M2Mail_ReceiveReward : MessageObject, IResponse
+    {
+        public static M2Mail_ReceiveReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2Mail_ReceiveReward), isFromPool) as M2Mail_ReceiveReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(InnerMessage.A2A_BroadcastSceneRequest)]
     [ResponseType(nameof(A2A_BroadcastSceneResponse))]
     public partial class A2A_BroadcastSceneRequest : MessageObject, IRequest
@@ -2226,7 +2289,9 @@ namespace ET
         public const ushort Mail2G_ExitMailServer = 20060;
         public const ushort M2Mail_SendMail = 20061;
         public const ushort Mail2M_SendMail = 20062;
-        public const ushort A2A_BroadcastSceneRequest = 20063;
-        public const ushort A2A_BroadcastSceneResponse = 20064;
+        public const ushort Mail2M_ReceiveReward = 20063;
+        public const ushort M2Mail_ReceiveReward = 20064;
+        public const ushort A2A_BroadcastSceneRequest = 20065;
+        public const ushort A2A_BroadcastSceneResponse = 20066;
     }
 }

@@ -111,7 +111,7 @@ namespace ET.Server
             ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
         }
 
-        public static void AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
+        public static int AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             // 创建批量同步消息
             M2C_ItemUpdateOp message = M2C_ItemUpdateOp.Create();
@@ -215,8 +215,15 @@ namespace ET.Server
             {
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
             }
+
+            return ErrorCode.ERR_Success;
         }
 
+        public static int AddItemData(this InventoryComponentS self, List<ItemInfo> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
+        {
+            return ErrorCode.ERR_Success;
+        }
+        
         public static bool HaveItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             Dictionary<int, int> removeItems = new();

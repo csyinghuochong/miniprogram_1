@@ -2,6 +2,7 @@
 {
     [FriendOf(typeof(MailComponentS))]
     [FriendOf(typeof(Mail))]
+    [FriendOf(typeof(MailRewardComponent))]
     [MessageHandler(SceneType.Mail)]
     public class C2Mail_OpeMailHandler : MessageHandler<MailUnit, C2Mail_OpeMail, Mail2C_OpeMail>
     {
@@ -46,9 +47,22 @@
                             return;
                         }
 
+                        // 发送邮件奖励
+                        Mail2M_ReceiveReward mail2MReceiveReward = Mail2M_ReceiveReward.Create();
+                        foreach (Item item in mail.GetComponent<MailRewardComponent>().ItemList)
+                        {
+                            mail2MReceiveReward.ItemInfoList.Add(item.ToMessage());
+                        }
+
+                        M2Mail_ReceiveReward m2MailReceiveReward = (M2Mail_ReceiveReward)await mailUnit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(mailUnit.Id, mail2MReceiveReward);
+                        if (m2MailReceiveReward.Error != ErrorCode.ERR_Success)
+                        {
+                            response.Error = m2MailReceiveReward.Error;
+                            return;
+                        }
+
                         mail.MailReadState = (int)MailReadState.Read;
                         mail.MailRewardState = (int)MailRewardState.Received;
-                        // TODO 发送邮件奖励
                     }
                     else if (request.MailOpType == (int)MailOpType.Delete)
                     {
