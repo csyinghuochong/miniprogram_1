@@ -475,8 +475,7 @@ message Mail2G_ExitMailServer // ILocationResponse
 message M2Mail_SendMail // IRequest
 {
     int32 RpcId = 1;
-	int64 UnitId = 2;
-	MailInfo MailInfo = 3;
+	string Msg = 2;
 }
 
 message Mail2M_SendMail // IResponse

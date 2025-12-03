@@ -2047,10 +2047,7 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public long UnitId { get; set; }
-
-        [MemoryPackOrder(2)]
-        public MailInfo MailInfo { get; set; }
+        public string Msg { get; set; }
 
         public override void Dispose()
         {
@@ -2060,8 +2057,7 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.UnitId = default;
-            this.MailInfo = default;
+            this.Msg = default;
 
             ObjectPool.Instance.Recycle(this);
         }

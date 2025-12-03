@@ -39,35 +39,10 @@ namespace ET.Server
 
                 if (commands[0] == "mail")
                 {
-                    long unitId = long.Parse(commands[1]);
-                    string title = commands[2];
-                    string content = commands[3];
-                    string rewards = commands[4];
-
-                    MailInfo mailInfo = MailInfo.Create();
-                    mailInfo.Id = IdGenerater.Instance.GenerateId();
-                    mailInfo.Title = title;
-                    mailInfo.Content = content;
-                    mailInfo.Time = TimeHelper.ServerNow();
-                    mailInfo.DeleteTime = TimeHelper.ServerNow() + TimeHelper.OneDay * 7;
-                    mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
-                    foreach (string reward in rewards.Split('@'))
-                    {
-                        string[] rewardInfo = reward.Split(';');
-                        int itemId = int.Parse(rewardInfo[0]);
-                        int itemNum = int.Parse(rewardInfo[1]);
-                        ItemInfo itemInfo = ItemInfo.Create();
-                        itemInfo.Id = IdGenerater.Instance.GenerateId();
-                        itemInfo.ConfigId = itemId;
-                        itemInfo.Num = itemNum;
-                        mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
-                    }
-
                     M2Mail_SendMail request = M2Mail_SendMail.Create();
-                    request.UnitId = unitId;
-                    request.MailInfo = mailInfo;
+                    request.Msg = message.GMMsg;
 
-                    Mail2M_SendMail response = (Mail2M_SendMail)await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request);
+                    unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request).Coroutine();
                     
                     return;
                 }

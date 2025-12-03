@@ -13,11 +13,19 @@ namespace ET.Server
         [EntitySystem]
         private static void Destroy(this MailCenterComponent self)
         {
+            self.ServerMails.Clear();
         }
 
         [EntitySystem]
         private static void Deserialize(this MailCenterComponent self)
         {
+            foreach (Entity entity in self.Children.Values)
+            {
+                if (entity is ServerMail serverMail)
+                {
+                    self.ServerMails.Add(serverMail);
+                }
+            }
         }
 
         // 等全服广播停服通知的时候才调用

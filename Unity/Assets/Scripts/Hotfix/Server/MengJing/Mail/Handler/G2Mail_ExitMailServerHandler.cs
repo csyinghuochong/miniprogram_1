@@ -5,8 +5,6 @@ namespace ET.Server
     {
         protected override async ETTask Run(MailUnit mailUnit, G2Mail_ExitMailServer request, Mail2G_ExitMailServer response)
         {
-            mailUnit.GetComponent<MailComponentS>().BeginInit();
-
             await UnitCacheHelper.SaveComponent(mailUnit.Root(), mailUnit.GetComponent<MailComponentS>());
 
             MailUnitExit(mailUnit).Coroutine();

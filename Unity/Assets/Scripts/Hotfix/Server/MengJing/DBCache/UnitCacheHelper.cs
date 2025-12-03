@@ -184,6 +184,8 @@ namespace ET.Server
 
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
+            
+            entity.BeginInit();
             await dbComponent.Save(root.Zone(), entity);
         }
 
