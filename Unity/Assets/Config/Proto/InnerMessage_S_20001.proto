@@ -485,7 +485,7 @@ message Mail2M_SendMail // IResponse
     string Message = 3;
 }
 
-//ResponseType Mail2M_ReceiveReward
+//ResponseType M2Mail_ReceiveReward
 message Mail2M_ReceiveReward // IRequest
 {
     int32 RpcId = 1;

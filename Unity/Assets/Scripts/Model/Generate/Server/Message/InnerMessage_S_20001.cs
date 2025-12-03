@@ -2098,7 +2098,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.Mail2M_ReceiveReward)]
-    [ResponseType(nameof(Mail2M_ReceiveReward))]
+    [ResponseType(nameof(M2Mail_ReceiveReward))]
     public partial class Mail2M_ReceiveReward : MessageObject, IRequest
     {
         public static Mail2M_ReceiveReward Create(bool isFromPool = false)

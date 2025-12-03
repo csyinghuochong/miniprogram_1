@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(UIMailItem))]
     [FriendOf(typeof(UIMailItem))]
+    [FriendOf(typeof(Mail))]
     public static partial class UIMailItemSystem
     {
         [EntitySystem]
@@ -25,13 +27,23 @@ namespace ET.Client
 
             self.Button_OnClick.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMailContent).Coroutine(); });
         }
-        
+
         [EntitySystem]
         private static void Destroy(this UIMailItem self)
         {
-            self.UICommonItemList.Clear();
             self.UICommonItem = null;
         }
-        
+
+        public static async ETTask UpdateInfo(this UIMailItem self, Mail mail)
+        {
+            self.MailId = mail.Id;
+
+            self.Text_State.SetText(mail.MailReadState == (int)MailReadState.Unread ? "未读" : "已读");
+            DateTime time = TimeInfo.Instance.ToDateTime(mail.Time);
+            self.Text_Time.SetTextFormat("{0}-{1}-{2}", time.Year, time.Month, time.Day);
+
+            DateTime EndTime = TimeInfo.Instance.ToDateTime(mail.EndTime);
+            self.Text_DeleteTime.SetTextFormat("{0}天后删除", EndTime - time);
+        }
     }
 }

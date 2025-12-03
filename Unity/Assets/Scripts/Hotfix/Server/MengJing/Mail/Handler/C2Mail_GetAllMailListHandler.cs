@@ -11,6 +11,16 @@ namespace ET.Server
 
             foreach (Mail mail in mailComponentS.MailList)
             {
+                if (mail.MailDeleteState == (int)MailDeleteState.Deleted)
+                {
+                    continue;
+                }
+
+                if (mail.EndTime >= TimeHelper.ServerNow())
+                {
+                    continue;
+                }
+
                 response.MailInfoList.Add(mail.ToMessage());
             }
 
