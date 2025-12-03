@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(MailComponentC))]
     public static class ClientMailHelper
     {
         public static async ETTask<int> GetAllMail(Scene root)

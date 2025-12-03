@@ -15,9 +15,9 @@ namespace ET
 
     public enum MailRewardState
     {
-        NotReward = 0,
-        NotReceived = 1,
-        Received = 2
+        NotReward = 0, //没有道具
+        NotReceived = 1, //未领取道具
+        Received = 2 //已领取道具
     }
 
     public enum MailDeleteState

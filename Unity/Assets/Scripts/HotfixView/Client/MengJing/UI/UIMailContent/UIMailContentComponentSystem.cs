@@ -28,8 +28,8 @@ namespace ET.Client
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMailContent); });
-            self.Button_Get.onClick.AddListener(() => { self.OnGet(); });
-            self.Button_Delete.onClick.AddListener(() => { self.OnDelete(); });
+            self.Button_Get.onClick.AddListener(() => { self.OnGet().Coroutine(); });
+            self.Button_Delete.onClick.AddListener(() => { self.OnDelete().Coroutine(); });
         }
 
         [EntitySystem]
@@ -41,6 +41,8 @@ namespace ET.Client
 
         public static void Init(this UIMailContentComponent self, long mailId)
         {
+            self.MailId = mailId;
+
             MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
             Mail mail = mailComponent.GetMail(mailId);
 
@@ -55,18 +57,32 @@ namespace ET.Client
 
             if (mail.MailReadState == (int)MailReadState.Unread)
             {
-                ClientMailHelper.OpeMail(self.Root(), MailOpType.Read, new List<long>() { mailId }).Coroutine();
+                ClientMailHelper.OpeMail(self.Root(), MailOpType.Read, new() { mailId }).Coroutine();
             }
         }
 
-        private static void OnDelete(this UIMailContentComponent self)
+        private static async ETTask OnDelete(this UIMailContentComponent self)
         {
-            Log.Warning("删除了一个邮件");
+            int error = await ClientMailHelper.OpeMail(self.Root(), MailOpType.Delete, new() { self.MailId });
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<FloatingTextComponent>().ShowTipText("删除邮件成功！");
+
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIMailContent);
         }
 
-        private static void OnGet(this UIMailContentComponent self)
+        private static async ETTask OnGet(this UIMailContentComponent self)
         {
-            Log.Warning("领取了一个邮件");
+            int error = await ClientMailHelper.OpeMail(self.Root(), MailOpType.Received, new() { self.MailId });
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取邮件道具成功！");
         }
     }
 }

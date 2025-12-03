@@ -40,8 +40,8 @@ namespace ET.Client
             self.UIMailItem = rc.Get<GameObject>("UIMailItem");
             self.UIMailItem.SetActive(false);
 
-            self.Button_DeleteAll.onClick.AddListener(() => { self.OnDeleteAll(); });
-            self.Button_GetAll.onClick.AddListener(() => { self.OnGetAll(); });
+            self.Button_DeleteAll.onClick.AddListener(() => { self.OnDeleteAll().Coroutine(); });
+            self.Button_GetAll.onClick.AddListener(() => { self.OnGetAll().Coroutine(); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMail); });
 
             self.UpdateMailList();
@@ -79,14 +79,56 @@ namespace ET.Client
             }
         }
 
-        private static void OnDeleteAll(this UIMailComponent self)
+        private static async ETTask OnDeleteAll(this UIMailComponent self)
         {
-            Log.Warning("删除了所有邮件");
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+            List<long> mailIds = new List<long>();
+            foreach (Mail mail in mailComponent.MailList)
+            {
+                if (mail.MailReadState == (int)MailReadState.Unread)
+                {
+                    continue;
+                }
+
+                // 已读未领取道具不用删除
+                if (mail.MailRewardState == (int)MailRewardState.NotReceived)
+                {
+                    continue;
+                }
+
+                mailIds.Add(mail.Id);
+            }
+
+            int error = await ClientMailHelper.OpeMail(self.Root(), MailOpType.Delete, mailIds);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<FloatingTextComponent>().ShowTipText("删除已读！");
         }
 
-        private static void OnGetAll(this UIMailComponent self)
+        private static async ETTask OnGetAll(this UIMailComponent self)
         {
-            Log.Warning("领取了所有邮件");
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+            List<long> mailIds = new List<long>();
+            foreach (Mail mail in mailComponent.MailList)
+            {
+                if (mail.MailRewardState != (int)MailRewardState.NotReceived)
+                {
+                    continue;
+                }
+
+                mailIds.Add(mail.Id);
+            }
+
+            int error = await ClientMailHelper.OpeMail(self.Root(), MailOpType.Received, mailIds);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取全部！");
         }
     }
 }

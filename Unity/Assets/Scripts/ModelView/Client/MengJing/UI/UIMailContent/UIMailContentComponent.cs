@@ -8,6 +8,7 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIMailContentComponent : Entity, IAwake, IDestroy
     {
+        public long MailId;
         public List<UICommonItem> UICommonItemList { get; set; } = new();
 
         public TMP_Text Text_Title;
