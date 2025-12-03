@@ -309,7 +309,7 @@
     "Base_Mage": 80,
     "Base_Def": 40,
     "Base_Adf": 40,
-    "Base_Cri": 500,
+    "Base_Cri": 1000000,
     "Base_ReCri": 0,
     "Base_Eva": 500,
     "Base_Hit": 0,
