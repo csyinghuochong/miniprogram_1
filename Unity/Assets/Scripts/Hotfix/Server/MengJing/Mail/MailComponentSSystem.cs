@@ -36,9 +36,18 @@ namespace ET.Server
             self.MailList.Add(mail);
         }
 
-        public static async ETTask SaveToDatabase(this MailComponentS self)
+        // 目前下线的时候检查一下
+        public static void Check(this MailComponentS self)
         {
-            await UnitCacheHelper.SaveComponent(self.Root(), self);
+            for (int i = self.MailList.Count - 1; i >= 0; i--)
+            {
+                Mail mail = self.MailList[i];
+                if (mail.MailDeleteState == (int)MailDeleteState.Deleted || TimeInfo.Instance.ServerNow() >= mail.EndTime)
+                {
+                    mail.Dispose();
+                    self.MailList.RemoveAt(i);
+                }
+            }
         }
     }
 }

@@ -38,12 +38,24 @@ namespace ET.Client
         {
             self.MailId = mail.Id;
 
+            self.Text_Title.SetText(mail.Title);
+
             self.Text_State.SetText(mail.MailReadState == (int)MailReadState.Unread ? "未读" : "已读");
+
             DateTime time = TimeInfo.Instance.ToDateTime(mail.Time);
             self.Text_Time.SetTextFormat("{0}-{1}-{2}", time.Year, time.Month, time.Day);
 
-            DateTime EndTime = TimeInfo.Instance.ToDateTime(mail.EndTime);
-            self.Text_DeleteTime.SetTextFormat("{0}天后删除", EndTime - time);
+            DateTime endTime = TimeInfo.Instance.ToDateTime(mail.EndTime);
+            TimeSpan timeSpan = endTime - time;
+
+            if (timeSpan.TotalDays >= 1)
+            {
+                self.Text_DeleteTime.SetTextFormat("{0}天后删除", Math.Floor(timeSpan.TotalDays));
+            }
+            else
+            {
+                self.Text_DeleteTime.SetTextFormat("{0}小时后删除", Math.Round(timeSpan.TotalHours));
+            }
         }
     }
 }
