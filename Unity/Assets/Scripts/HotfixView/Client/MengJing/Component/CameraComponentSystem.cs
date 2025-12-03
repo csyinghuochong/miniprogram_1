@@ -22,8 +22,8 @@ namespace ET.Client
             else
             {
                 self.MainCamera.orthographic = false;
-                self.MainCamera.transform.eulerAngles = new Vector3(-45f, 0, 0);
-                self.Offset = new Vector3(0, -35, -35f);
+                self.MainCamera.transform.eulerAngles = new Vector3(-25f, 0, 0);
+                self.Offset = new Vector3(0, -10, -35f);
             }
         }
 
