@@ -65,6 +65,34 @@ namespace ET.Server
         }
 
         /// <summary>
+        /// 处理特殊道具(金币、钻石、经验等),返回true表示已处理,false表示是普通道具
+        /// </summary>
+        private static bool TryAddSpecialItem(this InventoryComponentS self, int itemConfigId, int num)
+        {
+            if (itemConfigId > 10000000)
+            {
+                return false;
+            }
+
+            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+
+            switch (itemConfigId)
+            {
+                case ConfigData.Item_Gold:
+                    userInfoComponent.ChangeRoleData(UserDataType.Gold, num);
+                    break;
+                case ConfigData.Item_Diamond:
+                    userInfoComponent.ChangeRoleData(UserDataType.Diamond, num);
+                    break;
+                case ConfigData.Item_Exp:
+                    userInfoComponent.ChangeRoleData(UserDataType.Exp, num);
+                    break;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// 通过ItemId查找道具（遍历所有容器）
         /// </summary>
         public static Item GetItem(this InventoryComponentS self, long itemId)
@@ -126,27 +154,13 @@ namespace ET.Server
                     continue;
                 }
 
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
-
-                if (itemConfigId <= 10000000)
+                // 处理特殊道具(金币、钻石、经验等)
+                if (self.TryAddSpecialItem(itemConfigId, leftNum))
                 {
-                    // 加到玩家数据中
-                    UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
-                    switch (itemConfig.Id)
-                    {
-                        case ConfigData.Item_Gold:
-                            userInfoComponent.ChangeRoleData(UserDataType.Gold, leftNum);
-                            break;
-                        case ConfigData.Item_Diamond:
-                            userInfoComponent.ChangeRoleData(UserDataType.Diamond, leftNum);
-                            break;
-                        case ConfigData.Item_Exp:
-                            userInfoComponent.ChangeRoleData(UserDataType.Exp, leftNum);
-                            break;
-                    }
-
                     continue;
                 }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
 
                 // 从指定容器中查找可堆叠的道具
                 if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
@@ -221,6 +235,97 @@ namespace ET.Server
 
         public static int AddItemData(this InventoryComponentS self, List<ItemInfo> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
+            // 创建批量同步消息
+            M2C_ItemUpdateOp message = M2C_ItemUpdateOp.Create();
+
+            for (int i = rewardItems.Count - 1; i >= 0; i--)
+            {
+                ItemInfo itemInfo = rewardItems[i];
+                int itemConfigId = itemInfo.ConfigId;
+                int leftNum = itemInfo.Num;
+
+                if (!ItemConfigCategory.Instance.DataMap.ContainsKey(itemConfigId))
+                {
+                    continue;
+                }
+
+                // 处理特殊道具(金币、钻石、经验等)
+                if (self.TryAddSpecialItem(itemConfigId, leftNum))
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
+
+                // 从指定容器中查找可堆叠的道具
+                if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
+                {
+                    foreach (EntityRef<Item> itemRef in containerItems)
+                    {
+                        Item item = itemRef;
+                        if (itemConfigId == item.ConfigId)
+                        {
+                            if (item.Num < itemConfig.ItemPileSum)
+                            {
+                                if (item.Num + leftNum > itemConfig.ItemPileSum)
+                                {
+                                    leftNum = item.Num + leftNum - itemConfig.ItemPileSum;
+                                    item.Num = itemConfig.ItemPileSum;
+                                }
+                                else
+                                {
+                                    item.Num = item.Num + leftNum;
+                                    leftNum = 0;
+                                }
+
+                                message.ItemInfoUpdateList.Add(item.ToMessage());
+                            }
+                        }
+
+                        if (leftNum <= 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                // 创建新道具
+                while (leftNum > 0)
+                {
+                    Item newItem = self.AddChild<Item>();
+                    newItem.ConfigId = itemConfigId;
+                    newItem.ContainerType = (int)containerType;
+                    // ItemHelper.InitItem(newItem);
+
+                    if (leftNum > itemConfig.ItemPileSum)
+                    {
+                        newItem.Num = itemConfig.ItemPileSum;
+                        leftNum -= itemConfig.ItemPileSum;
+                    }
+                    else
+                    {
+                        newItem.Num = leftNum;
+                        leftNum = 0;
+                    }
+
+                    // 添加到容器
+                    if (newItem.Parent != self)
+                    {
+                        self.AddChild(newItem);
+                    }
+
+                    self.AddItemToContainer(newItem);
+
+                    message.ItemInfoAddList.Add(newItem.ToMessage());
+                }
+            }
+
+            // 批量发送同步消息
+            if (message.ItemInfoAddList.Count > 0 || message.ItemInfoUpdateList.Count > 0 || message.ItemInfoRemoveList.Count > 0)
+            {
+                MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
+            }
+
             return ErrorCode.ERR_Success;
         }
         
