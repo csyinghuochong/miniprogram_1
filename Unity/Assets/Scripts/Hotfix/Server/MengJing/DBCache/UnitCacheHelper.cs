@@ -64,10 +64,7 @@ namespace ET.Server
         /// <summary>
         /// 获取玩家组件缓存
         /// </summary>
-        /// <param name="unitId"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
+        public static async ETTask<T> GetComponentCache<T>(Scene root, long unitId) where T : Entity
         {
             int zone = root.Zone();
             ActorId dbCacheId = GetDbCacheId(zone);
@@ -75,35 +72,38 @@ namespace ET.Server
             Other2UnitCache_GetComponent other2UnitCacheGetComponent = Other2UnitCache_GetComponent.Create();
             other2UnitCacheGetComponent.UnitId = unitId;
             other2UnitCacheGetComponent.Component = typeof(T).FullName;
-            
-            bool iscache =  typeof(IUnitCache).IsAssignableFrom(typeof(T));
-            if (!iscache)
+
+            bool isCache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
+            if (!isCache)
             {
                 Log.Error($"GetComponentCacheError： {typeof(T).FullName}");
             }
-            
-            UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId,
-                other2UnitCacheGetComponent);
+
+            UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId, other2UnitCacheGetComponent);
 
             if (d2GGetUnit.Error == ErrorCode.ERR_Success && d2GGetUnit.Component != null)
             {
-                return  MongoHelper.Deserialize<T>(d2GGetUnit.Component);
+                return MongoHelper.Deserialize<T>(d2GGetUnit.Component);
             }
+
             return null;
         }
-        
+
         /// <summary>
         /// 保存玩家组件缓存
-        public static async ETTask SaveComponentCache(Scene root,  Entity entity)
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="entity"></param>
+        public static async ETTask SaveComponentCache(Scene root, Entity entity)
         {
             int zone = root.Zone();
             Other2UnitCache_AddOrUpdateUnit addOrUpdateUnit = Other2UnitCache_AddOrUpdateUnit.Create();
             addOrUpdateUnit.UnitId = entity.Id;
             addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
             addOrUpdateUnit.EntityBytes.Add(entity.ToBson());
-            
-            bool iscache = typeof(IUnitCache).IsAssignableFrom(entity.GetType());
-            if (!iscache)
+
+            bool isCache = typeof(IUnitCache).IsAssignableFrom(entity.GetType());
+            if (!isCache)
             {
                 Log.Error($"SaveComponentCacheError： {entity.GetType().FullName}");
             }
@@ -111,89 +111,82 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, addOrUpdateUnit);
         }
-            
+
         /// <summary>
         /// 保存非玩家组件缓存
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="unitId"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async ETTask<T> GetComponent<T>(Scene root, long unitId, int zone) where T : Entity
+        public static async ETTask<T> GetComponent<T>(Scene root, long id, int zone) where T : Entity
         {
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
-            
-            bool iscache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
-            if (iscache)
+
+            bool isCache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
+            if (isCache)
             {
                 Log.Error($"GetComponentError： {typeof(T).FullName}");
             }
-            
-            List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
-            if (resulets == null || resulets.Count == 0)
+
+            List<T> results = await dbComponent.Query<T>(root.Zone(), d => d.Id == id);
+            if (results == null || results.Count == 0)
             {
                 return null;
             }
 
-            return resulets[0];
+            return results[0];
         }
-        
-        
+
         /// <summary>
         /// 保存非玩家组件缓存
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="unitId"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
+        public static async ETTask<T> GetComponent<T>(Scene root, long id) where T : Entity
         {
             int zone = root.Zone();
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
-            
-            bool iscache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
-            if (iscache)
+
+            bool isCache = typeof(IUnitCache).IsAssignableFrom(typeof(T));
+            if (isCache)
             {
                 Log.Error($"GetComponentError： {typeof(T).FullName}");
             }
-            
-            List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
-            if (resulets == null || resulets.Count == 0)
+
+            List<T> results = await dbComponent.Query<T>(root.Zone(), d => d.Id == id);
+            if (results == null || results.Count == 0)
             {
                 return null;
             }
 
-            return resulets[0];
+            return results[0];
         }
 
-        public static async ETTask SaveComponent(Scene root, long unitId, Entity entity, int zone)
+        public static async ETTask SaveComponent(Scene root, Entity entity, int zone)
         {
-            bool iscache =typeof(IUnitCache).IsAssignableFrom(entity.GetType());
-            if (iscache)
+            bool isCache = typeof(IUnitCache).IsAssignableFrom(entity.GetType());
+            if (isCache)
             {
                 Log.Error($"GetComponentError： {entity.GetType().FullName}");
             }
+
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             await dbComponent.Save(root.Zone(), entity);
         }
-        
-        public static async ETTask SaveComponent(Scene root, long unitId, Entity entity)
+
+        public static async ETTask SaveComponent(Scene root, Entity entity)
         {
             int zone = root.Zone();
-            
-            bool iscache =typeof(IUnitCache).IsAssignableFrom(entity.GetType());
-            if (iscache)
+
+            bool isCache = typeof(IUnitCache).IsAssignableFrom(entity.GetType());
+            if (isCache)
             {
-                Log.Error($"GetComponentError： {entity.GetType().FullName}");
+                Log.Error($"SaveComponentError： {entity.GetType().FullName}");
             }
+
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             await dbComponent.Save(root.Zone(), entity);
         }
-        
+
 
         /// <summary>
         /// 删除玩家缓存

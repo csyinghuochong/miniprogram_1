@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ET.Server.Handler
 {
     [MessageHandler(SceneType.Mail)]
@@ -18,11 +20,11 @@ namespace ET.Server.Handler
             mailUnit = mailUnitComponent.AddChildWithId<MailUnit>(request.UnitId);
             mailUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
 
-            MailComponentS mailComponentS = await scene.GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone()).Query<MailComponentS>(request.UnitId);
+            MailComponentS mailComponentS = await UnitCacheHelper.GetComponent<MailComponentS>(scene, request.UnitId);
 
             if (mailComponentS == null)
             {
-                mailUnit.AddComponent<MailComponentS>();
+                mailComponentS = mailUnit.AddComponent<MailComponentS>();
             }
             else
             {

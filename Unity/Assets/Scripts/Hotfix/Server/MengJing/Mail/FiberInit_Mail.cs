@@ -15,7 +15,16 @@
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
 
-            root.AddComponent<MailCenterComponent>();
+            MailCenterComponent mailCenterComponent = await UnitCacheHelper.GetComponent<MailCenterComponent>(root, root.Zone());
+            if (mailCenterComponent == null)
+            {
+                mailCenterComponent = root.AddComponentWithId<MailCenterComponent>(root.Zone());
+            }
+            else
+            {
+                root.AddComponent(mailCenterComponent);
+            }
+
             root.AddComponent<MailUnitComponent>();
 
             await ETTask.CompletedTask;

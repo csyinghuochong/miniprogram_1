@@ -35,5 +35,10 @@ namespace ET.Server
 
             self.MailList.Add(mail);
         }
+        
+        public static async ETTask SaveToDatabase(this MailComponentS self)
+        {
+            await UnitCacheHelper.SaveComponent(self.Root(), self);
+        }
     }
 }
