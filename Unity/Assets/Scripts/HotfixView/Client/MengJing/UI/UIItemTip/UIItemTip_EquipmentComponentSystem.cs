@@ -48,6 +48,7 @@ namespace ET.Client
             self.Button_Wear.AddListener(self.OnButton_Wear);
             self.Button_TakeOff.AddListener(self.OnButton_TakeOff);
             self.Button_Save.AddListener(() => { self.OnButton_Save(); });
+            self.Button_Take.AddListener(() => { self.OnButton_Take(); });
         }
 
         [EntitySystem]
@@ -163,9 +164,14 @@ namespace ET.Client
                 self.Button_Take.gameObject.SetActive(true);
             }
 
-            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
                 self.Button_Save.gameObject.SetActive(true);
+            }
+            
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
+            {
+                self.Button_Take.gameObject.SetActive(true);
             }
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
@@ -222,12 +228,22 @@ namespace ET.Client
 
         private static void OnButton_Save(this UIItemTip_EquipmentComponent self)
         {
-            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
                 ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
             }
             
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
+        }
+        
+        private static void OnButton_Take(this UIItemTip_EquipmentComponent self)
+        {
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
+            {
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Bag).Coroutine();
+            }
+
+            self.OnClose();
         }
         
         private static void OnClose(this UIItemTip_EquipmentComponent self)

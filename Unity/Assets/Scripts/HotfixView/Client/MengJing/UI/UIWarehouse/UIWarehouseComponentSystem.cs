@@ -23,7 +23,6 @@ namespace ET.Client
         }
     }
 
-    
     [EntitySystemOf(typeof(UIWarehouseComponent))]
     [FriendOf(typeof(UIWarehouseComponent))]
     public static partial class UIWarehouseComponentSystem
@@ -68,7 +67,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UIWarehouseItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnBagItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UIWarehouseItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnWarehouseItemClick(itemId).Coroutine(); }).Coroutine();
                 self.UIWarehouseItemList[i].GameObject.SetActive(true);
                 self.UIWarehouseItemList[i].Item.SetActive(true);
             }
@@ -110,6 +109,19 @@ namespace ET.Client
             }
         }
 
+        private static async ETTask OnWarehouseItemClick(this UIWarehouseComponent self, long itemId)
+        {
+            UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
+            if (uI != null)
+            {
+                uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
+                {
+                    ItemId = itemId,
+                    UIItemTipOpType = UIItemTipOpType.Warehouse2Bag
+                });
+            }
+        }
+
         private static async ETTask OnBagItemClick(this UIWarehouseComponent self, long itemId)
         {
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
@@ -118,7 +130,7 @@ namespace ET.Client
                 uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                 {
                     ItemId = itemId,
-                    UIItemTipOpType = UIItemTipOpType.OnWarehouseBag
+                    UIItemTipOpType = UIItemTipOpType.Bag2Warehouse
                 });
             }
         }

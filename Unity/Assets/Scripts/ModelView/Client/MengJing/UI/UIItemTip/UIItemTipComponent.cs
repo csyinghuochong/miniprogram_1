@@ -10,7 +10,8 @@ namespace ET.Client
         UIHero_Wear,
         UIHero_TakeOff,
         OnWarehouse,
-        OnWarehouseBag,
+        Bag2Warehouse,
+        Warehouse2Bag,
         OnRoleBag,
     }
 
