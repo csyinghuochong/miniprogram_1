@@ -68,7 +68,7 @@ namespace ET.Client
             for (int i = 0; i < itemList.Count; i++)
             {
                 self.UIWarehouseItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnWarehouseItemClick(itemId).Coroutine(); }).Coroutine();
-                self.UIBagItemList[i].GameObject.SetActive(true);
+                self.UIWarehouseItemList[i].GameObject.SetActive(true);
             }
 
             for (int i = itemList.Count; i < self.UIWarehouseItemList.Count; i++)
