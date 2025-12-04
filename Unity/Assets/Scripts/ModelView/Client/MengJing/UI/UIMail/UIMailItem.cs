@@ -9,6 +9,7 @@ namespace ET.Client
     public class UIMailItem : Entity, IAwake<GameObject>, IDestroy
     {
         public long MailId;
+        public List<UICommonItem> UIRewardItemList { get; set; } = new();
         public GameObject GameObject { get; set; }
 
         public TMP_Text Text_State;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace ET.Client
     [EntitySystemOf(typeof(UIMailItem))]
     [FriendOf(typeof(UIMailItem))]
     [FriendOf(typeof(Mail))]
+    [FriendOf(typeof(MailRewardComponent))]
     public static partial class UIMailItemSystem
     {
         [EntitySystem]
@@ -31,6 +33,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIMailItem self)
         {
+            self.UIRewardItemList.Clear();
             self.UICommonItem = null;
         }
 
@@ -57,7 +60,36 @@ namespace ET.Client
                 self.Text_DeleteTime.SetTextFormat("{0}小时后删除", Math.Round(timeSpan.TotalHours));
             }
 
+            self.UpdateRewardItemList();
+
             await ETTask.CompletedTask;
+        }
+
+        private static void UpdateRewardItemList(this UIMailItem self)
+        {
+            Mail mail = self.Root().GetComponent<MailComponentC>().GetMail(self.MailId);
+
+            List<EntityRef<Item>> itemList = mail.GetComponent<MailRewardComponent>().ItemList;
+
+            while (self.UIRewardItemList.Count < itemList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UIRewardItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                self.UIRewardItemList[i].UpdateInfo(itemList[i]).Coroutine();
+                self.UIRewardItemList[i].GameObject.SetActive(true);
+
+                self.UIRewardItemList[i].Image_Selected.gameObject.SetActive(mail.MailRewardState == (int)MailRewardState.Received);
+            }
+
+            for (int i = itemList.Count; i < self.UIRewardItemList.Count; i++)
+            {
+                self.UIRewardItemList[i].GameObject.SetActive(false);
+            }
         }
 
         private static async ETTask OnClickHandler(this UIMailItem self)

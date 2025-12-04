@@ -9,7 +9,7 @@ namespace ET.Client
     public class UIMailContentComponent : Entity, IAwake, IDestroy
     {
         public long MailId;
-        public List<UICommonItem> UICommonItemList { get; set; } = new();
+        public List<UICommonItem> UIRewardItemList { get; set; } = new();
 
         public TMP_Text Text_Title;
         public TMP_Text Text_From;

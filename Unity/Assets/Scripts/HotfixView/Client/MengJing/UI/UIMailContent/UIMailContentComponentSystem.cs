@@ -10,6 +10,7 @@ namespace ET.Client
     [EntitySystemOf(typeof(UIMailContentComponent))]
     [FriendOf(typeof(UIMailContentComponent))]
     [FriendOf(typeof(Mail))]
+    [FriendOf(typeof(MailRewardComponent))]
     public static partial class UIMailContentComponentSystem
     {
         [EntitySystem]
@@ -35,7 +36,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIMailContentComponent self)
         {
-            self.UICommonItemList.Clear();
+            self.UIRewardItemList.Clear();
             self.UICommonItem = null;
         }
 
@@ -59,8 +60,37 @@ namespace ET.Client
             {
                 ClientMailHelper.OpeMail(self.Root(), MailOpType.Read, new() { mailId }).Coroutine();
             }
+            
+            self.UpdateRewardItemList();
         }
 
+        private static void UpdateRewardItemList(this UIMailContentComponent self)
+        {
+            Mail mail = self.Root().GetComponent<MailComponentC>().GetMail(self.MailId);
+
+            List<EntityRef<Item>> itemList = mail.GetComponent<MailRewardComponent>().ItemList;
+
+            while (self.UIRewardItemList.Count < itemList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UIRewardItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                self.UIRewardItemList[i].UpdateInfo(itemList[i]).Coroutine();
+                self.UIRewardItemList[i].GameObject.SetActive(true);
+
+                self.UIRewardItemList[i].Image_Selected.gameObject.SetActive(mail.MailRewardState == (int)MailRewardState.Received);
+            }
+
+            for (int i = itemList.Count; i < self.UIRewardItemList.Count; i++)
+            {
+                self.UIRewardItemList[i].GameObject.SetActive(false);
+            }
+        }
+        
         private static async ETTask OnDelete(this UIMailContentComponent self)
         {
             int error = await ClientMailHelper.OpeMail(self.Root(), MailOpType.Delete, new() { self.MailId });
@@ -82,6 +112,8 @@ namespace ET.Client
                 return;
             }
 
+            self.Init(self.MailId);
+            
             self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取邮件道具成功！");
         }
     }
