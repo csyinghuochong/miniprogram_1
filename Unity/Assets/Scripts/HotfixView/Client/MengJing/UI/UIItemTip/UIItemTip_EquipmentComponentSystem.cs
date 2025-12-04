@@ -47,6 +47,7 @@ namespace ET.Client
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
             self.Button_Wear.AddListener(self.OnButton_Wear);
             self.Button_TakeOff.AddListener(self.OnButton_TakeOff);
+            self.Button_Save.AddListener(() => { self.OnButton_Save(); });
         }
 
         [EntitySystem]
@@ -219,6 +220,16 @@ namespace ET.Client
             self.OnClose();
         }
 
+        private static void OnButton_Save(this UIItemTip_EquipmentComponent self)
+        {
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+            {
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
+            }
+            
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
+        }
+        
         private static void OnClose(this UIItemTip_EquipmentComponent self)
         {
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);

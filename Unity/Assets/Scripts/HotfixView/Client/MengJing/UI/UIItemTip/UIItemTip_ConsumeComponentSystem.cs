@@ -33,6 +33,7 @@ namespace ET.Client
 
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
             self.Button_Use.AddListener(() => { self.OnButton_Use(); });
+            self.Button_Save.AddListener(() => { self.OnButton_Save(); });
         }
 
         [EntitySystem]
@@ -84,17 +85,17 @@ namespace ET.Client
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
-                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
+                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
                 {
                     self.Button_Take.gameObject.SetActive(true);
                 }
 
-                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
                 {
                     self.Button_Save.gameObject.SetActive(true);
                 }
 
-                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
+                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
                 {
                     self.Button_Sell.gameObject.SetActive(true);
                     self.Button_Use.gameObject.SetActive(true);
@@ -105,6 +106,21 @@ namespace ET.Client
         private static void OnButton_Use(this UIItemTip_ConsumeComponent self)
         {
             ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.ItemId, 1, 0).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnButton_Save(this UIItemTip_ConsumeComponent self)
+        {
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+            {
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
+            }
+
+            self.OnClose();
+        }
+
+        private static void OnClose(this UIItemTip_ConsumeComponent self)
+        {
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
     }

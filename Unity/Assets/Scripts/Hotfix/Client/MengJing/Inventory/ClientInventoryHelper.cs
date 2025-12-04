@@ -44,5 +44,16 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> MoveItem(Scene root, long itemId, InventoryContainerType containerType)
+        {
+            C2M_MoveItem request = C2M_MoveItem.Create();
+            request.ItemIdList.Add(itemId);
+            request.ContainerType = (int)containerType;
+
+            M2C_MoveItem response = (M2C_MoveItem)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace ET.Client
             self.Button_Take.gameObject.SetActive(false);
 
             self.Button_Sell.AddListener(() => { self.OnButton_Sell().Coroutine(); });
+            self.Button_Save.AddListener(() => { self.OnButton_Save(); });
         }
 
         [EntitySystem]
@@ -97,6 +98,21 @@ namespace ET.Client
                     self.Button_Sell.gameObject.SetActive(true);
                 }
             }
+        }
+        
+        private static void OnButton_Save(this UIItemTip_MaterialComponent self)
+        {
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouseBag)
+            {
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
+            }
+
+            self.OnClose();
+        }
+
+        private static void OnClose(this UIItemTip_MaterialComponent self)
+        {
+            self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
     }
 }

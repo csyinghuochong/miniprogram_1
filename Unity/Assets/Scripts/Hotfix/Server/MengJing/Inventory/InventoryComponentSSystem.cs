@@ -139,6 +139,40 @@ namespace ET.Server
             ItemHelper.SyncItemInfo(self.GetParent<Unit>(), item, ItemOpType.Update);
         }
 
+        /// <summary>
+        /// 将道具移动到不同的容器，并同步到客户端
+        /// </summary>
+        public static void MoveItemToContainer(this InventoryComponentS self, List<Item> items, InventoryContainerType targetContainer)
+        {
+            if (items == null || items.Count == 0)
+            {
+                return;
+            }
+
+            M2C_ItemUpdateOp message = M2C_ItemUpdateOp.Create();
+
+            foreach (Item item in items)
+            {
+                int oldContainerType = item.ContainerType;
+                int newContainerType = (int)targetContainer;
+
+                if (oldContainerType == newContainerType)
+                {
+                    continue;
+                }
+
+                self.RemoveItemFromContainer(item);
+
+                item.ContainerType = newContainerType;
+
+                self.AddItemToContainer(item);
+                
+                message.ItemInfoUpdateList.Add(item.ToMessage());
+            }
+
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
+        }
+
         public static int AddItemData(this InventoryComponentS self, List<RewardItem> rewardItems, InventoryContainerType containerType = InventoryContainerType.Bag)
         {
             // 创建批量同步消息

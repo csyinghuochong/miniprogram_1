@@ -608,6 +608,21 @@ message M2C_UseItem // ILocationResponse
 	string Message = 3;
 }
 
+// ResponseType M2C_MoveItem
+message C2M_MoveItem // ILocationRequest
+{
+	int32 RpcId = 1;
+	repeated int64 ItemIdList = 2;
+	int32 ContainerType = 3;
+}
+
+message M2C_MoveItem // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 message HeroInfo
 {
 	int64 Id = 1;

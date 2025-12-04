@@ -4,6 +4,26 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class InventoryUpdate_UIWarehouseRefresh : AEvent<Scene, InventoryUpdate>
+    {
+        protected override async ETTask Run(Scene scene, InventoryUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIWarehouse);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIWarehouseComponent uiWarehouseComponent = ui.GetComponent<UIWarehouseComponent>();
+            uiWarehouseComponent.UpdateWarehouseItemList();
+            uiWarehouseComponent.UpdateBagItemList();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    
     [EntitySystemOf(typeof(UIWarehouseComponent))]
     [FriendOf(typeof(UIWarehouseComponent))]
     public static partial class UIWarehouseComponentSystem
@@ -20,6 +40,7 @@ namespace ET.Client
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIWarehouse); });
 
+            self.UpdateWarehouseItemList();
             self.UpdateBagItemList();
         }
 
@@ -33,7 +54,31 @@ namespace ET.Client
 
         public static void UpdateWarehouseItemList(this UIWarehouseComponent self)
         {
-            
+            InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
+
+            List<Item> itemList = null;
+            itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Warehouse);
+
+            while (self.UIWarehouseItemList.Count < (itemList.Count > 100 ? itemList.Count : 100))
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_WarehouseItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UIWarehouseItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                self.UIWarehouseItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnBagItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UIWarehouseItemList[i].GameObject.SetActive(true);
+                self.UIWarehouseItemList[i].Item.SetActive(true);
+            }
+
+            for (int i = itemList.Count; i < self.UIWarehouseItemList.Count; i++)
+            {
+                self.UIWarehouseItemList[i].GameObject.SetActive(true);
+                self.UIWarehouseItemList[i].Image_ItemNull.gameObject.SetActive(true);
+                self.UIWarehouseItemList[i].Item.SetActive(false);
+            }
         }
 
         public static void UpdateBagItemList(this UIWarehouseComponent self)

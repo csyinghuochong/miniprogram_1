@@ -18,7 +18,8 @@
         None = 0, //无类型
         Bag = 1, //背包
         HeroEquipment = 2, //英雄装备
-        Max = 3
+        Warehouse = 3, //仓库
+        Max = 4
     }
 
     [ChildOf]
