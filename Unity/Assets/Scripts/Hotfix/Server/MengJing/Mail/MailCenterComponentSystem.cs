@@ -27,11 +27,5 @@ namespace ET.Server
                 }
             }
         }
-
-        // 等全服广播停服通知的时候才调用
-        public static async ETTask SaveToDatabase(this MailCenterComponent self)
-        {
-            await UnitCacheHelper.SaveComponent(self.Root(), self);
-        }
     }
 }

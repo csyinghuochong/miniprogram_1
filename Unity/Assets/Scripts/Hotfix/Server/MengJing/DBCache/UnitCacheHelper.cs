@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-
     public static class UnitCacheHelper
     {
         /// <summary>
@@ -21,7 +20,7 @@ namespace ET.Server
             message.UnitId = unitId;
 
             UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
-            if (queryUnit.Error != ErrorCode.ERR_Success )
+            if (queryUnit.Error != ErrorCode.ERR_Success)
             {
                 return null;
             }
@@ -30,12 +29,12 @@ namespace ET.Server
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             if (queryUnit.EntityList.Count > 0)
             {
-                 int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
-                 unit = MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
-                 unitComponent.AddChild(unit);
+                int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
+                unit = MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
+                unitComponent.AddChild(unit);
             }
             else
-            {  
+            {
                 unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
             }
 
@@ -112,9 +111,6 @@ namespace ET.Server
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, addOrUpdateUnit);
         }
 
-        /// <summary>
-        /// 保存非玩家组件缓存
-        /// </summary>
         public static async ETTask<T> GetComponent<T>(Scene root, long id, int zone) where T : Entity
         {
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
@@ -136,7 +132,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 保存非玩家组件缓存
+        /// 获取非玩家组件缓存
         /// </summary>
         public static async ETTask<T> GetComponent<T>(Scene root, long id) where T : Entity
         {
@@ -172,6 +168,9 @@ namespace ET.Server
             await dbComponent.Save(root.Zone(), entity);
         }
 
+        /// <summary>
+        /// 保存非玩家组件缓存
+        /// </summary>
         public static async ETTask SaveComponent(Scene root, Entity entity)
         {
             int zone = root.Zone();
@@ -184,11 +183,10 @@ namespace ET.Server
 
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
-            
+
             entity.BeginInit();
             await dbComponent.Save(root.Zone(), entity);
         }
-
 
         /// <summary>
         /// 删除玩家缓存
@@ -203,7 +201,6 @@ namespace ET.Server
             message.UnitId = unitId;
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
         }
-
 
         /// <summary>
         /// 保存Unit及Unit身上组件到缓存服及数据库中
@@ -239,12 +236,12 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.DBCache)).ActorId;
         }
-        
+
         public static ActorId GetChatServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Chat").ActorId;
         }
-        
+
         public static ActorId GetRechargeCenter()
         {
             return StartSceneConfigCategory.Instance.RechargeConfig.ActorId;
@@ -255,28 +252,27 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
         }
 
-        
         public static ActorId GetQueueServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Queue)).ActorId;
         }
-        
+
         public static ActorId MainCityServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Map101").ActorId;
         }
-        
+
         public static ActorId GetMailServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Mail)).ActorId;
         }
-        
+
         public static ActorId GetRobotServerId()
         {
             ActorId robotSceneId = StartSceneConfigCategory.Instance.RobotManagerConfig.ActorId;
             return robotSceneId;
         }
-        
+
         public static List<ActorId> GetGateServerId(int zone)
         {
             List<ActorId> actorIds = new List<ActorId>();
@@ -285,8 +281,8 @@ namespace ET.Server
             return actorIds;
         }
 
-        public static async ETTask<List<long>> GetOnLineUnits(Scene root,  int zone)
-        {           
+        public static async ETTask<List<long>> GetOnLineUnits(Scene root, int zone)
+        {
             await ETTask.CompletedTask;
             List<long> onlines = new List<long>();
             List<ActorId> allactorids = GetGateServerId(zone);
@@ -297,7 +293,7 @@ namespace ET.Server
                 G2A_GetOnLineUnit aGetOnLineUnit = (G2A_GetOnLineUnit)await root.GetComponent<MessageSender>().Call(allactorids[i], a2GGetOnLineUnit);
                 onlines.AddRange(aGetOnLineUnit.OnLineUnits);
             }
-            
+
             return onlines;
         }
     }

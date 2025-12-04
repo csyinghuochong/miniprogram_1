@@ -3,22 +3,32 @@ using System.Linq;
 
 namespace ET.Server
 {
-    
     public static class BroadCastHelper
     {
+        public static async ETTask StopServer(Scene root)
+        {
+            M2All_StopServer request = M2All_StopServer.Create();
+
+            List<StartSceneConfig> otherScenes = BroadCastHelper.GetAllScene(root.Zone());
+
+            for (int i = 0; i < otherScenes.Count; i++)
+            {
+                await root.GetComponent<MessageSender>().Call(otherScenes[i].ActorId, request);
+            }
+        }
+
         public static List<StartSceneConfig> GetAllScene(int zone)
         {
-            List<StartSceneConfig> zonescenes = new List<StartSceneConfig>();
-            List<StartSceneConfig> listallscene = StartSceneConfigCategory.Instance.DataList;
-            for (int i = 0; i < listallscene.Count; i++)
+            List<StartSceneConfig> allScene = new List<StartSceneConfig>();
+            foreach (StartSceneConfig startSceneConfig in StartSceneConfigCategory.Instance.DataList)
             {
-                if ( ServerHelper.GetNewServerId(listallscene[i].Zone) == zone)
+                if (ServerHelper.GetNewServerId(startSceneConfig.Zone) == zone)
                 {
-                    zonescenes.Add( listallscene[i] );
+                    allScene.Add(startSceneConfig);
                 }
             }
 
-            return zonescenes;
+            return allScene;
         }
 
         /// <summary>
@@ -27,22 +37,23 @@ namespace ET.Server
         /// <returns></returns>
         public static List<int> GetAllZone()
         {
-            List<int> zoneList = new List<int> { };
-            List<StartZoneConfig> listprogress = StartZoneConfigCategory.Instance.DataList;
-            for (int i = 0; i < listprogress.Count; i++)
+            List<int> allZone = new List<int>();
+            foreach (StartZoneConfig startZoneConfig in StartZoneConfigCategory.Instance.DataList)
             {
-                if (listprogress[i].Id >= CommonHelp.MaxZone || ConfigData.InnerZoneList.Contains(listprogress[i].Id))
+                if (startZoneConfig.Id >= CommonHelp.MaxZone || ConfigData.InnerZoneList.Contains(startZoneConfig.Id))
                 {
                     continue;
                 }
-                if (!StartSceneConfigCategory.Instance.Gates.ContainsKey(listprogress[i].Id))
+
+                if (!StartSceneConfigCategory.Instance.Gates.ContainsKey(startZoneConfig.Id))
                 {
                     continue;
                 }
-                zoneList.Add(listprogress[i].Id);
+
+                allZone.Add(startZoneConfig.Id);
             }
-            return zoneList;
+
+            return allZone;
         }
     }
 }
-

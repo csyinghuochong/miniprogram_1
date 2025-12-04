@@ -118,7 +118,7 @@ namespace ET.Server
             }
             catch (Exception ex)
             {
-                Log.Debug(ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             await ETTask.CompletedTask;

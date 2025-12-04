@@ -59,28 +59,25 @@ namespace ET
         /// <summary>
         /// 合区后的区
         /// </summary>
-        /// <param name="banhao"></param>
-        /// <param name="zone"></param>
-        /// <returns></returns>
         public static int GetNewServerId(int zone)
         {
-            List<ServerItem> serverItems_1 = GetServerList(VersionMode.Beta);
+            List<ServerItem> serverList = GetServerList(VersionMode.Beta);
 
             string serverip = string.Empty;
-            for (int i = 0; i < serverItems_1.Count; i++)
+            for (int i = 0; i < serverList.Count; i++)
             {
-                if (serverItems_1[i].ServerId == zone)
+                if (serverList[i].ServerId == zone)
                 {
-                    serverip = serverItems_1[i].ServerIp;
+                    serverip = serverList[i].ServerIp;
                     break;
                 }
             }
 
-            for (int i = 0; i < serverItems_1.Count; i++)
+            for (int i = 0; i < serverList.Count; i++)
             {
-                if (serverItems_1[i].ServerIp == serverip && serverItems_1[i].Show == 1)
+                if (serverList[i].ServerIp == serverip && serverList[i].Show == 1)
                 {
-                    zone = serverItems_1[i].ServerId;
+                    zone = serverList[i].ServerId;
                     break;
                 }
             }

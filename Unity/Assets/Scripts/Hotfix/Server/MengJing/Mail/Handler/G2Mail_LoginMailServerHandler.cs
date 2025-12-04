@@ -59,7 +59,7 @@ namespace ET.Server.Handler
                 else if (serverMail.MailReceiveType == (int)MailReceiveType.All)
                 {
                     mailComponentS.AddMail(mail.ToMessage());
- 
+
                     serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
                 }
                 else if (serverMail.MailReceiveType == (int)MailReceiveType.LessLv)
@@ -71,6 +71,8 @@ namespace ET.Server.Handler
                     // ...
                 }
             }
+            
+            mailComponentS.Check();
 
             await mailUnit.AddLocation(LocationType.Mail);
 

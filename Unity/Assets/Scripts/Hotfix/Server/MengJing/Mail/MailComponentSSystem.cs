@@ -36,7 +36,6 @@ namespace ET.Server
             self.MailList.Add(mail);
         }
 
-        // 目前下线的时候检查一下
         public static void Check(this MailComponentS self)
         {
             for (int i = self.MailList.Count - 1; i >= 0; i--)

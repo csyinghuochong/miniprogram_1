@@ -2160,6 +2160,69 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(InnerMessage.M2All_StopServer)]
+    [ResponseType(nameof(All2M_StopServer))]
+    public partial class M2All_StopServer : MessageObject, IRequest
+    {
+        public static M2All_StopServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2All_StopServer), isFromPool) as M2All_StopServer;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.All2M_StopServer)]
+    public partial class All2M_StopServer : MessageObject, IResponse
+    {
+        public static All2M_StopServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(All2M_StopServer), isFromPool) as All2M_StopServer;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(InnerMessage.A2A_BroadcastSceneRequest)]
     [ResponseType(nameof(A2A_BroadcastSceneResponse))]
     public partial class A2A_BroadcastSceneRequest : MessageObject, IRequest
@@ -2291,7 +2354,9 @@ namespace ET
         public const ushort Mail2M_SendMail = 20062;
         public const ushort Mail2M_ReceiveReward = 20063;
         public const ushort M2Mail_ReceiveReward = 20064;
-        public const ushort A2A_BroadcastSceneRequest = 20065;
-        public const ushort A2A_BroadcastSceneResponse = 20066;
+        public const ushort M2All_StopServer = 20065;
+        public const ushort All2M_StopServer = 20066;
+        public const ushort A2A_BroadcastSceneRequest = 20067;
+        public const ushort A2A_BroadcastSceneResponse = 20068;
     }
 }

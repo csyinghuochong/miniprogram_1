@@ -46,6 +46,13 @@ namespace ET.Server
                     
                     return;
                 }
+                
+                if (commands[0] == "StopServer")
+                {
+                    BroadCastHelper.StopServer(unit.Scene()).Coroutine();
+                    
+                    return;
+                }
 
                 switch (int.Parse(commands[0]))
                 {

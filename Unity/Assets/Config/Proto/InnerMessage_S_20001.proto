@@ -499,6 +499,20 @@ message M2Mail_ReceiveReward // IResponse
     string Message = 3;
 }
 
+//ResponseType All2M_StopServer
+message M2All_StopServer // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message All2M_StopServer // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //ResponseType A2A_BroadcastSceneResponse
 message A2A_BroadcastSceneRequest // IRequest
 {
