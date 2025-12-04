@@ -2967,7 +2967,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(OuterMessage.C2M_RefreshStore)]
-    [ResponseType(nameof(M2C_StoreBuy))]
+    [ResponseType(nameof(M2C_RefreshStore))]
     public partial class C2M_RefreshStore : MessageObject, ILocationRequest
     {
         public static C2M_RefreshStore Create(bool isFromPool = false)

@@ -652,7 +652,7 @@ message M2C_StoreBuy // ILocationResponse
 	string Message = 3;
 }
 
-// ResponseType M2C_StoreBuy
+// ResponseType M2C_RefreshStore
 message C2M_RefreshStore // ILocationRequest
 {
 	int32 RpcId = 1;
