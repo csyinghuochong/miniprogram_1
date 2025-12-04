@@ -2836,6 +2836,203 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_GetStoreInfo)]
+    [ResponseType(nameof(M2C_GetStoreInfo))]
+    public partial class C2M_GetStoreInfo : MessageObject, ILocationRequest
+    {
+        public static C2M_GetStoreInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetStoreInfo), isFromPool) as C2M_GetStoreInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetStoreInfo)]
+    public partial class M2C_GetStoreInfo : MessageObject, ILocationResponse
+    {
+        public static M2C_GetStoreInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetStoreInfo), isFromPool) as M2C_GetStoreInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long LastRefreshTime { get; set; }
+
+        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [MemoryPackOrder(4)]
+        public Dictionary<int, int> StoreItemList { get; set; } = new();
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.LastRefreshTime = default;
+            this.StoreItemList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_StoreBuy)]
+    [ResponseType(nameof(M2C_StoreBuy))]
+    public partial class C2M_StoreBuy : MessageObject, ILocationRequest
+    {
+        public static C2M_StoreBuy Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_StoreBuy), isFromPool) as C2M_StoreBuy;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int StoreItemId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.StoreItemId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_StoreBuy)]
+    public partial class M2C_StoreBuy : MessageObject, ILocationResponse
+    {
+        public static M2C_StoreBuy Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_StoreBuy), isFromPool) as M2C_StoreBuy;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_RefreshStore)]
+    [ResponseType(nameof(M2C_StoreBuy))]
+    public partial class C2M_RefreshStore : MessageObject, ILocationRequest
+    {
+        public static C2M_RefreshStore Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_RefreshStore), isFromPool) as C2M_RefreshStore;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_RefreshStore)]
+    public partial class M2C_RefreshStore : MessageObject, ILocationResponse
+    {
+        public static M2C_RefreshStore Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_RefreshStore), isFromPool) as M2C_RefreshStore;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long LastRefreshTime { get; set; }
+
+        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [MemoryPackOrder(4)]
+        public Dictionary<int, int> StoreItemList { get; set; } = new();
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.LastRefreshTime = default;
+            this.StoreItemList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.HeroInfo)]
     public partial class HeroInfo : MessageObject
     {
@@ -4466,48 +4663,54 @@ namespace ET
         public const ushort M2C_UseItem = 10075;
         public const ushort C2M_MoveItem = 10076;
         public const ushort M2C_MoveItem = 10077;
-        public const ushort HeroInfo = 10078;
-        public const ushort C2M_GetAllHero = 10079;
-        public const ushort M2C_GetAllHero = 10080;
-        public const ushort M2C_HeroUpdateOp = 10081;
-        public const ushort C2M_SetHeroFormation = 10082;
-        public const ushort M2C_SetHeroFormation = 10083;
-        public const ushort C2M_SetHeroEquipment = 10084;
-        public const ushort M2C_SetHeroEquipment = 10085;
-        public const ushort M2C_RoleDataUpdate = 10086;
-        public const ushort C2M_GetUserInfo = 10087;
-        public const ushort M2C_GetUserInfo = 10088;
-        public const ushort C2M_SetTimeScale = 10089;
-        public const ushort M2C_SetTimeScale = 10090;
-        public const ushort M2C_UpdateTimeScale = 10091;
-        public const ushort C2M_EnterBossRoom = 10092;
-        public const ushort M2C_EnterBossRoom = 10093;
-        public const ushort C2M_SetAutoFight = 10094;
-        public const ushort M2C_SetAutoFight = 10095;
-        public const ushort C2M_TryUseSkill = 10096;
-        public const ushort M2C_TryUseSkill = 10097;
-        public const ushort C2M_HeroUseSkill = 10098;
-        public const ushort M2C_HeroUseSkill = 10099;
-        public const ushort M2C_OnUseSkill = 10100;
-        public const ushort M2C_UnitSkillRemove = 10101;
-        public const ushort M2C_UnitFinishSkill = 10102;
-        public const ushort M2C_UnitBuffUpdate = 10103;
-        public const ushort M2C_UnitBuffRemove = 10104;
-        public const ushort M2C_UnitStateUpdate = 10105;
-        public const ushort TaskProInfo = 10106;
-        public const ushort C2M_GetAllTask = 10107;
-        public const ushort M2C_GetAllTask = 10108;
-        public const ushort M2C_TaskUpdate = 10109;
-        public const ushort C2M_TaskCommit = 10110;
-        public const ushort M2C_TaskCommit = 10111;
-        public const ushort C2M_PickUpDropItem = 10112;
-        public const ushort M2C_PickUpDropItem = 10113;
-        public const ushort MailInfo = 10114;
-        public const ushort MailRewardComponentInfo = 10115;
-        public const ushort C2Mail_GetAllMailList = 10116;
-        public const ushort Mail2C_GetAllMailList = 10117;
-        public const ushort C2Mail_OpeMail = 10118;
-        public const ushort Mail2C_OpeMail = 10119;
-        public const ushort Mail2C_ReceiveMail = 10120;
+        public const ushort C2M_GetStoreInfo = 10078;
+        public const ushort M2C_GetStoreInfo = 10079;
+        public const ushort C2M_StoreBuy = 10080;
+        public const ushort M2C_StoreBuy = 10081;
+        public const ushort C2M_RefreshStore = 10082;
+        public const ushort M2C_RefreshStore = 10083;
+        public const ushort HeroInfo = 10084;
+        public const ushort C2M_GetAllHero = 10085;
+        public const ushort M2C_GetAllHero = 10086;
+        public const ushort M2C_HeroUpdateOp = 10087;
+        public const ushort C2M_SetHeroFormation = 10088;
+        public const ushort M2C_SetHeroFormation = 10089;
+        public const ushort C2M_SetHeroEquipment = 10090;
+        public const ushort M2C_SetHeroEquipment = 10091;
+        public const ushort M2C_RoleDataUpdate = 10092;
+        public const ushort C2M_GetUserInfo = 10093;
+        public const ushort M2C_GetUserInfo = 10094;
+        public const ushort C2M_SetTimeScale = 10095;
+        public const ushort M2C_SetTimeScale = 10096;
+        public const ushort M2C_UpdateTimeScale = 10097;
+        public const ushort C2M_EnterBossRoom = 10098;
+        public const ushort M2C_EnterBossRoom = 10099;
+        public const ushort C2M_SetAutoFight = 10100;
+        public const ushort M2C_SetAutoFight = 10101;
+        public const ushort C2M_TryUseSkill = 10102;
+        public const ushort M2C_TryUseSkill = 10103;
+        public const ushort C2M_HeroUseSkill = 10104;
+        public const ushort M2C_HeroUseSkill = 10105;
+        public const ushort M2C_OnUseSkill = 10106;
+        public const ushort M2C_UnitSkillRemove = 10107;
+        public const ushort M2C_UnitFinishSkill = 10108;
+        public const ushort M2C_UnitBuffUpdate = 10109;
+        public const ushort M2C_UnitBuffRemove = 10110;
+        public const ushort M2C_UnitStateUpdate = 10111;
+        public const ushort TaskProInfo = 10112;
+        public const ushort C2M_GetAllTask = 10113;
+        public const ushort M2C_GetAllTask = 10114;
+        public const ushort M2C_TaskUpdate = 10115;
+        public const ushort C2M_TaskCommit = 10116;
+        public const ushort M2C_TaskCommit = 10117;
+        public const ushort C2M_PickUpDropItem = 10118;
+        public const ushort M2C_PickUpDropItem = 10119;
+        public const ushort MailInfo = 10120;
+        public const ushort MailRewardComponentInfo = 10121;
+        public const ushort C2Mail_GetAllMailList = 10122;
+        public const ushort Mail2C_GetAllMailList = 10123;
+        public const ushort C2Mail_OpeMail = 10124;
+        public const ushort Mail2C_OpeMail = 10125;
+        public const ushort Mail2C_ReceiveMail = 10126;
     }
 }

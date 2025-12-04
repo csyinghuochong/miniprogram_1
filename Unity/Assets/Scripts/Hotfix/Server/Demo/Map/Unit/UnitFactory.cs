@@ -64,6 +64,11 @@ namespace ET.Server
                 TaskComponentS taskComponentS = unit.AddComponent<TaskComponentS>();
             }
 
+            if (unit.GetComponent<StoreComponentS>() == null)
+            {
+                StoreComponentS storeComponentS = unit.AddComponent<StoreComponentS>();
+            }
+
             unit.AddComponent<StateComponentS>();
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<SkillPassiveComponent>();

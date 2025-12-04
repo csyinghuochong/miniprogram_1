@@ -42,5 +42,10 @@ namespace ET
 
         [StaticField]
         public static List<ServerItem> ServerItems = new();
+
+        /// <summary>
+        /// 商店刷新时间
+        /// </summary>
+        public const long StoreRefreshTime = TimeHelper.Hour;
     }
 }

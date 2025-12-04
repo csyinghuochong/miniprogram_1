@@ -141,6 +141,7 @@ namespace ET.Server
                         unit.GetComponent<DBSaveComponent>().OnLogin();
                         unit.GetComponent<HeroComponentS>().OnLogin();
                         unit.GetComponent<TaskComponentS>().OnLogin();
+                        unit.GetComponent<StoreComponentS>().OnLogin();
                         HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
                         NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
                         if (heroComponent.GetFirstHero() != null)

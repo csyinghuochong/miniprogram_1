@@ -623,6 +623,50 @@ message M2C_MoveItem // ILocationResponse
 	string Message = 3;
 }
 
+// ResponseType M2C_GetStoreInfo
+message C2M_GetStoreInfo // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetStoreInfo // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 LastRefreshTime = 4;
+	map<int32,int32> StoreItemList = 5;
+}
+
+// ResponseType M2C_StoreBuy
+message C2M_StoreBuy // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 StoreItemId = 2;
+}
+
+message M2C_StoreBuy // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+// ResponseType M2C_StoreBuy
+message C2M_RefreshStore // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_RefreshStore // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 LastRefreshTime = 4;
+	map<int32,int32> StoreItemList = 5;
+}
+
 message HeroInfo
 {
 	int64 Id = 1;
