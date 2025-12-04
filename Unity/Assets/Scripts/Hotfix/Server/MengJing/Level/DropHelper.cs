@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -11,7 +12,8 @@ namespace ET.Server
             foreach (int dropId in monsterConfig.DropId)
             {
                 RewardItem rewardItem = DropHelper.DropItem(dropId);
-                UnitFactory.CreateDropItem(unit.Scene(), rewardItem.ItemId, rewardItem.ItemNum, unit.Position);
+                float3 position = new float3(unit.Position.x + RandomHelper.RandomNumberFloat(-2, 2), unit.Position.y + RandomHelper.RandomNumberFloat(-2, 2), unit.Position.z);
+                UnitFactory.CreateDropItem(unit.Scene(), rewardItem.ItemId, rewardItem.ItemNum, position);
             }
         }
 
