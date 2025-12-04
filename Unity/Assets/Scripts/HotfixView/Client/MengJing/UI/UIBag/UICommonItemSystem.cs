@@ -143,6 +143,16 @@ namespace ET.Client
 
         public static async ETTask UpdateInfo(this UICommonItem self, Item item, Action<long> onItemClick = null)
         {
+            if (item == null)
+            {
+                self.Image_ItemNull.gameObject.SetActive(true);
+                self.Item.SetActive(false);
+                return;
+            }
+            
+            self.Image_ItemNull.gameObject.SetActive(false);
+            self.Item.SetActive(true);
+            
             self.ItemId = item.Id;
             self.OnItemClick = onItemClick;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
