@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 10001001,
+    "SellItemID": 10001001,
+    "SellType": 1,
+    "SellValue": 500,
+    "LimitNumber": 10
+  },
+  {
+    "Id": 10001002,
+    "SellItemID": 10001002,
+    "SellType": 1,
+    "SellValue": 500,
+    "LimitNumber": 1
+  },
+  {
+    "Id": 10001003,
+    "SellItemID": 10003001,
+    "SellType": 1,
+    "SellValue": 500,
+    "LimitNumber": 5
+  },
+  {
+    "Id": 10001004,
+    "SellItemID": 10003002,
+    "SellType": 1,
+    "SellValue": 500,
+    "LimitNumber": 5
+  },
+  {
+    "Id": 10001005,
+    "SellItemID": 10003011,
+    "SellType": 2,
+    "SellValue": 100,
+    "LimitNumber": 1
+  }
+]
