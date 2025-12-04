@@ -19,7 +19,10 @@ namespace ET
         [EntitySystem]
         private static void Deserialize(this Mail self)
         {
-            self.AddComponent<MailRewardComponent>();
+            if (self.GetComponent<MailRewardComponent>() == null)
+            {
+                self.AddComponent<MailRewardComponent>();
+            }
         }
 
         public static MailInfo ToMessage(this Mail self)
