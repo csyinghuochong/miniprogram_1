@@ -54,21 +54,21 @@ namespace ET.Client
 
         private static async ETTask UpdateRefreshTime(this UIStoreComponent self)
         {
+            DateTime endTime = TimeInfo.Instance.ToDateTime(self.RefreshTime);
+
             while (true)
             {
-                DateTime time = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                if (self.IsDisposed)
+                {
+                    return;
+                }
 
-                DateTime endTime = TimeInfo.Instance.ToDateTime(self.RefreshTime);
+                DateTime time = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
                 TimeSpan timeSpan = endTime - time;
 
                 self.Text_RefreshTime.SetText("{0}:{1}:{2}后刷新", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
 
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
-
-                if (self.IsDisposed)
-                {
-                    return;
-                }
             }
         }
 
