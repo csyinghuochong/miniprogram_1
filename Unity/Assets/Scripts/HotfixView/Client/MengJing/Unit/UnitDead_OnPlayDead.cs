@@ -32,8 +32,7 @@ namespace ET.Client
 
                 if (unit.Type == UnitType.Monster)
                 {
-                    Log.Warning("怪物死亡，播放死亡音效");
-                    root.GetComponent<SoundComponent>().PlayClip("SkillAudio/dao", "mp3").Coroutine();
+                    root.GetComponent<SoundComponent>().PlayClip("Game/dead", "mp3").Coroutine();
                 }
             }
             catch (Exception e)
