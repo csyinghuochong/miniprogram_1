@@ -20,6 +20,8 @@
                 response.Error = ErrorCode.ERR_NotEnoughItems;
                 return;
             }
+            
+            inventoryComponent.RemoveItemData(ConfigData.StoreRefreshCost);
 
             storeComponent.RefreshStore();
             storeComponent.RefreshNum--;
