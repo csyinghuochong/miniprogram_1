@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -15,134 +16,191 @@ namespace ET.Server
                 MailUnitComponent mailUnitComponent = scene.GetComponent<MailUnitComponent>();
 
                 string[] commands = request.Msg.Split('#');
-                int type = int.Parse(commands[1]);
+
+                if (commands.Length < 7)
+                {
+                    Log.Error($"发送邮件参数不足: {request.Msg}");
+                    return;
+                }
+
+                if (!int.TryParse(commands[1], out int type))
+                {
+                    Log.Error($"邮件类型解析失败: {commands[1]}");
+                    return;
+                }
+
                 string receivePar = commands[2];
-                long time = long.Parse(commands[3]);
+
+                if (!long.TryParse(commands[3], out long time))
+                {
+                    Log.Error($"邮件有效期解析失败: {commands[3]}");
+                    return;
+                }
+
                 string title = commands[4];
                 string content = commands[5];
                 string rewards = commands[6];
 
-                MailInfo mailInfo = MailInfo.Create();
-                mailInfo.Id = IdGenerater.Instance.GenerateId();
-                mailInfo.From = "官方";//默认先这个吧
-                mailInfo.Title = title;
-                mailInfo.Content = content;
-                mailInfo.Time = TimeHelper.ServerNow();
-                mailInfo.EndTime = TimeHelper.ServerNow() + time;
-                mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
-                foreach (string reward in rewards.Split('@'))
+                MailInfo mailInfo = CreateMailInfo(title, content, time, rewards);
+
+                switch ((MailReceiveType)type)
                 {
+                    case MailReceiveType.PlayerId:
+                        await SendToPlayer(scene, mailCenterComponent, mailUnitComponent, mailInfo, receivePar);
+                        break;
+                    case MailReceiveType.All:
+                        await SendToAllPlayers(scene, mailCenterComponent, mailUnitComponent, mailInfo);
+                        break;
+                    case MailReceiveType.LessLv:
+                        await SendToLowLevelPlayers(scene, mailCenterComponent, mailUnitComponent, mailInfo, receivePar);
+                        break;
+                    default:
+                        Log.Error($"未知的邮件类型: {type}");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        private static MailInfo CreateMailInfo(string title, string content, long expireTime, string rewards)
+        {
+            MailInfo mailInfo = MailInfo.Create();
+            mailInfo.Id = IdGenerater.Instance.GenerateId();
+            mailInfo.From = "官方";
+            mailInfo.Title = title;
+            mailInfo.Content = content;
+            mailInfo.Time = TimeHelper.ServerNow();
+            mailInfo.EndTime = TimeHelper.ServerNow() + expireTime;
+            mailInfo.MailRewardComponentInfo = MailRewardComponentInfo.Create();
+
+            if (!string.IsNullOrEmpty(rewards))
+            {
+                string[] rewardItems = rewards.Split('@');
+                foreach (string reward in rewardItems)
+                {
+                    if (string.IsNullOrEmpty(reward))
+                    {
+                        continue;
+                    }
+
                     string[] rewardInfo = reward.Split(';');
-                    int itemId = int.Parse(rewardInfo[0]);
-                    int itemNum = int.Parse(rewardInfo[1]);
+                    if (rewardInfo.Length < 2)
+                    {
+                        continue;
+                    }
+
+                    if (!int.TryParse(rewardInfo[0], out int itemId) || !int.TryParse(rewardInfo[1], out int itemNum))
+                    {
+                        Log.Error($"奖励解析失败: {reward}");
+                        continue;
+                    }
+
                     ItemInfo itemInfo = ItemInfo.Create();
                     itemInfo.Id = IdGenerater.Instance.GenerateId();
                     itemInfo.ConfigId = itemId;
                     itemInfo.Num = itemNum;
                     mailInfo.MailRewardComponentInfo.ItemInfoList.Add(itemInfo);
                 }
+            }
 
-                mailInfo.MailRewardState = mailInfo.MailRewardComponentInfo.ItemInfoList.Count > 0 ? (int)MailRewardState.NotReceived
-                        : (int)MailRewardState.NotReward;
+            mailInfo.MailRewardState = mailInfo.MailRewardComponentInfo.ItemInfoList.Count > 0 ? (int)MailRewardState.NotReceived : (int)MailRewardState.NotReward;
 
-                if (type == (int)MailReceiveType.PlayerId)
+            return mailInfo;
+        }
+
+        private static async ETTask SendToPlayer(Scene scene, MailCenterComponent mailCenterComponent, MailUnitComponent mailUnitComponent, MailInfo mailInfo, string playerIdStr)
+        {
+            if (!long.TryParse(playerIdStr, out long unitId))
+            {
+                Log.Error($"玩家ID解析失败: {playerIdStr}");
+                return;
+            }
+
+            mailUnitComponent.Children.TryGetValue(unitId, out Entity mailUnitEntity);
+            MailUnit targetMailUnit = mailUnitEntity as MailUnit;
+
+            if (targetMailUnit != null)
+            {
+                // 在线，直接领取邮件
+                MailComponentS mailComponentS = targetMailUnit.GetComponent<MailComponentS>();
+                if (mailComponentS != null)
                 {
-                    // 发给指定玩家的
-                    long unitId = long.Parse(receivePar);
-                    mailUnitComponent.Children.TryGetValue(unitId, out Entity mailUnitEntity);
-                    MailUnit targetMailUnit = mailUnitEntity as MailUnit;
-
-                    if (targetMailUnit != null)
-                    {
-                        // 在线，直接领取邮件
-                        MailComponentS mailComponentS = targetMailUnit.GetComponent<MailComponentS>();
-                        if (mailComponentS != null)
-                        {
-                            mailComponentS.AddMail(mailInfo);
-                            Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
-                            message.MailInfo = mailInfo;
-                            MapMessageHelper.SendToClient(scene, targetMailUnit.Id, message);
-                        }
-                    }
-                    else
-                    {
-                        // 不在线，先保存在邮件中心，待玩家上线时再领取邮件
-                        ServerMail serverMail = mailCenterComponent.AddChild<ServerMail>();
-                        serverMail.MailReceiveType = (int)MailReceiveType.PlayerId;
-                        serverMail.Params = receivePar;
-                        Mail mail = serverMail.AddChildWithId<Mail>(mailInfo.Id);
-                        mail.FromMessage(mailInfo);
-                        serverMail.Mail = mail;
-
-                        mailCenterComponent.ServerMails.Add(serverMail);
-                    }
-                }
-                else if (type == (int)MailReceiveType.All)
-                {
-                    // 发给全服玩家的
-                    ServerMail serverMail = mailCenterComponent.AddChild<ServerMail>();
-                    serverMail.MailReceiveType = (int)MailReceiveType.All;
-                    Mail mail = serverMail.AddChildWithId<Mail>(mailInfo.Id);
-                    mail.FromMessage(mailInfo);
-                    serverMail.Mail = mail;
-
-                    // 在线，直接领取邮件
-                    foreach (Entity entity in mailUnitComponent.Children.Values)
-                    {
-                        MailUnit mailUnit = entity as MailUnit;
-
-                        if (mailUnit == null)
-                        {
-                            continue;
-                        }
-
-                        mailUnit.GetComponent<MailComponentS>().AddMail(mail.ToMessage());
-                        Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
-                        message.MailInfo = mailInfo;
-                        MapMessageHelper.SendToClient(scene, mailUnit.Id, message);
-
-                        serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
-                    }
-                }
-                else if (type == (int)MailReceiveType.LessLv)
-                {
-                    // 发给等级小于某个等级的玩家的
-                    int lv = int.Parse(receivePar);
-                    ServerMail serverMail = mailCenterComponent.AddChild<ServerMail>();
-                    serverMail.MailReceiveType = (int)MailReceiveType.LessLv;
-                    serverMail.Params = receivePar;
-                    Mail mail = serverMail.AddChildWithId<Mail>(mailInfo.Id);
-                    mail.FromMessage(mailInfo);
-                    serverMail.Mail = mail;
-                    
-                    // 在线
-                    foreach (Entity entity in mailUnitComponent.Children.Values)
-                    {
-                        MailUnit mailUnit = entity as MailUnit;
-
-                        if (mailUnit == null)
-                        {
-                            continue;
-                        }
-
-                        UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
-                        if (int.Parse(serverMail.Params) <= userInfoComponent.GetLv())
-                        {
-                            continue;
-                        }                        
-                        
-                        mailUnit.GetComponent<MailComponentS>().AddMail(mail.ToMessage());
-                        Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
-                        message.MailInfo = mailInfo;
-                        MapMessageHelper.SendToClient(scene, mailUnit.Id, message);
-
-                        serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
-                    }
+                    mailComponentS.AddMail(mailInfo);
+                    Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
+                    message.MailInfo = mailInfo;
+                    MapMessageHelper.SendToClient(scene, targetMailUnit.Id, message);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Log.Error(ex.ToString());
+                // 不在线，先保存在邮件中心，待玩家上线时再领取邮件
+                mailCenterComponent.CreateServerMail(mailInfo, (int)MailReceiveType.PlayerId, playerIdStr);
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask SendToAllPlayers(Scene scene, MailCenterComponent mailCenterComponent, MailUnitComponent mailUnitComponent, MailInfo mailInfo)
+        {
+            ServerMail serverMail = mailCenterComponent.CreateServerMail(mailInfo, (int)MailReceiveType.All, string.Empty);
+
+            // 在线，直接领取邮件
+            foreach (Entity entity in mailUnitComponent.Children.Values)
+            {
+                MailUnit mailUnit = entity as MailUnit;
+
+                if (mailUnit == null)
+                {
+                    continue;
+                }
+
+                mailUnit.GetComponent<MailComponentS>().AddMail(mailInfo);
+                serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
+
+                Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
+                message.MailInfo = mailInfo;
+                MapMessageHelper.SendToClient(scene, mailUnit.Id, message);
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask SendToLowLevelPlayers(Scene scene, MailCenterComponent mailCenterComponent, MailUnitComponent mailUnitComponent, MailInfo mailInfo, string levelStr)
+        {
+            if (!int.TryParse(levelStr, out int targetLevel))
+            {
+                Log.Error($"等级解析失败: {levelStr}");
+                return;
+            }
+
+            ServerMail serverMail = mailCenterComponent.CreateServerMail(mailInfo, (int)MailReceiveType.LessLv, levelStr);
+
+            foreach (Entity entity in mailUnitComponent.Children.Values)
+            {
+                MailUnit mailUnit = entity as MailUnit;
+
+                if (mailUnit == null)
+                {
+                    continue;
+                }
+
+                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
+                if (userInfoComponent.GetLv() >= targetLevel)
+                {
+                    continue;
+                }
+
+                mailUnit.GetComponent<MailComponentS>().AddMail(mailInfo);
+                serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
+
+                Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
+                message.MailInfo = mailInfo;
+                MapMessageHelper.SendToClient(scene, mailUnit.Id, message);
             }
 
             await ETTask.CompletedTask;

@@ -45,35 +45,53 @@ namespace ET.Server.Handler
                 }
 
                 Mail mail = serverMail.Mail;
-                if (serverMail.MailReceiveType == (int)MailReceiveType.PlayerId)
-                {
-                    if (long.Parse(serverMail.Params) == mailUnit.Id)
-                    {
-                        mailComponentS.AddMail(mail.ToMessage());
+                bool shouldReceive = false;
+                bool shouldRemove = false;
 
-                        // 领取后删除
-                        serverMail.Dispose();
-                        mailCenterComponent.ServerMails.RemoveAt(i);
+                switch ((MailReceiveType)serverMail.MailReceiveType)
+                {
+                    case MailReceiveType.PlayerId:
+                    {
+                        if (long.TryParse(serverMail.Params, out long targetId) && targetId == mailUnit.Id)
+                        {
+                            shouldReceive = true;
+                            shouldRemove = true;
+                        }
+
+                        break;
+                    }
+                    case MailReceiveType.All:
+                    {
+                        shouldReceive = true;
+                        break;
+                    }
+                    case MailReceiveType.LessLv:
+                    {
+                        UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
+                        if (int.TryParse(serverMail.Params, out int targetLevel) && userInfoComponent.GetLv() < targetLevel)
+                        {
+                            shouldReceive = true;
+                        }
+
+                        break;
                     }
                 }
-                else if (serverMail.MailReceiveType == (int)MailReceiveType.All)
+
+                if (shouldReceive)
                 {
                     mailComponentS.AddMail(mail.ToMessage());
 
-                    serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
-                }
-                else if (serverMail.MailReceiveType == (int)MailReceiveType.LessLv)
-                {
-                    UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
-                    if (int.Parse(serverMail.Params) > userInfoComponent.GetLv())
+                    if (shouldRemove)
                     {
-                        mailComponentS.AddMail(mail.ToMessage());
-                        
+                        mailCenterComponent.RemoveServerMailAt(i);
+                    }
+                    else
+                    {
                         serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
                     }
                 }
             }
-            
+
             mailComponentS.Check();
 
             await mailUnit.AddLocation(LocationType.Mail);
