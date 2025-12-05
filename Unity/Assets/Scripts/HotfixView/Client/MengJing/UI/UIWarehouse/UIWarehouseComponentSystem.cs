@@ -55,8 +55,7 @@ namespace ET.Client
         {
             InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
 
-            List<Item> itemList = null;
-            itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Warehouse);
+            List<Item> itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Warehouse);
 
             while (self.UIWarehouseItemList.Count < (itemList.Count > 100 ? itemList.Count : 100))
             {
@@ -82,8 +81,7 @@ namespace ET.Client
         {
             InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
 
-            List<Item> itemList = null;
-            itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Bag);
+            List<Item> itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Bag);
 
             while (self.UIBagItemList.Count < (itemList.Count > 100 ? itemList.Count : 100))
             {
