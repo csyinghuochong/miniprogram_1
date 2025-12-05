@@ -14,6 +14,7 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Text_Tip = rc.Get<GameObject>("Text_Tip").GetComponent<TMP_Text>();
+            self.Text_StoreRefreshNum = rc.Get<GameObject>("Text_StoreRefreshNum").GetComponent<TMP_Text>();
             self.Button_Refresh = rc.Get<GameObject>("Button_Refresh").GetComponent<Button>();
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
 
