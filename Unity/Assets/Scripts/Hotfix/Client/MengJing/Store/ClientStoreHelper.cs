@@ -11,7 +11,7 @@
             return response;
         }
 
-        public static async ETTask<int> GetStoreBuy(Scene root, int id)
+        public static async ETTask<int> StoreBuy(Scene root, int id)
         {
             C2M_StoreBuy request = C2M_StoreBuy.Create();
             request.StoreItemId = id;
@@ -21,13 +21,13 @@
             return response.Error;
         }
 
-        public static async ETTask<int> RefreshStore(Scene root)
+        public static async ETTask<M2C_RefreshStore> RefreshStore(Scene root)
         {
             C2M_RefreshStore request = C2M_RefreshStore.Create();
 
             M2C_RefreshStore response = (M2C_RefreshStore)await root.GetComponent<ClientSenderComponent>().Call(request);
 
-            return response.Error;
+            return response;
         }
     }
 }

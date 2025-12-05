@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
@@ -24,10 +25,16 @@ namespace ET.Client
             self.Transform_Item = rc.Get<GameObject>("Transform_Item").transform;
 
             self.UICommonItem = self.AddChild<UICommonItem, GameObject>(rc.Get<GameObject>("UICommonItem"));
+
+            self.Button_Buy.AddListener(self.OnButton_Buy);
         }
 
-        public static void UpdateInfo(this UIStoreItem self, int id, int num)
+        public static void UpdateInfo(this UIStoreItem self, int id, int num, Action<int> buyAction)
         {
+            self.StoreItemConfigId = id;
+            self.Num = num;
+            self.BuyAction = buyAction;
+
             StoreItemConfig storeItemConfig = StoreItemConfigCategory.Instance.Get(id);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeItemConfig.SellItemID);
 
@@ -36,6 +43,11 @@ namespace ET.Client
             self.Text_MoneyValue.SetText(storeItemConfig.SellValue);
 
             self.UICommonItem.UpdateInfo(itemConfig.Id, 0).Coroutine();
+        }
+
+        private static void OnButton_Buy(this UIStoreItem self)
+        {
+            self.BuyAction?.Invoke(self.StoreItemConfigId);
         }
     }
 }

@@ -26,7 +26,8 @@ namespace ET.Server
                 StoreItemConfig storeItemConfig = StoreItemConfigCategory.Instance.Get(request.StoreItemId);
 
                 InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
-                if (!inventoryComponent.HaveItemData(new List<RewardItem>() { new() { ItemId = storeItemConfig.SellType, ItemNum = storeItemConfig.SellValue } }))
+                List<RewardItem> cost = new List<RewardItem>() { new() { ItemId = storeItemConfig.SellType, ItemNum = storeItemConfig.SellValue } };
+                if (!inventoryComponent.HaveItemData(cost))
                 {
                     response.Error = ErrorCode.ERR_NotEnoughItems;
                     return;
@@ -34,8 +35,8 @@ namespace ET.Server
                 
                 storeComponent.StoreItemList[request.StoreItemId]--;
 
-                inventoryComponent.RemoveItemData(new List<RewardItem>() { new() { ItemId = storeItemConfig.SellType, ItemNum = storeItemConfig.SellValue } });
-                inventoryComponent.AddItemData(new List<RewardItem>() { new() { ItemId = storeItemConfig.SellType, ItemNum = storeItemConfig.SellValue } });
+                inventoryComponent.RemoveItemData(cost);
+                inventoryComponent.AddItemData(new List<RewardItem>() { new() { ItemId = storeItemConfig.SellItemID, ItemNum = 1 } });
             }
 
             await ETTask.CompletedTask;

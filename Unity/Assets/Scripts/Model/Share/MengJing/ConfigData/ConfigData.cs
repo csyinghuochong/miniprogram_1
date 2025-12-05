@@ -51,7 +51,7 @@ namespace ET
         [StaticField]
         public static List<RewardItem> StoreRefreshCost = new()
         {
-            new RewardItem() { ItemId = 3, ItemNum = 100 }
+            new RewardItem() { ItemId = Item_Diamond, ItemNum = 100 }
         };
 
         /// <summary>

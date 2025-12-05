@@ -25,7 +25,8 @@ namespace ET.Client
             self.UIStoreItem = rc.Get<GameObject>("UIStoreItem");
             self.UIStoreItem.SetActive(false);
 
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
+            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
+            self.Button_RefreshTime.AddListener(() => { self.OnButton_RefreshTime().Coroutine(); });
 
             self.GetStoreInfo().Coroutine();
         }
@@ -84,7 +85,7 @@ namespace ET.Client
             int index = 0;
             foreach (var item in self.StoreItemList)
             {
-                self.UIStoreItemList[index].UpdateInfo(item.Key, item.Value);
+                self.UIStoreItemList[index].UpdateInfo(item.Key, item.Value, (id) => { self.OnBuy(id).Coroutine(); });
                 self.UIStoreItemList[index].GameObject.SetActive(true);
                 index++;
             }
@@ -93,6 +94,33 @@ namespace ET.Client
             {
                 self.UIStoreItemList[i].GameObject.SetActive(false);
             }
+        }
+
+        private static async ETTask OnBuy(this UIStoreComponent self, int storeItemConfigId)
+        {
+            int error = await ClientStoreHelper.StoreBuy(self.Root(), storeItemConfigId);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.StoreItemList[storeItemConfigId]--;
+
+            self.UpdateStoreList();
+        }
+
+        private static async ETTask OnButton_RefreshTime(this UIStoreComponent self)
+        {
+            M2C_RefreshStore response = await ClientStoreHelper.RefreshStore(self.Root());
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.RefreshTime = response.RefreshNum;
+            self.StoreItemList = response.StoreItemList;
+
+            self.UpdateStoreList();
         }
     }
 }
