@@ -58,7 +58,7 @@ namespace ET.Client
             self.UIStoreItem.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
-            self.Button_RefreshTime.AddListener(() => { self.OnButton_RefreshTime().Coroutine(); });
+            self.Button_RefreshTime.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIStoreRefTip).Coroutine(); });
 
             self.UpdateGold();
             self.UpdateDiamond();
@@ -82,6 +82,7 @@ namespace ET.Client
 
             self.RefreshTime = response.RefreshTime;
             self.StoreItemList = response.StoreItemList;
+            self.StoreRefreshNum = response.RefreshNum;
 
             self.UpdateRefreshTime().Coroutine();
             self.UpdateStoreList();
@@ -143,17 +144,23 @@ namespace ET.Client
             self.UpdateStoreList();
         }
 
-        private static async ETTask OnButton_RefreshTime(this UIStoreComponent self)
+        public static async ETTask OnButton_RefreshTime(this UIStoreComponent self)
         {
+            if (self.StoreRefreshNum <= 0)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("刷新次数不足！");
+                return;
+            }
+            
             M2C_RefreshStore response = await ClientStoreHelper.RefreshStore(self.Root());
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
 
-            self.RefreshTime = response.RefreshNum;
+            self.StoreRefreshNum = response.RefreshNum;
             self.StoreItemList = response.StoreItemList;
-
+            
             self.UpdateStoreList();
         }
         

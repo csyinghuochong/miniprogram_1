@@ -27,5 +27,6 @@ namespace ET
         public const string UIMailContent = "UIMailContent/UIMailContent";
         public const string UIGetReward = "UIGetReward/UIGetReward";
         public const string UIDialogue = "UIDialogue/UIDialogue";
+        public const string UIStoreRefTip = "UIStoreRefTip/UIStoreRefTip";
     }
 }

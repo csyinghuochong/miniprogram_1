@@ -10,6 +10,7 @@ namespace ET.Client
     {
         public long RefreshTime;
         public Dictionary<int, int> StoreItemList;
+        public int StoreRefreshNum;
 
         public List<UIStoreItem> UIStoreItemList { get; set; } = new();
 
