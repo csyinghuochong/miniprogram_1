@@ -33,21 +33,14 @@ namespace ET.Client
 
         public static void OnRefresh(this UIStoreRefTipComponent self)
         {
-            if (self.StoreRefreshNum <= 0)
+            UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIStore);
+            if (ui == null)
             {
-                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("刷新次数不足！");
+                return;
             }
-            else
-            {
-                UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIStore);
-                if (ui == null)
-                {
-                    return;
-                }
-                UIStoreComponent uiStoreComponent = ui.GetComponent<UIStoreComponent>();
-                uiStoreComponent.StoreRefreshHandler().Coroutine();
-            }
-            
+
+            UIStoreComponent uiStoreComponent = ui.GetComponent<UIStoreComponent>();
+            uiStoreComponent.StoreRefreshHandler().Coroutine();
             self.OnClose();
         }
 
