@@ -114,6 +114,30 @@ namespace ET.Server
                     Mail mail = serverMail.AddChildWithId<Mail>(mailInfo.Id);
                     mail.FromMessage(mailInfo);
                     serverMail.Mail = mail;
+                    
+                    // 在线
+                    foreach (Entity entity in mailUnitComponent.Children.Values)
+                    {
+                        MailUnit mailUnit = entity as MailUnit;
+
+                        if (mailUnit == null)
+                        {
+                            continue;
+                        }
+
+                        UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
+                        if (int.Parse(serverMail.Params) <= userInfoComponent.GetLv())
+                        {
+                            continue;
+                        }                        
+                        
+                        mailUnit.GetComponent<MailComponentS>().AddMail(mail.ToMessage());
+                        Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
+                        message.MailInfo = mailInfo;
+                        MapMessageHelper.SendToClient(scene, mailUnit.Id, message);
+
+                        serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
+                    }
                 }
             }
             catch (Exception ex)

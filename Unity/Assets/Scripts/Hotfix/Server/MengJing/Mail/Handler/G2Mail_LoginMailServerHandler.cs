@@ -65,10 +65,12 @@ namespace ET.Server.Handler
                 else if (serverMail.MailReceiveType == (int)MailReceiveType.LessLv)
                 {
                     UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
-                    NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene, mailUnit.Id);
-                    InventoryComponentS inventoryComponent = await UnitCacheHelper.GetComponentCache<InventoryComponentS>(scene, mailUnit.Id);
-
-                    // ...
+                    if (int.Parse(serverMail.Params) > userInfoComponent.GetLv())
+                    {
+                        mailComponentS.AddMail(mail.ToMessage());
+                        
+                        serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
+                    }
                 }
             }
             
