@@ -9,6 +9,7 @@ namespace ET.Client
         public float Time;
         public string Path;
         public Vector3 Offset;
+        public Transform RootTransform;
         public Transform HeadTransform;
 
         public GameObject GameObject;

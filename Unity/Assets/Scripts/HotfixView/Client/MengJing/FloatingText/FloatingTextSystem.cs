@@ -28,13 +28,14 @@ namespace ET.Client
             }
         }
 
-        public static void Init(this FloatingText self, string text, float time, string path, Vector3 offset, Transform head = null)
+        public static void Init(this FloatingText self, string text, float time, string path, Vector3 offset, Transform rootTransform, Transform head = null)
         {
             self.Text = text;
             self.Time = time;
-            self.HeadTransform = head;
             self.Path = path;
             self.Offset = offset;
+            self.RootTransform = rootTransform;
+            self.HeadTransform = head;
             self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true, self.OnLoadGameObject);
         }
 
@@ -53,7 +54,7 @@ namespace ET.Client
             }
 
             self.GameObject = go;
-            self.GameObject.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
+            self.GameObject.transform.SetParent(self.RootTransform);
             self.GameObject.transform.Find("Text").GetComponent<TMP_Text>().SetText(self.Text);
             self.GameObject.transform.localScale = Vector3.one;
             self.GameObject.transform.localPosition = Vector3.zero;
