@@ -53,5 +53,19 @@ namespace ET.Server
                 self.ServerMails.RemoveAt(index);
             }
         }
+
+        public static void Check(this MailCenterComponent self)
+        {
+            for (int i = self.ServerMails.Count - 1; i >= 0; i--)
+            {
+                ServerMail serverMail = self.ServerMails[i];
+                Mail mail = serverMail.Mail;
+                if (mail.EndTime < TimeHelper.ServerNow())
+                {
+                    mail.Dispose();
+                    self.ServerMails.RemoveAt(i);
+                }
+            }
+        }
     }
 }

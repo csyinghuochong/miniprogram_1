@@ -35,6 +35,7 @@ namespace ET.Server.Handler
             }
 
             // 从邮件中心服领取邮件
+            mailCenterComponent.Check();
             for (int i = mailCenterComponent.ServerMails.Count - 1; i >= 0; i--)
             {
                 ServerMail serverMail = mailCenterComponent.ServerMails[i];
