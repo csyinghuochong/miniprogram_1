@@ -120,7 +120,7 @@ namespace ET.Client
             int index = 0;
             foreach (var item in self.StoreItemList)
             {
-                self.UIStoreItemList[index].UpdateInfo(item.Key, item.Value, (id) => { self.OnBuy(id).Coroutine(); });
+                self.UIStoreItemList[index].UpdateInfo(item.Key, item.Value, (id) => { self.OnBuy(id).Coroutine(); }).Coroutine();
                 self.UIStoreItemList[index].GameObject.SetActive(true);
                 index++;
             }

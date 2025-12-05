@@ -29,7 +29,7 @@ namespace ET.Client
             self.Button_Buy.AddListener(self.OnButton_Buy);
         }
 
-        public static void UpdateInfo(this UIStoreItem self, int id, int num, Action<int> buyAction)
+        public static async ETTask UpdateInfo(this UIStoreItem self, int id, int num, Action<int> buyAction)
         {
             self.StoreItemConfigId = id;
             self.Num = num;
@@ -41,6 +41,9 @@ namespace ET.Client
             self.Text_ItemName.SetText(itemConfig.ItemName);
             self.Text_Num.SetText("剩余数量：{0}", num);
             self.Text_MoneyValue.SetText(storeItemConfig.SellValue);
+
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, Convert.ToString(storeItemConfig.SellType));
+            self.Image_MoneyIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
             self.UICommonItem.UpdateInfo(itemConfig.Id, 0).Coroutine();
         }

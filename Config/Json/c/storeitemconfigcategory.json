@@ -33,5 +33,19 @@
     "SellType": 2,
     "SellValue": 100,
     "LimitNumber": 1
+  },
+  {
+    "Id": 10001006,
+    "SellItemID": 10002012,
+    "SellType": 1,
+    "SellValue": 99999999,
+    "LimitNumber": 2
+  },
+  {
+    "Id": 10001007,
+    "SellItemID": 10002013,
+    "SellType": 2,
+    "SellValue": 99999999,
+    "LimitNumber": 2
   }
 ]
