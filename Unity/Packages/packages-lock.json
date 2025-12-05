@@ -27,7 +27,7 @@
       "dependencies": {}
     },
     "com.tuyoogame.yooasset": {
-      "version": "file:com.tuyoogame.yooasset@db79161f337e",
+      "version": "file:com.tuyoogame.yooasset@2.3.18",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
