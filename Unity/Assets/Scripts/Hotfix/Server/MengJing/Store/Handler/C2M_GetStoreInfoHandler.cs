@@ -8,7 +8,8 @@
         {
             StoreComponentS storeComponent = unit.GetComponent<StoreComponentS>();
 
-            response.LastRefreshTime = storeComponent.LastRefreshTime;
+            storeComponent.Check();
+            response.RefreshTime = storeComponent.RefreshTime;
             response.StoreItemList = storeComponent.StoreItemList;
 
             await ETTask.CompletedTask;

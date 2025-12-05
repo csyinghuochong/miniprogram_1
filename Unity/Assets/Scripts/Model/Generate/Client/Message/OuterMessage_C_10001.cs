@@ -2880,7 +2880,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(3)]
-        public long LastRefreshTime { get; set; }
+        public long RefreshTime { get; set; }
 
         [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(4)]
@@ -2895,7 +2895,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.LastRefreshTime = default;
+            this.RefreshTime = default;
             this.StoreItemList.Clear();
 
             ObjectPool.Instance.Recycle(this);

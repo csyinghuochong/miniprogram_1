@@ -8,13 +8,13 @@ namespace ET.Client
     public class UIStoreItem : Entity, IAwake<GameObject>
     {
         public GameObject GameObject { get; set; }
-        
+
         public TMP_Text Text_ItemName;
         public TMP_Text Text_Num;
         public Button Button_Buy;
         public Image Image_MoneyIcon;
         public TMP_Text Text_MoneyValue;
         public Transform Transform_Item;
-        public GameObject UICommonItem;
+        public UICommonItem UICommonItem { get; set; }
     }
 }

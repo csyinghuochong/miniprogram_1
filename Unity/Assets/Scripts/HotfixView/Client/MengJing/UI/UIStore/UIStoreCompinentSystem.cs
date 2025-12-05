@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,12 +24,12 @@ namespace ET.Client
             self.Content_UIStoreITem = rc.Get<GameObject>("Content_UIStoreItem").transform;
             self.UIStoreItem = rc.Get<GameObject>("UIStoreItem");
             self.UIStoreItem.SetActive(false);
-            
+
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
-            
-            self.UpdateStoreList();
+
+            self.GetStoreInfo().Coroutine();
         }
-        
+
         [EntitySystem]
         private static void Destroy(this UIStoreComponent self)
         {
@@ -36,9 +37,62 @@ namespace ET.Client
             self.UIStoreItem = null;
         }
 
+        private static async ETTask GetStoreInfo(this UIStoreComponent self)
+        {
+            M2C_GetStoreInfo response = await ClientStoreHelper.GetStoreInfo(self.Root());
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.RefreshTime = response.RefreshTime;
+            self.StoreItemList = response.StoreItemList;
+
+            self.UpdateRefreshTime().Coroutine();
+            self.UpdateStoreList();
+        }
+
+        private static async ETTask UpdateRefreshTime(this UIStoreComponent self)
+        {
+            while (true)
+            {
+                DateTime time = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+
+                DateTime endTime = TimeInfo.Instance.ToDateTime(self.RefreshTime);
+                TimeSpan timeSpan = endTime - time;
+
+                self.Text_RefreshTime.SetText("{0}:{1}:{2}后刷新", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+
+                await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+
+                if (self.IsDisposed)
+                {
+                    return;
+                }
+            }
+        }
+
         private static void UpdateStoreList(this UIStoreComponent self)
         {
-            
+            while (self.UIStoreItemList.Count < self.StoreItemList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIStoreItem, self.Content_UIStoreITem);
+                UIStoreItem newItem = self.AddChild<UIStoreItem, GameObject>(go);
+                self.UIStoreItemList.Add(newItem);
+            }
+
+            int index = 0;
+            foreach (var item in self.StoreItemList)
+            {
+                self.UIStoreItemList[index].UpdateInfo(item.Key, item.Value);
+                self.UIStoreItemList[index].GameObject.SetActive(true);
+                index++;
+            }
+
+            for (int i = self.StoreItemList.Count; i < self.UIStoreItemList.Count; i++)
+            {
+                self.UIStoreItemList[i].GameObject.SetActive(false);
+            }
         }
     }
 }

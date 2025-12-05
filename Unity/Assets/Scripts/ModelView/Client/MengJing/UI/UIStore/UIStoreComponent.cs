@@ -8,8 +8,11 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIStoreComponent : Entity, IAwake, IDestroy
     {
-        public List<UIMailItem> UIStoreItemList { get; set; } = new();
-        
+        public long RefreshTime;
+        public Dictionary<int, int> StoreItemList;
+
+        public List<UIStoreItem> UIStoreItemList { get; set; } = new();
+
         public TMP_Text Text_Type_Gold;
         public TMP_Text Text_Type_Diamond;
         public Button Button_AddGold;

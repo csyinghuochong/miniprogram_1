@@ -10,7 +10,7 @@
 
             storeComponent.RefreshStore();
 
-            response.LastRefreshTime = storeComponent.LastRefreshTime;
+            response.LastRefreshTime = storeComponent.RefreshTime;
             response.StoreItemList = storeComponent.StoreItemList;
 
             await ETTask.CompletedTask;

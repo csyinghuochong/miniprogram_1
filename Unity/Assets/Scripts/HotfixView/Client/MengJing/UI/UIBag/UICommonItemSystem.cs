@@ -170,7 +170,14 @@ namespace ET.Client
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
 
-            self.Text_ItemNum.SetText(num);
+            if (num == 0)
+            {
+                self.Text_ItemNum.SetText( "");
+            }
+            else
+            {
+                self.Text_ItemNum.SetText(num);
+            }
 
             string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
             self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);

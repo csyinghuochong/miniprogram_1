@@ -22,8 +22,20 @@ namespace ET.Client
             self.Image_MoneyIcon = rc.Get<GameObject>("Image_MoneyIcon").GetComponent<Image>();
             self.Text_MoneyValue = rc.Get<GameObject>("Text_MoneyValue").GetComponent<TMP_Text>();
             self.Transform_Item = rc.Get<GameObject>("Transform_Item").transform;
-            self.UICommonItem = rc.Get<GameObject>("UICommonItem");
+
+            self.UICommonItem = self.AddChild<UICommonItem, GameObject>(rc.Get<GameObject>("UICommonItem"));
         }
-        
+
+        public static void UpdateInfo(this UIStoreItem self, int id, int num)
+        {
+            StoreItemConfig storeItemConfig = StoreItemConfigCategory.Instance.Get(id);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeItemConfig.SellItemID);
+
+            self.Text_ItemName.SetText(itemConfig.ItemName);
+            self.Text_Num.SetText("剩余数量：{0}", num);
+            self.Text_MoneyValue.SetText(storeItemConfig.SellValue);
+
+            self.UICommonItem.UpdateInfo(itemConfig.Id, 0).Coroutine();
+        }
     }
 }

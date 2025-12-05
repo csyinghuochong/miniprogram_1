@@ -634,7 +634,7 @@ message M2C_GetStoreInfo // ILocationResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	int64 LastRefreshTime = 4;
+	int64 RefreshTime = 4;
 	map<int32,int32> StoreItemList = 5;
 }
 

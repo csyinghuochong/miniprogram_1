@@ -19,7 +19,7 @@
         {
         }
 
-        public static void OnLogin(this StoreComponentS self)
+        public static void Check(this StoreComponentS self)
         {
             if (self.StoreItemList.Count == 0)
             {
@@ -27,7 +27,7 @@
             }
             else
             {
-                if (TimeHelper.ServerNow() - self.LastRefreshTime > ConfigData.StoreRefreshTime)
+                if (TimeHelper.ServerNow() > self.RefreshTime)
                 {
                     self.RefreshStore();
                 }
@@ -36,7 +36,7 @@
 
         public static void RefreshStore(this StoreComponentS self)
         {
-            self.LastRefreshTime = TimeHelper.ServerNow();
+            self.RefreshTime = TimeHelper.ServerNow() + ConfigData.StoreRefreshTime;
             self.StoreItemList.Clear();
 
             foreach (StoreItemConfig storeItemConfig in StoreItemConfigCategory.Instance.DataList)
