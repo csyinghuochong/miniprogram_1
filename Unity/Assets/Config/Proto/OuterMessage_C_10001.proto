@@ -635,7 +635,8 @@ message M2C_GetStoreInfo // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 	int64 RefreshTime = 4;
-	map<int32,int32> StoreItemList = 5;
+	int32 RefreshNum = 5;
+	map<int32,int32> StoreItemList = 6;
 }
 
 // ResponseType M2C_StoreBuy
@@ -663,7 +664,7 @@ message M2C_RefreshStore // ILocationResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	int64 LastRefreshTime = 4;
+	int32 RefreshNum = 4;
 	map<int32,int32> StoreItemList = 5;
 }
 

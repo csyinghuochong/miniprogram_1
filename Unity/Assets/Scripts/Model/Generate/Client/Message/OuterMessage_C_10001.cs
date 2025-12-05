@@ -2882,8 +2882,11 @@ namespace ET
         [MemoryPackOrder(3)]
         public long RefreshTime { get; set; }
 
-        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(4)]
+        public int RefreshNum { get; set; }
+
+        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [MemoryPackOrder(5)]
         public Dictionary<int, int> StoreItemList { get; set; } = new();
         public override void Dispose()
         {
@@ -2896,6 +2899,7 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.RefreshTime = default;
+            this.RefreshNum = default;
             this.StoreItemList.Clear();
 
             ObjectPool.Instance.Recycle(this);
@@ -3010,7 +3014,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(3)]
-        public long LastRefreshTime { get; set; }
+        public int RefreshNum { get; set; }
 
         [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(4)]
@@ -3025,7 +3029,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.LastRefreshTime = default;
+            this.RefreshNum = default;
             this.StoreItemList.Clear();
 
             ObjectPool.Instance.Recycle(this);

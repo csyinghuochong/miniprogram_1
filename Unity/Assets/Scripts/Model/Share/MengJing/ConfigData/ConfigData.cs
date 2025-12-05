@@ -43,9 +43,23 @@ namespace ET
         [StaticField]
         public static List<ServerItem> ServerItems = new();
 
+        # region 商店
+
         /// <summary>
-        /// 商店刷新时间
+        /// 商店刷新消耗
         /// </summary>
-        public const long StoreRefreshTime = TimeHelper.Hour;
+        [StaticField]
+        public static List<RewardItem> StoreRefreshCost = new()
+        {
+            new RewardItem() { ItemId = 3, ItemNum = 100 }
+        };
+
+        /// <summary>
+        /// 商店每天手动刷新次数
+        /// </summary>
+        [StaticField]
+        public static int StoreRefreshNum = 3;
+
+        # endregion
     }
 }

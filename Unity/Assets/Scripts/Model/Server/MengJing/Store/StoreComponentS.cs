@@ -8,6 +8,7 @@ namespace ET.Server
     public class StoreComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
         public long RefreshTime;
+        public int RefreshNum;
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, int> StoreItemList = new();

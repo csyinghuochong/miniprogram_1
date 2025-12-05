@@ -100,7 +100,8 @@ namespace ET
         public const int ERR_MailNotReward = 201204; //邮件没有奖励
         public const int ERR_MailTimeOut = 201205; //邮件过期
         
-        public const int ERR_StoreItemNotExist = 201301; //仓库道具不存在
-        public const int ERR_StoreItemNotEnough = 201302; //仓库道具不足
+        public const int ERR_StoreItemNotExist = 201301; //商店道具不存在
+        public const int ERR_StoreItemNotEnough = 201302; //商店道具不足
+        public const int ERR_StoreRefreshNumNotEnough = 201303; //商店刷新次数不足
     }
 }

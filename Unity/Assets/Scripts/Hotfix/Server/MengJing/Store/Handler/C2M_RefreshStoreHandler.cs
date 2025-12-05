@@ -8,9 +8,23 @@
         {
             StoreComponentS storeComponent = unit.GetComponent<StoreComponentS>();
 
-            storeComponent.RefreshStore();
+            if (storeComponent.RefreshNum <= 0)
+            {
+                response.Error = ErrorCode.ERR_StoreRefreshNumNotEnough;
+                return;
+            }
 
-            response.LastRefreshTime = storeComponent.RefreshTime;
+            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            if (!inventoryComponent.HaveItemData(ConfigData.StoreRefreshCost))
+            {
+                response.Error = ErrorCode.ERR_NotEnoughItems;
+                return;
+            }
+
+            storeComponent.RefreshStore();
+            storeComponent.RefreshNum--;
+
+            response.RefreshNum = storeComponent.RefreshNum;
             response.StoreItemList = storeComponent.StoreItemList;
 
             await ETTask.CompletedTask;

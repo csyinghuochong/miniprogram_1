@@ -10,6 +10,7 @@
 
             storeComponent.Check();
             response.RefreshTime = storeComponent.RefreshTime;
+            response.RefreshNum = storeComponent.RefreshNum;
             response.StoreItemList = storeComponent.StoreItemList;
 
             await ETTask.CompletedTask;

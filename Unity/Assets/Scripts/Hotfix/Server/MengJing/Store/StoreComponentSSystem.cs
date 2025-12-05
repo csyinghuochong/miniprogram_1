@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [EntitySystemOf(typeof(StoreComponentS))]
     [FriendOf(typeof(StoreComponentS))]
@@ -21,22 +23,27 @@
 
         public static void Check(this StoreComponentS self)
         {
-            if (self.StoreItemList.Count == 0)
+            if (self.StoreItemList.Count == 0 || TimeHelper.ServerNow() > self.RefreshTime)
             {
+                self.RefreshTime = GetNextDayZeroTimestamp();
+                self.RefreshNum = ConfigData.StoreRefreshNum;
+
                 self.RefreshStore();
             }
-            else
-            {
-                if (TimeHelper.ServerNow() > self.RefreshTime)
-                {
-                    self.RefreshStore();
-                }
-            }
+        }
+
+        // 次日凌晨
+        private static long GetNextDayZeroTimestamp()
+        {
+            DateTime now = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            DateTime nextDayZero = now.Date.AddDays(1);
+            nextDayZero = new DateTime(nextDayZero.Year, nextDayZero.Month, nextDayZero.Day, 0, 0, 0);
+
+            return TimeInfo.Instance.Transition(nextDayZero);
         }
 
         public static void RefreshStore(this StoreComponentS self)
         {
-            self.RefreshTime = TimeHelper.ServerNow() + ConfigData.StoreRefreshTime;
             self.StoreItemList.Clear();
 
             foreach (StoreItemConfig storeItemConfig in StoreItemConfigCategory.Instance.DataList)
