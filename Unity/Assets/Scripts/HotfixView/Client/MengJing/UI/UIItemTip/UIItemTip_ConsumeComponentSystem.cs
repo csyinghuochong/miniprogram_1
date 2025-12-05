@@ -55,63 +55,67 @@ namespace ET.Client
         {
             self.UIItemTipData = uiItemTipData;
 
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
-            if (item != null)
+            ItemConfig itemConfig = null;
+            if (uiItemTipData.Item != null)
             {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+                itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.Item.ConfigId);
+            }
+            else
+            {
+                itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.ItemConfigId);
+            }
 
-                string color = itemConfig.ItemQuality switch
-                {
-                    1 => "#0e832a",
-                    2 => "#2e69c4",
-                    3 => "#d6bb10",
-                    4 => "#be5e10",
-                    5 => "#e200af",
-                    6 => "#d01a06",
-                    _ => "#ffffff"
-                };
 
-                Color nowColor;
-                ColorUtility.TryParseHtmlString(color, out nowColor);
+            string color = itemConfig.ItemQuality switch
+            {
+                1 => "#0e832a",
+                2 => "#2e69c4",
+                3 => "#d6bb10",
+                4 => "#be5e10",
+                5 => "#e200af",
+                6 => "#d01a06",
+                _ => "#ffffff"
+            };
 
-                self.Text_ItemName.SetText(itemConfig.ItemName);
-                self.Text_ItemName.color = nowColor;
-                self.Text_ItemDescription.text = itemConfig.ItemDescription;
-                self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
+            Color nowColor;
+            ColorUtility.TryParseHtmlString(color, out nowColor);
 
-                string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
-                self.Image_ItemQuality.overrideSprite =
-                        await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+            self.Text_ItemName.SetText(itemConfig.ItemName);
+            self.Text_ItemName.color = nowColor;
+            self.Text_ItemDescription.text = itemConfig.ItemDescription;
+            self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
 
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-                self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
+            self.Image_ItemQuality.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
 
-                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
-                {
-                    self.Button_Take.gameObject.SetActive(true);
-                }
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
-                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
-                {
-                    self.Button_Save.gameObject.SetActive(true);
-                }
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
+            {
+                self.Button_Take.gameObject.SetActive(true);
+            }
 
-                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
-                {
-                    self.Button_Take.gameObject.SetActive(true);
-                }
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
+            {
+                self.Button_Save.gameObject.SetActive(true);
+            }
 
-                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
-                {
-                    self.Button_Sell.gameObject.SetActive(true);
-                    self.Button_Use.gameObject.SetActive(true);
-                }
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
+            {
+                self.Button_Take.gameObject.SetActive(true);
+            }
+
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
+            {
+                self.Button_Sell.gameObject.SetActive(true);
+                self.Button_Use.gameObject.SetActive(true);
             }
         }
 
         private static void OnButton_Use(this UIItemTip_ConsumeComponent self)
         {
-            ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.ItemId, 1, 0).Coroutine();
+            ClientInventoryHelper.UseItem(self.Root(), self.UIItemTipData.Item.Id, 1, 0).Coroutine();
             self.OnClose();
         }
 
@@ -119,7 +123,7 @@ namespace ET.Client
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
-                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.Item.Id, InventoryContainerType.Warehouse).Coroutine();
             }
 
             self.OnClose();
@@ -129,7 +133,7 @@ namespace ET.Client
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
             {
-                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Bag).Coroutine();
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.Item.Id, InventoryContainerType.Bag).Coroutine();
             }
 
             self.OnClose();

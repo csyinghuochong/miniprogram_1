@@ -31,27 +31,32 @@ namespace ET.Client
 
         public static void UpdateInfo(this UIItemTipComponent self, UIItemTipData uiItemTipData)
         {
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
-            if (item != null)
+            ItemConfig itemConfig = null;
+            if (uiItemTipData.Item != null)
             {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
-                if (itemConfig.ItemType == ItemType.Consume)
-                {
-                    self.UIItemTip_ConsumeComponent.GameObject.SetActive(true);
-                    self.UIItemTip_ConsumeComponent.UpdateInfo(uiItemTipData).Coroutine();
-                }
+                itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.Item.ConfigId);
+            }
+            else
+            {
+                itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.ItemConfigId);
+            }
+            
+            if (itemConfig.ItemType == ItemType.Consume)
+            {
+                self.UIItemTip_ConsumeComponent.GameObject.SetActive(true);
+                self.UIItemTip_ConsumeComponent.UpdateInfo(uiItemTipData).Coroutine();
+            }
 
-                if (itemConfig.ItemType == ItemType.Material)
-                {
-                    self.UIItemTip_MaterialComponent.GameObject.SetActive(true);
-                    self.UIItemTip_MaterialComponent.UpdateInfo(uiItemTipData).Coroutine();
-                }
+            if (itemConfig.ItemType == ItemType.Material)
+            {
+                self.UIItemTip_MaterialComponent.GameObject.SetActive(true);
+                self.UIItemTip_MaterialComponent.UpdateInfo(uiItemTipData).Coroutine();
+            }
 
-                if (itemConfig.ItemType == ItemType.Equipment)
-                {
-                    self.UIItemTip_EquipmentComponent.GameObject.SetActive(true);
-                    self.UIItemTip_EquipmentComponent.UpdateInfo(uiItemTipData).Coroutine();
-                }
+            if (itemConfig.ItemType == ItemType.Equipment)
+            {
+                self.UIItemTip_EquipmentComponent.GameObject.SetActive(true);
+                self.UIItemTip_EquipmentComponent.UpdateInfo(uiItemTipData).Coroutine();
             }
         }
     }

@@ -18,7 +18,7 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
-            self.Item = rc.Get<GameObject>("Item");
+            self.ItemGO = rc.Get<GameObject>("Item");
             self.Image_ItemNull = rc.Get<GameObject>("Image_ItemNull").GetComponent<Image>();
             self.Image_ItemQuality = rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>();
             self.Image_On = rc.Get<GameObject>("Image_On").GetComponent<Image>();
@@ -43,9 +43,40 @@ namespace ET.Client
             self.EventTrigger_Click.AddEventTrigger(self.OnEndDrag, EventTriggerType.EndDrag);
         }
 
+        [EntitySystem]
+        private static void Destroy(this UICommonItem self)
+        {
+        }
+        
         private static void OnClick(this UICommonItem self)
         {
-            self.OnItemClick?.Invoke(self.ItemId);
+            if (self.OnItemClick != null)
+            {
+                self.OnItemClick.Invoke(self.Item);
+            }
+            else
+            {
+                // 没有注册点击回调的话，默认点击弹出Tip
+                self.ShowTip().Coroutine();
+            }
+        }
+
+        private static async ETTask ShowTip(this UICommonItem self)
+        {
+            if (self.Item == null && self.ItemConfigId == 0)
+            {
+                return;
+            }
+            
+            UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
+            if (uI != null)
+            {
+                uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
+                {
+                    Item = self.Item,
+                    ItemConfigId = self.ItemConfigId,
+                });
+            }
         }
 
         private static void OnPointerDown(this UICommonItem self, PointerEventData eventData)
@@ -141,19 +172,19 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask UpdateInfo(this UICommonItem self, Item item, Action<long> onItemClick = null)
+        public static async ETTask UpdateInfo(this UICommonItem self, Item item, Action<Item> onItemClick = null)
         {
             if (item == null)
             {
                 self.Image_ItemNull.gameObject.SetActive(true);
-                self.Item.SetActive(false);
+                self.ItemGO.SetActive(false);
                 return;
             }
-            
+
             self.Image_ItemNull.gameObject.SetActive(false);
-            self.Item.SetActive(true);
-            
-            self.ItemId = item.Id;
+            self.ItemGO.SetActive(true);
+
+            self.Item = item;
             self.OnItemClick = onItemClick;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
@@ -166,13 +197,16 @@ namespace ET.Client
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
         }
 
+        // 奖励道具等一些没有Item实体的
         public static async ETTask UpdateInfo(this UICommonItem self, int itemConfigId, int num)
         {
+            self.ItemConfigId = itemConfigId;
+            
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemConfigId);
 
             if (num == 0)
             {
-                self.Text_ItemNum.SetText( "");
+                self.Text_ItemNum.SetText("");
             }
             else
             {
@@ -188,12 +222,12 @@ namespace ET.Client
 
         public static void SetSelected(this UICommonItem self, long itemId)
         {
-            self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
+            self.Image_Selected.gameObject.SetActive(self.Item.Id == itemId);
         }
 
         public static void SetImageOn(this UICommonItem self, long itemId)
         {
-            self.Image_Selected.gameObject.SetActive(self.ItemId == itemId);
+            self.Image_Selected.gameObject.SetActive(self.Item.Id == itemId);
         }
     }
 }

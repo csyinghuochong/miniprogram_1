@@ -53,64 +53,68 @@ namespace ET.Client
         {
             self.UIItemTipData = uiItemTipData;
 
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(uiItemTipData.ItemId);
-            if (item != null)
+            ItemConfig itemConfig = null;
+            if (uiItemTipData.Item != null)
             {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+                itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.Item.ConfigId);
+            }
+            else
+            {
+                itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.ItemConfigId);
+            }
 
-                string color = itemConfig.ItemQuality switch
-                {
-                    1 => "#0e832a",
-                    2 => "#2e69c4",
-                    3 => "#d6bb10",
-                    4 => "#be5e10",
-                    5 => "#e200af",
-                    6 => "#d01a06",
-                    _ => "#ffffff"
-                };
+            string color = itemConfig.ItemQuality switch
+            {
+                1 => "#0e832a",
+                2 => "#2e69c4",
+                3 => "#d6bb10",
+                4 => "#be5e10",
+                5 => "#e200af",
+                6 => "#d01a06",
+                _ => "#ffffff"
+            };
 
-                Color nowColor;
-                ColorUtility.TryParseHtmlString(color, out nowColor);
+            Color nowColor;
+            ColorUtility.TryParseHtmlString(color, out nowColor);
 
-                self.Text_ItemName.SetText(itemConfig.ItemName);
-                self.Text_ItemName.color = nowColor;
-                self.Text_ItemDescription.text = itemConfig.ItemDescription;
-                self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
+            self.Text_ItemName.SetText(itemConfig.ItemName);
+            self.Text_ItemName.color = nowColor;
+            self.Text_ItemDescription.text = itemConfig.ItemDescription;
+            self.Text_Lv.SetTextFormat("{0}级", itemConfig.UseLv);
 
-                string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
-                self.Image_ItemQuality.overrideSprite =
-                        await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
+            string qualityPath = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ZString.Format("quality{0}", itemConfig.ItemQuality));
+            self.Image_ItemQuality.overrideSprite =
+                    await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(qualityPath);
 
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-                self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
-                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
-                {
-                    self.Button_Take.gameObject.SetActive(true);
-                }
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
+            {
+                self.Button_Take.gameObject.SetActive(true);
+            }
 
-                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
-                {
-                    self.Button_Save.gameObject.SetActive(true);
-                }
-                
-                if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
-                {
-                    self.Button_Take.gameObject.SetActive(true);
-                }
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
+            {
+                self.Button_Save.gameObject.SetActive(true);
+            }
 
-                if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
-                {
-                    self.Button_Sell.gameObject.SetActive(true);
-                }
+            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
+            {
+                self.Button_Take.gameObject.SetActive(true);
+            }
+
+            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnRoleBag)
+            {
+                self.Button_Sell.gameObject.SetActive(true);
             }
         }
-        
+
         private static void OnButton_Save(this UIItemTip_MaterialComponent self)
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
-                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.Item.Id, InventoryContainerType.Warehouse).Coroutine();
             }
 
             self.OnClose();
@@ -120,7 +124,7 @@ namespace ET.Client
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
             {
-                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Bag).Coroutine();
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.Item.Id, InventoryContainerType.Bag).Coroutine();
             }
 
             self.OnClose();

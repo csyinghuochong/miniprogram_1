@@ -79,7 +79,7 @@ namespace ET.Client
                 return;
             }
             
-            ClientInventoryHelper.SellItem(self.Root(), self.UIItemTipData.ItemId, sellNum).Coroutine();
+            ClientInventoryHelper.SellItem(self.Root(), self.UIItemTipData.Item.Id, sellNum).Coroutine();
             self.OnButton_Cancel();
         }
 
@@ -87,9 +87,8 @@ namespace ET.Client
         {
             int sellNum = 0;
             sellNum = int.Parse(self.InputField_SellNum.text);
-            
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.UIItemTipData.ItemId);
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.UIItemTipData.Item.ConfigId);
 
             long price = sellNum * itemConfig.SellMoneyValue;
             self.Text_SellPrice.text = price.ToString();
@@ -98,8 +97,7 @@ namespace ET.Client
         public static void InitUI(this UIItemSellTipComponent self,UIItemTipData uiItemTipData)
         {
             self.UIItemTipData = uiItemTipData;
-            Item item = self.Root().GetComponent<InventoryComponentC>().GetItem(self.UIItemTipData.ItemId);
-            self.ItemMaxNum = item.Num;
+            self.ItemMaxNum = self.UIItemTipData.Item.Num;
 
             self.InputField_SellNum.text = self.ItemMaxNum.ToString();
             self.UpdateSellPrice();

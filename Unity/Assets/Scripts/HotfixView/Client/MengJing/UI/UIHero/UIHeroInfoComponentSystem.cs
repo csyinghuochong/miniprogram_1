@@ -152,9 +152,10 @@ namespace ET.Client
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)
             {
+                InventoryComponentC inventoryComponent = self.Root().GetComponent<InventoryComponentC>();
                 uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                 {
-                    ItemId = hero.Equipments[(int)equipSlotType],
+                    Item = inventoryComponent.GetItem(hero.Equipments[(int)equipSlotType]),
                     UIItemTipOpType = UIItemTipOpType.UIHero_TakeOff,
                     HeroId = self.CurrentHeroId
                 });
@@ -340,7 +341,7 @@ namespace ET.Client
             HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UICommonItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UICommonItemList[i].UpdateInfo(itemList[i], (item) => { self.OnItemClick(item).Coroutine(); }).Coroutine();
                 self.UICommonItemList[i].Image_Equipped.gameObject.SetActive(heroComponent.GetHeroIdByEquipmentId(itemList[i].Id) != 0);
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
@@ -351,26 +352,26 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnItemClick(this UIHeroInfoComponent self, long itemId)
+        private static async ETTask OnItemClick(this UIHeroInfoComponent self, Item item)
         {
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)
             {
                 HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
-                if (heroComponent.GetHeroIdByEquipmentId(itemId) != 0)
+                if (heroComponent.GetHeroIdByEquipmentId(item.Id) != 0)
                 {
                     uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                     {
-                        ItemId = itemId,
+                        Item = item,
                         UIItemTipOpType = UIItemTipOpType.UIHero_TakeOff,
-                        HeroId = heroComponent.GetHeroIdByEquipmentId(itemId)
+                        HeroId = heroComponent.GetHeroIdByEquipmentId(item.Id)
                     });
                 }
                 else
                 {
                     uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                     {
-                        ItemId = itemId,
+                        Item = item,
                         UIItemTipOpType = UIItemTipOpType.UIHero_Wear,
                         HeroId = self.CurrentHeroId
                     });

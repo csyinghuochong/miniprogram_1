@@ -7,11 +7,14 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ChildOf]
-    public class UICommonItem : Entity, IAwake<GameObject>
+    public class UICommonItem : Entity, IAwake<GameObject>, IDestroy
     {
-        public long ItemId;
+        private EntityRef<Item> item;
+        public Item Item { get => item; set => item = value; }
 
-        public Action<long> OnItemClick;
+        public int ItemConfigId;
+
+        public Action<Item> OnItemClick { get; set; }
         public Action OnLongPressed;
         public Action OnItemPointerUp;
         public bool IsDrag;
@@ -21,7 +24,7 @@ namespace ET.Client
 
         public GameObject GameObject { get; set; }
 
-        public GameObject Item { get; set; }
+        public GameObject ItemGO { get; set; }
         public Image Image_ItemNull { get; set; }
         public Image Image_ItemQuality;
         public Image Image_On;

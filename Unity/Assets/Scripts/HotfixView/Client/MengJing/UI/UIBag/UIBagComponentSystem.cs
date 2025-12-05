@@ -146,7 +146,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UICommonItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UICommonItemList[i].UpdateInfo(itemList[i], (item) => { self.OnItemClick(item).Coroutine(); }).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
 
@@ -157,14 +157,14 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnItemClick(this UIBagComponent self, long itemId)
+        private static async ETTask OnItemClick(this UIBagComponent self, Item item)
         {
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)
             {
                 uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                 {
-                    ItemId = itemId,
+                    Item = item,
                     UIItemTipOpType = UIItemTipOpType.OnRoleBag
                 });
             }

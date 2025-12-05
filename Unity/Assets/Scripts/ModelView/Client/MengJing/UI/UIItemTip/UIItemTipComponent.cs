@@ -17,7 +17,9 @@ namespace ET.Client
 
     public struct UIItemTipData
     {
-        public long ItemId;
+        private EntityRef<Item> item;
+        public Item Item { get => item; set=> item = value; } //存在有实体
+        public int ItemConfigId; //不存在实体
         public UIItemTipOpType UIItemTipOpType;
         public long HeroId;
     }

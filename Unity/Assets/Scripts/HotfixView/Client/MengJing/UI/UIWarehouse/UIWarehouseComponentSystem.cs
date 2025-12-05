@@ -66,7 +66,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UIWarehouseItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnWarehouseItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UIWarehouseItemList[i].UpdateInfo(itemList[i], (item) => { self.OnWarehouseItemClick(item).Coroutine(); }).Coroutine();
                 self.UIWarehouseItemList[i].GameObject.SetActive(true);
             }
 
@@ -92,7 +92,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UIBagItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnBagItemClick(itemId).Coroutine(); }).Coroutine();
+                self.UIBagItemList[i].UpdateInfo(itemList[i], (item) => { self.OnBagItemClick(item).Coroutine(); }).Coroutine();
                 self.UIBagItemList[i].GameObject.SetActive(true);
             }
 
@@ -103,27 +103,27 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnWarehouseItemClick(this UIWarehouseComponent self, long itemId)
+        private static async ETTask OnWarehouseItemClick(this UIWarehouseComponent self, Item item)
         {
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)
             {
                 uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                 {
-                    ItemId = itemId,
+                    Item = item,
                     UIItemTipOpType = UIItemTipOpType.Warehouse2Bag
                 });
             }
         }
 
-        private static async ETTask OnBagItemClick(this UIWarehouseComponent self, long itemId)
+        private static async ETTask OnBagItemClick(this UIWarehouseComponent self, Item item)
         {
             UI uI = await self.Root().GetComponent<UIComponent>().Create(UIType.UIItemTip);
             if (uI != null)
             {
                 uI.GetComponent<UIItemTipComponent>().UpdateInfo(new UIItemTipData()
                 {
-                    ItemId = itemId,
+                    Item = item,
                     UIItemTipOpType = UIItemTipOpType.Bag2Warehouse
                 });
             }

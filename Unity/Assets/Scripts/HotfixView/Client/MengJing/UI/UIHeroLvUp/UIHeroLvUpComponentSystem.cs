@@ -70,7 +70,7 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UICommonItemList[i].UpdateInfo(itemList[i], (itemId) => { self.OnItemClick(itemId); }).Coroutine();
+                self.UICommonItemList[i].UpdateInfo(itemList[i], (item) => { self.OnItemClick(item); }).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
 
@@ -81,20 +81,18 @@ namespace ET.Client
 
             if (itemList.Count >= 1)
             {
-                self.OnItemClick(itemList[0].Id);
+                self.OnItemClick(itemList[0]);
             }
             
             await ETTask.CompletedTask;
         }
 
-        private static void OnItemClick(this UIHeroLvUpComponent self, long itemId)
+        private static void OnItemClick(this UIHeroLvUpComponent self, Item item)
         {
-            self.ItemId = itemId;
+            self.ItemId = item.Id;
 
             foreach (UICommonItem uiCommonItem in self.UICommonItemList)
             {
-                InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
-                Item item = inventoryComponentC.GetItem(self.ItemId);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
 
                 self.Text_Tip.SetTextFormat("预计增加{0}-{1}经验", itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);

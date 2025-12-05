@@ -60,9 +60,16 @@ namespace ET.Client
         {
             self.UIItemTipData = uiItemTipData;
 
-            InventoryComponentC inventoryComponent = self.Root().GetComponent<InventoryComponentC>();
-            Item newItem = inventoryComponent.GetItem(uiItemTipData.ItemId);
-            ItemConfig newItemConfig = ItemConfigCategory.Instance.Get(newItem.ConfigId);
+            ItemConfig newItemConfig = null;
+            if (uiItemTipData.Item != null)
+            {
+                newItemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.Item.ConfigId);
+            }
+            else
+            {
+                newItemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.ItemConfigId);
+            }
+
             EquipConfig newEquipConfig = EquipConfigCategory.Instance.Get(newItemConfig.ItemEquipID);
 
             string type = newItemConfig.ItemSubType switch
@@ -106,6 +113,8 @@ namespace ET.Client
 
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.UIHero_Wear)
             {
+                InventoryComponentC inventoryComponent = self.Root().GetComponent<InventoryComponentC>();
+
                 self.Button_Wear.gameObject.SetActive(true);
 
                 Hero hero = self.Root().GetComponent<HeroComponentC>().GetHero(self.UIItemTipData.HeroId);
@@ -133,7 +142,7 @@ namespace ET.Client
                         }
                     }
 
-                    equipments.Add(newItem);
+                    equipments.Add(self.UIItemTipData.Item);
 
                     Dictionary<int, long> oldNumericDic = hero.NumericDic;
                     Dictionary<int, long> newNumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
@@ -168,7 +177,7 @@ namespace ET.Client
             {
                 self.Button_Save.gameObject.SetActive(true);
             }
-            
+
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
             {
                 self.Button_Take.gameObject.SetActive(true);
@@ -190,7 +199,6 @@ namespace ET.Client
             if (index % 2 == 0)
             {
                 rc.Get<GameObject>("Image_IconDef").GetComponent<Image>().gameObject.SetActive(false);
-
             }
             else
             {
@@ -216,13 +224,13 @@ namespace ET.Client
 
         private static void OnButton_Wear(this UIItemTip_EquipmentComponent self)
         {
-            ClientHeroHelper.SetHeroEquipment(self.Root(), 0, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
+            ClientHeroHelper.SetHeroEquipment(self.Root(), 0, self.UIItemTipData.HeroId, self.UIItemTipData.Item.Id).Coroutine();
             self.OnClose();
         }
 
         private static void OnButton_TakeOff(this UIItemTip_EquipmentComponent self)
         {
-            ClientHeroHelper.SetHeroEquipment(self.Root(), 1, self.UIItemTipData.HeroId, self.UIItemTipData.ItemId).Coroutine();
+            ClientHeroHelper.SetHeroEquipment(self.Root(), 1, self.UIItemTipData.HeroId, self.UIItemTipData.Item.Id).Coroutine();
             self.OnClose();
         }
 
@@ -230,22 +238,22 @@ namespace ET.Client
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
-                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Warehouse).Coroutine();
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.Item.Id, InventoryContainerType.Warehouse).Coroutine();
             }
-            
+
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
         }
-        
+
         private static void OnButton_Take(this UIItemTip_EquipmentComponent self)
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)
             {
-                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.ItemId, InventoryContainerType.Bag).Coroutine();
+                ClientInventoryHelper.MoveItem(self.Root(), self.UIItemTipData.Item.Id, InventoryContainerType.Bag).Coroutine();
             }
 
             self.OnClose();
         }
-        
+
         private static void OnClose(this UIItemTip_EquipmentComponent self)
         {
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIItemTip);
