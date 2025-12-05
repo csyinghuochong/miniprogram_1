@@ -1,10 +1,42 @@
 using System;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateUserData_UIStoreRefresh : AEvent<Scene, UpdateUserData>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserData args)
+        {
+            if (args.UserDataType != UserDataType.Gold && args.UserDataType != UserDataType.Diamond)
+            {
+                return;
+            }
+
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIStore);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIStoreComponent uiBagComponent = ui.GetComponent<UIStoreComponent>();
+            if (args.UserDataType == UserDataType.Gold)
+            {
+                uiBagComponent.UpdateGold();
+            }
+
+            if (args.UserDataType == UserDataType.Diamond)
+            {
+                uiBagComponent.UpdateDiamond();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [EntitySystemOf(typeof(UIStoreComponent))]
     [FriendOf(typeof(UIStoreComponent))]
     public static partial class UIStoreComponentSystem
@@ -28,6 +60,8 @@ namespace ET.Client
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
             self.Button_RefreshTime.AddListener(() => { self.OnButton_RefreshTime().Coroutine(); });
 
+            self.UpdateGold();
+            self.UpdateDiamond();
             self.GetStoreInfo().Coroutine();
         }
 
@@ -121,6 +155,32 @@ namespace ET.Client
             self.StoreItemList = response.StoreItemList;
 
             self.UpdateStoreList();
+        }
+        
+        public static void UpdateGold(this UIStoreComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+
+            if (userInfoComponent.Gold >= 10000)
+            {
+                self.Text_Type_Gold.SetTextFormat("{0}k", userInfoComponent.Gold / 1000);
+                return;
+            }
+
+            self.Text_Type_Gold.SetText(userInfoComponent.Gold);
+        }
+
+        public static void UpdateDiamond(this UIStoreComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            
+            if (userInfoComponent.Diamond >= 10000)
+            {
+                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
+                return;
+            }
+
+            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
     }
 }
