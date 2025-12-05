@@ -36,7 +36,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [EntitySystemOf(typeof(UIStoreComponent))]
     [FriendOf(typeof(UIStoreComponent))]
     public static partial class UIStoreComponentSystem
@@ -58,7 +58,7 @@ namespace ET.Client
             self.UIStoreItem.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
-            self.Button_RefreshTime.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIStoreRefTip).Coroutine(); });
+            self.Button_RefreshTime.AddListener(() => { self.OnButton_StoreRefresh().Coroutine(); });
 
             self.UpdateGold();
             self.UpdateDiamond();
@@ -144,14 +144,8 @@ namespace ET.Client
             self.UpdateStoreList();
         }
 
-        public static async ETTask OnButton_RefreshTime(this UIStoreComponent self)
+        public static async ETTask StoreRefreshHandler(this UIStoreComponent self)
         {
-            if (self.StoreRefreshNum <= 0)
-            {
-                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("刷新次数不足！");
-                return;
-            }
-            
             M2C_RefreshStore response = await ClientStoreHelper.RefreshStore(self.Root());
             if (response.Error != ErrorCode.ERR_Success)
             {
@@ -160,10 +154,10 @@ namespace ET.Client
 
             self.StoreRefreshNum = response.RefreshNum;
             self.StoreItemList = response.StoreItemList;
-            
+
             self.UpdateStoreList();
         }
-        
+
         public static void UpdateGold(this UIStoreComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
@@ -180,7 +174,7 @@ namespace ET.Client
         public static void UpdateDiamond(this UIStoreComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            
+
             if (userInfoComponent.Diamond >= 10000)
             {
                 self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
@@ -188,6 +182,13 @@ namespace ET.Client
             }
 
             self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
+        }
+
+        private static async ETTask OnButton_StoreRefresh(this UIStoreComponent self)
+        {
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIStoreRefTip);
+            UIStoreRefTipComponent uiStoreRefTipComponent = ui.GetComponent<UIStoreRefTipComponent>();
+            uiStoreRefTipComponent.Init(self.StoreRefreshNum);
         }
     }
 }

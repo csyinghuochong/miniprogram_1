@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,21 +20,40 @@ namespace ET.Client
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
 
             self.Button_Refresh.AddListener((() => { self.OnRefresh(); }));
-            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStoreRefTip); });
+            self.Button_Close.AddListener(() => { self.OnClose(); });
+        }
+
+        public static void Init(this UIStoreRefTipComponent self, int num)
+        {
+            self.StoreRefreshNum = num;
+            self.Text_StoreRefreshNum.SetTextFormat("剩余刷新次数：{0}", self.StoreRefreshNum);
+
+            self.Text_Tip.SetTextFormat("是否花费{0}钻石刷新商店", ConfigData.StoreRefreshCost[0].ItemNum);
         }
 
         public static void OnRefresh(this UIStoreRefTipComponent self)
         {
-            UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIStore);
-
-            if (ui == null)
+            if (self.StoreRefreshNum <= 0)
             {
-                return;
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("刷新次数不足！");
             }
+            else
+            {
+                UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIStore);
+                if (ui == null)
+                {
+                    return;
+                }
+                UIStoreComponent uiStoreComponent = ui.GetComponent<UIStoreComponent>();
+                uiStoreComponent.StoreRefreshHandler().Coroutine();
+            }
+            
+            self.OnClose();
+        }
 
-            UIStoreComponent uiStoreComponent = ui.GetComponent<UIStoreComponent>();
+        private static void OnClose(this UIStoreRefTipComponent self)
+        {
             self.Root().GetComponent<UIComponent>().Remove(UIType.UIStoreRefTip);
-            uiStoreComponent.OnButton_RefreshTime().Coroutine();
         }
     }
 }
