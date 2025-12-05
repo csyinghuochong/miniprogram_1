@@ -65,6 +65,17 @@ namespace ET.Client
     // }
 
     [Event(SceneType.Demo)]
+    public class ShowTip_Spawn : AEvent<Scene, ShowTip>
+    {
+        protected override async ETTask Run(Scene scene, ShowTip args)
+        {
+            scene.GetComponent<FloatingTextComponent>().ShowTipText(args.Tip);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class StateChange_ShowTip : AEvent<Scene, StateChange>
     {
         protected override async ETTask Run(Scene scene, StateChange args)

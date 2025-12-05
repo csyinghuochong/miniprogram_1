@@ -47,8 +47,10 @@ namespace ET.Client
             }
 
             EventSystem.Instance.Publish(root, new MailUpdate());
+            
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
 
-            return ErrorCode.ERR_Success;
+            return response.Error;
         }
     }
 }

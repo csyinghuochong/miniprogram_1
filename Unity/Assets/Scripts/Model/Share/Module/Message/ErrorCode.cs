@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ET
 {
     public static partial class ErrorCode
@@ -103,5 +105,22 @@ namespace ET
         public const int ERR_StoreItemNotExist = 201301; //商店道具不存在
         public const int ERR_StoreItemNotEnough = 201302; //商店道具不足
         public const int ERR_StoreRefreshNumNotEnough = 201303; //商店刷新次数不足
+
+        [StaticField]
+        public static Dictionary<int, string> ErrorTips = new()
+        {
+            { ERR_NotEnoughItems, "道具不足" },
+            { ERR_NotExistItem, "道具不存在" },
+
+            { ERR_MailNotExist, "邮件不存在" },
+            { ERR_MailDeleted, "邮件已删除" },
+            { ERR_MailRewardAlreadyReceived, "邮件道具已领取" },
+            { ERR_MailNotReward, "邮件没有奖励" },
+            { ERR_MailTimeOut, "邮件过期" },
+
+            { ERR_StoreItemNotExist, "商店道具不存在" },
+            { ERR_StoreItemNotEnough, "商店道具不足" },
+            { ERR_StoreRefreshNumNotEnough, "商店刷新次数不足" }
+        };
     }
 }

@@ -18,6 +18,8 @@
 
             M2C_StoreBuy response = (M2C_StoreBuy)await root.GetComponent<ClientSenderComponent>().Call(request);
 
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+
             return response.Error;
         }
 
@@ -26,6 +28,8 @@
             C2M_RefreshStore request = C2M_RefreshStore.Create();
 
             M2C_RefreshStore response = (M2C_RefreshStore)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
 
             return response;
         }
