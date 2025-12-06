@@ -139,6 +139,7 @@ namespace ET.Client
                 return;
             }
 
+            self.Root().GetComponent<FloatingTextComponent>().ShowTipText("购买成功！");
             self.StoreItemList[storeItemConfigId]--;
 
             self.UpdateStoreList();
