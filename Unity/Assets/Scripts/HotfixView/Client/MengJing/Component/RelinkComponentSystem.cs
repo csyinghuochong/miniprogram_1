@@ -55,7 +55,7 @@ namespace ET.Client
         {
             if (value)
             {
-                Log.Warning("获得焦点！！");
+                // Log.Warning("获得焦点！！");
                 self.CheckSession().Coroutine();
             }
         }

@@ -31,9 +31,7 @@ namespace ET.Client
             }
 
             Scene oldRoot = scene.Root();
-            Log.Warning($"ReturnLogin.RunAsync2  {oldRoot.Fiber.Id}");
             scene.Root().RemoveComponent<ClientSenderComponent>();
-            Log.Warning($"ReturnLogin  {oldRoot.CurrentScene()}   {oldRoot.CurrentScene()?.GetComponent<UnitComponent>()?.Children.Count}");
             oldRoot.CurrentScene()?.Dispose();
             oldRoot.GetComponent<UIComponent>().RemoveAll();
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(true);
