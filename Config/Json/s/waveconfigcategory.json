@@ -12,7 +12,7 @@
         "SpawnTime": 2,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -20,7 +20,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -39,7 +39,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -47,7 +47,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -66,7 +66,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -74,7 +74,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -93,7 +93,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -101,7 +101,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -120,7 +120,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -128,7 +128,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -166,7 +166,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -174,7 +174,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -193,7 +193,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -201,7 +201,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -220,7 +220,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -228,7 +228,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -247,7 +247,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -255,7 +255,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -274,7 +274,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -282,7 +282,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -320,7 +320,7 @@
         "SpawnTime": 2,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -328,7 +328,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -347,7 +347,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -355,7 +355,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -374,7 +374,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -382,7 +382,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -401,7 +401,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -409,7 +409,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
@@ -428,7 +428,7 @@
         "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000001
       },
@@ -436,7 +436,7 @@
         "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 5
+          "y": 50
         },
         "MonsterId": 10000002
       }
