@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ET.Client
@@ -55,7 +56,7 @@ namespace ET.Client
 
 		public static void RemoveAll(this UIComponent self)
 		{
-			foreach (KeyValuePair<string, UI> window in self.UIs)
+			foreach (KeyValuePair<string, UI> window in self.UIs.ToList())
 			{
 				UIEventComponent.Instance.OnRemove(self, window.Key);
 				self.UIs.Remove(window.Key);
