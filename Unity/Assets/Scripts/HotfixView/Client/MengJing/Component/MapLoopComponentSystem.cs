@@ -18,13 +18,18 @@ namespace ET.Client
 
             foreach (GameObject map in self.MapList)
             {
-                self.TotalHeight += map.transform.GetComponent<SpriteRenderer>().sprite.bounds.size.y * map.transform.lossyScale.y;
+                self.TotalHeight += 72;
             }
         }
 
         [EntitySystem]
         private static void Update(this MapLoopComponent self)
         {
+            if (self.LookAtUnit.Position.y < 72 * 1.5f)
+            {
+                return;
+            }
+
             if (self.LookAtUnit.Position.y > self.MapList[0].transform.position.y + self.TotalHeight / 2)
             {
                 GameObject bottomMap = self.MapList[0];

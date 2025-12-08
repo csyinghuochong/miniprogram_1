@@ -44,7 +44,7 @@ namespace ET.Client
                     break;
                 case MapType.LocalLevel:
                     paramss = "Level";
-                    subScene.Add("LevelTest");
+                    // subScene.Add("LevelTest");
                     break;
                 default:
                     break;
