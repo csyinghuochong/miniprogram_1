@@ -28,5 +28,6 @@ namespace ET
         public const string UIGetReward = "UIGetReward/UIGetReward";
         public const string UIDialogue = "UIDialogue/UIDialogue";
         public const string UIStoreRefTip = "UIStoreRefTip/UIStoreRefTip";
+        public const string UIRelink = "UIRelink/UIRelink";
     }
 }
