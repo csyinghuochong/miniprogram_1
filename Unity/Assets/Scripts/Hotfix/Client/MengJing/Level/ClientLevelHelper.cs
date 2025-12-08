@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     public static class ClientLevelHelper
     {
@@ -21,10 +23,10 @@
             return response.Error;
         }
 
-        public static async ETTask<int> PickUpDropItem(Scene root, long unitId)
+        public static async ETTask<int> PickUpDropItem(Scene root, List<long> unitIds)
         {
             C2M_PickUpDropItem request = C2M_PickUpDropItem.Create();
-            request.UnitIdList.Add(unitId);
+            request.UnitIdList.AddRange(unitIds);
 
             M2C_PickUpDropItem response = (M2C_PickUpDropItem)await root.GetComponent<ClientSenderComponent>().Call(request);
 

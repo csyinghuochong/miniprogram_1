@@ -8,5 +8,8 @@ namespace ET.Client
         private EntityRef<Unit> mainUnit;
         public Unit MainUnit { get => this.mainUnit; set => this.mainUnit = value; }
         public List<EntityRef<Unit>> DropItemList = new();
+        
+        public long LastSendTime = 0;
+        public List<long> SendIdList = new();
     }
 }

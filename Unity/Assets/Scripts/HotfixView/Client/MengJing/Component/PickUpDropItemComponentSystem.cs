@@ -33,8 +33,8 @@ namespace ET.Client
 
                 if (distanceToTarget <= moveStep)
                 {
-                    ClientLevelHelper.PickUpDropItem(self.Root(), unit.Id).Coroutine();
                     self.DropItemList.RemoveAt(i);
+                    self.SendIdList.Add(unit.Id);
                 }
                 else
                 {
@@ -48,6 +48,14 @@ namespace ET.Client
                     }
                 }
             }
+            
+            long now = TimeHelper.ServerNow();
+            if (self.SendIdList.Count > 0 && self.LastSendTime + 200 < now)
+            {
+                ClientLevelHelper.PickUpDropItem(self.Root(), self.SendIdList).Coroutine();
+                self.LastSendTime = now;
+                self.SendIdList.Clear();
+            }
         }
 
         [EntitySystem]
@@ -59,6 +67,7 @@ namespace ET.Client
         public static void OnStarDrop(this PickUpDropItemComponent self)
         {
             self.DropItemList.Clear();
+            self.SendIdList.Clear();
 
             UnitComponent unitComponent = self.MainUnit.GetParent<UnitComponent>();
             foreach (Unit unit in unitComponent.GetAll())
