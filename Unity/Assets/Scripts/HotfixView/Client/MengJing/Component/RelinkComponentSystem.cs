@@ -32,7 +32,7 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.MapType < MapType.Login)
+            if (mapComponent.MapType == MapType.Login)
             {
                 Log.Warning($"{mapComponent.MapType} 不检测");
                 return;
