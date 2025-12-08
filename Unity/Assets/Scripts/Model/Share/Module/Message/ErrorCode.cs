@@ -16,7 +16,7 @@ namespace ET
         // 这里配置逻辑层的错误码
         // 110000 - 200000是抛异常的错误
         // 200001以上不抛异常
-        
+
         // 通用错误 200001-200099
         public const int ERR_Error = 200002; //通用错误
         public const int ERR_NetWorkError = 200003; //网络错误
@@ -87,7 +87,7 @@ namespace ET
         public const int ERR_TargetUnitIsNull = 200904; //目标单位不存在
         public const int ERR_TargetUnitCantBeAttack = 200905; //目标不能被攻击
         public const int ERR_Stun = 200906; //眩晕状态中
-        public const int ERR_Freeze= 200907; //冰冻状态中
+        public const int ERR_Freeze = 200907; //冰冻状态中
 
         // 场景相关错误 201001-201099
         public const int ERR_SceneCantSetTimeScale = 201001; //当前Scene不能设置TimeScale
@@ -95,13 +95,14 @@ namespace ET
         // 任务相关错误 201101-201199
         public const int ERR_TaskCommited = 201101; //任务已经提交
         public const int ERR_TaskNoCompleted = 201102; //任务没有完成
-        
+
         public const int ERR_MailNotExist = 201201; //邮件不存在
         public const int ERR_MailDeleted = 201202; //邮件已删除
         public const int ERR_MailRewardAlreadyReceived = 201203; //邮件道具已领取
         public const int ERR_MailNotReward = 201204; //邮件没有奖励
         public const int ERR_MailTimeOut = 201205; //邮件过期
-        
+        public const int ERR_MailRewardNotReceive = 201206; //邮件奖励未领取
+
         public const int ERR_StoreItemNotExist = 201301; //商店道具不存在
         public const int ERR_StoreItemNotEnough = 201302; //商店道具不足
         public const int ERR_StoreRefreshNumNotEnough = 201303; //商店刷新次数不足
@@ -117,6 +118,7 @@ namespace ET
             { ERR_MailRewardAlreadyReceived, "邮件道具已领取" },
             { ERR_MailNotReward, "邮件没有奖励" },
             { ERR_MailTimeOut, "邮件过期" },
+            { ERR_MailRewardNotReceive, "邮件奖励未领取" },
 
             { ERR_StoreItemNotExist, "商店道具不存在" },
             { ERR_StoreItemNotEnough, "商店道具不足" },

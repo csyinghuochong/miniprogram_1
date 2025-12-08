@@ -60,7 +60,8 @@
                             mail2MReceiveReward.ItemInfoList.Add(item.ToMessage());
                         }
 
-                        M2Mail_ReceiveReward m2MailReceiveReward = (M2Mail_ReceiveReward)await mailUnit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(mailUnit.Id, mail2MReceiveReward);
+                        M2Mail_ReceiveReward m2MailReceiveReward = (M2Mail_ReceiveReward)await mailUnit.Root()
+                                .GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(mailUnit.Id, mail2MReceiveReward);
                         if (m2MailReceiveReward.Error != ErrorCode.ERR_Success)
                         {
                             response.Error = m2MailReceiveReward.Error;
@@ -72,9 +73,15 @@
                     }
                     else if (request.MailOpType == (int)MailOpType.Delete)
                     {
+                        if (mail.MailRewardState == (int)MailRewardState.NotReceived)
+                        {
+                            response.Error = ErrorCode.ERR_MailRewardNotReceive;
+                            return;
+                        }
+
                         mail.MailDeleteState = (int)MailDeleteState.Deleted;
                     }
-                    
+
                     response.MailInfoList.Add(mail.ToMessage());
                 }
             }
