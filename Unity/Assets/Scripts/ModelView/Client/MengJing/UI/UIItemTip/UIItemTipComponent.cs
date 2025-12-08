@@ -9,7 +9,6 @@ namespace ET.Client
         None = 0,
         UIHero_Wear,
         UIHero_TakeOff,
-        OnWarehouse,
         Bag2Warehouse,
         Warehouse2Bag,
         OnRoleBag,

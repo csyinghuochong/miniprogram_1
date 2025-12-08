@@ -89,11 +89,6 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
 
-            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
-            {
-                self.Button_Take.gameObject.SetActive(true);
-            }
-
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
                 self.Button_Save.gameObject.SetActive(true);
@@ -119,7 +114,7 @@ namespace ET.Client
 
             self.OnClose();
         }
-        
+
         private static void OnButton_Take(this UIItemTip_MaterialComponent self)
         {
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Warehouse2Bag)

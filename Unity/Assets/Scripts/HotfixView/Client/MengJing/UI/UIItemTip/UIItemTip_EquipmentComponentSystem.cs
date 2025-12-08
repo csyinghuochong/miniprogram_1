@@ -168,11 +168,6 @@ namespace ET.Client
                 self.Text_EquipHero.SetText(heroConfig.HeroName);
             }
 
-            if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
-            {
-                self.Button_Take.gameObject.SetActive(true);
-            }
-
             if (uiItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
                 self.Button_Save.gameObject.SetActive(true);

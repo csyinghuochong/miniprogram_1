@@ -65,7 +65,6 @@ namespace ET.Client
                 itemConfig = ItemConfigCategory.Instance.Get(uiItemTipData.ItemConfigId);
             }
 
-
             string color = itemConfig.ItemQuality switch
             {
                 1 => "#0e832a",
@@ -90,11 +89,6 @@ namespace ET.Client
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             self.Image_ItemIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-
-            if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.OnWarehouse)
-            {
-                self.Button_Take.gameObject.SetActive(true);
-            }
 
             if (self.UIItemTipData.UIItemTipOpType == UIItemTipOpType.Bag2Warehouse)
             {
