@@ -18,7 +18,6 @@ namespace ET
 		private int BigVersionIOS = 0;
 		
 		public Action<bool> OnApplicationFocusHandler;
-		public Action OnApplicationQuitHandler;
 
 		private void Start()
 		{
@@ -120,9 +119,7 @@ namespace ET
 			World.Instance.Dispose();
 		}
 		
-		/// 当程序获得或者是去焦点时
-		/// </summary>
-		/// <param name="focus"></param>
+		// 当程序获得或者是去焦点时
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			try
@@ -135,6 +132,4 @@ namespace ET
 			}
 		}
 	}
-	
-	
 }

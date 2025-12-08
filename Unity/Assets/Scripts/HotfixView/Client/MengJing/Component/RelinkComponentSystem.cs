@@ -55,8 +55,7 @@ namespace ET.Client
         {
             if (value)
             {
-                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("获得焦点！！");
-
+                Log.Warning("获得焦点！！");
                 self.CheckSession().Coroutine();
             }
         }
@@ -75,7 +74,8 @@ namespace ET.Client
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             for (int i = 0; i < 5; i++)
             {
-                long instanceid = self.InstanceId;
+                long instanceId = self.InstanceId;
+
                 Log.Warning($"重连请求  {i} ！！ {self.Relink}");
                 if (timerComponent == null || !self.Relink)
                 {
@@ -83,7 +83,8 @@ namespace ET.Client
                 }
 
                 await timerComponent.WaitAsync(1000);
-                if (instanceid != self.InstanceId)
+
+                if (instanceId != self.InstanceId)
                 {
                     break;
                 }

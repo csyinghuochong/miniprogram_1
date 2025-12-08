@@ -65,4 +65,8 @@ namespace ET
     public struct SessionDispose
     {
     }
+
+    public struct ReturnLogin
+    {
+    }
 }

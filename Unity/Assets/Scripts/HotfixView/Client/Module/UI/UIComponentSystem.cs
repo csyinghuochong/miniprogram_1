@@ -53,6 +53,18 @@ namespace ET.Client
 			ui.Dispose();
 		}
 
+		public static void RemoveAll(this UIComponent self)
+		{
+			foreach (KeyValuePair<string, UI> window in self.UIs)
+			{
+				UIEventComponent.Instance.OnRemove(self, window.Key);
+				self.UIs.Remove(window.Key);
+				window.Value.Dispose();
+			}
+
+			self.UIs.Clear();
+		}
+
 		public static UI Get(this UIComponent self, string name)
 		{
 			UI ui = null;
