@@ -14,7 +14,6 @@ namespace ET.Client
             self.MapList.Add(GameObject.Find("Tile_0"));
             self.MapList.Add(GameObject.Find("Tile_1"));
             self.MapList.Add(GameObject.Find("Tile_2"));
-            self.MapList.Add(GameObject.Find("Tile_3"));
 
             foreach (GameObject map in self.MapList)
             {
@@ -25,7 +24,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this MapLoopComponent self)
         {
-            if (self.LookAtUnit.Position.y < 72 * 1.5f)
+            if (self.LookAtUnit.Position.y < 72)
             {
                 return;
             }
