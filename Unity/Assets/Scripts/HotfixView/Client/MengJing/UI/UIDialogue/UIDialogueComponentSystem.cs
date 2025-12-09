@@ -27,6 +27,8 @@ namespace ET.Client
 
             self.Text_NpcName.SetText(npcConfig.Name);
             self.Text_Content.SetText(npcConfig.DialogueText);
+
+            await ETTask.CompletedTask;
         }
     }
 }
