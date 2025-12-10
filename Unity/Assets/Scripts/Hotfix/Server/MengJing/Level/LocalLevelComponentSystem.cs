@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -28,6 +29,10 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this LocalLevelComponent self)
         {
+            // 创建关卡边界
+            CollisionHelper.CreateStaticEdge(self.Scene(), new Vector2(-13, -37), new Vector2(-13, 2000));
+            CollisionHelper.CreateStaticEdge(self.Scene(), new Vector2(13, -37), new Vector2(13, 2000));
+            CollisionHelper.CreateStaticEdge(self.Scene(), new Vector2(-13, -37), new Vector2(13, -37));
         }
 
         [EntitySystem]

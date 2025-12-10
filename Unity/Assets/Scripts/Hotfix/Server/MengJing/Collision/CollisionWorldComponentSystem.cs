@@ -46,8 +46,9 @@ namespace ET.Server
         private static void Awake(this CollisionWorldComponent self)
         {
             self.World = new Box2DSharp.Dynamics.World(new Vector2(0, 0));
-            CollisionListenerComponent collisionListener = self.AddComponent<CollisionListenerComponent>();
-            self.World.SetContactListener(collisionListener);
+
+            // CollisionListenerComponent collisionListener = self.AddComponent<CollisionListenerComponent>();
+            // self.World.SetContactListener(collisionListener);
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.CollisionWorldTimer, self);
         }
