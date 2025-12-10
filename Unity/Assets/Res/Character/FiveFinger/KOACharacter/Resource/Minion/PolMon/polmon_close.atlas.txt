@@ -1,0 +1,139 @@
+
+polmon_close.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 442, 117
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+close_l1/blade_close
+  rotate: false
+  xy: 2, 2
+  size: 125, 60
+  orig: 125, 60
+  offset: 0, 0
+  index: -1
+close_l2/blade_close
+  rotate: false
+  xy: 2, 2
+  size: 125, 60
+  orig: 125, 60
+  offset: 0, 0
+  index: -1
+close_l1/body
+  rotate: false
+  xy: 319, 64
+  size: 121, 184
+  orig: 121, 184
+  offset: 0, 0
+  index: -1
+close_l1/eye
+  rotate: false
+  xy: 252, 32
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+close_l2/eye
+  rotate: false
+  xy: 252, 32
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+close_l3/eye
+  rotate: false
+  xy: 252, 32
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+close_l1/leg_left
+  rotate: false
+  xy: 300, 13
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+close_l2/leg_left
+  rotate: false
+  xy: 300, 13
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+close_l3/leg_left
+  rotate: false
+  xy: 300, 13
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+close_l1/leg_right
+  rotate: false
+  xy: 252, 12
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+close_l2/leg_right
+  rotate: false
+  xy: 252, 12
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+close_l3/leg_right
+  rotate: false
+  xy: 252, 12
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+close_l2/body_l2
+  rotate: false
+  xy: 173, 64
+  size: 144, 184
+  orig: 144, 184
+  offset: 0, 0
+  index: -1
+close_l3/armor
+  rotate: false
+  xy: 129, 7
+  size: 121, 55
+  orig: 121, 55
+  offset: 0, 0
+  index: -1
+close_l3/blade_close_l3
+  rotate: false
+  xy: 442, 45
+  size: 136, 70
+  orig: 136, 70
+  offset: 0, 0
+  index: -1
+close_l3/body_l3
+  rotate: false
+  xy: 2, 64
+  size: 169, 184
+  orig: 169, 184
+  offset: 0, 0
+  index: -1
+magic_ball
+  rotate: false
+  xy: 326, 36
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 348, 8
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1

@@ -1,0 +1,76 @@
+
+poomon_close.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 456, 119
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+body
+  rotate: false
+  xy: 154, 82
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 305, 82
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l3
+  rotate: false
+  xy: 2, 82
+  size: 150, 168
+  orig: 150, 168
+  offset: 0, 0
+  index: -1
+close
+  rotate: false
+  xy: 2, 20
+  size: 258, 22
+  orig: 258, 22
+  offset: 0, 0
+  index: -1
+close_l3
+  rotate: false
+  xy: 2, 44
+  size: 260, 36
+  orig: 260, 36
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 350, 22
+  size: 53, 58
+  orig: 53, 58
+  offset: 0, 0
+  index: -1
+leg_left
+  rotate: true
+  xy: 264, 49
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+leg_right
+  rotate: true
+  xy: 307, 49
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+tooth
+  rotate: false
+  xy: 262, 2
+  size: 76, 40
+  orig: 76, 40
+  offset: 0, 0
+  index: -1

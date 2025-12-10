@@ -1,0 +1,230 @@
+
+Belphegor.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 136
+  rotate: true
+  xy: 793, 271
+  size: 45, 30
+  orig: 45, 31
+  offset: 0, 0
+  index: -1
+arm1_l
+  rotate: false
+  xy: 964, 146
+  size: 43, 143
+  orig: 43, 143
+  offset: 0, 0
+  index: -1
+arm1_r
+  rotate: true
+  xy: 648, 18
+  size: 43, 143
+  orig: 43, 143
+  offset: 0, 0
+  index: -1
+arm2_l
+  rotate: false
+  xy: 812, 179
+  size: 69, 48
+  orig: 69, 48
+  offset: 0, 0
+  index: -1
+arm2_r
+  rotate: false
+  xy: 654, 164
+  size: 65, 53
+  orig: 65, 53
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 870, 405
+  size: 103, 135
+  orig: 103, 180
+  offset: 0, 45
+  index: -1
+effect_attack1
+  rotate: false
+  xy: 2, 22
+  size: 255, 204
+  orig: 263, 204
+  offset: 5, 0
+  index: -1
+effect_attack2
+  rotate: true
+  xy: 2, 228
+  size: 280, 204
+  orig: 280, 207
+  offset: 0, 3
+  index: -1
+effect_attack3
+  rotate: false
+  xy: 208, 276
+  size: 216, 232
+  orig: 216, 232
+  offset: 0, 0
+  index: -1
+effect_sleep3
+  rotate: true
+  xy: 426, 279
+  size: 229, 119
+  orig: 233, 119
+  offset: 4, 0
+  index: -1
+effect_swing_left
+  rotate: true
+  xy: 547, 318
+  size: 40, 276
+  orig: 46, 276
+  offset: 3, 0
+  index: -1
+effect_swing_right
+  rotate: true
+  xy: 208, 233
+  size: 41, 276
+  orig: 46, 276
+  offset: 3, 0
+  index: -1
+face
+  rotate: true
+  xy: 259, 83
+  size: 148, 149
+  orig: 148, 149
+  offset: 0, 0
+  index: -1
+face_sleep
+  rotate: false
+  xy: 547, 360
+  size: 148, 148
+  orig: 148, 149
+  offset: 0, 1
+  index: -1
+fog1
+  rotate: true
+  xy: 736, 220
+  size: 96, 52
+  orig: 100, 56
+  offset: 2, 2
+  index: -1
+foot_l
+  rotate: true
+  xy: 790, 229
+  size: 37, 35
+  orig: 37, 35
+  offset: 0, 0
+  index: -1
+foot_r
+  rotate: false
+  xy: 547, 287
+  size: 53, 29
+  orig: 53, 29
+  offset: 0, 0
+  index: -1
+glow
+  rotate: false
+  xy: 697, 385
+  size: 171, 123
+  orig: 200, 200
+  offset: 16, 40
+  index: -1
+hand_l
+  rotate: false
+  xy: 410, 84
+  size: 74, 147
+  orig: 74, 147
+  offset: 0, 0
+  index: -1
+hand_r
+  rotate: true
+  xy: 259, 7
+  size: 74, 147
+  orig: 74, 147
+  offset: 0, 0
+  index: -1
+horn_l
+  rotate: false
+  xy: 648, 63
+  size: 86, 97
+  orig: 86, 97
+  offset: 0, 0
+  index: -1
+horn_r
+  rotate: false
+  xy: 654, 219
+  size: 74, 97
+  orig: 74, 97
+  offset: 0, 0
+  index: -1
+leg1_l
+  rotate: false
+  xy: 807, 98
+  size: 61, 72
+  orig: 61, 72
+  offset: 0, 0
+  index: -1
+leg1_r
+  rotate: true
+  xy: 730, 172
+  size: 46, 80
+  orig: 46, 80
+  offset: 0, 0
+  index: -1
+leg2_l
+  rotate: true
+  xy: 793, 13
+  size: 57, 79
+  orig: 57, 79
+  offset: 0, 0
+  index: -1
+leg2_r
+  rotate: false
+  xy: 736, 72
+  size: 69, 72
+  orig: 71, 72
+  offset: 2, 0
+  index: -1
+manteau
+  rotate: false
+  xy: 964, 291
+  size: 56, 112
+  orig: 59, 120
+  offset: 0, 4
+  index: -1
+mouth
+  rotate: false
+  xy: 410, 3
+  size: 72, 79
+  orig: 72, 79
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 825, 268
+  size: 115, 137
+  orig: 124, 138
+  offset: 0, 1
+  index: -1
+waist
+  rotate: true
+  xy: 569, 8
+  size: 136, 77
+  orig: 136, 77
+  offset: 0, 0
+  index: -1
+wing_l
+  rotate: true
+  xy: 569, 162
+  size: 123, 83
+  orig: 123, 83
+  offset: 0, 0
+  index: -1
+wing_r
+  rotate: true
+  xy: 486, 2
+  size: 275, 81
+  orig: 275, 81
+  offset: 0, 0
+  index: -1

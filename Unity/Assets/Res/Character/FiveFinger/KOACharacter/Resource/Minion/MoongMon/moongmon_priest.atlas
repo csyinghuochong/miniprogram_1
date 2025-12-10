@@ -1,0 +1,167 @@
+
+moongmon_priest.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 2, 2
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+priest_l1/arm_right
+  rotate: false
+  xy: 479, 44
+  size: 22, 33
+  orig: 22, 33
+  offset: 0, 0
+  index: -1
+priest_l2/arm_right
+  rotate: false
+  xy: 479, 44
+  size: 22, 33
+  orig: 22, 33
+  offset: 0, 0
+  index: -1
+priest_l3/arm_right
+  rotate: false
+  xy: 479, 44
+  size: 22, 33
+  orig: 22, 33
+  offset: 0, 0
+  index: -1
+priest_l1/body
+  rotate: true
+  xy: 2, 120
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+priest_l1/book
+  rotate: true
+  xy: 233, 41
+  size: 77, 63
+  orig: 77, 63
+  offset: 0, 0
+  index: -1
+priest_l2/book
+  rotate: true
+  xy: 233, 41
+  size: 77, 63
+  orig: 77, 63
+  offset: 0, 0
+  index: -1
+priest_l3/book
+  rotate: true
+  xy: 233, 41
+  size: 77, 63
+  orig: 77, 63
+  offset: 0, 0
+  index: -1
+priest_l1/eye
+  rotate: false
+  xy: 407, 53
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+priest_l2/eye
+  rotate: false
+  xy: 407, 53
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+priest_l3/eye
+  rotate: false
+  xy: 407, 53
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+priest_l1/leg_left
+  rotate: false
+  xy: 407, 79
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+priest_l2/leg_left
+  rotate: false
+  xy: 407, 79
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+priest_l3/leg_left
+  rotate: false
+  xy: 407, 79
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+priest_l1/leg_right
+  rotate: false
+  xy: 407, 35
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+priest_l2/leg_right
+  rotate: false
+  xy: 407, 35
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+priest_l3/leg_right
+  rotate: false
+  xy: 407, 35
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+priest_l2/body
+  rotate: true
+  xy: 154, 120
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+priest_l2/tung
+  rotate: true
+  xy: 298, 8
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+priest_l3/tung
+  rotate: true
+  xy: 298, 8
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+priest_l3/body
+  rotate: false
+  xy: 306, 99
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+priest_l3/glow
+  rotate: true
+  xy: 135, 38
+  size: 80, 96
+  orig: 89, 101
+  offset: 4, 2
+  index: -1
+priest_l3/manteau_head
+  rotate: false
+  xy: 298, 42
+  size: 107, 55
+  orig: 107, 55
+  offset: 0, 0
+  index: -1

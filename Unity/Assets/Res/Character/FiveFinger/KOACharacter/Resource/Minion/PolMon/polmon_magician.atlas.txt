@@ -1,0 +1,146 @@
+
+polmon_magician.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 442, 123
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 516, 95
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 544, 95
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magician_l1/body
+  rotate: false
+  xy: 319, 70
+  size: 121, 184
+  orig: 121, 184
+  offset: 0, 0
+  index: -1
+magician_l1/eye
+  rotate: false
+  xy: 442, 91
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+magician_l2/eye
+  rotate: false
+  xy: 442, 91
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+magician_l3/eye
+  rotate: false
+  xy: 442, 91
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+magician_l1/leg_left
+  rotate: false
+  xy: 490, 72
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+magician_l2/leg_left
+  rotate: false
+  xy: 490, 72
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+magician_l3/leg_left
+  rotate: false
+  xy: 490, 72
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+magician_l1/leg_right
+  rotate: false
+  xy: 442, 71
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+magician_l2/leg_right
+  rotate: false
+  xy: 442, 71
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+magician_l3/leg_right
+  rotate: false
+  xy: 442, 71
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+magician_l1/stick
+  rotate: true
+  xy: 186, 16
+  size: 52, 168
+  orig: 52, 168
+  offset: 0, 0
+  index: -1
+magician_l2/stick
+  rotate: true
+  xy: 186, 16
+  size: 52, 168
+  orig: 52, 168
+  offset: 0, 0
+  index: -1
+magician_l2/body_l2
+  rotate: false
+  xy: 173, 70
+  size: 144, 184
+  orig: 144, 184
+  offset: 0, 0
+  index: -1
+magician_l2/manteau
+  rotate: false
+  xy: 356, 2
+  size: 124, 66
+  orig: 124, 67
+  offset: 0, 0
+  index: -1
+magician_l3/body_l3
+  rotate: false
+  xy: 2, 70
+  size: 169, 184
+  orig: 169, 184
+  offset: 0, 0
+  index: -1
+magician_l3/manteau_l3
+  rotate: false
+  xy: 482, 3
+  size: 124, 66
+  orig: 124, 67
+  offset: 0, 0
+  index: -1
+magician_l3/stick_l3
+  rotate: true
+  xy: 2, 13
+  size: 55, 182
+  orig: 55, 182
+  offset: 0, 0
+  index: -1

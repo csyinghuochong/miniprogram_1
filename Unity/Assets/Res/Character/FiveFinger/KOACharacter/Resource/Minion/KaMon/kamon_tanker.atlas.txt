@@ -1,0 +1,69 @@
+
+kamon_tanker.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 149, 2
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+blade
+  rotate: false
+  xy: 2, 36
+  size: 116, 80
+  orig: 117, 81
+  offset: 0, 1
+  index: -1
+blade_l3
+  rotate: false
+  xy: 282, 25
+  size: 116, 80
+  orig: 117, 81
+  offset: 0, 1
+  index: -1
+body
+  rotate: false
+  xy: 149, 120
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+body3
+  rotate: false
+  xy: 2, 118
+  size: 145, 133
+  orig: 145, 133
+  offset: 0, 0
+  index: -1
+body_l2
+  rotate: true
+  xy: 295, 107
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 428, 121
+  size: 60, 36
+  orig: 60, 36
+  offset: 0, 0
+  index: -1
+shiled
+  rotate: false
+  xy: 428, 159
+  size: 68, 92
+  orig: 68, 92
+  offset: 0, 0
+  index: -1
+shiled_l3
+  rotate: true
+  xy: 400, 29
+  size: 76, 99
+  orig: 76, 99
+  offset: 0, 0
+  index: -1

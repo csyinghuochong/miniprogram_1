@@ -1,0 +1,160 @@
+
+moongmon_tanker.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 306, 107
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+close_l3/body
+  rotate: true
+  xy: 2, 109
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+tanker_l2/body
+  rotate: true
+  xy: 2, 109
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+tanker_l1/body
+  rotate: true
+  xy: 154, 109
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+tanker_l1/eye
+  rotate: true
+  xy: 371, 35
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+tanker_l2/eye
+  rotate: true
+  xy: 371, 35
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+tanker_l3/eye
+  rotate: true
+  xy: 371, 35
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+tanker_l1/leg_left
+  rotate: false
+  xy: 296, 87
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+tanker_l2/leg_left
+  rotate: false
+  xy: 296, 87
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+tanker_l3/leg_left
+  rotate: false
+  xy: 296, 87
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+tanker_l1/leg_right
+  rotate: false
+  xy: 296, 69
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+tanker_l2/leg_right
+  rotate: false
+  xy: 296, 69
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+tanker_l3/leg_right
+  rotate: false
+  xy: 296, 69
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+tanker_l1/shiled
+  rotate: false
+  xy: 424, 40
+  size: 81, 98
+  orig: 81, 98
+  offset: 0, 0
+  index: -1
+tanker_l2/shiled
+  rotate: false
+  xy: 424, 40
+  size: 81, 98
+  orig: 81, 98
+  offset: 0, 0
+  index: -1
+tanker_l1/wepon
+  rotate: false
+  xy: 133, 41
+  size: 127, 66
+  orig: 127, 66
+  offset: 0, 0
+  index: -1
+tanker_l2/wepon
+  rotate: false
+  xy: 133, 41
+  size: 127, 66
+  orig: 127, 66
+  offset: 0, 0
+  index: -1
+tanker_l2/tung
+  rotate: false
+  xy: 262, 59
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+tanker_l3/tung
+  rotate: false
+  xy: 262, 59
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+tanker_l3/helmet
+  rotate: false
+  xy: 262, 2
+  size: 107, 55
+  orig: 107, 55
+  offset: 0, 0
+  index: -1
+tanker_l3/shiled_;2
+  rotate: false
+  xy: 424, 140
+  size: 84, 98
+  orig: 84, 98
+  offset: 0, 0
+  index: -1
+tanker_l3/wepon_l3
+  rotate: false
+  xy: 2, 36
+  size: 129, 71
+  orig: 129, 71
+  offset: 0, 0
+  index: -1

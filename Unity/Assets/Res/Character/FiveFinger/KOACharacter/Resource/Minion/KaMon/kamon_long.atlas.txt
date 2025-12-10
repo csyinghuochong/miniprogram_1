@@ -1,0 +1,55 @@
+
+kamon_long.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arrow
+  rotate: false
+  xy: 291, 12
+  size: 95, 73
+  orig: 96, 74
+  offset: 0, 0
+  index: -1
+arrow_l3
+  rotate: false
+  xy: 149, 2
+  size: 102, 96
+  orig: 103, 106
+  offset: 0, 8
+  index: -1
+body
+  rotate: false
+  xy: 149, 100
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+body3_long
+  rotate: false
+  xy: 2, 98
+  size: 145, 133
+  orig: 145, 133
+  offset: 0, 0
+  index: -1
+body_l2
+  rotate: true
+  xy: 295, 87
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+buket
+  rotate: false
+  xy: 2, 4
+  size: 94, 92
+  orig: 94, 92
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 253, 38
+  size: 60, 36
+  orig: 60, 36
+  offset: 0, 0
+  index: -1

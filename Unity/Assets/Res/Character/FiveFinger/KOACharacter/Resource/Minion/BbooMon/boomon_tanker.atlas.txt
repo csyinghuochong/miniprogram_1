@@ -1,0 +1,83 @@
+
+boomon_tanker.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 298, 10
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+blade
+  rotate: true
+  xy: 431, 10
+  size: 116, 80
+  orig: 117, 81
+  offset: 0, 1
+  index: -1
+blade_l3
+  rotate: true
+  xy: 513, 10
+  size: 116, 80
+  orig: 117, 81
+  offset: 0, 1
+  index: -1
+body_l1
+  rotate: false
+  xy: 152, 2
+  size: 144, 124
+  orig: 144, 124
+  offset: 0, 0
+  index: -1
+body_l3
+  rotate: false
+  xy: 2, 2
+  size: 148, 124
+  orig: 148, 124
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 771, 6
+  size: 42, 52
+  orig: 44, 54
+  offset: 1, 1
+  index: -1
+horn
+  rotate: false
+  xy: 813, 62
+  size: 58, 64
+  orig: 59, 65
+  offset: 1, 1
+  index: -1
+horn_back
+  rotate: false
+  xy: 825, 3
+  size: 54, 57
+  orig: 54, 57
+  offset: 0, 0
+  index: -1
+shiled
+  rotate: false
+  xy: 686, 37
+  size: 83, 89
+  orig: 83, 89
+  offset: 0, 0
+  index: -1
+shiled_l3
+  rotate: false
+  xy: 595, 37
+  size: 89, 89
+  orig: 89, 89
+  offset: 0, 0
+  index: -1
+tooth
+  rotate: true
+  xy: 771, 50
+  size: 76, 40
+  orig: 76, 40
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,41 @@
+
+basil_spear.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fog
+  rotate: false
+  xy: 372, 21
+  size: 118, 54
+  orig: 118, 54
+  offset: 0, 0
+  index: -1
+shutterstock_274450940
+  rotate: true
+  xy: 382, 127
+  size: 125, 94
+  orig: 125, 94
+  offset: 0, 0
+  index: -1
+skill_dirt
+  rotate: false
+  xy: 195, 2
+  size: 175, 73
+  orig: 175, 73
+  offset: 0, 0
+  index: -1
+spear
+  rotate: true
+  xy: 2, 77
+  size: 175, 378
+  orig: 175, 378
+  offset: 0, 0
+  index: -1
+spear_light
+  rotate: true
+  xy: 2, 2
+  size: 73, 191
+  orig: 73, 191
+  offset: 0, 0
+  index: -1

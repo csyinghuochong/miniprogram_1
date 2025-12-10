@@ -1,0 +1,160 @@
+
+polmon_tanker.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 52, 6
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 254, 409
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 254, 381
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+tanker_l1/blade
+  rotate: true
+  xy: 227, 18
+  size: 119, 43
+  orig: 121, 43
+  offset: 1, 0
+  index: -1
+tanker_l2/blade
+  rotate: true
+  xy: 227, 18
+  size: 119, 43
+  orig: 121, 43
+  offset: 1, 0
+  index: -1
+tanker_l1/body
+  rotate: false
+  xy: 148, 139
+  size: 121, 184
+  orig: 121, 184
+  offset: 0, 0
+  index: -1
+tanker_l1/eye
+  rotate: true
+  xy: 254, 437
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+tanker_l2/eye
+  rotate: true
+  xy: 254, 437
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+tanker_l3/eye
+  rotate: true
+  xy: 254, 437
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+tanker_l1/leg_left
+  rotate: false
+  xy: 221, 328
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+tanker_l2/leg_left
+  rotate: false
+  xy: 221, 328
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+tanker_l3/leg_left
+  rotate: false
+  xy: 221, 328
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+tanker_l1/leg_right
+  rotate: false
+  xy: 173, 327
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+tanker_l2/leg_right
+  rotate: false
+  xy: 173, 327
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+tanker_l3/leg_right
+  rotate: false
+  xy: 173, 327
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+tanker_l1/shiled
+  rotate: true
+  xy: 173, 429
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+tanker_l2/shiled
+  rotate: true
+  xy: 173, 429
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+tanker_l2/body_l2
+  rotate: false
+  xy: 2, 139
+  size: 144, 184
+  orig: 144, 184
+  offset: 0, 0
+  index: -1
+tanker_l3/armor
+  rotate: true
+  xy: 170, 16
+  size: 121, 55
+  orig: 121, 55
+  offset: 0, 0
+  index: -1
+tanker_l3/blade_l3
+  rotate: true
+  xy: 2, 2
+  size: 135, 48
+  orig: 137, 48
+  offset: 1, 0
+  index: -1
+tanker_l3/body_l3
+  rotate: false
+  xy: 2, 325
+  size: 169, 184
+  orig: 169, 184
+  offset: 0, 0
+  index: -1
+tanker_l3/shiled_l3
+  rotate: true
+  xy: 173, 347
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1

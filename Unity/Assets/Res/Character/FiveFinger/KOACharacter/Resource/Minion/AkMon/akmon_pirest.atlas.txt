@@ -1,0 +1,209 @@
+
+akmon_pirest.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 303, 10
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 671, 32
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 671, 4
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+priest_l1/body
+  rotate: true
+  xy: 163, 3
+  size: 123, 138
+  orig: 123, 138
+  offset: 0, 0
+  index: -1
+priest_l1/eye
+  rotate: false
+  xy: 495, 18
+  size: 58, 13
+  orig: 58, 13
+  offset: 0, 0
+  index: -1
+priest_l2/eye
+  rotate: false
+  xy: 495, 18
+  size: 58, 13
+  orig: 58, 13
+  offset: 0, 0
+  index: -1
+priest_l3/eye
+  rotate: false
+  xy: 495, 18
+  size: 58, 13
+  orig: 58, 13
+  offset: 0, 0
+  index: -1
+priest_l1/leg_left
+  rotate: true
+  xy: 436, 2
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+priest_l2/leg_left
+  rotate: true
+  xy: 436, 2
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+priest_l3/leg_left
+  rotate: true
+  xy: 436, 2
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+priest_l1/leg_right
+  rotate: true
+  xy: 483, 2
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+priest_l2/leg_right
+  rotate: true
+  xy: 483, 2
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+priest_l3/leg_right
+  rotate: true
+  xy: 483, 2
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+priest_l1/mouth
+  rotate: true
+  xy: 546, 51
+  size: 75, 22
+  orig: 75, 22
+  offset: 0, 0
+  index: -1
+priest_l2/mouth
+  rotate: true
+  xy: 546, 51
+  size: 75, 22
+  orig: 75, 22
+  offset: 0, 0
+  index: -1
+priest_l3/mouth
+  rotate: true
+  xy: 546, 51
+  size: 75, 22
+  orig: 75, 22
+  offset: 0, 0
+  index: -1
+priest_l1/wand
+  rotate: true
+  xy: 634, 60
+  size: 66, 38
+  orig: 66, 38
+  offset: 0, 0
+  index: -1
+priest_l2/wand
+  rotate: true
+  xy: 634, 60
+  size: 66, 38
+  orig: 66, 38
+  offset: 0, 0
+  index: -1
+priest_l1/wing_left
+  rotate: true
+  xy: 570, 55
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+priest_l2/wing_left
+  rotate: true
+  xy: 570, 55
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+priest_l3/wing_left
+  rotate: true
+  xy: 570, 55
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+priest_l1/wing_right
+  rotate: true
+  xy: 607, 9
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+priest_l2/wing_right
+  rotate: true
+  xy: 607, 9
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+priest_l3/wing_right
+  rotate: true
+  xy: 607, 9
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+priest_l2/body_l2
+  rotate: true
+  xy: 2, 3
+  size: 123, 159
+  orig: 123, 159
+  offset: 0, 0
+  index: -1
+priest_l3/body_l2
+  rotate: true
+  xy: 2, 3
+  size: 123, 159
+  orig: 123, 159
+  offset: 0, 0
+  index: -1
+priest_l2/hair
+  rotate: true
+  xy: 555, 2
+  size: 47, 50
+  orig: 47, 50
+  offset: 0, 0
+  index: -1
+priest_l3/hair_l3
+  rotate: true
+  xy: 436, 18
+  size: 108, 57
+  orig: 108, 57
+  offset: 0, 0
+  index: -1
+priest_l3/wand_l3
+  rotate: true
+  xy: 495, 33
+  size: 93, 49
+  orig: 93, 49
+  offset: 0, 0
+  index: -1

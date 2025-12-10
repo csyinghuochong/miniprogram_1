@@ -1,0 +1,335 @@
+
+Asmodeus.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 152
+  rotate: true
+  xy: 395, 43
+  size: 111, 153
+  orig: 111, 153
+  offset: 0, 0
+  index: -1
+arm1_left
+  rotate: false
+  xy: 668, 4
+  size: 76, 76
+  orig: 76, 76
+  offset: 0, 0
+  index: -1
+arm2_left
+  rotate: true
+  xy: 810, 167
+  size: 49, 72
+  orig: 49, 72
+  offset: 0, 0
+  index: -1
+attack
+  rotate: true
+  xy: 152, 298
+  size: 36, 130
+  orig: 38, 130
+  offset: 0, 0
+  index: -1
+body_dragon
+  rotate: true
+  xy: 406, 172
+  size: 129, 111
+  orig: 187, 178
+  offset: 0, 0
+  index: -1
+cow_face
+  rotate: false
+  xy: 484, 348
+  size: 91, 91
+  orig: 91, 94
+  offset: 0, 1
+  index: -1
+cow_face_glow
+  rotate: false
+  xy: 296, 429
+  size: 186, 81
+  orig: 208, 81
+  offset: 11, 0
+  index: -1
+cow_hair
+  rotate: true
+  xy: 810, 323
+  size: 62, 70
+  orig: 62, 70
+  offset: 0, 0
+  index: -1
+effect_attack2
+  rotate: true
+  xy: 152, 336
+  size: 174, 142
+  orig: 174, 142
+  offset: 0, 0
+  index: -1
+effect_attack3
+  rotate: false
+  xy: 2, 114
+  size: 151, 169
+  orig: 151, 169
+  offset: 0, 0
+  index: -1
+effect_shiled
+  rotate: true
+  xy: 684, 380
+  size: 73, 102
+  orig: 73, 104
+  offset: 0, 1
+  index: -1
+effect_skill1
+  rotate: true
+  xy: 746, 5
+  size: 75, 58
+  orig: 75, 68
+  offset: 0, 0
+  index: -1
+effect_skill2
+  rotate: false
+  xy: 824, 458
+  size: 75, 52
+  orig: 75, 52
+  offset: 0, 0
+  index: -1
+fog
+  rotate: false
+  xy: 284, 303
+  size: 92, 31
+  orig: 100, 46
+  offset: 5, 8
+  index: -1
+foot_back_l
+  rotate: false
+  xy: 464, 2
+  size: 60, 39
+  orig: 60, 39
+  offset: 0, 0
+  index: -1
+foot_back_r
+  rotate: false
+  xy: 464, 2
+  size: 60, 39
+  orig: 60, 39
+  offset: 0, 0
+  index: -1
+foot_front_r
+  rotate: false
+  xy: 464, 2
+  size: 60, 39
+  orig: 60, 39
+  offset: 0, 0
+  index: -1
+foot_front_l
+  rotate: false
+  xy: 526, 4
+  size: 52, 37
+  orig: 52, 37
+  offset: 0, 0
+  index: -1
+hand_left
+  rotate: false
+  xy: 516, 306
+  size: 46, 40
+  orig: 46, 40
+  offset: 0, 0
+  index: -1
+heart
+  rotate: true
+  xy: 550, 54
+  size: 120, 103
+  orig: 125, 125
+  offset: 5, 11
+  index: -1
+heart_boom1
+  rotate: true
+  xy: 2, 285
+  size: 225, 148
+  orig: 225, 148
+  offset: 0, 0
+  index: -1
+heart_boom2
+  rotate: false
+  xy: 242, 19
+  size: 151, 123
+  orig: 151, 123
+  offset: 0, 0
+  index: -1
+heart_glow
+  rotate: true
+  xy: 728, 218
+  size: 100, 99
+  orig: 100, 100
+  offset: 0, 1
+  index: -1
+heart_left
+  rotate: true
+  xy: 706, 320
+  size: 58, 102
+  orig: 58, 102
+  offset: 0, 0
+  index: -1
+heart_right
+  rotate: true
+  xy: 788, 387
+  size: 66, 101
+  orig: 66, 101
+  offset: 0, 0
+  index: -1
+horn_left
+  rotate: false
+  xy: 577, 362
+  size: 105, 77
+  orig: 105, 77
+  offset: 0, 0
+  index: -1
+horn_right
+  rotate: true
+  xy: 625, 200
+  size: 111, 101
+  orig: 112, 101
+  offset: 1, 0
+  index: -1
+human_body
+  rotate: false
+  xy: 281, 156
+  size: 123, 140
+  orig: 163, 140
+  offset: 0, 0
+  index: -1
+human_face
+  rotate: false
+  xy: 655, 82
+  size: 95, 116
+  orig: 96, 116
+  offset: 0, 0
+  index: -1
+human_face_glow
+  rotate: false
+  xy: 484, 441
+  size: 193, 69
+  orig: 225, 81
+  offset: 16, 6
+  index: -1
+human_mouth
+  rotate: true
+  xy: 752, 145
+  size: 71, 56
+  orig: 71, 56
+  offset: 0, 0
+  index: -1
+leg1_back_l
+  rotate: true
+  xy: 378, 303
+  size: 41, 85
+  orig: 41, 85
+  offset: 0, 0
+  index: -1
+leg1_back_r
+  rotate: true
+  xy: 378, 303
+  size: 41, 85
+  orig: 41, 85
+  offset: 0, 0
+  index: -1
+leg1_front_l
+  rotate: true
+  xy: 395, 3
+  size: 38, 67
+  orig: 38, 67
+  offset: 0, 0
+  index: -1
+leg1_front_r
+  rotate: true
+  xy: 612, 313
+  size: 47, 92
+  orig: 47, 92
+  offset: 0, 0
+  index: -1
+leg2_back_r
+  rotate: true
+  xy: 752, 87
+  size: 56, 65
+  orig: 56, 65
+  offset: 0, 0
+  index: -1
+leg2_front_l
+  rotate: true
+  xy: 863, 52
+  size: 52, 44
+  orig: 53, 44
+  offset: 0, 0
+  index: -1
+leg2_front_r
+  rotate: false
+  xy: 465, 304
+  size: 49, 40
+  orig: 49, 41
+  offset: 0, 0
+  index: -1
+leg3_back_r
+  rotate: true
+  xy: 580, 4
+  size: 48, 86
+  orig: 48, 86
+  offset: 0, 0
+  index: -1
+sheep_face
+  rotate: true
+  xy: 519, 176
+  size: 128, 104
+  orig: 128, 104
+  offset: 0, 0
+  index: -1
+sheep_face_glow
+  rotate: false
+  xy: 296, 346
+  size: 186, 81
+  orig: 208, 81
+  offset: 11, 0
+  index: -1
+sheep_mouth
+  rotate: false
+  xy: 564, 312
+  size: 46, 34
+  orig: 46, 38
+  offset: 0, 2
+  index: -1
+shiled_glow
+  rotate: false
+  xy: 2, 27
+  size: 238, 85
+  orig: 258, 101
+  offset: 20, 8
+  index: -1
+sholder_left
+  rotate: false
+  xy: 819, 106
+  size: 52, 59
+  orig: 52, 59
+  offset: 0, 0
+  index: -1
+sholder_right
+  rotate: true
+  xy: 806, 29
+  size: 56, 55
+  orig: 56, 55
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 155, 144
+  size: 152, 124
+  orig: 152, 124
+  offset: 0, 0
+  index: -1
+wepon
+  rotate: false
+  xy: 679, 455
+  size: 143, 55
+  orig: 146, 56
+  offset: 0, 0
+  index: -1

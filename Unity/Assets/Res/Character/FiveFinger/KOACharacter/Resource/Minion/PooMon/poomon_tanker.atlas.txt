@@ -1,0 +1,90 @@
+
+poomon_tanker.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 456, 121
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+body
+  rotate: false
+  xy: 154, 84
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 305, 84
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l3
+  rotate: false
+  xy: 2, 84
+  size: 150, 168
+  orig: 150, 168
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 238, 24
+  size: 53, 58
+  orig: 53, 58
+  offset: 0, 0
+  index: -1
+leg_left
+  rotate: false
+  xy: 335, 41
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+leg_right
+  rotate: true
+  xy: 335, 8
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+tanker_blade
+  rotate: false
+  xy: 2, 2
+  size: 116, 80
+  orig: 117, 81
+  offset: 0, 1
+  index: -1
+tanker_blade_l3
+  rotate: false
+  xy: 120, 2
+  size: 116, 80
+  orig: 117, 81
+  offset: 0, 1
+  index: -1
+tanker_shiled
+  rotate: false
+  xy: 456, 30
+  size: 89, 89
+  orig: 89, 89
+  offset: 0, 0
+  index: -1
+tanker_shiled_l3
+  rotate: false
+  xy: 547, 30
+  size: 89, 89
+  orig: 89, 89
+  offset: 0, 0
+  index: -1
+tooth
+  rotate: true
+  xy: 293, 6
+  size: 76, 40
+  orig: 76, 40
+  offset: 0, 0
+  index: -1

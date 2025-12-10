@@ -1,0 +1,223 @@
+
+chomon_long.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 272, 9
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+long_l1/arrow
+  rotate: false
+  xy: 698, 52
+  size: 95, 73
+  orig: 96, 74
+  offset: 1, 0
+  index: -1
+long_l2/arrow
+  rotate: false
+  xy: 698, 52
+  size: 95, 73
+  orig: 96, 74
+  offset: 1, 0
+  index: -1
+long_l1/body
+  rotate: false
+  xy: 2, 4
+  size: 133, 121
+  orig: 133, 121
+  offset: 0, 0
+  index: -1
+long_l2/body
+  rotate: false
+  xy: 2, 4
+  size: 133, 121
+  orig: 133, 121
+  offset: 0, 0
+  index: -1
+long_l1/eye
+  rotate: false
+  xy: 405, 6
+  size: 58, 15
+  orig: 58, 16
+  offset: 0, 0
+  index: -1
+long_l2/eye
+  rotate: false
+  xy: 405, 6
+  size: 58, 15
+  orig: 58, 16
+  offset: 0, 0
+  index: -1
+long_l3/eye
+  rotate: false
+  xy: 405, 6
+  size: 58, 15
+  orig: 58, 16
+  offset: 0, 0
+  index: -1
+long_l1/leg_left_1
+  rotate: true
+  xy: 597, 36
+  size: 14, 41
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+long_l2/leg_left_1
+  rotate: true
+  xy: 597, 36
+  size: 14, 41
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+long_l3/leg_left_1
+  rotate: true
+  xy: 597, 36
+  size: 14, 41
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+long_l1/leg_left_2
+  rotate: true
+  xy: 465, 2
+  size: 19, 41
+  orig: 20, 47
+  offset: 0, 0
+  index: -1
+long_l2/leg_left_2
+  rotate: true
+  xy: 465, 2
+  size: 19, 41
+  orig: 20, 47
+  offset: 0, 0
+  index: -1
+long_l3/leg_left_2
+  rotate: true
+  xy: 465, 2
+  size: 19, 41
+  orig: 20, 47
+  offset: 0, 0
+  index: -1
+long_l1/leg_right_1
+  rotate: true
+  xy: 559, 14
+  size: 15, 48
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+long_l2/leg_right_1
+  rotate: true
+  xy: 559, 14
+  size: 15, 48
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+long_l3/leg_right_1
+  rotate: true
+  xy: 559, 14
+  size: 15, 48
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+long_l1/leg_right_2
+  rotate: true
+  xy: 508, 14
+  size: 15, 49
+  orig: 15, 49
+  offset: 0, 0
+  index: -1
+long_l2/leg_right_2
+  rotate: true
+  xy: 508, 14
+  size: 15, 49
+  orig: 15, 49
+  offset: 0, 0
+  index: -1
+long_l3/leg_right_2
+  rotate: true
+  xy: 508, 14
+  size: 15, 49
+  orig: 15, 49
+  offset: 0, 0
+  index: -1
+long_l2/horn1
+  rotate: false
+  xy: 795, 66
+  size: 95, 59
+  orig: 98, 63
+  offset: 2, 4
+  index: -1
+long_l3/horn1
+  rotate: false
+  xy: 795, 66
+  size: 95, 59
+  orig: 98, 63
+  offset: 2, 4
+  index: -1
+long_l2/horn2
+  rotate: true
+  xy: 597, 52
+  size: 73, 99
+  orig: 75, 106
+  offset: 1, 4
+  index: -1
+long_l3/horn2
+  rotate: true
+  xy: 597, 52
+  size: 73, 99
+  orig: 75, 106
+  offset: 1, 4
+  index: -1
+long_l2/manteau
+  rotate: false
+  xy: 665, 6
+  size: 85, 44
+  orig: 85, 44
+  offset: 0, 0
+  index: -1
+long_l3/arrow_l3
+  rotate: true
+  xy: 405, 23
+  size: 102, 96
+  orig: 103, 106
+  offset: 1, 8
+  index: -1
+long_l3/body_l3_priest
+  rotate: false
+  xy: 137, 4
+  size: 133, 121
+  orig: 133, 121
+  offset: 0, 0
+  index: -1
+long_l3/buket
+  rotate: true
+  xy: 503, 31
+  size: 94, 92
+  orig: 94, 92
+  offset: 0, 0
+  index: -1
+long_l3/manteau_l3
+  rotate: false
+  xy: 752, 6
+  size: 85, 44
+  orig: 85, 44
+  offset: 0, 0
+  index: -1
+magic_ball
+  rotate: false
+  xy: 609, 8
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 637, 8
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1

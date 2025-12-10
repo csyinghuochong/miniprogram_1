@@ -1,0 +1,83 @@
+
+poomon_long.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 154, 80
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 305, 80
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l3
+  rotate: false
+  xy: 2, 80
+  size: 150, 168
+  orig: 150, 168
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 353, 20
+  size: 53, 58
+  orig: 53, 58
+  offset: 0, 0
+  index: -1
+leg_left
+  rotate: false
+  xy: 450, 37
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+leg_right
+  rotate: true
+  xy: 450, 4
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+long
+  rotate: false
+  xy: 2, 9
+  size: 142, 69
+  orig: 142, 69
+  offset: 0, 0
+  index: -1
+long_l3
+  rotate: true
+  xy: 456, 106
+  size: 142, 100
+  orig: 142, 100
+  offset: 0, 0
+  index: -1
+magician_manteau_back
+  rotate: false
+  xy: 238, 24
+  size: 113, 54
+  orig: 113, 54
+  offset: 0, 0
+  index: -1
+maricain_manteau_hill_l3
+  rotate: true
+  xy: 146, 7
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+tooth
+  rotate: true
+  xy: 408, 2
+  size: 76, 40
+  orig: 76, 40
+  offset: 0, 0
+  index: -1

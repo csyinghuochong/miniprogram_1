@@ -1,0 +1,55 @@
+
+kamon_close.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 686, 19
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+body
+  rotate: false
+  xy: 149, 4
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+body3
+  rotate: false
+  xy: 2, 2
+  size: 145, 133
+  orig: 145, 133
+  offset: 0, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 295, 4
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 819, 75
+  size: 60, 36
+  orig: 60, 36
+  offset: 0, 0
+  index: -1
+hammer
+  rotate: false
+  xy: 563, 16
+  size: 121, 119
+  orig: 121, 119
+  offset: 0, 0
+  index: -1
+hammer_l3
+  rotate: false
+  xy: 441, 15
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1

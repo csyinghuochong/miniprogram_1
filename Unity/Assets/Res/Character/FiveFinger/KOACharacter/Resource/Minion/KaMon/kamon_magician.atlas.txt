@@ -1,0 +1,76 @@
+
+kamon_magician.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 294, 77
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+body
+  rotate: false
+  xy: 2, 77
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 148, 77
+  size: 144, 131
+  orig: 144, 131
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 257, 2
+  size: 60, 36
+  orig: 60, 36
+  offset: 0, 0
+  index: -1
+hat_magician
+  rotate: false
+  xy: 2, 6
+  size: 120, 69
+  orig: 120, 69
+  offset: 0, 0
+  index: -1
+magic_ball
+  rotate: false
+  xy: 319, 12
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+manteau_magician
+  rotate: false
+  xy: 412, 118
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+manteau_magician_l3
+  rotate: false
+  xy: 412, 26
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+wand
+  rotate: true
+  xy: 257, 40
+  size: 35, 132
+  orig: 35, 132
+  offset: 0, 0
+  index: -1
+wand_l3
+  rotate: true
+  xy: 124, 29
+  size: 46, 131
+  orig: 46, 131
+  offset: 0, 0
+  index: -1

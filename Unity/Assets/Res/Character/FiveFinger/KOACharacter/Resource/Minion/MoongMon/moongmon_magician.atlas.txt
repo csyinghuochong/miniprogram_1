@@ -1,0 +1,160 @@
+
+moongmon_magician.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 2, 7
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 409, 5
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magician_l1/body
+  rotate: true
+  xy: 2, 125
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+magician_l1/eye
+  rotate: false
+  xy: 337, 10
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+magician_l2/eye
+  rotate: false
+  xy: 337, 10
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+magician_l3/eye
+  rotate: false
+  xy: 337, 10
+  size: 70, 24
+  orig: 70, 24
+  offset: 0, 0
+  index: -1
+magician_l1/leg_left
+  rotate: false
+  xy: 437, 126
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+magician_l2/leg_left
+  rotate: false
+  xy: 437, 126
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+magician_l3/leg_left
+  rotate: false
+  xy: 437, 126
+  size: 72, 18
+  orig: 72, 18
+  offset: 0, 0
+  index: -1
+magician_l1/leg_right
+  rotate: true
+  xy: 287, 59
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+magician_l2/leg_right
+  rotate: true
+  xy: 287, 59
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+magician_l3/leg_right
+  rotate: true
+  xy: 287, 59
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+magician_l1/wand
+  rotate: true
+  xy: 135, 69
+  size: 54, 150
+  orig: 54, 150
+  offset: 0, 0
+  index: -1
+magician_l2/wand
+  rotate: true
+  xy: 135, 69
+  size: 54, 150
+  orig: 54, 150
+  offset: 0, 0
+  index: -1
+magician_l2/body
+  rotate: true
+  xy: 154, 125
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+magician_l2/hat
+  rotate: false
+  xy: 305, 36
+  size: 108, 66
+  orig: 108, 66
+  offset: 0, 0
+  index: -1
+magician_l2/tung
+  rotate: true
+  xy: 287, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+magician_l3/tung
+  rotate: true
+  xy: 287, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+magician_l3/body
+  rotate: false
+  xy: 306, 104
+  size: 129, 150
+  orig: 129, 150
+  offset: 0, 0
+  index: -1
+magician_l3/hat_l3
+  rotate: true
+  xy: 437, 146
+  size: 108, 66
+  orig: 108, 66
+  offset: 0, 0
+  index: -1
+magician_l3/maricain_manteau copy
+  rotate: true
+  xy: 415, 33
+  size: 69, 65
+  orig: 70, 65
+  offset: 0, 0
+  index: -1
+magician_l3/wand
+  rotate: true
+  xy: 135, 13
+  size: 54, 150
+  orig: 54, 150
+  offset: 0, 0
+  index: -1

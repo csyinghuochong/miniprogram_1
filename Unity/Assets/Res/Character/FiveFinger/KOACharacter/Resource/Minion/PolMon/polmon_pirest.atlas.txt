@@ -1,0 +1,146 @@
+
+polmon_pirest.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 2, 2
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 237, 406
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 237, 378
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+pirest_l1/body
+  rotate: true
+  xy: 120, 12
+  size: 121, 184
+  orig: 121, 184
+  offset: 0, 0
+  index: -1
+pirest_l1/eye
+  rotate: true
+  xy: 237, 434
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+pirest_l2/eye
+  rotate: true
+  xy: 237, 434
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+pirest_l3/eye
+  rotate: true
+  xy: 237, 434
+  size: 72, 30
+  orig: 72, 30
+  offset: 0, 0
+  index: -1
+pirest_l1/leg_left
+  rotate: false
+  xy: 221, 137
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+pirest_l2/leg_left
+  rotate: false
+  xy: 221, 137
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+pirest_l3/leg_left
+  rotate: false
+  xy: 221, 137
+  size: 46, 17
+  orig: 46, 21
+  offset: 0, 3
+  index: -1
+pirest_l1/leg_right
+  rotate: false
+  xy: 173, 136
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+pirest_l2/leg_right
+  rotate: false
+  xy: 173, 136
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+pirest_l3/leg_right
+  rotate: false
+  xy: 173, 136
+  size: 46, 18
+  orig: 46, 22
+  offset: 0, 3
+  index: -1
+pirest_l1/wand
+  rotate: false
+  xy: 173, 156
+  size: 60, 164
+  orig: 60, 164
+  offset: 0, 0
+  index: -1
+pirest_l2/wand
+  rotate: false
+  xy: 173, 156
+  size: 60, 164
+  orig: 60, 164
+  offset: 0, 0
+  index: -1
+pirest_l2/body_l2
+  rotate: false
+  xy: 91, 322
+  size: 144, 184
+  orig: 144, 184
+  offset: 0, 0
+  index: -1
+pirest_l2/book
+  rotate: true
+  xy: 235, 240
+  size: 80, 68
+  orig: 80, 68
+  offset: 0, 0
+  index: -1
+pirest_l3/body_l3
+  rotate: false
+  xy: 2, 135
+  size: 169, 184
+  orig: 169, 184
+  offset: 0, 0
+  index: -1
+pirest_l3/book_l3
+  rotate: true
+  xy: 235, 158
+  size: 80, 68
+  orig: 80, 68
+  offset: 0, 0
+  index: -1
+pirest_l3/wand_l3
+  rotate: false
+  xy: 2, 321
+  size: 87, 185
+  orig: 87, 185
+  offset: 0, 0
+  index: -1

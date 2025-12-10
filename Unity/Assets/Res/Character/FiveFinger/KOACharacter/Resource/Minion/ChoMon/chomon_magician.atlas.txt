@@ -1,0 +1,216 @@
+
+chomon_magician.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 137, 7
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 466, 11
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 479, 48
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magician_l1/body
+  rotate: false
+  xy: 2, 2
+  size: 133, 121
+  orig: 133, 121
+  offset: 0, 0
+  index: -1
+magician_l2/body
+  rotate: false
+  xy: 2, 2
+  size: 133, 121
+  orig: 133, 121
+  offset: 0, 0
+  index: -1
+magician_l3/body copy
+  rotate: false
+  xy: 2, 2
+  size: 133, 121
+  orig: 133, 121
+  offset: 0, 0
+  index: -1
+magician_l1/eye
+  rotate: false
+  xy: 270, 7
+  size: 58, 15
+  orig: 58, 16
+  offset: 0, 0
+  index: -1
+magician_l2/eye
+  rotate: false
+  xy: 270, 7
+  size: 58, 15
+  orig: 58, 16
+  offset: 0, 0
+  index: -1
+magician_l3/eye
+  rotate: false
+  xy: 270, 7
+  size: 58, 15
+  orig: 58, 16
+  offset: 0, 0
+  index: -1
+magician_l1/leg_left_1
+  rotate: true
+  xy: 423, 6
+  size: 14, 41
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+magician_l2/leg_left_1
+  rotate: true
+  xy: 423, 6
+  size: 14, 41
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+magician_l3/leg_left_1
+  rotate: true
+  xy: 423, 6
+  size: 14, 41
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+magician_l1/leg_left_2
+  rotate: true
+  xy: 330, 3
+  size: 19, 41
+  orig: 20, 47
+  offset: 0, 0
+  index: -1
+magician_l2/leg_left_2
+  rotate: true
+  xy: 330, 3
+  size: 19, 41
+  orig: 20, 47
+  offset: 0, 0
+  index: -1
+magician_l3/leg_left_2
+  rotate: true
+  xy: 330, 3
+  size: 19, 41
+  orig: 20, 47
+  offset: 0, 0
+  index: -1
+magician_l1/leg_right_1
+  rotate: true
+  xy: 373, 5
+  size: 15, 48
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+magician_l2/leg_right_1
+  rotate: true
+  xy: 373, 5
+  size: 15, 48
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+magician_l3/leg_right_1
+  rotate: true
+  xy: 373, 5
+  size: 15, 48
+  orig: 15, 48
+  offset: 0, 0
+  index: -1
+magician_l1/leg_right_2
+  rotate: true
+  xy: 373, 22
+  size: 15, 49
+  orig: 15, 49
+  offset: 0, 0
+  index: -1
+magician_l2/leg_right_2
+  rotate: true
+  xy: 373, 22
+  size: 15, 49
+  orig: 15, 49
+  offset: 0, 0
+  index: -1
+magician_l3/leg_right_2
+  rotate: true
+  xy: 373, 22
+  size: 15, 49
+  orig: 15, 49
+  offset: 0, 0
+  index: -1
+magician_l1/wand
+  rotate: true
+  xy: 345, 39
+  size: 35, 132
+  orig: 35, 132
+  offset: 0, 0
+  index: -1
+magician_l2/wand
+  rotate: true
+  xy: 345, 39
+  size: 35, 132
+  orig: 35, 132
+  offset: 0, 0
+  index: -1
+magician_l2/horn1
+  rotate: true
+  xy: 507, 28
+  size: 95, 59
+  orig: 98, 63
+  offset: 2, 4
+  index: -1
+magician_l3/horn1
+  rotate: true
+  xy: 507, 28
+  size: 95, 59
+  orig: 98, 63
+  offset: 2, 4
+  index: -1
+magician_l2/horn2
+  rotate: false
+  xy: 270, 24
+  size: 73, 99
+  orig: 75, 106
+  offset: 1, 4
+  index: -1
+magician_l3/horn2
+  rotate: false
+  xy: 270, 24
+  size: 73, 99
+  orig: 75, 106
+  offset: 1, 4
+  index: -1
+magician_l2/manteau
+  rotate: true
+  xy: 568, 40
+  size: 83, 66
+  orig: 84, 66
+  offset: 0, 0
+  index: -1
+magician_l3/manteau_l3
+  rotate: true
+  xy: 636, 40
+  size: 83, 66
+  orig: 84, 66
+  offset: 0, 0
+  index: -1
+magician_l3/wand_l3
+  rotate: true
+  xy: 345, 76
+  size: 47, 141
+  orig: 47, 141
+  offset: 0, 0
+  index: -1

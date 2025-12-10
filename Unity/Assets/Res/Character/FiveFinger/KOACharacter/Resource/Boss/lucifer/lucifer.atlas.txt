@@ -1,0 +1,209 @@
+
+lucifer.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm1_left
+  rotate: true
+  xy: 718, 307
+  size: 65, 50
+  orig: 65, 50
+  offset: 0, 0
+  index: -1
+arm1_right
+  rotate: false
+  xy: 315, 185
+  size: 35, 108
+  orig: 35, 108
+  offset: 0, 0
+  index: -1
+arm2_left
+  rotate: false
+  xy: 490, 53
+  size: 35, 54
+  orig: 35, 54
+  offset: 0, 0
+  index: -1
+arm2_right
+  rotate: true
+  xy: 708, 119
+  size: 50, 49
+  orig: 50, 111
+  offset: 0, 62
+  index: -1
+body
+  rotate: true
+  xy: 58, 177
+  size: 90, 145
+  orig: 90, 210
+  offset: 0, 65
+  index: -1
+effect_attack1
+  rotate: true
+  xy: 2, 176
+  size: 334, 41
+  orig: 334, 42
+  offset: 0, 1
+  index: -1
+effect_skill1
+  rotate: false
+  xy: 61, 2
+  size: 224, 173
+  orig: 234, 175
+  offset: 1, 2
+  index: -1
+effect_skill2
+  rotate: false
+  xy: 189, 295
+  size: 211, 215
+  orig: 214, 224
+  offset: 0, 0
+  index: -1
+effect_skill3
+  rotate: false
+  xy: 402, 302
+  size: 194, 208
+  orig: 205, 251
+  offset: 4, 26
+  index: -1
+effect_wepon
+  rotate: false
+  xy: 598, 374
+  size: 135, 136
+  orig: 162, 162
+  offset: 14, 13
+  index: -1
+effect_wepon2
+  rotate: true
+  xy: 45, 176
+  size: 334, 11
+  orig: 334, 13
+  offset: 0, 1
+  index: -1
+eye light
+  rotate: false
+  xy: 490, 131
+  size: 42, 61
+  orig: 46, 63
+  offset: 3, 2
+  index: -1
+face
+  rotate: true
+  xy: 598, 304
+  size: 68, 118
+  orig: 68, 118
+  offset: 0, 0
+  index: -1
+fog1
+  rotate: true
+  xy: 58, 269
+  size: 241, 129
+  orig: 250, 133
+  offset: 6, 0
+  index: -1
+foot_left
+  rotate: false
+  xy: 481, 194
+  size: 56, 22
+  orig: 56, 22
+  offset: 0, 0
+  index: -1
+foot_right
+  rotate: false
+  xy: 490, 109
+  size: 41, 20
+  orig: 41, 20
+  offset: 0, 0
+  index: -1
+hair2
+  rotate: true
+  xy: 189, 271
+  size: 22, 63
+  orig: 22, 63
+  offset: 0, 0
+  index: -1
+hair_1
+  rotate: false
+  xy: 254, 185
+  size: 59, 108
+  orig: 59, 108
+  offset: 0, 0
+  index: -1
+hand_left
+  rotate: true
+  xy: 205, 177
+  size: 37, 29
+  orig: 37, 29
+  offset: 0, 0
+  index: -1
+leg1_left
+  rotate: false
+  xy: 481, 218
+  size: 63, 82
+  orig: 63, 82
+  offset: 0, 0
+  index: -1
+leg1_right
+  rotate: false
+  xy: 693, 226
+  size: 68, 76
+  orig: 68, 76
+  offset: 0, 0
+  index: -1
+leg2_left
+  rotate: false
+  xy: 708, 171
+  size: 51, 53
+  orig: 51, 53
+  offset: 0, 0
+  index: -1
+leg2_right
+  rotate: false
+  xy: 205, 216
+  size: 44, 53
+  orig: 48, 53
+  offset: 4, 0
+  index: -1
+tail
+  rotate: true
+  xy: 2, 3
+  size: 171, 57
+  orig: 171, 62
+  offset: 0, 0
+  index: -1
+wepon
+  rotate: false
+  xy: 546, 220
+  size: 145, 80
+  orig: 145, 80
+  offset: 0, 0
+  index: -1
+wing1_left
+  rotate: false
+  xy: 539, 22
+  size: 167, 194
+  orig: 172, 194
+  offset: 0, 0
+  index: -1
+wing1_right
+  rotate: true
+  xy: 287, 2
+  size: 181, 201
+  orig: 181, 201
+  offset: 0, 0
+  index: -1
+wing2_left
+  rotate: false
+  xy: 735, 390
+  size: 58, 120
+  orig: 58, 120
+  offset: 0, 0
+  index: -1
+wing2_right
+  rotate: true
+  xy: 352, 199
+  size: 94, 127
+  orig: 94, 127
+  offset: 0, 0
+  index: -1

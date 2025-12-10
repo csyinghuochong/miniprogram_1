@@ -1,0 +1,195 @@
+
+akmon_long.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: false
+  xy: 623, 9
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+long_l1/body
+  rotate: true
+  xy: 324, 2
+  size: 123, 138
+  orig: 123, 138
+  offset: 0, 0
+  index: -1
+long_l1/bow
+  rotate: true
+  xy: 564, 7
+  size: 118, 57
+  orig: 118, 57
+  offset: 0, 0
+  index: -1
+long_l2/bow copy
+  rotate: true
+  xy: 564, 7
+  size: 118, 57
+  orig: 118, 57
+  offset: 0, 0
+  index: -1
+long_l1/eye
+  rotate: true
+  xy: 844, 67
+  size: 58, 13
+  orig: 58, 13
+  offset: 0, 0
+  index: -1
+long_l2/eye
+  rotate: true
+  xy: 844, 67
+  size: 58, 13
+  orig: 58, 13
+  offset: 0, 0
+  index: -1
+long_l3/eye
+  rotate: true
+  xy: 844, 67
+  size: 58, 13
+  orig: 58, 13
+  offset: 0, 0
+  index: -1
+long_l1/leg_left
+  rotate: false
+  xy: 756, 3
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+long_l2/leg_left
+  rotate: false
+  xy: 756, 3
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+long_l3/leg_left
+  rotate: false
+  xy: 756, 3
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+long_l1/leg_right
+  rotate: false
+  xy: 772, 3
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+long_l2/leg_right
+  rotate: false
+  xy: 772, 3
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+long_l3/leg_right
+  rotate: false
+  xy: 772, 3
+  size: 14, 45
+  orig: 14, 45
+  offset: 0, 0
+  index: -1
+long_l1/mouth
+  rotate: true
+  xy: 756, 50
+  size: 75, 22
+  orig: 75, 22
+  offset: 0, 0
+  index: -1
+long_l2/mouth
+  rotate: true
+  xy: 756, 50
+  size: 75, 22
+  orig: 75, 22
+  offset: 0, 0
+  index: -1
+long_l3/mouth
+  rotate: true
+  xy: 756, 50
+  size: 75, 22
+  orig: 75, 22
+  offset: 0, 0
+  index: -1
+long_l1/wing_left
+  rotate: true
+  xy: 780, 54
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+long_l2/wing_left
+  rotate: true
+  xy: 780, 54
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+long_l3/wing_left
+  rotate: true
+  xy: 780, 54
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+long_l1/wing_right
+  rotate: true
+  xy: 788, 8
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+long_l2/wing_right
+  rotate: true
+  xy: 788, 8
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+long_l3/wing_right
+  rotate: true
+  xy: 788, 8
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+long_l2/body_l2_long
+  rotate: true
+  xy: 2, 2
+  size: 123, 159
+  orig: 123, 159
+  offset: 0, 0
+  index: -1
+long_l3/body_l3_long
+  rotate: true
+  xy: 163, 2
+  size: 123, 159
+  orig: 123, 159
+  offset: 0, 0
+  index: -1
+long_l3/bow_l3
+  rotate: true
+  xy: 464, 7
+  size: 118, 98
+  orig: 118, 98
+  offset: 0, 0
+  index: -1
+magic_ball
+  rotate: false
+  xy: 852, 39
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 852, 11
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1

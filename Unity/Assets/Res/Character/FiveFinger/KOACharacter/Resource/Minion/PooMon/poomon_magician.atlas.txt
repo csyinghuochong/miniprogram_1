@@ -1,0 +1,104 @@
+
+poomon_magician.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 153, 209
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+body
+  rotate: false
+  xy: 2, 172
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 2, 2
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l3
+  rotate: false
+  xy: 2, 342
+  size: 150, 168
+  orig: 150, 168
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 226, 34
+  size: 53, 58
+  orig: 53, 58
+  offset: 0, 0
+  index: -1
+leg_left
+  rotate: false
+  xy: 271, 316
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+leg_right
+  rotate: false
+  xy: 271, 273
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+magic_ball
+  rotate: false
+  xy: 226, 6
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magician_manteau_back
+  rotate: true
+  xy: 226, 94
+  size: 113, 54
+  orig: 113, 54
+  offset: 0, 0
+  index: -1
+maricain_manteau
+  rotate: false
+  xy: 153, 117
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+maricain_manteau_l3
+  rotate: false
+  xy: 153, 25
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+marician
+  rotate: false
+  xy: 239, 359
+  size: 54, 151
+  orig: 54, 151
+  offset: 0, 0
+  index: -1
+marician_l3
+  rotate: false
+  xy: 154, 359
+  size: 83, 151
+  orig: 85, 151
+  offset: 1, 0
+  index: -1
+tooth
+  rotate: true
+  xy: 281, 16
+  size: 76, 40
+  orig: 76, 40
+  offset: 0, 0
+  index: -1

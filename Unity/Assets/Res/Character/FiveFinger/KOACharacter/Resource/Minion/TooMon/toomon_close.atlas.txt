@@ -1,0 +1,153 @@
+
+toomon_close.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 422, 112
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+close_l1/body
+  rotate: false
+  xy: 2, 89
+  size: 138, 154
+  orig: 138, 154
+  offset: 0, 0
+  index: -1
+close_l1/eye
+  rotate: false
+  xy: 191, 2
+  size: 61, 26
+  orig: 61, 26
+  offset: 0, 0
+  index: -1
+close_l2/eye
+  rotate: false
+  xy: 191, 2
+  size: 61, 26
+  orig: 61, 26
+  offset: 0, 0
+  index: -1
+close_l3/eye
+  rotate: false
+  xy: 191, 2
+  size: 61, 26
+  orig: 61, 26
+  offset: 0, 0
+  index: -1
+close_l1/leg_left
+  rotate: false
+  xy: 96, 6
+  size: 93, 22
+  orig: 93, 22
+  offset: 0, 0
+  index: -1
+close_l2/leg_left
+  rotate: false
+  xy: 96, 6
+  size: 93, 22
+  orig: 93, 22
+  offset: 0, 0
+  index: -1
+close_l3/leg_left
+  rotate: false
+  xy: 96, 6
+  size: 93, 22
+  orig: 93, 22
+  offset: 0, 0
+  index: -1
+close_l1/leg_right
+  rotate: false
+  xy: 2, 5
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+close_l2/leg_right
+  rotate: false
+  xy: 2, 5
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+close_l3/leg_right
+  rotate: false
+  xy: 2, 5
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+close_l1/wepon
+  rotate: false
+  xy: 169, 30
+  size: 143, 57
+  orig: 143, 57
+  offset: 0, 0
+  index: -1
+close_l2/wepon copy
+  rotate: false
+  xy: 169, 30
+  size: 143, 57
+  orig: 143, 57
+  offset: 0, 0
+  index: -1
+close_l2/Layer 151
+  rotate: false
+  xy: 314, 16
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: -1
+close_l3/horn
+  rotate: false
+  xy: 314, 16
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: -1
+close_l2/body
+  rotate: false
+  xy: 142, 89
+  size: 138, 154
+  orig: 138, 198
+  offset: 0, 0
+  index: -1
+close_l3/armor
+  rotate: false
+  xy: 373, 18
+  size: 40, 69
+  orig: 40, 69
+  offset: 0, 0
+  index: -1
+close_l3/body_l3_tanker
+  rotate: false
+  xy: 282, 89
+  size: 138, 154
+  orig: 138, 198
+  offset: 0, 0
+  index: -1
+close_l3/wepon_l3
+  rotate: false
+  xy: 2, 30
+  size: 165, 57
+  orig: 165, 57
+  offset: 0, 0
+  index: -1
+magic_ball
+  rotate: false
+  xy: 254, 2
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 282, 2
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1

@@ -1,0 +1,104 @@
+
+poomon_priest.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 172
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l2
+  rotate: false
+  xy: 2, 2
+  size: 149, 168
+  orig: 150, 168
+  offset: 1, 0
+  index: -1
+body_l3_priest
+  rotate: false
+  xy: 2, 342
+  size: 150, 168
+  orig: 150, 168
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 154, 342
+  size: 53, 58
+  orig: 53, 58
+  offset: 0, 0
+  index: -1
+heal
+  rotate: false
+  xy: 153, 185
+  size: 88, 155
+  orig: 101, 155
+  offset: 7, 0
+  index: -1
+leg_left
+  rotate: false
+  xy: 214, 359
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+leg_right
+  rotate: false
+  xy: 243, 316
+  size: 31, 41
+  orig: 31, 41
+  offset: 0, 0
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 247, 374
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magician_manteau_back
+  rotate: true
+  xy: 154, 397
+  size: 113, 54
+  orig: 113, 54
+  offset: 0, 0
+  index: -1
+maricain_manteau_hill
+  rotate: false
+  xy: 193, 93
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+maricain_manteau_hill_l3
+  rotate: true
+  xy: 195, 20
+  size: 71, 90
+  orig: 72, 91
+  offset: 1, 0
+  index: -1
+priest
+  rotate: true
+  xy: 153, 80
+  size: 103, 38
+  orig: 103, 38
+  offset: 0, 0
+  index: -1
+priest_l3
+  rotate: true
+  xy: 210, 402
+  size: 108, 59
+  orig: 108, 59
+  offset: 0, 0
+  index: -1
+tooth
+  rotate: true
+  xy: 153, 2
+  size: 76, 40
+  orig: 76, 40
+  offset: 0, 0
+  index: -1

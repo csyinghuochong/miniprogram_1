@@ -1,0 +1,153 @@
+
+toomon_pirest.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack skill
+  rotate: true
+  xy: 422, 119
+  size: 131, 116
+  orig: 137, 118
+  offset: 1, 2
+  index: -1
+magic_ball
+  rotate: false
+  xy: 416, 9
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+magic_ball_heal
+  rotate: false
+  xy: 444, 9
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+priest_l1/body
+  rotate: false
+  xy: 2, 96
+  size: 138, 154
+  orig: 138, 154
+  offset: 0, 0
+  index: -1
+priest_l1/eye
+  rotate: false
+  xy: 353, 9
+  size: 61, 26
+  orig: 61, 26
+  offset: 0, 0
+  index: -1
+priest_l2/eye
+  rotate: false
+  xy: 353, 9
+  size: 61, 26
+  orig: 61, 26
+  offset: 0, 0
+  index: -1
+priest_l3/eye
+  rotate: false
+  xy: 353, 9
+  size: 61, 26
+  orig: 61, 26
+  offset: 0, 0
+  index: -1
+priest_l1/leg_left
+  rotate: false
+  xy: 258, 3
+  size: 93, 22
+  orig: 93, 22
+  offset: 0, 0
+  index: -1
+priest_l2/leg_left
+  rotate: false
+  xy: 258, 3
+  size: 93, 22
+  orig: 93, 22
+  offset: 0, 0
+  index: -1
+priest_l3/leg_left
+  rotate: false
+  xy: 258, 3
+  size: 93, 22
+  orig: 93, 22
+  offset: 0, 0
+  index: -1
+priest_l1/leg_right
+  rotate: false
+  xy: 164, 2
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+priest_l2/leg_right
+  rotate: false
+  xy: 164, 2
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+priest_l3/leg_right
+  rotate: false
+  xy: 164, 2
+  size: 92, 23
+  orig: 92, 23
+  offset: 0, 0
+  index: -1
+priest_l1/wand
+  rotate: true
+  xy: 347, 37
+  size: 57, 129
+  orig: 57, 129
+  offset: 0, 0
+  index: -1
+priest_l2/wand
+  rotate: true
+  xy: 347, 37
+  size: 57, 129
+  orig: 57, 129
+  offset: 0, 0
+  index: -1
+priest_l2/Layer 151
+  rotate: false
+  xy: 478, 46
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: -1
+priest_l3/horn
+  rotate: false
+  xy: 478, 46
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: -1
+priest_l2/body
+  rotate: false
+  xy: 142, 96
+  size: 138, 154
+  orig: 138, 198
+  offset: 0, 0
+  index: -1
+priest_l3/body_l3_magician
+  rotate: false
+  xy: 282, 96
+  size: 138, 154
+  orig: 138, 198
+  offset: 0, 0
+  index: -1
+priest_l3/manteau
+  rotate: false
+  xy: 164, 27
+  size: 181, 67
+  orig: 181, 67
+  offset: 0, 0
+  index: -1
+priest_l3/wand_l3
+  rotate: true
+  xy: 2, 7
+  size: 87, 160
+  orig: 87, 160
+  offset: 0, 0
+  index: -1
