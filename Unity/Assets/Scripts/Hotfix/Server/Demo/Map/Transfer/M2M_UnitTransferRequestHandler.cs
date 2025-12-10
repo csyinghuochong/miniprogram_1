@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -28,8 +29,6 @@ namespace ET.Server
                 }
             }
 
-            // unit.AddComponent<MoveComponent>();
-            unit.AddComponent<Move2DComponent>();
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 
@@ -58,21 +57,29 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+                    ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
+                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, 1), false, CollisionHelper.Default);
+                    unit.AddComponent<UnitMoveComponent>();
+                    unit.AddComponent<TransformNoticeToClientComponent>();
                     break;
                 }
                 case (int)MapType.LocalLevel:
                 {
                     unit.Position = float3.zero;
 
+                    numericComponent.ApplyValue(NumericType.BattleCamp, (int)CampType.CampPlayer_1, false);
+                    numericComponent.ApplyValue(NumericType.PassedLevelId, 0, false);
+                    
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
-                    numericComponent.ApplyValue(NumericType.BattleCamp, (int)CampType.CampPlayer_1, false);
-                    
                     unit.AddComponent<AOIEntity, int, float3>(100 * 1000, unit.Position);
+                    ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
+                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, 1), false, CollisionHelper.Default);
+                    unit.AddComponent<UnitMoveComponent>();
+                    unit.AddComponent<TransformNoticeToClientComponent>();
 
                     // 测试一直从第一关开始
-                    numericComponent.ApplyValue(NumericType.PassedLevelId, 0, false);
                     scene.GetComponent<LocalLevelComponent>().MainUnit = unit;
                     scene.GetComponent<LocalLevelComponent>().GenerateLevel();
                     break;

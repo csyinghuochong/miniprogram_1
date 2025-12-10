@@ -27,8 +27,13 @@ namespace ET.Server
                 self.BodyToDestroy.Clear();
                 try
                 {
-                    const float DeltaTime = 1f / 10;
-                    self.World.Step(DeltaTime, self.VelocityIteration, self.PositionIteration);
+                    const float DeltaTime = 100 / 1000f;
+                    float scaledDeltaTime = DeltaTime * self.Scene().TimeScale;
+
+                    if (scaledDeltaTime > 0)
+                    {
+                        self.World.Step(scaledDeltaTime, self.VelocityIteration, self.PositionIteration);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -43,7 +48,7 @@ namespace ET.Server
             self.World = new Box2DSharp.Dynamics.World(new Vector2(0, 0));
             CollisionListenerComponent collisionListener = self.AddComponent<CollisionListenerComponent>();
             self.World.SetContactListener(collisionListener);
-            
+
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.CollisionWorldTimer, self);
         }
 
@@ -53,7 +58,7 @@ namespace ET.Server
             self.World.Dispose();
             self.World = null;
             self.BodyToDestroy.Clear();
-            
+
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
@@ -66,7 +71,7 @@ namespace ET.Server
         {
             return self.World.CreateBody(new BodyDef() { BodyType = BodyType.DynamicBody, AllowSleep = false, Position = position });
         }
-        
+
         public static Body CreateKinematicBody(this CollisionWorldComponent self, Vector2 position)
         {
             return self.World.CreateBody(new BodyDef() { BodyType = BodyType.KinematicBody, AllowSleep = false, Position = position });

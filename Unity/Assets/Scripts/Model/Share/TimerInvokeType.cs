@@ -51,6 +51,8 @@
         public const int Move2DTimer = 243;
         public const int DeathTimer = 244;
         public const int CollisionWorldTimer = 245;
+        public const int TransformSyncToClient = 246;
+        public const int UnitMoveTimer = 247;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

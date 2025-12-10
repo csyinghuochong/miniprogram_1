@@ -17,7 +17,7 @@ namespace ET.Client
             if (args.NewValue == 1) //死亡
             {
                 // unit.GetComponent<StateComponentC>().Reset();
-                unit.GetComponent<Move2DComponent>()?.Stop();
+                // unit.GetComponent<Move2DComponent>()?.Stop();
                 unit.GetComponent<SkillManagerComponentC>()?.OnFinish();
                 unit.GetComponent<BuffManagerComponentC>()?.OnDead();
 
@@ -26,14 +26,14 @@ namespace ET.Client
         }
     }
 
-    [NumericWatcher(SceneType.Current, NumericType.Now_MoveSpeed)]
-    public class NumericWatcher_Now_Speed : INumericWatcher
-    {
-        public void Run(Unit unit, NumbericChange args)
-        {
-            float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            args.Defend.GetComponent<Move2DComponent>().Speed = speed;
-            // args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
-        }
-    }
+    // [NumericWatcher(SceneType.Current, NumericType.Now_MoveSpeed)]
+    // public class NumericWatcher_Now_Speed : INumericWatcher
+    // {
+    //     public void Run(Unit unit, NumbericChange args)
+    //     {
+    //         float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
+    //         args.Defend.GetComponent<Move2DComponent>().ChangeSpeed(speed);
+    //         // args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+    //     }
+    // }
 }

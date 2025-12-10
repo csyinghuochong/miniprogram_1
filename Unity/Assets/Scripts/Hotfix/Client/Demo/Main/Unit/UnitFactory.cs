@@ -62,17 +62,17 @@ namespace ET.Client
             }
 
             unit.AddComponent<StateComponentC>();
-            unit.AddComponent<Move2DComponent>();
-            if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
-            {
-                using (ListComponent<float3> list = ListComponent<float3>.Create())
-                {
-                    list.Add(unit.Position);
-                    list.AddRange(unitInfo.MoveInfo.Points);
-
-                    unit.MoveToAsync(list);
-                }
-            }
+            // unit.AddComponent<Move2DComponent>();
+            // if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
+            // {
+            //     using (ListComponent<float3> list = ListComponent<float3>.Create())
+            //     {
+            //         list.Add(unit.Position);
+            //         list.AddRange(unitInfo.MoveInfo.Points);
+            //
+            //         unit.MoveToAsync(list);
+            //     }
+            // }
 
             unit.AddComponent<SkillManagerComponentC>();
             unit.AddComponent<BuffManagerComponentC>();

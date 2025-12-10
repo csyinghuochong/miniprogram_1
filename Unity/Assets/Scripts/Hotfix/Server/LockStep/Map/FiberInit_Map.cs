@@ -17,6 +17,8 @@
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
+
+            root.AddComponent<CollisionWorldComponent>();
             MapComponent mapComponent =  root.AddComponent<MapComponent>();
             mapComponent.NavMeshId = 101;
             mapComponent.SceneId = 101;

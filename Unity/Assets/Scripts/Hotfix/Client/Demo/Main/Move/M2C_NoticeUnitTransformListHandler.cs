@@ -1,0 +1,35 @@
+namespace ET.Client
+{
+    [MessageHandler(SceneType.Demo)]
+    public class M2C_NoticeUnitTransformListHandler : MessageHandler<Scene, M2C_NoticeUnitTransformList>
+    {
+        protected override async ETTask Run(Scene root, M2C_NoticeUnitTransformList message)
+        {
+            Scene currentScene = root.CurrentScene();
+            if (currentScene == null)
+            {
+                return;
+            }
+
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+
+            if (unitComponent == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < message.UnitIdList.Count; i++)
+            {
+                Unit unit = unitComponent.Get(message.UnitIdList[i]);
+                if (unit == null)
+                {
+                    continue;
+                }
+
+                unit.Position = message.PositionList[i];
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+}

@@ -12,6 +12,8 @@ namespace ET.Server
             scene.AddComponent<MapComponent>();
             scene.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
 
+            scene.AddComponent<CollisionWorldComponent>();
+
             return scene;
         }
     }

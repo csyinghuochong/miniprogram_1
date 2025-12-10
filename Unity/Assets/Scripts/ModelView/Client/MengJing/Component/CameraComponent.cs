@@ -6,8 +6,7 @@ namespace ET.Client
     public class CameraComponent : Entity, IAwake, ILateUpdate, IDestroy
     {
         public Camera MainCamera;
-        private EntityRef<Unit> lookAtUnit;
-        public Unit LookAtUnit { get => this.lookAtUnit; set => this.lookAtUnit = value; }
+        public Transform Transform_LookAt;
         public Vector3 Offset;
     }
 }

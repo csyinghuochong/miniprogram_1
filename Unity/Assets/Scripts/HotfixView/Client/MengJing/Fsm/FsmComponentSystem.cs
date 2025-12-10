@@ -66,9 +66,9 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
 
-            Move2DComponent moveComponent = unit.GetComponent<Move2DComponent>();
-            bool idle = moveComponent == null || moveComponent.IsArrived();
-            self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
+            // Move2DComponent moveComponent = unit.GetComponent<Move2DComponent>();
+            // bool idle = moveComponent == null || moveComponent.IsArrived();
+            // self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
 
             self.WaitIdleTime = 0;
         }

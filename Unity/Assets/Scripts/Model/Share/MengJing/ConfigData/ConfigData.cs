@@ -4,6 +4,16 @@ namespace ET
 {
     public static class ConfigData
     {
+        public const float DefaultRadius = 1f;
+
+        /// <summary>
+        /// 0->2D 1->2.5D
+        /// </summary>
+        [StaticField]
+        public static int ViewMode = 0;
+        // 2.5D 摄像机角度
+        public const float CameraAngle = -25f;
+        
         public const int Item_Gold = 1;
         public const int Item_Diamond = 2;
         public const int Item_Exp = 3;

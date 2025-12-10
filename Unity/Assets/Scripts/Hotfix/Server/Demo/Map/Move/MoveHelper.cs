@@ -42,7 +42,8 @@ namespace ET.Server
             }
             
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
-            unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
+            // unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
+            unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
 
             M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
             m2CPathfindingResult.Id = unit.Id;
@@ -120,7 +121,8 @@ namespace ET.Server
         public static void Stop(this Unit unit, int error = 0)
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
-            unit.GetComponent<Move2DComponent>().Stop();
+            // unit.GetComponent<Move2DComponent>().Stop();
+            unit.GetComponent<UnitMoveComponent>().Stop();
             unit.SendStop(error);
         }
 
@@ -138,7 +140,8 @@ namespace ET.Server
         public static void StopResult(this Unit unit, float3 position, int error)
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
-            unit.GetComponent<Move2DComponent>().Stop();
+            // unit.GetComponent<Move2DComponent>().Stop();
+            unit.GetComponent<UnitMoveComponent>().Stop();
             unit.Position = position;
             M2C_StopResult m2CStop = M2C_StopResult.Create();
             m2CStop.Error = error;

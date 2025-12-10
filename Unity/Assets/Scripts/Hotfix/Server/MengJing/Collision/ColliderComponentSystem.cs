@@ -35,14 +35,13 @@ namespace ET.Server
         [EntitySystem]
         private static void Update(this ColliderComponent self)
         {
-            self.ParentUnit.Position = new float3(self.Body.GetPosition().X, self.ParentUnit.Position.y, self.Body.GetPosition().Y);
-            self.ParentUnit.Rotation = quaternion.Euler(0, -self.Body.GetAngle(), 0);
+            self.ParentUnit.Position = new float3(self.Body.GetPosition().X, self.Body.GetPosition().Y, 0);
+            // self.ParentUnit.Rotation = quaternion.Euler(0, -self.Body.GetAngle(), 0);
         }
 
         [EntitySystem]
         private static void Destroy(this ColliderComponent self)
         {
-            Log.Warning("Destroy 碰撞体");
             self.Scene().GetComponent<CollisionWorldComponent>()?.AddBodyTobeDestroyed(self.Body);
         }
 
@@ -83,7 +82,7 @@ namespace ET.Server
             fixtureDef.IsSensor = isSensor;
             fixtureDef.Shape = m_CircleShape;
             fixtureDef.Density = 1f;
-            fixtureDef.Friction = 0.3f;
+            // fixtureDef.Friction = 0.3f;
             fixtureDef.UserData = self.ParentUnit;
             fixtureDef.Filter = new()
             {
@@ -92,6 +91,9 @@ namespace ET.Server
                 GroupIndex = 0
             };
 
+            // 禁用刚体旋转
+            self.Body.IsFixedRotation = true;
+            
             self.Body.CreateFixture(fixtureDef);
         }
 

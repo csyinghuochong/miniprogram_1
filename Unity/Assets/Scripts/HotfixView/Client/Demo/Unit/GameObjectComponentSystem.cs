@@ -151,15 +151,7 @@ namespace ET.Client
         {
             if (self.GameObject != null)
             {
-                GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-                if (globalComponent.ViewMode == 0)
-                {
-                    self.GameObject.transform.eulerAngles = Vector3.zero;
-                }
-                else
-                {
-                    self.GameObject.transform.eulerAngles = new Vector3(globalComponent.MainCamera.transform.eulerAngles.x, 0, 0); // 朝向摄像机
-                }
+                self.GameObject.transform.eulerAngles = ConfigData.ViewMode == 0 ? Vector3.zero : new Vector3(ConfigData.CameraAngle, 0, 0);
 
                 self.GameObject.transform.position = new Vector3(vector.x, vector.y, 0);
             }
@@ -245,6 +237,8 @@ namespace ET.Client
                 default:
                     break;
             }
+            
+            unit.AddComponent<TransformSyncComponent>();
         }
 
         public static void ReloadGameObject(this GameObjectComponent self)

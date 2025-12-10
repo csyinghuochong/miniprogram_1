@@ -1009,3 +1009,9 @@ message Mail2C_ReceiveMail // IMessage
 {
 	MailInfo MailInfo = 1;
 }
+
+message M2C_NoticeUnitTransformList // IMessage
+{
+	repeated int64 UnitIdList = 1;
+	repeated Unity.Mathematics.float3 PositionList = 2;
+}

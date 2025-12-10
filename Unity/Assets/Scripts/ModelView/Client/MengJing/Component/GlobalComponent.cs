@@ -33,10 +33,5 @@ namespace ET
         public GameObject BloodText_Layer0 { get; set; }
         public GameObject BloodText_Layer1 { get; set; }
         public GameObject BloodText_Layer2 { get; set; }
-
-        /// <summary>
-        /// 0->2D 1->2.5D
-        /// </summary>
-        public int ViewMode { get; set; }
     }
 }

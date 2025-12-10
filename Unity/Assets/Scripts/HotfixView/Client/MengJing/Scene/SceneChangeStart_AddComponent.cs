@@ -9,14 +9,7 @@ namespace ET.Client
         {
             try
             {
-                if (args.MapType == MapType.LocalLevel)
-                {
-                    root.GetComponent<GlobalComponent>().ViewMode = 1;
-                }
-                else
-                {
-                    root.GetComponent<GlobalComponent>().ViewMode = 0;
-                }
+                ConfigData.ViewMode = args.MapType == MapType.LocalLevel ? 1 : 0;
                 
                 root.GetComponent<SceneManagerComponent>().BeforeChangeScene();
 

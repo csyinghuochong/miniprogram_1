@@ -10,9 +10,9 @@ namespace ET.Client
         private static void Awake(this CameraComponent self)
         {
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
-            self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            self.Transform_LookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform;
             
-            if (self.Root().GetComponent<GlobalComponent>().ViewMode == 0)
+            if (ConfigData.ViewMode == 0)
             {
                 self.MainCamera.orthographic = true;
                 self.MainCamera.orthographicSize = 25f;
@@ -22,7 +22,7 @@ namespace ET.Client
             else
             {
                 self.MainCamera.orthographic = false;
-                self.MainCamera.transform.eulerAngles = new Vector3(-25f, 0, 0);
+                self.MainCamera.transform.eulerAngles = new Vector3(ConfigData.CameraAngle, 0, 0);
                 self.Offset = new Vector3(0, -10, -35f);
             }
         }
@@ -30,7 +30,7 @@ namespace ET.Client
         [EntitySystem]
         private static void LateUpdate(this CameraComponent self)
         {
-            self.MainCamera.transform.position = new Vector3(self.LookAtUnit.Position.x + self.Offset.x, self.LookAtUnit.Position.y + self.Offset.y, self.Offset.z);
+            self.MainCamera.transform.position = new Vector3(self.Transform_LookAt.position.x + self.Offset.x, self.Transform_LookAt.position.y + self.Offset.y, self.Offset.z);
         }
 
         [EntitySystem]
