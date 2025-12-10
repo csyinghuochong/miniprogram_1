@@ -99,7 +99,7 @@ namespace ET.Client
         public static void ChangeState(this FsmComponent self, int targetFsm, int skillId = 0)
         {
             Unit unit = self.GetParent<Unit>();
-            SkeletonAnimation skeletonAnimation = unit.GetComponent<GameObjectComponent>().SkeletonAnimation;
+            SpineAnimator spineAnimator = unit.GetComponent<GameObjectComponent>().GameObject.GetComponent<SpineAnimator>();
 
             switch (self.CurrentFsm)
             {
@@ -114,22 +114,16 @@ namespace ET.Client
             switch (targetFsm)
             {
                 case FsmStateEnum.FsmDeathState:
-                    skeletonAnimation.AnimationState.SetAnimation(0, "attack", false);
+                    spineAnimator?.Play(AnimName.Attack, false);
                     break;
                 case FsmStateEnum.FsmIdleState:
-                    skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+                    spineAnimator?.Play(AnimName.Idle, true);
                     break;
                 case FsmStateEnum.FsmRunState:
-                    var currentAnimation = skeletonAnimation.AnimationState.GetCurrent(0);
-                    if (currentAnimation == null || currentAnimation.Animation.Name != "walking")
-                    {
-                        skeletonAnimation.AnimationState.SetAnimation(0, "walking", true);
-                    }
-
+                    spineAnimator?.Play(AnimName.Run, true);
                     break;
                 case FsmStateEnum.FsmSkillState:
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-                    skeletonAnimation.AnimationState.SetAnimation(0, skillConfig.SkillAnimation, false);
+                    spineAnimator?.Play(AnimName.Attack, false, true);
                     break;
                 default:
                     break;

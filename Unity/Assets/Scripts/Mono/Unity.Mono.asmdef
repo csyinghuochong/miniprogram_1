@@ -2,7 +2,8 @@
     "name": "Unity.Mono",
     "rootNamespace": "ET",
     "references": [
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "spine-unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

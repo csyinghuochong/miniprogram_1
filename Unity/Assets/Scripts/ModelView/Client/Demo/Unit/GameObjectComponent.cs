@@ -8,7 +8,6 @@ namespace ET.Client
     {
         public string UnitAssetsPath { get; set; }
         public GameObject GameObject { get; set; }
-        public SkeletonAnimation SkeletonAnimation { get; set; }
 
         public Vector3 LastPosition = Vector3.zero;
     }

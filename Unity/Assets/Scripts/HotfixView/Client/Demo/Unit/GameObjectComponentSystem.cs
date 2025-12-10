@@ -62,7 +62,6 @@ namespace ET.Client
             }
 
             self.GameObject = null;
-            self.SkeletonAnimation = null;
         }
 
         private static void LoadGameObject(this GameObjectComponent self)
@@ -138,11 +137,11 @@ namespace ET.Client
 
         public static void UpdateScaleX(this GameObjectComponent self, float scale)
         {
-            if (self.GameObject != null && self.SkeletonAnimation != null)
+            if (self.GameObject != null)
             {
                 if (scale != 0)
                 {
-                    self.SkeletonAnimation.Skeleton.ScaleX = scale > 0 ? 1 : -1;
+                    self.GameObject.transform.localScale = new Vector3(scale > 0 ? 1 : -1, 1, 1);
                 }
             }
         }
@@ -173,7 +172,6 @@ namespace ET.Client
 
             go.transform.SetParent(self.Root().GetComponent<GlobalComponent>().Unit);
             self.GameObject = go;
-            self.SkeletonAnimation = self.GameObject.GetComponentInChildren<SkeletonAnimation>();
             self.GameObject.SetActive(true);
 
             Unit unit = self.GetParent<Unit>();
