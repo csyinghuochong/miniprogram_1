@@ -142,7 +142,7 @@ namespace ET.Client
             {
                 if (scale != 0)
                 {
-                    self.SkeletonAnimation.Skeleton.ScaleX = scale > 0 ? -1 : 1;
+                    self.SkeletonAnimation.Skeleton.ScaleX = scale > 0 ? 1 : -1;
                 }
             }
         }

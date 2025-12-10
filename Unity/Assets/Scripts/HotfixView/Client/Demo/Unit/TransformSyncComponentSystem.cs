@@ -54,7 +54,7 @@ namespace ET.Client
                         }
 
                         self.GameObjectComponent.UpdatePositon(Vector3.Lerp(older.Position, newer.Position, t));
-                        self.GameObjectComponent.UpdateScaleX((newer.Position - older.Position).x);
+                        self.GameObjectComponent.UpdateScaleX(newer.Position.x - older.Position.x);
 
                         return;
                     }
