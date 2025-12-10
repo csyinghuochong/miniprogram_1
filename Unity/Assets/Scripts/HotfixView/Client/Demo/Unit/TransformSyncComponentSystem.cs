@@ -31,19 +31,39 @@ namespace ET.Client
         {
             if (self.PositionBuffer.Count >= 2)
             {
+                float newerTimestamp = float.MinValue;
+                Vector3 newerPos = Vector3.zero;
                 for (int i = 0; i < self.PositionBuffer.Count - 1; i++)
                 {
                     var newer = self.PositionBuffer[i];
                     var older = self.PositionBuffer[i + 1];
 
+                    if (newer.Timestamp > newerTimestamp)
+                    {
+                        newerTimestamp = newer.Timestamp;
+                        newerPos = newer.Position;
+                    }
+
                     if (older.Timestamp <= interpolationTime && interpolationTime <= newer.Timestamp)
                     {
                         float t = Mathf.InverseLerp(older.Timestamp, newer.Timestamp, interpolationTime);
-                        
+
+                        if (newer.Position == older.Position)
+                        {
+                            return;
+                        }
+
                         self.GameObjectComponent.UpdatePositon(Vector3.Lerp(older.Position, newer.Position, t));
                         self.GameObjectComponent.UpdateScaleX((newer.Position - older.Position).x);
+
                         return;
                     }
+                }
+
+                // 防止一开始移动会瞬移第一步，因为服务端只有位置变换才同步位置下来
+                if (interpolationTime - newerTimestamp > 0.1f)
+                {
+                    self.ReceiveServerPosition(newerPos);
                 }
             }
             else if (self.PositionBuffer.Count == 1)
