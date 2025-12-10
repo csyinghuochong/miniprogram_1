@@ -222,7 +222,7 @@ namespace ET.Client
 
             // 2D
             float3 start = self.MyUnit.Position;
-            Vector2 dire = self.Direction * 5f;
+            Vector2 dire = self.Direction * 10f;
             float3 targetPosition = new float3(start.x + dire.x, start.y + dire.y, start.z);
 
             // // 检查目标点是否在可移动区域内
