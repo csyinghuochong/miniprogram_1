@@ -114,7 +114,7 @@ namespace ET.Server
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
             ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, 1), false, CollisionHelper.Default);
+            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, CollisionHelper.Default);
 
             return unit;
         }
@@ -170,7 +170,7 @@ namespace ET.Server
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
             ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, 1), false, CollisionHelper.Default);
+            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, CollisionHelper.Default);
 
             return unit;
         }
@@ -229,7 +229,7 @@ namespace ET.Server
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
             ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, 1), false, CollisionHelper.Default);
+            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, CollisionHelper.Default);
 
             return unit;
         }
@@ -262,7 +262,7 @@ namespace ET.Server
             
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
             ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Static);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, 1), false, CollisionHelper.Default);
+            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, CollisionHelper.Default);
 
             return unit;
         }

@@ -4,7 +4,7 @@ namespace ET
 {
     public static class ConfigData
     {
-        public const float DefaultRadius = 1f;
+        public const float DefaultRadius = 0.8f;
 
         /// <summary>
         /// 0->2D 1->2.5D
