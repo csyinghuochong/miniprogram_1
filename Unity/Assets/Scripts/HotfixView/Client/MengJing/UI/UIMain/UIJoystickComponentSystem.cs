@@ -225,19 +225,19 @@ namespace ET.Client
             Vector2 dire = self.Direction * 5f;
             float3 targetPosition = new float3(start.x + dire.x, start.y + dire.y, start.z);
 
-            // 检查目标点是否在可移动区域内
-            float3 finalTarget = self.GetValidMoveTarget(targetPosition);
-
-            if (math.distancesq(finalTarget, start) < 0.01f)
-            {
-                return;
-            }
+            // // 检查目标点是否在可移动区域内
+            // float3 finalTarget = self.GetValidMoveTarget(targetPosition);
+            //
+            // if (math.distancesq(finalTarget, start) < 0.01f)
+            // {
+            //     return;
+            // }
 
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
 
             C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
-            c2MPathfindingResult.Position.Add(finalTarget);
+            c2MPathfindingResult.Position.Add(targetPosition);
             self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
 
             // float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
