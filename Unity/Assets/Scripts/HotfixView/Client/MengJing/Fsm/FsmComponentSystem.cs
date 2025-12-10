@@ -114,16 +114,16 @@ namespace ET.Client
             switch (targetFsm)
             {
                 case FsmStateEnum.FsmDeathState:
-                    skeletonAnimation.AnimationState.SetAnimation(0, "die", false);
+                    skeletonAnimation.AnimationState.SetAnimation(0, "attack", false);
                     break;
                 case FsmStateEnum.FsmIdleState:
                     skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
                     break;
                 case FsmStateEnum.FsmRunState:
                     var currentAnimation = skeletonAnimation.AnimationState.GetCurrent(0);
-                    if (currentAnimation == null || currentAnimation.Animation.Name != "run")
+                    if (currentAnimation == null || currentAnimation.Animation.Name != "walking")
                     {
-                        skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
+                        skeletonAnimation.AnimationState.SetAnimation(0, "walking", true);
                     }
 
                     break;
