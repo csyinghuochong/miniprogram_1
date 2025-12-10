@@ -82,7 +82,8 @@ namespace ET.Server
             fixtureDef.IsSensor = isSensor;
             fixtureDef.Shape = m_CircleShape;
             fixtureDef.Density = 1f;
-            // fixtureDef.Friction = 0.3f;
+            // fixtureDef.Friction = 1.0f;// 摩擦力
+            fixtureDef.Restitution = 0f;// 弹性系数
             fixtureDef.UserData = self.ParentUnit;
             fixtureDef.Filter = new()
             {
@@ -93,7 +94,10 @@ namespace ET.Server
 
             // 禁用刚体旋转
             self.Body.IsFixedRotation = true;
-            
+
+            // 线性阻尼
+            self.Body.LinearDamping = 0.5f;
+
             self.Body.CreateFixture(fixtureDef);
         }
 
