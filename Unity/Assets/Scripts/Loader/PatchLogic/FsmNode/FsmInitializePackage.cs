@@ -74,7 +74,7 @@ internal class FsmInitializePackage : IStateNode
             var createParameters = new WebPlayModeParameters();
 			string defaultHostServer = GetHostServerURL();
             string fallbackHostServer = GetHostServerURL();
-            string packageRoot = $"{WeChatWASM.WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE"; //注意：如果有子目录，请修改此处！
+            string packageRoot = $"{WeChatWASM.WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE/yoo"; //注意：如果有子目录，请修改此处！
             IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
             createParameters.WebServerFileSystemParameters = WechatFileSystemCreater.CreateFileSystemParameters(packageRoot, remoteServices);
             initializationOperation = package.InitializeAsync(createParameters);
@@ -112,22 +112,22 @@ internal class FsmInitializePackage : IStateNode
 
 #if UNITY_EDITOR
         if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
-            return $"{hostServerIP}/CDN/Android/{appVersion}";
+            return $"{hostServerIP}/CDN/Android";
         else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
-            return $"{hostServerIP}/CDN/IPhone/{appVersion}";
+            return $"{hostServerIP}/CDN/IPhone";
         else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL)
-            return $"{hostServerIP}/CDN/WebGL/{appVersion}";
+            return $"{hostServerIP}/CDN/WebGL";
         else
-            return $"{hostServerIP}/CDN/PC/{appVersion}";
+            return $"{hostServerIP}/CDN/PC";
 #else
         if (Application.platform == RuntimePlatform.Android)
-            return $"{hostServerIP}/CDN/Android/{appVersion}";
+            return $"{hostServerIP}/CDN/Android";
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
-            return $"{hostServerIP}/CDN/IPhone/{appVersion}";
+            return $"{hostServerIP}/CDN/IPhone";
         else if (Application.platform == RuntimePlatform.WebGLPlayer)
-            return $"{hostServerIP}/CDN/WebGL/{appVersion}";
+            return $"{hostServerIP}/CDN/WebGL";
         else
-            return $"{hostServerIP}/CDN/PC/{appVersion}";
+            return $"{hostServerIP}/CDN/PC";
 #endif
     }
 
