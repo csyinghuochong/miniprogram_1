@@ -148,7 +148,7 @@ namespace ET
                 else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
                 else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL/StreamingAssets/yoo/DefaultPackage";
                 else
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
 #else
@@ -157,7 +157,7 @@ namespace ET
 		        else if (Application.platform == RuntimePlatform.IPhonePlayer)
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
 		        else if (Application.platform == RuntimePlatform.WebGLPlayer)
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL/StreamingAssets/yoo/DefaultPackage";
                     // return $"{Application.streamingAssetsPath}/yoo/DefaultPackage";
 		        else
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
