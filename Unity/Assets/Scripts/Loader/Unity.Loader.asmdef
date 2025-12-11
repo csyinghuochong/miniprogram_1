@@ -11,7 +11,8 @@
         "Unity.TextMeshPro",
         "Unity.RenderPipelines.Universal.Runtime",
         "DG.Tweening.Modules",
-        "ZString"
+        "ZString",
+        "YooAsset.MiniGame"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
