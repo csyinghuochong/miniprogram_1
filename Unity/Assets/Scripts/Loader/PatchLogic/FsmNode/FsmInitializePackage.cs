@@ -107,7 +107,7 @@ internal class FsmInitializePackage : IStateNode
         //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
         // string hostServerIP = "http://weijinghot.weijinggame.com";
         // string hostServerIP = "http://115.190.237.40:8080"; //云服务测试
-        string hostServerIP = "http://127.0.0.1"; //本地测试
+        string hostServerIP = "http://192.168.31.186"; //本地测试
         string appVersion = "v1.0";
 
 #if UNITY_EDITOR
