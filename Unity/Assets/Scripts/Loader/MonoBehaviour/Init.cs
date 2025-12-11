@@ -59,6 +59,7 @@ namespace ET
             World.Instance.AddSingleton<ResourcesComponent>();
 
             //OnStartGame();
+            await ETTask.CompletedTask;
         }
 
         public void OnStartGame()
