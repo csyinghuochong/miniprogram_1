@@ -1,4 +1,5 @@
-﻿using Cysharp.Text;
+﻿using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,11 +38,26 @@ namespace ET.Client
                 return;
             }
 
+            // 地图加载完成后，提前加载一些资源和开始加载Unit
             if (!self.StartLoadAssets)
             {
                 self.StartLoadAssets = true;
                 self.StartPreLoadAssets().Coroutine();
                 UnitFactory.ShowAllUnit(self.Root()).Coroutine();
+            }
+
+            // 等待Unit加载完成
+            List<EntityRef<Unit>> allUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+            if (allUnit.Count == 0)
+            {
+                return;
+            }
+            foreach (Unit u in allUnit)
+            {
+                if (!u.FinishLoad)
+                {
+                    return;
+                }
             }
 
             if (self.PreLoadAssets.Count > 0)
@@ -54,14 +70,6 @@ namespace ET.Client
                 self.ShowProgress(1f);
             }
 
-            self.PassTime += Time.deltaTime;
-            self.ShowProgress(0.9f + self.PassTime * 0.1f);
-
-            if (self.PassTime < 1.5f)
-            {
-                return;
-            }
-
             Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (main == null)
             {
@@ -71,10 +79,11 @@ namespace ET.Client
             MapType mapType = self.Root().GetComponent<MapComponent>().MapType;
 
             UI ui = self.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
-            if (ui != null)
+            if (ui == null)
             {
-                ui.GetComponent<UIMainComponent>().AfterEnterScene(self.Root().GetComponent<MapComponent>().MapType);
+                return;
             }
+            ui.GetComponent<UIMainComponent>().AfterEnterScene(self.Root().GetComponent<MapComponent>().MapType);
 
             // 场景和角色都加载完成了
             self.Root().CurrentScene().AddComponent<OperaComponent>();
@@ -84,8 +93,6 @@ namespace ET.Client
             {
                 self.Root().CurrentScene().AddComponent<MapLoopComponent>();
             }
-            // Camera camera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
-            // camera.GetComponent<Camera>().fieldOfView = 50;
 
             self.Root().GetComponent<UIComponent>().Remove(UIType.UILoading);
         }

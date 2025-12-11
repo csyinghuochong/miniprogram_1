@@ -22,6 +22,9 @@ namespace ET
         [BsonIgnore]
         public bool WaitLoad { get; set; }
 
+        [BsonIgnore]
+        public bool FinishLoad { get; set; }
+
         [BsonElement]
         private float3 position; //坐标
 

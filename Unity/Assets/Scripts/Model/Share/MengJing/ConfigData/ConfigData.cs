@@ -19,7 +19,7 @@ namespace ET
         public const int Item_Exp = 3;
 
         [StaticField]
-        public static bool LoadSceneFinished { get; set; }
+        public static bool LoadSceneFinished;
 
         public const string RobotPassWord = "et@#robot";
 

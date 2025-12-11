@@ -125,6 +125,10 @@ namespace ET.Client
             {
                 self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, false, self.OnLoadGameObject);
             }
+            else
+            {
+                unit.FinishLoad = true;
+            }
         }
 
         public static void UpdateRotation(this GameObjectComponent self, Quaternion quaternion)
@@ -175,6 +179,7 @@ namespace ET.Client
             self.GameObject.SetActive(true);
 
             Unit unit = self.GetParent<Unit>();
+            unit.FinishLoad = true;
             self.UpdatePositon(unit.Position);
 
             UnitId unitId = self.GameObject.GetComponent<UnitId>() ?? self.GameObject.AddComponent<UnitId>();
