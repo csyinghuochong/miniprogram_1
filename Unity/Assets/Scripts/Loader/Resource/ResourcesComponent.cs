@@ -94,8 +94,8 @@ namespace ET
                     var webServerFileSystemParams = FileSystemParameters.CreateDefaultWebServerFileSystemParameters();
                     var webRemoteFileSystemParams = FileSystemParameters.CreateDefaultWebRemoteFileSystemParameters(remoteServices); //支持跨域下载
                     var createParameters = new WebPlayModeParameters();
-                    createParameters.WebServerFileSystemParameters = null;//本地直接Build and Run，设置为null
-                    // createParameters.WebServerFileSystemParameters = webServerFileSystemParams;
+                    // createParameters.WebServerFileSystemParameters = null;//本地直接Build and Run，设置为null
+                    createParameters.WebServerFileSystemParameters = webServerFileSystemParams;
                     createParameters.WebRemoteFileSystemParameters = webRemoteFileSystemParams;
                     await package.InitializeAsync(createParameters).Task;
                     
@@ -138,7 +138,8 @@ namespace ET
             {
                 //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
                 // string hostServerIP = "http://weijinghot.weijinggame.com";
-                string hostServerIP = "http://115.190.237.40:8080";
+                // string hostServerIP = "http://115.190.237.40:8080"; //云服务测试
+                string hostServerIP = "http://127.0.0.1"; //本地测试
                 string appVersion = "v1.0";
                 
 #if UNITY_EDITOR
@@ -156,8 +157,8 @@ namespace ET
 		        else if (Application.platform == RuntimePlatform.IPhonePlayer)
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
 		        else if (Application.platform == RuntimePlatform.WebGLPlayer)
-		        	// return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
-                    return $"{Application.streamingAssetsPath}/yoo/DefaultPackage";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
+                    // return $"{Application.streamingAssetsPath}/yoo/DefaultPackage";
 		        else
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
 #endif
