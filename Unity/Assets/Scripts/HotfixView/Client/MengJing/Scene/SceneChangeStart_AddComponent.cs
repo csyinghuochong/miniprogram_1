@@ -10,7 +10,15 @@ namespace ET.Client
             try
             {
                 ConfigData.ViewMode = args.MapType == MapType.LocalLevel ? 1 : 0;
-                
+                if (args.MapType == MapType.LocalLevel)
+                {
+                    ConfigData.LookAtMode = ConfigData.BattleMode == 0 ? 0 : 1;
+                }
+                else
+                {
+                    ConfigData.LookAtMode = 0;
+                }
+
                 root.GetComponent<SceneManagerComponent>().BeforeChangeScene();
 
                 UI ui = await root.GetComponent<UIComponent>().Create(UIType.UILoading);

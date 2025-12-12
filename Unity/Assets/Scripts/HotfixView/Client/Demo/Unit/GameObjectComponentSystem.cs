@@ -246,6 +246,9 @@ namespace ET.Client
 
         public static void ReloadGameObject(this GameObjectComponent self)
         {
+            // 后面给需要改变的组件加加一个接口
+            return;
+            
             Unit unit = self.GetParent<Unit>();
             int unitType = unit.Type;
             switch (unitType)

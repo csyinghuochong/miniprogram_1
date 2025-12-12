@@ -10,8 +10,7 @@ namespace ET.Client
         private static void Awake(this CameraComponent self)
         {
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
-            self.Transform_LookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform;
-            
+
             if (ConfigData.ViewMode == 0)
             {
                 self.MainCamera.orthographic = true;
@@ -30,7 +29,35 @@ namespace ET.Client
         [EntitySystem]
         private static void LateUpdate(this CameraComponent self)
         {
-            self.MainCamera.transform.position = new Vector3(self.Transform_LookAt.position.x + self.Offset.x, self.Transform_LookAt.position.y + self.Offset.y, self.Offset.z);
+            Vector3 lookAt = Vector3.zero;
+            if (ConfigData.LookAtMode == 0)
+            {
+                lookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform.position;
+            }
+            else
+            {
+                foreach (Unit unit in self.Scene().GetComponent<UnitComponent>().GetAll())
+                {
+                    if (unit.Type != UnitType.Hero)
+                    {
+                        continue;
+                    }
+
+                    Vector3 unitPos = unit.GetComponent<GameObjectComponent>().GameObject.transform.position;
+                    if (lookAt == Vector3.zero)
+                    {
+                        lookAt = unitPos;
+                    }
+
+                    // 看向最上面的英雄
+                    if (unit.Position.y > lookAt.y)
+                    {
+                        lookAt = unitPos;
+                    }
+                }
+            }
+
+            self.MainCamera.transform.position = new Vector3(lookAt.x + self.Offset.x, lookAt.y + self.Offset.y, self.Offset.z);
         }
 
         [EntitySystem]
