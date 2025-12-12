@@ -49,7 +49,7 @@ namespace ET.Client
 
             self.CopyModelGameObject =
                     UnityEngine.Object.Instantiate(self.Transform_HeroIcon.GetChild(0).gameObject, self.GameObject.transform.parent.parent);
-            self.CopyModelGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            self.CopyModelGameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
             self.Text_HeroName.gameObject.SetActive(false);
             self.Transform_HeroIcon.gameObject.SetActive(false);
@@ -93,7 +93,7 @@ namespace ET.Client
                 return;
             }
 
-            RectTransform canvas = self.GameObject.transform.parent.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.GameObject.transform.parent.parent.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pdata, results);
