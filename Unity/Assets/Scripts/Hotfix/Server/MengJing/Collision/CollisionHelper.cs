@@ -12,7 +12,7 @@ namespace ET.Server
         public const ushort Default = 1 << 0;
         public const ushort Player = 1 << 1;
         public const ushort Monster = 1 << 2;
-        public const ushort Map = 1 << 3;
+        public const ushort Hero = 1 << 3;
 
         public const ushort Max = 1 << 15;
         public const ushort All = 0xFFFF;
@@ -22,7 +22,9 @@ namespace ET.Server
             return layer switch
             {
                 Default => All,
-                Player => Player | Monster,
+                Player => Default,
+                Monster => Default | Monster | Hero,
+                Hero => Default | Monster | Hero,
                 _ => All
             };
         }

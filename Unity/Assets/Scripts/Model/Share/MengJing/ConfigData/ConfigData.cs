@@ -4,16 +4,24 @@ namespace ET
 {
     public static class ConfigData
     {
-        public const float DefaultRadius = 0.8f;
+        public const float DefaultRadius = 0.8f; // 默认半径
+        public const float PlayerDensity = 1f; // 玩家密度
+
+        public const float HeroDensity = 1f; // 英雄密度
+        public const float HeroLinearDamping = 0.5f; // 英雄线性阻尼
+
+        public const float MonsterDensity = 30f; // 怪物密度
+        public const float MonsterLinearDamping = 1f; // 怪物线性阻尼
 
         /// <summary>
         /// 0->2D 1->2.5D
         /// </summary>
         [StaticField]
         public static int ViewMode = 0;
+
         // 2.5D 摄像机角度
         public const float CameraAngle = -25f;
-        
+
         public const int Item_Gold = 1;
         public const int Item_Diamond = 2;
         public const int Item_Exp = 3;

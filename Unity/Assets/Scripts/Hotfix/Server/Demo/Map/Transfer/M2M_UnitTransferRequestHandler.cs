@@ -58,7 +58,7 @@ namespace ET.Server
 
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
                     ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, CollisionHelper.Default);
+                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Player);
                     unit.AddComponent<UnitMoveComponent>();
                     unit.AddComponent<TransformNoticeToClientComponent>();
                     break;
@@ -75,7 +75,7 @@ namespace ET.Server
 
                     unit.AddComponent<AOIEntity, int, float3>(100 * 1000, unit.Position);
                     ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, CollisionHelper.Default);
+                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Player);
                     unit.AddComponent<UnitMoveComponent>();
                     unit.AddComponent<TransformNoticeToClientComponent>();
 

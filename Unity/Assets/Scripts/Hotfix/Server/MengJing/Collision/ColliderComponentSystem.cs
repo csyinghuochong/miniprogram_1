@@ -54,7 +54,7 @@ namespace ET.Server
         {
             self.Body.LinearDamping = linearDamping;
         }
-        
+
         /// <summary>
         /// 旋转阻尼
         /// </summary>
@@ -64,7 +64,7 @@ namespace ET.Server
         {
             self.Body.AngularDamping = angularDamping;
         }
-        
+
         /// <summary>
         /// 圆形
         /// </summary>
@@ -73,7 +73,7 @@ namespace ET.Server
         /// <param name="offset">偏移量</param>
         /// <param name="isSensor">是否为触发器</param>
         /// <param name="layer"></param>
-        public static void CreateCircleCollider(this ColliderComponent self, float radius, Vector2 offset, bool isSensor, ushort layer)
+        public static void CreateCircleCollider(this ColliderComponent self, float radius, Vector2 offset, bool isSensor, float density, ushort layer)
         {
             CircleShape m_CircleShape = new();
             m_CircleShape.Radius = radius;
@@ -81,7 +81,7 @@ namespace ET.Server
             FixtureDef fixtureDef = new();
             fixtureDef.IsSensor = isSensor;
             fixtureDef.Shape = m_CircleShape;
-            fixtureDef.Density = 1f;
+            fixtureDef.Density = density;
             // fixtureDef.Friction = 1.0f;// 摩擦力
             fixtureDef.Restitution = 0f;// 弹性系数
             fixtureDef.UserData = self.ParentUnit;
@@ -94,9 +94,6 @@ namespace ET.Server
 
             // 禁用刚体旋转
             self.Body.IsFixedRotation = true;
-
-            // 线性阻尼
-            self.Body.LinearDamping = 0.5f;
 
             self.Body.CreateFixture(fixtureDef);
         }
@@ -111,7 +108,8 @@ namespace ET.Server
         /// <param name="angle">角度</param>
         /// <param name="isSensor">是否为触发器</param>
         /// <param name="layer"></param>
-        public static void CreateBoxCollider(this ColliderComponent self, float hx, float hy, Vector2 offset, float angle, bool isSensor, ushort layer)
+        public static void CreateBoxCollider(this ColliderComponent self, float hx, float hy, Vector2 offset, float angle, bool isSensor,
+        ushort layer)
         {
             PolygonShape m_BoxShape = new();
             m_BoxShape.SetAsBox(hx, hy, offset, angle);
