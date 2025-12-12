@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -43,6 +44,8 @@ namespace ET.Client
             self.BloodText_Layer2 = new GameObject("BloodText_Layer1");
             self.BloodText_Layer2.AddComponent<RectTransform>();
             SetParent(self.BloodText_Layer2, self.BloodText);
+
+            self.SetCanvas();
         }
 
         [EntitySystem]
@@ -69,6 +72,21 @@ namespace ET.Client
             son.transform.SetParent(parent.transform);
             son.transform.localPosition = Vector3.zero;
             son.transform.localScale = Vector3.one;
+        }
+
+        private static void SetCanvas(this GlobalComponent self)
+        {
+            Vector2 screenSize = new Vector2(1152, 2048);
+            self.BloodRoot.GetComponent<CanvasScaler>().referenceResolution = screenSize;
+            self.BloodRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
+            self.NormalRoot.GetComponent<CanvasScaler>().referenceResolution = screenSize;
+            self.NormalRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
+            self.MidRoot.GetComponent<CanvasScaler>().referenceResolution = screenSize;
+            self.MidRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
+            self.FixedRoot.GetComponent<CanvasScaler>().referenceResolution = screenSize;
+            self.FixedRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
+            self.PopUpRoot.GetComponent<CanvasScaler>().referenceResolution = screenSize;
+            self.PopUpRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
         }
     }
 }
