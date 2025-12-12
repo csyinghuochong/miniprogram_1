@@ -74,7 +74,7 @@ internal class FsmInitializePackage : IStateNode
             var createParameters = new WebPlayModeParameters();
 			string defaultHostServer = GetHostServerURL();
             string fallbackHostServer = GetHostServerURL();
-            string packageRoot = $"{WeChatWASM.WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE/yoo"; //注意：如果有子目录，请修改此处！
+            string packageRoot = $"{WeChatWASM.WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE"; //注意：如果有子目录，请修改此处！
             IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
             createParameters.WebServerFileSystemParameters = WechatFileSystemCreater.CreateFileSystemParameters(packageRoot, remoteServices);
             initializationOperation = package.InitializeAsync(createParameters);
