@@ -25,8 +25,6 @@ namespace ET.Server
         public int SpawnedMonsterIndex;
         public float SpawnTime;
 
-        public float3 LastPlayerPosition;
-
         // 记录生成的英雄Unit,用于检测英雄死亡
         public List<long> HeroUnitIds = new();
     }

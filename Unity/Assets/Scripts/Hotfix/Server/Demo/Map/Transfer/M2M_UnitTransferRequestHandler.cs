@@ -56,7 +56,7 @@ namespace ET.Server
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
-                    unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+                    unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
                     ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
                     colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Player);
                     unit.AddComponent<UnitMoveComponent>();
@@ -73,7 +73,7 @@ namespace ET.Server
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
-                    unit.AddComponent<AOIEntity, int, float3>(100 * 1000, unit.Position);
+                    unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
                     ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
                     colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Player);
                     unit.AddComponent<UnitMoveComponent>();

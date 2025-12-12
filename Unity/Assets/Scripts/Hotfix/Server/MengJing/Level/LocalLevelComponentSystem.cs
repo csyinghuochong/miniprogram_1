@@ -53,6 +53,31 @@ namespace ET.Server
                 return;
             }
 
+            if (ConfigData.BattleMode == 1)
+            {
+                // 玩家同步到坐标Y值最大的英雄上
+                float3 maxPos = float3.zero;
+                foreach (Unit u in self.Scene().GetComponent<UnitComponent>().GetAll())
+                {
+                    if (u.Type != UnitType.Hero)
+                    {
+                        continue;
+                    }
+
+                    if (maxPos.Equals(float3.zero))
+                    {
+                        maxPos = u.Position;
+                    }
+
+                    if (u.Position.y > maxPos.y)
+                    {
+                        maxPos = u.Position;
+                    }
+                }
+
+                self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(maxPos.x, maxPos.y));
+            }
+
             // 所有状态都检测英雄存活
             if (!self.CheckHeroesAlive())
             {
@@ -97,14 +122,12 @@ namespace ET.Server
                     if (waveConfig.HaveBoss)
                     {
                         // Boss房间怪物生成相对玩家出生点
-                        position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X,
-                            waveConfig.PlayerSpawnPosition.Y + monsterSpawnInfo.SpawnPosition.Y);
+                        position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, waveConfig.PlayerSpawnPosition.Y + monsterSpawnInfo.SpawnPosition.Y);
                     }
                     else
                     {
                         // 循环路上怪物生成相对地图X坐标和玩家Y坐标
-                        position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X,
-                            self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
+                        position = new float2(waveConfig.PlayerSpawnPosition.X + monsterSpawnInfo.SpawnPosition.X, self.MainUnit.Position.y + monsterSpawnInfo.SpawnPosition.Y);
                     }
 
                     UnitFactory.CreateMonster(self.Scene(), monsterSpawnInfo.MonsterId, position);
@@ -328,23 +351,24 @@ namespace ET.Server
             }
 
             Log.Info("传送到Boss房间");
-
-            // 记录玩家在关卡中的位置,打完Boss后返回
-            self.LastPlayerPosition = self.MainUnit.Position;
+            
+            self.ClearDropItem();
 
             // 传送玩家到Boss房间
-            self.MainUnit.Position = new float3(nextWaveConfig.PlayerSpawnPosition.X, nextWaveConfig.PlayerSpawnPosition.Y, 0);
+            self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(nextWaveConfig.PlayerSpawnPosition);
             self.MainUnit.Stop();
 
-            // 传送所有英雄到Boss房间(保持相对位置)
+            // 传送所有英雄到Boss房间
             UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
             foreach (long heroUnitId in self.HeroUnitIds)
             {
                 Unit heroUnit = unitComponent.Get(heroUnitId);
                 if (heroUnit != null && heroUnit.Type == UnitType.Hero)
                 {
-                    float3 offset = heroUnit.Position - self.LastPlayerPosition;
-                    heroUnit.Position = self.MainUnit.Position + offset;
+                    float3 offset = self.MainUnit.GetComponent<HeroComponentS>().GetHeroPosition(heroUnitId);
+                    float3 spawnPos = new float3(nextWaveConfig.PlayerSpawnPosition.X, nextWaveConfig.PlayerSpawnPosition.Y, 0);
+                    float3 newPosition = spawnPos + offset;
+                    heroUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(newPosition.x, newPosition.y));
                     heroUnit.Stop();
                 }
             }
@@ -367,10 +391,12 @@ namespace ET.Server
             }
 
             Log.Info("从Boss房间传送回关卡");
+            
+            self.ClearDropItem();
 
-            // 传送玩家回到之前的位置
-            float3 oldPosition = self.MainUnit.Position;
-            self.MainUnit.Position = self.LastPlayerPosition;
+            // 传送玩家回到循环地图
+            float3 levelPos = new float3(0, 100f, 0);
+            self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(levelPos.x, levelPos.y));
             self.MainUnit.Stop();
 
             // 传送所有英雄回到关卡(保持相对位置)
@@ -380,8 +406,9 @@ namespace ET.Server
                 Unit heroUnit = unitComponent.Get(heroUnitId);
                 if (heroUnit != null && heroUnit.Type == UnitType.Hero)
                 {
-                    float3 offset = heroUnit.Position - oldPosition;
-                    heroUnit.Position = self.LastPlayerPosition + offset;
+                    float3 offset = self.MainUnit.GetComponent<HeroComponentS>().GetHeroPosition(heroUnitId);
+                    float3 newPosition = levelPos + offset;
+                    heroUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(newPosition.x, newPosition.y));
                     heroUnit.Stop();
                 }
             }
@@ -438,6 +465,20 @@ namespace ET.Server
 
             // 重新生成英雄(传送到新关卡并生成英雄)
             // self.GenerateHeroes();
+        }
+
+        private static void ClearDropItem(this LocalLevelComponent self)
+        {
+            UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
+            List<EntityRef<Unit>> allUnit = unitComponent.GetAll();
+            for (int i = allUnit.Count - 1; i >= 0; i--)
+            {
+                Unit u = allUnit[i];
+                if (u.Type == UnitType.DropItem)
+                {
+                    unitComponent.Remove(u.Id);
+                }
+            }
         }
 
         public static void GenerateLevel(this LocalLevelComponent self)
