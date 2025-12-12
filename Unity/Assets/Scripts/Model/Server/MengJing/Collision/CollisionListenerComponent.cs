@@ -19,7 +19,7 @@ namespace ET.Server
             Unit unitA = (Unit)contact.FixtureA.UserData;
             Unit unitB = (Unit)contact.FixtureB.UserData;
 
-            if (unitA.IsDisposed || unitB.IsDisposed)
+            if (unitA == null || unitB == null || unitA.IsDisposed || unitB.IsDisposed)
             {
                 return;
             }
@@ -35,6 +35,11 @@ namespace ET.Server
             Unit unitA = (Unit)contact.FixtureA.UserData;
             Unit unitB = (Unit)contact.FixtureB.UserData;
 
+            if (unitA == null || unitB == null || unitA.IsDisposed || unitB.IsDisposed)
+            {
+                return;
+            }
+            
             // Id不分顺序，防止移除失败
             this.ToBeRemovedCollisionData.Add((unitA.Id, unitB.Id));
             this.ToBeRemovedCollisionData.Add((unitB.Id, unitA.Id));
