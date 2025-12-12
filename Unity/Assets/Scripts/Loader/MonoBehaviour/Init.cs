@@ -58,7 +58,7 @@ namespace ET
             // 初始化资源系统
             World.Instance.AddSingleton<ResourcesComponent>();
 
-            //OnStartGame();
+            OnStartGame();
             await ETTask.CompletedTask;
         }
 
