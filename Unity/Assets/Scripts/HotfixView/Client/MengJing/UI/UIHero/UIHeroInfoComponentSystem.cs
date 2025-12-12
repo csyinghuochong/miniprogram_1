@@ -186,7 +186,7 @@ namespace ET.Client
 
             string path = ABPathHelper.GetUIUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
             GameObject model = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
-            model.transform.localScale = new Vector3(1f, 1f, 1f);
+            model.transform.localScale = new Vector3(3f, 3f, 1f);
             UICommonHelper.DestoryChild(self.Spine_HeroModel.gameObject);
             UnityEngine.Object.Instantiate(model, self.Spine_HeroModel);
 
