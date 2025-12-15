@@ -71,7 +71,15 @@ namespace ET.Client
         public static void AfterEnterScene(this UIJoystickComponent self, MapType mapType)
         {
             self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            
+            if (mapType == MapType.LocalLevel && self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleMode) == 1)
+            { 
+                self.GameObject.SetActive(false);
+            }
+            else
+            {
+                self.GameObject.SetActive(true);
+            }
+
             // 。。。解决传送到关卡或者返回主城时第一次拖动摇杆后会瞬移回来 先这样吧，还不太明确是什么问题
             C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
             c2MPathfindingResult.Position.Add(self.MyUnit.Position);

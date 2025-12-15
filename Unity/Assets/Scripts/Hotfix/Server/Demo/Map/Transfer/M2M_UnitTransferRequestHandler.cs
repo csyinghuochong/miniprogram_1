@@ -68,6 +68,7 @@ namespace ET.Server
                     unit.Position = float3.zero;
 
                     numericComponent.ApplyValue(NumericType.BattleCamp, (int)CampType.CampPlayer_1, false);
+                    numericComponent.ApplyValue(NumericType.BattleMode, 1, false);
                     numericComponent.ApplyValue(NumericType.PassedLevelId, 0, false);
                     
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);

@@ -21,6 +21,7 @@
         public const int DropItemId = 3013;                                     //掉落物Id
         public const int DropItemNum = 3014;                                    //掉落物数量
         public const int DropType = 3015;
+        public const int BattleMode = 3016;                                     //0:跟随玩家战斗 1:自由战斗
         
         // 闯关相关
         public const int PassedLevelId = 3100;                                  //通关的关卡Id

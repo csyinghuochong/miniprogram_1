@@ -108,7 +108,7 @@ namespace ET.Server
             // unit.AddComponent<Move2DComponent>();
             unit.AddComponent<UnitMoveComponent>();
 
-            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(ConfigData.BattleMode == 0 ? 1 : 2);
+            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(master.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleMode) == 0 ? 1 : 2);
             aiComponent.InitHero(hero);
             aiComponent.Begin();
 

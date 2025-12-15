@@ -9,6 +9,18 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this CameraComponent self)
         {
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (mapComponent.MapType == MapType.LocalLevel)
+            {
+                self.LookAtMode = myUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleMode) == 0 ? 0 : 1;
+            }
+            else
+            {
+                self.LookAtMode = 0;
+            }
+            
+            
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
 
             if (ConfigData.ViewMode == 0)
@@ -30,7 +42,7 @@ namespace ET.Client
         private static void LateUpdate(this CameraComponent self)
         {
             Vector3 lookAt = Vector3.zero;
-            if (ConfigData.LookAtMode == 0)
+            if (self.LookAtMode == 0)
             {
                 lookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform.position;
             }
@@ -55,6 +67,11 @@ namespace ET.Client
                         lookAt = unitPos;
                     }
                 }
+            }
+
+            if (lookAt == Vector3.zero)
+            {
+                return;
             }
 
             self.MainCamera.transform.position = new Vector3(lookAt.x + self.Offset.x, lookAt.y + self.Offset.y, self.Offset.z);

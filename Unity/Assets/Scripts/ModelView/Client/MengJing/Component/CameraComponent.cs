@@ -6,6 +6,9 @@ namespace ET.Client
     public class CameraComponent : Entity, IAwake, ILateUpdate, IDestroy
     {
         public Camera MainCamera;
+
         public Vector3 Offset;
+
+        public int LookAtMode = 0; // 0: 玩家 1: 英雄
     }
 }

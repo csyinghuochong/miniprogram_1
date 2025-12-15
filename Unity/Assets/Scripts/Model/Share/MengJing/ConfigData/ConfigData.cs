@@ -4,6 +4,8 @@ namespace ET
 {
     public static class ConfigData
     {
+        #region Box2D默认配置
+
         public const float DefaultRadius = 0.8f; // 默认半径
         public const float PlayerDensity = 1f; // 玩家密度
 
@@ -13,22 +15,13 @@ namespace ET
         public const float MonsterDensity = 30f; // 怪物密度
         public const float MonsterLinearDamping = 1f; // 怪物线性阻尼
 
-        /// <summary>
-        /// 0->跟随玩家战斗 1->自由战斗
-        /// </summary>
-        public const int BattleMode = 1;
+        #endregion
 
         /// <summary>
         /// 0->2D 1->2.5D
         /// </summary>
         [StaticField]
         public static int ViewMode = 0;
-        
-        /// <summary>
-        /// 0->看向玩家 1->看向英雄
-        /// </summary>
-        [StaticField]
-        public static int LookAtMode = 0;
 
         // 2.5D 摄像机角度
         public const float CameraAngle = -25f;

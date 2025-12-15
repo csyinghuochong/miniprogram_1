@@ -53,7 +53,7 @@ namespace ET.Server
                 return;
             }
 
-            if (ConfigData.BattleMode == 1)
+            if (self.MainUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleMode) == 1)
             {
                 // 玩家同步到坐标Y值最大的英雄上
                 float3 maxPos = float3.zero;
@@ -75,7 +75,10 @@ namespace ET.Server
                     }
                 }
 
-                self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(maxPos.x, maxPos.y));
+                if (!maxPos.Equals(float3.zero))
+                {
+                    self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(maxPos.x, maxPos.y));
+                }
             }
 
             // 所有状态都检测英雄存活

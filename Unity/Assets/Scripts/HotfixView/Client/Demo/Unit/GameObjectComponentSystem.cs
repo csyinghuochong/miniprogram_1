@@ -73,21 +73,30 @@ namespace ET.Client
             {
                 case UnitType.Player:
                 {
-                    NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-                    int heroId = numericComponent.GetAsInt(NumericType.ShowHeroId);
-
-                    HeroConfig heroConfig = null;
-                    if (!HeroConfigCategory.Instance.DataMap.ContainsKey(heroId))
+                    MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                    if (unit.MainHero && mapComponent.MapType == MapType.LocalLevel && unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleMode) == 1)
                     {
-                        Log.Warning("没有英雄上阵，默认用第一个吧");
-                        heroConfig = HeroConfigCategory.Instance.DataList[0];
+                        self.UnitAssetsPath = "";
                     }
                     else
                     {
-                        heroConfig = HeroConfigCategory.Instance.Get(heroId);
+                        NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+                        int heroId = numericComponent.GetAsInt(NumericType.ShowHeroId);
+
+                        HeroConfig heroConfig = null;
+                        if (!HeroConfigCategory.Instance.DataMap.ContainsKey(heroId))
+                        {
+                            Log.Warning("没有英雄上阵，默认用第一个吧");
+                            heroConfig = HeroConfigCategory.Instance.DataList[0];
+                        }
+                        else
+                        {
+                            heroConfig = HeroConfigCategory.Instance.Get(heroId);
+                        }
+
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
                     }
 
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath(ABUnitType.Hero, heroConfig.HeroModelID);
                     break;
                 }
                 case UnitType.Hero:
