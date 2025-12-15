@@ -10,5 +10,7 @@ namespace ET.Client
         public Vector3 Offset;
 
         public int LookAtMode = 0; // 0: 玩家 1: 英雄
+        
+        public Vector3 TargetLookAt = Vector3.zero; // 目标看向位置
     }
 }

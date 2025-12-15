@@ -19,8 +19,7 @@ namespace ET.Client
             {
                 self.LookAtMode = 0;
             }
-            
-            
+
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera;
 
             if (ConfigData.ViewMode == 0)
@@ -41,10 +40,10 @@ namespace ET.Client
         [EntitySystem]
         private static void LateUpdate(this CameraComponent self)
         {
-            Vector3 lookAt = Vector3.zero;
+            Vector3 targetLookAt = Vector3.zero;
             if (self.LookAtMode == 0)
             {
-                lookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform.position;
+                targetLookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform.position;
             }
             else
             {
@@ -56,25 +55,38 @@ namespace ET.Client
                     }
 
                     Vector3 unitPos = unit.GetComponent<GameObjectComponent>().GameObject.transform.position;
-                    if (lookAt == Vector3.zero)
+                    if (targetLookAt == Vector3.zero)
                     {
-                        lookAt = unitPos;
+                        targetLookAt = unitPos;
                     }
 
                     // 看向最上面的英雄
-                    if (unit.Position.y > lookAt.y)
+                    if (unit.Position.y > targetLookAt.y)
                     {
-                        lookAt = unitPos;
+                        targetLookAt = unitPos;
                     }
                 }
             }
 
-            if (lookAt == Vector3.zero)
+            if (targetLookAt == Vector3.zero)
             {
                 return;
             }
 
-            self.MainCamera.transform.position = new Vector3(lookAt.x + self.Offset.x, lookAt.y + self.Offset.y, self.Offset.z);
+            Vector3 targetPosition = new Vector3(targetLookAt.x + self.Offset.x, targetLookAt.y + self.Offset.y, self.Offset.z);
+            float distance = Vector3.Distance(self.MainCamera.transform.position, targetPosition);
+
+            if (distance > 10)
+            {
+                // 距离过大，直接跳转
+                self.MainCamera.transform.position = targetPosition;
+            }
+            else
+            {
+                // 距离较近，平滑过渡
+                float smoothSpeed = 5f; // 平滑速度，可调整
+                self.MainCamera.transform.position = Vector3.Lerp(self.MainCamera.transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+            }
         }
 
         [EntitySystem]
