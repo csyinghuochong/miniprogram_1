@@ -7,8 +7,8 @@ namespace ET
         public const float DefaultRadius = 0.8f; // 默认半径
         public const float PlayerDensity = 1f; // 玩家密度
 
-        public const float HeroDensity = 1f; // 英雄密度
-        public const float HeroLinearDamping = 0.5f; // 英雄线性阻尼
+        public const float HeroDensity = 10f; // 英雄密度
+        public const float HeroLinearDamping = 1f; // 英雄线性阻尼
 
         public const float MonsterDensity = 30f; // 怪物密度
         public const float MonsterLinearDamping = 1f; // 怪物线性阻尼
