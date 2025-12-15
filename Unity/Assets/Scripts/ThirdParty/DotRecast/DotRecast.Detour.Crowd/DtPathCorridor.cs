@@ -246,7 +246,7 @@ namespace DotRecast.Detour.Crowd
             }
             
             
-            const int MAX_ITER = 32;
+            // const int MAX_ITER = 32;
             const int MAX_RES = 32;
 
             Span<long> res = stackalloc long[MAX_RES];

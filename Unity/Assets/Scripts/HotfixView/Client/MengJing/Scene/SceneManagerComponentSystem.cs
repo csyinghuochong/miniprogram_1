@@ -29,26 +29,8 @@ namespace ET.Client
 
         public static async ETTask ChangeScene(this SceneManagerComponent self, MapType mapType, MapType lastScene, int sceneid)
         {
-            string paramss = "";
+            string paramss = CommonHelp.GetMapObjName(mapType);
             List<string> subScene = new();
-            switch (mapType)
-            {
-                case MapType.Init:
-                    paramss = "Init";
-                    break;
-                case MapType.Login:
-                    paramss = "Login";
-                    break;
-                case MapType.MainCity:
-                    paramss = "MainCity";
-                    break;
-                case MapType.LocalLevel:
-                    paramss = "Level";
-                    // subScene.Add("LevelTest");
-                    break;
-                default:
-                    break;
-            }
 
             self.Root().GetComponent<GameObjectLoadComponent>().DisposeAll();
 

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using DotRecast.Detour.Crowd;
 using MongoDB.Bson.Serialization.Attributes;
 using Unity.Mathematics;
 
@@ -6,8 +7,11 @@ namespace ET
 {
     [ChildOf(typeof(UnitComponent))]
     [DebuggerDisplay("ViewName,nq")]
-    public partial class Unit : Entity, IAwake<int>
+    public partial class Unit : Entity, IAwake<int>, IDestroy
     {
+        [BsonIgnore]
+        public int DtCrowdAgentId { get; set; }
+        
         public int AI { get; set; }
 
         public int Type { get; set; }

@@ -9,29 +9,30 @@ namespace ET.Server
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask FindPathMoveToAsync(this Unit unit, float3 target, int speedRate = 100)
         {
-            MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-            moveComponent.SyncPosition();
-            M2C_PathfindingResult m2CPathfindingResult = new();
-            unit.GetComponent<PathfindingComponent>().Find(unit.Position, target, m2CPathfindingResult.Points);
-
-            if (m2CPathfindingResult.Points.Count < 2)
-            {
-                unit.SendStop(-1);
-                return;
-            }
-
-            // 广播寻路路径
-            m2CPathfindingResult.Id = unit.Id;
-            m2CPathfindingResult.SpeedRate = speedRate;
-            MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
-
-            float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
-            speed *= (speedRate * 0.01f);
-            bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);
-            if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
-            {
-                unit.SendStop(0);
-            }
+            // MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
+            // moveComponent.SyncPosition();
+            // M2C_PathfindingResult m2CPathfindingResult = new();
+            // unit.GetComponent<PathfindingComponent>().Find(unit.Position, target, m2CPathfindingResult.Points);
+            //
+            // if (m2CPathfindingResult.Points.Count < 2)
+            // {
+            //     unit.SendStop(-1);
+            //     return;
+            // }
+            //
+            // // 广播寻路路径
+            // m2CPathfindingResult.Id = unit.Id;
+            // m2CPathfindingResult.SpeedRate = speedRate;
+            // MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
+            //
+            // float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
+            // speed *= (speedRate * 0.01f);
+            // bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);
+            // if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
+            // {
+            //     unit.SendStop(0);
+            // }
+            await ETTask.CompletedTask;
         }
 
         public static void PathResultTo(Unit unit, float3 target)
@@ -43,7 +44,8 @@ namespace ET.Server
             
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
             // unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
-            unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
+            // unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
+            unit.Scene().GetComponent<CrowdComponent>().SetMoveTarget(unit.DtCrowdAgentId, target, speed);
 
             M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
             m2CPathfindingResult.Id = unit.Id;
@@ -122,7 +124,8 @@ namespace ET.Server
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
             // unit.GetComponent<Move2DComponent>().Stop();
-            unit.GetComponent<UnitMoveComponent>().Stop();
+            // unit.GetComponent<UnitMoveComponent>().Stop();
+            unit.Scene().GetComponent<CrowdComponent>().Stop(unit.DtCrowdAgentId);
             unit.SendStop(error);
         }
 
@@ -141,7 +144,8 @@ namespace ET.Server
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
             // unit.GetComponent<Move2DComponent>().Stop();
-            unit.GetComponent<UnitMoveComponent>().Stop();
+            // unit.GetComponent<UnitMoveComponent>().Stop();
+            unit.Scene().GetComponent<CrowdComponent>().Stop(unit.DtCrowdAgentId);
             unit.Position = position;
             M2C_StopResult m2CStop = M2C_StopResult.Create();
             m2CStop.Error = error;

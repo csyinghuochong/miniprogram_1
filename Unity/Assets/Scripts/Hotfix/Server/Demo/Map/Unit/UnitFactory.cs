@@ -106,16 +106,14 @@ namespace ET.Server
 
             // unit.AddComponent<MoveComponent>();
             // unit.AddComponent<Move2DComponent>();
-            unit.AddComponent<UnitMoveComponent>();
+            // unit.AddComponent<UnitMoveComponent>();
 
             AIComponent aiComponent = unit.AddComponent<AIComponent, int>(master.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleMode) == 0 ? 1 : 2);
             aiComponent.InitHero(hero);
             aiComponent.Begin();
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.HeroDensity, CollisionHelper.Hero);
-            colliderComponent.SetLinearDamping(ConfigData.HeroLinearDamping);
+            scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }
@@ -160,7 +158,7 @@ namespace ET.Server
 
             // unit.AddComponent<MoveComponent>();
             // unit.AddComponent<Move2DComponent>();
-            unit.AddComponent<UnitMoveComponent>();
+            // unit.AddComponent<UnitMoveComponent>();
 
             if (monsterConfig.AI != 0)
             {
@@ -170,9 +168,7 @@ namespace ET.Server
             }
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.MonsterDensity, CollisionHelper.Monster);
-            colliderComponent.SetLinearDamping(ConfigData.MonsterLinearDamping);
+            scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }
@@ -220,7 +216,7 @@ namespace ET.Server
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
             // unit.AddComponent<Move2DComponent>();
-            unit.AddComponent<UnitMoveComponent>();
+            // unit.AddComponent<UnitMoveComponent>();
 
             if (monsterConfig.AI != 0)
             {
@@ -230,9 +226,7 @@ namespace ET.Server
             }
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.HeroDensity, CollisionHelper.Hero);
-            colliderComponent.SetLinearDamping(ConfigData.HeroLinearDamping);
+            scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }
@@ -264,8 +258,7 @@ namespace ET.Server
             unit.Type = UnitType.NPC;
             
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Static);
-            colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Default);
+            scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }

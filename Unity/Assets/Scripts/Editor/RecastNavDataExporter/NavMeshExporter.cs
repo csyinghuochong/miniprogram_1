@@ -76,39 +76,40 @@ namespace ETEditor
         [MenuItem("ET/NavMesh/ExportSceneObj", false, ETMenuItemPriority.NavMesh)]
         public static void ExportScene()
         {
-            var triangulation = NavMesh.CalculateTriangulation();
-            if (triangulation.indices.Length < 3)
-            {
-                Debug.LogError($"NavMeshExporter ExportScene Error - 场景里没有需要被导出的物体，请先用NavMesh进行Bake。");
-                return;
-            }
-
-            InitScene();
-            vertList.Clear();
-            faceList.Clear();
-            pairList.Clear();
-            vertFaceDict.Clear();
-            vertPairDict.Clear();
-            pointVertDict.Clear();
-            indexVertDict.Clear();
-            InputVertices(triangulation.vertices);
-            InputTriangles(triangulation.indices, triangulation.areas);
-            IndexVertsAndFaces();
+            // var triangulation = NavMesh.CalculateTriangulation();
+            // if (triangulation.indices.Length < 3)
+            // {
+            //     Debug.LogError($"NavMeshExporter ExportScene Error - 场景里没有需要被导出的物体，请先用NavMesh进行Bake。");
+            //     return;
+            // }
+            //
+            // InitScene();
+            // vertList.Clear();
+            // faceList.Clear();
+            // pairList.Clear();
+            // vertFaceDict.Clear();
+            // vertPairDict.Clear();
+            // pointVertDict.Clear();
+            // indexVertDict.Clear();
+            // InputVertices(triangulation.vertices);
+            // InputTriangles(triangulation.indices, triangulation.areas);
+            // IndexVertsAndFaces();
             //WriteFile();
 
             // 导出*_internal.Obj，仅供Unity编辑器自己查看
             //WriteUnityObjFile();
             // 导出Recast可用的*.Obj文件
             WriteRecastObjFile();
+            Debug.Log("导出.obj完成");
             // 拷贝Obj和Bytes文件到服务器目录下 TODO 暂不需要
             //CopyObjFiles();
             
-            ResetScene();
+            // ResetScene();
             
             // 保存当前场景
-            EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
+            // EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
 
-            Debug.Log($"NavMesh Output Info - Vertices:[{vertList.Count}] - Faces:[{faceList.Count}]");
+            // Debug.Log($"NavMesh Output Info - Vertices:[{vertList.Count}] - Faces:[{faceList.Count}]");
         }
 
         private static void InitScene()

@@ -49,6 +49,8 @@ namespace ET.Server
 
                         MapComponent mapComponent = levelScene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo(MapType.LocalLevel, request.SceneId);
+
+                        levelScene.AddComponent<CrowdComponent, string>(CommonHelp.GetMapObjName(MapType.LocalLevel));
                         
                         levelScene.AddComponent<LocalLevelComponent>();
 

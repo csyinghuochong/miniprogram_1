@@ -603,7 +603,7 @@ namespace DotRecast.Detour.Crowd
                     Debug.Assert(reqPath.Length == MAX_RES);
 
                     // Quick search towards the goal.
-                    const int MAX_ITER = 20;
+                    // const int MAX_ITER = 20;
                     _navQuery.InitSlicedFindPath(path[0], ag.targetRef, ag.npos, ag.targetPos, _filters[ag.option.queryFilterType], 0);
                     _navQuery.UpdateSlicedFindPath(_config.maxTargetFindPathIterations, out var _);
 

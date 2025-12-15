@@ -220,5 +220,29 @@ namespace ET
 
             return equipSlotType;
         }
+
+        public static string GetMapObjName(MapType mapType)
+        {
+            string mapObjName = "";
+            switch (mapType)
+            {
+                case MapType.Init:
+                    mapObjName = "Init";
+                    break;
+                case MapType.Login:
+                    mapObjName = "Login";
+                    break;
+                case MapType.MainCity:
+                    mapObjName = "MainCity";
+                    break;
+                case MapType.LocalLevel:
+                    mapObjName = "Level";
+                    break;
+                default:
+                    break;
+            }
+
+            return mapObjName;
+        }
     }
 }

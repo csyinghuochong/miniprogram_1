@@ -16,5 +16,11 @@ namespace ET
         {
             return self.Type;
         }
+
+        [EntitySystem]
+        private static void Destroy(this Unit self)
+        {
+            self.Scene()?.GetComponent<CrowdComponent>()?.RemoveAgent(self.DtCrowdAgentId);
+        }
     }
 }

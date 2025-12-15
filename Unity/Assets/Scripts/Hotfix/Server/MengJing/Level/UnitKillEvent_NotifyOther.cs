@@ -15,7 +15,8 @@
             // 角色要过几秒才销毁，先停止一些组件
             // defendUnit.GetComponent<MoveComponent>()?.Stop(false);
             // defendUnit.GetComponent<Move2DComponent>()?.Stop();
-            defendUnit.GetComponent<UnitMoveComponent>()?.Stop();
+            // defendUnit.GetComponent<UnitMoveComponent>()?.Stop();
+            scene.GetComponent<CrowdComponent>().Stop(defendUnit.DtCrowdAgentId);
             defendUnit.GetComponent<AIComponent>()?.Stop();
             defendUnit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
             defendUnit.GetComponent<SkillPassiveComponent>()?.Stop();

@@ -18,11 +18,12 @@
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
 
-            root.AddComponent<CollisionWorldComponent>();
             MapComponent mapComponent =  root.AddComponent<MapComponent>();
             mapComponent.NavMeshId = 101;
             mapComponent.SceneId = 101;
             mapComponent.MapType = MapType.MainCity;
+
+            root.AddComponent<CrowdComponent, string>(CommonHelp.GetMapObjName(MapType.MainCity));
             
             UnitHelper.CreateNPC(root);
             

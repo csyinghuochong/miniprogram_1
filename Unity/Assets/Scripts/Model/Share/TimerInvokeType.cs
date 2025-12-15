@@ -53,6 +53,7 @@
         public const int CollisionWorldTimer = 245;
         public const int TransformSyncToClient = 246;
         public const int UnitMoveTimer = 247;
+        public const int CrowdTimer = 248;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

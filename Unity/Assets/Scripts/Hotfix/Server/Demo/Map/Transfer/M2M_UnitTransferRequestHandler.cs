@@ -57,9 +57,7 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
-                    ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Player);
-                    unit.AddComponent<UnitMoveComponent>();
+                    scene.GetComponent<CrowdComponent>().AddAgent(unit);
                     unit.AddComponent<TransformNoticeToClientComponent>();
                     break;
                 }
@@ -70,14 +68,12 @@ namespace ET.Server
                     numericComponent.ApplyValue(NumericType.BattleCamp, (int)CampType.CampPlayer_1, false);
                     numericComponent.ApplyValue(NumericType.BattleMode, 1, false);
                     numericComponent.ApplyValue(NumericType.PassedLevelId, 0, false);
-                    
+
                     m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
-                    ColliderComponent colliderComponent = unit.AddComponent<ColliderComponent, Unit, ColliderType>(unit, ColliderType.Dynamic);
-                    colliderComponent.CreateCircleCollider(ConfigData.DefaultRadius, new Vector2(0, ConfigData.DefaultRadius), false, ConfigData.PlayerDensity, CollisionHelper.Player);
-                    unit.AddComponent<UnitMoveComponent>();
+                    scene.GetComponent<CrowdComponent>().AddAgent(unit);
                     unit.AddComponent<TransformNoticeToClientComponent>();
 
                     // 测试一直从第一关开始

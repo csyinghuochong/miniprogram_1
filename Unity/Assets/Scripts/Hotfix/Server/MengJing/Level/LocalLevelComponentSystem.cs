@@ -29,10 +29,6 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this LocalLevelComponent self)
         {
-            // 创建关卡边界
-            CollisionHelper.CreateStaticEdge(self.Scene(), new Vector2(-13, -37), new Vector2(-13, 2000));
-            CollisionHelper.CreateStaticEdge(self.Scene(), new Vector2(13, -37), new Vector2(13, 2000));
-            CollisionHelper.CreateStaticEdge(self.Scene(), new Vector2(-13, -37), new Vector2(13, -37));
         }
 
         [EntitySystem]
@@ -77,7 +73,7 @@ namespace ET.Server
 
                 if (!maxPos.Equals(float3.zero))
                 {
-                    self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(maxPos.x, maxPos.y));
+                    self.Scene().GetComponent<CrowdComponent>().ChangePosition(self.MainUnit.DtCrowdAgentId, new float2(maxPos.x, maxPos.y));
                 }
             }
 
@@ -358,7 +354,7 @@ namespace ET.Server
             self.ClearDropItem();
 
             // 传送玩家到Boss房间
-            self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(nextWaveConfig.PlayerSpawnPosition);
+            self.Scene().GetComponent<CrowdComponent>().ChangePosition(self.MainUnit.DtCrowdAgentId, new float2(nextWaveConfig.PlayerSpawnPosition.X, nextWaveConfig.PlayerSpawnPosition.Y));
             self.MainUnit.Stop();
 
             // 传送所有英雄到Boss房间
@@ -371,7 +367,7 @@ namespace ET.Server
                     float3 offset = self.MainUnit.GetComponent<HeroComponentS>().GetHeroPosition(heroUnitId);
                     float3 spawnPos = new float3(nextWaveConfig.PlayerSpawnPosition.X, nextWaveConfig.PlayerSpawnPosition.Y, 0);
                     float3 newPosition = spawnPos + offset;
-                    heroUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(newPosition.x, newPosition.y));
+                    self.Scene().GetComponent<CrowdComponent>().ChangePosition(heroUnit.DtCrowdAgentId, new float2(newPosition.x, newPosition.y));
                     heroUnit.Stop();
                 }
             }
@@ -399,7 +395,7 @@ namespace ET.Server
 
             // 传送玩家回到循环地图
             float3 levelPos = new float3(0, 100f, 0);
-            self.MainUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(levelPos.x, levelPos.y));
+            self.Scene().GetComponent<CrowdComponent>().ChangePosition(self.MainUnit.DtCrowdAgentId, new float2(levelPos.x, levelPos.y));
             self.MainUnit.Stop();
 
             // 传送所有英雄回到关卡(保持相对位置)
@@ -411,7 +407,7 @@ namespace ET.Server
                 {
                     float3 offset = self.MainUnit.GetComponent<HeroComponentS>().GetHeroPosition(heroUnitId);
                     float3 newPosition = levelPos + offset;
-                    heroUnit.GetComponent<ColliderComponent>()?.SetColliderBodyPos(new Vector2(newPosition.x, newPosition.y));
+                    self.Scene().GetComponent<CrowdComponent>().ChangePosition(heroUnit.DtCrowdAgentId, new float2(newPosition.x, newPosition.y));
                     heroUnit.Stop();
                 }
             }
