@@ -20,7 +20,7 @@ namespace ET
         [EntitySystem]
         private static void Destroy(this Unit self)
         {
-            self.Scene()?.GetComponent<CrowdComponent>()?.RemoveAgent(self.DtCrowdAgentId);
+            self.Scene().GetComponent<CrowdComponent>()?.RemoveAgent(self.DtCrowdAgentId);
         }
     }
 }
