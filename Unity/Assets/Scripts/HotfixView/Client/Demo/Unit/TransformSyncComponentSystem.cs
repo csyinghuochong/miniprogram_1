@@ -16,7 +16,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this TransformSyncComponent self)
         {
-            float interpolationTime = Time.unscaledTime - ConfigData.TransformSyncTime / 1000f;
+            float interpolationTime = self.MyUnit.MainHero ? Time.unscaledTime : Time.unscaledTime - ConfigData.TransformSyncTime / 1000f;
             self.InterpolatePosition(interpolationTime);
             // self.InterpolateRotation(interpolationTime);
         }
@@ -51,7 +51,6 @@ namespace ET.Client
 
                         if (newer.Position == older.Position)
                         {
-                            EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.MyUnit });
                             return;
                         }
 
@@ -63,6 +62,8 @@ namespace ET.Client
                         return;
                     }
                 }
+                
+                EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.MyUnit });
 
                 // 防止一开始移动会瞬移第一步，因为服务端只有位置变换才同步位置下来
                 if (interpolationTime - newerTimestamp > 0.1f)
