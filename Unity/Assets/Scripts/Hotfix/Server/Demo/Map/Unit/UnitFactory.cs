@@ -99,6 +99,7 @@ namespace ET.Server
             {
                 skillPassiveComponent.AddPassiveSkill(id);
             }
+
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
@@ -152,6 +153,7 @@ namespace ET.Server
             {
                 skillPassiveComponent.AddPassiveSkill(id);
             }
+
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
@@ -231,19 +233,19 @@ namespace ET.Server
             return unit;
         }
 
-        public static Unit CreateDropItem(Scene scene,int itemConfigId,int num, float3 position)
+        public static Unit CreateDropItem(Scene scene, int itemConfigId, int num, float3 position)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), itemConfigId);
             scene.GetComponent<UnitComponent>().Add(unit);
             unit.Position = position;
             unit.Type = UnitType.DropItem;
-            
+
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.DropItemId, itemConfigId, false);
             numericComponent.ApplyValue(NumericType.DropItemNum, num, false);
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            
+
             return unit;
         }
 
@@ -251,14 +253,13 @@ namespace ET.Server
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), npcId);
             scene.GetComponent<UnitComponent>().Add(unit);
-            
+
             NPCConfig npcConfig = NPCConfigCategory.Instance.Get(npcId);
 
             unit.Position = new float3(npcConfig.Position.X, npcConfig.Position.Y, 0);
             unit.Type = UnitType.NPC;
-            
+
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }

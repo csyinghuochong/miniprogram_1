@@ -12,6 +12,7 @@ namespace ET
         public long LastUpdateTime;
 
         public Dictionary<int, EntityRef<Unit>> agent2unit = new();
+        public HashSet<int> toRemoveAgents = new();
 
         public DtNavMesh navMesh;
 

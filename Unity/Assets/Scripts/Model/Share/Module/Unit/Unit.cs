@@ -10,7 +10,7 @@ namespace ET
     public partial class Unit : Entity, IAwake<int>, IDestroy
     {
         [BsonIgnore]
-        public int DtCrowdAgentId { get; set; }
+        public int DtCrowdAgentId { get; set; } = -1;
         
         public int AI { get; set; }
 

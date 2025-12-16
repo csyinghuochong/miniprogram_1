@@ -64,6 +64,7 @@ namespace ET
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.agent2unit.Clear();
+            self.toRemoveAgents.Clear();
             self.navMesh = null;
             self.crowd = null;
         }
@@ -124,13 +125,31 @@ namespace ET
 
             self.crowd.Update(dt, self._agentDebug);
 
-            // 同步Unit位置
-            foreach (DtCrowdAgent ag in self.crowd.GetActiveAgents())
+            // 先清理待删除的失效agent
+            if (self.toRemoveAgents.Count > 0)
             {
-                if (self.agent2unit.TryGetValue(ag.idx, out var unit1))
+                foreach (int agentIdx in self.toRemoveAgents)
                 {
-                    Unit unit = unit1;
-                    unit.Position = new float3(-ag.npos.X, ag.npos.Z, 0);
+                    self.agent2unit.Remove(agentIdx);
+                }
+                self.toRemoveAgents.Clear();
+            }
+
+            // 同步Unit位置（仅遍历有效的映射）
+            foreach (var kvp in self.agent2unit)
+            {
+                Unit unit = kvp.Value;
+                if (unit == null)
+                {
+                    // 标记为待删除（不在遍历中直接修改字典）
+                    self.toRemoveAgents.Add(kvp.Key);
+                    continue;
+                }
+
+                DtCrowdAgent agent = self.crowd.GetAgent(kvp.Key);
+                if (agent != null && agent.state != DtCrowdAgentState.DT_CROWDAGENT_STATE_INVALID)
+                {
+                    unit.Position = RecastToUnity(agent.npos);
                 }
             }
 
@@ -161,10 +180,25 @@ namespace ET
         public static void AddAgent(this CrowdComponent self, Unit unit)
         {
             if (self.crowd == null)
+            {
+                Log.Error("AddAgent failed, crowd is null");
                 return;
+            }
 
-            float3 point = unit.Position;
-            RcVec3f p = new RcVec3f(-point.x, point.y, point.z);
+            if (unit == null)
+            {
+                Log.Error("AddAgent failed, unit is null");
+                return;
+            }
+
+            // 检查是否已存在
+            if (unit.DtCrowdAgentId >= 0 && self.agent2unit.ContainsKey(unit.DtCrowdAgentId))
+            {
+                Log.Warning($"AddAgent: Unit {unit.Id} already has agent {unit.DtCrowdAgentId}, removing old one first");
+                self.RemoveAgent(unit.DtCrowdAgentId);
+            }
+
+            RcVec3f p = UnityToRecast(unit.Position);
 
             DtCrowdAgentParams ap = new DtCrowdAgentParams();
             ap.radius = agentRadius;
@@ -183,6 +217,10 @@ namespace ET
                 self.agent2unit.TryAdd(ag.idx, unit);
                 unit.DtCrowdAgentId = ag.idx;
             }
+            else
+            {
+                Log.Error($"AddAgent failed for unit {unit.Id} at position {unit.Position}");
+            }
         }
 
         public static void SetMoveTarget(this CrowdComponent self, int agentId, float3 target, float speed, bool adjust = false)
@@ -194,12 +232,13 @@ namespace ET
 
             if (agent == null)
             {
+                Log.Warning($"SetMoveTarget failed, agent not found: {agentId}");
                 return;
             }
 
             agent.option.maxSpeed = speed;
 
-            RcVec3f p = new RcVec3f(-target.x, 0, target.y);
+            RcVec3f p = UnityToRecast(target);
             // Find nearest point on navmesh and set move request to that location.
             DtNavMeshQuery navquery = self.crowd.GetNavMeshQuery();
             IDtQueryFilter filter = self.crowd.GetFilter(0);
@@ -229,13 +268,19 @@ namespace ET
 
             if (agent == null)
             {
+                Log.Warning($"Stop agent failed, agent not found: {agentId}");
                 return;
             }
 
-            // TODO: 停止
+            // 重置速度和目标
+            self.crowd.ResetMoveTarget(agent);
+
+            // 设置速度为0
+            RcVec3f zeroVel = RcVec3f.Zero;
+            self.crowd.RequestMoveVelocity(agent, zeroVel);
         }
 
-        public static void ChangePosition(this CrowdComponent self, int agentId, float2 target)
+        public static void ChangePosition(this CrowdComponent self, int agentId, float3 target)
         {
             if (self.crowd == null)
                 return;
@@ -244,10 +289,35 @@ namespace ET
 
             if (agent == null)
             {
+                Log.Warning($"ChangePosition failed, agent not found: {agentId}");
                 return;
             }
+            
+            RcVec3f targetPos = UnityToRecast(target);
 
-            // TODO: 改变位置
+            // 找到navmesh上最近的有效点
+            DtNavMeshQuery navquery = self.crowd.GetNavMeshQuery();
+            IDtQueryFilter filter = self.crowd.GetFilter(0);
+            RcVec3f halfExtents = self.crowd.GetQueryExtents();
+
+            navquery.FindNearestPoly(targetPos, halfExtents, filter, out long nearestRef, out RcVec3f nearestPt, out var _);
+
+            if (nearestRef != 0)
+            {
+                // 将agent传送到新位置
+                agent.npos = nearestPt;
+                agent.corridor.Reset(nearestRef, nearestPt);
+                agent.boundary.Reset();
+                agent.partial = false;
+
+                // 重置速度
+                agent.vel = RcVec3f.Zero;
+                agent.dvel = RcVec3f.Zero;
+            }
+            else
+            {
+                Log.Error($"ChangePosition failed, cannot find valid position on navmesh for agent: {agentId}, target: {target}");
+            }
         }
 
         public static void ChangeSpeed(this CrowdComponent self, int agentId, float speed)
@@ -259,7 +329,20 @@ namespace ET
 
             if (agent == null)
             {
+                Log.Warning($"ChangeSpeed failed, agent not found: {agentId}");
                 return;
+            }
+
+            // 速度验证
+            if (speed < 0)
+            {
+                Log.Warning($"ChangeSpeed: Invalid speed {speed} for agent {agentId}, clamping to 0");
+                speed = 0;
+            }
+            else if (speed > 100f) // 合理的最大速度上限
+            {
+                Log.Warning($"ChangeSpeed: Speed {speed} too high for agent {agentId}, clamping to 100");
+                speed = 100f;
             }
 
             agent.option.maxSpeed = speed;
@@ -271,6 +354,20 @@ namespace ET
             vel.Y = 0.0f;
             vel = RcVec3f.Normalize(vel);
             return vel * speed;
+        }
+
+        // Unity坐标系 (x,y,z) -> DotRecast坐标系 (x,y,z)
+        private static RcVec3f UnityToRecast(float3 unityPos)
+        {
+            // return new RcVec3f(-unityPos.x, unityPos.y, unityPos.z);
+            return new RcVec3f(-unityPos.x, 0, unityPos.y);
+        }
+
+        // DotRecast坐标系 (x,y,z) -> Unity坐标系 (x,y,z)
+        private static float3 RecastToUnity(RcVec3f recastPos)
+        {
+            // return new float3(-recastPos.X, recastPos.Y, recastPos.Z);
+            return new float3(-recastPos.X, recastPos.Z, 0);
         }
     }
 }

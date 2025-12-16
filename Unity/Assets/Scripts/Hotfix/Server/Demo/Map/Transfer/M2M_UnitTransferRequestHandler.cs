@@ -73,7 +73,6 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
-                    scene.GetComponent<CrowdComponent>().AddAgent(unit);
                     unit.AddComponent<TransformNoticeToClientComponent>();
 
                     // 测试一直从第一关开始
