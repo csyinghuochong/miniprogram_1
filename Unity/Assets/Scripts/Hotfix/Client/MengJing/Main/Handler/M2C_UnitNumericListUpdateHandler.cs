@@ -6,6 +6,8 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, M2C_UnitNumericListUpdate message)
         {
+            using var _ = message;
+
             Scene currentScene = root.CurrentScene();
             if (currentScene == null)
             {
@@ -23,12 +25,13 @@ namespace ET.Client
             {
                 numericComponent.ApplyValue(message.Ks[i], message.Vs[i], true);
             }
-            
+
             if (nowNunt.MainHero)
             {
                 //自己的属性派发时间更新属性界面
                 EventSystem.Instance.Publish(root, new DataUpdate_UpdateRoleProper());
             }
+
             await ETTask.CompletedTask;
         }
     }
