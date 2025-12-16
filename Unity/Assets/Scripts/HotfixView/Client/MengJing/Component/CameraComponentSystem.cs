@@ -47,6 +47,10 @@ namespace ET.Client
             }
             else
             {
+                // 计算所有英雄的中心位置（质心），让摄像机平滑跟随
+                Vector3 sumPosition = Vector3.zero;
+                int heroCount = 0;
+
                 foreach (Unit unit in self.Scene().GetComponent<UnitComponent>().GetAll())
                 {
                     if (unit.Type != UnitType.Hero)
@@ -55,16 +59,13 @@ namespace ET.Client
                     }
 
                     Vector3 unitPos = unit.GetComponent<GameObjectComponent>().GameObject.transform.position;
-                    if (targetLookAt == Vector3.zero)
-                    {
-                        targetLookAt = unitPos;
-                    }
+                    sumPosition += unitPos;
+                    heroCount++;
+                }
 
-                    // 看向最上面的英雄
-                    if (unit.Position.y > targetLookAt.y)
-                    {
-                        targetLookAt = unitPos;
-                    }
+                if (heroCount > 0)
+                {
+                    targetLookAt = sumPosition / heroCount;
                 }
             }
 
