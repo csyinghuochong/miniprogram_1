@@ -19,15 +19,14 @@ namespace ET.Server
                     Unit unit = aOIEntity.Unit;
 
                     bool notice = false;
-                    if (!self.UnitPositions.ContainsKey(unit.Id))
+                    if (!self.UnitPositions.TryGetValue(unit.Id, out float3 position))
                     {
                         self.UnitPositions.Add(unit.Id, unit.Position);
                         notice = true;
                     }
                     else
                     {
-                        float epsilon = 0.01f; // 自定义容差
-                        bool areSamePosition = math.all(math.abs(unit.Position - self.UnitPositions[unit.Id]) < epsilon);
+                        bool areSamePosition = position.Equals(unit.Position);
                         if (!areSamePosition)
                         {
                             notice = true;
@@ -36,11 +35,13 @@ namespace ET.Server
 
                     self.UnitPositions[unit.Id] = unit.Position;
 
-                    if (notice)
+                    if (!notice)
                     {
-                        message.UnitIdList.Add(unit.Id);
-                        message.PositionList.Add(unit.Position);
+                        continue;
                     }
+
+                    message.UnitIdList.Add(unit.Id);
+                    message.PositionList.Add(unit.Position);
                 }
 
                 if (message.UnitIdList.Count == 0)
@@ -57,7 +58,7 @@ namespace ET.Server
         private static void Awake(this TransformNoticeToClientComponent self)
         {
             self.AOIEntity = self.GetParent<Unit>().GetComponent<AOIEntity>();
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(100, TimerInvokeType.TransformSyncToClient, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(ConfigData.TransformSyncTime, TimerInvokeType.TransformSyncToClient, self);
         }
 
         [EntitySystem]

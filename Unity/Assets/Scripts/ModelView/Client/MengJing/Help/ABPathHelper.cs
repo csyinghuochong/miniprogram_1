@@ -194,7 +194,7 @@ namespace ET
             return prefabPath;
         }
 
-        public static string GetRecastPath(int text)
+        public static string GetRecastPath(string text)
         {
             string prefabPath = ZString.Format("Assets/Bundles/Recast/{0}.bytes", text);
 

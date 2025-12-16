@@ -6,7 +6,7 @@ using DotRecast.Detour.Crowd;
 namespace ET
 {
     [ComponentOf(typeof(Scene))]
-    public class CrowdComponent : Entity, IAwake<string>, IDestroy
+    public class CrowdComponent : Entity, IAwake<byte[]>, IDestroy
     {
         public long Timer;
         public long LastUpdateTime;

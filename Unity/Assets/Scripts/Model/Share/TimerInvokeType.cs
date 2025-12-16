@@ -129,5 +129,6 @@
         public const int LocalLevelTimer = 381;
         public const int UIMainSkillTimer = 382;
         public const int UIMainSkillItemTimer = 383;
+        public const int TransformSyncToServer = 384;
     }
 }

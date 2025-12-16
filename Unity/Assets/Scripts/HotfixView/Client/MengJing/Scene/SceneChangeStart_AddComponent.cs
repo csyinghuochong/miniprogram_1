@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -23,7 +24,10 @@ namespace ET.Client
                 }
 
                 Log.Debug($"SceneChangeStart:  {args.LastMapType}");
-
+                
+                TextAsset textAsset = await root.GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(ABPathHelper.GetRecastPath(CommonHelp.GetMapObjName(args.MapType)));
+                root.CurrentScene().AddComponent<CrowdComponent, byte[]>(textAsset.bytes);
+                
                 await root.GetComponent<SceneManagerComponent>().ChangeScene(args.MapType, args.LastMapType, args.ChapterId);
             }
             catch (Exception e)

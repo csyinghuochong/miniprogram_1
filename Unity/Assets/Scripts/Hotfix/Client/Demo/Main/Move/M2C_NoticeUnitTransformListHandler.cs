@@ -1,3 +1,5 @@
+using Unity.Mathematics;
+
 namespace ET.Client
 {
     [MessageHandler(SceneType.Demo)]
@@ -5,6 +7,8 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, M2C_NoticeUnitTransformList message)
         {
+            using var _ = message;
+
             Scene currentScene = root.CurrentScene();
             if (currentScene == null)
             {
@@ -26,7 +30,20 @@ namespace ET.Client
                     continue;
                 }
 
-                unit.Position = message.PositionList[i];
+                float3 position = message.PositionList[i];
+
+                if (unit.MainHero)
+                {
+                    if (math.distance(unit.Position, position) > ConfigData.PlayerSynMaxDistance)
+                    {
+                        unit.Scene().GetComponent<CrowdComponent>()?.ChangePosition(unit.DtCrowdAgentId, position);
+                        unit.Position = position;
+                    }
+
+                    continue;
+                }
+
+                unit.Position = position;
             }
 
             await ETTask.CompletedTask;

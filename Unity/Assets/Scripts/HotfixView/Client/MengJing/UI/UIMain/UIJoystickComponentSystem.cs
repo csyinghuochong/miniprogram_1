@@ -72,7 +72,7 @@ namespace ET.Client
         {
             self.MyUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (mapType == MapType.LocalLevel && self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleMode) == 1)
-            { 
+            {
                 self.GameObject.SetActive(false);
             }
             else
@@ -80,10 +80,10 @@ namespace ET.Client
                 self.GameObject.SetActive(true);
             }
 
-            // 。。。解决传送到关卡或者返回主城时第一次拖动摇杆后会瞬移回来 先这样吧，还不太明确是什么问题
-            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
-            c2MPathfindingResult.Position.Add(self.MyUnit.Position);
-            self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
+            // 。。。解决传送到关卡或者返回主城时第一次拖动摇杆后会瞬移回来
+            // C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
+            // c2MPathfindingResult.Position.Add(self.MyUnit.Position);
+            // self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
         }
 
         private static void OnPointerDown(this UIJoystickComponent self, PointerEventData pdata)
@@ -114,7 +114,7 @@ namespace ET.Client
             self.LastDirection = Vector3.zero;
 
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
-            self.JoystickTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(250, TimerInvokeType.JoystickTimer, self);
+            self.JoystickTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(100, TimerInvokeType.JoystickTimer, self);
         }
 
         private static void OnDrag(this UIJoystickComponent self, PointerEventData pdata)
@@ -132,11 +132,13 @@ namespace ET.Client
             self.IsDrag = false;
             self.LastDirection = Vector3.zero;
 
-            C2M_StopResult c2MStop = C2M_StopResult.Create();
-            c2MStop.Position = self.MyUnit.Position;
-            self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
+            // C2M_StopResult c2MStop = C2M_StopResult.Create();
+            // c2MStop.Position = self.MyUnit.Position;
+            // self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
 
             // self.MyUnit.GetComponent<Move2DComponent>().Stop();
+
+            self.MyUnit.Scene().GetComponent<CrowdComponent>()?.Stop(self.MyUnit.DtCrowdAgentId);
 
             self.ResetUI();
 
@@ -244,12 +246,12 @@ namespace ET.Client
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
 
-            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
-            c2MPathfindingResult.Position.Add(targetPosition);
-            self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
+            // C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
+            // c2MPathfindingResult.Position.Add(targetPosition);
+            // self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
 
-            // float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            // self.MyUnit.GetComponent<Move2DComponent>().MoveTo(finalTarget, speed);
+            float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
+            self.MyUnit.Scene().GetComponent<CrowdComponent>().SetMoveTarget(self.MyUnit.DtCrowdAgentId, targetPosition, speed);
         }
 
         private static bool IsInMovableArea(this UIJoystickComponent self, float3 position)

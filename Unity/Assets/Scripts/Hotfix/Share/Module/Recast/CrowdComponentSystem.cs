@@ -36,9 +36,8 @@ namespace ET
         const int SAMPLE_POLYFLAGS_ALL = 0xffff; // All abilities.
 
         [EntitySystem]
-        private static void Awake(this CrowdComponent self, string name)
+        private static void Awake(this CrowdComponent self, byte[] buffer)
         {
-            byte[] buffer = NavmeshComponent.Instance.Get(name);
             DtMeshSetReader reader = new();
             using MemoryStream ms = new(buffer);
             using BinaryReader br = new(ms);
@@ -46,7 +45,7 @@ namespace ET
 
             if (self.NavMesh == null)
             {
-                throw new Exception($"nav load fail: {name}");
+                throw new Exception($"nav load fail");
             }
 
             self.AgCfg = new DtCrowdAgentConfig();

@@ -12,7 +12,7 @@ namespace ET
             OuterMessage.G2C_Ping,
             OuterMessage.C2G_Benchmark,
             OuterMessage.G2C_Benchmark,
-            OuterMessage.M2C_NoticeUnitTransformList,
+            // OuterMessage.M2C_NoticeUnitTransformList,
             //OuterMessage.C2M_PathfindingRequest,
             //OuterMessage.C2M_PathfindingResult,
             //OuterMessage.M2C_PathfindingResult,

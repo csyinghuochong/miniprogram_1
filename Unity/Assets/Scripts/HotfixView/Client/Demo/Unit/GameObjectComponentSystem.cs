@@ -202,10 +202,17 @@ namespace ET.Client
                     self.GameObject.tag = TagHelper.Player;
                     LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Player);
 
+                    if (unit.MainHero)
+                    {
+                        self.Scene().GetComponent<CrowdComponent>()?.AddAgent(unit);
+                        unit.AddComponent<TransformNoticeToServerComponent>();
+                    }
+
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<FsmComponent>();
+                    unit.AddComponent<TransformSyncComponent>();
                     unit.AddComponent<PickUpDropItemComponent>();
                     break;
                 }
@@ -218,6 +225,7 @@ namespace ET.Client
                     unit.AddComponent<UIHeroHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<FsmComponent>();
+                    unit.AddComponent<TransformSyncComponent>();
                     break;
                 }
                 case UnitType.Monster:
@@ -229,6 +237,7 @@ namespace ET.Client
                     unit.AddComponent<UIMonsterHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<FsmComponent>();
+                    unit.AddComponent<TransformSyncComponent>();
                     break;
                 }
                 case UnitType.DropItem:
@@ -249,8 +258,6 @@ namespace ET.Client
                 default:
                     break;
             }
-            
-            unit.AddComponent<TransformSyncComponent>();
         }
 
         public static void ReloadGameObject(this GameObjectComponent self)

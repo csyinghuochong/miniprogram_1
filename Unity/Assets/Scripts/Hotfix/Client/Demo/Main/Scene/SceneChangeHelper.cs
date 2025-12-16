@@ -18,8 +18,6 @@
 
             mapComponent.SetMapInfo(mapType, sceneId);
 
-            currentScene.AddComponent<CrowdComponent, string>(CommonHelp.GetMapObjName(mapType));
-
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(root, new SceneChangeStart()
             {

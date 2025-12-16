@@ -22,8 +22,6 @@
             mapComponent.NavMeshId = 101;
             mapComponent.SceneId = 101;
             mapComponent.MapType = MapType.MainCity;
-
-            root.AddComponent<CrowdComponent, string>(CommonHelp.GetMapObjName(MapType.MainCity));
             
             UnitHelper.CreateNPC(root);
             

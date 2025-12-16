@@ -64,6 +64,9 @@ namespace ET.Client
     [ComponentOf(typeof(Unit))]
     public class TransformSyncComponent : Entity, IAwake, IUpdate, IDestroy
     {
+        private EntityRef<Unit> myUnit;
+        public Unit MyUnit { get => this.myUnit; set => this.myUnit = value; }
+
         private EntityRef<GameObjectComponent> gameObjectComponent;
         public GameObjectComponent GameObjectComponent { get => this.gameObjectComponent; set => this.gameObjectComponent = value; }
 

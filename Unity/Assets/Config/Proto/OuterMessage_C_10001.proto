@@ -1015,3 +1015,9 @@ message M2C_NoticeUnitTransformList // IMessage
 	repeated int64 UnitIdList = 1;
 	repeated Unity.Mathematics.float3 PositionList = 2;
 }
+
+message C2M_NoticeUnitTransform // ILocationMessage
+{
+	int32 RpcId = 1;
+	Unity.Mathematics.float3 Position = 2;
+}

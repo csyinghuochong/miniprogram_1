@@ -9,13 +9,14 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this TransformSyncComponent self)
         {
-            self.GameObjectComponent = self.GetParent<Unit>().GetComponent<GameObjectComponent>();
+            self.MyUnit = self.GetParent<Unit>();
+            self.GameObjectComponent = self.MyUnit.GetComponent<GameObjectComponent>();
         }
 
         [EntitySystem]
         private static void Update(this TransformSyncComponent self)
         {
-            float interpolationTime = Time.unscaledTime - self.InterpolationBackTime;
+            float interpolationTime = Time.unscaledTime - ConfigData.TransformSyncTime / 1000f;
             self.InterpolatePosition(interpolationTime);
             // self.InterpolateRotation(interpolationTime);
         }

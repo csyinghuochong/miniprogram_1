@@ -4618,6 +4618,35 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_NoticeUnitTransform)]
+    public partial class C2M_NoticeUnitTransform : MessageObject, ILocationMessage
+    {
+        public static C2M_NoticeUnitTransform Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_NoticeUnitTransform), isFromPool) as C2M_NoticeUnitTransform;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public Unity.Mathematics.float3 Position { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Position = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -4746,5 +4775,6 @@ namespace ET
         public const ushort Mail2C_OpeMail = 10125;
         public const ushort Mail2C_ReceiveMail = 10126;
         public const ushort M2C_NoticeUnitTransformList = 10127;
+        public const ushort C2M_NoticeUnitTransform = 10128;
     }
 }
