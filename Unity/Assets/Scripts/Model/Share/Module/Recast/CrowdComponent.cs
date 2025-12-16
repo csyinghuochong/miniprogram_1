@@ -11,13 +11,13 @@ namespace ET
         public long Timer;
         public long LastUpdateTime;
 
-        public Dictionary<int, EntityRef<Unit>> agent2unit = new();
-        public HashSet<int> toRemoveAgents = new();
+        public Dictionary<int, EntityRef<Unit>> Agent2Unit = new();
+        public HashSet<int> ToRemoveAgents = new();
 
-        public DtNavMesh navMesh;
+        public DtNavMesh NavMesh;
 
-        public DtCrowdAgentConfig _agCfg;
-        public DtCrowdAgentDebugInfo _agentDebug;
-        public DtCrowd crowd;
+        public DtCrowdAgentConfig AgCfg;
+        public DtCrowdAgentDebugInfo AgentDebug;
+        public DtCrowd Crowd;
     }
 }
