@@ -51,8 +51,11 @@ namespace ET.Client
 
                         if (newer.Position == older.Position)
                         {
+                            EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.MyUnit });
                             return;
                         }
+
+                        EventSystem.Instance.Publish(self.Scene(), new MoveStart() { Unit = self.MyUnit });
 
                         self.GameObjectComponent.UpdatePositon(Vector3.Lerp(older.Position, newer.Position, t));
                         self.GameObjectComponent.UpdateScaleX(newer.Position.x - older.Position.x);
