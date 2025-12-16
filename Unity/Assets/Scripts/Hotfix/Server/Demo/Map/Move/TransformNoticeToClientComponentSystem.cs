@@ -67,5 +67,10 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.UnitPositions.Clear();
         }
+
+        public static void ResetSelf(this TransformNoticeToClientComponent self)
+        {
+            self.UnitPositions.Remove(self.GetParent<Unit>().Id);
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace ET.Server
 
             if (math.distance(unit.Position, message.Position) > ConfigData.PlayerSynMaxDistance)
             {
+                // 拉回来
+                unit.GetComponent<TransformNoticeToClientComponent>()?.ResetSelf();
                 return;
             }
 
