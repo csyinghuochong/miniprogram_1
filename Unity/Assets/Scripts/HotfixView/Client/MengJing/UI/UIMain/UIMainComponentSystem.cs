@@ -457,13 +457,7 @@ namespace ET.Client
 
         private static void OnButton_PickUpDropItem(this UIMainComponent self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (unit == null)
-            {
-                return;
-            }
-            
-            unit.GetComponent<PickUpDropItemComponent>().OnStarDrop();
+            self.Root().GetComponent<PickUpDropItemComponent>().OnStarDrop();
         }
     }
 }

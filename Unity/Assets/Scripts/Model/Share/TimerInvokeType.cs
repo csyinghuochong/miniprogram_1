@@ -130,5 +130,6 @@
         public const int UIMainSkillTimer = 382;
         public const int UIMainSkillItemTimer = 383;
         public const int TransformSyncToServer = 384;
+        public const int PickUpDropItemTimer = 385;
     }
 }

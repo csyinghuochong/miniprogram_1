@@ -217,7 +217,6 @@ namespace ET.Client
                     unit.AddComponent<UIPlayerHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<FsmComponent>();
-                    unit.AddComponent<PickUpDropItemComponent>();
                     break;
                 }
                 case UnitType.Hero:

@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace ET.Client
@@ -7,15 +8,42 @@ namespace ET.Client
     [FriendOf(typeof(PickUpDropItemComponent))]
     public static partial class PickUpDropItemComponentSystem
     {
-        [EntitySystem]
-        private static void Awake(this PickUpDropItemComponent self)
+        [Invoke(TimerInvokeType.PickUpDropItemTimer)]
+        public class PickUpDropItemTimer : ATimer<PickUpDropItemComponent>
         {
-            self.MainUnit = self.GetParent<Unit>();
+            protected override void Run(PickUpDropItemComponent self)
+            {
+                try
+                {
+                    self.Update();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
         }
 
         [EntitySystem]
+        private static void Awake(this PickUpDropItemComponent self)
+        {
+        }
+
+        [EntitySystem]
+        private static void Destroy(this PickUpDropItemComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.DropItemList.Clear();
+        }
+
         private static void Update(this PickUpDropItemComponent self)
         {
+            if (self.DropItemList.Count == 0 && self.SendIdList.Count == 0)
+            {
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+                return;
+            }
+
             if (self.MainUnit == null)
             {
                 return;
@@ -48,7 +76,7 @@ namespace ET.Client
                     }
                 }
             }
-            
+
             long now = TimeHelper.ServerNow();
             if (self.SendIdList.Count > 0 && self.LastSendTime + 200 < now)
             {
@@ -58,17 +86,16 @@ namespace ET.Client
             }
         }
 
-        [EntitySystem]
-        private static void Destroy(this PickUpDropItemComponent self)
-        {
-            self.DropItemList.Clear();
-        }
-
         public static void OnStarDrop(this PickUpDropItemComponent self)
         {
             self.DropItemList.Clear();
             self.SendIdList.Clear();
 
+            if (self.MainUnit == null)
+            {
+                self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            }
+            
             UnitComponent unitComponent = self.MainUnit.GetParent<UnitComponent>();
             foreach (Unit unit in unitComponent.GetAll())
             {
@@ -76,6 +103,11 @@ namespace ET.Client
                 {
                     self.DropItemList.Add(unit);
                 }
+            }
+
+            if (self.Timer == 0)
+            {
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PickUpDropItemTimer, self);
             }
         }
     }

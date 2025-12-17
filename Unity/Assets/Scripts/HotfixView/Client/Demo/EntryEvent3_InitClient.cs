@@ -26,6 +26,7 @@ namespace ET.Client
             root.AddComponent<MailComponentC>();
             root.AddComponent<FloatingTextComponent>();
             root.AddComponent<RelinkComponent>();
+            root.AddComponent<PickUpDropItemComponent>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

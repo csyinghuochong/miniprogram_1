@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof(Unit))]
-    public class PickUpDropItemComponent : Entity, IAwake, IUpdate, IDestroy
+    [ComponentOf(typeof(Scene))]
+    public class PickUpDropItemComponent : Entity, IAwake, IDestroy
     {
         private EntityRef<Unit> mainUnit;
         public Unit MainUnit { get => this.mainUnit; set => this.mainUnit = value; }
@@ -11,5 +11,6 @@ namespace ET.Client
         
         public long LastSendTime = 0;
         public List<long> SendIdList = new();
+        public long Timer;
     }
 }
