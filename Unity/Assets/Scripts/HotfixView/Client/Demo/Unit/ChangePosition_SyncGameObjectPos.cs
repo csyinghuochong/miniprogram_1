@@ -15,7 +15,7 @@
 
             if (unit.MainHero)
             {
-                scene.Root().GetComponent<UIComponent>().Get(UIType.UIMain)?.GetComponent<UIMainComponent>()?.UIMiniMapComponent?.OnMainHeroMove();
+                scene.Root().GetComponent<UIComponent>().Get(UIType.UIMain)?.GetComponent<UIMainComponent>()?.UIMiniMapComponent?.OnUpdateMiniMapAllUnit();
             }
             else
             {

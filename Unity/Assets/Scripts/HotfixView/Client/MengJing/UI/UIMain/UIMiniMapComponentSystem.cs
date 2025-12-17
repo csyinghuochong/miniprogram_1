@@ -62,7 +62,7 @@ namespace ET.Client
             GameObject mapCamera = GameObject.Find("Global/MapCamera");
             if (mapCamera == null)
             {
-                var path = ABPathHelper.GetUnitPath("Component", "MapCamera");
+                string path = ABPathHelper.GetUnitPath("Component", "MapCamera");
                 GameObject prefab = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
                 mapCamera = UnityEngine.Object.Instantiate(prefab, GameObject.Find("Global").transform);
                 mapCamera.name = "MapCamera";
@@ -71,47 +71,47 @@ namespace ET.Client
             Camera camera = mapCamera.GetComponent<Camera>();
             camera.enabled = true;
 
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            camera.enabled = false;
+
             self.ScaleRateX = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.ScaleRateY = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
 
             self.MapCamera = mapCamera;
-            
-            self.OnMainHeroMove();
-        }
-
-        public static void OnMainHeroMove(this UIMiniMapComponent self)
-        {
-            if (self.MapCamera == null)
-            {
-                return;
-            }
-
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (unit == null || self.MapCamera == null)
-            {
-                return;
-            }
-
-            Vector3 old = self.MapCamera.transform.position;
-            old.x = unit.Position.x;
-            old.y = unit.Position.y;
-            self.MapCamera.transform.position = old;
 
             self.OnUpdateMiniMapAllUnit();
         }
 
-        private static void OnUpdateMiniMapAllUnit(this UIMiniMapComponent self)
+        public static void OnUpdateMiniMapAllUnit(this UIMiniMapComponent self)
         {
             Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            if (main == null)
+            if (main == null || self.MapCamera == null)
             {
                 return;
             }
 
-            List<long> allIds = new List<long>();
             List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
 
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            MapType mapType = mapComponent.MapType;
+
+            Vector2 centerPos = self.GetWordToUIPositon(new Vector3(main.Position.x, main.Position.y, 0f));
+
+            if (mapType == MapType.LocalLevel)
+            {
+                // 关卡不显示小地图，因为是地图无限循环的，摄像机得一直开着，性能消耗太大，看看后面要怎么处理
+                self.RawImage_Map.gameObject.SetActive(false);
+            }
+            else
+            {
+                self.RawImage_Map.gameObject.SetActive(true);
+            }
+
+            self.RawImage_Map.transform.localPosition = new Vector2(centerPos.x * -1, centerPos.y * -1);
+            self.Transform_HeadList.localPosition = new Vector2(centerPos.x * -1, centerPos.y * -1);
+
+            using ListComponent<long> allIds = ListComponent<long>.Create();
             for (int i = 0; i < allUnit.Count; i++)
             {
                 Unit unit = allUnit[i];
@@ -119,7 +119,7 @@ namespace ET.Client
                 self.OnUpdateMiniMapOneUnit(unit);
             }
 
-            List<long> removeIds = new List<long>();
+            using ListComponent<long> removeIds = ListComponent<long>.Create();
             foreach (var keyValuePair in self.AllPointList)
             {
                 if (!allIds.Contains(keyValuePair.Key))
@@ -144,7 +144,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             if (unit.Type != UnitType.Player && unit.Type != UnitType.Hero && unit.Type != UnitType.Monster)
             {
                 return;
