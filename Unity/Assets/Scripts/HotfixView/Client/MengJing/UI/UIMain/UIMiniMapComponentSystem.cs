@@ -68,44 +68,61 @@ namespace ET.Client
                 mapCamera.name = "MapCamera";
             }
 
-            Camera camera = mapCamera.GetComponent<Camera>();
-            camera.enabled = true;
+            self.MapCamera = mapCamera;
+            self.MapCamera.transform.position = new Vector3(0, 0, -100f);
 
-            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
-            camera.enabled = false;
+            self.TakePhoto().Coroutine();
 
+            Camera camera = self.MapCamera.GetComponent<Camera>();
             self.ScaleRateX = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.ScaleRateY = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
-
-            self.MapCamera = mapCamera;
 
             self.OnUpdateMiniMapAllUnit();
         }
 
-        public static void OnUpdateMiniMapAllUnit(this UIMiniMapComponent self)
+        private static async ETTask TakePhoto(this UIMiniMapComponent self)
         {
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
-
-            if (main == null || self.MapCamera == null)
+            if (self.MapCamera == null)
             {
                 return;
             }
 
-            List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
+            Camera camera = self.MapCamera.GetComponent<Camera>();
+            camera.enabled = true;
+
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            camera.enabled = false;
+            
+            self.LastMapCameraPos = self.MapCamera.transform.position;
+        }
+
+        public static void OnUpdateMiniMapAllUnit(this UIMiniMapComponent self)
+        {
+            Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+
+            if (mainUnit == null || self.MapCamera == null)
+            {
+                return;
+            }
+
+            List<EntityRef<Unit>> allUnit = mainUnit.GetParent<UnitComponent>().GetAll();
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             MapType mapType = mapComponent.MapType;
 
-            Vector2 centerPos = self.GetWordToUIPositon(new Vector3(main.Position.x, main.Position.y, 0f));
-
+            Vector3 mainUnitPos = mainUnit.Position;
+            Vector2 centerPos = self.GetWordToUIPositon(new Vector3(mainUnitPos.x, mainUnitPos.y, 0f));
             if (mapType == MapType.LocalLevel)
             {
-                // 关卡不显示小地图，因为是地图无限循环的，摄像机得一直开着，性能消耗太大，看看后面要怎么处理
-                self.RawImage_Map.gameObject.SetActive(false);
-            }
-            else
-            {
-                self.RawImage_Map.gameObject.SetActive(true);
+                // 关卡是无限循环生成的，要不断拍照，刷新小地图
+                if (Vector3.Distance(self.LastMapCameraPos, mainUnitPos) > 10f)
+                {
+                    Vector3 old = self.MapCamera.transform.position;
+                    old.x = mainUnit.Position.x;
+                    old.y = mainUnit.Position.y;
+                    self.MapCamera.transform.position = old;
+                    self.TakePhoto().Coroutine();
+                }
             }
 
             self.RawImage_Map.transform.localPosition = new Vector2(centerPos.x * -1, centerPos.y * -1);

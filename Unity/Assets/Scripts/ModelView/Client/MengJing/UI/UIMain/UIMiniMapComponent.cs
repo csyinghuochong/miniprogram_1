@@ -18,6 +18,7 @@ namespace ET.Client
         public float ScaleRateX;
         public float ScaleRateY;
         public Dictionary<long, GameObject> AllPointList = new();
-        public List<GameObject> CachePointList = new();	
+        public List<GameObject> CachePointList = new();
+        public Vector3 LastMapCameraPos;
     }
 }
