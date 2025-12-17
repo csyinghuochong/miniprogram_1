@@ -36,7 +36,7 @@ namespace ET
         public const string RobotPassWord = "et@#robot";
 
         // 玩家位置同步最大距离 防止速度作弊
-        public const float PlayerSynMaxDistance = 3f;
+        public const float PlayerSynMaxDistance = 10f;
 
         public const long TransformSyncTime = 200;
         

@@ -36,7 +36,6 @@ namespace ET.Client
                 {
                     if (math.distance(unit.Position, position) > ConfigData.PlayerSynMaxDistance)
                     {
-                        unit.Scene().GetComponent<CrowdComponent>()?.ChangePosition(unit.DtCrowdAgentId, position);
                         unit.Position = position;
                     }
 

@@ -16,7 +16,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this TransformSyncComponent self)
         {
-            float interpolationTime = self.MyUnit.MainHero ? Time.unscaledTime : Time.unscaledTime - ConfigData.TransformSyncTime / 1000f;
+            float interpolationTime = Time.unscaledTime - ConfigData.TransformSyncTime / 1000f;
             self.InterpolatePosition(interpolationTime);
             // self.InterpolateRotation(interpolationTime);
         }

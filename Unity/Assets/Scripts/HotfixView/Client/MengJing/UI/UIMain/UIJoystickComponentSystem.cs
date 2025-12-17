@@ -136,9 +136,7 @@ namespace ET.Client
             // c2MStop.Position = self.MyUnit.Position;
             // self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
 
-            // self.MyUnit.GetComponent<Move2DComponent>().Stop();
-
-            self.MyUnit.Scene().GetComponent<CrowdComponent>()?.Stop(self.MyUnit.DtCrowdAgentId);
+            self.MyUnit.GetComponent<Move2DComponent>().Stop();
 
             self.ResetUI();
 
@@ -251,7 +249,9 @@ namespace ET.Client
             // self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
 
             float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            self.MyUnit.Scene().GetComponent<CrowdComponent>().SetMoveTarget(self.MyUnit.DtCrowdAgentId, targetPosition, speed);
+            using ListComponent<float3> path = ListComponent<float3>.Create();
+            self.MyUnit.GetComponent<PathfindingComponent>()?.Find(self.MyUnit.Position, targetPosition, path);
+            self.MyUnit.GetComponent<Move2DComponent>().MoveTo(path, speed);
         }
 
         private static bool IsInMovableArea(this UIJoystickComponent self, float3 position)

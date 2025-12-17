@@ -204,15 +204,19 @@ namespace ET.Client
 
                     if (unit.MainHero)
                     {
-                        self.Scene().GetComponent<CrowdComponent>()?.AddAgent(unit);
                         unit.AddComponent<TransformNoticeToServerComponent>();
+                        unit.AddComponent<Move2DComponent>();
+                        self.LoadPath().Coroutine();
+                    }
+                    else
+                    {
+                        unit.AddComponent<TransformSyncComponent>();
                     }
 
                     unit.AddComponent<UnitBoneComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<FsmComponent>();
-                    unit.AddComponent<TransformSyncComponent>();
                     unit.AddComponent<PickUpDropItemComponent>();
                     break;
                 }
@@ -260,6 +264,13 @@ namespace ET.Client
             }
         }
 
+        private static async ETTask LoadPath(this GameObjectComponent self)
+        {
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            TextAsset textAsset = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(ABPathHelper.GetRecastPath(CommonHelp.GetMapObjName(mapComponent.MapType)));
+            self.GetParent<Unit>().AddComponent<PathfindingComponent, byte[]>(textAsset.bytes);
+        }
+        
         public static void ReloadGameObject(this GameObjectComponent self)
         {
             // 后面给需要改变的组件加加一个接口
