@@ -44,6 +44,8 @@ namespace ET.Client
             if (self.LookAtMode == 0)
             {
                 targetLookAt = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<GameObjectComponent>().GameObject.transform.position;
+                Vector3 targetPosition = new Vector3(targetLookAt.x + self.Offset.x, targetLookAt.y + self.Offset.y, self.Offset.z);
+                self.MainCamera.transform.position = targetPosition;
             }
             else
             {
@@ -67,26 +69,26 @@ namespace ET.Client
                 {
                     targetLookAt = sumPosition / heroCount;
                 }
-            }
 
-            if (targetLookAt == Vector3.zero)
-            {
-                return;
-            }
+                if (targetLookAt == Vector3.zero)
+                {
+                    return;
+                }
 
-            Vector3 targetPosition = new Vector3(targetLookAt.x + self.Offset.x, targetLookAt.y + self.Offset.y, self.Offset.z);
-            float distance = Vector3.Distance(self.MainCamera.transform.position, targetPosition);
+                Vector3 targetPosition = new Vector3(targetLookAt.x + self.Offset.x, targetLookAt.y + self.Offset.y, self.Offset.z);
+                float distance = Vector3.Distance(self.MainCamera.transform.position, targetPosition);
 
-            if (distance > 10)
-            {
-                // 距离过大，直接跳转
-                self.MainCamera.transform.position = targetPosition;
-            }
-            else
-            {
-                // 距离较近，平滑过渡
-                float smoothSpeed = 5f; // 平滑速度，可调整
-                self.MainCamera.transform.position = Vector3.Lerp(self.MainCamera.transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+                if (distance > 10)
+                {
+                    // 距离过大，直接跳转
+                    self.MainCamera.transform.position = targetPosition;
+                }
+                else
+                {
+                    // 距离较近，平滑过渡
+                    float smoothSpeed = 5f; // 平滑速度，可调整
+                    self.MainCamera.transform.position = Vector3.Lerp(self.MainCamera.transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+                }
             }
         }
 
