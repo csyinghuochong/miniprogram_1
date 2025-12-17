@@ -140,6 +140,11 @@ namespace ET.Client
                 return;
             }
 
+            if (self.MapCamera == null)
+            {
+                return;
+            }
+            
             if (unit.Type != UnitType.Player && unit.Type != UnitType.Hero && unit.Type != UnitType.Monster)
             {
                 return;
