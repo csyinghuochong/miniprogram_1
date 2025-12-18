@@ -12,7 +12,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this UILoginComponent self)
         {
-            CommonViewHelper.TargetFrameRate(60);
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
 
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
