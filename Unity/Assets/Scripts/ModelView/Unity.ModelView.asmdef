@@ -12,7 +12,8 @@
         "I2.Loc",
         "Unity.TextMeshPro",
         "ZString",
-        "spine-unity"
+        "spine-unity",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

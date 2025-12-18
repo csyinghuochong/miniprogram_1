@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 namespace ET.Client
 {
@@ -45,6 +46,7 @@ namespace ET.Client
             self.BloodText_Layer2.AddComponent<RectTransform>();
             SetParent(self.BloodText_Layer2, self.BloodText);
 
+            self.SetCamera();
             self.SetCanvas();
         }
 
@@ -87,6 +89,33 @@ namespace ET.Client
             self.FixedRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
             self.PopUpRoot.GetComponent<CanvasScaler>().referenceResolution = screenSize;
             self.PopUpRoot.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.5f;
+        }
+
+        private static void SetCamera(this GlobalComponent self)
+        {
+            // 主摄像机设置
+            self.MainCamera.useOcclusionCulling = true;
+            UniversalAdditionalCameraData mainCameraData = self.MainCamera.GetUniversalAdditionalCameraData();
+            mainCameraData.renderPostProcessing = false;
+            mainCameraData.renderShadows = false;
+            mainCameraData.requiresColorOption = CameraOverrideOption.Off;
+            mainCameraData.requiresDepthOption = CameraOverrideOption.Off;
+
+            // UI摄像机设置
+            self.UICamera.useOcclusionCulling = false;
+            UniversalAdditionalCameraData uiCameraData = self.UICamera.GetUniversalAdditionalCameraData();
+            uiCameraData.renderPostProcessing = false;
+            uiCameraData.renderShadows = false;
+            uiCameraData.requiresColorOption = CameraOverrideOption.Off;
+            uiCameraData.requiresDepthOption = CameraOverrideOption.Off;
+        }
+
+        public static void SetMainCameraOcclusionCulling(this GlobalComponent self, bool enable)
+        {
+            if (self.MainCamera != null)
+            {
+                self.MainCamera.useOcclusionCulling = enable;
+            }
         }
     }
 }

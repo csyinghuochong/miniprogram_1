@@ -16,7 +16,8 @@
         "DG.Tweening.Modules",
         "Unity.TextMeshPro",
         "spine-unity",
-        "ZString"
+        "ZString",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
