@@ -12,9 +12,9 @@
     [ComponentOf(typeof(Unit))]
     public class FsmComponent : Entity, IAwake, IDestroy
     {
+        public SpineAnimator SpineAnimator;
         public int CurrentFsm;
         public long Timer;
-        public long WaitIdleTime;
         public string LastAnimator;
     }
 }

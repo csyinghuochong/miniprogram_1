@@ -1,4 +1,5 @@
 ﻿using System;
+using Spine;
 using Spine.Unity;
 using UnityEngine;
 
@@ -29,11 +30,24 @@ namespace ET
         public AnimationReferenceAsset Skill;
         public AnimationReferenceAsset Death;
 
-        private AnimName CurrentAnim;
+        public AnimName CurrentAnim { get; private set; }
 
         private void Start()
         {
+            if (this.SkeletonAnimation != null)
+            {
+                this.SkeletonAnimation.AnimationState.Complete += OnAnimationComplete;
+            }
+
             Play(StartAnim, true);
+        }
+
+        void OnDestroy()
+        {
+            if (this.SkeletonAnimation != null)
+            {
+                this.SkeletonAnimation.AnimationState.Complete -= OnAnimationComplete;
+            }
         }
 
         public void Play(AnimName animName, bool loop, bool fromStart = false)
@@ -61,6 +75,9 @@ namespace ET
                 case AnimName.Attack:
                     playAnim = this.Attack;
                     break;
+                case AnimName.Skill:
+                    playAnim = this.Skill;
+                    break;
                 case AnimName.Death:
                     playAnim = this.Death;
                     break;
@@ -74,6 +91,21 @@ namespace ET
 
             this.SkeletonAnimation.AnimationState.SetAnimation(0, playAnim, loop);
             this.CurrentAnim = animName;
+        }
+
+        private void OnAnimationComplete(TrackEntry trackEntry)
+        {
+            if (this.Attack != null && trackEntry.Animation.Name == this.Attack.name)
+            {
+                Play(AnimName.Idle, true);
+                return;
+            }
+
+            if (this.Skill != null && trackEntry.Animation.Name == this.Skill.name)
+            {
+                Play(AnimName.Idle, true);
+                return;
+            }
         }
     }
 }

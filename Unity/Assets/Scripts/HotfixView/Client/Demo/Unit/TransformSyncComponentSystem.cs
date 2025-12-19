@@ -11,6 +11,7 @@ namespace ET.Client
         {
             self.MyUnit = self.GetParent<Unit>();
             self.GameObjectComponent = self.MyUnit.GetComponent<GameObjectComponent>();
+            self.FsmComponent = self.MyUnit.GetComponent<FsmComponent>();
         }
 
         [EntitySystem]
@@ -54,7 +55,7 @@ namespace ET.Client
                             return;
                         }
 
-                        EventSystem.Instance.Publish(self.Scene(), new MoveStart() { Unit = self.MyUnit });
+                        self.FsmComponent.ChangeState(FsmStateEnum.FsmRunState);
 
                         self.GameObjectComponent.UpdatePositon(Vector3.Lerp(older.Position, newer.Position, t));
                         self.GameObjectComponent.UpdateScaleX(newer.Position.x - older.Position.x);
@@ -62,8 +63,8 @@ namespace ET.Client
                         return;
                     }
                 }
-                
-                EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.MyUnit });
+
+                self.FsmComponent.ChangeState(FsmStateEnum.FsmIdleState);
 
                 // 防止一开始移动会瞬移第一步，因为服务端只有位置变换才同步位置下来
                 if (interpolationTime - newerTimestamp > 0.1f)

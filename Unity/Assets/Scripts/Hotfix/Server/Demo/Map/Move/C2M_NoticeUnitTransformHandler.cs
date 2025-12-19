@@ -9,10 +9,10 @@ namespace ET.Server
         {
             using var _ = message;
 
+            // 速度校验
             if (math.distance(unit.Position, message.Position) > ConfigData.PlayerSynMaxDistance)
             {
-                // 拉回来
-                unit.GetComponent<TransformNoticeToClientComponent>()?.ResetSelf();
+                unit.Stop();
                 return;
             }
 

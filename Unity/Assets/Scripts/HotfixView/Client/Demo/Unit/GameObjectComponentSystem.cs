@@ -74,7 +74,8 @@ namespace ET.Client
                 case UnitType.Player:
                 {
                     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                    if (unit.MainHero && mapComponent.MapType == MapType.LocalLevel && unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleMode) == 1)
+                    if (unit.MainHero && mapComponent.MapType == MapType.LocalLevel &&
+                        unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleMode) == 1)
                     {
                         self.UnitAssetsPath = "";
                     }
@@ -202,6 +203,11 @@ namespace ET.Client
                     self.GameObject.tag = TagHelper.Player;
                     LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Player);
 
+                    unit.AddComponent<UnitBoneComponent>();
+                    unit.AddComponent<UIPlayerHpComponent>();
+                    unit.AddComponent<EffectViewComponent>();
+                    unit.AddComponent<FsmComponent>();
+
                     if (unit.MainHero)
                     {
                         unit.AddComponent<TransformNoticeToServerComponent>();
@@ -213,10 +219,6 @@ namespace ET.Client
                         unit.AddComponent<TransformSyncComponent>();
                     }
 
-                    unit.AddComponent<UnitBoneComponent>();
-                    unit.AddComponent<UIPlayerHpComponent>();
-                    unit.AddComponent<EffectViewComponent>();
-                    unit.AddComponent<FsmComponent>();
                     break;
                 }
                 case UnitType.Hero:
@@ -269,12 +271,12 @@ namespace ET.Client
             TextAsset textAsset = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(ABPathHelper.GetRecastPath(CommonHelp.GetMapObjName(mapComponent.MapType)));
             self.GetParent<Unit>().AddComponent<PathfindingComponent, byte[]>(textAsset.bytes);
         }
-        
+
         public static void ReloadGameObject(this GameObjectComponent self)
         {
             // 后面给需要改变的组件加加一个接口
             return;
-            
+
             Unit unit = self.GetParent<Unit>();
             int unitType = unit.Type;
             switch (unitType)

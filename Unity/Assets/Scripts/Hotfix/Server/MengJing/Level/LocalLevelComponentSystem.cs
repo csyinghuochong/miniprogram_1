@@ -74,6 +74,7 @@ namespace ET.Server
                 if (!maxPos.Equals(float3.zero))
                 {
                     self.MainUnit.Position = maxPos;
+                    self.MainUnit.Stop();
                 }
             }
 

@@ -18,6 +18,11 @@ namespace ET.Server
                 {
                     Unit unit = aOIEntity.Unit;
 
+                    if (unit.Id == self.MyUnit.Id)
+                    {
+                        continue;
+                    }
+
                     bool notice = false;
                     if (!self.UnitPositions.TryGetValue(unit.Id, out float3 position))
                     {
@@ -57,7 +62,8 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this TransformNoticeToClientComponent self)
         {
-            self.AOIEntity = self.GetParent<Unit>().GetComponent<AOIEntity>();
+            self.MyUnit = self.GetParent<Unit>();
+            self.AOIEntity = self.MyUnit.GetComponent<AOIEntity>();
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(ConfigData.TransformSyncTime, TimerInvokeType.TransformSyncToClient, self);
         }
 
@@ -66,11 +72,6 @@ namespace ET.Server
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.UnitPositions.Clear();
-        }
-
-        public static void ResetSelf(this TransformNoticeToClientComponent self)
-        {
-            self.UnitPositions.Remove(self.GetParent<Unit>().Id);
         }
     }
 }

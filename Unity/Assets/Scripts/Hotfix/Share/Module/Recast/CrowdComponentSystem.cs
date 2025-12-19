@@ -116,11 +116,15 @@ namespace ET
             self.LastUpdateTime = now;
 
             if (self.Crowd == null)
+            {
                 return;
+            }
 
             DtNavMesh nav = self.Crowd.GetNavMesh();
             if (nav == null)
+            {
                 return;
+            }
 
             self.Crowd.Update(dt, self.AgentDebug);
 
@@ -131,6 +135,7 @@ namespace ET
                 {
                     self.Agent2Unit.Remove(agentIdx);
                 }
+
                 self.ToRemoveAgents.Clear();
             }
 
@@ -158,7 +163,9 @@ namespace ET
         public static void RemoveAgent(this CrowdComponent self, int agentId)
         {
             if (self.Crowd == null)
+            {
                 return;
+            }
 
             DtCrowdAgent agent = self.Crowd.GetAgent(agentId);
 
@@ -225,13 +232,14 @@ namespace ET
         public static void SetMoveTarget(this CrowdComponent self, int agentId, float3 target, float speed, bool adjust = false)
         {
             if (self.Crowd == null)
+            {
                 return;
+            }
 
             DtCrowdAgent agent = self.Crowd.GetAgent(agentId);
 
             if (agent == null)
             {
-                Log.Warning($"SetMoveTarget failed, agent not found: {agentId}");
                 return;
             }
 
@@ -261,13 +269,14 @@ namespace ET
         public static void Stop(this CrowdComponent self, int agentId)
         {
             if (self.Crowd == null)
+            {
                 return;
+            }
 
             DtCrowdAgent agent = self.Crowd.GetAgent(agentId);
 
             if (agent == null)
             {
-                Log.Warning($"Stop agent failed, agent not found: {agentId}");
                 return;
             }
 
@@ -282,16 +291,17 @@ namespace ET
         public static void ChangePosition(this CrowdComponent self, int agentId, float3 target)
         {
             if (self.Crowd == null)
+            {
                 return;
+            }
 
             DtCrowdAgent agent = self.Crowd.GetAgent(agentId);
 
             if (agent == null)
             {
-                Log.Warning($"ChangePosition failed, agent not found: {agentId}");
                 return;
             }
-            
+
             RcVec3f targetPos = UnityToRecast(target);
 
             // 找到navmesh上最近的有效点
@@ -322,13 +332,14 @@ namespace ET
         public static void ChangeSpeed(this CrowdComponent self, int agentId, float speed)
         {
             if (self.Crowd == null)
+            {
                 return;
+            }
 
             DtCrowdAgent agent = self.Crowd.GetAgent(agentId);
 
             if (agent == null)
             {
-                Log.Warning($"ChangeSpeed failed, agent not found: {agentId}");
                 return;
             }
 

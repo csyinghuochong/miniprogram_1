@@ -13,7 +13,7 @@ namespace ET.Client
                 return;
             }
 
-            // unit.GetComponent<Move2DComponent>().Stop();
+            unit.GetComponent<Move2DComponent>()?.Stop();
             unit.Position = message.Position;
             EventSystem.Instance.Publish(root.CurrentScene(), new MoveStop() { Unit = unit });
             

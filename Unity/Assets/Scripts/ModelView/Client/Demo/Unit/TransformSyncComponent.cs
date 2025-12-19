@@ -70,6 +70,9 @@ namespace ET.Client
         private EntityRef<GameObjectComponent> gameObjectComponent;
         public GameObjectComponent GameObjectComponent { get => this.gameObjectComponent; set => this.gameObjectComponent = value; }
 
+        private EntityRef<FsmComponent> fsmComponent;
+        public FsmComponent FsmComponent { get => this.fsmComponent; set => this.fsmComponent = value; }
+
         // 环形缓冲区替代 List
         public RingBuffer<PositionState> PositionBuffer = new(50);
         public RingBuffer<RotationState> RotationBuffer = new(50);

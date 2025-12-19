@@ -32,16 +32,6 @@ namespace ET.Client
 
                 float3 position = message.PositionList[i];
 
-                if (unit.MainHero)
-                {
-                    if (math.distance(unit.Position, position) > ConfigData.PlayerSynMaxDistance)
-                    {
-                        unit.Position = position;
-                    }
-
-                    continue;
-                }
-
                 unit.Position = position;
             }
 

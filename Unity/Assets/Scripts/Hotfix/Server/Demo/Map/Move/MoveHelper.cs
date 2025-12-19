@@ -137,14 +137,14 @@ namespace ET.Server
         }
 
         // error: 0表示协程走完正常停止
-        public static void SendStop(this Unit unit, int error)
+        public static void SendStop(this Unit unit, int error = 0)
         {
-            // M2C_Stop m2CStop = M2C_Stop.Create();
-            // m2CStop.Error = error;
-            // m2CStop.Id = unit.Id;
-            // m2CStop.Position = unit.Position;
-            // m2CStop.Rotation = unit.Rotation;
-            // MapMessageHelper.Broadcast(unit, m2CStop);
+            M2C_Stop m2CStop = M2C_Stop.Create();
+            m2CStop.Error = error;
+            m2CStop.Id = unit.Id;
+            m2CStop.Position = unit.Position;
+            m2CStop.Rotation = unit.Rotation;
+            MapMessageHelper.Broadcast(unit, m2CStop);
         }
 
         public static void StopResult(this Unit unit, float3 position, int error)
@@ -154,12 +154,12 @@ namespace ET.Server
             // unit.GetComponent<UnitMoveComponent>().Stop();
             unit.Scene().GetComponent<CrowdComponent>()?.Stop(unit.DtCrowdAgentId);
             unit.Position = position;
-            // M2C_StopResult m2CStop = M2C_StopResult.Create();
-            // m2CStop.Error = error;
-            // m2CStop.Id = unit.Id;
-            // m2CStop.Position = position;
-            // m2CStop.Rotation = unit.Rotation;
-            // MapMessageHelper.Broadcast(unit, m2CStop);
+            M2C_StopResult m2CStop = M2C_StopResult.Create();
+            m2CStop.Error = error;
+            m2CStop.Id = unit.Id;
+            m2CStop.Position = position;
+            m2CStop.Rotation = unit.Rotation;
+            MapMessageHelper.Broadcast(unit, m2CStop);
         }
     }
 }

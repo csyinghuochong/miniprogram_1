@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Text;
 using Spine.Unity;
 using UnityEngine;
 
@@ -66,11 +67,9 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
 
-            // Move2DComponent moveComponent = unit.GetComponent<Move2DComponent>();
-            // bool idle = moveComponent == null || moveComponent.IsArrived();
-            // self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
+            self.SpineAnimator = unit.GetComponent<GameObjectComponent>().GameObject.GetComponent<SpineAnimator>();
 
-            self.WaitIdleTime = 0;
+            self.ChangeState(FsmStateEnum.FsmIdleState);
         }
 
         [EntitySystem]
@@ -83,7 +82,7 @@ namespace ET.Client
         {
         }
 
-        public static void EndTimer(this FsmComponent self)
+        private static void EndTimer(this FsmComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
@@ -98,14 +97,21 @@ namespace ET.Client
 
         public static void ChangeState(this FsmComponent self, int targetFsm, int skillId = 0)
         {
-            Unit unit = self.GetParent<Unit>();
-            SpineAnimator spineAnimator = unit.GetComponent<GameObjectComponent>().GameObject.GetComponent<SpineAnimator>();
+            if (self.SpineAnimator == null)
+            {
+                Log.Error("SpineAnimator is null");
+                return;
+            }
 
             switch (self.CurrentFsm)
             {
+                case FsmStateEnum.FsmIdleState:
+                    break;
                 case FsmStateEnum.FsmRunState:
                     break;
                 case FsmStateEnum.FsmDeathState:
+                    break;
+                case FsmStateEnum.FsmSkillState:
                     break;
                 default:
                     break;
@@ -114,16 +120,24 @@ namespace ET.Client
             switch (targetFsm)
             {
                 case FsmStateEnum.FsmDeathState:
-                    spineAnimator?.Play(AnimName.Attack, false);
+                    self.SpineAnimator.Play(AnimName.Attack, false);
                     break;
                 case FsmStateEnum.FsmIdleState:
-                    spineAnimator?.Play(AnimName.Idle, true);
+                    if (self.SpineAnimator.CurrentAnim != AnimName.Skill && self.SpineAnimator.CurrentAnim != AnimName.Attack)
+                    {
+                        self.SpineAnimator.Play(AnimName.Idle, true);
+                    }
+
                     break;
                 case FsmStateEnum.FsmRunState:
-                    spineAnimator?.Play(AnimName.Run, true);
+                    if (self.SpineAnimator.CurrentAnim != AnimName.Skill && self.SpineAnimator.CurrentAnim != AnimName.Attack)
+                    {
+                        self.SpineAnimator.Play(AnimName.Run, true);
+                    }
+
                     break;
                 case FsmStateEnum.FsmSkillState:
-                    spineAnimator?.Play(AnimName.Attack, false, true);
+                    self.SpineAnimator.Play(AnimName.Attack, false, true);
                     break;
                 default:
                     break;
