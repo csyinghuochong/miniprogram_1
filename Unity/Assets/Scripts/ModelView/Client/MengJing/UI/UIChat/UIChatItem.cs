@@ -7,7 +7,7 @@ namespace ET.Client
     public class UIChatItem : Entity, IAwake
     {
         public Image Image_SpeakerHead;
-        public Button Button_SpeakerHead;
+        public Button Button_OnSpeakerHead;
         public TMP_Text Text_PlayerName;
         public TMP_Text Text_Content;
     }

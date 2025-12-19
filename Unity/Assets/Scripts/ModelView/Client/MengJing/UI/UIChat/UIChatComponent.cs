@@ -7,6 +7,8 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIChatComponent: Entity, IAwake
     {
+        public int CurrentPage { get; set; } = 0;
+        
         public Button Button_Close;
         public TMP_Text Text_Title;
         public Transform Content_UIChatItem;
@@ -14,7 +16,7 @@ namespace ET.Client
         public TMP_InputField InputField_Content;
         public Button Button_Emoji;
         public Button Button_Send;
-        public Button Button_World;
-        public Button Button_LianMeng;
+        public Button Button_Type_World;
+        public Button Button_Type_LianMeng;
     }
 }

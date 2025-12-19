@@ -30,5 +30,6 @@ namespace ET
         public const string UIStoreRefTip = "UIStoreRefTip/UIStoreRefTip";
         public const string UIRelink = "UIRelink/UIRelink";
         public const string UIChat = "UIChat/UIChat";
+        public const string UIPlayerInfo = "UIPlayerInfo/UIPlayerInfo";
     }
 }

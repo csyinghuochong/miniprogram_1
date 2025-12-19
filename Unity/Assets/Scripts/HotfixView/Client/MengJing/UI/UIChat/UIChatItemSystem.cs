@@ -14,11 +14,13 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Image_SpeakerHead = rc.Get<GameObject>("Image_SpeakerHead").GetComponent<Image>();
-            self.Button_SpeakerHead = rc.Get<GameObject>("Button_SpeakerHead").GetComponent<Button>();
+            self.Button_OnSpeakerHead = rc.Get<GameObject>("Button_SpeakerHead").GetComponent<Button>();
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_Content = rc.Get<GameObject>("Text_Content").GetComponent<TMP_Text>();
+
+            self.Button_OnSpeakerHead.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo).Coroutine(); });
         }
 
-        
+
     }
 }
