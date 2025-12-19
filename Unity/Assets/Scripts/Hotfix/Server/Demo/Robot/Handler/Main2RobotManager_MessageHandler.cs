@@ -14,7 +14,7 @@ namespace ET.Client
             {
                 case 1:
                     
-                    Console.WriteLine("Main2RobotManager_Message.RemoveRobot");
+                    Log.Console("Main2RobotManager_Message.RemoveRobot");
                     root.GetComponent<RobotManagerComponent>().RemoveRobot(int.Parse(request.OpParam)).Coroutine();
                     break;
                 default:

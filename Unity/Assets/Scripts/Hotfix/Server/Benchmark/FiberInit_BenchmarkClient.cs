@@ -20,7 +20,7 @@ namespace ET.Server
             root.AddComponent<NetComponent, AddressFamily, NetworkProtocol>(AddressFamily.InterNetwork, NetworkProtocol.UDP);
             root.AddComponent<BenchmarkClientComponent>();
 
-            Console.WriteLine("FiberInit_BenchmarkClient");
+            Log.Console("FiberInit_BenchmarkClient");
             await ETTask.CompletedTask;
         }
     }

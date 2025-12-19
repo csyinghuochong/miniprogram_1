@@ -21,7 +21,7 @@ namespace ET.Server
             
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get(root.Fiber.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
-            Console.WriteLine($"FiberInit_Queue: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
+            Log.Console($"FiberInit_Queue: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
             await ETTask.CompletedTask;
         }
     }

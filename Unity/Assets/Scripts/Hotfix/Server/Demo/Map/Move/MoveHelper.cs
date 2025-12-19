@@ -68,7 +68,6 @@ namespace ET.Server
             bool ret = await moveComponent.MoveToAsync(positonsss, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
-                //Console.WriteLine($"PathResultToAsync  unit.SendStop(0):  {TimeHelper.ServerNow()}");
                 //unit.SendStop(0);
             }
 

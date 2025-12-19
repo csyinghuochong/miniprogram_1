@@ -20,8 +20,7 @@ namespace ET.Server
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Error:  " +  messageObject.ToString());
-                    Console.WriteLine(e);
+                    Log.Console(e.ToString());
                     throw;
                 }
                

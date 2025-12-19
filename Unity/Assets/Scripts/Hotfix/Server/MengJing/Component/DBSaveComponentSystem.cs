@@ -60,7 +60,7 @@ namespace ET.Server
         //离线
         public static void OnOffLine(this DBSaveComponent self)
         {
-            Console.WriteLine($"OnOffLine: {self.Id}");
+            Log.Console($"OnOffLine: {self.Id}");
 
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
@@ -78,7 +78,7 @@ namespace ET.Server
 
         public static void OnDisconnect(this DBSaveComponent self)
         {
-            Console.WriteLine($"OnDisconnect: {self.Id}");
+            Log.Console($"OnDisconnect: {self.Id}");
 
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +

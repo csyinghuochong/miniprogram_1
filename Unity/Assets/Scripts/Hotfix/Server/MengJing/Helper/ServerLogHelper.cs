@@ -38,12 +38,12 @@ namespace ET.Server
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Log.Error(ex.Message);
                 }
             }
             else
             {
-                Console.WriteLine("日志文件不存在!");
+                Log.Error("日志文件不存在!");
             }
         }
         

@@ -65,7 +65,7 @@ namespace ET.Server
                 
                 if (player == null)
                 {
-                    Console.WriteLine($"C2G_LoginGameGate: player == null  {account}  {session.Id}");
+                    Log.Console($"C2G_LoginGameGate: player == null  {account}  {session.Id}");
 
                     player = playerComponent.AddChildWithId<Player, string>(request.RoleId, account);
 
@@ -85,7 +85,7 @@ namespace ET.Server
                 }
                 else
                 {
-                    Console.WriteLine($"C2G_LoginGameGate:  player != null  {account}  {player.IsDisposed}  {player.Id}  {session.Id}");
+                    Log.Console($"C2G_LoginGameGate:  player != null  {account}  {player.IsDisposed}  {player.Id}  {session.Id}");
                     
                     player.RemoveComponent<PlayerOfflineOutTimeComponent>();
 

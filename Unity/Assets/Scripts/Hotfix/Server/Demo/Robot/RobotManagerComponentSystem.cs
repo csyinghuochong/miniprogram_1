@@ -56,7 +56,7 @@ namespace ET.Server
             if (infos != null && infos.KeyId != -1 )
             {
                 infos.KeyId = -1;
-                Console.WriteLine($"移除机器人:   {infos.Value2}    {TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow())}");
+                Log.Console($"移除机器人:   {infos.Value2}    {TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow())}");
                 FiberManager.Instance.Remove(fiberid).Coroutine();
             }
 

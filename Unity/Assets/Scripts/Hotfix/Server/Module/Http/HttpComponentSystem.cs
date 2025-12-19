@@ -51,14 +51,14 @@ namespace ET.Server
             try
             {
                 self.Listener = new HttpListener();
-                Console.WriteLine($"HttpComponent: Awake");
+                Log.Console($"HttpComponent: Awake");
                 foreach (string s in address.Split(';'))
                 {
                     if (s.Trim() == "")
                     {
                         continue;
                     }
-                    Console.WriteLine($"HttpComponent: {s}  ");
+                    Log.Console($"HttpComponent: {s}  ");
 
                     self.Listener.Prefixes.Add(s);
                 }
@@ -172,7 +172,7 @@ namespace ET.Server
                 catch (Exception ex)
                 {
                     // 方法3: 作为字节数组加载
-                    Console.WriteLine(ex);
+                    Log.Console(ex.ToString());
                     byte[] certData = File.ReadAllBytes(path);
                     return new X509Certificate2(certData, password,
                         X509KeyStorageFlags.UserKeySet |

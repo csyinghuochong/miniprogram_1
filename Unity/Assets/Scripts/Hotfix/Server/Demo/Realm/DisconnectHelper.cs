@@ -30,7 +30,7 @@ namespace ET.Server
             {
                 return;
             }
-            Console.WriteLine($"KickPlayerNoLock:  {player.Id}  {type}");
+            Log.Console($"KickPlayerNoLock:  {player.Id}  {type}");
             switch (player.PlayerState)
             {
                 case PlayerState.Disconnect:

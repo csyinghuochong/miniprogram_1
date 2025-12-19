@@ -22,7 +22,7 @@ namespace ET.Server
             // 发送断线消息
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(self.Player.Id, G2M_SessionDisconnect.Create());
             
-            Console.WriteLine($"SessionPlayerComponent.Destroy:  {self.Player.Id}");
+            Log.Console($"SessionPlayerComponent.Destroy:  {self.Player.Id}");
             
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
             // Session playerSession = playerSessionComponent ?.Session;

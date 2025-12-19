@@ -9,7 +9,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, Main2RobotClient_Message request, RobotClient2Main_Message response)
         {
-            Console.WriteLine($"Main2RobotClient_Message: {request.Message}");
+            Log.Console($"Main2RobotClient_Message: {request.Message}");
             root.GetComponent<BehaviourComponent>().Message = request.Message;
             
             await ETTask.CompletedTask;
