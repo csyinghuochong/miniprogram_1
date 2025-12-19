@@ -112,22 +112,22 @@ MonoBehaviour:
   data:
   - key: Button_Close
     gameObject: {fileID: 2884267023644722160}
-  - key: Text_Title
-    gameObject: {fileID: 5769533224122861875}
-  - key: Content_UIChatItem
-    gameObject: {fileID: 0}
-  - key: UIChatItem
-    gameObject: {fileID: 0}
-  - key: InputField_Content
-    gameObject: {fileID: 0}
-  - key: Button_Emoji
-    gameObject: {fileID: 0}
-  - key: Button_Send
-    gameObject: {fileID: 0}
-  - key: Button_World
+  - key: Image_PlayerHead
+    gameObject: {fileID: 4817189007831126239}
+  - key: Button_OnPlayerHead
+    gameObject: {fileID: 2232724391256123583}
+  - key: Text_PalyerName
+    gameObject: {fileID: 3289481277549388012}
+  - key: Text_PalyerCE
+    gameObject: {fileID: 2098222331463870659}
+  - key: Text_PalyerLianMeng
+    gameObject: {fileID: 4171866611649425259}
+  - key: Button_AddFriend
     gameObject: {fileID: 5458412756930348778}
-  - key: Button_LianMeng
+  - key: Button_Report
     gameObject: {fileID: 6649362972350625530}
+  - key: Button_Black
+    gameObject: {fileID: 239328541655249441}
 --- !u!1 &28795522853508515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,7 +1664,7 @@ GameObject:
   - component: {fileID: 6889445390383643066}
   - component: {fileID: 8671284470522073407}
   m_Layer: 5
-  m_Name: Button_SpeakerHead
+  m_Name: Button_OnPlayerHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3731,7 +3731,7 @@ GameObject:
   - component: {fileID: 3213102844369188710}
   - component: {fileID: 4020535052237433173}
   m_Layer: 5
-  m_Name: Image_SpeakerHead
+  m_Name: Image_PlayerHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5126,7 +5126,7 @@ GameObject:
   - component: {fileID: 2378526849875685194}
   - component: {fileID: 6113338262450724534}
   m_Layer: 5
-  m_Name: Button_LianMeng
+  m_Name: Button_Report
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
