@@ -90,10 +90,10 @@ namespace ET.Client
             Camera camera = self.MapCamera.GetComponent<Camera>();
             camera.enabled = true;
 
+            self.LastMapCameraPos = self.MapCamera.transform.position;
+            
             await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
             camera.enabled = false;
-            
-            self.LastMapCameraPos = self.MapCamera.transform.position;
         }
 
         public static void OnUpdateMiniMapAllUnit(this UIMiniMapComponent self)
@@ -112,18 +112,18 @@ namespace ET.Client
 
             Vector3 mainUnitPos = mainUnit.Position;
             Vector2 centerPos = self.GetWordToUIPositon(new Vector3(mainUnitPos.x, mainUnitPos.y, 0f));
-            if (mapType == MapType.LocalLevel)
-            {
-                // 关卡是无限循环生成的，要不断拍照，刷新小地图
-                if (Vector3.Distance(self.LastMapCameraPos, mainUnitPos) > 10f)
-                {
-                    Vector3 old = self.MapCamera.transform.position;
-                    old.x = mainUnit.Position.x;
-                    old.y = mainUnit.Position.y;
-                    self.MapCamera.transform.position = old;
-                    self.TakePhoto().Coroutine();
-                }
-            }
+            // if (mapType == MapType.LocalLevel)
+            // {
+            //     // 关卡是无限循环生成的，要不断拍照，刷新小地图
+            //     if (Vector3.Distance(self.LastMapCameraPos, mainUnitPos) > 10f)
+            //     {
+            //         Vector3 old = self.MapCamera.transform.position;
+            //         old.x = mainUnit.Position.x;
+            //         old.y = mainUnit.Position.y;
+            //         self.MapCamera.transform.position = old;
+            //         self.TakePhoto().Coroutine();
+            //     }
+            // }
 
             self.RawImage_Map.transform.localPosition = new Vector2(centerPos.x * -1, centerPos.y * -1);
             self.Transform_HeadList.localPosition = new Vector2(centerPos.x * -1, centerPos.y * -1);
