@@ -1,0 +1,20 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [ComponentOf(typeof(UI))]
+    public class UIChatComponent: Entity, IAwake
+    {
+        public Button Button_Close;
+        public TMP_Text Text_Title;
+        public Transform Content_UIChatItem;
+        public GameObject UIChatItem;
+        public TMP_InputField InputField_Content;
+        public Button Button_Emoji;
+        public Button Button_Send;
+        public Button Button_World;
+        public Button Button_LianMeng;
+    }
+}
