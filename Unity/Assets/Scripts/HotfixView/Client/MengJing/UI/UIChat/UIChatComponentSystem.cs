@@ -22,6 +22,8 @@ namespace ET.Client
             self.Button_Send = rc.Get<GameObject>("Button_Send").GetComponent<Button>();
             self.Button_World = rc.Get<GameObject>("Button_World").GetComponent<Button>();
             self.Button_LianMeng = rc.Get<GameObject>("Button_LianMeng").GetComponent<Button>();
+
+            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIChat); });
         }
         
         

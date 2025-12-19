@@ -177,7 +177,10 @@ namespace ET.Client
             self.Button_Boss = rc.Get<GameObject>("Button_Boss").GetComponent<Button>();
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
-            
+            self.Content_UIMainChatItem = rc.Get<GameObject>("Content_UIMainChatItem").transform;
+            self.UIMainChatItem = rc.Get<GameObject>("UIMainItem");
+            self.Button_OnChat = rc.Get<GameObject>("Button_OnChat").GetComponent<Button>();
+
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
             self.UIMainSkillComponent = self.AddComponent<UIMainSkillComponent, GameObject>(rc.Get<GameObject>("UIMainSkill"));
@@ -192,6 +195,7 @@ namespace ET.Client
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
             self.Button_Boss.AddListener(() => { self.OnBoss().Coroutine(); });
+            self.Button_OnChat.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIChat).Coroutine(); });
         }
 
         [EntitySystem]

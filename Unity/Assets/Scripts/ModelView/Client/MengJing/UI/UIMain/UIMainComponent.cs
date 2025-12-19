@@ -41,5 +41,8 @@ namespace ET.Client
         public Button Button_Boss;
         public Slider Slider_Exp;
         public TMP_Text Text_Exp;
+        public Transform Content_UIMainChatItem;
+        public GameObject UIMainChatItem;
+        public Button Button_OnChat;
     }
 }
