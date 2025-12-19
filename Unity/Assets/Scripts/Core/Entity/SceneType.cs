@@ -29,6 +29,7 @@ namespace ET
         LoginCenter = 1L << 26,
         RobotManager = 1L << 28,
         Mail = 1L << 29,
+        Chat = 1L << 30,
 
         // 客户端
         Demo = 1L << 50,

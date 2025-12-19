@@ -48,6 +48,14 @@
     "Port": 0
   },
   {
+    "Id": 115,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Chat",
+    "Name": "Chat",
+    "Port": 0
+  },
+  {
     "Id": 1000201,
     "Zone": 1000,
     "Process": 1,
