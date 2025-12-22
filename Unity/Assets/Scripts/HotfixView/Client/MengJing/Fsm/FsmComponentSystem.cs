@@ -36,7 +36,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, FsmChange args)
         {
-            args.Unit.GetComponent<FsmComponent>()?.ChangeState(args.FsmHandlerType, args.SkillId);
+            args.Unit.GetComponent<FsmComponent>()?.ChangeState((FsmStateEnum)args.FsmHandlerType, args.SkillId);
 
             await ETTask.CompletedTask;
         }
@@ -95,7 +95,7 @@ namespace ET.Client
             }
         }
 
-        public static void ChangeState(this FsmComponent self, int targetFsm, int skillId = 0)
+        public static void ChangeState(this FsmComponent self, FsmStateEnum targetFsm, int skillId = 0)
         {
             if (self.SpineAnimator == null)
             {
