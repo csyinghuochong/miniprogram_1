@@ -114,6 +114,14 @@ namespace ET.Client
                         self.PreLoadAssets.Add(path);
                     }
                 }
+                
+                // 飘字
+                self.PreLoadAssets.Add(FloatingTextComponent.PhysicalDamageText);
+                self.PreLoadAssets.Add(FloatingTextComponent.MagicDamageText);
+                self.PreLoadAssets.Add(FloatingTextComponent.CriDamageText);
+                self.PreLoadAssets.Add(FloatingTextComponent.RecoverText);
+                self.PreLoadAssets.Add(FloatingTextComponent.NormalText);
+                self.PreLoadAssets.Add(FloatingTextComponent.TipText);
             }
         }
 
