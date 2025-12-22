@@ -12,7 +12,7 @@ namespace ET.Client
         private static void Awake(this UIChatComponent self)
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
-            
+
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_Title = rc.Get<GameObject>("Text_Title").GetComponent<TMP_Text>();
             self.Content_UIChatItem = rc.Get<GameObject>("Content_UIChatItem").transform;
@@ -22,12 +22,19 @@ namespace ET.Client
             self.Button_Send = rc.Get<GameObject>("Button_Send").GetComponent<Button>();
             self.Button_Type_World = rc.Get<GameObject>("Button_Type_World").GetComponent<Button>();
             self.Button_Type_LianMeng = rc.Get<GameObject>("Button_Type_LianMeng").GetComponent<Button>();
+            self.GameObject_Emoji = rc.Get<GameObject>("GameObject_Emoji");
+            self.Button_CloseEmoji = rc.Get<GameObject>("Button_CloseEmoji").GetComponent<Button>();
+            self.Content_EmojiList = rc.Get<GameObject>("Content_EmojiList");
+
+            self.GameObject_Emoji.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIChat); });
+            self.Button_Emoji.AddListener(() => { self.GameObject_Emoji.SetActive(true); });
             self.Button_Type_World.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_LianMeng.onClick.AddListener(() => { self.SetShowType(1); });
+            self.Button_CloseEmoji.AddListener(() => { self.GameObject_Emoji.SetActive(false); });
         }
-        
+
         private static void SetShowType(this UIChatComponent self, int page)
         {
             self.CurrentPage = page;
