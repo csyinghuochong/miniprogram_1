@@ -19,6 +19,9 @@ namespace ET.Client
         private static void Destroy(this UIDropItemComponent self)
         {
             self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HeadBarPath, self.GameObject);
+            self.HeadBarPath = null;
+            self.GameObject = null;
+            self.Text_Name = null;
         }
 
         private static void OnLoadGameObject(this UIDropItemComponent self, GameObject gameObject, long formId)

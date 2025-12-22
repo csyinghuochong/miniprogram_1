@@ -31,11 +31,12 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this SkillManagerComponentC self)
         {
-            self.Skills.Clear();
-            self.Skills = null;
-            self.SkillCDs.Clear();
-            self.SkillCDs = null;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.Timer = 0;
+            self.LastUpdateTime = 0;
+            self.PublicCD = 0;
+            self.Skills.Clear();
+            self.SkillCDs.Clear();
         }
 
         private static void Update(this SkillManagerComponentC self)
@@ -125,7 +126,7 @@ namespace ET.Client
             initSkillData.Angle = message.Angle;
             initSkillData.TargetPosition = message.Position;
 
-            SkillC skill = self.AddChildWithId<SkillC>(message.SkillId);
+            SkillC skill = self.AddChildWithId<SkillC>(message.SkillId, true);
             self.Skills.Add(skill);
             skill.OnInit(initSkillData, unit);
             skill.OnExecute();

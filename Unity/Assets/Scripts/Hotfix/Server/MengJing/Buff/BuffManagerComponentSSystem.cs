@@ -139,7 +139,7 @@ namespace ET.Server
 
             if (notice)
             {
-                M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create();
+                M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create(true);
                 m2C_UnitBuffUpdate.UnitId = unit.Id;
                 m2C_UnitBuffUpdate.BuffId = newBuff.Id;
                 m2C_UnitBuffUpdate.BuffConfigId = newBuffConfig.Id;
@@ -161,7 +161,7 @@ namespace ET.Server
 
         private static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buff)
         {
-            M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create();
+            M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create(true);
             m2C_UnitBuffUpdate.UnitId = self.GetParent<Unit>().Id;
             m2C_UnitBuffUpdate.BuffId = buff.Id;
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffUpdate);

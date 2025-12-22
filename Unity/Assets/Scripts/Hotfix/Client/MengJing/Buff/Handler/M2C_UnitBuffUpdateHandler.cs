@@ -8,6 +8,8 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, M2C_UnitBuffUpdate message)
         {
+            using var _ = message;
+            
             Unit unit = root.CurrentScene()?.GetComponent<UnitComponent>().Get(message.UnitId);
             if (unit == null)
             {

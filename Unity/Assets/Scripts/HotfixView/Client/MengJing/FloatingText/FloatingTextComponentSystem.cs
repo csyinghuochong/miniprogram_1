@@ -264,7 +264,7 @@ namespace ET.Client
         public static void ShowPhysicalDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_PhysicalDamage.prefab";
-            FloatingText floatingText = self.AddChild<FloatingText>();
+            FloatingText floatingText = self.AddChild<FloatingText>(true);
             Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(0, 80), RandomHelper.RandomNumberFloat(0, 40), 0);
             floatingText.Init(text, 1.0f, path, offset, self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform, head);
 
@@ -275,7 +275,7 @@ namespace ET.Client
         public static void ShowMagicDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_MagicDamage.prefab";
-            FloatingText floatingText = self.AddChild<FloatingText>();
+            FloatingText floatingText = self.AddChild<FloatingText>(true);
             Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-80, 0), RandomHelper.RandomNumberFloat(0, 40), 0);
             floatingText.Init(text, 1.0f, path, offset, self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform, head);
 
@@ -286,7 +286,7 @@ namespace ET.Client
         public static void ShowCriDamageText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_CriDamage.prefab";
-            FloatingText floatingText = self.AddChild<FloatingText>();
+            FloatingText floatingText = self.AddChild<FloatingText>(true);
             Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-40, 40), RandomHelper.RandomNumberFloat(0, 40), 0);
             floatingText.Init(text, 1.0f, path, offset, self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform, head);
 
@@ -297,7 +297,7 @@ namespace ET.Client
         public static void ShowRecoverText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Recover.prefab";
-            FloatingText floatingText = self.AddChild<FloatingText>();
+            FloatingText floatingText = self.AddChild<FloatingText>(true);
             Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-40, 40), RandomHelper.RandomNumberFloat(0, 40), 0);
             floatingText.Init(text, 1.0f, path, offset, self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform, head);
 
@@ -307,7 +307,7 @@ namespace ET.Client
         public static void ShowNormalText(this FloatingTextComponent self, string text, Transform head)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Normal.prefab";
-            FloatingText floatingText = self.AddChild<FloatingText>();
+            FloatingText floatingText = self.AddChild<FloatingText>(true);
             Vector3 offset = new Vector3(RandomHelper.RandomNumberFloat(-80, 80), RandomHelper.RandomNumberFloat(0, 40), 0);
             floatingText.Init(text, 1.0f, path, offset, self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform, head);
 
@@ -318,7 +318,7 @@ namespace ET.Client
         public static void ShowTipText(this FloatingTextComponent self, string text)
         {
             string path = "Assets/Bundles/UI/Blood/Text_Tip.prefab";
-            FloatingText floatingText = self.AddChild<FloatingText>();
+            FloatingText floatingText = self.AddChild<FloatingText>(true);
             floatingText.Init(text, 1.0f, path, Vector3.zero, self.Root().GetComponent<GlobalComponent>().PopUpRoot);
 
             self.FloatingTexts.Add(floatingText);

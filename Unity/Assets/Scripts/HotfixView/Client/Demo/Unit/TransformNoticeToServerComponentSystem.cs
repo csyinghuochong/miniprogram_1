@@ -35,6 +35,7 @@
         private static void Destroy(this TransformNoticeToServerComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.Timer = 0;
         }
     }
 }

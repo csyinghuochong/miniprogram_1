@@ -185,7 +185,7 @@ namespace ET.Server
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerS, self);
             }
 
-            M2C_OnUseSkill message = M2C_OnUseSkill.Create();
+            M2C_OnUseSkill message = M2C_OnUseSkill.Create(true);
             message.UnitId = myUnit.Id;
             message.SkillId = skill.Id;
             message.SkillConfigId = initSkillData.SkillConfigId;
@@ -288,7 +288,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             if (notice && unit != null && !unit.IsDisposed)
             {
-                M2C_UnitFinishSkill message = M2C_UnitFinishSkill.Create();
+                M2C_UnitFinishSkill message = M2C_UnitFinishSkill.Create(true);
                 message.UnitId = unit.Id;
                 MapMessageHelper.Broadcast(unit, message);
             }
@@ -307,7 +307,7 @@ namespace ET.Server
 
         private static void OnRemoveSkillItem(this SkillManagerComponentS self, SkillS skill)
         {
-            M2C_UnitSkillRemove message = M2C_UnitSkillRemove.Create();
+            M2C_UnitSkillRemove message = M2C_UnitSkillRemove.Create(true);
             message.UnitId = self.GetParent<Unit>().Id;
             message.SkillId = skill.Id;
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), message);

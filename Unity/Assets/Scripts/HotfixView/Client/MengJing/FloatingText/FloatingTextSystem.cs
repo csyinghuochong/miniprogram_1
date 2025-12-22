@@ -16,6 +16,13 @@ namespace ET.Client
         private static void Destroy(this FloatingText self)
         {
             self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.Path, self.GameObject);
+            self.Text = null;
+            self.Time = 0;
+            self.Path = null;
+            self.Offset = Vector3.zero;
+            self.RootTransform = null;
+            self.HeadTransform = null;
+            self.GameObject = null;
         }
 
         public static void Update(this FloatingText self)

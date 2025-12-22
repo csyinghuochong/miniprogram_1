@@ -34,6 +34,8 @@ namespace ET
         private static void Destroy(this Move2DComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.Timer = 0;
+            self.Targets.Clear();
         }
 
         private static void Update(this Move2DComponent self)

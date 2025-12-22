@@ -5,6 +5,8 @@
     {
         protected override async ETTask Run(Scene root, M2C_UnitSkillRemove message)
         {
+            using var _ = message;
+            
             Scene currentScene = root.CurrentScene();
             if (currentScene == null)
             {

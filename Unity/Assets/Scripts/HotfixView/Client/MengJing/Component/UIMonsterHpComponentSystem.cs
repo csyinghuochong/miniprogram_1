@@ -44,6 +44,10 @@ namespace ET.Client
         private static void Destroy(this UIMonsterHpComponent self)
         {
             self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HeadBarPath, self.GameObject);
+            self.HeadBarPath = null;
+            self.GameObject = null;
+            self.Text_Name = null;
+            self.Image_Hp = null;
         }
 
         private static void OnLoadGameObject(this UIMonsterHpComponent self, GameObject gameObject, long formId)

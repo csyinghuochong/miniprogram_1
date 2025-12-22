@@ -74,8 +74,8 @@ namespace ET.Client
             //     }
             // }
 
-            unit.AddComponent<SkillManagerComponentC>();
-            unit.AddComponent<BuffManagerComponentC>();
+            unit.AddComponent<SkillManagerComponentC>(true);
+            unit.AddComponent<BuffManagerComponentC>(true);
 
             OnAfterCreateUnit(unit);
             return unit;

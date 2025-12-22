@@ -12,6 +12,15 @@
         [EntitySystem]
         private static void Destroy(this BuffC self)
         {
+            self.InitBuffData = default;
+            self.BuffState = default;
+            self.BuffHandler = null;
+            self.BuffConfig = null;
+            self.TheUnitBelongTo = null;
+            self.BuffEndTime = 0;
+            self.RunTime = 0;
+            self.InitEffectData = default;
+            self.EffectInstanceId = 0;
         }
 
         public static void OnInit(this BuffC self, InitBuffData initBuffData, Unit theUnitBelongTo)

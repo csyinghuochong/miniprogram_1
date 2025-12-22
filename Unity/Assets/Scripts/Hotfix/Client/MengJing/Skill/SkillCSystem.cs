@@ -15,6 +15,17 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this SkillC self)
         {
+            self.InitSkillData = default;
+            self.SkillConfig = null;
+            self.SkillHandler = null;
+            self.SkillState = default;
+            self.TheUnitFrom = null;
+            self.TheUnitTarget = null;
+            self.NowPosition = default;
+            self.TargetPosition = default;
+            self.RunTime = 0;
+            self.Speed = 0;
+            self.EffectInstanceId.Clear();
         }
 
         public static void OnInit(this SkillC self, InitSkillData initSkillData, Unit theUnitFrom)

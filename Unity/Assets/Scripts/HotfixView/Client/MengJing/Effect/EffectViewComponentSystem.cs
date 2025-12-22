@@ -93,6 +93,9 @@ namespace ET.Client
         private static void Destroy(this EffectViewComponent self)
         {
             self.OnDispose();
+            self.Timer = 0;
+            self.LastUpdateTime = 0;
+            self.Effects.Clear();
         }
 
         private static void Update(this EffectViewComponent self)

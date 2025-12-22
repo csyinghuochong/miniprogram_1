@@ -19,6 +19,9 @@ namespace ET.Client
         private static void Destroy(this UINPCHpComponent self)
         {
             self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HeadBarPath, self.GameObject);
+            self.HeadBarPath = null;
+            self.GameObject = null;
+            self.Text_Name = null;
         }
 
         private static void OnLoadGameObject(this UINPCHpComponent self, GameObject gameObject, long formId)

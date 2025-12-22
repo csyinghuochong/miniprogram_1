@@ -15,6 +15,5 @@
         public SpineAnimator SpineAnimator;
         public FsmStateEnum CurrentFsm;
         public long Timer;
-        public string LastAnimator;
     }
 }

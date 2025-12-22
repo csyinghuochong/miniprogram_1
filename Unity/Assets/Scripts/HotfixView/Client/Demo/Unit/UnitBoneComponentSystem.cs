@@ -24,6 +24,8 @@ namespace ET.Client
         private static void Destroy(this UnitBoneComponent self)
         {
             self.Hp = null;
+            self.Center = null;
+            self.Bottom = null;
         }
 
         public static Transform GetTransform(this UnitBoneComponent self, string posType)

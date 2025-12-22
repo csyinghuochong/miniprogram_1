@@ -33,6 +33,8 @@ namespace ET.Client
         private static void Destroy(this BuffManagerComponentC self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.Timer = 0;
+            self.LastUpdateTime = 0;
             self.Buffs.Clear();
         }
 
@@ -77,7 +79,7 @@ namespace ET.Client
             initBuffData.TargetPostion = new float3(message.TargetPostion[0], message.TargetPostion[1], message.TargetPostion[2]);
             
             
-            BuffC buff = self.AddChildWithId<BuffC>(message.BuffId);
+            BuffC buff = self.AddChildWithId<BuffC>(message.BuffId, true);
             buff.OnInit(initBuffData, self.GetParent<Unit>());
             buff.OnExecute();
             self.Buffs.Add(buff);

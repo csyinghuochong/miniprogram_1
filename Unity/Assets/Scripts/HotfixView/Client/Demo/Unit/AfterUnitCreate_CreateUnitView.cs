@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene scene, AfterUnitCreate args)
         {
 
-            args.Unit.AddComponent<GameObjectComponent>();
+            args.Unit.AddComponent<GameObjectComponent>(true);
             
             await ETTask.CompletedTask;
         }

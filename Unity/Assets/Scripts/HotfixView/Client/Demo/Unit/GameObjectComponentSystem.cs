@@ -61,6 +61,7 @@ namespace ET.Client
                 self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
 
+            self.UnitAssetsPath = null;
             self.GameObject = null;
         }
 
@@ -203,20 +204,20 @@ namespace ET.Client
                     self.GameObject.tag = TagHelper.Player;
                     LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Player);
 
-                    unit.AddComponent<UnitBoneComponent>();
-                    unit.AddComponent<UIPlayerHpComponent>();
-                    unit.AddComponent<EffectViewComponent>();
-                    unit.AddComponent<FsmComponent>();
+                    unit.AddComponent<UnitBoneComponent>(true);
+                    unit.AddComponent<UIPlayerHpComponent>(true);
+                    unit.AddComponent<EffectViewComponent>(true);
+                    unit.AddComponent<FsmComponent>(true);
 
                     if (unit.MainHero)
                     {
-                        unit.AddComponent<TransformNoticeToServerComponent>();
-                        unit.AddComponent<Move2DComponent>();
+                        unit.AddComponent<TransformNoticeToServerComponent>(true);
+                        unit.AddComponent<Move2DComponent>(true);
                         self.LoadPath().Coroutine();
                     }
                     else
                     {
-                        unit.AddComponent<TransformSyncComponent>();
+                        unit.AddComponent<TransformSyncComponent>(true);
                     }
 
                     break;
@@ -226,11 +227,11 @@ namespace ET.Client
                     self.GameObject.tag = TagHelper.Hero;
                     LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Hero);
 
-                    unit.AddComponent<UnitBoneComponent>();
-                    unit.AddComponent<UIHeroHpComponent>();
-                    unit.AddComponent<EffectViewComponent>();
-                    unit.AddComponent<FsmComponent>();
-                    unit.AddComponent<TransformSyncComponent>();
+                    unit.AddComponent<UnitBoneComponent>(true);
+                    unit.AddComponent<UIHeroHpComponent>(true);
+                    unit.AddComponent<EffectViewComponent>(true);
+                    unit.AddComponent<FsmComponent>(true);
+                    unit.AddComponent<TransformSyncComponent>(true);
                     break;
                 }
                 case UnitType.Monster:
@@ -238,16 +239,16 @@ namespace ET.Client
                     self.GameObject.tag = TagHelper.Monster;
                     LayerHelp.ChangeLayerAll(self.GameObject.transform, LayerEnum.Monster);
 
-                    unit.AddComponent<UnitBoneComponent>();
-                    unit.AddComponent<UIMonsterHpComponent>();
-                    unit.AddComponent<EffectViewComponent>();
-                    unit.AddComponent<FsmComponent>();
-                    unit.AddComponent<TransformSyncComponent>();
+                    unit.AddComponent<UnitBoneComponent>(true);
+                    unit.AddComponent<UIMonsterHpComponent>(true);
+                    unit.AddComponent<EffectViewComponent>(true);
+                    unit.AddComponent<FsmComponent>(true);
+                    unit.AddComponent<TransformSyncComponent>(true);
                     break;
                 }
                 case UnitType.DropItem:
                 {
-                    unit.AddComponent<UIDropItemComponent>();
+                    unit.AddComponent<UIDropItemComponent>(true);
                     break;
                 }
                 case UnitType.NPC:
@@ -256,8 +257,8 @@ namespace ET.Client
 
                     self.GameObject.name = unit.ConfigId.ToString();
 
-                    unit.AddComponent<UnitBoneComponent>();
-                    unit.AddComponent<UINPCHpComponent>();
+                    unit.AddComponent<UnitBoneComponent>(true);
+                    unit.AddComponent<UINPCHpComponent>(true);
                     break;
                 }
                 default:

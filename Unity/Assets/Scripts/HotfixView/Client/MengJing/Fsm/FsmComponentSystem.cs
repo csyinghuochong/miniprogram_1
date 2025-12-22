@@ -76,6 +76,9 @@ namespace ET.Client
         private static void Destroy(this FsmComponent self)
         {
             self.EndTimer();
+            self.SpineAnimator = null;
+            self.CurrentFsm = FsmStateEnum.FsmIdleState;
+            self.Timer = 0;
         }
 
         private static void Update(this FsmComponent self)

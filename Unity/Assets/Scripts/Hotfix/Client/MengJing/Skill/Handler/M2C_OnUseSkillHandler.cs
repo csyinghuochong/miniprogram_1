@@ -5,6 +5,8 @@
     {
         protected override async ETTask Run(Scene root, M2C_OnUseSkill message)
         {
+            using var _ = message;
+            
             Scene currentScene = root.CurrentScene();
             if (currentScene == null)
             {
