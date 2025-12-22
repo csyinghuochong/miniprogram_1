@@ -3,7 +3,7 @@
     "Id": 10000001,
     "Name": "战士普通攻击",
     "EffectType": 1,
-    "EffectName": "",
+    "EffectName": "Eff_Test1",
     "SkillEffectLiveTime": 1,
     "SkillEffectDelayTime": 0,
     "SkillParent": 0,

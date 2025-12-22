@@ -22,6 +22,8 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UILoadingComponent self)
         {
+            self.PreLoadAssets.Clear();
+            self.ReleaseAssets.Clear();
         }
 
         [EntitySystem]
@@ -100,6 +102,19 @@ namespace ET.Client
         public static void OnInitUI(this UILoadingComponent self)
         {
             // 可以设置一些要提前加载的资源
+            MapType mapType = self.Root().GetComponent<MapComponent>().MapType;
+            if (mapType == MapType.LocalLevel)
+            {
+                foreach (EffectConfig effectConfig in EffectConfigCategory.Instance.DataList)
+                {
+                    // 特效
+                    string path = ABPathHelper.GetSkillEffectPath(effectConfig.EffectName);
+                    if (!self.PreLoadAssets.Contains(path))
+                    {
+                        self.PreLoadAssets.Add(path);
+                    }
+                }
+            }
         }
 
         private static async ETTask StartPreLoadAssets(this UILoadingComponent self)
