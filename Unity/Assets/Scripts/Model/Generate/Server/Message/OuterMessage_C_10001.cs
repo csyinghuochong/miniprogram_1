@@ -4648,6 +4648,43 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.ChatInfo)]
+    public partial class ChatInfo : MessageObject
+    {
+        public static ChatInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(ChatInfo), isFromPool) as ChatInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string Name { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string ChatMsg { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int Channel { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitId = default;
+            this.Name = default;
+            this.ChatMsg = default;
+            this.Channel = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2Chat_SendChat)]
     [ResponseType(nameof(Chat2C_SendChat))]
     public partial class C2Chat_SendChat : MessageObject, IChatRequest
@@ -4661,7 +4698,7 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public string ChatMessage { get; set; }
+        public ChatInfo ChatInfo { get; set; }
 
         public override void Dispose()
         {
@@ -4671,7 +4708,7 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.ChatMessage = default;
+            this.ChatInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -4720,10 +4757,7 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public string Name { get; set; }
-
-        [MemoryPackOrder(1)]
-        public string ChatMessage { get; set; }
+        public ChatInfo ChatInfo { get; set; }
 
         public override void Dispose()
         {
@@ -4732,8 +4766,7 @@ namespace ET
                 return;
             }
 
-            this.Name = default;
-            this.ChatMessage = default;
+            this.ChatInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -4868,8 +4901,9 @@ namespace ET
         public const ushort Mail2C_ReceiveMail = 10126;
         public const ushort M2C_NoticeUnitTransformList = 10127;
         public const ushort C2M_NoticeUnitTransform = 10128;
-        public const ushort C2Chat_SendChat = 10129;
-        public const ushort Chat2C_SendChat = 10130;
-        public const ushort Chat2C_NoticeChat = 10131;
+        public const ushort ChatInfo = 10129;
+        public const ushort C2Chat_SendChat = 10130;
+        public const ushort Chat2C_SendChat = 10131;
+        public const ushort Chat2C_NoticeChat = 10132;
     }
 }
