@@ -5,47 +5,45 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EnableClass]
-    public class RingBuffer<T>
+    public struct FixedStateBuffer<T> where T : struct
     {
-        private readonly T[] buffer;
-        private int head;
+        private const int MAX_CAPACITY = 30;
+        private T[] buffer; // 只分配一次，池化复用
+        private int writeIndex;
         private int count;
 
         public int Count => count;
-        public int Capacity => buffer.Length;
 
-        public RingBuffer(int capacity)
+        public void EnsureInitialized()
         {
-            buffer = new T[capacity];
-            head = 0;
-            count = 0;
+            if (buffer == null)
+            {
+                buffer = new T[MAX_CAPACITY];
+                writeIndex = 0;
+                count = 0;
+            }
         }
 
         public void Add(T item)
         {
-            buffer[head] = item;
-            head = (head + 1) % buffer.Length;
-            if (count < buffer.Length)
+            EnsureInitialized();
+            buffer[writeIndex] = item;
+            writeIndex = (writeIndex + 1) % MAX_CAPACITY;
+            if (count < MAX_CAPACITY)
                 count++;
         }
 
-        public T this[int index]
+        public ref T GetRef(int index)
         {
-            get
-            {
-                if (index < 0 || index >= count)
-                    throw new IndexOutOfRangeException();
-
-                int idx = (head - 1 - index + buffer.Length) % buffer.Length;
-                return buffer[idx];
-            }
+            int idx = (writeIndex - 1 - index + MAX_CAPACITY) % MAX_CAPACITY;
+            return ref buffer[idx];
         }
 
         public void Clear()
         {
-            head = 0;
+            writeIndex = 0;
             count = 0;
+            // 注意：不释放buffer数组，保留复用
         }
     }
 
@@ -73,9 +71,9 @@ namespace ET.Client
         private EntityRef<FsmComponent> fsmComponent;
         public FsmComponent FsmComponent { get => this.fsmComponent; set => this.fsmComponent = value; }
 
-        // 环形缓冲区替代 List
-        public RingBuffer<PositionState> PositionBuffer = new(50);
-        public RingBuffer<RotationState> RotationBuffer = new(50);
-        public float InterpolationBackTime = 0.1f; // 延迟100ms进
+        public FixedStateBuffer<PositionState> PositionBuffer;
+        public FixedStateBuffer<RotationState> RotationBuffer;
+
+        public FsmStateEnum cachedFsmState = FsmStateEnum.FsmIdleState;
     }
 }

@@ -12,6 +12,10 @@ namespace ET.Client
             self.MyUnit = self.GetParent<Unit>();
             self.GameObjectComponent = self.MyUnit.GetComponent<GameObjectComponent>();
             self.FsmComponent = self.MyUnit.GetComponent<FsmComponent>();
+
+            self.PositionBuffer.EnsureInitialized();
+            self.RotationBuffer.EnsureInitialized();
+            self.cachedFsmState = FsmStateEnum.FsmIdleState;
         }
 
         [EntitySystem]
@@ -31,31 +35,36 @@ namespace ET.Client
 
         private static void InterpolatePosition(this TransformSyncComponent self, float interpolationTime)
         {
-            if (self.PositionBuffer.Count >= 2)
-            {
-                float newerTimestamp = float.MinValue;
-                Vector3 newerPos = Vector3.zero;
-                for (int i = 0; i < self.PositionBuffer.Count - 1; i++)
-                {
-                    var newer = self.PositionBuffer[i];
-                    var older = self.PositionBuffer[i + 1];
+            int bufferCount = self.PositionBuffer.Count;
 
-                    if (newer.Timestamp > newerTimestamp)
-                    {
-                        newerTimestamp = newer.Timestamp;
-                        newerPos = newer.Position;
-                    }
+            if (bufferCount == 0) return;
+
+            if (bufferCount >= 2)
+            {
+                ref PositionState newest = ref self.PositionBuffer.GetRef(0);
+                float newerTimestamp = newest.Timestamp;
+                Vector3 newerPos = newest.Position;
+
+                for (int i = 0; i < bufferCount - 1; i++)
+                {
+                    ref PositionState newer = ref self.PositionBuffer.GetRef(i);
+                    ref PositionState older = ref self.PositionBuffer.GetRef(i + 1);
 
                     if (older.Timestamp <= interpolationTime && interpolationTime <= newer.Timestamp)
                     {
                         float t = Mathf.InverseLerp(older.Timestamp, newer.Timestamp, interpolationTime);
 
-                        if (newer.Position == older.Position)
+                        float sqrDistance = (newer.Position - older.Position).sqrMagnitude;
+                        if (sqrDistance < 0.000001f)
                         {
                             return;
                         }
 
-                        self.FsmComponent.ChangeState(FsmStateEnum.FsmRunState);
+                        if (self.cachedFsmState != FsmStateEnum.FsmRunState)
+                        {
+                            self.cachedFsmState = FsmStateEnum.FsmRunState;
+                            self.FsmComponent.ChangeState(FsmStateEnum.FsmRunState);
+                        }
 
                         self.GameObjectComponent.UpdatePositon(Vector3.Lerp(older.Position, newer.Position, t));
                         self.GameObjectComponent.UpdateScaleX(newer.Position.x - older.Position.x);
@@ -64,29 +73,37 @@ namespace ET.Client
                     }
                 }
 
-                self.FsmComponent.ChangeState(FsmStateEnum.FsmIdleState);
+                if (self.cachedFsmState != FsmStateEnum.FsmIdleState)
+                {
+                    self.cachedFsmState = FsmStateEnum.FsmIdleState;
+                    self.FsmComponent.ChangeState(FsmStateEnum.FsmIdleState);
+                }
 
                 // 防止一开始移动会瞬移第一步，因为服务端只有位置变换才同步位置下来
-                if (interpolationTime - newerTimestamp > 0.1f)
+                if (interpolationTime - newerTimestamp > ConfigData.TransformSyncTime / 1000f)
                 {
                     self.ReceiveServerPosition(newerPos);
                 }
             }
-            else if (self.PositionBuffer.Count == 1)
+            else
             {
-                var target = self.PositionBuffer[0].Position;
-                self.GameObjectComponent.UpdatePositon(Vector3.Lerp(self.GameObjectComponent.GameObject.transform.position, target, Time.unscaledDeltaTime * 5f));
+                ref PositionState target = ref self.PositionBuffer.GetRef(0);
+                self.GameObjectComponent.UpdatePositon(Vector3.Lerp(self.GameObjectComponent.GameObject.transform.position, target.Position, Time.unscaledDeltaTime * 5f));
             }
         }
 
         private static void InterpolateRotation(this TransformSyncComponent self, float interpolationTime)
         {
-            if (self.RotationBuffer.Count >= 2)
+            int bufferCount = self.RotationBuffer.Count;
+
+            if (bufferCount == 0) return;
+
+            if (bufferCount >= 2)
             {
-                for (int i = 0; i < self.RotationBuffer.Count - 1; i++)
+                for (int i = 0; i < bufferCount - 1; i++)
                 {
-                    var newer = self.RotationBuffer[i];
-                    var older = self.RotationBuffer[i + 1];
+                    ref RotationState newer = ref self.RotationBuffer.GetRef(i);
+                    ref RotationState older = ref self.RotationBuffer.GetRef(i + 1);
 
                     if (older.Timestamp <= interpolationTime && interpolationTime <= newer.Timestamp)
                     {
@@ -96,10 +113,10 @@ namespace ET.Client
                     }
                 }
             }
-            else if (self.RotationBuffer.Count == 1)
+            else
             {
-                var target = self.RotationBuffer[0].Rotation;
-                self.GameObjectComponent.UpdateRotation(Quaternion.Slerp(self.GameObjectComponent.GameObject.transform.rotation, target, Time.unscaledDeltaTime * 5f));
+                ref RotationState target = ref self.RotationBuffer.GetRef(0);
+                self.GameObjectComponent.UpdateRotation(Quaternion.Slerp(self.GameObjectComponent.GameObject.transform.rotation, target.Rotation, Time.unscaledDeltaTime * 5f));
             }
         }
 
