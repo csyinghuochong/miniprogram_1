@@ -13,13 +13,13 @@ namespace ET
             CollectSpriteRendererTransforms(transform);
         }
 
-        void Update()
+        public void Facing(float angle)
         {
             if (targetTransforms == null || targetTransforms.Length == 0) return;
 
             for (int i = 0; i < targetTransforms.Length; i++)
             {
-                targetTransforms[i].rotation = Camera.main.transform.rotation;
+                targetTransforms[i].eulerAngles = new Vector3(angle, 0, 0);
             }
         }
 

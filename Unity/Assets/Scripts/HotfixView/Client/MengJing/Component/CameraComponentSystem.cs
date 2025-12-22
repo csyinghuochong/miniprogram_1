@@ -34,6 +34,12 @@ namespace ET.Client
                 self.MainCamera.orthographic = false;
                 self.MainCamera.transform.eulerAngles = new Vector3(ConfigData.CameraAngle, 0, 0);
                 self.Offset = new Vector3(0, -10, -35f);
+                
+                FacingCamera[] allFacingCameraScripts = UnityEngine.Object.FindObjectsOfType<FacingCamera>();
+                foreach (var facingCamera in allFacingCameraScripts)
+                {
+                    facingCamera.Facing(ConfigData.CameraAngle);
+                }
             }
         }
 
