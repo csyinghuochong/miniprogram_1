@@ -1021,3 +1021,23 @@ message C2M_NoticeUnitTransform // ILocationMessage
 	int32 RpcId = 1;
 	Unity.Mathematics.float3 Position = 2;
 }
+
+//ResponseType Chat2C_SendChat
+message C2Chat_SendChat // IChatRequest
+{
+	int32 RpcId = 1;
+	string ChatMessage  = 2;
+}
+
+message Chat2C_SendChat // IChatResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message Chat2C_NoticeChat // IMessage
+{
+	string Name = 1;
+	string ChatMessage = 2;
+}

@@ -4647,6 +4647,98 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2Chat_SendChat)]
+    [ResponseType(nameof(Chat2C_SendChat))]
+    public partial class C2Chat_SendChat : MessageObject, IChatRequest
+    {
+        public static C2Chat_SendChat Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Chat_SendChat), isFromPool) as C2Chat_SendChat;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string ChatMessage { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ChatMessage = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Chat2C_SendChat)]
+    public partial class Chat2C_SendChat : MessageObject, IChatResponse
+    {
+        public static Chat2C_SendChat Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2C_SendChat), isFromPool) as Chat2C_SendChat;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Chat2C_NoticeChat)]
+    public partial class Chat2C_NoticeChat : MessageObject, IMessage
+    {
+        public static Chat2C_NoticeChat Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2C_NoticeChat), isFromPool) as Chat2C_NoticeChat;
+        }
+
+        [MemoryPackOrder(0)]
+        public string Name { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string ChatMessage { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Name = default;
+            this.ChatMessage = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -4776,5 +4868,8 @@ namespace ET
         public const ushort Mail2C_ReceiveMail = 10126;
         public const ushort M2C_NoticeUnitTransformList = 10127;
         public const ushort C2M_NoticeUnitTransform = 10128;
+        public const ushort C2Chat_SendChat = 10129;
+        public const ushort Chat2C_SendChat = 10130;
+        public const ushort Chat2C_NoticeChat = 10131;
     }
 }

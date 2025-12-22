@@ -527,3 +527,31 @@ message A2A_BroadcastSceneResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType Chat2G_LoginChatServer
+message G2Chat_LoginChatServer // IRequest
+{
+    int32 RpcId = 1;
+	string Name  = 2;
+	int64 UnitId = 3;
+}
+
+message Chat2G_LoginChatServer // IResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
+//ResponseType Chat2G_ExitChatServer
+message G2Chat_ExitChatServer // ILocationRequest
+{
+    int32 RpcId = 1;
+}
+
+message Chat2G_ExitChatServer // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}

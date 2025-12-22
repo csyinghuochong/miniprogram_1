@@ -2289,6 +2289,132 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.G2Chat_LoginChatServer)]
+    [ResponseType(nameof(Chat2G_LoginChatServer))]
+    public partial class G2Chat_LoginChatServer : MessageObject, IRequest
+    {
+        public static G2Chat_LoginChatServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Chat_LoginChatServer), isFromPool) as G2Chat_LoginChatServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string Name { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Name = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Chat2G_LoginChatServer)]
+    public partial class Chat2G_LoginChatServer : MessageObject, IResponse
+    {
+        public static Chat2G_LoginChatServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2G_LoginChatServer), isFromPool) as Chat2G_LoginChatServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.G2Chat_ExitChatServer)]
+    [ResponseType(nameof(Chat2G_ExitChatServer))]
+    public partial class G2Chat_ExitChatServer : MessageObject, ILocationRequest
+    {
+        public static G2Chat_ExitChatServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Chat_ExitChatServer), isFromPool) as G2Chat_ExitChatServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Chat2G_ExitChatServer)]
+    public partial class Chat2G_ExitChatServer : MessageObject, ILocationResponse
+    {
+        public static Chat2G_ExitChatServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2G_ExitChatServer), isFromPool) as Chat2G_ExitChatServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -2358,5 +2484,9 @@ namespace ET
         public const ushort All2M_StopServer = 20066;
         public const ushort A2A_BroadcastSceneRequest = 20067;
         public const ushort A2A_BroadcastSceneResponse = 20068;
+        public const ushort G2Chat_LoginChatServer = 20069;
+        public const ushort Chat2G_LoginChatServer = 20070;
+        public const ushort G2Chat_ExitChatServer = 20071;
+        public const ushort Chat2G_ExitChatServer = 20072;
     }
 }

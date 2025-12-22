@@ -239,7 +239,7 @@ namespace ET.Server
 
         public static ActorId GetChatServerId(int zone)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Chat").ActorId;
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Chat)).ActorId;
         }
 
         public static ActorId GetRechargeCenter()

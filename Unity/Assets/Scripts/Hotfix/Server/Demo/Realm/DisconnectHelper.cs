@@ -44,6 +44,9 @@ namespace ET.Server
                     // 通知邮件服下线邮件Unit
                     await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Mail).Call(player.Id, G2Mail_ExitMailServer.Create());
                     
+                    // 通知聊天服下线聊天Unit
+                    await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Chat).Call(player.Id, G2Chat_ExitChatServer.Create());
+                    
                     // //通知组队服
                     // await BroadCastHelper.SendServerMessage(player.Root(), UnitCacheHelper.GetTeamServerId(player.Zone()) , NoticeType.PlayerExit, player.UnitId.ToString());
                     
@@ -72,6 +75,7 @@ namespace ET.Server
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.GateSession)?.Remove(player.Id);
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Unit)?.Remove(player.Id);
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Mail)?.Remove(player.Id);
+            player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Chat)?.Remove(player.Id);
             
             player.Root().GetComponent<PlayerComponent>()?.Remove(player);
             player?.Dispose();

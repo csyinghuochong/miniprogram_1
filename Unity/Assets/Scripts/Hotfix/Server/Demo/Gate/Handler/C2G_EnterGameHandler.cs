@@ -133,9 +133,9 @@ namespace ET.Server
                         Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = player.Id;
-                        
-                        // await this.LoginChatServer(unit);// 登录聊天服
+
                         await this.LoginMailServer(unit);// 登录邮件服
+                        await this.LoginChatServer(unit);// 登录聊天服
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 
                         unit.GetComponent<DBSaveComponent>().OnLogin();
@@ -169,6 +169,14 @@ namespace ET.Server
             request.UnitId = unit.Id;
 
             await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetMailServerId(unit.Zone()), request);
+        }
+
+        private async ETTask LoginChatServer(Unit unit)
+        {
+            G2Chat_LoginChatServer request = G2Chat_LoginChatServer.Create();
+            request.UnitId = unit.Id;
+
+            await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetChatServerId(unit.Zone()), request);
         }
     }
 }
