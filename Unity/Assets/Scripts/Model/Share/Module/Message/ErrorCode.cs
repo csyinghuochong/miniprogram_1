@@ -21,6 +21,7 @@ namespace ET
         public const int ERR_Error = 200002; //通用错误
         public const int ERR_NetWorkError = 200003; //网络错误
         public const int ERR_OperationOften = 200004; //操作太频繁
+        public const int ERR_ComponentIsNull = 200005;
 
         // 账号相关错误 200101-200199
         public const int ERR_AccountAlreadyRegister = 200101; //表示账号已经被注册

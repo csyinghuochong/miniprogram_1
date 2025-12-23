@@ -26,6 +26,9 @@ namespace ET.Client
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIPlayerInfo); });
         }
 
-
+        public static void UpdateInfo(this UIPlayerInfoComponent self, M2C_WatchPlayer response)
+        {
+            self.Text_PlayerName.SetText(response.PlayerName);
+        }
     }
 }

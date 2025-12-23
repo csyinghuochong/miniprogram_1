@@ -20,7 +20,7 @@ namespace ET.Client
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_Content = rc.Get<GameObject>("Text_Content").GetComponent<TMP_Text>();
 
-            self.Button_OnSpeakerHead.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo).Coroutine(); });
+            self.Button_OnSpeakerHead.AddListener(() => { self.OnButton_OnSpeakerHead().Coroutine(); });
         }
 
         public static void UpdateInfo(this UIChatItem self, ChatEntry chatEntry)
@@ -29,6 +29,20 @@ namespace ET.Client
 
             self.Text_PlayerName.SetText(chatEntry.Name);
             self.Text_Content.SetText(chatEntry.Content);
+        }
+
+        private static async ETTask OnButton_OnSpeakerHead(this UIChatItem self)
+        {
+            M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.ChatEntry.UnitId);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo);
+            UIPlayerInfoComponent uiPlayerInfoComponent = ui.GetComponent<UIPlayerInfoComponent>();
+            uiPlayerInfoComponent.UpdateInfo(response);
         }
     }
 }

@@ -103,10 +103,10 @@ message C2M_PathfindingResult // ILocationMessage
 	int32 RpcId = 1;
   
 	int32 SpeedRate = 3;
-	int64 ServerTime = 4;   //服务器时间戳
+	int64 ServerTime = 4; //服务器时间戳
 	repeated	Unity.Mathematics.float3 Position = 5;
-	Unity.Mathematics.float3 Current = 6;   //当前位置
-	int32 Frame = 7;                        //当前帧
+	Unity.Mathematics.float3 Current = 6; //当前位置
+	int32 Frame = 7; //当前帧
 }
 
 message C2M_Stop // ILocationMessage
@@ -202,8 +202,8 @@ message ServerItem
 	int64 ServerOpenTime = 4;
 	int32 Show = 5;
 	int32 New = 6;
-	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
-	repeated int64 OldServerIds = 8;      //
+	repeated int32 PlatformList = 7; //不配置或者-1全部显示
+	repeated int64 OldServerIds = 8; //
 }
 
 //ResponseType R2C_DeleteAccountResponse
@@ -235,7 +235,7 @@ message R2C_ServerList // ISessionResponse
 	string Message = 2;
 	int32 Error = 3;
 	
-	repeated ServerItem ServerItems = 4;		//服务器列表
+	repeated ServerItem ServerItems = 4; //服务器列表
 	string NoticeVersion = 5;
 	string NoticeText = 6;
 }
@@ -244,8 +244,8 @@ message R2C_ServerList // ISessionResponse
 message C2R_LoginAccount // ISessionRequest
 {
 	int32 RpcId = 1;
-	string  Account = 2;  // 帐号
-	string  Password = 3;  // 密码
+	string  Account = 2; // 帐号
+	string  Password = 3; // 密码
 	string  Token = 4;  
 	string  ThirdLogin = 5;
 	int32 Relink = 6;
@@ -273,10 +273,10 @@ message R2C_LoginAccount // ISessionResponse
 message C2R_RealNameRequest // ISessionRequest
 {
 	int32 RpcId = 90;
-	string Name = 1;		//姓名
-	string IdCardNO = 2;		//身份证号码
-	int32 AiType = 3;			//1认证 2查询 3上报
-	int64 AccountId	 = 4;	// 帐号Id
+	string Name = 1; //姓名
+	string IdCardNO = 2; //身份证号码
+	int32 AiType = 3; //1认证 2查询 3上报
+	int64 AccountId	 = 4; // 帐号Id
 }
 
 message R2C_RealNameResponse // ISessionResponse
@@ -284,7 +284,7 @@ message R2C_RealNameResponse // ISessionResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	int32 ErrorCode = 1;		//实名认证返回
+	int32 ErrorCode = 1; //实名认证返回
 	PlayerInfo PlayerInfo = 11;
 }
 
@@ -292,10 +292,10 @@ message R2C_RealNameResponse // ISessionResponse
 message C2M_RealNameRequest // ILocationRequest
 {
 	int32 RpcId = 90;
-	string Name = 1;		//姓名
-	string IdCardNO = 2;		//身份证号码
-	int32 AiType = 3;			//1认证 2查询 3上报
-	int64 AccountId	 = 4;	// 帐号Id
+	string Name = 1; //姓名
+	string IdCardNO = 2; //身份证号码
+	int32 AiType = 3; //1认证 2查询 3上报
+	int64 AccountId	 = 4; // 帐号Id
 }
 
 message M2C_RealNameResponse // ILocationResponse
@@ -303,7 +303,7 @@ message M2C_RealNameResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	int32 ErrorCode = 1;		//实名认证返回
+	int32 ErrorCode = 1; //实名认证返回
 	PlayerInfo PlayerInfo = 11;
 }
 
@@ -495,7 +495,7 @@ message ServerInfo
 	int64 ExChangeGold = 2;
 	int32 TianQi = 5;
 	bool ShouLieOpen = 6;
-	int32 ChouKaDropId = 7;   //每天随机
+	int32 ChouKaDropId = 7; //每天随机
 }
 
 message A2C_Disconnect	//IMessage
@@ -536,7 +536,7 @@ message M2C_RoleDataBroadcast // IMessage
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	int32 UpdateType = 1;				//UserDataType
+	int32 UpdateType = 1; //UserDataType
 	string UpdateTypeValue = 2;			
 	int64 UnitId = 3;
 }
@@ -955,6 +955,22 @@ message M2C_PickUpDropItem // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+// ResponseType M2C_WatchPlayer
+message C2M_WatchPlayer // ILocationRequest 
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+}
+
+message M2C_WatchPlayer // ILocationResponse
+{
+  	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	string PlayerName = 4;
+}
+
 
 message MailInfo
 {

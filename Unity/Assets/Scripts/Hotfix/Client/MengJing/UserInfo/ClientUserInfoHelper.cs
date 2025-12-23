@@ -21,5 +21,15 @@
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_WatchPlayer> WatchPlayer(Scene root, long unitId)
+        {
+            C2M_WatchPlayer request = C2M_WatchPlayer.Create();
+            request.UnitId = unitId;
+
+            M2C_WatchPlayer response = (M2C_WatchPlayer)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response;
+        }
     }
 }

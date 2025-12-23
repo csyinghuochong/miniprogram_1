@@ -4345,6 +4345,73 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_WatchPlayer)]
+    [ResponseType(nameof(M2C_WatchPlayer))]
+    public partial class C2M_WatchPlayer : MessageObject, ILocationRequest
+    {
+        public static C2M_WatchPlayer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_WatchPlayer), isFromPool) as C2M_WatchPlayer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_WatchPlayer)]
+    public partial class M2C_WatchPlayer : MessageObject, ILocationResponse
+    {
+        public static M2C_WatchPlayer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_WatchPlayer), isFromPool) as M2C_WatchPlayer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string PlayerName { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.PlayerName = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.MailInfo)]
     public partial class MailInfo : MessageObject
     {
@@ -4963,20 +5030,22 @@ namespace ET
         public const ushort M2C_TaskCommit = 10117;
         public const ushort C2M_PickUpDropItem = 10118;
         public const ushort M2C_PickUpDropItem = 10119;
-        public const ushort MailInfo = 10120;
-        public const ushort MailRewardComponentInfo = 10121;
-        public const ushort C2Mail_GetAllMailList = 10122;
-        public const ushort Mail2C_GetAllMailList = 10123;
-        public const ushort C2Mail_OpeMail = 10124;
-        public const ushort Mail2C_OpeMail = 10125;
-        public const ushort Mail2C_ReceiveMail = 10126;
-        public const ushort M2C_NoticeUnitTransformList = 10127;
-        public const ushort C2M_NoticeUnitTransform = 10128;
-        public const ushort ChatEntryInfo = 10129;
-        public const ushort C2Chat_SendChat = 10130;
-        public const ushort Chat2C_SendChat = 10131;
-        public const ushort Chat2C_NoticeChat = 10132;
-        public const ushort C2Friend_GetAllFriend = 10133;
-        public const ushort Friend2C_GetAllFriend = 10134;
+        public const ushort C2M_WatchPlayer = 10120;
+        public const ushort M2C_WatchPlayer = 10121;
+        public const ushort MailInfo = 10122;
+        public const ushort MailRewardComponentInfo = 10123;
+        public const ushort C2Mail_GetAllMailList = 10124;
+        public const ushort Mail2C_GetAllMailList = 10125;
+        public const ushort C2Mail_OpeMail = 10126;
+        public const ushort Mail2C_OpeMail = 10127;
+        public const ushort Mail2C_ReceiveMail = 10128;
+        public const ushort M2C_NoticeUnitTransformList = 10129;
+        public const ushort C2M_NoticeUnitTransform = 10130;
+        public const ushort ChatEntryInfo = 10131;
+        public const ushort C2Chat_SendChat = 10132;
+        public const ushort Chat2C_SendChat = 10133;
+        public const ushort Chat2C_NoticeChat = 10134;
+        public const ushort C2Friend_GetAllFriend = 10135;
+        public const ushort Friend2C_GetAllFriend = 10136;
     }
 }
