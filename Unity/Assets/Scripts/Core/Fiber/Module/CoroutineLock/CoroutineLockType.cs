@@ -24,6 +24,7 @@ namespace ET
         public const int PickUpDropItem = 18;
         public const int OpeMail = 19;
         public const int Store = 20;
+        public const int Friend = 21;
 
         public const int Max = 100; // 这个必须最大
     }

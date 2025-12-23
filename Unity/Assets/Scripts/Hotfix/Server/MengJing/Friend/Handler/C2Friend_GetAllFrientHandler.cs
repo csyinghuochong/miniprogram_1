@@ -8,7 +8,7 @@
             FriendComponentS friendComponent = friendUnit.GetComponent<FriendComponentS>();
 
             response.FriendList.AddRange(friendComponent.FriendList);
-            response.ApplyList.AddRange(friendComponent.ApplyList);
+            response.RequestList.AddRange(friendComponent.RequestList);
             response.BlackList.AddRange(friendComponent.BlackList);
 
             await ETTask.CompletedTask;

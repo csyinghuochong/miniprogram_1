@@ -1077,6 +1077,22 @@ message Friend2C_GetAllFriend // IFriendResponse
 	int32 Error = 2;
 	string Message = 3;
 	repeated int64 FriendList = 4;
-	repeated int64 ApplyList = 5;
+	repeated int64 RequestList = 5;
 	repeated int64 BlackList = 6;
+}
+
+//ResponseType Friend2C_FriendRequest
+message C2Friend_FriendRequest // IFriendRequest
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+}
+
+message Friend2C_FriendRequest // IFriendResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated int64 FriendList = 4;
+	repeated int64 RequestList = 5;
 }

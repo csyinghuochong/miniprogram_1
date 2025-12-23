@@ -13,7 +13,7 @@ namespace ET.Server
         /// <summary>
         /// 申请列表
         /// </summary>
-        public List<long> ApplyList { get; set; } = new();
+        public List<long> RequestList { get; set; } = new();
 
         /// <summary>
         /// 黑名单

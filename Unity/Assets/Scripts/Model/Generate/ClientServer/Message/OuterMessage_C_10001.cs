@@ -4887,7 +4887,7 @@ namespace ET
         public List<long> FriendList { get; set; } = new();
 
         [MemoryPackOrder(4)]
-        public List<long> ApplyList { get; set; } = new();
+        public List<long> RequestList { get; set; } = new();
 
         [MemoryPackOrder(5)]
         public List<long> BlackList { get; set; } = new();
@@ -4903,8 +4903,79 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.FriendList.Clear();
-            this.ApplyList.Clear();
+            this.RequestList.Clear();
             this.BlackList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2Friend_FriendRequest)]
+    [ResponseType(nameof(Friend2C_FriendRequest))]
+    public partial class C2Friend_FriendRequest : MessageObject, IFriendRequest
+    {
+        public static C2Friend_FriendRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Friend_FriendRequest), isFromPool) as C2Friend_FriendRequest;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_FriendRequest)]
+    public partial class Friend2C_FriendRequest : MessageObject, IFriendResponse
+    {
+        public static Friend2C_FriendRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_FriendRequest), isFromPool) as Friend2C_FriendRequest;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<long> FriendList { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<long> RequestList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.FriendList.Clear();
+            this.RequestList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -5047,5 +5118,7 @@ namespace ET
         public const ushort Chat2C_NoticeChat = 10134;
         public const ushort C2Friend_GetAllFriend = 10135;
         public const ushort Friend2C_GetAllFriend = 10136;
+        public const ushort C2Friend_FriendRequest = 10137;
+        public const ushort Friend2C_FriendRequest = 10138;
     }
 }
