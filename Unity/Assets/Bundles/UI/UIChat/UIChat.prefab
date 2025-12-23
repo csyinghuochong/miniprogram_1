@@ -34,7 +34,6 @@ RectTransform:
   m_Children:
   - {fileID: 8038028862653911643}
   - {fileID: 8051216684579973487}
-  - {fileID: 571493450213618133}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -115,18 +114,24 @@ MonoBehaviour:
     gameObject: {fileID: 2884267023644722160}
   - key: Text_Title
     gameObject: {fileID: 5769533224122861875}
-  - key: UIChat_PublicChat
+  - key: Scroll_PublicChatItem
     gameObject: {fileID: 3032650063053556710}
   - key: Content_UIPublicChatItem
     gameObject: {fileID: 4291273204461227504}
   - key: UIPublicChatItem
     gameObject: {fileID: 7039124939518727938}
-  - key: UIChat_PrivateChat
+  - key: Scroll_PrivateChatPeopleItem
     gameObject: {fileID: 4488097238104145522}
-  - key: Content_UIPrivateChatItem
+  - key: Content_UIPrivateChatPeopleItem
     gameObject: {fileID: 7459017356430917430}
-  - key: UIPrivateChatItem
+  - key: UIPrivateChatPeopleItem
     gameObject: {fileID: 640163579180869428}
+  - key: Scroll_PrivateChatITem
+    gameObject: {fileID: 223032296915968203}
+  - key: Content_UIPrivateChatItem
+    gameObject: {fileID: 7786240103502105058}
+  - key: UIPrivateChatItem
+    gameObject: {fileID: 68306952046915960}
   - key: InputField_Content
     gameObject: {fileID: 1791854201639698930}
   - key: Button_Emoji
@@ -485,12 +490,12 @@ GameObject:
   - component: {fileID: 2753400506606398087}
   - component: {fileID: 467708347869018584}
   m_Layer: 5
-  m_Name: UIChat_PrivateChat
+  m_Name: Scroll_PrivateChatITem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &267211970616314591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -691,10 +696,10 @@ RectTransform:
   - {fileID: 1162004153966898746}
   m_Father: {fileID: 5728967362535766205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 525, y: -220}
+  m_SizeDelta: {x: 950, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &555739165428820054
 CanvasRenderer:
@@ -3229,7 +3234,7 @@ GameObject:
   - component: {fileID: 5115295310222893059}
   - component: {fileID: 9145112905148037843}
   m_Layer: 5
-  m_Name: UIChat_PublicChat
+  m_Name: Scroll_PublicChatItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3335,7 +3340,7 @@ GameObject:
   - component: {fileID: 5749489308828039812}
   - component: {fileID: 8178178041917417038}
   m_Layer: 5
-  m_Name: Text_ChatPeopleName
+  m_Name: Text_Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4232,12 +4237,12 @@ GameObject:
   - component: {fileID: 7597370149341468106}
   - component: {fileID: 3804056365166161962}
   m_Layer: 5
-  m_Name: UIChat_PrivateChatPeopleList
+  m_Name: Scroll_PrivateChatPeopleItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9148469594534968462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5806,41 +5811,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &6388028916083880223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 571493450213618133}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &571493450213618133
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6388028916083880223}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 224438795553994780}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6471555649329765905
 GameObject:
   m_ObjectHideFlags: 0
@@ -7127,7 +7097,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 320}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &305209177886567839
 MonoBehaviour:
@@ -7488,7 +7458,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 400}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4664235411831659337
 MonoBehaviour:
