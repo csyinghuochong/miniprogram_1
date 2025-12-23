@@ -113,6 +113,7 @@ namespace ET
         
         public const int ERR_FriendIsFriend = 200501; //已经添加好友
         public const int ERR_FriendIsRequest = 200502; //已经发送好友请求
+        public const int ERR_FriendIsNotRequest = 200503; //申请列表中不包含此用户
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()

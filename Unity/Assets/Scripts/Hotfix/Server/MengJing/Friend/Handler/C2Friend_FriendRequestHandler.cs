@@ -10,11 +10,11 @@
             using (await scene.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
             {
                 FriendUnitComponent friendUnitComponent = scene.GetComponent<FriendUnitComponent>();
-                FriendComponentS friendComponent = friendUnit.GetComponent<FriendComponentS>();
+                FriendComponentS myFriendComponent = friendUnit.GetComponent<FriendComponentS>();
 
                 long targetFrientUnitId = request.UnitId;
 
-                if (friendComponent.FriendList.Contains(targetFrientUnitId))
+                if (myFriendComponent.FriendList.Contains(targetFrientUnitId))
                 {
                     response.Error = ErrorCode.ERR_FriendIsFriend;
                     return;
@@ -40,7 +40,7 @@
                         return;
                     }
 
-                    friendComponent.RequestList.Add(targetFrientUnitId);
+                    myFriendComponent.RequestList.Add(targetFrientUnitId);
                 }
                 else
                 {
@@ -65,9 +65,9 @@
                         return;
                     }
 
-                    friendComponent.RequestList.Add(targetFrientUnitId);
+                    myFriendComponent.RequestList.Add(targetFrientUnitId);
 
-                    await UnitCacheHelper.SaveComponent(scene, friendComponent);
+                    await UnitCacheHelper.SaveComponent(scene, targetFriendComponent);
                 }
             }
 

@@ -1096,3 +1096,20 @@ message Friend2C_FriendRequest // IFriendResponse
 	repeated int64 FriendList = 4;
 	repeated int64 RequestList = 5;
 }
+
+//ResponseType Friend2C_FriendRequestAccept
+message C2Friend_FriendRequestAccept // IFriendRequest
+{
+	int32 RpcId = 1;
+	int32 UnitId = 2;
+	int32 OpType = 3;
+}
+
+message Friend2C_FriendRequestAccept // IFriendResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated int64 FriendList = 4;
+	repeated int64 RequestList = 5;
+}
