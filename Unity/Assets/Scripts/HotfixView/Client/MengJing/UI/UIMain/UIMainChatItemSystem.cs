@@ -26,7 +26,7 @@ namespace ET.Client
             {
                 self.Text_ChatType.SetText("【世界】");
             }
-            else if (chatEntry.Channel == (int)ChatChannelType.LianMeng)
+            else if (chatEntry.Channel == (int)ChatChannelType.Alliance)
             {
                 self.Text_ChatType.SetText("【联盟】");
             }

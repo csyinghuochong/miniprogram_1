@@ -3,7 +3,7 @@
     public enum ChatChannelType
     {
         World = 0, //世界 
-        LianMeng = 1, //联盟
+        Alliance = 1, //联盟
     }
 
     public static class NoticeType

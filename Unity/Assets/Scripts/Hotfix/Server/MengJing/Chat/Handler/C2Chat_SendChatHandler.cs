@@ -35,7 +35,7 @@
                     MapMessageHelper.SendToClient(chatUnit.Root(), chantUnit.Id, chat2C_NoticeChat);
                 }
             }
-            else if (request.ChatEntryInfo.Channel == (int)ChatChannelType.LianMeng)
+            else if (request.ChatEntryInfo.Channel == (int)ChatChannelType.Alliance)
             {
             }
 

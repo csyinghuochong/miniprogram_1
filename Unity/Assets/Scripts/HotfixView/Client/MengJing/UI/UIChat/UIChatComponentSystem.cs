@@ -75,7 +75,7 @@ namespace ET.Client
         public static void UpdateItemList(this UIChatComponent self, int page)
         {
             ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
-            ChatChannelType channelType = page == 0 ? ChatChannelType.World : ChatChannelType.LianMeng;
+            ChatChannelType channelType = page == 0 ? ChatChannelType.World : ChatChannelType.Alliance;
             List<ChatEntry> chatEntryList = chatComponent.GetChatEntryList(channelType);
 
             while (self.UIChatItemList.Count < chatEntryList.Count)
@@ -107,7 +107,7 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ClientChatHelper.SendChat(self.Root(), input, self.CurrentPage == 0 ? ChatChannelType.World : ChatChannelType.LianMeng);
+            int error = await ClientChatHelper.SendChat(self.Root(), input, self.CurrentPage == 0 ? ChatChannelType.World : ChatChannelType.Alliance);
 
             if (error != ErrorCode.ERR_Success)
             {
