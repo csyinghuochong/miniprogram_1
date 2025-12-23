@@ -35,8 +35,8 @@ namespace ET.Client
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_Title = rc.Get<GameObject>("Text_Title").GetComponent<TMP_Text>();
-            self.Content_UIChatItem = rc.Get<GameObject>("Content_UIChatItem").transform;
-            self.UIChatItem = rc.Get<GameObject>("UIChatItem");
+            self.Content_UIPublicChatItem = rc.Get<GameObject>("Content_UIChatItem").transform;
+            self.UIPublicChatItem = rc.Get<GameObject>("UIChatItem");
             self.InputField_Content = rc.Get<GameObject>("InputField_Content").GetComponent<TMP_InputField>();
             self.Button_Emoji = rc.Get<GameObject>("Button_Emoji").GetComponent<Button>();
             self.Button_Send = rc.Get<GameObject>("Button_Send").GetComponent<Button>();
@@ -48,7 +48,7 @@ namespace ET.Client
             self.Content_EmojiList = rc.Get<GameObject>("Content_EmojiList");
 
             self.GameObject_Emoji.SetActive(false);
-            self.UIChatItem.SetActive(false);
+            self.UIPublicChatItem.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIChat); });
             self.Button_Emoji.AddListener(() => { self.GameObject_Emoji.SetActive(true); });
@@ -80,7 +80,7 @@ namespace ET.Client
 
             while (self.UIChatItemList.Count < chatEntryList.Count)
             {
-                GameObject go = UnityEngine.Object.Instantiate(self.UIChatItem, self.Content_UIChatItem);
+                GameObject go = UnityEngine.Object.Instantiate(self.UIPublicChatItem, self.Content_UIPublicChatItem);
                 UIChatItem newItem = self.AddChild<UIChatItem, GameObject>(go);
                 self.UIChatItemList.Add(newItem);
             }

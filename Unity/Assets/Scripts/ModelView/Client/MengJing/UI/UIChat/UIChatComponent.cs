@@ -13,8 +13,8 @@ namespace ET.Client
         
         public Button Button_Close;
         public TMP_Text Text_Title;
-        public Transform Content_UIChatItem;
-        public GameObject UIChatItem;
+        public Transform Content_UIPublicChatItem;
+        public GameObject UIPublicChatItem;
         public TMP_InputField InputField_Content;
         public Button Button_Emoji;
         public Button Button_Send;
