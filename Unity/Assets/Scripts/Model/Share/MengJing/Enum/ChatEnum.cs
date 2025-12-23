@@ -4,6 +4,7 @@
     {
         World = 0, //世界 
         Alliance = 1, //联盟
+        Friend = 2, //好友
     }
 
     public static class NoticeType
