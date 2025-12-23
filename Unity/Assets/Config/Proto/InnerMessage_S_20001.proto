@@ -554,3 +554,30 @@ message Chat2G_ExitChatServer // ILocationResponse
     int32 Error = 2;
     string Message = 3;
 }
+
+//ResponseType Friend2G_LoginFriendServer
+message G2Friend_LoginFriendServer // IRequest
+{
+    int32 RpcId = 1;
+	int64 UnitId = 2;
+}
+
+message Friend2G_LoginFriendServer // IResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
+//ResponseType Friend2G_ExitFriendServer
+message G2Friend_ExitFriendServer // ILocationRequest
+{
+    int32 RpcId = 1;
+}
+
+message Friend2G_ExitFriendServer // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}

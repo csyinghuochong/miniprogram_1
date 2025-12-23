@@ -12,7 +12,10 @@
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationProxyComponent>();
+            root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
+
+            root.AddComponent<FriendUnitComponent>();
 
             await ETTask.CompletedTask;
         }

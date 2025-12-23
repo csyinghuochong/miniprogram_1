@@ -23,15 +23,14 @@ namespace ET.Server.Handler
             mailUnit = mailUnitComponent.AddChildWithId<MailUnit>(request.UnitId);
             mailUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
 
-            MailComponentS mailComponentS = await UnitCacheHelper.GetComponent<MailComponentS>(scene, request.UnitId);
-
-            if (mailComponentS == null)
+            MailComponentS mailComponent = await UnitCacheHelper.GetComponent<MailComponentS>(scene, request.UnitId);
+            if (mailComponent == null)
             {
-                mailComponentS = mailUnit.AddComponent<MailComponentS>();
+                mailComponent = mailUnit.AddComponent<MailComponentS>();
             }
             else
             {
-                mailUnit.AddComponent(mailComponentS);
+                mailUnit.AddComponent(mailComponent);
             }
 
             // 从邮件中心服领取邮件
@@ -80,7 +79,7 @@ namespace ET.Server.Handler
 
                 if (shouldReceive)
                 {
-                    mailComponentS.AddMail(mail.ToMessage());
+                    mailComponent.AddMail(mail.ToMessage());
 
                     if (shouldRemove)
                     {
@@ -93,7 +92,7 @@ namespace ET.Server.Handler
                 }
             }
 
-            mailComponentS.Check();
+            mailComponent.Check();
 
             await mailUnit.AddLocation(LocationType.Mail);
 

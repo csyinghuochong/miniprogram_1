@@ -78,7 +78,30 @@ namespace ET.Server
 
                     break;
                 }
-                case IChatMessage actorChatMessage:
+                case IChatMessage actorFriendMessage:
+                {
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Friend).Send(player.Id, actorFriendMessage);
+
+                    break;
+                }
+                case IFriendRequest actorFriendRequest:
+                {
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    int rpcId = actorFriendRequest.RpcId;
+                    long instanceId = session.InstanceId;
+
+                    IChatResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Friend).Call(player.Id, actorFriendRequest) as IChatResponse;
+                    iResponse.RpcId = rpcId;
+
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Send(iResponse);
+                    }
+
+                    break;
+                }
+                case IFriendMessage actorChatMessage:
                 {
                     Player player = session.GetComponent<SessionPlayerComponent>().Player;
                     root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Chat).Send(player.Id, actorChatMessage);

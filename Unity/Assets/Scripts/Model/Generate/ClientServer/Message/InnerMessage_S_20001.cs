@@ -2411,6 +2411,128 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.G2Friend_LoginFriendServer)]
+    [ResponseType(nameof(Friend2G_LoginFriendServer))]
+    public partial class G2Friend_LoginFriendServer : MessageObject, IRequest
+    {
+        public static G2Friend_LoginFriendServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Friend_LoginFriendServer), isFromPool) as G2Friend_LoginFriendServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Friend2G_LoginFriendServer)]
+    public partial class Friend2G_LoginFriendServer : MessageObject, IResponse
+    {
+        public static Friend2G_LoginFriendServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2G_LoginFriendServer), isFromPool) as Friend2G_LoginFriendServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.G2Friend_ExitFriendServer)]
+    [ResponseType(nameof(Friend2G_ExitFriendServer))]
+    public partial class G2Friend_ExitFriendServer : MessageObject, ILocationRequest
+    {
+        public static G2Friend_ExitFriendServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Friend_ExitFriendServer), isFromPool) as G2Friend_ExitFriendServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Friend2G_ExitFriendServer)]
+    public partial class Friend2G_ExitFriendServer : MessageObject, ILocationResponse
+    {
+        public static Friend2G_ExitFriendServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2G_ExitFriendServer), isFromPool) as Friend2G_ExitFriendServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -2484,5 +2606,9 @@ namespace ET
         public const ushort Chat2G_LoginChatServer = 20070;
         public const ushort G2Chat_ExitChatServer = 20071;
         public const ushort Chat2G_ExitChatServer = 20072;
+        public const ushort G2Friend_LoginFriendServer = 20073;
+        public const ushort Friend2G_LoginFriendServer = 20074;
+        public const ushort G2Friend_ExitFriendServer = 20075;
+        public const ushort Friend2G_ExitFriendServer = 20076;
     }
 }

@@ -241,6 +241,11 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Chat)).ActorId;
         }
+        
+        public static ActorId GetFriendServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Friend)).ActorId;
+        }
 
         public static ActorId GetRechargeCenter()
         {
