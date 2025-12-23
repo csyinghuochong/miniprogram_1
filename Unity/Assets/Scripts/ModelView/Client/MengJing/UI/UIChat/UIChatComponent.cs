@@ -9,7 +9,7 @@ namespace ET.Client
     public class UIChatComponent: Entity, IAwake
     {
         public int CurrentPage { get; set; } = 0;
-        public List<UIChatItem> UIChatItemList { get; set; } = new();
+        public List<UIPublicChatItem> UIChatItemList { get; set; } = new();
         
         public Button Button_Close;
         public TMP_Text Text_Title;

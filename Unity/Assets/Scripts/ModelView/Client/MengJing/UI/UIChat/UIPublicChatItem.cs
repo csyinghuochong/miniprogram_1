@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ChildOf]
-    public class UIChatItem : Entity, IAwake<GameObject>
+    public class UIPublicChatItem : Entity, IAwake<GameObject>
     {
         private EntityRef<ChatEntry> chatEntry;
         public ChatEntry ChatEntry { get => this.chatEntry; set => this.chatEntry = value; }

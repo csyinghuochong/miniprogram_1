@@ -25,7 +25,7 @@ namespace ET.Client
 
     [EntitySystemOf(typeof(UIChatComponent))]
     [FriendOf(typeof(UIChatComponent))]
-    [FriendOf(typeof(UIChatItem))]
+    [FriendOf(typeof(UIPublicChatItem))]
     public static partial class UIChatComponentSystem
     {
         [EntitySystem]
@@ -90,7 +90,7 @@ namespace ET.Client
             while (self.UIChatItemList.Count < chatEntryList.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIPublicChatItem, self.Content_UIPublicChatItem);
-                UIChatItem newItem = self.AddChild<UIChatItem, GameObject>(go);
+                UIPublicChatItem newItem = self.AddChild<UIPublicChatItem, GameObject>(go);
                 self.UIChatItemList.Add(newItem);
             }
 

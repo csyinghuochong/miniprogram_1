@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(UIChatItem))]
-    [FriendOf(typeof(UIChatItem))]
-    public static partial class UIChatItemSystem
+    [EntitySystemOf(typeof(UIPublicChatItem))]
+    [FriendOf(typeof(UIPublicChatItem))]
+    public static partial class UIPublicChatItemSystem
     {
         [EntitySystem]
-        private static void Awake(this UIChatItem self, GameObject gameObject)
+        private static void Awake(this UIPublicChatItem self, GameObject gameObject)
         {
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
@@ -23,7 +23,7 @@ namespace ET.Client
             self.Button_OnSpeakerHead.AddListener(() => { self.OnButton_OnSpeakerHead().Coroutine(); });
         }
 
-        public static void UpdateInfo(this UIChatItem self, ChatEntry chatEntry)
+        public static void UpdateInfo(this UIPublicChatItem self, ChatEntry chatEntry)
         {
             self.ChatEntry = chatEntry;
 
@@ -31,7 +31,7 @@ namespace ET.Client
             self.Text_Content.SetText(chatEntry.Content);
         }
 
-        private static async ETTask OnButton_OnSpeakerHead(this UIChatItem self)
+        private static async ETTask OnButton_OnSpeakerHead(this UIPublicChatItem self)
         {
             M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.ChatEntry.UnitId);
 
