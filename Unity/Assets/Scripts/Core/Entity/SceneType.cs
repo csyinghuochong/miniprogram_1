@@ -30,6 +30,7 @@ namespace ET
         RobotManager = 1L << 28,
         Mail = 1L << 29,
         Chat = 1L << 30,
+        Friend = 1L << 31,
 
         // 客户端
         Demo = 1L << 50,

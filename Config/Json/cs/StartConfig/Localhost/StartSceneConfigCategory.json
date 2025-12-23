@@ -56,6 +56,14 @@
     "Port": 0
   },
   {
+    "Id": 116,
+    "Zone": 1,
+    "Process": 1,
+    "SceneType": "Friend",
+    "Name": "Friend",
+    "Port": 0
+  },
+  {
     "Id": 1000201,
     "Zone": 1000,
     "Process": 1,
