@@ -5,6 +5,8 @@
     {
         protected override async ETTask Run(Scene root, M2C_PathfindingResult message)
         {
+            using var _ = message;
+            
             Unit unit = root.CurrentScene().GetComponent<UnitComponent>().Get(message.Id);
             if (unit == null)
             {
