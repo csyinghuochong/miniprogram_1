@@ -12,7 +12,6 @@
         [EntitySystem]
         private static void Destroy(this ChatUnit self)
         {
-            self.Name = null;
         }
     }
 }

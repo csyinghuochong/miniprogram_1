@@ -2303,9 +2303,6 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public string Name { get; set; }
-
-        [MemoryPackOrder(2)]
         public long UnitId { get; set; }
 
         public override void Dispose()
@@ -2316,7 +2313,6 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.Name = default;
             this.UnitId = default;
 
             ObjectPool.Instance.Recycle(this);

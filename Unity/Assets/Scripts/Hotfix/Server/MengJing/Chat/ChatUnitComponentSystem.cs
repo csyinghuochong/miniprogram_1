@@ -14,12 +14,6 @@ namespace ET.Server
         [EntitySystem]
         private static void Destroy(this ChatUnitComponent self)
         {
-            foreach (ChatUnit chatUnit in self.ChatUnitDict.Values)
-            {
-                chatUnit?.Dispose();
-            }
-
-            self.ChatUnitDict.Clear();
         }
     }
 }

@@ -532,8 +532,7 @@ message A2A_BroadcastSceneResponse // IResponse
 message G2Chat_LoginChatServer // IRequest
 {
     int32 RpcId = 1;
-	string Name  = 2;
-	int64 UnitId = 3;
+	int64 UnitId = 2;
 }
 
 message Chat2G_LoginChatServer // IResponse

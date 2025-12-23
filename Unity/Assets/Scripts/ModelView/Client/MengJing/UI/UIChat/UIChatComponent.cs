@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ namespace ET.Client
     public class UIChatComponent: Entity, IAwake
     {
         public int CurrentPage { get; set; } = 0;
+        public List<UIChatItem> UIChatItemList { get; set; } = new();
         
         public Button Button_Close;
         public TMP_Text Text_Title;

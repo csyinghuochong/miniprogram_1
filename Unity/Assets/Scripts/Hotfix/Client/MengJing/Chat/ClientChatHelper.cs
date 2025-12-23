@@ -6,6 +6,7 @@
         {
             C2Chat_SendChat request = C2Chat_SendChat.Create();
             ChatEntryInfo chatEntryInfo = ChatEntryInfo.Create();
+            chatEntryInfo.Name = root.GetComponent<UserInfoComponentC>().PlayerName;
             chatEntryInfo.Content = message;
             chatEntryInfo.Channel = (int)channelType;
 

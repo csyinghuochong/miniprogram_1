@@ -1,11 +1,31 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class ChatUpdate_UIChatRefresh : AEvent<Scene, ChatUpdate>
+    {
+        protected override async ETTask Run(Scene scene, ChatUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIChat);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIChatComponent uiChatComponent = ui.GetComponent<UIChatComponent>();
+            uiChatComponent.UpdateItemList(uiChatComponent.CurrentPage);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIChatComponent))]
     [FriendOf(typeof(UIChatComponent))]
+    [FriendOf(typeof(UIChatItem))]
     public static partial class UIChatComponentSystem
     {
         [EntitySystem]
@@ -28,6 +48,7 @@ namespace ET.Client
             self.Content_EmojiList = rc.Get<GameObject>("Content_EmojiList");
 
             self.GameObject_Emoji.SetActive(false);
+            self.UIChatItem.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIChat); });
             self.Button_Emoji.AddListener(() => { self.GameObject_Emoji.SetActive(true); });
@@ -35,6 +56,7 @@ namespace ET.Client
             self.Button_Type_LianMeng.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_PrivateChat.AddListener(() => { self.SetShowType(2); });
             self.Button_CloseEmoji.AddListener(() => { self.GameObject_Emoji.SetActive(false); });
+            self.Button_Send.AddListener(() => { self.OnButton_Send().Coroutine(); });
         }
 
         private static void SetShowType(this UIChatComponent self, int page)
@@ -52,8 +74,45 @@ namespace ET.Client
 
         public static void UpdateItemList(this UIChatComponent self, int page)
         {
+            ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
+            ChatChannelType channelType = page == 0 ? ChatChannelType.World : ChatChannelType.LianMeng;
+            List<ChatEntry> chatEntryList = chatComponent.GetChatEntryList(channelType);
 
+            while (self.UIChatItemList.Count < chatEntryList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIChatItem, self.Content_UIChatItem);
+                UIChatItem newItem = self.AddChild<UIChatItem, GameObject>(go);
+                self.UIChatItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < chatEntryList.Count; i++)
+            {
+                self.UIChatItemList[i].UpdateInfo(chatEntryList[i]);
+                self.UIChatItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = chatEntryList.Count; i < self.UIChatItemList.Count; i++)
+            {
+                self.UIChatItemList[i].GameObject.SetActive(false);
+            }
         }
 
+        private static async ETTask OnButton_Send(this UIChatComponent self)
+        {
+            string input = self.InputField_Content.text;
+            self.InputField_Content.SetTextWithoutNotify("");
+
+            if (string.IsNullOrEmpty(input))
+            {
+                return;
+            }
+
+            int error = await ClientChatHelper.SendChat(self.Root(), input, self.CurrentPage == 0 ? ChatChannelType.World : ChatChannelType.LianMeng);
+
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+        }
     }
 }

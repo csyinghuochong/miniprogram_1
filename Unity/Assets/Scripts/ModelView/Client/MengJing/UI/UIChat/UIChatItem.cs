@@ -1,11 +1,17 @@
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [ChildOf]
-    public class UIChatItem : Entity, IAwake
+    public class UIChatItem : Entity, IAwake<GameObject>
     {
+        private EntityRef<ChatEntry> chatEntry;
+        public ChatEntry ChatEntry { get => this.chatEntry; set => this.chatEntry = value; }
+
+        public GameObject GameObject;
+
         public Image Image_SpeakerHead;
         public Button Button_OnSpeakerHead;
         public TMP_Text Text_PlayerName;

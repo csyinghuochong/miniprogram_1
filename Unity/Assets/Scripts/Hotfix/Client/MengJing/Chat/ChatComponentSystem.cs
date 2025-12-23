@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     [EntitySystemOf(typeof(ChatComponent))]
     [FriendOf(typeof(ChatComponent))]
@@ -14,7 +16,21 @@
         {
         }
 
-        public static void AddChatFromMessage(this ChatComponent self, ChatEntryInfo chatEntryInfo)
+        public static List<ChatEntry> GetChatEntryList(this ChatComponent self, ChatChannelType chatChannelType)
+        {
+            List<ChatEntry> chatEntryList = new();
+            foreach (ChatEntry chatEntry in self.ChatEntryList)
+            {
+                if (chatEntry.Channel == (int)chatChannelType)
+                {
+                    chatEntryList.Add(chatEntry);
+                }
+            }
+
+            return chatEntryList;
+        }
+
+        public static void AddChatEntryFromMessage(this ChatComponent self, ChatEntryInfo chatEntryInfo)
         {
             ChatEntry chatEntry = self.AddChild<ChatEntry>();
             chatEntry.FromMessage(chatEntryInfo);

@@ -5,9 +5,9 @@
     {
         protected override async ETTask Run(Scene root, Chat2C_NoticeChat message)
         {
-            root.AddComponent<ChatComponent>().AddChatFromMessage(message.ChatEntryInfo);
+            root.GetComponent<ChatComponent>().AddChatEntryFromMessage(message.ChatEntryInfo);
 
-            EventSystem.Instance.Publish(root, new UpdateChatInfo());
+            EventSystem.Instance.Publish(root, new ChatUpdate());
 
             await ETTask.CompletedTask;
         }

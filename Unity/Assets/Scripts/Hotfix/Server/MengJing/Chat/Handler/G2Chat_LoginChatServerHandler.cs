@@ -13,12 +13,10 @@
 
             if (chatUnit != null)
             {
-                chatUnit.Name = request.Name;
                 return;
             }
 
             chatUnit = chatInfoUnitsComponent.AddChildWithId<ChatUnit>(request.UnitId);
-            chatUnit.Name = request.Name;
 
             chatUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             await chatUnit.AddLocation(LocationType.Chat);

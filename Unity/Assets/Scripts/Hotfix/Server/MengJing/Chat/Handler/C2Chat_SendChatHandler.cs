@@ -20,17 +20,19 @@
 
             ChatEntryInfo chatEntryInfo = request.ChatEntryInfo;
             chatEntryInfo.UnitId = chatUnit.Id;
-            chatEntryInfo.Name = chatUnit.Name;
 
             if (request.ChatEntryInfo.Channel == (int)ChatChannelType.World)
             {
                 ChatUnitComponent chatUnitComponent = chatUnit.Root().GetComponent<ChatUnitComponent>();
-                foreach (ChatUnit otherUnit in chatUnitComponent.ChatUnitDict.Values)
+
+                foreach (Entity entity in chatUnitComponent.Children.Values)
                 {
+                    ChatUnit chantUnit = entity as ChatUnit;
+
                     Chat2C_NoticeChat chat2C_NoticeChat = Chat2C_NoticeChat.Create();
                     chat2C_NoticeChat.ChatEntryInfo = chatEntryInfo;
 
-                    MapMessageHelper.SendToClient(chatUnit.Root(), otherUnit.Id, chat2C_NoticeChat);
+                    MapMessageHelper.SendToClient(chatUnit.Root(), chantUnit.Id, chat2C_NoticeChat);
                 }
             }
             else if (request.ChatEntryInfo.Channel == (int)ChatChannelType.LianMeng)
