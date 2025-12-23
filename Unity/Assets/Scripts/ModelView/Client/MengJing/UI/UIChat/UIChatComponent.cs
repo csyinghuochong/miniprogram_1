@@ -18,6 +18,7 @@ namespace ET.Client
         public Button Button_Send;
         public Button Button_Type_World;
         public Button Button_Type_LianMeng;
+        public Button Button_Type_PrivateChat;
         public GameObject GameObject_Emoji;
         public Button Button_CloseEmoji;
         public GameObject Content_EmojiList;

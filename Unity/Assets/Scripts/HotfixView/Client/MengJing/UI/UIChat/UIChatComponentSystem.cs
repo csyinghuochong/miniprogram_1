@@ -22,6 +22,7 @@ namespace ET.Client
             self.Button_Send = rc.Get<GameObject>("Button_Send").GetComponent<Button>();
             self.Button_Type_World = rc.Get<GameObject>("Button_Type_World").GetComponent<Button>();
             self.Button_Type_LianMeng = rc.Get<GameObject>("Button_Type_LianMeng").GetComponent<Button>();
+            self.Button_Type_PrivateChat = rc.Get<GameObject>("Button_Type_PrivateChat").GetComponent<Button>();
             self.GameObject_Emoji = rc.Get<GameObject>("GameObject_Emoji");
             self.Button_CloseEmoji = rc.Get<GameObject>("Button_CloseEmoji").GetComponent<Button>();
             self.Content_EmojiList = rc.Get<GameObject>("Content_EmojiList");
@@ -32,6 +33,7 @@ namespace ET.Client
             self.Button_Emoji.AddListener(() => { self.GameObject_Emoji.SetActive(true); });
             self.Button_Type_World.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_LianMeng.onClick.AddListener(() => { self.SetShowType(1); });
+            self.Button_Type_PrivateChat.AddListener(() => { self.SetShowType(2); });
             self.Button_CloseEmoji.AddListener(() => { self.GameObject_Emoji.SetActive(false); });
         }
 
@@ -42,14 +44,16 @@ namespace ET.Client
             self.Button_Type_World.transform.Find("Image_Off").gameObject.SetActive(page != 0);
             self.Button_Type_LianMeng.transform.Find("Image_On").gameObject.SetActive(page == 1);
             self.Button_Type_LianMeng.transform.Find("Image_Off").gameObject.SetActive(page != 1);
-            
+            self.Button_Type_PrivateChat.transform.Find("Image_On").gameObject.SetActive(page == 2);
+            self.Button_Type_PrivateChat.transform.Find("Image_Off").gameObject.SetActive(page != 2);
+
             self.UpdateItemList(page);
         }
 
         public static void UpdateItemList(this UIChatComponent self, int page)
         {
-            
+
         }
-        
+
     }
 }
