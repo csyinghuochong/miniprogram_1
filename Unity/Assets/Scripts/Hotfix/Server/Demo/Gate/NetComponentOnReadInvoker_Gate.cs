@@ -91,7 +91,7 @@ namespace ET.Server
                     int rpcId = actorFriendRequest.RpcId;
                     long instanceId = session.InstanceId;
 
-                    IChatResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Friend).Call(player.Id, actorFriendRequest) as IChatResponse;
+                    IFriendResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Friend).Call(player.Id, actorFriendRequest) as IFriendResponse;
                     iResponse.RpcId = rpcId;
 
                     if (session.InstanceId == instanceId)
@@ -101,10 +101,10 @@ namespace ET.Server
 
                     break;
                 }
-                case IFriendMessage actorChatMessage:
+                case IFriendMessage actorFriendMessage:
                 {
                     Player player = session.GetComponent<SessionPlayerComponent>().Player;
-                    root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Chat).Send(player.Id, actorChatMessage);
+                    root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Friend).Send(player.Id, actorFriendMessage);
 
                     break;
                 }

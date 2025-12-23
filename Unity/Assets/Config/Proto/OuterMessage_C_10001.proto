@@ -1048,3 +1048,19 @@ message Chat2C_NoticeChat // IMessage
 {
 	ChatEntryInfo ChatEntryInfo = 1;
 }
+
+//ResponseType Friend2C_GetAllFriend
+message C2Friend_GetAllFriend // IFriendRequest
+{
+	int32 RpcId = 1;
+}
+
+message Friend2C_GetAllFriend // IFriendResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated int64 FriendList = 4;
+	repeated int64 ApplyList = 5;
+	repeated int64 BlackList = 6;
+}

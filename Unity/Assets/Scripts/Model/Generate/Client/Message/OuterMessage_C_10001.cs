@@ -4772,6 +4772,77 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2Friend_GetAllFriend)]
+    [ResponseType(nameof(Friend2C_GetAllFriend))]
+    public partial class C2Friend_GetAllFriend : MessageObject, IFriendRequest
+    {
+        public static C2Friend_GetAllFriend Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Friend_GetAllFriend), isFromPool) as C2Friend_GetAllFriend;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_GetAllFriend)]
+    public partial class Friend2C_GetAllFriend : MessageObject, IFriendResponse
+    {
+        public static Friend2C_GetAllFriend Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_GetAllFriend), isFromPool) as Friend2C_GetAllFriend;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<long> FriendList { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<long> ApplyList { get; set; } = new();
+
+        [MemoryPackOrder(5)]
+        public List<long> BlackList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.FriendList.Clear();
+            this.ApplyList.Clear();
+            this.BlackList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -4905,5 +4976,7 @@ namespace ET
         public const ushort C2Chat_SendChat = 10130;
         public const ushort Chat2C_SendChat = 10131;
         public const ushort Chat2C_NoticeChat = 10132;
+        public const ushort C2Friend_GetAllFriend = 10133;
+        public const ushort Friend2C_GetAllFriend = 10134;
     }
 }

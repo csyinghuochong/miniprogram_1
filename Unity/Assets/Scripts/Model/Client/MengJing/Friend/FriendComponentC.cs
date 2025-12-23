@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace ET.Server
+namespace ET.Client
 {
-    [ComponentOf(typeof(FriendUnit))]
-    public class FriendComponentS : Entity, IAwake, IDestroy, IDeserialize
+    [ComponentOf(typeof(Scene))]
+    public class FriendComponentC : Entity, IAwake, IDestroy
     {
         /// <summary>
         /// 好友列表

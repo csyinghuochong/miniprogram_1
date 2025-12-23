@@ -27,6 +27,8 @@
             {
                 friendUnit.AddComponent(friendComponent);
             }
+            
+            await friendUnit.AddLocation(LocationType.Friend);
 
             await ETTask.CompletedTask;
         }
