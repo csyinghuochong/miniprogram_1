@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ namespace ET.Client
         public UIMiniMapComponent UIMiniMapComponent { get; set; }
         public UIJoystickComponent UIJoystickComponent { get; set; }
         public UIMainSkillComponent UIMainSkillComponent { get; set; }
+        public List<UIMainChatItem> UIMainChatItemList { get; set; } = new();
 
         public TMP_Text Text_UID;
         public TMP_Text Text_PlayerName;

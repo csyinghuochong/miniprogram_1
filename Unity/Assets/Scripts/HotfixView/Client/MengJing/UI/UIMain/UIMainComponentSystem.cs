@@ -1,4 +1,5 @@
-﻿using Cysharp.Text;
+﻿using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,24 @@ namespace ET.Client
 {
     # region 事件监听
 
+    [Event(SceneType.Demo)]
+    public class ChatUpdate_UIMainRefresh : AEvent<Scene, ChatUpdate>
+    {
+        protected override async ETTask Run(Scene scene, ChatUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateUIMainChatItemList();
+
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [Event(SceneType.Demo)]
     public class DataUpdate_UpdateUserData_UIMainRefresh : AEvent<Scene, UpdateUserData>
     {
@@ -178,7 +197,8 @@ namespace ET.Client
             self.Slider_Exp = rc.Get<GameObject>("Slider_Exp").GetComponent<Slider>();
             self.Text_Exp = rc.Get<GameObject>("Text_Exp").GetComponent<TMP_Text>();
             self.Content_UIMainChatItem = rc.Get<GameObject>("Content_UIMainChatItem").transform;
-            self.UIMainChatItem = rc.Get<GameObject>("UIMainItem");
+            self.UIMainChatItem = rc.Get<GameObject>("UIMainChatItem");
+            self.UIMainChatItem.SetActive(false);
             self.Button_OnChat = rc.Get<GameObject>("Button_OnChat").GetComponent<Button>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
@@ -225,6 +245,7 @@ namespace ET.Client
             self.UpdateDiamond();
             self.UpdateExp();
             self.UpdateMainTask();
+            self.UpdateUIMainChatItemList();
 
             self.UIMiniMapComponent.AfterEnterScene(mapType);
             self.UIJoystickComponent.AfterEnterScene(mapType);
@@ -462,6 +483,30 @@ namespace ET.Client
         private static void OnButton_PickUpDropItem(this UIMainComponent self)
         {
             self.Root().GetComponent<PickUpDropItemComponent>().OnStarDrop();
+        }
+        
+        public static void UpdateUIMainChatItemList(this UIMainComponent self)
+        {
+            ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
+            List<EntityRef<ChatEntry>> chatEntryList = chatComponent.ChatEntryList;
+
+            while (self.UIMainChatItemList.Count < chatEntryList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIMainChatItem, self.Content_UIMainChatItem);
+                UIMainChatItem newItem = self.AddChild<UIMainChatItem, GameObject>(go);
+                self.UIMainChatItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < chatEntryList.Count; i++)
+            {
+                self.UIMainChatItemList[i].UpdateInfo(chatEntryList[i]);
+                self.UIMainChatItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = chatEntryList.Count; i < self.UIMainChatItemList.Count; i++)
+            {
+                self.UIMainChatItemList[i].GameObject.SetActive(false);
+            }
         }
     }
 }
