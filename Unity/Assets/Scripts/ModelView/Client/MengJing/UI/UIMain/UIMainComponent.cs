@@ -46,5 +46,6 @@ namespace ET.Client
         public Transform Content_UIMainChatItem;
         public GameObject UIMainChatItem;
         public Button Button_OnChat;
+        public Button Button_Friend;
     }
 }

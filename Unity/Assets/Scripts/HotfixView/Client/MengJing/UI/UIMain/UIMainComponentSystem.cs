@@ -26,7 +26,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [Event(SceneType.Demo)]
     public class DataUpdate_UpdateUserData_UIMainRefresh : AEvent<Scene, UpdateUserData>
     {
@@ -200,6 +200,7 @@ namespace ET.Client
             self.UIMainChatItem = rc.Get<GameObject>("UIMainChatItem");
             self.UIMainChatItem.SetActive(false);
             self.Button_OnChat = rc.Get<GameObject>("Button_OnChat").GetComponent<Button>();
+            self.Button_Friend = rc.Get<GameObject>("Button_Friend").GetComponent<Button>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
@@ -216,6 +217,7 @@ namespace ET.Client
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
             self.Button_Boss.AddListener(() => { self.OnBoss().Coroutine(); });
             self.Button_OnChat.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIChat).Coroutine(); });
+            self.Button_Friend.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFriend).Coroutine(); });
         }
 
         [EntitySystem]
@@ -303,7 +305,7 @@ namespace ET.Client
         {
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             self.Text_UID.SetTextFormat("ID:{0}", playerInfoComponent.CurrentRoleId);
-            
+
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.Text_PlayerName.SetText(userInfoComponent.PlayerName);
         }
@@ -484,7 +486,7 @@ namespace ET.Client
         {
             self.Root().GetComponent<PickUpDropItemComponent>().OnStarDrop();
         }
-        
+
         public static void UpdateUIMainChatItemList(this UIMainComponent self)
         {
             ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();

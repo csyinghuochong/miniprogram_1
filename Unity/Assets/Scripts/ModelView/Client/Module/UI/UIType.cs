@@ -19,8 +19,8 @@ namespace ET
         public const string UISkillTip = "UISkillTip/UISkillTip";
         public const string UIHeroLvUp = "UIHeroLvUp/UIHeroLvUp";
         public const string UIHeroAttributes = "UIHeroAttributes/UIHeroAttributes";
-        public const string UIHeroStarUp =  "UIHeroStarUp/UIHeroStarUp";
-        public const string UIItemRewardTip  = "UIItemRewardTip/UIItemRewardTip";
+        public const string UIHeroStarUp = "UIHeroStarUp/UIHeroStarUp";
+        public const string UIItemRewardTip = "UIItemRewardTip/UIItemRewardTip";
         public const string UIStore = "UIStore/UIStore";
         public const string UIWarehouse = "UIWarehouse/UIWarehouse";
         public const string UIMail = "UIMail/UIMail";
@@ -31,5 +31,6 @@ namespace ET
         public const string UIRelink = "UIRelink/UIRelink";
         public const string UIChat = "UIChat/UIChat";
         public const string UIPlayerInfo = "UIPlayerInfo/UIPlayerInfo";
+        public const string UIFriend = "UIFriend/UIFriend";
     }
 }

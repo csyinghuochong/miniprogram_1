@@ -185,8 +185,6 @@ MonoBehaviour:
     gameObject: {fileID: 5395084362772909515}
   - key: Text_HeroName
     gameObject: {fileID: 3698110269112729042}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 5279749982395129017}
   - key: Image_HeroOff
@@ -992,8 +990,6 @@ MonoBehaviour:
     gameObject: {fileID: 5783398971044343511}
   - key: Text_HeroName
     gameObject: {fileID: 4690853860337573588}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 4170779263861306718}
   - key: Image_HeroOff
@@ -1388,8 +1384,6 @@ MonoBehaviour:
     gameObject: {fileID: 2432390590008474520}
   - key: Text_HeroName
     gameObject: {fileID: 2789915895605031260}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 8709548962520260725}
   - key: Image_HeroOff
@@ -1902,8 +1896,6 @@ MonoBehaviour:
     gameObject: {fileID: 2136108522261709488}
   - key: Text_HeroName
     gameObject: {fileID: 495215266104316019}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 433444523874432447}
   - key: Image_HeroOff
@@ -5755,8 +5747,6 @@ MonoBehaviour:
     gameObject: {fileID: 4087765526766279885}
   - key: Text_HeroName
     gameObject: {fileID: 5909556055596809754}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 3411929237495382038}
   - key: Image_HeroOff
@@ -5798,7 +5788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 1050, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4626611168174126355
@@ -6289,8 +6279,6 @@ MonoBehaviour:
     gameObject: {fileID: 2792727497987240061}
   - key: Text_HeroName
     gameObject: {fileID: 6285840975849849514}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 2377087530607067213}
   - key: Image_HeroOff
@@ -6565,8 +6553,6 @@ MonoBehaviour:
     gameObject: {fileID: 6428838084496313821}
   - key: Text_HeroName
     gameObject: {fileID: 7252238667737459396}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 1538398754129830006}
   - key: Image_HeroOff
@@ -6763,8 +6749,6 @@ MonoBehaviour:
     gameObject: {fileID: 7681408460773364862}
   - key: Text_HeroName
     gameObject: {fileID: 7457647127729808951}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 5165334565523455698}
   - key: Image_HeroOff
@@ -6976,8 +6960,6 @@ MonoBehaviour:
     gameObject: {fileID: 9216982921471223214}
   - key: Text_HeroName
     gameObject: {fileID: 4970393762466906475}
-  - key: EventTrigger_Click
-    gameObject: {fileID: 0}
   - key: Image_HeroOn
     gameObject: {fileID: 7644718285339087574}
   - key: Image_HeroOff
