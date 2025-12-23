@@ -133,4 +133,8 @@ namespace ET.Client
     {
         public string Tip;
     }
+    
+    public struct UpdateChatInfo
+    {
+    }
 }

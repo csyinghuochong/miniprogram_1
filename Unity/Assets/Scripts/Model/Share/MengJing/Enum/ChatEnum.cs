@@ -1,26 +1,16 @@
-﻿
-
-
-namespace ET
+﻿namespace ET
 {
-    public static class ChannelEnum
+    public enum ChatChannelType
     {
-        public const int Word = 0;               //世界 
-        public const int Team = 1;              //组队
-        public const int Union = 2;               //帮派
-        public const int System = 3;             //系统
-        public const int Friend = 4;             //私聊
-        public const int Pick = 5;
-        public const int PaiMai = 6;            //拍卖
-
-        public const int Number = 7;
+        World = 0, //世界 
+        LianMeng = 1, //联盟
     }
 
     public static class NoticeType
-    { 
+    {
         public const int Notice = 0;
-        public const int StopSever = 1;  //停服
-        public const int RemoteLogin = 2;//异地登录
+        public const int StopSever = 1; //停服
+        public const int RemoteLogin = 2; //异地登录
 
         public const int UnitDisconnect = 3;
         public const int BattleOpen = 3;
@@ -47,5 +37,4 @@ namespace ET
         public const int PetMatchOpen = 24;
         public const int PetMatchClose = 25;
     }
-
 }

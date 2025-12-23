@@ -1022,11 +1022,11 @@ message C2M_NoticeUnitTransform // ILocationMessage
 	Unity.Mathematics.float3 Position = 2;
 }
 
-message ChatInfo
+message ChatEntryInfo
 {
 	int64 UnitId = 1;
 	string Name = 2;
-	string ChatMsg = 3;
+	string Content = 3;
 	int32 Channel = 4;
 }
 
@@ -1034,7 +1034,7 @@ message ChatInfo
 message C2Chat_SendChat // IChatRequest
 {
 	int32 RpcId = 1;
-	ChatInfo ChatInfo = 2;
+	ChatEntryInfo ChatEntryInfo = 2;
 }
 
 message Chat2C_SendChat // IChatResponse
@@ -1046,5 +1046,5 @@ message Chat2C_SendChat // IChatResponse
 
 message Chat2C_NoticeChat // IMessage
 {
-	ChatInfo ChatInfo = 1;
+	ChatEntryInfo ChatEntryInfo = 1;
 }

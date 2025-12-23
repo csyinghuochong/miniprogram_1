@@ -106,6 +106,9 @@ namespace ET
         public const int ERR_StoreItemNotExist = 201301; //商店道具不存在
         public const int ERR_StoreItemNotEnough = 201302; //商店道具不足
         public const int ERR_StoreRefreshNumNotEnough = 201303; //商店刷新次数不足
+        
+        public const int ERR_ChatInfoNull = 201401; 
+        public const int ERR_ChatMessageEmpty = 201402; //聊天信息为空
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()
