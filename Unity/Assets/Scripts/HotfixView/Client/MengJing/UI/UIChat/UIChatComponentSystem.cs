@@ -85,7 +85,7 @@ namespace ET.Client
         {
             ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
             ChatChannelType channelType = page == 0 ? ChatChannelType.World : ChatChannelType.Alliance;
-            List<ChatEntry> chatEntryList = chatComponent.GetChatEntryList(channelType);
+            List<Chat> chatEntryList = chatComponent.GetChatEntryList(channelType);
 
             while (self.UIChatItemList.Count < chatEntryList.Count)
             {

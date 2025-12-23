@@ -490,7 +490,7 @@ namespace ET.Client
         public static void UpdateUIMainChatItemList(this UIMainComponent self)
         {
             ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
-            List<EntityRef<ChatEntry>> chatEntryList = chatComponent.ChatEntryList;
+            List<EntityRef<Chat>> chatEntryList = chatComponent.ChatList;
 
             while (self.UIMainChatItemList.Count < chatEntryList.Count)
             {

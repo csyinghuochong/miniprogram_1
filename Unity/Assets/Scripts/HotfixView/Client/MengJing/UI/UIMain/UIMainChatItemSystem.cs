@@ -18,20 +18,20 @@ namespace ET.Client
             self.Text_Content = rc.Get<GameObject>("Text_Content").GetComponent<TMP_Text>();
         }
 
-        public static void UpdateInfo(this UIMainChatItem self, ChatEntry chatEntry)
+        public static void UpdateInfo(this UIMainChatItem self, Chat chat)
         {
-            self.ChatEntry = chatEntry;
+            self.Chat = chat;
 
-            if (chatEntry.Channel == (int)ChatChannelType.World)
+            if (chat.Channel == (int)ChatChannelType.World)
             {
                 self.Text_ChatType.SetText("【世界】");
             }
-            else if (chatEntry.Channel == (int)ChatChannelType.Alliance)
+            else if (chat.Channel == (int)ChatChannelType.Alliance)
             {
                 self.Text_ChatType.SetText("【联盟】");
             }
 
-            self.Text_Content.SetTextFormat("{0}:{1}", chatEntry.Name, chatEntry.Content);
+            self.Text_Content.SetTextFormat("{0}:{1}", chat.Name, chat.Content);
         }
     }
 }

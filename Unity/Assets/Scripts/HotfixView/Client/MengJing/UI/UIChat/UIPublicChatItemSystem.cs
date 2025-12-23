@@ -23,17 +23,17 @@ namespace ET.Client
             self.Button_OnSpeakerHead.AddListener(() => { self.OnButton_OnSpeakerHead().Coroutine(); });
         }
 
-        public static void UpdateInfo(this UIPublicChatItem self, ChatEntry chatEntry)
+        public static void UpdateInfo(this UIPublicChatItem self, Chat chat)
         {
-            self.ChatEntry = chatEntry;
+            self.Chat = chat;
 
-            self.Text_PlayerName.SetText(chatEntry.Name);
-            self.Text_Content.SetText(chatEntry.Content);
+            self.Text_PlayerName.SetText(chat.Name);
+            self.Text_Content.SetText(chat.Content);
         }
 
         private static async ETTask OnButton_OnSpeakerHead(this UIPublicChatItem self)
         {
-            M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.ChatEntry.UnitId);
+            M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.Chat.UnitId);
 
             if (response.Error != ErrorCode.ERR_Success)
             {

@@ -16,36 +16,36 @@ namespace ET.Client
         {
         }
 
-        public static List<ChatEntry> GetChatEntryList(this ChatComponent self, ChatChannelType chatChannelType)
+        public static List<Chat> GetChatEntryList(this ChatComponent self, ChatChannelType chatChannelType)
         {
-            List<ChatEntry> chatEntryList = new();
-            foreach (ChatEntry chatEntry in self.ChatEntryList)
+            List<Chat> chatList = new();
+            foreach (Chat chatEntry in self.ChatList)
             {
                 if (chatEntry.Channel == (int)chatChannelType)
                 {
-                    chatEntryList.Add(chatEntry);
+                    chatList.Add(chatEntry);
                 }
             }
 
-            return chatEntryList;
+            return chatList;
         }
 
-        public static void AddChatEntryFromMessage(this ChatComponent self, ChatEntryInfo chatEntryInfo)
+        public static void AddChatFromMessage(this ChatComponent self, ChatInfo chatInfo)
         {
-            ChatEntry chatEntry = self.AddChild<ChatEntry>();
-            chatEntry.FromMessage(chatEntryInfo);
+            Chat chat = self.AddChild<Chat>();
+            chat.FromMessage(chatInfo);
 
-            self.ChatEntryList.Add(chatEntry);
+            self.ChatList.Add(chat);
         }
 
         public static void Clear(this ChatComponent self)
         {
-            foreach (ChatEntry chatEntry in self.ChatEntryList)
+            foreach (Chat chat in self.ChatList)
             {
-                chatEntry?.Dispose();
+                chat?.Dispose();
             }
 
-            self.ChatEntryList.Clear();
+            self.ChatList.Clear();
         }
     }
 }

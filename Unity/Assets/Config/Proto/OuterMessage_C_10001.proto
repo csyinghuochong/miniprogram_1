@@ -1038,7 +1038,7 @@ message C2M_NoticeUnitTransform // ILocationMessage
 	Unity.Mathematics.float3 Position = 2;
 }
 
-message ChatEntryInfo
+message ChatInfo
 {
 	int64 UnitId = 1;
 	string Name = 2;
@@ -1050,7 +1050,7 @@ message ChatEntryInfo
 message C2Chat_SendChat // IChatRequest
 {
 	int32 RpcId = 1;
-	ChatEntryInfo ChatEntryInfo = 2;
+	ChatInfo ChatInfo = 2;
 }
 
 message Chat2C_SendChat // IChatResponse
@@ -1062,7 +1062,15 @@ message Chat2C_SendChat // IChatResponse
 
 message Chat2C_NoticeChat // IMessage
 {
-	ChatEntryInfo ChatEntryInfo = 1;
+	ChatInfo ChatInfo = 1;
+}
+
+message FriendInfo 
+{
+	int64 UnitId = 1;
+	int32 OnLine = 2;
+	string PlayerName = 3;
+	int32 Lv = 4;
 }
 
 //ResponseType Friend2C_GetAllFriend
@@ -1076,9 +1084,9 @@ message Friend2C_GetAllFriend // IFriendResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	repeated int64 FriendList = 4;
-	repeated int64 RequestList = 5;
-	repeated int64 BlackList = 6;
+	repeated FriendInfo FriendList = 4;
+	repeated FriendInfo RequestList = 5;
+	repeated FriendInfo BlackList = 6;
 }
 
 //ResponseType Friend2C_FriendRequest
@@ -1093,8 +1101,6 @@ message Friend2C_FriendRequest // IFriendResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	repeated int64 FriendList = 4;
-	repeated int64 RequestList = 5;
 }
 
 //ResponseType Friend2C_FriendRequestAccept
@@ -1110,6 +1116,4 @@ message Friend2C_FriendRequestAccept // IFriendResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	repeated int64 FriendList = 4;
-	repeated int64 RequestList = 5;
 }

@@ -6,22 +6,22 @@
     {
         protected override async ETTask Run(ChatUnit chatUnit, C2Chat_SendChat request, Chat2C_SendChat response)
         {
-            if (request.ChatEntryInfo == null)
+            if (request.ChatInfo == null)
             {
                 response.Error = ErrorCode.ERR_ChatInfoNull;
                 return;
             }
 
-            if (string.IsNullOrEmpty(request.ChatEntryInfo.Content))
+            if (string.IsNullOrEmpty(request.ChatInfo.Content))
             {
                 response.Error = ErrorCode.ERR_ChatMessageEmpty;
                 return;
             }
 
-            ChatEntryInfo chatEntryInfo = request.ChatEntryInfo;
-            chatEntryInfo.UnitId = chatUnit.Id;
+            ChatInfo chatInfo = request.ChatInfo;
+            chatInfo.UnitId = chatUnit.Id;
 
-            if (request.ChatEntryInfo.Channel == (int)ChatChannelType.World)
+            if (request.ChatInfo.Channel == (int)ChatChannelType.World)
             {
                 ChatUnitComponent chatUnitComponent = chatUnit.Root().GetComponent<ChatUnitComponent>();
 
@@ -30,12 +30,12 @@
                     ChatUnit chantUnit = entity as ChatUnit;
 
                     Chat2C_NoticeChat chat2C_NoticeChat = Chat2C_NoticeChat.Create();
-                    chat2C_NoticeChat.ChatEntryInfo = chatEntryInfo;
+                    chat2C_NoticeChat.ChatInfo = chatInfo;
 
                     MapMessageHelper.SendToClient(chatUnit.Root(), chantUnit.Id, chat2C_NoticeChat);
                 }
             }
-            else if (request.ChatEntryInfo.Channel == (int)ChatChannelType.Alliance)
+            else if (request.ChatInfo.Channel == (int)ChatChannelType.Alliance)
             {
             }
 

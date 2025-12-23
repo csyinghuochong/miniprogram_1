@@ -11,12 +11,22 @@
             if (response.Error == ErrorCode.ERR_Success)
             {
                 FriendComponentC friendComponentC = root.GetComponent<FriendComponentC>();
-                friendComponentC.FriendList.Clear();
-                friendComponentC.RequestList.Clear();
-                friendComponentC.BlackList.Clear();
-                friendComponentC.FriendList.AddRange(response.FriendList);
-                friendComponentC.RequestList.AddRange(response.RequestList);
-                friendComponentC.BlackList.AddRange(response.BlackList);
+                friendComponentC.Clear();
+
+                foreach (FriendInfo friendInfo in response.FriendList)
+                {
+                    friendComponentC.AddFriendFromMessage(friendInfo);
+                }
+
+                foreach (FriendInfo friendInfo in response.RequestList)
+                {
+                    friendComponentC.AddRequestFromMessage(friendInfo);
+                }
+
+                foreach (FriendInfo friendInfo in response.BlackList)
+                {
+                    friendComponentC.AddBlackFromMessage(friendInfo);
+                }
             }
 
             return response.Error;

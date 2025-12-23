@@ -5,6 +5,6 @@ namespace ET.Client
     [ComponentOf(typeof(Scene))]
     public class ChatComponent : Entity, IAwake, IDestroy
     {
-        public List<EntityRef<ChatEntry>> ChatEntryList { get; set; } = new();
+        public List<EntityRef<Chat>> ChatList { get; set; } = new();
     }
 }

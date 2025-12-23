@@ -5,12 +5,12 @@
         public static async ETTask<int> SendChat(Scene root, string message, ChatChannelType channelType)
         {
             C2Chat_SendChat request = C2Chat_SendChat.Create();
-            ChatEntryInfo chatEntryInfo = ChatEntryInfo.Create();
-            chatEntryInfo.Name = root.GetComponent<UserInfoComponentC>().PlayerName;
-            chatEntryInfo.Content = message;
-            chatEntryInfo.Channel = (int)channelType;
+            ChatInfo chatInfo = ChatInfo.Create();
+            chatInfo.Name = root.GetComponent<UserInfoComponentC>().PlayerName;
+            chatInfo.Content = message;
+            chatInfo.Channel = (int)channelType;
 
-            request.ChatEntryInfo = chatEntryInfo;
+            request.ChatInfo = chatInfo;
 
             Chat2C_SendChat response = (Chat2C_SendChat)await root.GetComponent<ClientSenderComponent>().Call(request);
 

@@ -7,8 +7,8 @@ namespace ET.Client
     [ChildOf]
     public class UIPublicChatItem : Entity, IAwake<GameObject>
     {
-        private EntityRef<ChatEntry> chatEntry;
-        public ChatEntry ChatEntry { get => this.chatEntry; set => this.chatEntry = value; }
+        private EntityRef<Chat> chat;
+        public Chat Chat { get => this.chat; set => this.chat = value; }
 
         public GameObject GameObject;
 
