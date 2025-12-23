@@ -57,5 +57,30 @@
             friend.FromMessage(friendInfo);
             self.BlackList.Add(friend);
         }
+
+        public static void FriendRequestAccept(this FriendComponentC self, long unitId, int isAgree)
+        {
+            Friend friend = null;
+            foreach (Friend friend1 in self.RequestList)
+            {
+                if (friend1.UnitId == unitId)
+                {
+                    friend = friend1;
+                    break;
+                }
+            }
+
+            if (friend == null)
+            {
+                return;
+            }
+
+            self.RequestList.Remove(friend);
+
+            if (isAgree == 1)
+            {
+                self.FriendList.Add(friend);
+            }
+        }
     }
 }

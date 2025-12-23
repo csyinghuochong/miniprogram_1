@@ -25,7 +25,7 @@
                     return;
                 }
 
-                if (request.OpType == 0)
+                if (request.IsAgree == 1)
                 {
                     // 同意
                     friendUnitComponent.Children.TryGetValue(targetFrientUnitId, out Entity friendUnitEntity);

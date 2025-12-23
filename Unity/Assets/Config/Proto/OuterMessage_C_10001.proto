@@ -1107,8 +1107,8 @@ message Friend2C_FriendRequest // IFriendResponse
 message C2Friend_FriendRequestAccept // IFriendRequest
 {
 	int32 RpcId = 1;
-	int32 UnitId = 2;
-	int32 OpType = 3;
+	int64 UnitId = 2;
+	int32 IsAgree = 3;
 }
 
 message Friend2C_FriendRequestAccept // IFriendResponse

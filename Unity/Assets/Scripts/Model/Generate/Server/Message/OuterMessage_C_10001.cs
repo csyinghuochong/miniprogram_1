@@ -5024,10 +5024,10 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int UnitId { get; set; }
+        public long UnitId { get; set; }
 
         [MemoryPackOrder(2)]
-        public int OpType { get; set; }
+        public int IsAgree { get; set; }
 
         public override void Dispose()
         {
@@ -5038,7 +5038,7 @@ namespace ET
 
             this.RpcId = default;
             this.UnitId = default;
-            this.OpType = default;
+            this.IsAgree = default;
 
             ObjectPool.Instance.Recycle(this);
         }
