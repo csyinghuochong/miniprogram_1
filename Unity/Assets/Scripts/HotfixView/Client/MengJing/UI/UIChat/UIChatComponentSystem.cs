@@ -35,8 +35,17 @@ namespace ET.Client
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_Title = rc.Get<GameObject>("Text_Title").GetComponent<TMP_Text>();
+            
+            self.Scroll_PublicChatItem = rc.Get<GameObject>("Scroll_PublicChatItem");
             self.Content_UIPublicChatItem = rc.Get<GameObject>("Content_UIPublicChatItem").transform;
             self.UIPublicChatItem = rc.Get<GameObject>("UIPublicChatItem");
+            self.Scroll_PrivateChatPeopleItem = rc.Get<GameObject>("Scroll_PrivateChatPeopleItem");
+            self.Content_UIPrivateChatPeopleItem = rc.Get<GameObject>("Content_UIPrivateChatPeopleItem").transform;
+            self.UIPrivateChatPeopleItem = rc.Get<GameObject>("UIPrivateChatPeopleItem");
+            self.Scroll_PrivateChatItem = rc.Get<GameObject>("Scroll_PrivateChatItem");
+            self.Content_UIPrivateChatItem = rc.Get<GameObject>("Content_UIPrivateChatItem").transform;
+            self.UIPrivateChatItem = rc.Get<GameObject>("UIPrivateChatItem");
+            
             self.InputField_Content = rc.Get<GameObject>("InputField_Content").GetComponent<TMP_InputField>();
             self.Button_Emoji = rc.Get<GameObject>("Button_Emoji").GetComponent<Button>();
             self.Button_Send = rc.Get<GameObject>("Button_Send").GetComponent<Button>();
