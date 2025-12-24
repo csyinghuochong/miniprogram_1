@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,8 +26,13 @@ namespace ET.Client
             self.Text_Sort = rc.Get<GameObject>("Text_Sort").GetComponent<TMP_Text>();
         }
 
-        public static void UpdateInfo(this UIFriendItem self, FriendDate friendDate)
+        public static void UpdateInfo(this UIFriendItem self, FriendData friendData)
         {
+            self.FriendData = friendData;
+
+            self.Text_PlayerName.SetText(friendData.PlayerName);
+            self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
+            self.Text_PlayerStatus.SetText(friendData.OnLine == 1 ? "在线" : "离线");
         }
     }
 }

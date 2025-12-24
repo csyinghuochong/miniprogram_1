@@ -62,7 +62,7 @@ namespace ET.Client
         public static void UpdateFriendItemList(this UIFriendComponent self)
         {
             FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
-            List<EntityRef<FriendDate>> friendDataList = friendComponent.FriendList;
+            List<EntityRef<FriendData>> friendDataList = friendComponent.FriendList;
 
             while (self.UIFriendItemList.Count < friendDataList.Count)
             {
@@ -86,7 +86,7 @@ namespace ET.Client
         public static void UpdateFriendRequestItemList(this UIFriendComponent self)
         {
             FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
-            List<EntityRef<FriendDate>> friendDataList = friendComponent.RequestList;
+            List<EntityRef<FriendData>> friendDataList = friendComponent.RequestList;
 
             while (self.UIFriendRequestItemList.Count < friendDataList.Count)
             {

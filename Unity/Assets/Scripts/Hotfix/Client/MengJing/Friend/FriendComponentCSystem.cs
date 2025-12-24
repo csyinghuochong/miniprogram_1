@@ -15,23 +15,23 @@
 
         public static void Clear(this FriendComponentC self)
         {
-            foreach (FriendDate friend in self.FriendList)
+            foreach (FriendData friendData in self.FriendList)
             {
-                friend?.Dispose();
+                friendData?.Dispose();
             }
 
             self.FriendList.Clear();
 
-            foreach (FriendDate friend in self.RequestList)
+            foreach (FriendData friendData in self.RequestList)
             {
-                friend?.Dispose();
+                friendData?.Dispose();
             }
 
             self.RequestList.Clear();
 
-            foreach (FriendDate friend in self.BlackList)
+            foreach (FriendData friendData in self.BlackList)
             {
-                friend?.Dispose();
+                friendData?.Dispose();
             }
 
             self.BlackList.Clear();
@@ -39,47 +39,51 @@
 
         public static void AddFriendFromMessage(this FriendComponentC self, FriendDataInfo friendDataInfo)
         {
-            FriendDate friendDate = self.AddChild<FriendDate>();
-            friendDate.FromMessage(friendDataInfo);
-            self.FriendList.Add(friendDate);
+            FriendData friendData = self.AddChild<FriendData>();
+            friendData.FromMessage(friendDataInfo);
+            self.FriendList.Add(friendData);
         }
 
         public static void AddRequestFromMessage(this FriendComponentC self, FriendDataInfo friendDataInfo)
         {
-            FriendDate friendDate = self.AddChild<FriendDate>();
-            friendDate.FromMessage(friendDataInfo);
-            self.RequestList.Add(friendDate);
+            FriendData friendData = self.AddChild<FriendData>();
+            friendData.FromMessage(friendDataInfo);
+            self.RequestList.Add(friendData);
         }
 
         public static void AddBlackFromMessage(this FriendComponentC self, FriendDataInfo friendDataInfo)
         {
-            FriendDate friendDate = self.AddChild<FriendDate>();
-            friendDate.FromMessage(friendDataInfo);
-            self.BlackList.Add(friendDate);
+            FriendData friendData = self.AddChild<FriendData>();
+            friendData.FromMessage(friendDataInfo);
+            self.BlackList.Add(friendData);
         }
 
         public static void FriendRequestAccept(this FriendComponentC self, long unitId, int isAgree)
         {
-            FriendDate friendDate = null;
-            foreach (FriendDate friend1 in self.RequestList)
+            FriendData friendData = null;
+            foreach (FriendData data in self.RequestList)
             {
-                if (friend1.UnitId == unitId)
+                if (data.UnitId == unitId)
                 {
-                    friendDate = friend1;
+                    friendData = data;
                     break;
                 }
             }
 
-            if (friendDate == null)
+            if (friendData == null)
             {
                 return;
             }
 
-            self.RequestList.Remove(friendDate);
+            self.RequestList.Remove(friendData);
 
             if (isAgree == 1)
             {
-                self.FriendList.Add(friendDate);
+                self.FriendList.Add(friendData);
+            }
+            else
+            {
+                friendData.Dispose();
             }
         }
     }

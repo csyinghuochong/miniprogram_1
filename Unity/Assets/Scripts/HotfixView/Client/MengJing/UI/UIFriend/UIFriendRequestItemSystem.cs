@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,8 +26,13 @@ namespace ET.Client
             self.Button_Refuse = rc.Get<GameObject>("Button_Refuse").GetComponent<Button>();
         }
 
-        public static void UpdateInfo(this UIFriendRequestItem self, FriendDate friendData)
+        public static void UpdateInfo(this UIFriendRequestItem self, FriendData friendData)
         {
+            self.FriendData = friendData;
+
+            self.Text_PlayerName.SetText(friendData.PlayerName);
+            self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
+            self.Text_PlayerStatus.SetText(friendData.OnLine == 1 ? "在线" : "离线");
         }
     }
 }

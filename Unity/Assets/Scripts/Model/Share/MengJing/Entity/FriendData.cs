@@ -1,7 +1,7 @@
 ﻿namespace ET
 {
     [ChildOf]
-    public class FriendDate : Entity, IAwake, IDestroy
+    public class FriendData : Entity, IAwake, IDestroy
     {
         public long UnitId { get; set; }
         public int OnLine { get; set; }
