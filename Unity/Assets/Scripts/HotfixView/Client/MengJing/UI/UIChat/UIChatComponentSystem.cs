@@ -39,12 +39,15 @@ namespace ET.Client
             self.Scroll_PublicChatItem = rc.Get<GameObject>("Scroll_PublicChatItem");
             self.Content_UIPublicChatItem = rc.Get<GameObject>("Content_UIPublicChatItem").transform;
             self.UIPublicChatItem = rc.Get<GameObject>("UIPublicChatItem");
+            self.UIPublicChatItem.SetActive(false);
             self.Scroll_PrivateChatPeopleItem = rc.Get<GameObject>("Scroll_PrivateChatPeopleItem");
             self.Content_UIPrivateChatPeopleItem = rc.Get<GameObject>("Content_UIPrivateChatPeopleItem").transform;
             self.UIPrivateChatPeopleItem = rc.Get<GameObject>("UIPrivateChatPeopleItem");
+            self.UIPrivateChatPeopleItem.SetActive(false);
             self.Scroll_PrivateChatItem = rc.Get<GameObject>("Scroll_PrivateChatItem");
             self.Content_UIPrivateChatItem = rc.Get<GameObject>("Content_UIPrivateChatItem").transform;
             self.UIPrivateChatItem = rc.Get<GameObject>("UIPrivateChatItem");
+            self.UIPrivateChatItem.SetActive(false);
             
             self.InputField_Content = rc.Get<GameObject>("InputField_Content").GetComponent<TMP_InputField>();
             self.Button_Emoji = rc.Get<GameObject>("Button_Emoji").GetComponent<Button>();
@@ -57,7 +60,6 @@ namespace ET.Client
             self.Content_EmojiList = rc.Get<GameObject>("Content_EmojiList");
 
             self.GameObject_Emoji.SetActive(false);
-            self.UIPublicChatItem.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIChat); });
             self.Button_Emoji.AddListener(() => { self.GameObject_Emoji.SetActive(true); });
@@ -66,6 +68,8 @@ namespace ET.Client
             self.Button_Type_PrivateChat.AddListener(() => { self.SetShowType(2); });
             self.Button_CloseEmoji.AddListener(() => { self.GameObject_Emoji.SetActive(false); });
             self.Button_Send.AddListener(() => { self.OnButton_Send().Coroutine(); });
+            
+            self.SetShowType(0);
         }
 
         private static void SetShowType(this UIChatComponent self, int page)
@@ -78,6 +82,9 @@ namespace ET.Client
             self.Button_Type_PrivateChat.transform.Find("Image_On").gameObject.SetActive(page == 2);
             self.Button_Type_PrivateChat.transform.Find("Image_Off").gameObject.SetActive(page != 2);
 
+            
+            self.Scroll_PublicChatItem.gameObject.SetActive(page == 0);
+            
             self.UpdateItemList(page);
         }
 
