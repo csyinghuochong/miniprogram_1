@@ -20,7 +20,7 @@ namespace ET.Client
             self.UIFriendItem = rc.Get<GameObject>("UIFriendItem");
             self.UIFriendItem.SetActive(false);
             self.Scroll_FriendRequestItem = rc.Get<GameObject>("Scroll_FriendRequestItem");
-            self.Content_UIFriendRequestItem = rc.Get<GameObject>("Content_UIFriendItem").transform;
+            self.Content_UIFriendRequestItem = rc.Get<GameObject>("Content_UIFriendRequestItem").transform;
             self.UIFriendRequestItem = rc.Get<GameObject>("UIFriendRequestItem");
             self.UIFriendRequestItem.SetActive(false);
             self.Button_Type_GameFriend = rc.Get<GameObject>("Button_Type_GameFriend").GetComponent<Button>();

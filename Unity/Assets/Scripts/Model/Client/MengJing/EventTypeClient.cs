@@ -137,4 +137,8 @@ namespace ET.Client
     public struct ChatUpdate
     {
     }
+    
+    public struct FriendUpdate
+    {
+    }
 }

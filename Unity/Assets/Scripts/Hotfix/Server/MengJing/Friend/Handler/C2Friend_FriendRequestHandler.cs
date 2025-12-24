@@ -5,11 +5,11 @@
     {
         protected override async ETTask Run(FriendUnit friendUnit, C2Friend_FriendRequest request, Friend2C_FriendRequest response)
         {
-            Scene scene = friendUnit.Scene();
+            Scene root = friendUnit.Root();
 
-            using (await scene.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
+            using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
             {
-                FriendUnitComponent friendUnitComponent = scene.GetComponent<FriendUnitComponent>();
+                FriendUnitComponent friendUnitComponent = root.GetComponent<FriendUnitComponent>();
                 FriendComponentS myFriendComponent = friendUnit.GetComponent<FriendComponentS>();
 
                 long myUnitId = friendUnit.Id;
@@ -20,7 +20,7 @@
                     response.Error = ErrorCode.ERR_FriendIsSelf;
                     return;
                 }
-                
+
                 if (myFriendComponent.FriendList.Contains(targetFrientUnitId))
                 {
                     response.Error = ErrorCode.ERR_FriendIsFriend;
@@ -48,11 +48,15 @@
                     }
 
                     targetFriendComponent.RequestList.Add(myUnitId);
+
+                    Friend2C_ReceiveFriendRequest message = Friend2C_ReceiveFriendRequest.Create();
+                    message.FriendDataInfo = await FriendHelper.GetFriendDataInfo(root, myUnitId);
+                    MapMessageHelper.SendToClient(root, targetFriendUnit.Id, message);
                 }
                 else
                 {
                     // 离线
-                    FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(scene, request.UnitId);
+                    FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(root, request.UnitId);
 
                     if (targetFriendComponent == null)
                     {
@@ -74,7 +78,7 @@
 
                     targetFriendComponent.RequestList.Add(myUnitId);
 
-                    await UnitCacheHelper.SaveComponent(scene, targetFriendComponent);
+                    await UnitCacheHelper.SaveComponent(root, targetFriendComponent);
                 }
             }
 

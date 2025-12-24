@@ -5040,6 +5040,43 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.Friend2C_ReceiveFriendRequest)]
+    public partial class Friend2C_ReceiveFriendRequest : MessageObject, IMessage
+    {
+        public static Friend2C_ReceiveFriendRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_ReceiveFriendRequest), isFromPool) as Friend2C_ReceiveFriendRequest;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public FriendDataInfo FriendDataInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.FriendDataInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2Friend_FriendRequestAccept)]
     [ResponseType(nameof(Friend2C_FriendRequestAccept))]
     public partial class C2Friend_FriendRequestAccept : MessageObject, IFriendRequest
@@ -5247,7 +5284,8 @@ namespace ET
         public const ushort Friend2C_GetAllFriend = 10138;
         public const ushort C2Friend_FriendRequest = 10139;
         public const ushort Friend2C_FriendRequest = 10140;
-        public const ushort C2Friend_FriendRequestAccept = 10141;
-        public const ushort Friend2C_FriendRequestAccept = 10142;
+        public const ushort Friend2C_ReceiveFriendRequest = 10141;
+        public const ushort C2Friend_FriendRequestAccept = 10142;
+        public const ushort Friend2C_FriendRequestAccept = 10143;
     }
 }
