@@ -42,7 +42,7 @@ namespace ET.Client
 
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo);
             UIPlayerInfoComponent uiPlayerInfoComponent = ui.GetComponent<UIPlayerInfoComponent>();
-            uiPlayerInfoComponent.UpdateInfo(response);
+            uiPlayerInfoComponent.UpdateInfo(response.WatchPlayerInfo);
         }
     }
 }

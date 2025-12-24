@@ -12,6 +12,7 @@
                 FriendUnitComponent friendUnitComponent = scene.GetComponent<FriendUnitComponent>();
                 FriendComponentS myFriendComponent = friendUnit.GetComponent<FriendComponentS>();
 
+                long myUnitId = friendUnit.Id;
                 long targetFrientUnitId = request.UnitId;
 
                 if (targetFrientUnitId == friendUnit.Id)
@@ -34,19 +35,19 @@
                     // 在线
                     FriendComponentS targetFriendComponent = targetFriendUnit.GetComponent<FriendComponentS>();
 
-                    if (targetFriendComponent.FriendList.Contains(targetFrientUnitId))
+                    if (targetFriendComponent.FriendList.Contains(myUnitId))
                     {
                         response.Error = ErrorCode.ERR_FriendIsFriend;
                         return;
                     }
 
-                    if (targetFriendComponent.RequestList.Contains(targetFrientUnitId))
+                    if (targetFriendComponent.RequestList.Contains(myUnitId))
                     {
                         response.Error = ErrorCode.ERR_FriendIsRequest;
                         return;
                     }
 
-                    myFriendComponent.RequestList.Add(targetFrientUnitId);
+                    targetFriendComponent.RequestList.Add(myUnitId);
                 }
                 else
                 {
@@ -59,19 +60,19 @@
                         return;
                     }
 
-                    if (targetFriendComponent.FriendList.Contains(targetFrientUnitId))
+                    if (targetFriendComponent.FriendList.Contains(myUnitId))
                     {
                         response.Error = ErrorCode.ERR_FriendIsFriend;
                         return;
                     }
 
-                    if (targetFriendComponent.RequestList.Contains(targetFrientUnitId))
+                    if (targetFriendComponent.RequestList.Contains(myUnitId))
                     {
                         response.Error = ErrorCode.ERR_FriendIsRequest;
                         return;
                     }
 
-                    myFriendComponent.RequestList.Add(targetFrientUnitId);
+                    targetFriendComponent.RequestList.Add(myUnitId);
 
                     await UnitCacheHelper.SaveComponent(scene, targetFriendComponent);
                 }

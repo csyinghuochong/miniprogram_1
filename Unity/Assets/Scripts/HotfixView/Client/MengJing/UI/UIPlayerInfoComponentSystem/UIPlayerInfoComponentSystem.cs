@@ -32,17 +32,18 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIPlayerInfoComponent self)
         {
-            self.M2C_WatchPlayer = null;
+            self.WatchPlayerInfo = null;
         }
 
-        public static void UpdateInfo(this UIPlayerInfoComponent self, M2C_WatchPlayer response)
+        public static void UpdateInfo(this UIPlayerInfoComponent self, WatchPlayerInfo watchPlayerInfo)
         {
-            self.Text_PlayerName.SetText(response.PlayerName);
+            self.WatchPlayerInfo = watchPlayerInfo;
+            self.Text_PlayerName.SetText(self.WatchPlayerInfo.PlayerName);
         }
 
         private static async ETTask OnButton_AddFriend(this UIPlayerInfoComponent self)
         {
-            int error = await ClientFriendHelper.FriendRequest(self.Root(), self.M2C_WatchPlayer.UnitId);
+            int error = await ClientFriendHelper.FriendRequest(self.Root(), self.WatchPlayerInfo.UnitId);
             if (error == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("申请成功");

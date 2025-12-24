@@ -6,7 +6,7 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIPlayerInfoComponent : Entity, IAwake, IDestroy
     {
-        public M2C_WatchPlayer M2C_WatchPlayer;
+        public WatchPlayerInfo WatchPlayerInfo;
 
         public Button Button_Close;
         public Image Image_PlayerHead;

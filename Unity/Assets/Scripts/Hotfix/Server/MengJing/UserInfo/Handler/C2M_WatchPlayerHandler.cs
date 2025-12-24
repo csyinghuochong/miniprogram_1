@@ -14,8 +14,11 @@
                 return;
             }
 
-            response.UnitId = request.UnitId;
-            response.PlayerName = userInfoComponent.GetPlayerName();
+            WatchPlayerInfo watchPlayerInfo = WatchPlayerInfo.Create();
+            watchPlayerInfo.UnitId = request.UnitId;
+            watchPlayerInfo.PlayerName = userInfoComponent.GetPlayerName();
+
+            response.WatchPlayerInfo = watchPlayerInfo;
 
             await ETTask.CompletedTask;
         }
