@@ -4889,6 +4889,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public int Lv { get; set; }
 
+        [MemoryPackOrder(4)]
+        public long CombatPower { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -4900,6 +4903,7 @@ namespace ET
             this.OnLine = default;
             this.PlayerName = default;
             this.Lv = default;
+            this.CombatPower = default;
 
             ObjectPool.Instance.Recycle(this);
         }

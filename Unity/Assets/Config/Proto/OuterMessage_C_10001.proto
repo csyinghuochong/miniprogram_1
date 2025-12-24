@@ -1077,6 +1077,7 @@ message FriendDataInfo
 	int32 OnLine = 2;
 	string PlayerName = 3;
 	int32 Lv = 4;
+	int64 CombatPower = 5;
 }
 
 //ResponseType Friend2C_GetAllFriend

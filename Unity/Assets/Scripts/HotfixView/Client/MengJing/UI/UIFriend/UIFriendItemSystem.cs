@@ -31,8 +31,9 @@ namespace ET.Client
             self.FriendData = friendData;
 
             self.Text_PlayerName.SetText(friendData.PlayerName);
-            self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
             self.Text_PlayerStatus.SetText(friendData.OnLine == 1 ? "在线" : "离线");
+            self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
+            self.Text_PlayerCE.SetTextFormat("战力:{0}", friendData.CombatPower);
         }
     }
 }

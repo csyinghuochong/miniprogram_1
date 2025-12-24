@@ -20,6 +20,7 @@
             friendDataInfo.OnLine = self.OnLine;
             friendDataInfo.PlayerName = self.PlayerName;
             friendDataInfo.Lv = self.Lv;
+            friendDataInfo.CombatPower = self.CombatPower;
             return friendDataInfo;
         }
 
@@ -29,6 +30,7 @@
             self.OnLine = friendDataInfo.OnLine;
             self.PlayerName = friendDataInfo.PlayerName;
             self.Lv = friendDataInfo.Lv;
+            self.CombatPower = friendDataInfo.CombatPower;
         }
     }
 }
