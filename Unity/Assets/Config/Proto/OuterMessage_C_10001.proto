@@ -1137,3 +1137,22 @@ message Friend2C_FriendRequestSucceed // IMessage
 {
 	FriendDataInfo FriendDataInfo = 1;
 }
+
+//ResponseType Friend2C_DeleteFriend
+message C2Friend_DeleteFriend // IFriendRequest
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+}
+
+message Friend2C_DeleteFriend // IFriendResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+message Friend2C_DeleteYou // IMessage
+{
+	int64 UnitId = 1;
+}

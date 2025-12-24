@@ -21,11 +21,13 @@ namespace ET.Client
             self.Text_PlayerCE = rc.Get<GameObject>("Text_PlayerCE").GetComponent<TMP_Text>();
             self.Text_PlayerLianMeng = rc.Get<GameObject>("Text_PlayerLianMeng").GetComponent<TMP_Text>();
             self.Button_AddFriend = rc.Get<GameObject>("Button_AddFriend").GetComponent<Button>();
+            self.Button_DeleteFriend = rc.Get<GameObject>("Button_DeleteFriend").GetComponent<Button>();
             self.Button_Report = rc.Get<GameObject>("Button_Report").GetComponent<Button>();
             self.Button_Black = rc.Get<GameObject>("Button_Black").GetComponent<Button>();
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIPlayerInfo); });
             self.Button_AddFriend.AddListener(() => { self.OnButton_AddFriend().Coroutine(); });
+            self.Button_DeleteFriend.AddListener(() => { self.OnButton_DeleteFriend().Coroutine(); });
             self.Button_Report.AddListener(() => { self.OnButton_Report().Coroutine(); });
             self.Button_Black.AddListener(() => { self.OnButton_Black().Coroutine(); });
         }
@@ -44,6 +46,11 @@ namespace ET.Client
 
             // self.WatchPlayerInfo.HeroFormation
             // self.WatchPlayerInfo.HeroInfoList
+
+            FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
+            bool isFriend = friendComponent.IsFriend(self.WatchPlayerInfo.UnitId);
+            self.Button_AddFriend.gameObject.SetActive(!isFriend);
+            self.Button_DeleteFriend.gameObject.SetActive(isFriend);
         }
 
         private static async ETTask OnButton_AddFriend(this UIPlayerInfoComponent self)
@@ -52,6 +59,15 @@ namespace ET.Client
             if (error == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("申请成功");
+            }
+        }
+
+        private static async ETTask OnButton_DeleteFriend(this UIPlayerInfoComponent self)
+        {
+            int error = await ClientFriendHelper.DeleteFriend(self.Root(), self.WatchPlayerInfo.UnitId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("删除成功");
             }
         }
 

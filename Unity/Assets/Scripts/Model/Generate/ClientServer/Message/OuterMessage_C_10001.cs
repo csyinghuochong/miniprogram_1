@@ -5172,6 +5172,94 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2Friend_DeleteFriend)]
+    [ResponseType(nameof(Friend2C_DeleteFriend))]
+    public partial class C2Friend_DeleteFriend : MessageObject, IFriendRequest
+    {
+        public static C2Friend_DeleteFriend Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Friend_DeleteFriend), isFromPool) as C2Friend_DeleteFriend;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_DeleteFriend)]
+    public partial class Friend2C_DeleteFriend : MessageObject, IFriendResponse
+    {
+        public static Friend2C_DeleteFriend Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_DeleteFriend), isFromPool) as Friend2C_DeleteFriend;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_DeleteYou)]
+    public partial class Friend2C_DeleteYou : MessageObject, IMessage
+    {
+        public static Friend2C_DeleteYou Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_DeleteYou), isFromPool) as Friend2C_DeleteYou;
+        }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -5317,5 +5405,8 @@ namespace ET
         public const ushort C2Friend_FriendRequestAccept = 10142;
         public const ushort Friend2C_FriendRequestAccept = 10143;
         public const ushort Friend2C_FriendRequestSucceed = 10144;
+        public const ushort C2Friend_DeleteFriend = 10145;
+        public const ushort Friend2C_DeleteFriend = 10146;
+        public const ushort Friend2C_DeleteYou = 10147;
     }
 }

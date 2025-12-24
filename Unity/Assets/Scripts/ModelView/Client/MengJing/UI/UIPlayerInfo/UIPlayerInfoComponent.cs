@@ -15,6 +15,7 @@ namespace ET.Client
         public TMP_Text Text_PlayerCE;
         public TMP_Text Text_PlayerLianMeng;
         public Button Button_AddFriend;
+        public Button Button_DeleteFriend;
         public Button Button_Report;
         public Button Button_Black;
     }

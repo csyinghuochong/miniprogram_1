@@ -86,5 +86,31 @@
                 friendData.Dispose();
             }
         }
+
+        public static void DeleteFriend(this FriendComponentC self, long unitId)
+        {
+            for (int i = self.FriendList.Count - 1; i >= 0; i--)
+            {
+                FriendData friendData = self.FriendList[i];
+                if (friendData.UnitId == unitId)
+                {
+                    self.FriendList.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
+        public static bool IsFriend(this FriendComponentC self, long unitId)
+        {
+            foreach (FriendData friendData in self.FriendList)
+            {
+                if (friendData.UnitId == unitId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

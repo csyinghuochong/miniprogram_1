@@ -124,6 +124,8 @@ MonoBehaviour:
     gameObject: {fileID: 4171866611649425259}
   - key: Button_AddFriend
     gameObject: {fileID: 5458412756930348778}
+  - key: Button_DeleteFriend
+    gameObject: {fileID: 5277347566174714527}
   - key: Button_Report
     gameObject: {fileID: 6649362972350625530}
   - key: Button_Black

@@ -60,5 +60,23 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> DeleteFriend(Scene root, long unitId)
+        {
+            C2Friend_DeleteFriend request = C2Friend_DeleteFriend.Create();
+            request.UnitId = unitId;
+
+            Friend2C_DeleteFriend response = (Friend2C_DeleteFriend)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                FriendComponentC friendComponentC = root.GetComponent<FriendComponentC>();
+                friendComponentC.DeleteFriend(unitId);
+            }
+
+            EventSystem.Instance.Publish(root, new FriendUpdate());
+
+            return response.Error;
+        }
     }
 }
