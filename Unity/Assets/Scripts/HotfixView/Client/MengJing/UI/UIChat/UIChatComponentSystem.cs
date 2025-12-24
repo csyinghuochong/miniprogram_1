@@ -68,10 +68,18 @@ namespace ET.Client
             self.Button_Type_PrivateChat.AddListener(() => { self.SetShowType(2); });
             self.Button_CloseEmoji.AddListener(() => { self.GameObject_Emoji.SetActive(false); });
             self.Button_Send.AddListener(() => { self.OnButton_Send().Coroutine(); });
-            
+
+            for (int i = 0; i < self.Content_EmojiList.transform.childCount; i++)
+            {
+                GameObject go = self.Content_EmojiList.transform.GetChild(i).gameObject;
+                go.GetComponent<Button>().AddListener(() => { self.InputField_Content.text += $"<sprite={go.name}>"; });
+            }
+
             self.SetShowType(0);
         }
 
+        
+        
         private static void SetShowType(this UIChatComponent self, int page)
         {
             self.CurrentPage = page;

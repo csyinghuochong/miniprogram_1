@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 8435267347104022789}
   - component: {fileID: 3081304404893028675}
   m_Layer: 5
-  m_Name: Button_OneEmoji
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1688,7 +1688,7 @@ GameObject:
   - component: {fileID: 7989076730095858501}
   - component: {fileID: 7233710353788452459}
   m_Layer: 5
-  m_Name: Button_OneEmoji
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2322,7 +2322,7 @@ GameObject:
   - component: {fileID: 5570465922296319286}
   - component: {fileID: 8832789108292564432}
   m_Layer: 5
-  m_Name: Button_OneEmoji
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5207,7 +5207,7 @@ GameObject:
   - component: {fileID: 3755456665747502223}
   - component: {fileID: 8467327957146184933}
   m_Layer: 5
-  m_Name: Button_OneEmoji
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5899,7 +5899,7 @@ GameObject:
   - component: {fileID: 7014074567714701167}
   - component: {fileID: 6773582432132605605}
   m_Layer: 5
-  m_Name: Button_OneEmoji
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7150,7 +7150,7 @@ GameObject:
   - component: {fileID: 5387553067156471384}
   - component: {fileID: 6174010420786470981}
   m_Layer: 5
-  m_Name: Button_OneEmoji
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8064,7 +8064,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 99a25df485d4d6449ac1933c9517755d, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
