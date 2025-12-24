@@ -13,17 +13,17 @@
                 FriendComponentC friendComponentC = root.GetComponent<FriendComponentC>();
                 friendComponentC.Clear();
 
-                foreach (FriendInfo friendInfo in response.FriendList)
+                foreach (FriendDataInfo friendInfo in response.FriendList)
                 {
                     friendComponentC.AddFriendFromMessage(friendInfo);
                 }
 
-                foreach (FriendInfo friendInfo in response.RequestList)
+                foreach (FriendDataInfo friendInfo in response.RequestList)
                 {
                     friendComponentC.AddRequestFromMessage(friendInfo);
                 }
 
-                foreach (FriendInfo friendInfo in response.BlackList)
+                foreach (FriendDataInfo friendInfo in response.BlackList)
                 {
                     friendComponentC.AddBlackFromMessage(friendInfo);
                 }

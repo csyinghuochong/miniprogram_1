@@ -25,5 +25,8 @@ namespace ET.Client
             self.Button_Refuse = rc.Get<GameObject>("Button_Refuse").GetComponent<Button>();
         }
 
+        public static void UpdateInfo(this UIFriendRequestItem self, FriendDate friendData)
+        {
+        }
     }
 }

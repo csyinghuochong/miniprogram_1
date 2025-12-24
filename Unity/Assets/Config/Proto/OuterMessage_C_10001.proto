@@ -1066,7 +1066,7 @@ message Chat2C_NoticeChat // IMessage
 	ChatInfo ChatInfo = 1;
 }
 
-message FriendInfo 
+message FriendDataInfo 
 {
 	int64 UnitId = 1;
 	int32 OnLine = 2;
@@ -1085,9 +1085,9 @@ message Friend2C_GetAllFriend // IFriendResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	repeated FriendInfo FriendList = 4;
-	repeated FriendInfo RequestList = 5;
-	repeated FriendInfo BlackList = 6;
+	repeated FriendDataInfo FriendList = 4;
+	repeated FriendDataInfo RequestList = 5;
+	repeated FriendDataInfo BlackList = 6;
 }
 
 //ResponseType Friend2C_FriendRequest

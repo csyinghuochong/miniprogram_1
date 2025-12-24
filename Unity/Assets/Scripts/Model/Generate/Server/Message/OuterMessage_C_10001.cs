@@ -4844,12 +4844,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.FriendInfo)]
-    public partial class FriendInfo : MessageObject
+    [Message(OuterMessage.FriendDataInfo)]
+    public partial class FriendDataInfo : MessageObject
     {
-        public static FriendInfo Create(bool isFromPool = false)
+        public static FriendDataInfo Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(FriendInfo), isFromPool) as FriendInfo;
+            return ObjectPool.Instance.Fetch(typeof(FriendDataInfo), isFromPool) as FriendDataInfo;
         }
 
         [MemoryPackOrder(0)]
@@ -4925,13 +4925,13 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(3)]
-        public List<FriendInfo> FriendList { get; set; } = new();
+        public List<FriendDataInfo> FriendList { get; set; } = new();
 
         [MemoryPackOrder(4)]
-        public List<FriendInfo> RequestList { get; set; } = new();
+        public List<FriendDataInfo> RequestList { get; set; } = new();
 
         [MemoryPackOrder(5)]
-        public List<FriendInfo> BlackList { get; set; } = new();
+        public List<FriendDataInfo> BlackList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -5216,7 +5216,7 @@ namespace ET
         public const ushort C2Chat_SendChat = 10132;
         public const ushort Chat2C_SendChat = 10133;
         public const ushort Chat2C_NoticeChat = 10134;
-        public const ushort FriendInfo = 10135;
+        public const ushort FriendDataInfo = 10135;
         public const ushort C2Friend_GetAllFriend = 10136;
         public const ushort Friend2C_GetAllFriend = 10137;
         public const ushort C2Friend_FriendRequest = 10138;

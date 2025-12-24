@@ -17,26 +17,26 @@ namespace ET.Server
             await ETTask.CompletedTask;
         }
 
-        private async ETTask<List<FriendInfo>> GetFriendInfoList(Scene root, List<long> friendUnitIdList)
+        private async ETTask<List<FriendDataInfo>> GetFriendInfoList(Scene root, List<long> friendUnitIdList)
         {
             FriendUnitComponent friendUnitComponent = root.GetComponent<FriendUnitComponent>();
 
-            List<FriendInfo> friendInfoList = new List<FriendInfo>();
+            List<FriendDataInfo> friendDataInfoList = new List<FriendDataInfo>();
 
             foreach (long unitId in friendUnitIdList)
             {
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, unitId);
 
-                FriendInfo friendInfo = FriendInfo.Create();
-                friendInfo.UnitId = unitId;
-                friendInfo.OnLine = friendUnitComponent.Children.ContainsKey(unitId) ? 1 : 0;
-                friendInfo.PlayerName = userInfoComponent.GetPlayerName();
-                friendInfo.Lv = userInfoComponent.GetLv();
+                FriendDataInfo friendDataInfo = FriendDataInfo.Create();
+                friendDataInfo.UnitId = unitId;
+                friendDataInfo.OnLine = friendUnitComponent.Children.ContainsKey(unitId) ? 1 : 0;
+                friendDataInfo.PlayerName = userInfoComponent.GetPlayerName();
+                friendDataInfo.Lv = userInfoComponent.GetLv();
 
-                friendInfoList.Add(friendInfo);
+                friendDataInfoList.Add(friendDataInfo);
             }
 
-            return friendInfoList;
+            return friendDataInfoList;
         }
     }
 }

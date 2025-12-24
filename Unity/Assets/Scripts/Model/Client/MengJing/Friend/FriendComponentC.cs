@@ -8,16 +8,16 @@ namespace ET.Client
         /// <summary>
         /// 好友列表
         /// </summary>
-        public List<EntityRef<Friend>> FriendList { get; set; } = new();
+        public List<EntityRef<FriendDate>> FriendList { get; set; } = new();
 
         /// <summary>
         /// 申请列表
         /// </summary>
-        public List<EntityRef<Friend>> RequestList { get; set; } = new();
+        public List<EntityRef<FriendDate>> RequestList { get; set; } = new();
 
         /// <summary>
         /// 黑名单
         /// </summary>
-        public List<EntityRef<Friend>> BlackList { get; set; } = new();
+        public List<EntityRef<FriendDate>> BlackList { get; set; } = new();
     }
 }

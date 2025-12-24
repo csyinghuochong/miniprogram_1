@@ -1,13 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UIFriendComponent: Entity, IAwake
+    public class UIFriendComponent : Entity, IAwake
     {
         public int CurrentPage { get; set; } = 0;
-        
+
+        public List<UIFriendItem> UIFriendItemList { get; set; } = new();
+        public List<UIFriendRequestItem> UIFriendRequestItemList { get; set; } = new();
+
         public Button Button_Close;
         public GameObject Scroll_FriendItem;
         public Transform Content_UIFriendItem;

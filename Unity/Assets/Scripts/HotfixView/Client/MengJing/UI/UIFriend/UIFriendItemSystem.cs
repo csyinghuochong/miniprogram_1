@@ -23,9 +23,10 @@ namespace ET.Client
             self.Text_PlayerStatus = rc.Get<GameObject>("Text_PlayerStatus").GetComponent<TMP_Text>();
             self.Button_Chat = rc.Get<GameObject>("Button_Chat").GetComponent<Button>();
             self.Text_Sort = rc.Get<GameObject>("Text_Sort").GetComponent<TMP_Text>();
-
-
         }
 
+        public static void UpdateInfo(this UIFriendItem self, FriendDate friendDate)
+        {
+        }
     }
 }

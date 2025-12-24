@@ -7,7 +7,7 @@ namespace ET.Client
     [ChildOf]
     public class UIFriendItem : Entity, IAwake<GameObject>
     {
-        public GameObject GameObject;
+        public GameObject GameObject { get; set; }
 
         public Image Image_PlayerHead;
         public Button Button_OnPlayerHead;
