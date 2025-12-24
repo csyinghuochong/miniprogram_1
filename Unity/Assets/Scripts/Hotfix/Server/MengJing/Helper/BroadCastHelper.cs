@@ -5,9 +5,9 @@ namespace ET.Server
 {
     public static class BroadCastHelper
     {
-        public static async ETTask StopServer(Scene root)
+        public static async ETTask SaveData(Scene root)
         {
-            M2All_StopServer request = M2All_StopServer.Create();
+            M2All_SaveData request = M2All_SaveData.Create();
 
             List<StartSceneConfig> otherScenes = BroadCastHelper.GetAllScene(root.Zone());
 

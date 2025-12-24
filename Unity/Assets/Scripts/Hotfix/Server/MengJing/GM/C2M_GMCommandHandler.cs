@@ -49,7 +49,7 @@ namespace ET.Server
                 
                 if (commands[0] == "StopServer")
                 {
-                    BroadCastHelper.StopServer(unit.Scene()).Coroutine();
+                    BroadCastHelper.SaveData(unit.Scene()).Coroutine();
                     
                     return;
                 }

@@ -3,9 +3,9 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.All)]
-    public class M2All_StopServerHandler : MessageHandler<Scene, M2All_StopServer, All2M_StopServer>
+    public class M2All_SaveDataHandler : MessageHandler<Scene, M2All_SaveData, All2M_SaveData>
     {
-        protected override async ETTask Run(Scene scene, M2All_StopServer request, All2M_StopServer response)
+        protected override async ETTask Run(Scene scene, M2All_SaveData request, All2M_SaveData response)
         {
             try
             {
@@ -26,7 +26,25 @@ namespace ET.Server
                             await UnitCacheHelper.SaveComponent(scene, mailUnit.GetComponent<MailComponentS>());
                         }
 
-                        Log.Debug($"数据落地:  Mail: {scene.Zone()}");
+                        Log.Info($"数据落地:  Mail: {scene.Zone()}");
+
+                        break;
+                    }
+                    case SceneType.Friend:
+                    {
+                        foreach (Entity entity in scene.GetComponent<FriendUnitComponent>().Children.Values)
+                        {
+                            FriendUnit friendUnit = entity as FriendUnit;
+
+                            if (friendUnit == null)
+                            {
+                                continue;
+                            }
+
+                            await UnitCacheHelper.SaveComponent(scene, friendUnit.GetComponent<FriendComponentS>());
+                        }
+
+                        Log.Info($"数据落地:  Friend: {scene.Zone()}");
 
                         break;
                     }

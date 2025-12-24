@@ -2160,13 +2160,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2All_StopServer)]
-    [ResponseType(nameof(All2M_StopServer))]
-    public partial class M2All_StopServer : MessageObject, IRequest
+    [Message(InnerMessage.M2All_SaveData)]
+    [ResponseType(nameof(All2M_SaveData))]
+    public partial class M2All_SaveData : MessageObject, IRequest
     {
-        public static M2All_StopServer Create(bool isFromPool = false)
+        public static M2All_SaveData Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2All_StopServer), isFromPool) as M2All_StopServer;
+            return ObjectPool.Instance.Fetch(typeof(M2All_SaveData), isFromPool) as M2All_SaveData;
         }
 
         [MemoryPackOrder(89)]
@@ -2190,12 +2190,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.All2M_StopServer)]
-    public partial class All2M_StopServer : MessageObject, IResponse
+    [Message(InnerMessage.All2M_SaveData)]
+    public partial class All2M_SaveData : MessageObject, IResponse
     {
-        public static All2M_StopServer Create(bool isFromPool = false)
+        public static All2M_SaveData Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(All2M_StopServer), isFromPool) as All2M_StopServer;
+            return ObjectPool.Instance.Fetch(typeof(All2M_SaveData), isFromPool) as All2M_SaveData;
         }
 
         [MemoryPackOrder(89)]
@@ -2598,8 +2598,8 @@ namespace ET
         public const ushort Mail2M_SendMail = 20062;
         public const ushort Mail2M_ReceiveReward = 20063;
         public const ushort M2Mail_ReceiveReward = 20064;
-        public const ushort M2All_StopServer = 20065;
-        public const ushort All2M_StopServer = 20066;
+        public const ushort M2All_SaveData = 20065;
+        public const ushort All2M_SaveData = 20066;
         public const ushort A2A_BroadcastSceneRequest = 20067;
         public const ushort A2A_BroadcastSceneResponse = 20068;
         public const ushort G2Chat_LoginChatServer = 20069;

@@ -31,6 +31,7 @@ namespace ET
         Mail = 1L << 29,
         Chat = 1L << 30,
         Friend = 1L << 31,
+        Center = 1L << 32,
 
         // 客户端
         Demo = 1L << 50,

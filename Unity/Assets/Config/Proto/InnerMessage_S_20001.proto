@@ -344,9 +344,9 @@ message Other2UnitCache_AddOrUpdateUnit // IRequest
 {
 	 int32 RpcId = 90;
 
-     int64 UnitId = 1;				  // 需要缓存的UnitId
-     repeated string EntityTypes = 2;  //实体类型
-     repeated bytes EntityBytes = 3;   //实体序列化后的bytes
+     int64 UnitId = 1; // 需要缓存的UnitId
+     repeated string EntityTypes = 2; //实体类型
+     repeated bytes EntityBytes = 3; //实体序列化后的bytes
 }
 
 message UnitCache2Other_AddOrUpdateUnit // IResponse
@@ -499,14 +499,14 @@ message M2Mail_ReceiveReward // IResponse
     string Message = 3;
 }
 
-//ResponseType All2M_StopServer
-message M2All_StopServer // IRequest
+//ResponseType All2M_SaveData
+message M2All_SaveData // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 }
 
-message All2M_StopServer // IResponse
+message All2M_SaveData // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
