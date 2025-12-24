@@ -967,6 +967,9 @@ message WatchPlayerInfo
 {	
 	int64 UnitId = 1;
 	string PlayerName = 2;
+	int64 CombatPower = 3;
+	repeated int64 HeroFormation = 4;
+	repeated HeroInfo HeroInfoList = 5;
 }
 
 message M2C_WatchPlayer // ILocationResponse

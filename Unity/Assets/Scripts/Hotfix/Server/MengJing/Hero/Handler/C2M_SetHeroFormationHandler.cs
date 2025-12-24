@@ -22,7 +22,7 @@
                 numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId);
             }
             
-            response.Formation = heroComponent.Formation;
+            response.Formation.AddRange(heroComponent.Formation);
 
             await ETTask.CompletedTask;
         }

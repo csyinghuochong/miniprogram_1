@@ -4389,6 +4389,15 @@ namespace ET
         [MemoryPackOrder(1)]
         public string PlayerName { get; set; }
 
+        [MemoryPackOrder(2)]
+        public long CombatPower { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<long> HeroFormation { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<HeroInfo> HeroInfoList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -4398,6 +4407,9 @@ namespace ET
 
             this.UnitId = default;
             this.PlayerName = default;
+            this.CombatPower = default;
+            this.HeroFormation.Clear();
+            this.HeroInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

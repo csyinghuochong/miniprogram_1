@@ -15,7 +15,7 @@ namespace ET.Server
                 response.HeroList.Add(hero.ToMessage());
             }
 
-            response.Formation = heroComponentS.Formation;
+            response.Formation.AddRange(heroComponentS.Formation);
 
             await ETTask.CompletedTask;
         }

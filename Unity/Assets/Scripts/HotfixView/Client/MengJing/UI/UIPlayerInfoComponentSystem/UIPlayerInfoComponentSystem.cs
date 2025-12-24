@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,10 @@ namespace ET.Client
         {
             self.WatchPlayerInfo = watchPlayerInfo;
             self.Text_PlayerName.SetText(self.WatchPlayerInfo.PlayerName);
+            self.Text_PlayerCE.SetTextFormat("战力:{0}", self.WatchPlayerInfo.CombatPower);
+
+            // self.WatchPlayerInfo.HeroFormation
+            // self.WatchPlayerInfo.HeroInfoList
         }
 
         private static async ETTask OnButton_AddFriend(this UIPlayerInfoComponent self)
