@@ -5,12 +5,13 @@
     {
         protected override async ETTask Run(FriendUnit friendUnit, C2Friend_FriendRequestAccept request, Friend2C_FriendRequestAccept response)
         {
-            Scene scene = friendUnit.Scene();
-            using (await scene.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
+            Scene root = friendUnit.Scene();
+            using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
             {
-                FriendUnitComponent friendUnitComponent = scene.GetComponent<FriendUnitComponent>();
+                FriendUnitComponent friendUnitComponent = root.GetComponent<FriendUnitComponent>();
                 FriendComponentS myFriendComponent = friendUnit.GetComponent<FriendComponentS>();
 
+                long myUnitId = friendUnit.Id;
                 long targetFrientUnitId = request.UnitId;
 
                 if (myFriendComponent.FriendList.Contains(targetFrientUnitId))
@@ -36,15 +37,19 @@
                         // 在线
                         FriendComponentS targetFriendComponent = targetFriendUnit.GetComponent<FriendComponentS>();
 
-                        targetFriendComponent.FriendList.Add(friendUnit.Id);
+                        targetFriendComponent.FriendList.Add(myUnitId);
 
                         myFriendComponent.FriendList.Add(targetFrientUnitId);
                         myFriendComponent.RequestList.Remove(targetFrientUnitId);
+                        
+                        Friend2C_FriendRequestSucceed message = Friend2C_FriendRequestSucceed.Create();
+                        message.FriendDataInfo = await FriendHelper.GetFriendDataInfo(root, targetFrientUnitId);
+                        MapMessageHelper.SendToClient(root, targetFriendUnit.Id, message);
                     }
                     else
                     {
                         // 离线
-                        FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(scene, request.UnitId);
+                        FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(root, request.UnitId);
 
                         if (targetFriendComponent == null)
                         {
@@ -52,12 +57,12 @@
                             return;
                         }
 
-                        targetFriendComponent.FriendList.Add(friendUnit.Id);
+                        targetFriendComponent.FriendList.Add(myUnitId);
 
                         myFriendComponent.FriendList.Add(targetFrientUnitId);
                         myFriendComponent.RequestList.Remove(targetFrientUnitId);
 
-                        await UnitCacheHelper.SaveComponent(scene, targetFriendComponent);
+                        await UnitCacheHelper.SaveComponent(root, targetFriendComponent);
                     }
                 }
                 else

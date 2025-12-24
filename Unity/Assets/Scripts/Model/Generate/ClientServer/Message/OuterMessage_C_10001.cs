@@ -5049,15 +5049,6 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(1)]
-        public int Error { get; set; }
-
-        [MemoryPackOrder(2)]
-        public string Message { get; set; }
-
-        [MemoryPackOrder(3)]
         public FriendDataInfo FriendDataInfo { get; set; }
 
         public override void Dispose()
@@ -5067,9 +5058,6 @@ namespace ET
                 return;
             }
 
-            this.RpcId = default;
-            this.Error = default;
-            this.Message = default;
             this.FriendDataInfo = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -5138,6 +5126,31 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_FriendRequestSucceed)]
+    public partial class Friend2C_FriendRequestSucceed : MessageObject, IMessage
+    {
+        public static Friend2C_FriendRequestSucceed Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_FriendRequestSucceed), isFromPool) as Friend2C_FriendRequestSucceed;
+        }
+
+        [MemoryPackOrder(0)]
+        public FriendDataInfo FriendDataInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.FriendDataInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -5287,5 +5300,6 @@ namespace ET
         public const ushort Friend2C_ReceiveFriendRequest = 10141;
         public const ushort C2Friend_FriendRequestAccept = 10142;
         public const ushort Friend2C_FriendRequestAccept = 10143;
+        public const ushort Friend2C_FriendRequestSucceed = 10144;
     }
 }

@@ -1111,10 +1111,7 @@ message Friend2C_FriendRequest // IFriendResponse
 
 message Friend2C_ReceiveFriendRequest // IMessage
 {
-	int32 RpcId = 1;
-	int32 Error = 2;
-	string Message = 3;
-	FriendDataInfo FriendDataInfo = 4;
+	FriendDataInfo FriendDataInfo = 1;
 }
 
 //ResponseType Friend2C_FriendRequestAccept
@@ -1130,4 +1127,9 @@ message Friend2C_FriendRequestAccept // IFriendResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
+}
+
+message Friend2C_FriendRequestSucceed // IMessage
+{
+	FriendDataInfo FriendDataInfo = 1;
 }

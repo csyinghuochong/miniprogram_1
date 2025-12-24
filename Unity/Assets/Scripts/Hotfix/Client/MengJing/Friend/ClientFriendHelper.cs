@@ -56,6 +56,8 @@
                 friendComponentC.FriendRequestAccept(unitId, isAgree);
             }
 
+            EventSystem.Instance.Publish(root, new FriendUpdate());
+
             return response.Error;
         }
     }

@@ -24,6 +24,9 @@ namespace ET.Client
             self.Text_PlayerStatus = rc.Get<GameObject>("Text_PlayerStatus").GetComponent<TMP_Text>();
             self.Button_Accept = rc.Get<GameObject>("Button_Accept").GetComponent<Button>();
             self.Button_Refuse = rc.Get<GameObject>("Button_Refuse").GetComponent<Button>();
+
+            self.Button_Accept.AddListener(() => self.OnButton_Accept().Coroutine());
+            self.Button_Refuse.AddListener(() => self.OnButton_Refuse().Coroutine());
         }
 
         public static void UpdateInfo(this UIFriendRequestItem self, FriendData friendData)
@@ -33,6 +36,26 @@ namespace ET.Client
             self.Text_PlayerName.SetText(friendData.PlayerName);
             self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
             self.Text_PlayerStatus.SetText(friendData.OnLine == 1 ? "在线" : "离线");
+        }
+
+        private static async ETTask OnButton_Accept(this UIFriendRequestItem self)
+        {
+            int error = await ClientFriendHelper.FriendRequestAccept(self.Root(), self.FriendData.UnitId, 1);
+
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.GetParent<UIFriendComponent>().UpdateFriendRequestItemList();
+            }
+        }
+
+        private static async ETTask OnButton_Refuse(this UIFriendRequestItem self)
+        {
+            int error = await ClientFriendHelper.FriendRequestAccept(self.Root(), self.FriendData.UnitId, 0);
+
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.GetParent<UIFriendComponent>().UpdateFriendRequestItemList();
+            }
         }
     }
 }

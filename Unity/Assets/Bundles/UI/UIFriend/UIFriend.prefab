@@ -4961,7 +4961,7 @@ MonoBehaviour:
     gameObject: {fileID: 6471555649329765905}
   - key: Button_OnPlayerHead
     gameObject: {fileID: 6281430133372421172}
-  - key: Text_PalyerName
+  - key: Text_PlayerName
     gameObject: {fileID: 851954734172288388}
   - key: Text_PlayerLv
     gameObject: {fileID: 525368433660995140}
