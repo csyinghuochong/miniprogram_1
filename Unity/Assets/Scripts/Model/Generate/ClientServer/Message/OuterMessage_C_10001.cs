@@ -4393,6 +4393,9 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(3)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(4)]
         public string PlayerName { get; set; }
 
         public override void Dispose()
@@ -4405,6 +4408,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.UnitId = default;
             this.PlayerName = default;
 
             ObjectPool.Instance.Recycle(this);

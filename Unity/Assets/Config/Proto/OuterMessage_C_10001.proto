@@ -968,7 +968,8 @@ message M2C_WatchPlayer // ILocationResponse
   	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	string PlayerName = 4;
+	int64 UnitId = 4;
+	string PlayerName = 5;
 }
 
 

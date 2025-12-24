@@ -24,11 +24,39 @@ namespace ET.Client
             self.Button_Black = rc.Get<GameObject>("Button_Black").GetComponent<Button>();
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIPlayerInfo); });
+            self.Button_AddFriend.AddListener(() => { self.OnButton_AddFriend().Coroutine(); });
+            self.Button_Report.AddListener(() => { self.OnButton_Report().Coroutine(); });
+            self.Button_Black.AddListener(() => { self.OnButton_Black().Coroutine(); });
+        }
+
+        [EntitySystem]
+        private static void Destroy(this UIPlayerInfoComponent self)
+        {
+            self.M2C_WatchPlayer = null;
         }
 
         public static void UpdateInfo(this UIPlayerInfoComponent self, M2C_WatchPlayer response)
         {
             self.Text_PlayerName.SetText(response.PlayerName);
+        }
+
+        private static async ETTask OnButton_AddFriend(this UIPlayerInfoComponent self)
+        {
+            int error = await ClientFriendHelper.FriendRequest(self.Root(), self.M2C_WatchPlayer.UnitId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("申请成功");
+            }
+        }
+
+        private static async ETTask OnButton_Report(this UIPlayerInfoComponent self)
+        {
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask OnButton_Black(this UIPlayerInfoComponent self)
+        {
+            await ETTask.CompletedTask;
         }
     }
 }

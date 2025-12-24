@@ -4,8 +4,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UIPlayerInfoComponent : Entity, IAwake
+    public class UIPlayerInfoComponent : Entity, IAwake, IDestroy
     {
+        public M2C_WatchPlayer M2C_WatchPlayer;
+
         public Button Button_Close;
         public Image Image_PlayerHead;
         public Button Button_OnPlayerHead;
@@ -15,6 +17,5 @@ namespace ET.Client
         public Button Button_AddFriend;
         public Button Button_Report;
         public Button Button_Black;
-
     }
 }

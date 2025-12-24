@@ -14,6 +14,12 @@
 
                 long targetFrientUnitId = request.UnitId;
 
+                if (targetFrientUnitId == friendUnit.Id)
+                {
+                    response.Error = ErrorCode.ERR_FriendIsSelf;
+                    return;
+                }
+                
                 if (myFriendComponent.FriendList.Contains(targetFrientUnitId))
                 {
                     response.Error = ErrorCode.ERR_FriendIsFriend;

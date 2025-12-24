@@ -14,6 +14,7 @@
                 return;
             }
 
+            response.UnitId = request.UnitId;
             response.PlayerName = userInfoComponent.GetPlayerName();
 
             await ETTask.CompletedTask;

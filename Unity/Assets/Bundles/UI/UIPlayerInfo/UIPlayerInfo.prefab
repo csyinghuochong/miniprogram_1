@@ -116,11 +116,11 @@ MonoBehaviour:
     gameObject: {fileID: 4817189007831126239}
   - key: Button_OnPlayerHead
     gameObject: {fileID: 2232724391256123583}
-  - key: Text_PalyerName
+  - key: Text_PlayerName
     gameObject: {fileID: 3289481277549388012}
-  - key: Text_PalyerCE
+  - key: Text_PlayerCE
     gameObject: {fileID: 2098222331463870659}
-  - key: Text_PalyerLianMeng
+  - key: Text_PlayerLianMeng
     gameObject: {fileID: 4171866611649425259}
   - key: Button_AddFriend
     gameObject: {fileID: 5458412756930348778}
@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 5836560636480093717}
   - component: {fileID: 5905680369217237123}
   m_Layer: 5
-  m_Name: Text_PalyerCE
+  m_Name: Text_PlayerCE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2852,7 +2852,7 @@ GameObject:
   - component: {fileID: 5187065654136592105}
   - component: {fileID: 787590520108037157}
   m_Layer: 5
-  m_Name: Text_PalyerName
+  m_Name: Text_PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3586,7 +3586,7 @@ GameObject:
   - component: {fileID: 1507751222323324990}
   - component: {fileID: 5113823674746985879}
   m_Layer: 5
-  m_Name: Text_PalyerLianMeng
+  m_Name: Text_PlayerLianMeng
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
