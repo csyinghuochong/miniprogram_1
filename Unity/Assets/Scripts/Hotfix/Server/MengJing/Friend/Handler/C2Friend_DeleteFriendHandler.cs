@@ -1,8 +1,9 @@
 ﻿namespace ET.Server
 {
-    public class C2Friend_DeleteFriendHandler : MessageHandler<FriendUnit, C2Friend_FriendRequest, Friend2C_FriendRequest>
+    [MessageHandler(SceneType.Friend)]
+    public class C2Friend_DeleteFriendHandler : MessageHandler<FriendUnit, C2Friend_DeleteFriend, Friend2C_DeleteFriend>
     {
-        protected override async ETTask Run(FriendUnit friendUnit, C2Friend_FriendRequest request, Friend2C_FriendRequest response)
+        protected override async ETTask Run(FriendUnit friendUnit, C2Friend_DeleteFriend request, Friend2C_DeleteFriend response)
         {
             Scene root = friendUnit.Root();
 
