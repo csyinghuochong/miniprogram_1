@@ -47,10 +47,21 @@ namespace ET.Client
             // self.WatchPlayerInfo.HeroFormation
             // self.WatchPlayerInfo.HeroInfoList
 
-            FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
-            bool isFriend = friendComponent.IsFriend(self.WatchPlayerInfo.UnitId);
-            self.Button_AddFriend.gameObject.SetActive(!isFriend);
-            self.Button_DeleteFriend.gameObject.SetActive(isFriend);
+            bool isMy = self.WatchPlayerInfo.UnitId == self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId;
+            if (isMy)
+            {
+                self.Button_AddFriend.gameObject.SetActive(false);
+                self.Button_DeleteFriend.gameObject.SetActive(false);
+                self.Button_Report.gameObject.SetActive(false);
+                self.Button_Black.gameObject.SetActive(false);
+            }
+            else
+            {
+                FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
+                bool isFriend = friendComponent.IsFriend(self.WatchPlayerInfo.UnitId);
+                self.Button_AddFriend.gameObject.SetActive(!isFriend);
+                self.Button_DeleteFriend.gameObject.SetActive(isFriend);
+            }
         }
 
         private static async ETTask OnButton_AddFriend(this UIPlayerInfoComponent self)
