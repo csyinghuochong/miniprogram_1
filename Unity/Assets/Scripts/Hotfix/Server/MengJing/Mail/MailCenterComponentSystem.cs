@@ -60,9 +60,10 @@ namespace ET.Server
             {
                 ServerMail serverMail = self.ServerMails[i];
                 Mail mail = serverMail.Mail;
-                if (mail.EndTime < TimeHelper.ServerNow())
+
+                if (mail == null || mail.EndTime < TimeHelper.ServerNow())
                 {
-                    mail.Dispose();
+                    serverMail.Dispose();
                     self.ServerMails.RemoveAt(i);
                 }
             }
