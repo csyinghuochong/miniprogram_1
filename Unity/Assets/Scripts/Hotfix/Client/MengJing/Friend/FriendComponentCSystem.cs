@@ -100,6 +100,27 @@
             }
         }
 
+        public static void FriendOnLineChange(this FriendComponentC self, long unitId, int onLine)
+        {
+            foreach (FriendData data in self.FriendList)
+            {
+                if (data.UnitId == unitId)
+                {
+                    data.OnLine = onLine;
+                    return;
+                }
+            }
+            
+            foreach (FriendData data in self.RequestList)
+            {
+                if (data.UnitId == unitId)
+                {
+                    data.OnLine = onLine;
+                    return;
+                }
+            }
+        }
+        
         public static bool IsFriend(this FriendComponentC self, long unitId)
         {
             foreach (FriendData friendData in self.FriendList)

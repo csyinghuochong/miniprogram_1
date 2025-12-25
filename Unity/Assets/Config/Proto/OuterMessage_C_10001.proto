@@ -1156,3 +1156,9 @@ message Friend2C_DeleteYou // IMessage
 {
 	int64 UnitId = 1;
 }
+
+message Friend2C_FriendOnLineChange // IMessage
+{
+	int64 UnitId = 1;
+	int32 OnLine = 2;
+}

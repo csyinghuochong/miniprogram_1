@@ -9,7 +9,8 @@
 
             await UnitCacheHelper.SaveComponent(mailUnit.Root(), friendComponent);
 
-            // TODO 通知好友下线
+            // 通知好友下线
+            FriendHelper.FriendOnLineChange(mailUnit.Root(), mailUnit.Id, 0);
             
             FriendUnitExit(mailUnit).Coroutine();
 

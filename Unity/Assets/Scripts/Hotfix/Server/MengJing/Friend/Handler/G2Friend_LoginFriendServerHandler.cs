@@ -27,8 +27,11 @@
             {
                 friendUnit.AddComponent(friendComponent);
             }
-            
+
             await friendUnit.AddLocation(LocationType.Friend);
+
+            // 通知好友上线
+            FriendHelper.FriendOnLineChange(scene, request.UnitId, 1);
 
             await ETTask.CompletedTask;
         }

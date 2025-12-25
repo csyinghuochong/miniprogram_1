@@ -18,5 +18,32 @@
 
             return friendDataInfo;
         }
+
+        public static void FriendOnLineChange(Scene root, long unitId, int onLine)
+        {
+            FriendUnitComponent friendUnitComponent = root.GetComponent<FriendUnitComponent>();
+
+            foreach (Entity entity in friendUnitComponent.Children.Values)
+            {
+                FriendUnit friendUnit = entity as FriendUnit;
+
+                if (friendUnit.Id == unitId)
+                {
+                    continue;
+                }
+
+                FriendComponentS friendComponent = friendUnit.GetComponent<FriendComponentS>();
+
+                bool notice = friendComponent.FriendList.Contains(unitId) || friendComponent.RequestList.Contains(unitId);
+
+                if (notice)
+                {
+                    Friend2C_FriendOnLineChange message = Friend2C_FriendOnLineChange.Create();
+                    message.UnitId = unitId;
+                    message.OnLine = onLine;
+                    MapMessageHelper.SendToClient(root, friendUnit.Id, message);
+                }
+            }
+        }
     }
 }

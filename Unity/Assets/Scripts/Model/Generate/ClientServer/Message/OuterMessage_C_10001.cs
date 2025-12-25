@@ -5260,6 +5260,35 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_FriendOnLineChange)]
+    public partial class Friend2C_FriendOnLineChange : MessageObject, IMessage
+    {
+        public static Friend2C_FriendOnLineChange Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_FriendOnLineChange), isFromPool) as Friend2C_FriendOnLineChange;
+        }
+
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int OnLine { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitId = default;
+            this.OnLine = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -5408,5 +5437,6 @@ namespace ET
         public const ushort C2Friend_DeleteFriend = 10145;
         public const ushort Friend2C_DeleteFriend = 10146;
         public const ushort Friend2C_DeleteYou = 10147;
+        public const ushort Friend2C_FriendOnLineChange = 10148;
     }
 }
