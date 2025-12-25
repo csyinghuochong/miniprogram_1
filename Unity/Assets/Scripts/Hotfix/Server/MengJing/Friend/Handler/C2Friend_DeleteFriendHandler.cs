@@ -65,7 +65,7 @@
                         return;
                     }
 
-                    targetFriendComponent.RequestList.Remove(myUnitId);
+                    targetFriendComponent.FriendList.Remove(myUnitId);
                     myFriendComponent.FriendList.Remove(targetFrientUnitId);
 
                     await UnitCacheHelper.SaveComponent(root, targetFriendComponent);
