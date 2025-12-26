@@ -7,8 +7,10 @@ namespace ET.Client
     [ChildOf]
     public class UIPrivateChatItem : Entity, IAwake<GameObject>
     {
+        private EntityRef<Chat> chat;
+        public Chat Chat { get => this.chat; set => this.chat = value; }
 
-        public GameObject GameObject;
+        public GameObject GameObject { get; set; }
 
         public Image Image_SpeakerHead;
         public Button Button_OnSpeakerHead;

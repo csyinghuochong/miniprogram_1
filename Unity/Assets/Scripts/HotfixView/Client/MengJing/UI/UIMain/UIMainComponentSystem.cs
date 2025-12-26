@@ -216,7 +216,7 @@ namespace ET.Client
             self.Button_Hero.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIHero).Coroutine(); });
             self.Button_Bag.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBag).Coroutine(); });
             self.Button_Boss.AddListener(() => { self.OnBoss().Coroutine(); });
-            self.Button_OnChat.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIChat).Coroutine(); });
+            self.Button_OnChat.AddListener(() => { self.OnButton_OnChat().Coroutine(); });
             self.Button_Friend.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFriend).Coroutine(); });
         }
 
@@ -509,6 +509,12 @@ namespace ET.Client
             {
                 self.UIMainChatItemList[i].GameObject.SetActive(false);
             }
+        }
+
+        private static async ETTask OnButton_OnChat(this UIMainComponent self)
+        {
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIChat);
+            ui.GetComponent<UIChatComponent>().SetShowType(0);
         }
     }
 }

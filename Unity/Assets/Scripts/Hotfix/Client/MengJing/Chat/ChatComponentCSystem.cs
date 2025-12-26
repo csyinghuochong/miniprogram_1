@@ -85,5 +85,21 @@ namespace ET.Client
 
             return list;
         }
+
+        public static List<Chat> GetFriendChatList(this ChatComponentC self, long friendId)
+        {
+            List<Chat> list = new List<Chat>();
+            string key = CommonHelp.GetChatRoomKey(self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId, friendId);
+            if (self.ChatRoomDict.ContainsKey(key))
+            {
+                ChatRoom chatRoom = self.ChatRoomDict[key];
+                foreach (Chat chat in chatRoom.ChatList)
+                {
+                    list.Add(chat);
+                }
+            }
+
+            return list;
+        }
     }
 }

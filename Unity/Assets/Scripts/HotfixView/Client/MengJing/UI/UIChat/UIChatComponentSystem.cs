@@ -45,6 +45,7 @@ namespace ET.Client
             self.UIPrivateChatPeopleItem = rc.Get<GameObject>("UIPrivateChatPeopleItem");
             self.UIPrivateChatPeopleItem.SetActive(false);
             self.Scroll_PrivateChatItem = rc.Get<GameObject>("Scroll_PrivateChatItem");
+            self.Text_ChatPeopleName = rc.Get<GameObject>("Text_ChatPeopleName").GetComponent<TMP_Text>();
             self.Content_UIPrivateChatItem = rc.Get<GameObject>("Content_UIPrivateChatItem").transform;
             self.UIPrivateChatItem = rc.Get<GameObject>("UIPrivateChatItem");
             self.UIPrivateChatItem.SetActive(false);
@@ -74,13 +75,12 @@ namespace ET.Client
                 GameObject go = self.Content_EmojiList.transform.GetChild(i).gameObject;
                 go.GetComponent<Button>().AddListener(() => { self.InputField_Content.text += $"<sprite={go.name}>"; });
             }
-
-            self.SetShowType(0);
         }
 
-        private static void SetShowType(this UIChatComponent self, int page)
+        public static void SetShowType(this UIChatComponent self, int page, FriendData friendData = null)
         {
             self.CurrentPage = page;
+            self.FriendData = friendData;
             self.Button_Type_World.transform.Find("Image_On").gameObject.SetActive(page == 0);
             self.Button_Type_World.transform.Find("Image_Off").gameObject.SetActive(page != 0);
             self.Button_Type_LianMeng.transform.Find("Image_On").gameObject.SetActive(page == 1);
@@ -89,6 +89,8 @@ namespace ET.Client
             self.Button_Type_PrivateChat.transform.Find("Image_Off").gameObject.SetActive(page != 2);
 
             self.Scroll_PublicChatItem.gameObject.SetActive(page == 0);
+            self.Scroll_PrivateChatPeopleItem.gameObject.SetActive(page == 1);
+            self.Scroll_PrivateChatItem.gameObject.SetActive(page == 2);
 
             self.UpdateItemList(page);
         }
@@ -96,38 +98,59 @@ namespace ET.Client
         public static void UpdateItemList(this UIChatComponent self, int page)
         {
             ChatComponentC chatComponent = self.Root().GetComponent<ChatComponentC>();
-            ChatRoomType roomType = page == 0 ? ChatRoomType.World : ChatRoomType.Alliance;
             List<Chat> chatList = null;
             if (page == 0)
             {
                 chatList = chatComponent.GetWorldChatList();
+                
+                while (self.UIChatItemList.Count < chatList.Count)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(self.UIPublicChatItem, self.Content_UIPublicChatItem);
+                    UIPublicChatItem newItem = self.AddChild<UIPublicChatItem, GameObject>(go);
+                    self.UIChatItemList.Add(newItem);
+                }
+
+                for (int i = 0; i < chatList.Count; i++)
+                {
+                    self.UIChatItemList[i].UpdateInfo(chatList[i]);
+                    self.UIChatItemList[i].GameObject.SetActive(true);
+                }
+
+                for (int i = chatList.Count; i < self.UIChatItemList.Count; i++)
+                {
+                    self.UIChatItemList[i].GameObject.SetActive(false);
+                }
             }
             else if (page == 1)
             {
                 chatList = chatComponent.GetAllianceChatList();
             }
-
-            if (chatList == null)
+            else if (page == 2)
             {
-                return;
-            }
+                if (self.FriendData != null)
+                {
+                    self.Text_ChatPeopleName.SetText(self.FriendData.PlayerName);
 
-            while (self.UIChatItemList.Count < chatList.Count)
-            {
-                GameObject go = UnityEngine.Object.Instantiate(self.UIPublicChatItem, self.Content_UIPublicChatItem);
-                UIPublicChatItem newItem = self.AddChild<UIPublicChatItem, GameObject>(go);
-                self.UIChatItemList.Add(newItem);
-            }
+                    chatList = chatComponent.GetFriendChatList(self.FriendData.UnitId);
+                    
+                    while (self.UIPrivateChatItemList.Count < chatList.Count)
+                    {
+                        GameObject go = UnityEngine.Object.Instantiate(self.UIPrivateChatItem, self.Content_UIPrivateChatItem);
+                        UIPrivateChatItem newItem = self.AddChild<UIPrivateChatItem, GameObject>(go);
+                        self.UIPrivateChatItemList.Add(newItem);
+                    }
 
-            for (int i = 0; i < chatList.Count; i++)
-            {
-                self.UIChatItemList[i].UpdateInfo(chatList[i]);
-                self.UIChatItemList[i].GameObject.SetActive(true);
-            }
+                    for (int i = 0; i < chatList.Count; i++)
+                    {
+                        self.UIPrivateChatItemList[i].UpdateInfo(chatList[i]);
+                        self.UIPrivateChatItemList[i].GameObject.SetActive(true);
+                    }
 
-            for (int i = chatList.Count; i < self.UIChatItemList.Count; i++)
-            {
-                self.UIChatItemList[i].GameObject.SetActive(false);
+                    for (int i = chatList.Count; i < self.UIPrivateChatItemList.Count; i++)
+                    {
+                        self.UIPrivateChatItemList[i].GameObject.SetActive(false);
+                    }
+                }
             }
         }
 
@@ -141,7 +164,19 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ClientChatHelper.SendChat(self.Root(), input, self.CurrentPage == 0 ? ChatRoomType.World : ChatRoomType.Alliance);
+            int error = 0;
+            switch (self.CurrentPage)
+            {
+                case 0:
+                    error = await ClientChatHelper.SendChat(self.Root(), input, ChatRoomType.World);
+                    break;
+                case 1:
+                    error = await ClientChatHelper.SendChat(self.Root(), input, ChatRoomType.Alliance);
+                    break;
+                case 2:
+                    error = await ClientChatHelper.SendChat(self.Root(), input, ChatRoomType.Private, self.FriendData.UnitId);
+                    break;
+            }
 
             if (error != ErrorCode.ERR_Success)
             {

@@ -126,8 +126,10 @@ MonoBehaviour:
     gameObject: {fileID: 7459017356430917430}
   - key: UIPrivateChatPeopleItem
     gameObject: {fileID: 640163579180869428}
-  - key: Scroll_PrivateChatITem
+  - key: Scroll_PrivateChatItem
     gameObject: {fileID: 223032296915968203}
+  - key: Text_ChatPeopleName
+    gameObject: {fileID: 828456414773130532}
   - key: Content_UIPrivateChatItem
     gameObject: {fileID: 7786240103502105058}
   - key: UIPrivateChatItem
@@ -490,7 +492,7 @@ GameObject:
   - component: {fileID: 2753400506606398087}
   - component: {fileID: 467708347869018584}
   m_Layer: 5
-  m_Name: Scroll_PrivateChatITem
+  m_Name: Scroll_PrivateChatItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,8 +8,13 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIChatComponent: Entity, IAwake
     {
+        private EntityRef<FriendData> friendData;
+        public FriendData FriendData { get => this.friendData; set => this.friendData = value; }
+
         public int CurrentPage { get; set; } = 0;
         public List<UIPublicChatItem> UIChatItemList { get; set; } = new();
+        public List<UIPrivateChatPeopleItem> UIPrivateChatPeopleItemList { get; set; } = new();
+        public List<UIPrivateChatItem> UIPrivateChatItemList { get; set; } = new();
         
         public Button Button_Close;
         public TMP_Text Text_Title;
@@ -21,6 +26,7 @@ namespace ET.Client
         public Transform Content_UIPrivateChatPeopleItem;
         public GameObject UIPrivateChatPeopleItem;
         public GameObject Scroll_PrivateChatItem;
+        public TMP_Text Text_ChatPeopleName;
         public Transform Content_UIPrivateChatItem;
         public GameObject UIPrivateChatItem;
         

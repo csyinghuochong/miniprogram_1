@@ -24,13 +24,17 @@ namespace ET.Client
 
             ChatRoom chatRoom = chat.GetParent<ChatRoom>();
 
-            if (chatRoom.ChatRoomType == (int)ChatRoomType.World)
+            switch (chatRoom.ChatRoomType)
             {
-                self.Text_ChatType.SetText("【世界】");
-            }
-            else if (chatRoom.ChatRoomType == (int)ChatRoomType.Alliance)
-            {
-                self.Text_ChatType.SetText("【联盟】");
+                case (int)ChatRoomType.World:
+                    self.Text_ChatType.SetText("【世界】");
+                    break;
+                case (int)ChatRoomType.Alliance:
+                    self.Text_ChatType.SetText("【联盟】");
+                    break;
+                case (int)ChatRoomType.Private:
+                    self.Text_ChatType.SetText("【私聊】");
+                    break;
             }
 
             self.Text_Content.SetTextFormat("{0}:{1}", chat.Name, chat.Content);

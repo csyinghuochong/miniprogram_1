@@ -24,6 +24,8 @@ namespace ET.Client
             self.Text_PlayerStatus = rc.Get<GameObject>("Text_PlayerStatus").GetComponent<TMP_Text>();
             self.Button_Chat = rc.Get<GameObject>("Button_Chat").GetComponent<Button>();
             self.Text_Sort = rc.Get<GameObject>("Text_Sort").GetComponent<TMP_Text>();
+
+            self.Button_Chat.AddListener(() => { self.OnButton_Chat().Coroutine(); });
         }
 
         public static void UpdateInfo(this UIFriendItem self, FriendData friendData)
@@ -34,6 +36,12 @@ namespace ET.Client
             self.Text_PlayerStatus.SetText(friendData.OnLine == 1 ? "在线" : "离线");
             self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
             self.Text_PlayerCE.SetTextFormat("战力:{0}", friendData.CombatPower);
+        }
+
+        private static async ETTask OnButton_Chat(this UIFriendItem self)
+        {
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIChat);
+            ui.GetComponent<UIChatComponent>().SetShowType(2, self.FriendData);
         }
     }
 }
