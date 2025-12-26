@@ -120,6 +120,11 @@ namespace ET.Client
                 {
                     self.UIChatItemList[i].GameObject.SetActive(false);
                 }
+                
+                // 移动到底部
+                Canvas.ForceUpdateCanvases();
+                self.Content_UIPublicChatItem.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
+                Canvas.ForceUpdateCanvases();
             }
             else if (page == 1)
             {
@@ -150,6 +155,11 @@ namespace ET.Client
                     {
                         self.UIPrivateChatItemList[i].GameObject.SetActive(false);
                     }
+                    
+                    // 移动到底部
+                    Canvas.ForceUpdateCanvases();
+                    self.Content_UIPrivateChatItem.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
+                    Canvas.ForceUpdateCanvases();
                 }
             }
         }

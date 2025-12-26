@@ -45,6 +45,8 @@ namespace ET.Client
                 }
             }
 
+            list.Sort((x, y) => x.SendTime.CompareTo(y.SendTime));
+
             return list;
         }
 

@@ -18,6 +18,7 @@
         {
             ChatInfo chatInfo = ChatInfo.Create();
             chatInfo.UnitId = self.UnitId;
+            chatInfo.SendTime = self.SendTime;
             chatInfo.Name = self.Name;
             chatInfo.Content = self.Content;
 
@@ -27,6 +28,7 @@
         public static void FromMessage(this Chat self, ChatInfo chatInfo)
         {
             self.UnitId = chatInfo.UnitId;
+            self.SendTime = chatInfo.SendTime;
             self.Name = chatInfo.Name;
             self.Content = chatInfo.Content;
         }

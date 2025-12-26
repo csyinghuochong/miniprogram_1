@@ -509,6 +509,11 @@ namespace ET.Client
             {
                 self.UIMainChatItemList[i].GameObject.SetActive(false);
             }
+
+            // 移动到底部
+            Canvas.ForceUpdateCanvases();
+            self.Content_UIMainChatItem.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
+            Canvas.ForceUpdateCanvases();
         }
 
         private static async ETTask OnButton_OnChat(this UIMainComponent self)
