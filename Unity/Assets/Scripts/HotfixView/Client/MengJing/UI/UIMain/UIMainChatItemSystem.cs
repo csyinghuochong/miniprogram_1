@@ -22,11 +22,13 @@ namespace ET.Client
         {
             self.Chat = chat;
 
-            if (chat.Channel == (int)ChatChannelType.World)
+            ChatRoom chatRoom = chat.GetParent<ChatRoom>();
+
+            if (chatRoom.ChatRoomType == (int)ChatRoomType.World)
             {
                 self.Text_ChatType.SetText("【世界】");
             }
-            else if (chat.Channel == (int)ChatChannelType.Alliance)
+            else if (chatRoom.ChatRoomType == (int)ChatRoomType.Alliance)
             {
                 self.Text_ChatType.SetText("【联盟】");
             }

@@ -6,8 +6,8 @@
     {
         protected override async ETTask Run(Scene scene, G2Chat_LoginChatServer request, Chat2G_LoginChatServer response)
         {
-            ChatUnitComponent chatInfoUnitsComponent = scene.Root().GetComponent<ChatUnitComponent>();
-            chatInfoUnitsComponent.Children.TryGetValue(request.UnitId, out Entity chatUnitEntity);
+            ChatUnitComponent chatUnitComponent = scene.Root().GetComponent<ChatUnitComponent>();
+            chatUnitComponent.Children.TryGetValue(request.UnitId, out Entity chatUnitEntity);
 
             ChatUnit chatUnit = chatUnitEntity as ChatUnit;
 
@@ -16,7 +16,18 @@
                 return;
             }
 
-            chatUnit = chatInfoUnitsComponent.AddChildWithId<ChatUnit>(request.UnitId);
+            chatUnit = chatUnitComponent.AddChildWithId<ChatUnit>(request.UnitId);
+            chatUnit.Name = request.Name;
+
+            ChatComponentS chatComponent = await UnitCacheHelper.GetComponent<ChatComponentS>(scene, request.UnitId);
+            if (chatComponent == null)
+            {
+                chatComponent = chatUnit.AddComponent<ChatComponentS>();
+            }
+            else
+            {
+                chatUnit.AddComponent(chatComponent);
+            }
 
             chatUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             await chatUnit.AddLocation(LocationType.Chat);

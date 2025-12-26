@@ -88,5 +88,7 @@ namespace ET
         public static int StoreRefreshNum = 3;
 
         # endregion
+
+        public const string WorldChatRoomKey = "WorldChatRoom";
     }
 }

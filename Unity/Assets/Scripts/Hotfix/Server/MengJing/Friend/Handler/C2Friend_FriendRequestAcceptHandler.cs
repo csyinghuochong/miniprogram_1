@@ -41,7 +41,7 @@
 
                         myFriendComponent.FriendList.Add(targetFrientUnitId);
                         myFriendComponent.RequestList.Remove(targetFrientUnitId);
-                        
+
                         Friend2C_FriendRequestSucceed message = Friend2C_FriendRequestSucceed.Create();
                         message.FriendDataInfo = await FriendHelper.GetFriendDataInfo(root, targetFrientUnitId);
                         MapMessageHelper.SendToClient(root, targetFriendUnit.Id, message);
@@ -64,6 +64,13 @@
 
                         await UnitCacheHelper.SaveComponent(root, targetFriendComponent);
                     }
+
+                    // 创建聊天室
+                    Friend2Chat_CreateChatRoom friend2ChatCreateChatRoom = Friend2Chat_CreateChatRoom.Create();
+                    friend2ChatCreateChatRoom.UnitId_1 = myUnitId;
+                    friend2ChatCreateChatRoom.UnitId_2 = targetFrientUnitId;
+
+                    await root.GetComponent<MessageSender>().Call(UnitCacheHelper.GetChatServerId(root.Zone()), friend2ChatCreateChatRoom);
                 }
                 else
                 {

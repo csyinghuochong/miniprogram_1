@@ -48,6 +48,25 @@ namespace ET.Server
 
                         break;
                     }
+                    case SceneType.Chat:
+                    {
+                        await UnitCacheHelper.SaveComponent(scene, scene.GetComponent<ChatCenterComponent>());
+                        foreach (Entity entity in scene.GetComponent<ChatUnitComponent>().Children.Values)
+                        {
+                            ChatUnit chatUnit = entity as ChatUnit;
+
+                            if (chatUnit == null)
+                            {
+                                continue;
+                            }
+
+                            await UnitCacheHelper.SaveComponent(scene, chatUnit.GetComponent<ChatComponentS>());
+                        }
+
+                        Log.Info($"数据落地:  Chat: {scene.Zone()}");
+
+                        break;
+                    }
                     default:
                         break;
                 }

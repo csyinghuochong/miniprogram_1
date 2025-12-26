@@ -176,6 +176,7 @@ namespace ET.Server
         {
             G2Chat_LoginChatServer request = G2Chat_LoginChatServer.Create();
             request.UnitId = unit.Id;
+            request.Name = unit.GetComponent<UserInfoComponentS>().GetPlayerName();
 
             await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetChatServerId(unit.Zone()), request);
         }

@@ -20,7 +20,6 @@
             chatInfo.UnitId = self.UnitId;
             chatInfo.Name = self.Name;
             chatInfo.Content = self.Content;
-            chatInfo.Channel = self.Channel;
 
             return chatInfo;
         }
@@ -30,7 +29,6 @@
             self.UnitId = chatInfo.UnitId;
             self.Name = chatInfo.Name;
             self.Content = chatInfo.Content;
-            self.Channel = chatInfo.Channel;
         }
     }
 }

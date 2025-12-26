@@ -489,23 +489,23 @@ namespace ET.Client
 
         public static void UpdateUIMainChatItemList(this UIMainComponent self)
         {
-            ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
-            List<EntityRef<Chat>> chatEntryList = chatComponent.ChatList;
+            ChatComponentC chatComponent = self.Root().GetComponent<ChatComponentC>();
+            List<Chat> chatList = chatComponent.GetAllChatList();
 
-            while (self.UIMainChatItemList.Count < chatEntryList.Count)
+            while (self.UIMainChatItemList.Count < chatList.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIMainChatItem, self.Content_UIMainChatItem);
                 UIMainChatItem newItem = self.AddChild<UIMainChatItem, GameObject>(go);
                 self.UIMainChatItemList.Add(newItem);
             }
 
-            for (int i = 0; i < chatEntryList.Count; i++)
+            for (int i = 0; i < chatList.Count; i++)
             {
-                self.UIMainChatItemList[i].UpdateInfo(chatEntryList[i]);
+                self.UIMainChatItemList[i].UpdateInfo(chatList[i]);
                 self.UIMainChatItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = chatEntryList.Count; i < self.UIMainChatItemList.Count; i++)
+            for (int i = chatList.Count; i < self.UIMainChatItemList.Count; i++)
             {
                 self.UIMainChatItemList[i].GameObject.SetActive(false);
             }

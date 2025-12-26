@@ -533,6 +533,7 @@ message G2Chat_LoginChatServer // IRequest
 {
     int32 RpcId = 1;
 	int64 UnitId = 2;
+	string Name = 3;
 }
 
 message Chat2G_LoginChatServer // IResponse
@@ -576,6 +577,21 @@ message G2Friend_ExitFriendServer // ILocationRequest
 }
 
 message Friend2G_ExitFriendServer // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
+//ResponseType Chat2Friend_CreateChatRoom
+message Friend2Chat_CreateChatRoom // IRequest
+{
+    int32 RpcId = 1;
+	int64 UnitId_1 = 2;
+	int64 UnitId_2 = 3;
+}
+
+message Chat2Friend_CreateChatRoom // IResponse
 {
     int32 RpcId = 1;
     int32 Error = 2;

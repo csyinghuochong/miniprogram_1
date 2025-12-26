@@ -244,5 +244,13 @@ namespace ET
 
             return mapObjName;
         }
+
+        public static string GetChatRoomKey(long userId1, long userId2)
+        {
+            long minUserId = Math.Min(userId1, userId2);
+            long maxUserId = Math.Max(userId1, userId2);
+
+            return $"{minUserId}_{maxUserId}";
+        }
     }
 }

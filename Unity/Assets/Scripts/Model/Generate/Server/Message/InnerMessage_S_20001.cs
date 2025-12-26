@@ -2305,6 +2305,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public long UnitId { get; set; }
 
+        [MemoryPackOrder(2)]
+        public string Name { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2314,6 +2317,7 @@ namespace ET
 
             this.RpcId = default;
             this.UnitId = default;
+            this.Name = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -2533,6 +2537,73 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.Friend2Chat_CreateChatRoom)]
+    [ResponseType(nameof(Chat2Friend_CreateChatRoom))]
+    public partial class Friend2Chat_CreateChatRoom : MessageObject, IRequest
+    {
+        public static Friend2Chat_CreateChatRoom Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2Chat_CreateChatRoom), isFromPool) as Friend2Chat_CreateChatRoom;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId_1 { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long UnitId_2 { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId_1 = default;
+            this.UnitId_2 = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Chat2Friend_CreateChatRoom)]
+    public partial class Chat2Friend_CreateChatRoom : MessageObject, IResponse
+    {
+        public static Chat2Friend_CreateChatRoom Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2Friend_CreateChatRoom), isFromPool) as Chat2Friend_CreateChatRoom;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -2610,5 +2681,7 @@ namespace ET
         public const ushort Friend2G_LoginFriendServer = 20074;
         public const ushort G2Friend_ExitFriendServer = 20075;
         public const ushort Friend2G_ExitFriendServer = 20076;
+        public const ushort Friend2Chat_CreateChatRoom = 20077;
+        public const ushort Chat2Friend_CreateChatRoom = 20078;
     }
 }

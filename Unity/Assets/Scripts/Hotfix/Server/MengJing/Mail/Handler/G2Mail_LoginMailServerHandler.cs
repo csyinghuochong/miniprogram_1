@@ -21,7 +21,6 @@ namespace ET.Server.Handler
             }
 
             mailUnit = mailUnitComponent.AddChildWithId<MailUnit>(request.UnitId);
-            mailUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
 
             MailComponentS mailComponent = await UnitCacheHelper.GetComponent<MailComponentS>(scene, request.UnitId);
             if (mailComponent == null)
@@ -94,6 +93,7 @@ namespace ET.Server.Handler
 
             mailComponent.Check();
 
+            mailUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             await mailUnit.AddLocation(LocationType.Mail);
 
             await ETTask.CompletedTask;

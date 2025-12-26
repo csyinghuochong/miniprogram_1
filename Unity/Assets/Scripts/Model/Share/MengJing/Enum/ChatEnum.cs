@@ -1,12 +1,5 @@
 ﻿namespace ET
 {
-    public enum ChatChannelType
-    {
-        World = 0, //世界 
-        Alliance = 1, //联盟
-        Friend = 2, //好友
-    }
-
     public static class NoticeType
     {
         public const int Notice = 0;

@@ -4756,6 +4756,43 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.ChatRoomInfo)]
+    public partial class ChatRoomInfo : MessageObject
+    {
+        public static ChatRoomInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(ChatRoomInfo), isFromPool) as ChatRoomInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public string ChatRoomKey { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ChatRoomType { get; set; }
+
+        [MemoryPackOrder(2)]
+        public List<long> UnitList { get; set; } = new();
+
+        [MemoryPackOrder(3)]
+        public List<ChatInfo> ChatInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ChatRoomKey = default;
+            this.ChatRoomType = default;
+            this.UnitList.Clear();
+            this.ChatInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.ChatInfo)]
     public partial class ChatInfo : MessageObject
     {
@@ -4768,13 +4805,13 @@ namespace ET
         public long UnitId { get; set; }
 
         [MemoryPackOrder(1)]
-        public string Name { get; set; }
+        public long SendTime { get; set; }
 
         [MemoryPackOrder(2)]
-        public string Content { get; set; }
+        public string Name { get; set; }
 
         [MemoryPackOrder(3)]
-        public int Channel { get; set; }
+        public string Content { get; set; }
 
         public override void Dispose()
         {
@@ -4784,9 +4821,97 @@ namespace ET
             }
 
             this.UnitId = default;
+            this.SendTime = default;
             this.Name = default;
             this.Content = default;
-            this.Channel = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2Chat_GetAllChat)]
+    [ResponseType(nameof(Chat2C_GetAllChat))]
+    public partial class C2Chat_GetAllChat : MessageObject, IChatRequest
+    {
+        public static C2Chat_GetAllChat Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Chat_GetAllChat), isFromPool) as C2Chat_GetAllChat;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Chat2C_GetAllChat)]
+    public partial class Chat2C_GetAllChat : MessageObject, IChatResponse
+    {
+        public static Chat2C_GetAllChat Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2C_GetAllChat), isFromPool) as Chat2C_GetAllChat;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<ChatRoomInfo> ChatRoomInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.ChatRoomInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Chat2C_UpdateChatRoom)]
+    public partial class Chat2C_UpdateChatRoom : MessageObject, IMessage
+    {
+        public static Chat2C_UpdateChatRoom Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Chat2C_UpdateChatRoom), isFromPool) as Chat2C_UpdateChatRoom;
+        }
+
+        [MemoryPackOrder(0)]
+        public ChatRoomInfo ChatRoomInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ChatRoomInfo = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -4806,7 +4931,10 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public ChatInfo ChatInfo { get; set; }
+        public string ChatRoomKey { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Content { get; set; }
 
         public override void Dispose()
         {
@@ -4816,7 +4944,8 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.ChatInfo = default;
+            this.ChatRoomKey = default;
+            this.Content = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -4865,6 +4994,9 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
+        public string ChatRoomKey { get; set; }
+
+        [MemoryPackOrder(1)]
         public ChatInfo ChatInfo { get; set; }
 
         public override void Dispose()
@@ -4874,6 +5006,7 @@ namespace ET
                 return;
             }
 
+            this.ChatRoomKey = default;
             this.ChatInfo = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -5421,22 +5554,26 @@ namespace ET
         public const ushort Mail2C_ReceiveMail = 10129;
         public const ushort M2C_NoticeUnitTransformList = 10130;
         public const ushort C2M_NoticeUnitTransform = 10131;
-        public const ushort ChatInfo = 10132;
-        public const ushort C2Chat_SendChat = 10133;
-        public const ushort Chat2C_SendChat = 10134;
-        public const ushort Chat2C_NoticeChat = 10135;
-        public const ushort FriendDataInfo = 10136;
-        public const ushort C2Friend_GetAllFriend = 10137;
-        public const ushort Friend2C_GetAllFriend = 10138;
-        public const ushort C2Friend_FriendRequest = 10139;
-        public const ushort Friend2C_FriendRequest = 10140;
-        public const ushort Friend2C_ReceiveFriendRequest = 10141;
-        public const ushort C2Friend_FriendRequestAccept = 10142;
-        public const ushort Friend2C_FriendRequestAccept = 10143;
-        public const ushort Friend2C_FriendRequestSucceed = 10144;
-        public const ushort C2Friend_DeleteFriend = 10145;
-        public const ushort Friend2C_DeleteFriend = 10146;
-        public const ushort Friend2C_DeleteYou = 10147;
-        public const ushort Friend2C_FriendOnLineChange = 10148;
+        public const ushort ChatRoomInfo = 10132;
+        public const ushort ChatInfo = 10133;
+        public const ushort C2Chat_GetAllChat = 10134;
+        public const ushort Chat2C_GetAllChat = 10135;
+        public const ushort Chat2C_UpdateChatRoom = 10136;
+        public const ushort C2Chat_SendChat = 10137;
+        public const ushort Chat2C_SendChat = 10138;
+        public const ushort Chat2C_NoticeChat = 10139;
+        public const ushort FriendDataInfo = 10140;
+        public const ushort C2Friend_GetAllFriend = 10141;
+        public const ushort Friend2C_GetAllFriend = 10142;
+        public const ushort C2Friend_FriendRequest = 10143;
+        public const ushort Friend2C_FriendRequest = 10144;
+        public const ushort Friend2C_ReceiveFriendRequest = 10145;
+        public const ushort C2Friend_FriendRequestAccept = 10146;
+        public const ushort Friend2C_FriendRequestAccept = 10147;
+        public const ushort Friend2C_FriendRequestSucceed = 10148;
+        public const ushort C2Friend_DeleteFriend = 10149;
+        public const ushort Friend2C_DeleteFriend = 10150;
+        public const ushort Friend2C_DeleteYou = 10151;
+        public const ushort Friend2C_FriendOnLineChange = 10152;
     }
 }

@@ -12,7 +12,29 @@ namespace ET.Server
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationProxyComponent>();
+            root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
+
+            ChatCenterComponent chatCenterComponent = await UnitCacheHelper.GetComponent<ChatCenterComponent>(root, root.Zone());
+            if (chatCenterComponent == null)
+            {
+                chatCenterComponent = root.AddComponentWithId<ChatCenterComponent>(root.Zone());
+            }
+            else
+            {
+                root.AddComponent(chatCenterComponent);
+            }
+
+            string chatRoomKey = ConfigData.WorldChatRoomKey;
+            if (!chatCenterComponent.ChatRoomDict.ContainsKey(chatRoomKey))
+            {
+                // 创建世界聊天室
+                ChatRoom chatRoom = chatCenterComponent.AddChild<ChatRoom>();
+                chatRoom.ChatRoomKey = chatRoomKey;
+                chatRoom.ChatRoomType = (int)ChatRoomType.World;
+
+                chatCenterComponent.ChatRoomDict.Add(chatRoom.ChatRoomKey, chatRoom);
+            }
 
             root.AddComponent<ChatUnitComponent>();
 

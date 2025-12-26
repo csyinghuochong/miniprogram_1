@@ -104,7 +104,7 @@ message C2M_PathfindingResult // ILocationMessage
   
 	int32 SpeedRate = 3;
 	int64 ServerTime = 4; //服务器时间戳
-	repeated	Unity.Mathematics.float3 Position = 5;
+	repeated Unity.Mathematics.float3 Position = 5;
 	Unity.Mathematics.float3 Current = 6; //当前位置
 	int32 Frame = 7; //当前帧
 }
@@ -1047,19 +1047,47 @@ message C2M_NoticeUnitTransform // ILocationMessage
 	Unity.Mathematics.float3 Position = 2;
 }
 
+message ChatRoomInfo 
+{
+	string ChatRoomKey = 1;
+	int32 ChatRoomType = 2;
+	repeated int64 UnitList = 3;
+	repeated ChatInfo ChatInfoList = 4;
+}
+
 message ChatInfo
 {
 	int64 UnitId = 1;
-	string Name = 2;
-	string Content = 3;
-	int32 Channel = 4;
+	int64 SendTime = 2;
+	string Name = 3;
+	string Content = 4;
+}
+
+//ResponseType Chat2C_GetAllChat
+message C2Chat_GetAllChat // IChatRequest
+{
+	int32 RpcId = 1;
+}
+
+message Chat2C_GetAllChat // IChatResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated ChatRoomInfo ChatRoomInfoList = 4;
+}
+
+message Chat2C_UpdateChatRoom // IMessage
+{
+	ChatRoomInfo ChatRoomInfo = 1;
 }
 
 //ResponseType Chat2C_SendChat
 message C2Chat_SendChat // IChatRequest
 {
 	int32 RpcId = 1;
-	ChatInfo ChatInfo = 2;
+	string ChatRoomKey = 2;
+	string Content = 3;
 }
 
 message Chat2C_SendChat // IChatResponse
@@ -1071,7 +1099,8 @@ message Chat2C_SendChat // IChatResponse
 
 message Chat2C_NoticeChat // IMessage
 {
-	ChatInfo ChatInfo = 1;
+	string ChatRoomKey = 1;
+	ChatInfo ChatInfo = 2;
 }
 
 message FriendDataInfo 

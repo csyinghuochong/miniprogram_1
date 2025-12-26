@@ -110,6 +110,10 @@ namespace ET
         
         public const int ERR_ChatInfoNull = 201401; 
         public const int ERR_ChatMessageEmpty = 201402; //聊天信息为空
+        public const int ERR_ChatNotFriend = 201403; //聊天对象不是好友
+        public const int ERR_NotFindChatRoom = 201405; //聊天室不存在
+        public const int ERR_NotInChatRoom = 201406; //用户不在聊天室中
+        public const int ERR_ChatRoomNotOpen = 201407; //聊天室未开放
         
         public const int ERR_FriendIsFriend = 200501; //已经添加好友
         public const int ERR_FriendIsRequest = 200502; //已经发送好友请求

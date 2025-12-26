@@ -35,7 +35,7 @@ namespace ET.Client
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_Title = rc.Get<GameObject>("Text_Title").GetComponent<TMP_Text>();
-            
+
             self.Scroll_PublicChatItem = rc.Get<GameObject>("Scroll_PublicChatItem");
             self.Content_UIPublicChatItem = rc.Get<GameObject>("Content_UIPublicChatItem").transform;
             self.UIPublicChatItem = rc.Get<GameObject>("UIPublicChatItem");
@@ -48,7 +48,7 @@ namespace ET.Client
             self.Content_UIPrivateChatItem = rc.Get<GameObject>("Content_UIPrivateChatItem").transform;
             self.UIPrivateChatItem = rc.Get<GameObject>("UIPrivateChatItem");
             self.UIPrivateChatItem.SetActive(false);
-            
+
             self.InputField_Content = rc.Get<GameObject>("InputField_Content").GetComponent<TMP_InputField>();
             self.Button_Emoji = rc.Get<GameObject>("Button_Emoji").GetComponent<Button>();
             self.Button_Send = rc.Get<GameObject>("Button_Send").GetComponent<Button>();
@@ -78,8 +78,6 @@ namespace ET.Client
             self.SetShowType(0);
         }
 
-        
-        
         private static void SetShowType(this UIChatComponent self, int page)
         {
             self.CurrentPage = page;
@@ -90,32 +88,44 @@ namespace ET.Client
             self.Button_Type_PrivateChat.transform.Find("Image_On").gameObject.SetActive(page == 2);
             self.Button_Type_PrivateChat.transform.Find("Image_Off").gameObject.SetActive(page != 2);
 
-            
             self.Scroll_PublicChatItem.gameObject.SetActive(page == 0);
-            
+
             self.UpdateItemList(page);
         }
 
         public static void UpdateItemList(this UIChatComponent self, int page)
         {
-            ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
-            ChatChannelType channelType = page == 0 ? ChatChannelType.World : ChatChannelType.Alliance;
-            List<Chat> chatEntryList = chatComponent.GetChatEntryList(channelType);
+            ChatComponentC chatComponent = self.Root().GetComponent<ChatComponentC>();
+            ChatRoomType roomType = page == 0 ? ChatRoomType.World : ChatRoomType.Alliance;
+            List<Chat> chatList = null;
+            if (page == 0)
+            {
+                chatList = chatComponent.GetWorldChatList();
+            }
+            else if (page == 1)
+            {
+                chatList = chatComponent.GetAllianceChatList();
+            }
 
-            while (self.UIChatItemList.Count < chatEntryList.Count)
+            if (chatList == null)
+            {
+                return;
+            }
+
+            while (self.UIChatItemList.Count < chatList.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIPublicChatItem, self.Content_UIPublicChatItem);
                 UIPublicChatItem newItem = self.AddChild<UIPublicChatItem, GameObject>(go);
                 self.UIChatItemList.Add(newItem);
             }
 
-            for (int i = 0; i < chatEntryList.Count; i++)
+            for (int i = 0; i < chatList.Count; i++)
             {
-                self.UIChatItemList[i].UpdateInfo(chatEntryList[i]);
+                self.UIChatItemList[i].UpdateInfo(chatList[i]);
                 self.UIChatItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = chatEntryList.Count; i < self.UIChatItemList.Count; i++)
+            for (int i = chatList.Count; i < self.UIChatItemList.Count; i++)
             {
                 self.UIChatItemList[i].GameObject.SetActive(false);
             }
@@ -131,7 +141,7 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ClientChatHelper.SendChat(self.Root(), input, self.CurrentPage == 0 ? ChatChannelType.World : ChatChannelType.Alliance);
+            int error = await ClientChatHelper.SendChat(self.Root(), input, self.CurrentPage == 0 ? ChatRoomType.World : ChatRoomType.Alliance);
 
             if (error != ErrorCode.ERR_Success)
             {

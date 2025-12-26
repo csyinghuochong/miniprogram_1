@@ -27,7 +27,7 @@ namespace ET.Client
             root.AddComponent<FloatingTextComponent>();
             root.AddComponent<RelinkComponent>();
             root.AddComponent<PickUpDropItemComponent>();
-            root.AddComponent<ChatComponent>();
+            root.AddComponent<ChatComponentC>();
             root.AddComponent<FriendComponentC>();
             
             // 根据配置修改掉Main Fiber的SceneType
