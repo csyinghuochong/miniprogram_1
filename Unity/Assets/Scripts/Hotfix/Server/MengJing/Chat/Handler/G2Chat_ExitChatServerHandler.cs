@@ -15,7 +15,7 @@
             await chatUnit.Fiber().WaitFrameFinish();
             await chatUnit.RemoveLocation(LocationType.Chat);
             chatUnit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(chatUnit.Id);
-            chatUnit?.Dispose();
+            chatUnit.Dispose();
 
             await ETTask.CompletedTask;
         }

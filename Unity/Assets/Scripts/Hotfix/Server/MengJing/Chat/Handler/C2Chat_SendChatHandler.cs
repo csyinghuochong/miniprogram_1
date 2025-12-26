@@ -19,19 +19,33 @@
                     return;
                 }
 
+                if (request.Content.Length > ConfigData.ChatContentMax)
+                {
+                    response.Error = ErrorCode.ERR_ChatContentTooLong;
+                    return;
+                }
+
+                if (TimeHelper.ServerNow() - chatUnit.LastSendTime < ConfigData.ChatInterval)
+                {
+                    response.Error = ErrorCode.ERR_ChatTooFast;
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(request.ChatRoomKey))
                 {
                     response.Error = ErrorCode.ERR_ModifyData;
                     return;
                 }
 
-                if (!chatCenterComponent.ChatRoomDict.ContainsKey(request.ChatRoomKey))
+                ChatRoom chatRoom = null;
+                if (!chatCenterComponent.ChatRoomDict.TryGetValue(request.ChatRoomKey, out var chatRoomRef))
                 {
                     response.Error = ErrorCode.ERR_NotFindChatRoom;
+                    Log.Warning($"聊天室不存在: {request.ChatRoomKey}, UnitId: {chatUnit.Id}");
                     return;
                 }
 
-                ChatRoom chatRoom = chatCenterComponent.ChatRoomDict[request.ChatRoomKey];
+                chatRoom = chatRoomRef;
 
                 ChatInfo chatInfo = ChatInfo.Create();
                 chatInfo.UnitId = chatUnit.Id;
@@ -52,9 +66,9 @@
 
                         foreach (Entity entity in chatUnitComponent.Children.Values)
                         {
-                            ChatUnit chantUnit = entity as ChatUnit;
+                            ChatUnit targetChatUnit = entity as ChatUnit;
 
-                            MapMessageHelper.SendToClient(chatUnit.Root(), chantUnit.Id, chat2C_NoticeChat);
+                            MapMessageHelper.SendToClient(chatUnit.Root(), targetChatUnit.Id, chat2C_NoticeChat);
                         }
 
                         break;
@@ -65,6 +79,7 @@
                         if (!chatRoom.UnitList.Contains(chatUnit.Id))
                         {
                             response.Error = ErrorCode.ERR_NotInChatRoom;
+                            Log.Warning($"用户不在聊天室中: RoomKey={request.ChatRoomKey}, UnitId={chatUnit.Id}");
                             return;
                         }
 
@@ -92,6 +107,8 @@
                         break;
                     }
                 }
+
+                chatUnit.LastSendTime = TimeHelper.ServerNow();
             }
 
             await ETTask.CompletedTask;

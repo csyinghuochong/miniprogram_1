@@ -102,7 +102,7 @@ namespace ET.Client
             if (page == 0)
             {
                 chatList = chatComponent.GetWorldChatList();
-                
+
                 while (self.UIChatItemList.Count < chatList.Count)
                 {
                     GameObject go = UnityEngine.Object.Instantiate(self.UIPublicChatItem, self.Content_UIPublicChatItem);
@@ -120,7 +120,7 @@ namespace ET.Client
                 {
                     self.UIChatItemList[i].GameObject.SetActive(false);
                 }
-                
+
                 // 移动到底部
                 Canvas.ForceUpdateCanvases();
                 self.Content_UIPublicChatItem.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
@@ -137,7 +137,7 @@ namespace ET.Client
                     self.Text_ChatPeopleName.SetText(self.FriendData.PlayerName);
 
                     chatList = chatComponent.GetFriendChatList(self.FriendData.UnitId);
-                    
+
                     while (self.UIPrivateChatItemList.Count < chatList.Count)
                     {
                         GameObject go = UnityEngine.Object.Instantiate(self.UIPrivateChatItem, self.Content_UIPrivateChatItem);
@@ -155,7 +155,7 @@ namespace ET.Client
                     {
                         self.UIPrivateChatItemList[i].GameObject.SetActive(false);
                     }
-                    
+
                     // 移动到底部
                     Canvas.ForceUpdateCanvases();
                     self.Content_UIPrivateChatItem.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
@@ -167,13 +167,29 @@ namespace ET.Client
         private static async ETTask OnButton_Send(this UIChatComponent self)
         {
             string input = self.InputField_Content.text;
-            self.InputField_Content.SetTextWithoutNotify("");
 
             if (string.IsNullOrEmpty(input))
             {
                 return;
             }
 
+            if (input.Length > ConfigData.ChatContentMax)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("内容太长");
+                return;
+            }
+
+            if (TimeHelper.ServerNow() - self.LastSendTime < ConfigData.ChatInterval)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("发送过于频繁");
+                return;
+            }
+
+            // TODO 敏感词检查
+
+            self.InputField_Content.SetTextWithoutNotify("");
+            self.LastSendTime = TimeHelper.ServerNow();
+            
             int error = 0;
             switch (self.CurrentPage)
             {

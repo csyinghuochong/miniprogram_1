@@ -8,6 +8,8 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIChatComponent: Entity, IAwake
     {
+        public long LastSendTime;
+        
         private EntityRef<FriendData> friendData;
         public FriendData FriendData { get => this.friendData; set => this.friendData = value; }
 

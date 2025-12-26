@@ -32,8 +32,11 @@ namespace ET.Server
                 ChatRoom chatRoom = chatCenterComponent.AddChild<ChatRoom>();
                 chatRoom.ChatRoomKey = chatRoomKey;
                 chatRoom.ChatRoomType = (int)ChatRoomType.World;
+                chatRoom.ChatRoomState = (int)ChatRoomState.Open;
 
                 chatCenterComponent.ChatRoomDict.Add(chatRoom.ChatRoomKey, chatRoom);
+
+                Log.Info($"创建世界聊天室: {chatRoomKey}, Zone: {root.Zone()}");
             }
 
             root.AddComponent<ChatUnitComponent>();

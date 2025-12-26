@@ -114,12 +114,14 @@ namespace ET
         public const int ERR_NotFindChatRoom = 201405; //聊天室不存在
         public const int ERR_NotInChatRoom = 201406; //用户不在聊天室中
         public const int ERR_ChatRoomNotOpen = 201407; //聊天室未开放
+        public const int ERR_ChatContentTooLong = 201408; //聊天内容过长
+        public const int ERR_ChatTooFast = 201409; //聊天内容发送太快
         
-        public const int ERR_FriendIsFriend = 200501; //已经添加好友
-        public const int ERR_FriendIsRequest = 200502; //已经发送好友请求
-        public const int ERR_FriendIsNotRequest = 200503; //申请列表中不包含此用户
-        public const int ERR_FriendIsSelf = 200504; //不能添加自己为好友
-        public const int ERR_FriendIsNotFriend = 200505; //不是好友
+        public const int ERR_FriendIsFriend = 201501; //已经添加好友
+        public const int ERR_FriendIsRequest = 201502; //已经发送好友请求
+        public const int ERR_FriendIsNotRequest = 201503; //申请列表中不包含此用户
+        public const int ERR_FriendIsSelf = 201504; //不能添加自己为好友
+        public const int ERR_FriendIsNotFriend = 201505; //不是好友
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()

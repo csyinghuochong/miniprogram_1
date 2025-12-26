@@ -43,7 +43,7 @@
                         myFriendComponent.RequestList.Remove(targetFrientUnitId);
 
                         Friend2C_FriendRequestSucceed message = Friend2C_FriendRequestSucceed.Create();
-                        message.FriendDataInfo = await FriendHelper.GetFriendDataInfo(root, targetFrientUnitId);
+                        message.FriendDataInfo = await FriendHelper.GetFriendDataInfo(root, myUnitId);
                         MapMessageHelper.SendToClient(root, targetFriendUnit.Id, message);
                     }
                     else

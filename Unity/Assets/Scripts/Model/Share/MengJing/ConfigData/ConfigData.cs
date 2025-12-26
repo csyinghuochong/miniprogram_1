@@ -90,5 +90,9 @@ namespace ET
         # endregion
 
         public const string WorldChatRoomKey = "WorldChatRoom";
+        // 聊天内容最大长度
+        public const int ChatContentMax = 100;
+        // 聊天间隔
+        public const long ChatInterval = 3 * 1000;
     }
 }

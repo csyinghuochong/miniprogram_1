@@ -63,19 +63,18 @@
 
         public static void Check(this ChatRoom self)
         {
-            int num = 1;
-            for (int i = self.ChatList.Count - 1; i >= 0; i--)
+            if (self.ChatList.Count <= 100)
             {
-                Chat chat = self.ChatList[i];
+                return;
+            }
 
-                // 超过100条就删除
-                if (num > 100)
-                {
-                    chat.Dispose();
-                    self.ChatList.RemoveAt(i);
-                }
-
-                num++;
+            // 保留最新的100条消息，删除最旧的
+            int deleteCount = self.ChatList.Count - 100;
+            for (int i = 0; i < deleteCount; i++)
+            {
+                Chat chat = self.ChatList[0];
+                chat.Dispose();
+                self.ChatList.RemoveAt(0);
             }
         }
     }

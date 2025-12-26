@@ -13,10 +13,13 @@
                 ChatRoom chatRoom = chatCenterComponent.AddChild<ChatRoom>();
                 chatRoom.ChatRoomKey = chatRoomKey;
                 chatRoom.ChatRoomType = (int)ChatRoomType.Private;
+                chatRoom.ChatRoomState = (int)ChatRoomState.Open;
                 chatRoom.UnitList.Add(request.UnitId_1);
                 chatRoom.UnitList.Add(request.UnitId_2);
 
                 chatCenterComponent.ChatRoomDict.Add(chatRoom.ChatRoomKey, chatRoom);
+
+                Log.Info($"创建私聊房间: {chatRoomKey}, UnitId: {request.UnitId_1}, {request.UnitId_2}");
 
                 ChatUnitComponent chatUnitComponent = scene.GetComponent<ChatUnitComponent>();
                 foreach (long unitId in chatRoom.UnitList)

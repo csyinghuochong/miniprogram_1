@@ -6,13 +6,13 @@
         protected override async ETTask Run(Scene root, Chat2C_NoticeChat message)
         {
             ChatComponentC chatComponent = root.GetComponent<ChatComponentC>();
-            if (!chatComponent.ChatRoomDict.ContainsKey(message.ChatRoomKey))
+            if (!chatComponent.ChatRoomDict.TryGetValue(message.ChatRoomKey, out var chatRoomRef))
             {
-                Log.Error($"没有改聊天室 {message.ChatRoomKey}");
+                Log.Error($"没有该聊天室: {message.ChatRoomKey}");
                 return;
             }
 
-            ChatRoom chatRoom = chatComponent.ChatRoomDict[message.ChatRoomKey];
+            ChatRoom chatRoom = chatRoomRef;
             chatRoom.AddChatFromMessage(message.ChatInfo);
 
             EventSystem.Instance.Publish(root, new ChatUpdate());

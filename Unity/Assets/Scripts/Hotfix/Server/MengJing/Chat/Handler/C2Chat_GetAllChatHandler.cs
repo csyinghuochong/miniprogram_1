@@ -9,7 +9,14 @@
             ChatComponentS chatComponent = chatUnit.GetComponent<ChatComponentS>();
 
             // 世界聊天室
-            ChatRoom chatRoom = chatCenterComponent.ChatRoomDict[ConfigData.WorldChatRoomKey];
+            if (!chatCenterComponent.ChatRoomDict.TryGetValue(ConfigData.WorldChatRoomKey, out var chatRoomRef))
+            {
+                Log.Error($"世界聊天室不存在! UnitId: {chatUnit.Id}");
+                response.Error = ErrorCode.ERR_NotFindChatRoom;
+                return;
+            }
+
+            ChatRoom chatRoom = chatRoomRef;
             response.ChatRoomInfoList.Add(chatRoom.ToMessage());
 
             // 好友、联盟聊天室
