@@ -7,7 +7,7 @@ namespace ET.Client
         {
             GlobalComponent globalComponent = root.AddComponent<GlobalComponent>();
             root.AddComponent<ResourcesLoaderComponent>();
-            root.AddComponent<MaskWordHelper>();
+            root.AddComponent<MaskWordComponent>();
             root.AddComponent<LanguageComponent>();
             root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();

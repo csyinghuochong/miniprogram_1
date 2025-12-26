@@ -69,6 +69,12 @@ namespace ET.Client
             self.Button_Type_PrivateChat.AddListener(() => { self.SetShowType(2); });
             self.Button_CloseEmoji.AddListener(() => { self.GameObject_Emoji.SetActive(false); });
             self.Button_Send.AddListener(() => { self.OnButton_Send().Coroutine(); });
+            self.InputField_Content.onValueChanged.AddListener((string s) =>
+            {
+                string text_new = "";
+                self.Root().GetComponent<MaskWordComponent>().IsContainSensitiveWords(ref s, out text_new);
+                self.InputField_Content.SetTextWithoutNotify(s);
+            });
 
             for (int i = 0; i < self.Content_EmojiList.transform.childCount; i++)
             {
@@ -185,11 +191,9 @@ namespace ET.Client
                 return;
             }
 
-            // TODO 敏感词检查
-
             self.InputField_Content.SetTextWithoutNotify("");
             self.LastSendTime = TimeHelper.ServerNow();
-            
+
             int error = 0;
             switch (self.CurrentPage)
             {
