@@ -79,7 +79,10 @@ namespace ET.Client
             for (int i = 0; i < self.Content_EmojiList.transform.childCount; i++)
             {
                 GameObject go = self.Content_EmojiList.transform.GetChild(i).gameObject;
-                go.GetComponent<Button>().AddListener(() => { self.InputField_Content.text += $"<sprite={go.name}>"; });
+                go.GetComponent<Button>().AddListener(() =>
+                {
+                    self.InputField_Content.SetTextWithoutNotify(self.InputField_Content.text + $"<sprite={go.name}>");
+                });
             }
         }
 
