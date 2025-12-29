@@ -50,6 +50,15 @@ namespace ET.Client
         {
             self.UnitId = watchPlayerInfo.UnitId;
             self.Text_PlayerName.SetText(watchPlayerInfo.PlayerName);
+            if (string.IsNullOrEmpty(watchPlayerInfo.AllianceName))
+            {
+                self.Text_PlayerLianMeng.gameObject.SetActive(false);
+            }
+            else
+            {
+                self.Text_PlayerLianMeng.gameObject.SetActive(true);
+                self.Text_PlayerLianMeng.SetTextFormat("联盟:{0}", watchPlayerInfo.AllianceName);
+            }
             self.Text_PlayerCE.SetTextFormat("战力:{0}", watchPlayerInfo.CombatPower);
 
             for (int i = 0; i < 9; i++)

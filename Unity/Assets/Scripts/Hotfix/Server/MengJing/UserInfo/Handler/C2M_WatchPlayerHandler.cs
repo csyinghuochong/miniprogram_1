@@ -30,6 +30,7 @@
             WatchPlayerInfo watchPlayerInfo = WatchPlayerInfo.Create();
             watchPlayerInfo.UnitId = request.UnitId;
             watchPlayerInfo.PlayerName = userInfoComponent.GetPlayerName();
+            watchPlayerInfo.AllianceName = ""; //先为空
             watchPlayerInfo.CombatPower = numericComponent.GetAsLong(NumericType.CombatPower);
             watchPlayerInfo.HeroFormation.AddRange(heroComponent.Formation);
             foreach (long id in heroComponent.Formation)

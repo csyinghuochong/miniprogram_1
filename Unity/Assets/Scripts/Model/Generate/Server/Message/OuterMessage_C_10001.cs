@@ -4390,12 +4390,15 @@ namespace ET
         public string PlayerName { get; set; }
 
         [MemoryPackOrder(2)]
-        public long CombatPower { get; set; }
+        public string AllianceName { get; set; }
 
         [MemoryPackOrder(3)]
-        public List<long> HeroFormation { get; set; } = new();
+        public long CombatPower { get; set; }
 
         [MemoryPackOrder(4)]
+        public List<long> HeroFormation { get; set; } = new();
+
+        [MemoryPackOrder(5)]
         public List<HeroInfo> HeroInfoList { get; set; } = new();
 
         public override void Dispose()
@@ -4407,6 +4410,7 @@ namespace ET
 
             this.UnitId = default;
             this.PlayerName = default;
+            this.AllianceName = default;
             this.CombatPower = default;
             this.HeroFormation.Clear();
             this.HeroInfoList.Clear();
