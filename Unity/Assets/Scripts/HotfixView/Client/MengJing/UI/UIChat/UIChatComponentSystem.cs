@@ -46,9 +46,11 @@ namespace ET.Client
             self.UIPrivateChatPeopleItem.SetActive(false);
             self.Scroll_PrivateChatItem = rc.Get<GameObject>("Scroll_PrivateChatItem");
             self.Text_ChatPeopleName = rc.Get<GameObject>("Text_ChatPeopleName").GetComponent<TMP_Text>();
+            self.Button_ReturnPrivateChatPeople = rc.Get<GameObject>("Button_ReturnPrivateChatPeople").GetComponent<Button>();
             self.Content_UIPrivateChatItem = rc.Get<GameObject>("Content_UIPrivateChatItem").transform;
             self.UIPrivateChatItem = rc.Get<GameObject>("UIPrivateChatItem");
             self.UIPrivateChatItem.SetActive(false);
+            self.SendNode = rc.Get<GameObject>("SendNode");
 
             self.InputField_Content = rc.Get<GameObject>("InputField_Content").GetComponent<TMP_InputField>();
             self.Button_Emoji = rc.Get<GameObject>("Button_Emoji").GetComponent<Button>();
@@ -62,6 +64,7 @@ namespace ET.Client
 
             self.GameObject_Emoji.SetActive(false);
 
+            self.Button_ReturnPrivateChatPeople.AddListener(() => { self.OnButton_ReturnPrivateChatPeople(); });
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIChat); });
             self.Button_Emoji.AddListener(() => { self.GameObject_Emoji.SetActive(true); });
             self.Button_Type_World.onClick.AddListener(() => { self.SetShowType(0); });
@@ -86,10 +89,9 @@ namespace ET.Client
             }
         }
 
-        public static void SetShowType(this UIChatComponent self, int page, FriendData friendData = null)
+        public static void SetShowType(this UIChatComponent self, int page)
         {
             self.CurrentPage = page;
-            self.FriendData = friendData;
             self.Button_Type_World.transform.Find("Image_On").gameObject.SetActive(page == 0);
             self.Button_Type_World.transform.Find("Image_Off").gameObject.SetActive(page != 0);
             self.Button_Type_LianMeng.transform.Find("Image_On").gameObject.SetActive(page == 1);
@@ -98,10 +100,20 @@ namespace ET.Client
             self.Button_Type_PrivateChat.transform.Find("Image_Off").gameObject.SetActive(page != 2);
 
             self.Scroll_PublicChatItem.gameObject.SetActive(page == 0);
-            self.Scroll_PrivateChatPeopleItem.gameObject.SetActive(page == 1);
+            // 联盟。。。
+            self.Scroll_PrivateChatPeopleItem.gameObject.SetActive(page == 2);
             self.Scroll_PrivateChatItem.gameObject.SetActive(page == 2);
 
+            self.SendNode.gameObject.SetActive(true);
+
             self.UpdateItemList(page);
+        }
+
+        public static void ShowPrivateChat(this UIChatComponent self, FriendData friendData)
+        {
+            self.FriendData = friendData;
+
+            self.SetShowType(2);
         }
 
         public static void UpdateItemList(this UIChatComponent self, int page)
@@ -143,6 +155,10 @@ namespace ET.Client
             {
                 if (self.FriendData != null)
                 {
+                    self.Scroll_PrivateChatPeopleItem.gameObject.SetActive(false);
+                    self.Scroll_PrivateChatItem.gameObject.SetActive(true);
+                    self.SendNode.SetActive(true);
+
                     self.Text_ChatPeopleName.SetText(self.FriendData.PlayerName);
 
                     chatList = chatComponent.GetFriendChatList(self.FriendData.UnitId);
@@ -170,7 +186,53 @@ namespace ET.Client
                     self.Content_UIPrivateChatItem.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
                     Canvas.ForceUpdateCanvases();
                 }
+                else
+                {
+                    self.Scroll_PrivateChatPeopleItem.gameObject.SetActive(true);
+                    self.Scroll_PrivateChatItem.gameObject.SetActive(false);
+                    self.SendNode.SetActive(false);
+
+                    List<FriendData> friendList = new List<FriendData>();
+                    FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
+                    long myUnitId = self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId;
+                    foreach (FriendData friendData in friendComponent.FriendList)
+                    {
+                        string chatRoomKey = CommonHelp.GetChatRoomKey(myUnitId, friendData.UnitId);
+                        if (chatComponent.ChatRoomDict.ContainsKey(chatRoomKey))
+                        {
+                            ChatRoom chatRoom = chatComponent.ChatRoomDict[chatRoomKey];
+                            if (chatRoom.ChatList.Count > 0)
+                            {
+                                friendList.Add(friendData);
+                            }
+                        }
+                    }
+
+                    while (self.UIPrivateChatPeopleItemList.Count < friendList.Count)
+                    {
+                        GameObject go = UnityEngine.Object.Instantiate(self.UIPrivateChatPeopleItem, self.Content_UIPrivateChatPeopleItem);
+                        UIPrivateChatPeopleItem newItem = self.AddChild<UIPrivateChatPeopleItem, GameObject>(go);
+                        self.UIPrivateChatPeopleItemList.Add(newItem);
+                    }
+
+                    for (int i = 0; i < friendList.Count; i++)
+                    {
+                        self.UIPrivateChatPeopleItemList[i].UpdateInfo(friendList[i]);
+                        self.UIPrivateChatPeopleItemList[i].GameObject.SetActive(true);
+                    }
+
+                    for (int i = friendList.Count; i < self.UIPrivateChatPeopleItemList.Count; i++)
+                    {
+                        self.UIPrivateChatPeopleItemList[i].GameObject.SetActive(false);
+                    }
+                }
             }
+        }
+
+        private static void OnButton_ReturnPrivateChatPeople(this UIChatComponent self)
+        {
+            self.FriendData = null;
+            self.SetShowType(2);
         }
 
         private static async ETTask OnButton_Send(this UIChatComponent self)

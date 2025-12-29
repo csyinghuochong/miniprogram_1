@@ -29,8 +29,10 @@ namespace ET.Client
         public GameObject UIPrivateChatPeopleItem;
         public GameObject Scroll_PrivateChatItem;
         public TMP_Text Text_ChatPeopleName;
+        public Button Button_ReturnPrivateChatPeople;
         public Transform Content_UIPrivateChatItem;
         public GameObject UIPrivateChatItem;
+        public GameObject SendNode;
         
         public TMP_InputField InputField_Content;
         public Button Button_Emoji;

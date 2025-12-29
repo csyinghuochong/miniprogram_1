@@ -64,7 +64,7 @@ namespace ET.Client
         private static async ETTask OnButton_Chat(this UIFriendItem self)
         {
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIChat);
-            ui.GetComponent<UIChatComponent>().SetShowType(2, self.FriendData);
+            ui.GetComponent<UIChatComponent>().ShowPrivateChat(self.FriendData);
         }
     }
 }

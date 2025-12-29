@@ -130,10 +130,14 @@ MonoBehaviour:
     gameObject: {fileID: 223032296915968203}
   - key: Text_ChatPeopleName
     gameObject: {fileID: 828456414773130532}
+  - key: Button_ReturnPrivateChatPeople
+    gameObject: {fileID: 4964043043511738685}
   - key: Content_UIPrivateChatItem
     gameObject: {fileID: 7786240103502105058}
   - key: UIPrivateChatItem
     gameObject: {fileID: 68306952046915960}
+  - key: SendNode
+    gameObject: {fileID: 2466724111163868893}
   - key: InputField_Content
     gameObject: {fileID: 1791854201639698930}
   - key: Button_Emoji
@@ -4587,7 +4591,7 @@ GameObject:
   - component: {fileID: 2388977159926277889}
   - component: {fileID: 25427997240864084}
   m_Layer: 5
-  m_Name: Button_Return
+  m_Name: Button_ReturnPrivateChatPeople
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5564,8 +5568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 0, y: -100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2928922803180230988
 CanvasRenderer:
