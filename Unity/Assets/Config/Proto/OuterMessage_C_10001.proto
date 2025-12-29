@@ -1122,9 +1122,10 @@ message FriendDataInfo
 {
 	int64 UnitId = 1;
 	int32 OnLine = 2;
-	string PlayerName = 3;
-	int32 Lv = 4;
-	int64 CombatPower = 5;
+	int64 LastLoginTime = 3;
+	string PlayerName = 4;
+	int32 Lv = 5;
+	int64 CombatPower = 6;
 }
 
 //ResponseType Friend2C_GetAllFriend

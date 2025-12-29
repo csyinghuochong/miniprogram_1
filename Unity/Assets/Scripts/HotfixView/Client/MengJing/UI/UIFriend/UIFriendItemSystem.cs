@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
@@ -33,7 +34,29 @@ namespace ET.Client
             self.FriendData = friendData;
 
             self.Text_PlayerName.SetText(friendData.PlayerName);
-            self.Text_PlayerStatus.SetText(friendData.OnLine == 1 ? "在线" : "离线");
+            if (friendData.OnLine == 1)
+            {
+                self.Text_PlayerStatus.SetText("在线");
+            }
+            else
+            {
+                DateTime lastTime = TimeInfo.Instance.ToDateTime(friendData.LastLoginTime);
+                DateTime nowTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                TimeSpan timeSpan = nowTime - lastTime;
+                if (timeSpan.Days > 0)
+                {
+                    self.Text_PlayerStatus.SetTextFormat("{0}天前登录", timeSpan.Days);
+                }
+                else if (timeSpan.Hours > 0)
+                {
+                    self.Text_PlayerStatus.SetTextFormat("{0}小时前登录", timeSpan.Hours);
+                }
+                else
+                {
+                    self.Text_PlayerStatus.SetTextFormat("{0}分钟前登录", timeSpan.Minutes);
+                }
+            }
+
             self.Text_PlayerLv.SetTextFormat("等级:{0}", friendData.Lv);
             self.Text_PlayerCE.SetTextFormat("战力:{0}", friendData.CombatPower);
         }

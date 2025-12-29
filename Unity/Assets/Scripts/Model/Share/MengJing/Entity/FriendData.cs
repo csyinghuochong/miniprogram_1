@@ -5,6 +5,7 @@
     {
         public long UnitId { get; set; }
         public int OnLine { get; set; }
+        public long LastLoginTime { get; set; }
         public string PlayerName { get; set; }
         public int Lv { get; set; }
         public long CombatPower { get; set; }

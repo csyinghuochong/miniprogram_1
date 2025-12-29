@@ -12,6 +12,7 @@
             FriendDataInfo friendDataInfo = FriendDataInfo.Create();
             friendDataInfo.UnitId = unitId;
             friendDataInfo.OnLine = friendUnitComponent.Children.ContainsKey(unitId) ? 1 : 0;
+            friendDataInfo.LastLoginTime = numericComponent.GetAsLong(NumericType.LastLoginTime);
             friendDataInfo.PlayerName = userInfoComponent.GetPlayerName();
             friendDataInfo.Lv = userInfoComponent.GetLv();
             friendDataInfo.CombatPower = numericComponent.GetAsLong(NumericType.CombatPower);

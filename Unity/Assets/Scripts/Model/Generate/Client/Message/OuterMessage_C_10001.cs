@@ -5096,12 +5096,15 @@ namespace ET
         public int OnLine { get; set; }
 
         [MemoryPackOrder(2)]
-        public string PlayerName { get; set; }
+        public long LastLoginTime { get; set; }
 
         [MemoryPackOrder(3)]
-        public int Lv { get; set; }
+        public string PlayerName { get; set; }
 
         [MemoryPackOrder(4)]
+        public int Lv { get; set; }
+
+        [MemoryPackOrder(5)]
         public long CombatPower { get; set; }
 
         public override void Dispose()
@@ -5113,6 +5116,7 @@ namespace ET
 
             this.UnitId = default;
             this.OnLine = default;
+            this.LastLoginTime = default;
             this.PlayerName = default;
             this.Lv = default;
             this.CombatPower = default;
