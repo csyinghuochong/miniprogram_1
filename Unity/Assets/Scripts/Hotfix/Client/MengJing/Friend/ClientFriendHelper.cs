@@ -78,5 +78,32 @@
 
             return response.Error;
         }
+        
+        public static async ETTask<int> BlackFriend(Scene root, long unitId)
+        {
+            C2Friend_BlackFriend request = C2Friend_BlackFriend.Create();
+            request.UnitId = unitId;
+            request.Ope = 0;
+
+            Friend2C_BlackFriend response = (Friend2C_BlackFriend)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                FriendComponentC friendComponentC = root.GetComponent<FriendComponentC>();
+                if (request.Ope == 0)
+                {
+                    friendComponentC.DeleteRequest(unitId);
+                    friendComponentC.AddBlackFromMessage(response.FriendDataInfo);
+                }
+                else
+                {
+                    friendComponentC.DeleteBlack(unitId);
+                }
+            }
+
+            EventSystem.Instance.Publish(root, new FriendUpdate());
+
+            return response.Error;
+        }
     }
 }

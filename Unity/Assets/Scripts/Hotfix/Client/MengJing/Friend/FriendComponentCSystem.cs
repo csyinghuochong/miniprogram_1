@@ -94,7 +94,36 @@
                 FriendData friendData = self.FriendList[i];
                 if (friendData.UnitId == unitId)
                 {
+                    friendData.Dispose();
                     self.FriendList.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+        
+        public static void DeleteRequest(this FriendComponentC self, long unitId)
+        {
+            for (int i = self.RequestList.Count - 1; i >= 0; i--)
+            {
+                FriendData friendData = self.RequestList[i];
+                if (friendData.UnitId == unitId)
+                {
+                    friendData.Dispose();
+                    self.RequestList.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
+        public static void DeleteBlack(this FriendComponentC self, long unitId)
+        {
+            for (int i = self.BlackList.Count - 1; i >= 0; i--)
+            {
+                FriendData friendData = self.BlackList[i];
+                if (friendData.UnitId == unitId)
+                {
+                    friendData.Dispose();
+                    self.BlackList.RemoveAt(i);
                     return;
                 }
             }
@@ -110,7 +139,7 @@
                     return;
                 }
             }
-            
+
             foreach (FriendData data in self.RequestList)
             {
                 if (data.UnitId == unitId)
@@ -120,7 +149,7 @@
                 }
             }
         }
-        
+
         public static bool IsFriend(this FriendComponentC self, long unitId)
         {
             foreach (FriendData friendData in self.FriendList)

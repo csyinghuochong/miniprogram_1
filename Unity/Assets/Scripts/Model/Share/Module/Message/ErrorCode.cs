@@ -123,6 +123,9 @@ namespace ET
         public const int ERR_FriendIsNotRequest = 201503; //申请列表中不包含此用户
         public const int ERR_FriendIsSelf = 201504; //不能添加自己为好友
         public const int ERR_FriendIsNotFriend = 201505; //不是好友
+        public const int ERR_FriendIsBlack = 201506; //黑名单中
+        public const int ERR_FriendCantBlack = 201507; //好友不能被拉黑
+        public const int ERR_FriendIsNotBlack = 201508; //用户不在黑名单
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()

@@ -114,7 +114,11 @@ namespace ET.Client
 
         private static async ETTask OnButton_Black(this UIPlayerInfoComponent self)
         {
-            await ETTask.CompletedTask;
+            int error = await ClientFriendHelper.BlackFriend(self.Root(), self.UnitId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("拉黑成功");
+            }
         }
     }
 }

@@ -5432,6 +5432,80 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2Friend_BlackFriend)]
+    [ResponseType(nameof(Friend2C_BlackFriend))]
+    public partial class C2Friend_BlackFriend : MessageObject, IFriendRequest
+    {
+        public static C2Friend_BlackFriend Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Friend_BlackFriend), isFromPool) as C2Friend_BlackFriend;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        /// <summary>
+        /// 0拉黑 1取消拉黑
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public int Ope { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+            this.Ope = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Friend2C_BlackFriend)]
+    public partial class Friend2C_BlackFriend : MessageObject, IFriendResponse
+    {
+        public static Friend2C_BlackFriend Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Friend2C_BlackFriend), isFromPool) as Friend2C_BlackFriend;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public FriendDataInfo FriendDataInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.FriendDataInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.Friend2C_DeleteYou)]
     public partial class Friend2C_DeleteYou : MessageObject, IMessage
     {
@@ -5638,7 +5712,9 @@ namespace ET
         public const ushort Friend2C_FriendRequestSucceed = 10150;
         public const ushort C2Friend_DeleteFriend = 10151;
         public const ushort Friend2C_DeleteFriend = 10152;
-        public const ushort Friend2C_DeleteYou = 10153;
-        public const ushort Friend2C_FriendOnLineChange = 10154;
+        public const ushort C2Friend_BlackFriend = 10153;
+        public const ushort Friend2C_BlackFriend = 10154;
+        public const ushort Friend2C_DeleteYou = 10155;
+        public const ushort Friend2C_FriendOnLineChange = 10156;
     }
 }

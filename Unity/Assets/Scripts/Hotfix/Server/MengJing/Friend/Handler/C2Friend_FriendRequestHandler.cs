@@ -47,6 +47,12 @@
                         return;
                     }
 
+                    if (targetFriendComponent.BlackList.Contains(myUnitId))
+                    {
+                        response.Error = ErrorCode.ERR_FriendIsBlack;
+                        return;
+                    }
+
                     targetFriendComponent.RequestList.Add(myUnitId);
 
                     Friend2C_ReceiveFriendRequest message = Friend2C_ReceiveFriendRequest.Create();
@@ -56,7 +62,7 @@
                 else
                 {
                     // 离线
-                    FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(root, request.UnitId);
+                    FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(root, targetFrientUnitId);
 
                     if (targetFriendComponent == null)
                     {
@@ -73,6 +79,12 @@
                     if (targetFriendComponent.RequestList.Contains(myUnitId))
                     {
                         response.Error = ErrorCode.ERR_FriendIsRequest;
+                        return;
+                    }
+
+                    if (targetFriendComponent.BlackList.Contains(myUnitId))
+                    {
+                        response.Error = ErrorCode.ERR_FriendIsBlack;
                         return;
                     }
 

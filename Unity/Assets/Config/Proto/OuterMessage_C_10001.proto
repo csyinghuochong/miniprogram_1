@@ -1195,6 +1195,22 @@ message Friend2C_DeleteFriend // IFriendResponse
 	string Message = 3;
 }
 
+//ResponseType Friend2C_BlackFriend
+message C2Friend_BlackFriend // IFriendRequest
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+	int32 Ope = 3; //0拉黑 1取消拉黑
+}
+
+message Friend2C_BlackFriend // IFriendResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	FriendDataInfo FriendDataInfo = 4;
+}
+
 message Friend2C_DeleteYou // IMessage
 {
 	int64 UnitId = 1;
