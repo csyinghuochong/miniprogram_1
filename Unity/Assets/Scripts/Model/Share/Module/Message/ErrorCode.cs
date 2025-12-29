@@ -116,6 +116,7 @@ namespace ET
         public const int ERR_ChatRoomNotOpen = 201407; //聊天室未开放
         public const int ERR_ChatContentTooLong = 201408; //聊天内容过长
         public const int ERR_ChatTooFast = 201409; //聊天内容发送太快
+        public const int ERR_ChatMute = 201410; //玩家禁言中
         
         public const int ERR_FriendIsFriend = 201501; //已经添加好友
         public const int ERR_FriendIsRequest = 201502; //已经发送好友请求

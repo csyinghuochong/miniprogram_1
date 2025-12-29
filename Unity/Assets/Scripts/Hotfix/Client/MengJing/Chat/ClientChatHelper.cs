@@ -24,6 +24,11 @@
 
             Chat2C_SendChat response = (Chat2C_SendChat)await root.GetComponent<ClientSenderComponent>().Call(request);
 
+            if (response.Error == ErrorCode.ERR_ChatMute)
+            {
+                EventSystem.Instance.Publish(root, new ShowTip() { Tip = response.Message });
+            }
+            
             return response.Error;
         }
 
@@ -43,6 +48,16 @@
                     chatComponent.AddChatRoomFromMessage(chatRoomInfo);
                 }
             }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> Report(Scene root, long unitId)
+        {
+            C2Chat_Report request = C2Chat_Report.Create();
+            request.UnitId = unitId;
+
+            Chat2C_Report response = (Chat2C_Report)await root.GetComponent<ClientSenderComponent>().Call(request);
 
             return response.Error;
         }

@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Chat)]
     [FriendOf(typeof(ChatUnit))]
@@ -12,6 +14,7 @@
             {
                 ChatCenterComponent chatCenterComponent = root.GetComponent<ChatCenterComponent>();
                 ChatUnitComponent chatUnitComponent = root.GetComponent<ChatUnitComponent>();
+                ChatComponentS chatComponent = chatUnit.GetComponent<ChatComponentS>();
 
                 if (string.IsNullOrEmpty(request.Content))
                 {
@@ -30,6 +33,18 @@
                     response.Error = ErrorCode.ERR_ChatTooFast;
                     return;
                 }
+
+                if (chatComponent.UnmuteTime > TimeHelper.ServerNow())
+                {
+                    long leftTime = chatComponent.UnmuteTime - TimeHelper.ServerNow();
+                    int hour = (int)(leftTime * 1f / TimeHelper.Hour);
+                    hour = Math.Max(hour, 1);
+                    response.Error = ErrorCode.ERR_ChatMute;
+                    response.Message = $"你当前已经被禁言，{hour}小时后解封！";
+                    return;
+                }
+
+                chatComponent.ReportList.Clear();
 
                 if (string.IsNullOrEmpty(request.ChatRoomKey))
                 {

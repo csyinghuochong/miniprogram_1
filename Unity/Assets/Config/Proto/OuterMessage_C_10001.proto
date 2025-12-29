@@ -1097,6 +1097,20 @@ message Chat2C_SendChat // IChatResponse
 	string Message = 3;
 }
 
+//ResponseType Chat2C_Report
+message C2Chat_Report // IChatRequest
+{
+	int32 RpcId = 1;
+	int64 UnitId = 2;
+}
+
+message Chat2C_Report // IChatResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 message Chat2C_NoticeChat // IMessage
 {
 	string ChatRoomKey = 1;
