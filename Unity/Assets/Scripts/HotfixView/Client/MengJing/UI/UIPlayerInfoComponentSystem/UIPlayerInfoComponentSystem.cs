@@ -76,7 +76,7 @@ namespace ET.Client
                 }
 
                 self.UIFormationSlotItemList[i].UpdateInfo(hero, i + 1).Coroutine();
-                // self.UIFormationSlotItemList[i].EventTrigger_Click.gameObject.SetActive(false);
+                self.UIFormationSlotItemList[i].EventTrigger_Click.gameObject.SetActive(false);
             }
 
             self.UpdateButtonList();
