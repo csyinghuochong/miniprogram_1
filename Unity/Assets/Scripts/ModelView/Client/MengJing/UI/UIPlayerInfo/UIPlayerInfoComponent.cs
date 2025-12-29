@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -6,7 +8,8 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIPlayerInfoComponent : Entity, IAwake, IDestroy
     {
-        public WatchPlayerInfo WatchPlayerInfo;
+        public long UnitId;
+        public List<UIFormationSlotItem> UIFormationSlotItemList { get; set; } = new();
 
         public Button Button_Close;
         public Image Image_PlayerHead;
@@ -18,5 +21,6 @@ namespace ET.Client
         public Button Button_DeleteFriend;
         public Button Button_Report;
         public Button Button_Black;
+        public Transform Transform_UIFormationSlotItemList;
     }
 }

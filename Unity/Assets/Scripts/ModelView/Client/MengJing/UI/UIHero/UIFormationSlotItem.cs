@@ -8,7 +8,8 @@ namespace ET.Client
     [ChildOf]
     public class UIFormationSlotItem : Entity, IAwake<GameObject>
     {
-        public long HeroId;
+        private EntityRef<Hero> hero;
+        public Hero Hero { get => this.hero; set => this.hero = value; }
         public int SlotIndex;
         public bool IsDrag;
         public GameObject CopyModelGameObject;
@@ -16,7 +17,7 @@ namespace ET.Client
         public GameObject GameObject;
         public Transform Transform_HeroIcon;
         public TMP_Text Text_HeroName;
-        public EventTrigger EventTrigger_Click;
+        public EventTrigger EventTrigger_Click { get; set; }
         public Image Image_HeroOn;
         public Image Image_HeroOff;
     }

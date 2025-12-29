@@ -7,8 +7,25 @@
         protected override async ETTask Run(Unit unit, C2M_WatchPlayer request, M2C_WatchPlayer response)
         {
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(unit.Root(), request.UnitId);
+            if (userInfoComponent == null)
+            {
+                response.Error = ErrorCode.ERR_ComponentIsNull;
+                return;
+            }
+
             HeroComponentS heroComponent = await UnitCacheHelper.GetComponentCache<HeroComponentS>(unit.Root(), request.UnitId);
+            if (heroComponent == null)
+            {
+                response.Error = ErrorCode.ERR_ComponentIsNull;
+                return;
+            }
+
             NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(unit.Root(), request.UnitId);
+            if (numericComponent == null)
+            {
+                response.Error = ErrorCode.ERR_ComponentIsNull;
+                return;
+            }
 
             WatchPlayerInfo watchPlayerInfo = WatchPlayerInfo.Create();
             watchPlayerInfo.UnitId = request.UnitId;
@@ -17,10 +34,18 @@
             watchPlayerInfo.HeroFormation.AddRange(heroComponent.Formation);
             foreach (long id in heroComponent.Formation)
             {
-                Hero hero = heroComponent.GetHero(id);
-                if (hero != null)
+                if (heroComponent.ChildrenDB == null)
                 {
-                    watchPlayerInfo.HeroInfoList.Add(hero.ToMessage());
+                    continue;
+                }
+
+                foreach (Entity entity in heroComponent.ChildrenDB)
+                {
+                    Hero hero = entity as Hero;
+                    if (hero.Id == id)
+                    {
+                        watchPlayerInfo.HeroInfoList.Add(hero.ToMessage());
+                    }
                 }
             }
 

@@ -37,7 +37,7 @@ namespace ET.Client
 
         private static void OnBeginDrag(this UIFormationSlotItem self, PointerEventData pdata)
         {
-            if (self.HeroId == 0)
+            if (self.Hero == null)
             {
                 return;
             }
@@ -78,12 +78,12 @@ namespace ET.Client
                 return;
             }
 
-            if (self.HeroId == 0)
+            if (self.Hero == null)
             {
                 return;
             }
 
-            self.GetParent<UIHeroFormationComponent>().OnUnloadHero(self.HeroId, self.SlotIndex).Coroutine();
+            self.GetParent<UIHeroFormationComponent>().OnUnloadHero(self.Hero.Id, self.SlotIndex).Coroutine();
         }
 
         private static void OnEndDrag(this UIFormationSlotItem self, PointerEventData pdata)
@@ -112,7 +112,7 @@ namespace ET.Client
                 int index = int.Parse(name.Substring(20, name.Length - 20));
 
                 select = true;
-                self.GetParent<UIHeroFormationComponent>().OnSelectHero(self.HeroId, index).Coroutine();
+                self.GetParent<UIHeroFormationComponent>().OnSelectHero(self.Hero.Id, index).Coroutine();
 
                 break;
             }
@@ -132,17 +132,14 @@ namespace ET.Client
             self.IsDrag = false;
         }
 
-        public static async ETTask UpdateInfo(this UIFormationSlotItem self, long heroId, int slotIndex)
+        public static async ETTask UpdateInfo(this UIFormationSlotItem self, Hero hero, int slotIndex)
         {
-            self.HeroId = heroId;
+            self.Hero = hero;
             self.SlotIndex = slotIndex;
-
-            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            Hero hero = heroComponentC.GetHero(heroId);
 
             if (hero == null)
             {
-                self.HeroId = 0;
+                self.Hero = null;
                 self.Text_HeroName.gameObject.SetActive(false);
                 self.Transform_HeroIcon.gameObject.SetActive(false);
                 self.Image_HeroOn.gameObject.SetActive(false);

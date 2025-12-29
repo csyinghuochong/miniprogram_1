@@ -76,7 +76,7 @@ namespace ET.Client
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             for (int i = 0; i < 9; i++)
             {
-                self.UIFormationSlotItemList[i].UpdateInfo(heroComponentC.Formation[i], i + 1).Coroutine();
+                self.UIFormationSlotItemList[i].UpdateInfo(heroComponentC.GetHero(heroComponentC.Formation[i]), i + 1).Coroutine();
             }
         }
 
