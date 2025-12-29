@@ -133,6 +133,8 @@ MonoBehaviour:
     gameObject: {fileID: 1623826177972680470}
   - key: Text_PlayerName
     gameObject: {fileID: 4971907432509287831}
+  - key: Text_CP
+    gameObject: {fileID: 6836730897985107713}
   - key: Text_Gold
     gameObject: {fileID: 7004093926088419708}
   - key: Button_AddGold
@@ -8537,7 +8539,7 @@ GameObject:
   - component: {fileID: 481425041465040045}
   - component: {fileID: 7592094392830064272}
   m_Layer: 5
-  m_Name: Text_CE
+  m_Name: Text_CP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

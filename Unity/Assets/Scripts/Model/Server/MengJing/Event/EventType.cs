@@ -34,4 +34,9 @@ namespace ET.Server
         public int TargetId;
         public int TargetValue;
     }
+
+    public struct UpdateTotalCombatPower
+    {
+        public Unit Unit;
+    }
 }

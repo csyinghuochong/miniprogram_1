@@ -22,6 +22,7 @@ namespace ET.Client
 
         public TMP_Text Text_UID;
         public TMP_Text Text_PlayerName;
+        public TMP_Text Text_CP;
         public TMP_Text Text_PlayerLv;
         public TMP_Text Text_FPS;
         public TMP_Text Text_Ping;

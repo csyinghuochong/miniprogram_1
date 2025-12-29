@@ -181,6 +181,9 @@ namespace ET.Server
                 self.Formation[slotIndex - 1] = 0;
             }
 
+            Unit unit = self.GetParent<Unit>();
+            EventSystem.Instance.Publish(unit.Scene(), new UpdateTotalCombatPower() { Unit = unit });
+            
             return ErrorCode.ERR_Success;
         }
 

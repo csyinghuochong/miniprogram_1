@@ -48,22 +48,10 @@ namespace ET.Client
 
         public static void UpdateOther(this UIHeroFormationComponent self)
         {
-            long totalCP = 0;
-
             HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
             List<long> currentFormation = heroComponentC.Formation;
 
-            for (int i = 0; i < currentFormation.Count; i++)
-            {
-                Hero hero = heroComponentC.GetHero(currentFormation[i]);
-
-                if (hero == null)
-                {
-                    continue;
-                }
-
-                totalCP += hero.NumericDic[NumericType.CombatPower];
-            }
+            long totalCP = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsLong(NumericType.CombatPower);
 
             //获取当前上阵英雄数量
             int currentHeroCount = 0;

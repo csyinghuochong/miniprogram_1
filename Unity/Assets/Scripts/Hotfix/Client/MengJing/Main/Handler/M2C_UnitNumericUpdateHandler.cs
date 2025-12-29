@@ -11,7 +11,7 @@ namespace ET.Client
             using var _ = message;
             
             Scene currentScene = root.CurrentScene();
-            Unit unit = currentScene.GetComponent<UnitComponent>()?.Get(message.UnitId);
+            Unit unit = currentScene?.GetComponent<UnitComponent>()?.Get(message.UnitId);
             if (unit == null)
             {
                 return;

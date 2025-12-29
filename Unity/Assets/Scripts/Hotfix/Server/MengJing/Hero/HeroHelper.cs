@@ -31,6 +31,8 @@ namespace ET.Server
             }
 
             hero.NumericDic = CommonHelp.CalculateHeroNumeric(hero, equipments);
+
+            EventSystem.Instance.Publish(unit.Scene(), new UpdateTotalCombatPower() { Unit = unit });
         }
 
         public static void AddHeroExp(Hero hero, int value)

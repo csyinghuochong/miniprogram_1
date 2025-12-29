@@ -161,6 +161,22 @@ namespace ET.Client
             uiMainComponent.UpdateLevelProgress();
         }
     }
+    
+    [NumericWatcher(SceneType.Current, NumericType.CombatPower)]
+    public class NumericWatcher_CombatPower_UIMainRefresh : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            UI ui = unit.Root().GetComponent<UIComponent>().Get(UIType.UIMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIMainComponent uiMainComponent = ui.GetComponent<UIMainComponent>();
+            uiMainComponent.UpdateCombatPower();
+        }
+    }
 
     #endregion
 
@@ -175,6 +191,7 @@ namespace ET.Client
 
             self.Text_UID = rc.Get<GameObject>("Text_UID").GetComponent<TMP_Text>();
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
+            self.Text_CP = rc.Get<GameObject>("Text_CP").GetComponent<TMP_Text>();
             self.Text_PlayerLv = rc.Get<GameObject>("Text_PlayerLv").GetComponent<TMP_Text>();
             self.Text_FPS = rc.Get<GameObject>("Text_FPS").GetComponent<TMP_Text>();
             self.Text_Ping = rc.Get<GameObject>("Text_Ping").GetComponent<TMP_Text>();
@@ -242,6 +259,7 @@ namespace ET.Client
             self.UILevelProgress.gameObject.SetActive(mapType == MapType.LocalLevel);
 
             self.UpdatePlayerName();
+            self.UpdateCombatPower();
             self.UpdatePlayerLv();
             self.UpdateGold();
             self.UpdateDiamond();
@@ -308,6 +326,12 @@ namespace ET.Client
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.Text_PlayerName.SetText(userInfoComponent.PlayerName);
+        }
+
+        public static void UpdateCombatPower(this UIMainComponent self)
+        {
+            NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+            self.Text_CP.SetText(numericComponent.GetAsLong(NumericType.CombatPower));
         }
 
         public static void UpdatePlayerLv(this UIMainComponent self)
