@@ -16,7 +16,7 @@ namespace ET.Server
             root.AddComponent<ProcessOuterSender, IPEndPoint>(startProcessConfig.IPEndPoint);
             root.AddComponent<ProcessInnerSender>();
 
-            Log.Console($"FiberInit_NetInner:  {startProcessConfig.IPEndPoint}");
+            // Log.Console($"FiberInit_NetInner:  {startProcessConfig.IPEndPoint}");
             await ETTask.CompletedTask;
         }
     }
