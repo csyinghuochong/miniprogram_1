@@ -21,6 +21,7 @@ namespace ET.Client
         public Button Button_DeleteFriend;
         public Button Button_Report;
         public Button Button_Black;
+        public Button Button_UnBlack;
         public Transform Transform_UIFormationSlotItemList;
     }
 }

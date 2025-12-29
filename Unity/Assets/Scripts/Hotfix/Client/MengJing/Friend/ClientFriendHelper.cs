@@ -78,12 +78,12 @@
 
             return response.Error;
         }
-        
-        public static async ETTask<int> BlackFriend(Scene root, long unitId)
+
+        public static async ETTask<int> BlackFriend(Scene root, long unitId, int ope)
         {
             C2Friend_BlackFriend request = C2Friend_BlackFriend.Create();
             request.UnitId = unitId;
-            request.Ope = 0;
+            request.Ope = ope;
 
             Friend2C_BlackFriend response = (Friend2C_BlackFriend)await root.GetComponent<ClientSenderComponent>().Call(request);
 

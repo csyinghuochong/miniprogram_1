@@ -100,7 +100,7 @@
                 }
             }
         }
-        
+
         public static void DeleteRequest(this FriendComponentC self, long unitId)
         {
             for (int i = self.RequestList.Count - 1; i >= 0; i--)
@@ -153,6 +153,19 @@
         public static bool IsFriend(this FriendComponentC self, long unitId)
         {
             foreach (FriendData friendData in self.FriendList)
+            {
+                if (friendData.UnitId == unitId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsBlack(this FriendComponentC self, long unitId)
+        {
+            foreach (FriendData friendData in self.BlackList)
             {
                 if (friendData.UnitId == unitId)
                 {

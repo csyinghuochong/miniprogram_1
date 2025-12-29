@@ -24,6 +24,7 @@ namespace ET.Client
             self.Button_DeleteFriend = rc.Get<GameObject>("Button_DeleteFriend").GetComponent<Button>();
             self.Button_Report = rc.Get<GameObject>("Button_Report").GetComponent<Button>();
             self.Button_Black = rc.Get<GameObject>("Button_Black").GetComponent<Button>();
+            self.Button_UnBlack = rc.Get<GameObject>("Button_UnBlack").GetComponent<Button>();
             self.Transform_UIFormationSlotItemList = rc.Get<GameObject>("Transform_UIFormationSlotItemList").transform;
             for (int i = 0; i < 9; i++)
             {
@@ -37,6 +38,7 @@ namespace ET.Client
             self.Button_DeleteFriend.AddListener(() => { self.OnButton_DeleteFriend().Coroutine(); });
             self.Button_Report.AddListener(() => { self.OnButton_Report().Coroutine(); });
             self.Button_Black.AddListener(() => { self.OnButton_Black().Coroutine(); });
+            self.Button_UnBlack.AddListener(() => { self.OnButton_UnBlack().Coroutine(); });
         }
 
         [EntitySystem]
@@ -68,6 +70,11 @@ namespace ET.Client
                 // self.UIFormationSlotItemList[i].EventTrigger_Click.gameObject.SetActive(false);
             }
 
+            self.UpdateButtonList();
+        }
+
+        private static void UpdateButtonList(this UIPlayerInfoComponent self)
+        {
             bool isMy = self.UnitId == self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId;
             if (isMy)
             {
@@ -75,13 +82,19 @@ namespace ET.Client
                 self.Button_DeleteFriend.gameObject.SetActive(false);
                 self.Button_Report.gameObject.SetActive(false);
                 self.Button_Black.gameObject.SetActive(false);
+                self.Button_UnBlack.gameObject.SetActive(false);
             }
             else
             {
                 FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
                 bool isFriend = friendComponent.IsFriend(self.UnitId);
-                self.Button_AddFriend.gameObject.SetActive(!isFriend);
+                bool isBlack = friendComponent.IsBlack(self.UnitId);
+
+                self.Button_AddFriend.gameObject.SetActive(!isFriend && !isBlack);
                 self.Button_DeleteFriend.gameObject.SetActive(isFriend);
+                self.Button_Report.gameObject.SetActive(!isFriend);
+                self.Button_Black.gameObject.SetActive(!isFriend && !isBlack);
+                self.Button_UnBlack.gameObject.SetActive(!isFriend && isBlack);
             }
         }
 
@@ -100,6 +113,7 @@ namespace ET.Client
             if (error == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("删除成功");
+                self.UpdateButtonList();
             }
         }
 
@@ -114,10 +128,21 @@ namespace ET.Client
 
         private static async ETTask OnButton_Black(this UIPlayerInfoComponent self)
         {
-            int error = await ClientFriendHelper.BlackFriend(self.Root(), self.UnitId);
+            int error = await ClientFriendHelper.BlackFriend(self.Root(), self.UnitId, 0);
             if (error == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("拉黑成功");
+                self.UpdateButtonList();
+            }
+        }
+
+        private static async ETTask OnButton_UnBlack(this UIPlayerInfoComponent self)
+        {
+            int error = await ClientFriendHelper.BlackFriend(self.Root(), self.UnitId, 1);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("取消拉黑成功");
+                self.UpdateButtonList();
             }
         }
     }

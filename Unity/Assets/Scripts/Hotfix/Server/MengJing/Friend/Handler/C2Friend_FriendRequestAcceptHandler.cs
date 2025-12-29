@@ -26,6 +26,12 @@
                     return;
                 }
 
+                if (myFriendComponent.BlackList.Contains(targetFrientUnitId))
+                {
+                    response.Error = ErrorCode.ERR_FriendIsBlack;
+                    return;
+                }
+
                 if (request.IsAgree == 1)
                 {
                     // 同意
