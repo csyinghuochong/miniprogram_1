@@ -6,6 +6,7 @@
         protected override async ETTask Run(Scene root, Friend2C_FriendRequestSucceed message)
         {
             FriendComponentC friendComponent = root.GetComponent<FriendComponentC>();
+            friendComponent.DeleteRequest(message.FriendDataInfo.UnitId);
             friendComponent.AddFriendFromMessage(message.FriendDataInfo);
 
             EventSystem.Instance.Publish(root, new FriendUpdate());

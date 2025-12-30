@@ -5,6 +5,24 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class FriendUpdate_UIFriendRefresh : AEvent<Scene, FriendUpdate>
+    {
+        protected override async ETTask Run(Scene scene, FriendUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIFriend);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIFriendComponent uiFriendComponent = ui.GetComponent<UIFriendComponent>();
+            uiFriendComponent.SetShowType(uiFriendComponent.CurrentPage);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIFriendComponent))]
     [FriendOf(typeof(UIFriendComponent))]
     public static partial class UIFriendComponentSystem
@@ -33,7 +51,7 @@ namespace ET.Client
             self.Button_Type_Black.AddListener(() => { self.SetShowType(2); });
         }
 
-        private static void SetShowType(this UIFriendComponent self, int page)
+        public static void SetShowType(this UIFriendComponent self, int page)
         {
             self.CurrentPage = page;
             self.Button_Type_GameFriend.transform.Find("Image_On").gameObject.SetActive(page == 0);

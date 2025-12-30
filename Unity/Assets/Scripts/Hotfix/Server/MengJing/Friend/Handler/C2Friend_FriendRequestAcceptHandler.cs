@@ -44,6 +44,10 @@
                         FriendComponentS targetFriendComponent = targetFriendUnit.GetComponent<FriendComponentS>();
 
                         targetFriendComponent.FriendList.Add(myUnitId);
+                        if (targetFriendComponent.RequestList.Contains(myUnitId))
+                        {
+                            targetFriendComponent.RequestList.Remove(myUnitId);
+                        }
 
                         myFriendComponent.FriendList.Add(targetFrientUnitId);
                         myFriendComponent.RequestList.Remove(targetFrientUnitId);
@@ -64,6 +68,10 @@
                         }
 
                         targetFriendComponent.FriendList.Add(myUnitId);
+                        if (targetFriendComponent.RequestList.Contains(myUnitId))
+                        {
+                            targetFriendComponent.RequestList.Remove(myUnitId);
+                        }
 
                         myFriendComponent.FriendList.Add(targetFrientUnitId);
                         myFriendComponent.RequestList.Remove(targetFrientUnitId);
