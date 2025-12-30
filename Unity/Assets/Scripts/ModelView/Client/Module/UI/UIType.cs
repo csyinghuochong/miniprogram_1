@@ -32,5 +32,6 @@ namespace ET
         public const string UIChat = "UIChat/UIChat";
         public const string UIPlayerInfo = "UIPlayerInfo/UIPlayerInfo";
         public const string UIFriend = "UIFriend/UIFriend";
+        public const string UIRank = "UIRank/UIRank";
     }
 }

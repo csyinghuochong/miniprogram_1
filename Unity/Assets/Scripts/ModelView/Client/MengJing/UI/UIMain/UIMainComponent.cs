@@ -48,5 +48,6 @@ namespace ET.Client
         public GameObject UIMainChatItem;
         public Button Button_OnChat;
         public Button Button_Friend;
+        public Button Button_Rank;
     }
 }
