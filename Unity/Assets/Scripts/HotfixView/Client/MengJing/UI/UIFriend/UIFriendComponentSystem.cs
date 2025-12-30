@@ -41,6 +41,10 @@ namespace ET.Client
             self.Content_UIFriendRequestItem = rc.Get<GameObject>("Content_UIFriendRequestItem").transform;
             self.UIFriendRequestItem = rc.Get<GameObject>("UIFriendRequestItem");
             self.UIFriendRequestItem.SetActive(false);
+            self.Scroll_BlackItem = rc.Get<GameObject>("Scroll_BlackItem");
+            self.Content_UIBlackItem = rc.Get<GameObject>("Content_UIBlackItem").transform;
+            self.UIBlackItem = rc.Get<GameObject>("UIBlackItem");
+            self.UIBlackItem.SetActive(false);
             self.Button_Type_GameFriend = rc.Get<GameObject>("Button_Type_GameFriend").GetComponent<Button>();
             self.Button_Type_FriendRequest = rc.Get<GameObject>("Button_Type_FriendRequest").GetComponent<Button>();
             self.Button_Type_Black = rc.Get<GameObject>("Button_Type_Black").GetComponent<Button>();
@@ -62,6 +66,7 @@ namespace ET.Client
             self.Scroll_FriendRequestItem.gameObject.SetActive(page == 1);
             self.Button_Type_Black.transform.Find("Image_On").gameObject.SetActive(page == 2);
             self.Button_Type_Black.transform.Find("Image_Off").gameObject.SetActive(page != 2);
+            self.Scroll_BlackItem.gameObject.SetActive(page == 2);
 
             if (page == 0)
             {
@@ -127,6 +132,26 @@ namespace ET.Client
 
         public static void UpdateBlackItemList(this UIFriendComponent self)
         {
+            FriendComponentC friendComponent = self.Root().GetComponent<FriendComponentC>();
+            List<EntityRef<FriendData>> friendDataList = friendComponent.BlackList;
+
+            while (self.UIBlackItemList.Count < friendDataList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIBlackItem, self.Content_UIBlackItem);
+                UIBlackItem newItem = self.AddChild<UIBlackItem, GameObject>(go);
+                self.UIBlackItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < friendDataList.Count; i++)
+            {
+                self.UIBlackItemList[i].UpdateInfo(friendDataList[i]);
+                self.UIBlackItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = friendDataList.Count; i < self.UIBlackItemList.Count; i++)
+            {
+                self.UIBlackItemList[i].GameObject.SetActive(false);
+            }
         }
     }
 }

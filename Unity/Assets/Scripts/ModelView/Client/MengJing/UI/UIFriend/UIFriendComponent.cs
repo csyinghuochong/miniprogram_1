@@ -11,6 +11,7 @@ namespace ET.Client
 
         public List<UIFriendItem> UIFriendItemList { get; set; } = new();
         public List<UIFriendRequestItem> UIFriendRequestItemList { get; set; } = new();
+        public List<UIBlackItem> UIBlackItemList { get; set; } = new();
 
         public Button Button_Close;
         public GameObject Scroll_FriendItem;
@@ -19,6 +20,9 @@ namespace ET.Client
         public GameObject Scroll_FriendRequestItem;
         public Transform Content_UIFriendRequestItem;
         public GameObject UIFriendRequestItem;
+        public GameObject Scroll_BlackItem;
+        public Transform Content_UIBlackItem;
+        public GameObject UIBlackItem;
         public Button Button_Type_GameFriend;
         public Button Button_Type_FriendRequest;
         public Button Button_Type_Black;
