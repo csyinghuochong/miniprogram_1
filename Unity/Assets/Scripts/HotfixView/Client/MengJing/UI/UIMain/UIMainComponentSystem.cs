@@ -292,21 +292,13 @@ namespace ET.Client
         {
             float timeScale = Time.timeScale;
 
-            if (timeScale <= 0.5f)
-            {
-                timeScale = 1f;
-            }
-            else if (timeScale <= 1f)
+            if (timeScale < 1.5f)
             {
                 timeScale = 2f;
             }
-            else if (timeScale <= 2f)
-            {
-                timeScale = 3f;
-            }
             else
             {
-                timeScale = 0;
+                timeScale = 1f;
             }
 
             C2M_SetTimeScale request = C2M_SetTimeScale.Create();
@@ -316,7 +308,16 @@ namespace ET.Client
 
         public static void UpdateTimeScale(this UIMainComponent self)
         {
-            self.Button_Speed.GetComponentInChildren<TMP_Text>().SetTextFormat("x{0:0.#}", Time.timeScale);
+            if (Time.timeScale < 1.5f)
+            {
+                self.Button_Speed.transform.Find("Image_1").gameObject.SetActive(true);
+                self.Button_Speed.transform.Find("Image_2").gameObject.SetActive(false);
+            }
+            else
+            {
+                self.Button_Speed.transform.Find("Image_1").gameObject.SetActive(false);
+                self.Button_Speed.transform.Find("Image_2").gameObject.SetActive(true);
+            }
         }
 
         public static void UpdatePlayerName(this UIMainComponent self)
