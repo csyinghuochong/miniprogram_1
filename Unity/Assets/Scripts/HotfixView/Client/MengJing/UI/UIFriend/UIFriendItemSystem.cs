@@ -29,10 +29,11 @@ namespace ET.Client
             self.Button_Chat.AddListener(() => { self.OnButton_Chat().Coroutine(); });
         }
 
-        public static void UpdateInfo(this UIFriendItem self, FriendData friendData)
+        public static void UpdateInfo(this UIFriendItem self, int index, FriendData friendData)
         {
             self.FriendData = friendData;
 
+            self.Text_Sort.SetText(index);
             self.Text_PlayerName.SetText(friendData.PlayerName);
             if (friendData.OnLine == 1)
             {

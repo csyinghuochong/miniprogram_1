@@ -73,7 +73,7 @@ namespace ET.Client
 
             for (int i = 0; i < friendDataList.Count; i++)
             {
-                self.UIFriendItemList[i].UpdateInfo(friendDataList[i]);
+                self.UIFriendItemList[i].UpdateInfo(i + 1, friendDataList[i]);
                 self.UIFriendItemList[i].GameObject.SetActive(true);
             }
 
