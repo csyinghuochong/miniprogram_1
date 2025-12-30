@@ -32,6 +32,7 @@ namespace ET
         Chat = 1L << 30,
         Friend = 1L << 31,
         Center = 1L << 32,
+        Rank = 1L << 33,
 
         // 客户端
         Demo = 1L << 50,
