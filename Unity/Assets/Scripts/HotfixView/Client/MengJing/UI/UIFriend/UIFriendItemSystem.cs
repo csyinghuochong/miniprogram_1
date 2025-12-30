@@ -27,6 +27,7 @@ namespace ET.Client
             self.Text_Sort = rc.Get<GameObject>("Text_Sort").GetComponent<TMP_Text>();
 
             self.Button_Chat.AddListener(() => { self.OnButton_Chat().Coroutine(); });
+            self.Button_OnPlayerHead.AddListener(() => { self.OnButton_OnSpeakerHead().Coroutine(); });
         }
 
         public static void UpdateInfo(this UIFriendItem self, int index, FriendData friendData)
@@ -66,6 +67,20 @@ namespace ET.Client
         {
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIChat);
             ui.GetComponent<UIChatComponent>().ShowPrivateChat(self.FriendData);
+        }
+        
+        private static async ETTask OnButton_OnSpeakerHead(this UIFriendItem self)
+        {
+            M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.FriendData.UnitId);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo);
+            UIPlayerInfoComponent uiPlayerInfoComponent = ui.GetComponent<UIPlayerInfoComponent>();
+            uiPlayerInfoComponent.UpdateInfo(response.WatchPlayerInfo);
         }
     }
 }

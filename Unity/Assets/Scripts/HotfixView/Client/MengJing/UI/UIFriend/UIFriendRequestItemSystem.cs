@@ -28,6 +28,7 @@ namespace ET.Client
 
             self.Button_Accept.AddListener(() => self.OnButton_Accept().Coroutine());
             self.Button_Refuse.AddListener(() => self.OnButton_Refuse().Coroutine());
+            self.Button_OnPlayerHead.AddListener(() => { self.OnButton_OnSpeakerHead().Coroutine(); });
         }
 
         public static void UpdateInfo(this UIFriendRequestItem self, FriendData friendData)
@@ -80,6 +81,20 @@ namespace ET.Client
             {
                 self.GetParent<UIFriendComponent>().UpdateFriendRequestItemList();
             }
+        }
+        
+        private static async ETTask OnButton_OnSpeakerHead(this UIFriendRequestItem self)
+        {
+            M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.FriendData.UnitId);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo);
+            UIPlayerInfoComponent uiPlayerInfoComponent = ui.GetComponent<UIPlayerInfoComponent>();
+            uiPlayerInfoComponent.UpdateInfo(response.WatchPlayerInfo);
         }
     }
 }
