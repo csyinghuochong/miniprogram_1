@@ -25,7 +25,7 @@
                     }
 
                     // 禁言
-                    if (targetChatComponent.ReportList.Count == 5)
+                    if (targetChatComponent.ReportList.Count == ConfigData.ChatReportMax)
                     {
                         targetChatComponent.UnmuteTime = TimeHelper.ServerNow() + TimeHelper.OneDay;
                     }
@@ -39,7 +39,7 @@
                     }
 
                     // 禁言
-                    if (targetChatComponent.ReportList.Count == 5)
+                    if (targetChatComponent.ReportList.Count == ConfigData.ChatReportMax)
                     {
                         targetChatComponent.UnmuteTime = TimeHelper.ServerNow() + TimeHelper.OneDay;
                     }

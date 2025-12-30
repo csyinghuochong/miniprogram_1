@@ -44,7 +44,10 @@ namespace ET.Server
                     return;
                 }
 
-                chatComponent.ReportList.Clear();
+                if (chatComponent.ReportList.Count >= ConfigData.ChatReportMax)
+                {
+                    chatComponent.ReportList.Clear();
+                }
 
                 if (string.IsNullOrEmpty(request.ChatRoomKey))
                 {
