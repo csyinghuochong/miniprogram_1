@@ -47,6 +47,11 @@
                         myFriendComponent.RequestList.Remove(targetUnitId);
                     }
 
+                    if (targetFriendComponent.RequestList.Contains(myUnitId))
+                    {
+                        targetFriendComponent.RequestList.Remove(myUnitId);
+                    }
+
                     myFriendComponent.BlackList.Add(targetUnitId);
 
                     response.FriendDataInfo = await FriendHelper.GetFriendDataInfo(root, targetUnitId);
