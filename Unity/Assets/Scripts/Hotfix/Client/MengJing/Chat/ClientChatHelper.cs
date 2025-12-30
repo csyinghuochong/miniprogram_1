@@ -28,7 +28,11 @@
             {
                 EventSystem.Instance.Publish(root, new ShowTip() { Tip = response.Message });
             }
-            
+            else
+            {
+                if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+            }
+
             return response.Error;
         }
 
@@ -49,6 +53,8 @@
                 }
             }
 
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+
             return response.Error;
         }
 
@@ -58,6 +64,8 @@
             request.UnitId = unitId;
 
             Chat2C_Report response = (Chat2C_Report)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
 
             return response.Error;
         }

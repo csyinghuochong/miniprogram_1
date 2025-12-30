@@ -130,9 +130,87 @@ namespace ET
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()
         {
+            // 通用错误 200001-200099
+            { ERR_Error, "通用错误" },
+            { ERR_NetWorkError, "网络错误" },
+            { ERR_OperationOften, "操作太频繁" },
+            { ERR_ComponentIsNull, "组件为空" },
+
+            // 账号相关错误 200101-200199
+            { ERR_AccountAlreadyRegister, "账号已经被注册" },
+            { ERR_AccountOrPasswordError, "账号或密码错误" },
+            { ERR_RequestRepeatedly, "请求重复" },
+            { ERR_LoginInfoIsNull, "登录信息为空" },
+            { ERR_AccountInBlackListError, "账号在黑名单中" },
+            { ERR_OtherAccountLogin, "异地登录" },
+            { ERR_TokenError, "Token错误" },
+            { ERR_NotFindAccount, "账号不存在" },
+            { ERR_AccountNameFormError, "账户名格式错误" },
+            { ERR_PasswordFormError, "密码格式错误" },
+
+            // 登录相关错误 200201-200299
+            { ERR_EnterGameError, "进入游戏错误" },
+            { ERR_ReEnterGameError, "重复进入游戏错误" },
+            { ERR_SessionPlayerError, "会话玩家错误" },
+            { ERR_NonePlayerError, "无玩家错误" },
+            { ERR_PlayerSessionError, "玩家会话错误" },
+            { ERR_SessionDisconnect, "会话断开连接" },
+            { ERR_LoginTimeOut, "登录超时" },
+            { ERR_EnterQueue, "进入排队" },
+            { ERR_LoginRealm, "登录领域服务器错误" },
+            { ERR_StopServer, "服务器停止服务" },
+            { ERR_LoginGameGateError01, "网关登录错误" },
+
+            // 手机绑定错误 200301-200399
+            { ERR_BingPhoneError_1, "手机绑定错误1" },
+            { ERR_BingPhoneError_2, "手机绑定错误2" },
+
+            // 版本和数据错误 200401-200499
+            { ERR_VersionNoMatch, "版本不匹配" },
+            { ERR_ModifyData, "数据修改错误" },
+            { ERR_PaiMaiBuyMaxPage, "拍卖达到最大页数" },
+            { Pre_Condition_Error, "前置条件不足" },
+            { ERR_RequestExitFuben, "请求退出副本" },
+            { ERR_KickOutPlayer, "长时间不操作被踢下线" },
+            { ERR_PackageFrequent, "发送包过于频繁" },
+            { ERR_AlreadyHave, "已经拥有" },
+
+            // 角色相关错误 200501-200599
+            { ERR_CreateRoleName, "角色名字不合法" },
+
+            // 道具相关错误 200601-200699
             { ERR_NotEnoughItems, "道具不足" },
             { ERR_NotExistItem, "道具不存在" },
+            { ERR_InventoryContainerError, "背包容器错误" },
+            { ERR_ItemUseNumError, "道具使用数量错误" },
 
+            // 英雄相关错误 200701-200799
+            { ERR_HeroNotEquipSlot, "英雄没有这个类型的装备孔位" },
+            { ERR_NotExistHero, "英雄不存在" },
+
+            // 冒险/关卡相关错误 200801-200899
+            { ERR_AlreadyAdventureState, "已在闯关中" },
+            { ERR_AdventureLevelIdError, "冒险关卡ID错误" },
+            { ERR_AdventureWinResultError, "战斗胜利数据异常" },
+            { ERR_LevelIsNot, "关卡Id不存在" },
+
+            // 技能相关错误 200901-200999
+            { ERR_UseSkillInCD, "技能在冷却中" },
+            { ERR_UseSkillInPublicCD, "技能公共冷却时间" },
+            { ERR_NotSkillHandler, "技能没有配置SkillHandler" },
+            { ERR_TargetUnitIsNull, "目标单位不存在" },
+            { ERR_TargetUnitCantBeAttack, "目标不能被攻击" },
+            { ERR_Stun, "眩晕状态中" },
+            { ERR_Freeze, "冰冻状态中" },
+
+            // 场景相关错误 201001-201099
+            { ERR_SceneCantSetTimeScale, "当前Scene不能设置TimeScale" },
+
+            // 任务相关错误 201101-201199
+            { ERR_TaskCommited, "任务已经提交" },
+            { ERR_TaskNoCompleted, "任务没有完成" },
+
+            // 邮件相关错误 201201-201299
             { ERR_MailNotExist, "邮件不存在" },
             { ERR_MailDeleted, "邮件已删除" },
             { ERR_MailRewardAlreadyReceived, "邮件道具已领取" },
@@ -140,9 +218,31 @@ namespace ET
             { ERR_MailTimeOut, "邮件过期" },
             { ERR_MailRewardNotReceive, "邮件奖励未领取" },
 
+            // 商店相关错误 201301-201399
             { ERR_StoreItemNotExist, "商店道具不存在" },
             { ERR_StoreItemNotEnough, "商店道具不足" },
-            { ERR_StoreRefreshNumNotEnough, "商店刷新次数不足" }
+            { ERR_StoreRefreshNumNotEnough, "商店刷新次数不足" },
+            
+            // 聊天相关错误 201401-201499
+            { ERR_ChatInfoNull, "聊天信息为空" },
+            { ERR_ChatMessageEmpty, "聊天信息为空" },
+            { ERR_ChatNotFriend, "聊天对象不是好友" },
+            { ERR_NotFindChatRoom, "聊天室不存在" },
+            { ERR_NotInChatRoom, "用户不在聊天室中" },
+            { ERR_ChatRoomNotOpen, "聊天室未开放" },
+            { ERR_ChatContentTooLong, "聊天内容过长" },
+            { ERR_ChatTooFast, "聊天内容发送太快" },
+            { ERR_ChatMute, "玩家禁言中" },
+            
+            // 好友相关错误 201501-201599
+            { ERR_FriendIsFriend, "已经添加好友" },
+            { ERR_FriendIsRequest, "已经发送好友请求" },
+            { ERR_FriendIsNotRequest, "申请列表中不包含此用户" },
+            { ERR_FriendIsSelf, "不能添加自己为好友" },
+            { ERR_FriendIsNotFriend, "不是好友" },
+            { ERR_FriendIsBlack, "黑名单中" },
+            { ERR_FriendCantBlack, "好友不能被拉黑" },
+            { ERR_FriendIsNotBlack, "用户不在黑名单" }
         };
     }
 }
