@@ -87,7 +87,7 @@ namespace ET.Server
 
             float3 startpos = unit.Position;
             startpos.y = target.y;
-            M2C_PathfindingResult m2CPathfindingResult = new();
+            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
             m2CPathfindingResult.Points.Add(startpos);
             m2CPathfindingResult.Points.Add(startpos + (target - unit.Position) * 0.5f);
             m2CPathfindingResult.Points.Add(target);
