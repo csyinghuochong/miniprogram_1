@@ -15,6 +15,18 @@
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
 
+            RankCenterComponent rankCenterComponent = await UnitCacheHelper.GetComponent<RankCenterComponent>(root, root.Zone());
+            if (rankCenterComponent == null)
+            {
+                rankCenterComponent = root.AddComponentWithId<RankCenterComponent>(root.Zone());
+            }
+            else
+            {
+                root.AddComponent(rankCenterComponent);
+            }
+
+            root.AddComponent<RankUnitComponent>();
+
             await ETTask.CompletedTask;
         }
     }

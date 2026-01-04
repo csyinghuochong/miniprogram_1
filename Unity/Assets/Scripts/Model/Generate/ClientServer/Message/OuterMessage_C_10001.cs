@@ -5567,6 +5567,43 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.RankDataInfo)]
+    public partial class RankDataInfo : MessageObject
+    {
+        public static RankDataInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(RankDataInfo), isFromPool) as RankDataInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RankType { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string PlayerName { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long CombatPower { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RankType = default;
+            this.UnitId = default;
+            this.PlayerName = default;
+            this.CombatPower = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -5724,5 +5761,6 @@ namespace ET
         public const ushort Friend2C_BlackFriend = 10154;
         public const ushort Friend2C_DeleteYou = 10155;
         public const ushort Friend2C_FriendOnLineChange = 10156;
+        public const ushort RankDataInfo = 10157;
     }
 }
