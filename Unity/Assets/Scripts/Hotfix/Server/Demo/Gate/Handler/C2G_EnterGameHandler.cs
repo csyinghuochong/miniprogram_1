@@ -137,6 +137,7 @@ namespace ET.Server
                         await this.LoginMailServer(unit); //登录邮件服
                         await this.LoginChatServer(unit); //登录聊天服
                         await this.LoginFriendServer(unit); //登录好友服
+                        await this.LoginRankServer(unit); //登录排行服
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 
                         unit.GetComponent<DBSaveComponent>().OnLogin();
@@ -187,6 +188,14 @@ namespace ET.Server
             request.UnitId = unit.Id;
 
             await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetFriendServerId(unit.Zone()), request);
+        }
+        
+        private async ETTask LoginRankServer(Unit unit)
+        {
+            G2Rank_LoginRankServer request = G2Rank_LoginRankServer.Create();
+            request.UnitId = unit.Id;
+
+            await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetRankServerId(unit.Zone()), request);
         }
     }
 }

@@ -108,6 +108,29 @@ namespace ET.Server
 
                     break;
                 }
+                case IRankRequest actorRankRequest:
+                {
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    int rpcId = actorRankRequest.RpcId;
+                    long instanceId = session.InstanceId;
+
+                    IRankResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Rank).Call(player.Id, actorRankRequest) as IRankResponse;
+                    iResponse.RpcId = rpcId;
+
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Send(iResponse);
+                    }
+
+                    break;
+                }
+                case IRankMessage actorRankMessage:
+                {
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Rank).Send(player.Id, actorRankMessage);
+
+                    break;
+                }
                 case ILocationMessage actorLocationMessage:
                 {
                     long unitId = session.GetComponent<SessionPlayerComponent>().Player.Id;

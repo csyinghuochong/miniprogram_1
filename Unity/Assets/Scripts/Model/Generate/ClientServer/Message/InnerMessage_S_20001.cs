@@ -2604,6 +2604,128 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.G2Rank_LoginRankServer)]
+    [ResponseType(nameof(Rank2G_LoginRankServer))]
+    public partial class G2Rank_LoginRankServer : MessageObject, IRequest
+    {
+        public static G2Rank_LoginRankServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Rank_LoginRankServer), isFromPool) as G2Rank_LoginRankServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Rank2G_LoginRankServer)]
+    public partial class Rank2G_LoginRankServer : MessageObject, IResponse
+    {
+        public static Rank2G_LoginRankServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Rank2G_LoginRankServer), isFromPool) as Rank2G_LoginRankServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.G2Rank_ExitRankServer)]
+    [ResponseType(nameof(Rank2G_ExitRankServer))]
+    public partial class G2Rank_ExitRankServer : MessageObject, ILocationRequest
+    {
+        public static G2Rank_ExitRankServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Rank_ExitRankServer), isFromPool) as G2Rank_ExitRankServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Rank2G_ExitRankServer)]
+    public partial class Rank2G_ExitRankServer : MessageObject, ILocationResponse
+    {
+        public static Rank2G_ExitRankServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Rank2G_ExitRankServer), isFromPool) as Rank2G_ExitRankServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -2683,5 +2805,9 @@ namespace ET
         public const ushort Friend2G_ExitFriendServer = 20076;
         public const ushort Friend2Chat_CreateChatRoom = 20077;
         public const ushort Chat2Friend_CreateChatRoom = 20078;
+        public const ushort G2Rank_LoginRankServer = 20079;
+        public const ushort Rank2G_LoginRankServer = 20080;
+        public const ushort G2Rank_ExitRankServer = 20081;
+        public const ushort Rank2G_ExitRankServer = 20082;
     }
 }

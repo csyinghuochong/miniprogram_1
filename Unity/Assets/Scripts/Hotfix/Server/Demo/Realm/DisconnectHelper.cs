@@ -49,6 +49,9 @@ namespace ET.Server
                     
                     // 通知好友服下线
                     await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Friend).Call(player.Id, G2Friend_ExitFriendServer.Create());
+                    
+                    //通知排行服下线
+                    await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Rank).Call(player.Id, G2Rank_ExitRankServer.Create());
 
                     // //通知组队服
                     // await BroadCastHelper.SendServerMessage(player.Root(), UnitCacheHelper.GetTeamServerId(player.Zone()) , NoticeType.PlayerExit, player.UnitId.ToString());
@@ -80,6 +83,7 @@ namespace ET.Server
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Mail)?.Remove(player.Id);
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Chat)?.Remove(player.Id);
             player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Friend)?.Remove(player.Id);
+            player?.Root()?.GetComponent<MessageLocationSenderComponent>()?.Get(LocationType.Rank)?.Remove(player.Id);
             
             player.Root().GetComponent<PlayerComponent>()?.Remove(player);
             player?.Dispose();

@@ -597,3 +597,30 @@ message Chat2Friend_CreateChatRoom // IResponse
     int32 Error = 2;
     string Message = 3;
 }
+
+//ResponseType Rank2G_LoginRankServer
+message G2Rank_LoginRankServer // IRequest
+{
+    int32 RpcId = 1;
+	int64 UnitId = 2;
+}
+
+message Rank2G_LoginRankServer // IResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
+//ResponseType Rank2G_ExitRankServer
+message G2Rank_ExitRankServer // ILocationRequest
+{
+    int32 RpcId = 1;
+}
+
+message Rank2G_ExitRankServer // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
