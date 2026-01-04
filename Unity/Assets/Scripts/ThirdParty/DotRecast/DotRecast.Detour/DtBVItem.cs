@@ -2,7 +2,7 @@ using DotRecast.Core.Numerics;
 
 namespace DotRecast.Detour
 {
-    public class BVItem
+    public class DtBVItem
     {
         public RcVec3i bmin;
         public RcVec3i bmax;

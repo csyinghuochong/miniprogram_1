@@ -26,7 +26,7 @@ using DotRecast.Core.Numerics;
 
 namespace DotRecast.Recast.Geom
 {
-    public class SimpleInputGeomProvider : IInputGeomProvider
+    public class RcSimpleInputGeomProvider : IRcInputGeomProvider
     {
         public readonly float[] vertices;
         public readonly int[] faces;
@@ -37,14 +37,14 @@ namespace DotRecast.Recast.Geom
         private readonly List<RcConvexVolume> volumes = new List<RcConvexVolume>();
         private readonly RcTriMesh _mesh;
 
-        public static SimpleInputGeomProvider LoadFile(string objFilePath)
+        public static RcSimpleInputGeomProvider LoadFile(string objFilePath)
         {
             byte[] chunk = RcIO.ReadFileIfFound(objFilePath);
             var context = RcObjImporter.LoadContext(chunk);
-            return new SimpleInputGeomProvider(context.vertexPositions, context.meshFaces);
+            return new RcSimpleInputGeomProvider(context.vertexPositions, context.meshFaces);
         }
 
-        public SimpleInputGeomProvider(List<float> vertexPositions, List<int> meshFaces)
+        public RcSimpleInputGeomProvider(List<float> vertexPositions, List<int> meshFaces)
             : this(MapVertices(vertexPositions), MapFaces(meshFaces))
         {
         }
@@ -71,7 +71,7 @@ namespace DotRecast.Recast.Geom
             return vertices;
         }
 
-        public SimpleInputGeomProvider(float[] vertices, int[] faces)
+        public RcSimpleInputGeomProvider(float[] vertices, int[] faces)
         {
             this.vertices = vertices;
             this.faces = faces;
