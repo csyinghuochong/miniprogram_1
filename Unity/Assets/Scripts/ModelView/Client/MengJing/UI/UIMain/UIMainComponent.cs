@@ -49,5 +49,6 @@ namespace ET.Client
         public Button Button_OnChat;
         public Button Button_Friend;
         public Button Button_Rank;
+        public Button Button_LotteryDraw;
     }
 }

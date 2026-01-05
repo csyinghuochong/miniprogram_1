@@ -219,6 +219,7 @@ namespace ET.Client
             self.Button_OnChat = rc.Get<GameObject>("Button_OnChat").GetComponent<Button>();
             self.Button_Friend = rc.Get<GameObject>("Button_Friend").GetComponent<Button>();
             self.Button_Rank = rc.Get<GameObject>("Button_Rank").GetComponent<Button>();
+            self.Button_LotteryDraw = rc.Get<GameObject>("Button_LotteryDraw").GetComponent<Button>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
@@ -237,6 +238,7 @@ namespace ET.Client
             self.Button_OnChat.AddListener(() => { self.OnButton_OnChat().Coroutine(); });
             self.Button_Friend.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIFriend).Coroutine(); });
             self.Button_Rank.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRank).Coroutine(); });
+            self.Button_LotteryDraw.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UILotteryDraw).Coroutine(); });
         }
 
         [EntitySystem]
