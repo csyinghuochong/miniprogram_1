@@ -114,7 +114,7 @@ namespace ET
         # region 抽卡
 
         // 抽卡掉落ID
-        public const int LotteryDrawDropId = 1001;
+        public const int LotteryDrawDropId = 2001;
 
         // 1次抽卡消耗
         [StaticField]
@@ -137,7 +137,7 @@ namespace ET
         public const int LotteryDrawBaoDi = 50;
 
         // 抽卡保底掉落ID
-        public const int LotteryDrawBaoDiDropId = 1002;
+        public const int LotteryDrawBaoDiDropId = 2002;
 
         # endregion
     }
