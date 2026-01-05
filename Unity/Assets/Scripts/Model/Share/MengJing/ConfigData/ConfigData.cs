@@ -39,7 +39,7 @@ namespace ET
         public const float PlayerSynMaxDistance = 10f;
 
         public const long TransformSyncTime = 200;
-        
+
         /// <summary>
         /// 200内部区 201版号区 202中心区 203机器人
         /// </summary>
@@ -89,15 +89,56 @@ namespace ET
 
         # endregion
 
+        # region 聊天
+
         public const string WorldChatRoomKey = "WorldChatRoom";
+
         // 聊天内容最大长度
         public const int ChatContentMax = 100;
+
         // 聊天间隔
         public const long ChatInterval = 3 * 1000;
+
         // 聊天举报多少次后会被禁言
         public const int ChatReportMax = 5;
-        
+
+        # endregion
+
+        #region 排行
+
         // 排行榜显示最大数量
         public const int ShowRankMaxNum = 30;
+
+        #endregion
+
+        # region 抽卡
+
+        // 抽卡掉落ID
+        public const int LotteryDrawDropId = 1001;
+
+        // 1次抽卡消耗
+        [StaticField]
+        public static List<RewardItem> LotteryDrawCost_One = new()
+        {
+            new RewardItem() { ItemId = Item_Diamond, ItemNum = 100 }
+        };
+
+        // 10次抽卡消耗
+        [StaticField]
+        public static List<RewardItem> LotteryDrawCost_Ten = new()
+        {
+            new RewardItem() { ItemId = Item_Diamond, ItemNum = 1000 }
+        };
+
+        // 抽卡免费刷新时间
+        public const long LotteryDrawFreeTime = TimeHelper.OneDay;
+
+        // 抽卡保底(达到这个数后一定必得传说英雄)
+        public const int LotteryDrawBaoDi = 50;
+
+        // 抽卡保底掉落ID
+        public const int LotteryDrawBaoDiDropId = 1002;
+
+        # endregion
     }
 }

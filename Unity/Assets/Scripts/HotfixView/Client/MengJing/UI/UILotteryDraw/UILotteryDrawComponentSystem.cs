@@ -1,5 +1,5 @@
-
-
+using System;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +32,60 @@ namespace ET.Client
             self.GameObject_Wish = rc.Get<GameObject>("GameObject_Wish");
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UILotteryDraw); });
+            self.Button_DrawOne.AddListener(() => { self.OnButton_Draw(0).Coroutine(); });
+            self.Button_DrawTen.AddListener(() => { self.OnButton_Draw(1).Coroutine(); });
 
+            self.UpdateBaoDiTip();
+            self.UpdateFreeTime().Coroutine();
+        }
+
+        private static void UpdateBaoDiTip(this UILotteryDrawComponent self)
+        {
+            NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+            self.Text_BaoDiTips.SetTextFormat("再抽取{0}次必得传说英雄", ConfigData.LotteryDrawBaoDi - numericComponent.GetAsInt(NumericType.LotteryDrawNum));
+        }
+
+        private static async ETTask UpdateFreeTime(this UILotteryDrawComponent self)
+        {
+            NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+            while (true)
+            {
+                if (self.IsDisposed)
+                {
+                    return;
+                }
+
+                long freeTime = numericComponent.GetAsLong(NumericType.LotteryDrawFreeTime);
+                long nowTime = TimeHelper.ServerNow();
+                if (nowTime > freeTime)
+                {
+                    self.Text_FreeTime.SetText("免费");
+                }
+                else
+                {
+                    DateTime endTime = TimeInfo.Instance.ToDateTime(freeTime);
+                    DateTime time = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                    TimeSpan timeSpan = endTime - time;
+
+                    self.Text_FreeTime.SetText("{0}:{1}:{2}后免费", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+                }
+
+                await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+            }
+        }
+
+        private static async ETTask OnButton_Draw(this UILotteryDrawComponent self, int opeType)
+        {
+            M2C_LotteryDrawRequest response = await ClientLotteryDrawHelper.LotteryDrawRequest(self.Root(), opeType);
+            
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+            
+            self.UpdateBaoDiTip();
+            
+            // 奖励提示
         }
     }
 }

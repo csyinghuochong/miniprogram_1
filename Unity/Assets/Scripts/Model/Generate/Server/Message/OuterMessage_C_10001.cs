@@ -5696,6 +5696,76 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_LotteryDrawRequest)]
+    [ResponseType(nameof(M2C_LotteryDrawRequest))]
+    public partial class C2M_LotteryDrawRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_LotteryDrawRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_LotteryDrawRequest), isFromPool) as C2M_LotteryDrawRequest;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// 0单抽 1十连抽
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public int OpType { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.OpType = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_LotteryDrawRequest)]
+    public partial class M2C_LotteryDrawRequest : MessageObject, ILocationResponse
+    {
+        public static M2C_LotteryDrawRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_LotteryDrawRequest), isFromPool) as M2C_LotteryDrawRequest;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<ItemInfo> ItemInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.ItemInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -5857,5 +5927,7 @@ namespace ET
         public const ushort C2Rank_GetAllRank = 10158;
         public const ushort Rank2C_GetAllRank = 10159;
         public const ushort Rank2C_NoticeRankUpdate = 10160;
+        public const ushort C2M_LotteryDrawRequest = 10161;
+        public const ushort M2C_LotteryDrawRequest = 10162;
     }
 }

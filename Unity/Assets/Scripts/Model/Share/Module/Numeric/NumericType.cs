@@ -28,6 +28,9 @@
         public const int CurrentLevelId = 3101;                                 //当前进行的关卡Id
         public const int CurrentWaveIndex = 3102;                               //当前进行的关卡第几波，从1开始
         public const int CurrentWaveKillMonsterNum = 3103;                      //当前这一波已经击杀的怪物数量
+        
+        public const int LotteryDrawNum = 3200;                                 //抽卡次数
+        public const int LotteryDrawFreeTime = 3201;                            //抽卡免费时间
 
         public const int Max = 10000;
 
