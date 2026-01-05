@@ -53,6 +53,8 @@ namespace ET.Client
             self.Button_Type_GameFriend.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_FriendRequest.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Black.AddListener(() => { self.SetShowType(2); });
+
+            self.SetShowType(0);
         }
 
         public static void SetShowType(this UIFriendComponent self, int page)
