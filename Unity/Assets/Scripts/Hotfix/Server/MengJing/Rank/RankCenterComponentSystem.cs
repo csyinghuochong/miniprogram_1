@@ -47,6 +47,7 @@ namespace ET.Server
             if (rankData == null)
             {
                 rankData = self.AddChild<RankData>();
+                rankData.RankType = (int)RankType.PlayerRank;
                 rankData.UnitId = unitId;
                 rankData.PlayerName = playerName;
                 rankData.CombatPower = combatPower;
@@ -72,7 +73,7 @@ namespace ET.Server
             {
                 RankData xData = x;
                 RankData yData = y;
-                return xData.CombatPower.CompareTo(yData.CombatPower);
+                return yData.CombatPower.CompareTo(xData.CombatPower);
             });
 
             Rank2C_NoticeRankUpdate message = Rank2C_NoticeRankUpdate.Create();

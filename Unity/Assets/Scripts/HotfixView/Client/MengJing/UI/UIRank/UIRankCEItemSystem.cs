@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,8 +21,31 @@ namespace ET.Client
             self.Text_PlayerName = rc.Get<GameObject>("Text_PlayerName").GetComponent<TMP_Text>();
             self.Text_PlayerCE = rc.Get<GameObject>("Text_PlayerCE").GetComponent<TMP_Text>();
             self.Text_Sort = rc.Get<GameObject>("Text_Sort").GetComponent<TMP_Text>();
-            
+
+            self.Button_OnPlayerHead.AddListener(() => self.OnButton_OnPlayerHead().Coroutine());
         }
-        
+
+        public static void UpdateInfo(this UIRankCEItem self, RankData rankData)
+        {
+            self.UnitId = rankData.UnitId;
+
+            self.Text_Sort.SetText(rankData.Rank);
+            self.Text_PlayerName.SetText(rankData.PlayerName);
+            self.Text_PlayerCE.SetText(rankData.CombatPower.ToString());
+        }
+
+        private static async ETTask OnButton_OnPlayerHead(this UIRankCEItem self)
+        {
+            M2C_WatchPlayer response = await ClientUserInfoHelper.WatchPlayer(self.Root(), self.UnitId);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIPlayerInfo);
+            UIPlayerInfoComponent uiPlayerInfoComponent = ui.GetComponent<UIPlayerInfoComponent>();
+            uiPlayerInfoComponent.UpdateInfo(response.WatchPlayerInfo);
+        }
     }
 }

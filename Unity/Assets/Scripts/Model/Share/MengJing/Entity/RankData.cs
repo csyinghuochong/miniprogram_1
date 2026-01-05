@@ -6,7 +6,7 @@
     }
 
     [ChildOf]
-    public class RankData : Entity, IAwake, IDestroy
+    public class RankData : Entity, IAwake, IDestroy, ISerializeToEntity
     {
         public int RankType { get; set; }
         public int Rank { get; set; }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,11 +30,10 @@ namespace ET.Client
             self.Text_SelfName = rc.Get<GameObject>("Text_SelfName").GetComponent<TMP_Text>();
             self.Text_SelfCE = rc.Get<GameObject>("Text_SelfCE").GetComponent<TMP_Text>();
             self.Text_SelfSort = rc.Get<GameObject>("Text_SelfSort").GetComponent<TMP_Text>();
-            
+
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIRank); });
             self.Button_Type_CE.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_LianMeng.onClick.AddListener(() => { self.SetShowType(1); });
-
         }
 
         public static void SetShowType(this UIRankComponent self, int page)
@@ -58,12 +58,30 @@ namespace ET.Client
 
         public static void UpdateRankCEItemList(this UIRankComponent self)
         {
-            
+            RankComponent rankComponent = self.Root().GetComponent<RankComponent>();
+            List<RankData> playerRankDataList = rankComponent.GetPlayerRankDataList();
+
+            while (self.UIRankCEItemList.Count < playerRankDataList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIRankCEItem, self.Content_UIRankCEItem);
+                UIRankCEItem newItem = self.AddChild<UIRankCEItem, GameObject>(go);
+                self.UIRankCEItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < playerRankDataList.Count; i++)
+            {
+                self.UIRankCEItemList[i].UpdateInfo(playerRankDataList[i]);
+                self.UIRankCEItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = playerRankDataList.Count; i < self.UIRankCEItemList.Count; i++)
+            {
+                self.UIRankCEItemList[i].GameObject.SetActive(false);
+            }
         }
 
         public static void UpdateRankLianMengItemList(this UIRankComponent self)
         {
-            
         }
     }
 }

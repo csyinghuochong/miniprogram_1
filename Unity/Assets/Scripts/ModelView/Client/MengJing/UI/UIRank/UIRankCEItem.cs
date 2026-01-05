@@ -7,6 +7,8 @@ namespace ET.Client
     [ChildOf]
     public class UIRankCEItem : Entity, IAwake<GameObject>
     {
+        public long UnitId;
+        
         public GameObject GameObject { get; set; }
 
         public Image Image_PlayerHead;
