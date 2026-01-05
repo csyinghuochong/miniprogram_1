@@ -1227,7 +1227,27 @@ message Friend2C_FriendOnLineChange // IMessage
 message RankDataInfo
 {
 	int32 RankType = 1;
-	int64 UnitId = 2;
-	string PlayerName = 3;
-	int64 CombatPower = 4;
+	int32 Rank = 2;
+	int64 UnitId = 3;
+	string PlayerName = 4;
+	int64 CombatPower = 5;
+}
+
+//ResponseType Rank2C_GetAllRank
+message C2Rank_GetAllRank // IRankRequest
+{
+	int32 RpcId = 1;
+}
+
+message Rank2C_GetAllRank // IRankResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated RankDataInfo RankDataList = 4;
+}
+
+message Rank2C_NoticeRankUpdate // IMessage
+{
+	repeated RankDataInfo RankDataInfoList = 1;
 }

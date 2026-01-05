@@ -18,6 +18,7 @@
         {
             RankDataInfo rankDataInfo = RankDataInfo.Create();
             rankDataInfo.RankType = self.RankType;
+            rankDataInfo.Rank = self.Rank;
             rankDataInfo.UnitId = self.UnitId;
             rankDataInfo.PlayerName = self.PlayerName;
             rankDataInfo.CombatPower = self.CombatPower;
@@ -27,6 +28,7 @@
         public static void FromMessage(this RankData self, RankDataInfo rankDataInfo)
         {
             self.RankType = rankDataInfo.RankType;
+            self.Rank = rankDataInfo.Rank;
             self.UnitId = rankDataInfo.UnitId;
             self.PlayerName = rankDataInfo.PlayerName;
             self.CombatPower = rankDataInfo.CombatPower;

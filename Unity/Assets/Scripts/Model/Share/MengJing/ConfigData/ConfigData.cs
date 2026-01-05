@@ -96,5 +96,8 @@ namespace ET
         public const long ChatInterval = 3 * 1000;
         // 聊天举报多少次后会被禁言
         public const int ChatReportMax = 5;
+        
+        // 排行榜显示最大数量
+        public const int ShowRankMaxNum = 30;
     }
 }

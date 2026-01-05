@@ -2620,6 +2620,12 @@ namespace ET
         [MemoryPackOrder(1)]
         public long UnitId { get; set; }
 
+        [MemoryPackOrder(2)]
+        public string PlayerName { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long CombatPower { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -2629,6 +2635,8 @@ namespace ET
 
             this.RpcId = default;
             this.UnitId = default;
+            this.PlayerName = default;
+            this.CombatPower = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -2700,6 +2708,77 @@ namespace ET
         public static Rank2G_ExitRankServer Create(bool isFromPool = false)
         {
             return ObjectPool.Instance.Fetch(typeof(Rank2G_ExitRankServer), isFromPool) as Rank2G_ExitRankServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.M2Rank_UpdatePlayerRankData)]
+    [ResponseType(nameof(Rank2M_UpdatePlayerRankData))]
+    public partial class M2Rank_UpdatePlayerRankData : MessageObject, ILocationRequest
+    {
+        public static M2Rank_UpdatePlayerRankData Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2Rank_UpdatePlayerRankData), isFromPool) as M2Rank_UpdatePlayerRankData;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string PlayerName { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long CombatPower { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+            this.PlayerName = default;
+            this.CombatPower = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Rank2M_UpdatePlayerRankData)]
+    public partial class Rank2M_UpdatePlayerRankData : MessageObject, ILocationResponse
+    {
+        public static Rank2M_UpdatePlayerRankData Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Rank2M_UpdatePlayerRankData), isFromPool) as Rank2M_UpdatePlayerRankData;
         }
 
         [MemoryPackOrder(0)]
@@ -2809,5 +2888,7 @@ namespace ET
         public const ushort Rank2G_LoginRankServer = 20080;
         public const ushort G2Rank_ExitRankServer = 20081;
         public const ushort Rank2G_ExitRankServer = 20082;
+        public const ushort M2Rank_UpdatePlayerRankData = 20083;
+        public const ushort Rank2M_UpdatePlayerRankData = 20084;
     }
 }

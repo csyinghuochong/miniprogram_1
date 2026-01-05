@@ -67,6 +67,14 @@ namespace ET.Server
 
                         break;
                     }
+                    case SceneType.Rank:
+                    {
+                        await UnitCacheHelper.SaveComponent(scene, scene.GetComponent<RankCenterComponent>());
+
+                        Log.Info($"数据落地:  Rank: {scene.Zone()}");
+
+                        break;
+                    }
                     default:
                         break;
                 }

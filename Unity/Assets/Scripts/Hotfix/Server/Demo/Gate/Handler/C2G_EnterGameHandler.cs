@@ -134,12 +134,6 @@ namespace ET.Server
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = player.Id;
 
-                        await this.LoginMailServer(unit); //登录邮件服
-                        await this.LoginChatServer(unit); //登录聊天服
-                        await this.LoginFriendServer(unit); //登录好友服
-                        await this.LoginRankServer(unit); //登录排行服
-                        // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
-
                         unit.GetComponent<DBSaveComponent>().OnLogin();
                         unit.GetComponent<HeroComponentS>().OnLogin();
                         unit.GetComponent<TaskComponentS>().OnLogin();
@@ -149,6 +143,12 @@ namespace ET.Server
                         {
                             numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId, false);
                         }
+                        
+                        await this.LoginMailServer(unit); //登录邮件服
+                        await this.LoginChatServer(unit); //登录聊天服
+                        await this.LoginFriendServer(unit); //登录好友服
+                        await this.LoginRankServer(unit); //登录排行服
+                        // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
                         
                         TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 
@@ -194,6 +194,8 @@ namespace ET.Server
         {
             G2Rank_LoginRankServer request = G2Rank_LoginRankServer.Create();
             request.UnitId = unit.Id;
+            request.PlayerName = unit.GetComponent<UserInfoComponentS>().GetPlayerName();
+            request.CombatPower = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.CombatPower);
 
             await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetRankServerId(unit.Zone()), request);
         }

@@ -9,6 +9,7 @@
     public class RankData : Entity, IAwake, IDestroy
     {
         public int RankType { get; set; }
+        public int Rank { get; set; }
         public long UnitId { get; set; }
         public string PlayerName { get; set; }
         public long CombatPower { get; set; }

@@ -5580,12 +5580,15 @@ namespace ET
         public int RankType { get; set; }
 
         [MemoryPackOrder(1)]
-        public long UnitId { get; set; }
+        public int Rank { get; set; }
 
         [MemoryPackOrder(2)]
-        public string PlayerName { get; set; }
+        public long UnitId { get; set; }
 
         [MemoryPackOrder(3)]
+        public string PlayerName { get; set; }
+
+        [MemoryPackOrder(4)]
         public long CombatPower { get; set; }
 
         public override void Dispose()
@@ -5596,9 +5599,98 @@ namespace ET
             }
 
             this.RankType = default;
+            this.Rank = default;
             this.UnitId = default;
             this.PlayerName = default;
             this.CombatPower = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2Rank_GetAllRank)]
+    [ResponseType(nameof(Rank2C_GetAllRank))]
+    public partial class C2Rank_GetAllRank : MessageObject, IRankRequest
+    {
+        public static C2Rank_GetAllRank Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2Rank_GetAllRank), isFromPool) as C2Rank_GetAllRank;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Rank2C_GetAllRank)]
+    public partial class Rank2C_GetAllRank : MessageObject, IRankResponse
+    {
+        public static Rank2C_GetAllRank Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Rank2C_GetAllRank), isFromPool) as Rank2C_GetAllRank;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<RankDataInfo> RankDataList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.RankDataList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.Rank2C_NoticeRankUpdate)]
+    public partial class Rank2C_NoticeRankUpdate : MessageObject, IMessage
+    {
+        public static Rank2C_NoticeRankUpdate Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Rank2C_NoticeRankUpdate), isFromPool) as Rank2C_NoticeRankUpdate;
+        }
+
+        [MemoryPackOrder(0)]
+        public List<RankDataInfo> RankDataInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RankDataInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -5762,5 +5854,8 @@ namespace ET
         public const ushort Friend2C_DeleteYou = 10155;
         public const ushort Friend2C_FriendOnLineChange = 10156;
         public const ushort RankDataInfo = 10157;
+        public const ushort C2Rank_GetAllRank = 10158;
+        public const ushort Rank2C_GetAllRank = 10159;
+        public const ushort Rank2C_NoticeRankUpdate = 10160;
     }
 }

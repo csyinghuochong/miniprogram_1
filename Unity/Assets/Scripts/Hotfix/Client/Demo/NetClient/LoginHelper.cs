@@ -109,6 +109,7 @@ namespace ET.Client
                     await ClientMailHelper.GetAllMail(root);
                     await ClientFriendHelper.GetAllFriend(root);
                     await ClientChatHelper.GetAllChatRoom(root);
+                    await ClientRankHelper.GetAllRank(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

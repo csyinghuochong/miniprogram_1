@@ -603,6 +603,8 @@ message G2Rank_LoginRankServer // IRequest
 {
     int32 RpcId = 1;
 	int64 UnitId = 2;
+	string PlayerName = 3;
+	int64 CombatPower = 4;
 }
 
 message Rank2G_LoginRankServer // IResponse
@@ -619,6 +621,22 @@ message G2Rank_ExitRankServer // ILocationRequest
 }
 
 message Rank2G_ExitRankServer // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
+//ResponseType Rank2M_UpdatePlayerRankData
+message M2Rank_UpdatePlayerRankData // ILocationRequest
+{
+    int32 RpcId = 1;
+	int64 UnitId = 2;
+	string PlayerName = 3;
+	int64 CombatPower = 4;
+}
+
+message Rank2M_UpdatePlayerRankData // ILocationResponse
 {
     int32 RpcId = 1;
     int32 Error = 2;
