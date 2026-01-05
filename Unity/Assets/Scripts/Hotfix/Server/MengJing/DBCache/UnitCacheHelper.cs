@@ -246,6 +246,11 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Friend)).ActorId;
         }
+        
+        public static ActorId GetRankServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, nameof(SceneType.Rank)).ActorId;
+        }
 
         public static ActorId GetRechargeCenter()
         {

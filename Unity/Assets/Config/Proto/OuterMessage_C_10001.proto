@@ -1223,3 +1223,11 @@ message Friend2C_FriendOnLineChange // IMessage
 	int64 UnitId = 1;
 	int32 OnLine = 2;
 }
+
+message RankDataInfo
+{
+	int32 RankType = 1;
+	int64 UnitId = 2;
+	string PlayerName = 3;
+	int64 CombatPower = 4;
+}
