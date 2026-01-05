@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -77,6 +78,39 @@ namespace ET.Client
             for (int i = playerRankDataList.Count; i < self.UIRankCEItemList.Count; i++)
             {
                 self.UIRankCEItemList[i].GameObject.SetActive(false);
+            }
+
+            // 显示自己的排行信息
+            RankData selfRankData = null;
+            long selfUnitId = self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId;
+            foreach (RankData rankData in playerRankDataList)
+            {
+                if (rankData.UnitId == selfUnitId)
+                {
+                    selfRankData = rankData;
+                    break;
+                }
+            }
+
+            if (selfRankData != null)
+            {
+                self.Text_SelfSort.SetText(selfRankData.Rank);
+            }
+            else
+            {
+                self.Text_SelfSort.SetText("未上榜");
+            }
+
+            self.Text_SelfName.SetText(self.Root().GetComponent<UserInfoComponentC>().PlayerName);
+            long combatPower = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.CombatPower);
+            if (combatPower >= 10000)
+            {
+                combatPower = combatPower / 10000;
+                self.Text_SelfCE.SetTextFormat("战力:{0}万", combatPower);
+            }
+            else
+            {
+                self.Text_SelfCE.SetTextFormat("战力:{0}", combatPower);
             }
         }
 

@@ -31,7 +31,17 @@ namespace ET.Client
 
             self.Text_Sort.SetText(rankData.Rank);
             self.Text_PlayerName.SetText(rankData.PlayerName);
-            self.Text_PlayerCE.SetText(rankData.CombatPower.ToString());
+
+            long combatPower = rankData.CombatPower;
+            if (combatPower >= 10000)
+            {
+                combatPower = combatPower / 10000;
+                self.Text_PlayerCE.SetTextFormat("战力:{0}万", combatPower);
+            }
+            else
+            {
+                self.Text_PlayerCE.SetTextFormat("战力:{0}", combatPower);
+            }
         }
 
         private static async ETTask OnButton_OnPlayerHead(this UIRankCEItem self)
