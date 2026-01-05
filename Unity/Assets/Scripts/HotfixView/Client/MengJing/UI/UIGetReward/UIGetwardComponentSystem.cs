@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,12 +19,22 @@ namespace ET.Client
 
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIGetReward); });
         }
-        
+
         [EntitySystem]
         private static void Destroy(this UIGetRewardComponent self)
         {
             self.UIRewardItemList.Clear();
             self.UICommonItem = null;
+        }
+
+        public static void OnInit(this UIGetRewardComponent self, List<RewardItem> rewardItems)
+        {
+            for (int i = 0; i < rewardItems.Count; i++)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                newItem.UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
+            }
         }
     }
 }

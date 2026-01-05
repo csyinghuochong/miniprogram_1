@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
@@ -77,15 +78,27 @@ namespace ET.Client
         private static async ETTask OnButton_Draw(this UILotteryDrawComponent self, int opeType)
         {
             M2C_LotteryDrawRequest response = await ClientLotteryDrawHelper.LotteryDrawRequest(self.Root(), opeType);
-            
+
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
-            
+
             self.UpdateBaoDiTip();
-            
+
             // 奖励提示
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            for (int i = 0; i < response.ItemInfoList.Count; i++)
+            {
+                RewardItem rewardItem = new RewardItem();
+                rewardItem.ItemId = response.ItemInfoList[i].ConfigId;
+                rewardItem.ItemNum = response.ItemInfoList[i].Num;
+                rewardItems.Add(rewardItem);
+            }
+
+            UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIGetReward);
+            UIGetRewardComponent uiGetRewardComponent = ui.GetComponent<UIGetRewardComponent>();
+            uiGetRewardComponent.OnInit(rewardItems);
         }
     }
 }
