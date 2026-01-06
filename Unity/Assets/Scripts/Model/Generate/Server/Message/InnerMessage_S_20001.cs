@@ -2805,6 +2805,132 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.G2Alliance_LoginAllianceServer)]
+    [ResponseType(nameof(Alliance2G_LoginAllianceServer))]
+    public partial class G2Alliance_LoginAllianceServer : MessageObject, IRequest
+    {
+        public static G2Alliance_LoginAllianceServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Alliance_LoginAllianceServer), isFromPool) as G2Alliance_LoginAllianceServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string PlayerName { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.UnitId = default;
+            this.PlayerName = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Alliance2G_LoginAllianceServer)]
+    public partial class Alliance2G_LoginAllianceServer : MessageObject, IResponse
+    {
+        public static Alliance2G_LoginAllianceServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Alliance2G_LoginAllianceServer), isFromPool) as Alliance2G_LoginAllianceServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.G2Alliance_ExitAllianceServer)]
+    [ResponseType(nameof(Alliance2G_ExitAllianceServer))]
+    public partial class G2Alliance_ExitAllianceServer : MessageObject, ILocationRequest
+    {
+        public static G2Alliance_ExitAllianceServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2Alliance_ExitAllianceServer), isFromPool) as G2Alliance_ExitAllianceServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.Alliance2G_ExitAllianceServer)]
+    public partial class Alliance2G_ExitAllianceServer : MessageObject, ILocationResponse
+    {
+        public static Alliance2G_ExitAllianceServer Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Alliance2G_ExitAllianceServer), isFromPool) as Alliance2G_ExitAllianceServer;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -2890,5 +3016,9 @@ namespace ET
         public const ushort Rank2G_ExitRankServer = 20082;
         public const ushort M2Rank_UpdatePlayerRankData = 20083;
         public const ushort Rank2M_UpdatePlayerRankData = 20084;
+        public const ushort G2Alliance_LoginAllianceServer = 20085;
+        public const ushort Alliance2G_LoginAllianceServer = 20086;
+        public const ushort G2Alliance_ExitAllianceServer = 20087;
+        public const ushort Alliance2G_ExitAllianceServer = 20088;
     }
 }

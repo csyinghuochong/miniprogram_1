@@ -642,3 +642,31 @@ message Rank2M_UpdatePlayerRankData // ILocationResponse
     int32 Error = 2;
     string Message = 3;
 }
+
+//ResponseType Alliance2G_LoginAllianceServer
+message G2Alliance_LoginAllianceServer // IRequest
+{
+    int32 RpcId = 1;
+	int64 UnitId = 2;
+	string PlayerName = 3;
+}
+
+message Alliance2G_LoginAllianceServer // IResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
+
+//ResponseType Alliance2G_ExitAllianceServer
+message G2Alliance_ExitAllianceServer // ILocationRequest
+{
+    int32 RpcId = 1;
+}
+
+message Alliance2G_ExitAllianceServer // ILocationResponse
+{
+    int32 RpcId = 1;
+    int32 Error = 2;
+    string Message = 3;
+}
