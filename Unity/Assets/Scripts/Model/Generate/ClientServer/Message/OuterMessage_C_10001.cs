@@ -5766,6 +5766,39 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.ArchiveHeroInfo)]
+    public partial class ArchiveHeroInfo : MessageObject
+    {
+        public static ArchiveHeroInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(ArchiveHeroInfo), isFromPool) as ArchiveHeroInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int HeroConfigId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Lv { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int Star { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.HeroConfigId = default;
+            this.Lv = default;
+            this.Star = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -5929,5 +5962,6 @@ namespace ET
         public const ushort Rank2C_NoticeRankUpdate = 10160;
         public const ushort C2M_LotteryDrawRequest = 10161;
         public const ushort M2C_LotteryDrawRequest = 10162;
+        public const ushort ArchiveHeroInfo = 10163;
     }
 }

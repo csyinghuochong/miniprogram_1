@@ -1266,3 +1266,10 @@ message M2C_LotteryDrawRequest // ILocationResponse
 	string Message = 3;
 	repeated ItemInfo ItemInfoList = 4;
 }
+
+message ArchiveHeroInfo
+{
+	int32 HeroConfigId = 1;
+	int32 Lv = 2;
+	int32 Star = 3;
+}
