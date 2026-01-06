@@ -35,39 +35,44 @@ namespace ET.Server
 
             if (unit.GetComponent<UserInfoComponentS>() == null)
             {
-                UserInfoComponentS userInfoComponentS = unit.AddComponent<UserInfoComponentS>();
-                userInfoComponentS.Account = account;
-                userInfoComponentS.UnitId = id;
-                userInfoComponentS.AccInfoID = accountId;
-                userInfoComponentS.PlayerName = createRoleInfo.PlayerName;
-                userInfoComponentS.Lv = 1;
+                UserInfoComponentS userInfoComponent = unit.AddComponent<UserInfoComponentS>();
+                userInfoComponent.Account = account;
+                userInfoComponent.UnitId = id;
+                userInfoComponent.AccInfoID = accountId;
+                userInfoComponent.PlayerName = createRoleInfo.PlayerName;
+                userInfoComponent.Lv = 1;
             }
 
             if (unit.GetComponent<NumericComponentS>() == null)
             {
-                NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
-                numericComponentS.ApplyValue(NumericType.Base_Speed_Base, 60000, false); // 速度是6米每秒
-                numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
+                NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+                numericComponent.ApplyValue(NumericType.Base_Speed_Base, 60000, false); // 速度是6米每秒
+                numericComponent.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
             }
 
             if (unit.GetComponent<InventoryComponentS>() == null)
             {
-                InventoryComponentS inventoryComponentS = unit.AddComponent<InventoryComponentS>();
+                InventoryComponentS inventoryComponent = unit.AddComponent<InventoryComponentS>();
             }
 
             if (unit.GetComponent<HeroComponentS>() == null)
             {
-                HeroComponentS heroComponentS = unit.AddComponent<HeroComponentS>();
+                HeroComponentS heroComponent = unit.AddComponent<HeroComponentS>();
             }
 
             if (unit.GetComponent<TaskComponentS>() == null)
             {
-                TaskComponentS taskComponentS = unit.AddComponent<TaskComponentS>();
+                TaskComponentS taskComponent = unit.AddComponent<TaskComponentS>();
             }
 
             if (unit.GetComponent<StoreComponentS>() == null)
             {
-                StoreComponentS storeComponentS = unit.AddComponent<StoreComponentS>();
+                StoreComponentS storeComponent = unit.AddComponent<StoreComponentS>();
+            }
+
+            if (unit.GetComponent<ArchiveComponentS>() == null)
+            {
+                ArchiveComponentS archiveComponent = unit.AddComponent<ArchiveComponentS>();
             }
 
             unit.AddComponent<StateComponentS>();
