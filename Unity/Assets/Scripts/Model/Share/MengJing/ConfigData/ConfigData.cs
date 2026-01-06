@@ -140,5 +140,31 @@ namespace ET
         public const int LotteryDrawBaoDiDropId = 2002;
 
         # endregion
+
+        # region 图鉴奖励
+
+        [StaticField]
+        public static Dictionary<int, RewardItem[]> ArchiveRewardDic = new()
+        {
+            {
+                10,
+                new RewardItem[]
+                {
+                    new RewardItem() { ItemId = Item_Gold, ItemNum = 100 },
+                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 10 },
+                    new RewardItem() { ItemId = Item_Exp, ItemNum = 1000 }
+                }
+            },
+            {
+                20, new RewardItem[]
+                {
+                    new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
+                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
+                    new RewardItem() { ItemId = Item_Exp, ItemNum = 2000 }
+                }
+            },
+        };
+
+        #endregion
     }
 }
