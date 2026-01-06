@@ -53,6 +53,80 @@ namespace ET
             return dateTime.Year * 10000 + dateTime.Month * 100 + dateTime.Day;
         }
 
+        // 根据配置计算英雄属性
+        public static Dictionary<int, long> CalculateHeroNumericByConfig(int heroConfigId, int lv, int star)
+        {
+            Dictionary<int, long> numericDic = new Dictionary<int, long>();
+
+            // 英雄配置表属性
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(heroConfigId);
+            long base_MaxHp = heroConfig.BaseHp;
+            long base_MinAct = heroConfig.BaseAct;
+            long base_MaxAct = heroConfig.BaseAct;
+            long base_MageAct = heroConfig.BaseMage;
+            long base_MinDef = heroConfig.BaseDef;
+            long base_MaxDef = heroConfig.BaseDef;
+            long base_MinAdf = heroConfig.BaseAdf;
+            long base_MaxAdf = heroConfig.BaseAdf;
+            long base_Cri = heroConfig.BaseCri;
+            long base_ReCri = heroConfig.BaseReCri;
+            long base_Eva = heroConfig.BaseEva;
+            long base_Hit = heroConfig.BaseHit;
+            long base_HitLess = heroConfig.BaseHitLess;
+            long base_MoveSpeed = heroConfig.BaseMoveSpeed;
+            long base_AtkSpeed = heroConfig.BaseAtkSpeed;
+            // long base_Combo = 0;
+            // long base_Counterattack = 0;
+            // long base_LifeSteal = 0;
+            // long base_ReCombo = 0;
+            // long base_ReCounterattack = 0;
+            // long base_ReLifeSteal = 0;
+            // long base_ReEva = 0;
+            long combatPower = 0;
+
+            // 等级成长
+            base_MaxHp += lv * heroConfig.LvHp;
+            base_MinAct += lv * heroConfig.LvAct;
+            base_MaxAct += lv * heroConfig.LvAct;
+            base_MinDef += lv * heroConfig.LvDef;
+            base_MaxDef += lv * heroConfig.LvDef;
+            base_MinAdf += lv * heroConfig.LvAdf;
+            base_MaxAdf += lv * heroConfig.LvAdf;
+
+            // 星级
+            base_MaxHp += star * 100;
+            base_MinAct += star * 100;
+            base_MaxAct += star * 100;
+            base_MinDef += star * 100;
+            base_MaxDef += star * 100;
+            base_MinAdf += star * 100;
+            base_MaxAdf += star * 100;
+
+            // 计算战斗力
+            combatPower = base_MaxHp + base_MinAct + base_MaxAct + base_MinDef + base_MaxDef + base_MinAdf + base_MaxAdf;
+
+            // 保存数据
+            numericDic.Add(NumericType.Now_Hp, base_MaxHp);
+            numericDic.Add(NumericType.Base_MaxHp_Base, base_MaxHp);
+            numericDic.Add(NumericType.Base_MinAct_Base, base_MinAct);
+            numericDic.Add(NumericType.Base_MaxAct_Base, base_MaxAct);
+            numericDic.Add(NumericType.Base_Mage_Base, base_MageAct);
+            numericDic.Add(NumericType.Base_MinDef_Base, base_MinDef);
+            numericDic.Add(NumericType.Base_MaxDef_Base, base_MaxDef);
+            numericDic.Add(NumericType.Base_MinAdf_Base, base_MaxAdf);
+            numericDic.Add(NumericType.Base_MaxAdf_Base, base_MinAdf);
+            numericDic.Add(NumericType.Base_Cri_Base, base_Cri);
+            numericDic.Add(NumericType.Base_ReCri_Base, base_ReCri);
+            numericDic.Add(NumericType.Base_Eva_Base, base_Eva);
+            numericDic.Add(NumericType.Base_Hit_Base, base_Hit);
+            numericDic.Add(NumericType.Base_HitDamageLessPro_Base, base_HitLess);
+            numericDic.Add(NumericType.Base_Speed_Base, base_MoveSpeed);
+            numericDic.Add(NumericType.Base_AtkSpeed_Base, base_AtkSpeed);
+            numericDic.Add(NumericType.CombatPower, combatPower);
+
+            return numericDic;
+        }
+
         // 计算英雄属性、战斗力
         public static Dictionary<int, long> CalculateHeroNumeric(Hero hero, List<Item> equipments)
         {
@@ -85,22 +159,24 @@ namespace ET
             long combatPower = 0;
 
             // 等级成长
-            base_MaxHp += hero.Lv * heroConfig.LvHp;
-            base_MinAct += hero.Lv * heroConfig.LvAct;
-            base_MaxAct += hero.Lv * heroConfig.LvAct;
-            base_MinDef += hero.Lv * heroConfig.LvDef;
-            base_MaxDef += hero.Lv * heroConfig.LvDef;
-            base_MinAdf += hero.Lv * heroConfig.LvAdf;
-            base_MaxAdf += hero.Lv * heroConfig.LvAdf;
+            int lv = hero.Lv;
+            base_MaxHp += lv * heroConfig.LvHp;
+            base_MinAct += lv * heroConfig.LvAct;
+            base_MaxAct += lv * heroConfig.LvAct;
+            base_MinDef += lv * heroConfig.LvDef;
+            base_MaxDef += lv * heroConfig.LvDef;
+            base_MinAdf += lv * heroConfig.LvAdf;
+            base_MaxAdf += lv * heroConfig.LvAdf;
 
             // 星级
-            base_MaxHp += hero.Star * 100;
-            base_MinAct += hero.Star * 100;
-            base_MaxAct += hero.Star * 100;
-            base_MinDef += hero.Star * 100;
-            base_MaxDef += hero.Star * 100;
-            base_MinAdf += hero.Star * 100;
-            base_MaxAdf += hero.Star * 100;
+            int star = hero.Star;
+            base_MaxHp += star * 100;
+            base_MinAct += star * 100;
+            base_MaxAct += star * 100;
+            base_MinDef += star * 100;
+            base_MaxDef += star * 100;
+            base_MinAdf += star * 100;
+            base_MaxAdf += star * 100;
 
             // 装备
             foreach (Item item in equipments)
