@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf(typeof(UI))]
-    public class UIArchiveComponent : Entity, IAwake,IDestroy
+    public class UIArchiveComponent : Entity, IAwake, IDestroy
     {
         public int CurrentPage { get; set; } = 0;
 

@@ -35,6 +35,8 @@ namespace ET.Client
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIRank); });
             self.Button_Type_CE.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_LianMeng.onClick.AddListener(() => { self.SetShowType(1); });
+
+            self.SetShowType(0);
         }
 
         public static void SetShowType(this UIRankComponent self, int page)

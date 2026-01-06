@@ -36,5 +36,6 @@ namespace ET
         public const string UILotteryDraw = "UILotteryDraw/UILotteryDraw";
         public const string UIArchive = "UIArchive/UIArchive";
         public const string UIHeroDetails = "UIHeroDetails/UIHeroDetails";
+        public const string UIArchiveReward = "UIArchiveReward/UIArchiveReward";
     }
 }

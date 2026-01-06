@@ -24,6 +24,7 @@ namespace ET.Client
             self.Text_CollectProgress = rc.Get<GameObject>("Text_CollectProgress").GetComponent<TMP_Text>();
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIArchive); });
+            self.Button_Reward.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIArchiveReward).Coroutine(); });
             self.Button_Type_Hero.onClick.AddListener(() => { self.SetShowType(1); });
 
             self.SetShowType(1);
