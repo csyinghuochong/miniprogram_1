@@ -33,6 +33,7 @@ namespace ET
         Friend = 1L << 31,
         Center = 1L << 32,
         Rank = 1L << 33,
+        Alliance = 1L << 34,
 
         // 客户端
         Demo = 1L << 50,
