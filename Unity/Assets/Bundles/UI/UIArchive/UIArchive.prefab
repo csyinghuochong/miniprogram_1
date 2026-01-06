@@ -38,8 +38,8 @@ RectTransform:
   - {fileID: 8647094964714450764}
   - {fileID: 3531454477824117846}
   - {fileID: 8961937669162034299}
-  - {fileID: 166919027077109188}
   - {fileID: 8039656736689041004}
+  - {fileID: 166919027077109188}
   - {fileID: 2257799756248214049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,7 +116,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: []
+  data:
+  - key: Button_Close
+    gameObject: {fileID: 3203925688668038577}
+  - key: Button_Reward
+    gameObject: {fileID: 6861415472770127683}
+  - key: Button_Type_Hero
+    gameObject: {fileID: 81092467759424745}
+  - key: Content_UIArchiveHeroItem
+    gameObject: {fileID: 2509348731091716606}
+  - key: UIArchiveHeroItem
+    gameObject: {fileID: 6065633535166955573}
+  - key: Text_Progress
+    gameObject: {fileID: 5680957643641361289}
 --- !u!1 &81092467759424745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,7 +1090,7 @@ GameObject:
   - component: {fileID: 6773172655939802525}
   - component: {fileID: 521986814241914163}
   m_Layer: 5
-  m_Name: Content_UIHeroItem
+  m_Name: Content_UIArchiveHeroItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,7 +1286,7 @@ GameObject:
   - component: {fileID: 2969764445310896222}
   - component: {fileID: 3960673950140359941}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1894,7 +1906,7 @@ GameObject:
   - component: {fileID: 363354190227434310}
   - component: {fileID: 5314289516487651155}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2240,7 +2252,7 @@ GameObject:
   - component: {fileID: 2324093061337967234}
   - component: {fileID: 7827715004112085216}
   m_Layer: 5
-  m_Name: UIHeroItem
+  m_Name: UIArchiveHeroItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2266,10 +2278,10 @@ RectTransform:
   - {fileID: 7032149686215898204}
   m_Father: {fileID: 5907381725295804198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 185, y: -155}
+  m_SizeDelta: {x: 230, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1130487600593532624
 CanvasRenderer:
