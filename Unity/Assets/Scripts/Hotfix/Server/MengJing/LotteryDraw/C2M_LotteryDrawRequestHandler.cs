@@ -17,7 +17,7 @@ namespace ET.Server
                 drawNum = 1;
 
                 long nowTime = TimeHelper.ServerNow();
-                if (nowTime > numericComponent.GetAsInt(NumericType.LotteryDrawFreeTime))
+                if (nowTime > numericComponent.GetAsLong(NumericType.LotteryDrawFreeTime))
                 {
                     // 免费抽
                     numericComponent.ApplyValue(NumericType.LotteryDrawFreeTime, nowTime + ConfigData.LotteryDrawFreeTime);
