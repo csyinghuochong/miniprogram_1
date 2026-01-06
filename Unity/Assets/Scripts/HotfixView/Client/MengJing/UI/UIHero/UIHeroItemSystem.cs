@@ -16,6 +16,7 @@ namespace ET.Client
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
 
+            self.Image_HeroQuality = rc.Get<GameObject>("Image_HeroQuality").GetComponent<Image>();
             self.Text_HeroName = rc.Get<GameObject>("Text_HeroName").GetComponent<TMP_Text>();
             self.Image_HeroIcon = rc.Get<GameObject>("Image_HeroIcon").GetComponent<Image>();
             self.Transform_HeroStar = rc.Get<GameObject>("Transform_HeroStar").transform;

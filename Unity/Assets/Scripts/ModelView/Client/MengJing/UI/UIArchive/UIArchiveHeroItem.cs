@@ -1,13 +1,14 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [ChildOf]
-    public class UIHeroItem : Entity, IAwake<GameObject>
+    public class UIArchiveHeroItem : Entity, IAwake<GameObject>
     {
         public long HeroId;
+        public int HeroConfigId;
 
         public GameObject GameObject { get; set; }
 
@@ -15,11 +16,9 @@ namespace ET.Client
         public TMP_Text Text_HeroName;
         public Image Image_HeroIcon;
         public Transform Transform_HeroStar;
-        public Transform Transform_CE;
-        public TMP_Text Text_HeroCombatPower;
-        public Slider Slider_ShardNum;
-        public TMP_Text Text_ShardNum;
-        public TMP_Text Text_NotHave;
         public Button Button_Click;
+        public Button Button_JiFen;
+        public TMP_Text Text_JiFen;
+        public TMP_Text Text_NotHave;
     }
 }

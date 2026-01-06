@@ -34,5 +34,7 @@ namespace ET
         public const string UIFriend = "UIFriend/UIFriend";
         public const string UIRank = "UIRank/UIRank";
         public const string UILotteryDraw = "UILotteryDraw/UILotteryDraw";
+        public const string UIArchive = "UIArchive/UIArchive";
+        public const string UIHeroDetails = "UIHeroDetails/UIHeroDetails";
     }
 }

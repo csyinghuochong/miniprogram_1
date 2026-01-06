@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 224438795553994780}
   - component: {fileID: 698002628791109729}
   - component: {fileID: 3982344588342131406}
+  - component: {fileID: 1462864290745070345}
   - component: {fileID: 2157612295276224657}
   m_Layer: 5
   m_Name: UIHeroDetails
@@ -79,6 +80,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1462864290745070345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386170326414932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UILayer: 1
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!114 &2157612295276224657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,9 +121,9 @@ MonoBehaviour:
     gameObject: {fileID: 5539521616649302433}
   - key: Transform_HeroStar
     gameObject: {fileID: 5986765692179436569}
-  - key: Text_Type
+  - key: Text_HeroType
     gameObject: {fileID: 4626364304594828051}
-  - key: Text_Lv
+  - key: Text_HeroLv
     gameObject: {fileID: 7320996085911505949}
   - key: Content_UIBaseAttributeItem
     gameObject: {fileID: 5736800486734862824}
@@ -149,7 +166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 320}
+  m_AnchoredPosition: {x: 0, y: 180}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &81005683569074102
@@ -695,7 +712,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8432039266648587097
 CanvasRenderer:
@@ -1345,7 +1362,7 @@ GameObject:
   - component: {fileID: 3228895266278150858}
   - component: {fileID: 6442426770635966509}
   m_Layer: 5
-  m_Name: Text_Type
+  m_Name: Text_HeroType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1848,7 +1865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 90}
+  m_AnchoredPosition: {x: 0, y: 80}
   m_SizeDelta: {x: 350, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &77326755683556705
@@ -1988,7 +2005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 195}
+  m_AnchoredPosition: {x: 0, y: 180}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4517611952725511649
@@ -2055,7 +2072,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2191,7 +2208,7 @@ GameObject:
   - component: {fileID: 1184964142213519276}
   - component: {fileID: 4957002091307665281}
   m_Layer: 5
-  m_Name: Text_Lv
+  m_Name: Text_HeroLv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
