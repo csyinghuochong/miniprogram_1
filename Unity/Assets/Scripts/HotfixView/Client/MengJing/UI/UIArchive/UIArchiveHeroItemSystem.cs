@@ -80,16 +80,18 @@ namespace ET.Client
 
         private static void ShowJiFen(this UIArchiveHeroItem self)
         {
+            self.Button_JiFen.gameObject.SetActive(false);
+            
             Hero hero = self.Root().GetComponent<HeroComponentC>().GetHeroByConfigId(self.HeroConfigId);
             if (hero == null)
             {
-                self.Button_JiFen.gameObject.SetActive(false);
                 return;
             }
 
             ArchiveHero archiveHero = self.Root().GetComponent<ArchiveComponentC>().GetArchiveHero(self.HeroConfigId);
             if (archiveHero == null)
             {
+                // 首次激活
                 int score = ConfigData.ArchiveHeroAddScore + hero.Star * ConfigData.ArchiveHeroStarAddScore;
                 self.Text_JiFen.SetTextFormat("+{0}积分", score);
                 self.Button_JiFen.gameObject.SetActive(true);
@@ -98,7 +100,8 @@ namespace ET.Client
 
             if (archiveHero.Star < hero.Star)
             {
-                int score = ConfigData.ArchiveHeroAddScore + (hero.Star - archiveHero.Star) * ConfigData.ArchiveHeroStarAddScore;
+                // 有更高星级
+                int score = (hero.Star - archiveHero.Star) * ConfigData.ArchiveHeroStarAddScore;
                 self.Text_JiFen.SetTextFormat("+{0}积分", score);
                 self.Button_JiFen.gameObject.SetActive(true);
             }
@@ -114,11 +117,6 @@ namespace ET.Client
         private static async ETTask OnButton_JiFen(this UIArchiveHeroItem self)
         {
             int error = await ClientArchiveHelper.ActiveArchiveHero(self.Root(), self.HeroConfigId);
-            if (error == ErrorCode.ERR_Success)
-            {
-                UIArchiveComponent uIArchiveComponent = self.GetParent<UIArchiveComponent>();
-                uIArchiveComponent.SetShowType(uIArchiveComponent.CurrentPage);
-            }
         }
     }
 }

@@ -8,6 +8,8 @@
             ArchiveComponentC archiveComponent = root.GetComponent<ArchiveComponentC>();
             archiveComponent?.AddOrUpdateArchiveHero(message.ArchiveHeroInfo);
 
+            EventSystem.Instance.Publish(root, new ArchiveHeroUpdate());
+
             await ETTask.CompletedTask;
         }
     }

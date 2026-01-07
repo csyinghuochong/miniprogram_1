@@ -141,4 +141,8 @@ namespace ET.Client
     public struct FriendUpdate
     {
     }
+    
+    public struct ArchiveHeroUpdate
+    {
+    }
 }

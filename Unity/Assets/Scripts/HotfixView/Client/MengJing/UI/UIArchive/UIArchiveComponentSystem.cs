@@ -6,6 +6,24 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class ArchiveHeroUpdate_UIArchiveRefresh : AEvent<Scene, ArchiveHeroUpdate>
+    {
+        protected override async ETTask Run(Scene scene, ArchiveHeroUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIArchive);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UIArchiveComponent uiArchiveComponent = ui.GetComponent<UIArchiveComponent>();
+            uiArchiveComponent.SetShowType(uiArchiveComponent.CurrentPage);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(UIArchiveComponent))]
     [FriendOf(typeof(UIArchiveComponent))]
     public static partial class UIArchiveComponentSystem
