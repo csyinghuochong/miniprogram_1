@@ -150,11 +150,11 @@ namespace ET
         public const int ArchiveHeroStarAddScore = 1;
 
         [StaticField]
-        public static Dictionary<int, RewardItem[]> ArchiveRewardDic = new()
+        public static Dictionary<int, List<RewardItem>> ArchiveRewardDic = new()
         {
             {
                 10,
-                new RewardItem[]
+                new List<RewardItem>
                 {
                     new RewardItem() { ItemId = Item_Gold, ItemNum = 100 },
                     new RewardItem() { ItemId = Item_Diamond, ItemNum = 10 },
@@ -162,7 +162,23 @@ namespace ET
                 }
             },
             {
-                20, new RewardItem[]
+                20, new List<RewardItem>
+                {
+                    new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
+                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
+                    new RewardItem() { ItemId = Item_Exp, ItemNum = 2000 }
+                }
+            },
+            {
+                40, new List<RewardItem>
+                {
+                    new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
+                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
+                    new RewardItem() { ItemId = Item_Exp, ItemNum = 2000 }
+                }
+            },
+            {
+                80, new List<RewardItem>
                 {
                     new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
                     new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
