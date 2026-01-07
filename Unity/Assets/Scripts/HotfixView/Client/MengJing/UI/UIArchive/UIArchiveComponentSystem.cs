@@ -46,20 +46,20 @@ namespace ET.Client
 
             self.UpdateHeroList(page);
         }
-        
+
         private static void UpdateHeroList(this UIArchiveComponent self, int page)
         {
-            HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
-            
-            int heroCount = heroComponentC.GetAllHeroCount();
+            ArchiveComponentC archiveComponent = self.Root().GetComponent<ArchiveComponentC>();
+
+            int heroCount = archiveComponent.ArchiveHeroList.Count;
             int allHeroCount = HeroConfigCategory.Instance.DataMap.Count;
 
             self.Text_CollectProgress.SetTextFormat("{0}/{1}", heroCount, allHeroCount);
 
-            List<Hero> heroList = null;
+            List<EntityRef<ArchiveHero>> archiveHeroeList = null;
             if (page == 1)
             {
-                heroList = heroComponentC.GetAllHero();
+                archiveHeroeList = archiveComponent.ArchiveHeroList;
             }
             else
             {
@@ -69,8 +69,17 @@ namespace ET.Client
             List<int> notHaveHeroConfigIdList = new();
             foreach (HeroConfig config in HeroConfigCategory.Instance.DataList)
             {
+                bool exist = false;
+                foreach (ArchiveHero archiveHero in archiveHeroeList)
+                {
+                    if (archiveHero.HeroConfigId == config.Id)
+                    {
+                        exist = true;
+                        break;
+                    }
+                }
 
-                if (heroList.Exists(x => x.ConfigId == config.Id))
+                if (exist)
                 {
                     continue;
                 }
@@ -78,26 +87,26 @@ namespace ET.Client
                 notHaveHeroConfigIdList.Add(config.Id);
             }
 
-            while (self.UIArchiveHeroItemList.Count < heroList.Count + notHaveHeroConfigIdList.Count)
+            while (self.UIArchiveHeroItemList.Count < archiveHeroeList.Count + notHaveHeroConfigIdList.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIArchiveHeroItem, self.Content_UIArchiveHeroItem);
                 UIArchiveHeroItem newItem = self.AddChild<UIArchiveHeroItem, GameObject>(go);
                 self.UIArchiveHeroItemList.Add(newItem);
             }
 
-            for (int i = 0; i < heroList.Count; i++)
+            for (int i = 0; i < archiveHeroeList.Count; i++)
             {
-                self.UIArchiveHeroItemList[i].UpdateInfo(heroList[i]).Coroutine();
+                self.UIArchiveHeroItemList[i].UpdateInfo(archiveHeroeList[i]).Coroutine();
                 self.UIArchiveHeroItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = heroList.Count; i < heroList.Count + notHaveHeroConfigIdList.Count; i++)
+            for (int i = archiveHeroeList.Count; i < archiveHeroeList.Count + notHaveHeroConfigIdList.Count; i++)
             {
-                self.UIArchiveHeroItemList[i].UpdateInfo(notHaveHeroConfigIdList[i - heroList.Count]).Coroutine();
+                self.UIArchiveHeroItemList[i].UpdateInfo(notHaveHeroConfigIdList[i - archiveHeroeList.Count]).Coroutine();
                 self.UIArchiveHeroItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = heroList.Count + notHaveHeroConfigIdList.Count; i < self.UIArchiveHeroItemList.Count; i++)
+            for (int i = archiveHeroeList.Count + notHaveHeroConfigIdList.Count; i < self.UIArchiveHeroItemList.Count; i++)
             {
                 self.UIArchiveHeroItemList[i].GameObject.SetActive(false);
             }

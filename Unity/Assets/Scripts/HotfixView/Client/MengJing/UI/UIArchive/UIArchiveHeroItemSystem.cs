@@ -27,15 +27,14 @@ namespace ET.Client
             self.Button_Click.AddListener(() => { self.OnButton_Click().Coroutine(); });
         }
 
-        public static async ETTask UpdateInfo(this UIArchiveHeroItem self, Hero hero)
+        public static async ETTask UpdateInfo(this UIArchiveHeroItem self, ArchiveHero archiveHero)
         {
-            self.HeroId = hero.Id;
-            self.HeroConfigId = hero.ConfigId;
+            self.HeroConfigId = archiveHero.HeroConfigId;
 
             self.Transform_HeroStar.gameObject.SetActive(true);
             self.Text_NotHave.gameObject.SetActive(false);
 
-            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(self.HeroConfigId);
             self.Text_HeroName.text = heroConfig.HeroName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
@@ -56,7 +55,7 @@ namespace ET.Client
                 }
 
                 GameObject star = self.Transform_HeroStar.GetChild(i).GetChild(0).gameObject;
-                star.SetActive(hero.Star > i);
+                star.SetActive(archiveHero.Star > i);
             }
         }
 
