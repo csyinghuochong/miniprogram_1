@@ -7,6 +7,8 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UILotteryDrawComponent : Entity, IAwake
     {
+        public int LookingForwardHeroId;
+        
         public Button Button_Close;
         public TMP_Text Text_Type_LotteryTicket;
         public TMP_Text Text_Type_Diamond;

@@ -116,6 +116,13 @@ namespace ET
         // 抽卡掉落ID
         public const int LotteryDrawDropId = 2001;
 
+        // 心愿单道具
+        [StaticField]
+        public static List<int> LotteryDrawLookingForwardHeroIdList = new()
+        {
+            10002005, 10002006
+        };
+
         // 1次抽卡消耗
         [StaticField]
         public static List<RewardItem> LotteryDrawCost_One = new()

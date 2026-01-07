@@ -77,7 +77,7 @@ namespace ET.Client
 
         private static async ETTask OnButton_Draw(this UILotteryDrawComponent self, int opeType)
         {
-            M2C_LotteryDrawRequest response = await ClientLotteryDrawHelper.LotteryDrawRequest(self.Root(), opeType);
+            M2C_LotteryDrawRequest response = await ClientLotteryDrawHelper.LotteryDrawRequest(self.Root(), opeType, self.LookingForwardHeroId);
 
             if (response.Error != ErrorCode.ERR_Success)
             {
