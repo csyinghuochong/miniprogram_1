@@ -37,22 +37,22 @@ namespace ET.Client
 
         public static void UpdateInfo(this UIArchiveRewardComponent self)
         {
-            List<int> rewardIdList = ConfigData.ArchiveRewardDic.Keys.ToList();
+            List<ArchiveRewardConfig> archiveRewardConfigs = ArchiveRewardConfigCategory.Instance.DataList;
 
-            while (self.UIArchiveRewardItemList.Count < rewardIdList.Count)
+            while (self.UIArchiveRewardItemList.Count < archiveRewardConfigs.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIArchiveRewardItem, self.Content_UIArchiveRewardItem);
                 UIArchiveRewardItem newItem = self.AddChild<UIArchiveRewardItem, GameObject>(go);
                 self.UIArchiveRewardItemList.Add(newItem);
             }
 
-            for (int i = 0; i < rewardIdList.Count; i++)
+            for (int i = 0; i < archiveRewardConfigs.Count; i++)
             {
-                self.UIArchiveRewardItemList[i].UpdateInfo(rewardIdList[i]).Coroutine();
+                self.UIArchiveRewardItemList[i].UpdateInfo(archiveRewardConfigs[i].Id).Coroutine();
                 self.UIArchiveRewardItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = rewardIdList.Count; i < self.UIArchiveRewardItemList.Count; i++)
+            for (int i = archiveRewardConfigs.Count; i < self.UIArchiveRewardItemList.Count; i++)
             {
                 self.UIArchiveRewardItemList[i].GameObject.SetActive(false);
             }

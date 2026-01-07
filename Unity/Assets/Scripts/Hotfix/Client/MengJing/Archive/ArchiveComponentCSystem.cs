@@ -40,15 +40,15 @@
             self.ArchiveHeroList.Add(newArchiveHero);
         }
 
-        public static int GetCurrentScore(this ArchiveComponentC self)
+        public static int GetCurrentPoint(this ArchiveComponentC self)
         {
-            int score = 0;
+            int point = 0;
             foreach (ArchiveHero archiveHero in self.ArchiveHeroList)
             {
-                score += ConfigData.ArchiveHeroAddScore + archiveHero.Star * ConfigData.ArchiveHeroStarAddScore;
+                point += ConfigData.ArchiveHeroAddPoint + archiveHero.Star * ConfigData.ArchiveHeroStarAddPoint;
             }
 
-            return score;
+            return point;
         }
 
         public static ArchiveHero GetArchiveHero(this ArchiveComponentC self, int heroConfigId)

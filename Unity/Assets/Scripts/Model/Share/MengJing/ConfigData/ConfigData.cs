@@ -151,48 +151,10 @@ namespace ET
         # region 图鉴奖励
 
         // 一个英雄加多少积分
-        public const int ArchiveHeroAddScore = 10;
+        public const int ArchiveHeroAddPoint = 10;
 
         // 英雄的一个星级加多少积分
-        public const int ArchiveHeroStarAddScore = 1;
-
-        [StaticField]
-        public static Dictionary<int, List<RewardItem>> ArchiveRewardDic = new()
-        {
-            {
-                10,
-                new List<RewardItem>
-                {
-                    new RewardItem() { ItemId = Item_Gold, ItemNum = 100 },
-                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 10 },
-                    new RewardItem() { ItemId = Item_Exp, ItemNum = 1000 }
-                }
-            },
-            {
-                20, new List<RewardItem>
-                {
-                    new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
-                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
-                    new RewardItem() { ItemId = Item_Exp, ItemNum = 2000 }
-                }
-            },
-            {
-                40, new List<RewardItem>
-                {
-                    new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
-                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
-                    new RewardItem() { ItemId = Item_Exp, ItemNum = 2000 }
-                }
-            },
-            {
-                80, new List<RewardItem>
-                {
-                    new RewardItem() { ItemId = Item_Gold, ItemNum = 200 },
-                    new RewardItem() { ItemId = Item_Diamond, ItemNum = 20 },
-                    new RewardItem() { ItemId = Item_Exp, ItemNum = 2000 }
-                }
-            },
-        };
+        public const int ArchiveHeroStarAddPoint = 1;
 
         #endregion
     }

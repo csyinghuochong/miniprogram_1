@@ -64,15 +64,15 @@
             }
         }
 
-        public static int GetCurrentScore(this ArchiveComponentS self)
+        public static int GetCurrentPoint(this ArchiveComponentS self)
         {
-            int score = 0;
+            int point = 0;
             foreach (ArchiveHero archiveHero in self.ArchiveHeroList)
             {
-                score += ConfigData.ArchiveHeroAddScore + archiveHero.Star * ConfigData.ArchiveHeroStarAddScore;
+                point += ConfigData.ArchiveHeroAddPoint + archiveHero.Star * ConfigData.ArchiveHeroStarAddPoint;
             }
 
-            return score;
+            return point;
         }
     }
 }

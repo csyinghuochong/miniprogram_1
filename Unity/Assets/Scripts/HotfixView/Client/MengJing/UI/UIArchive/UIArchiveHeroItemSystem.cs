@@ -92,7 +92,7 @@ namespace ET.Client
             if (archiveHero == null)
             {
                 // 首次激活
-                int score = ConfigData.ArchiveHeroAddScore + hero.Star * ConfigData.ArchiveHeroStarAddScore;
+                int score = ConfigData.ArchiveHeroAddPoint + hero.Star * ConfigData.ArchiveHeroStarAddPoint;
                 self.Text_JiFen.SetTextFormat("+{0}积分", score);
                 self.Button_JiFen.gameObject.SetActive(true);
                 return;
@@ -101,7 +101,7 @@ namespace ET.Client
             if (archiveHero.Star < hero.Star)
             {
                 // 有更高星级
-                int score = (hero.Star - archiveHero.Star) * ConfigData.ArchiveHeroStarAddScore;
+                int score = (hero.Star - archiveHero.Star) * ConfigData.ArchiveHeroStarAddPoint;
                 self.Text_JiFen.SetTextFormat("+{0}积分", score);
                 self.Button_JiFen.gameObject.SetActive(true);
             }
