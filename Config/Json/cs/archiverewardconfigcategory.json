@@ -1,0 +1,120 @@
+[
+  {
+    "Id": 10000001,
+    "RequiredPoints": 10,
+    "RewardItem": [
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10000002,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000002,
+    "RequiredPoints": 20,
+    "RewardItem": [
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000003,
+    "RequiredPoints": 50,
+    "RewardItem": [
+      {
+        "ItemId": 10001004,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000004,
+    "RequiredPoints": 100,
+    "RewardItem": [
+      {
+        "ItemId": 10001005,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001006,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000005,
+    "RequiredPoints": 150,
+    "RewardItem": [
+      {
+        "ItemId": 10003001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000006,
+    "RequiredPoints": 200,
+    "RewardItem": [
+      {
+        "ItemId": 10003002,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000007,
+    "RequiredPoints": 250,
+    "RewardItem": [
+      {
+        "ItemId": 10003003,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000008,
+    "RequiredPoints": 300,
+    "RewardItem": [
+      {
+        "ItemId": 10003004,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000009,
+    "RequiredPoints": 350,
+    "RewardItem": [
+      {
+        "ItemId": 10003005,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000010,
+    "RequiredPoints": 400,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002002,
+    "RequiredPoints": 450,
+    "RewardItem": [
+      {
+        "ItemId": 10003011,
+        "ItemNum": 1
+      }
+    ]
+  }
+]
