@@ -40,6 +40,20 @@ namespace ET.Server
                     return hero;
                 }
             }
+
+            return null;
+        }
+
+        public static Hero GetHeroByConfigId(this HeroComponentS self, int heroConfigId)
+        {
+            foreach (Hero hero in self.Heros)
+            {
+                if (hero.ConfigId == heroConfigId)
+                {
+                    return hero;
+                }
+            }
+
             return null;
         }
 
@@ -89,7 +103,6 @@ namespace ET.Server
             self.Heros.Add(hero);
             
             Unit unit = self.GetParent<Unit>();
-            EventSystem.Instance.Publish(self.Scene(), new AddOrUpdateHero() { Unit = unit, Hero = hero });
             
             HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Add);
         }

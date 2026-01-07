@@ -50,5 +50,18 @@
 
             return score;
         }
+
+        public static ArchiveHero GetArchiveHero(this ArchiveComponentC self, int heroConfigId)
+        {
+            foreach (ArchiveHero archiveHero in self.ArchiveHeroList)
+            {
+                if (archiveHero.HeroConfigId == heroConfigId)
+                {
+                    return archiveHero;
+                }
+            }
+
+            return null;
+        }
     }
 }

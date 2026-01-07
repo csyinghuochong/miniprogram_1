@@ -1,16 +1,5 @@
 ﻿namespace ET.Server
 {
-    [Event(SceneType.Map)]
-    public class AddOrUpdateHero_Notify : AEvent<Scene, AddOrUpdateHero>
-    {
-        protected override async ETTask Run(Scene scene, AddOrUpdateHero args)
-        {
-            args.Unit.GetComponent<ArchiveComponentS>()?.AddOrUpdateHero(args.Hero);
-
-            await ETTask.CompletedTask;
-        }
-    }
-
     [EntitySystemOf(typeof(ArchiveComponentS))]
     [FriendOf(typeof(ArchiveComponentS))]
     public static partial class ArchiveComponentSSystem
@@ -38,7 +27,7 @@
             }
         }
 
-        public static void AddOrUpdateHero(this ArchiveComponentS self, Hero hero, bool notice = true)
+        public static void ActiveArchiveHero(this ArchiveComponentS self, Hero hero)
         {
             bool change = false;
             ArchiveHero UpdateArchiveHero = null;
@@ -67,7 +56,7 @@
                 change = true;
             }
 
-            if (notice && change)
+            if (change)
             {
                 M2C_ArchiveHeroUpdate message = M2C_ArchiveHeroUpdate.Create();
                 message.ArchiveHeroInfo = UpdateArchiveHero.ToMessage();

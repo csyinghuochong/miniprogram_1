@@ -83,8 +83,6 @@ namespace ET.Server
                 hero.HunShi -= heroConfig.HeroUpStarNeed[hero.Star];
                 hero.Star += 1;
             }
-
-            EventSystem.Instance.Publish(unit.Scene(), new AddOrUpdateHero() { Unit = unit, Hero = hero });
         }
 
         public static void UpdateHeroSkill(Hero hero)

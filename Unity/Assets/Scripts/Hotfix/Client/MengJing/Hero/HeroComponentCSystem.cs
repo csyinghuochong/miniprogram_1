@@ -27,6 +27,20 @@ namespace ET.Client
                     return hero;
                 }
             }
+
+            return null;
+        }
+
+        public static Hero GetHeroByConfigId(this HeroComponentC self, int heroConfigId)
+        {
+            foreach (Hero hero in self.Heros)
+            {
+                if (hero.ConfigId == heroConfigId)
+                {
+                    return hero;
+                }
+            }
+
             return null;
         }
 

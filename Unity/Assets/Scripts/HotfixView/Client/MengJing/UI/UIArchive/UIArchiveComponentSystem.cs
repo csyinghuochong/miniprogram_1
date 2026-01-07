@@ -50,6 +50,7 @@ namespace ET.Client
         private static void UpdateHeroList(this UIArchiveComponent self, int page)
         {
             ArchiveComponentC archiveComponent = self.Root().GetComponent<ArchiveComponentC>();
+            HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
 
             int heroCount = archiveComponent.ArchiveHeroList.Count;
             int allHeroCount = HeroConfigCategory.Instance.DataMap.Count;

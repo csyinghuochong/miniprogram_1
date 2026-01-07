@@ -5888,6 +5888,69 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_ActiveArchiveHero)]
+    [ResponseType(nameof(M2C_ActiveArchiveHero))]
+    public partial class C2M_ActiveArchiveHero : MessageObject, ILocationRequest
+    {
+        public static C2M_ActiveArchiveHero Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_ActiveArchiveHero), isFromPool) as C2M_ActiveArchiveHero;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int HeroConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.HeroConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ActiveArchiveHero)]
+    public partial class M2C_ActiveArchiveHero : MessageObject, ILocationResponse
+    {
+        public static M2C_ActiveArchiveHero Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ActiveArchiveHero), isFromPool) as M2C_ActiveArchiveHero;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_ReceivedArchiveReward)]
     [ResponseType(nameof(M2C_ReceivedArchiveReward))]
     public partial class C2M_ReceivedArchiveReward : MessageObject, ILocationRequest
@@ -6117,7 +6180,9 @@ namespace ET
         public const ushort C2M_GetAllArchiveHero = 10164;
         public const ushort M2C_GetAllArchiveHero = 10165;
         public const ushort M2C_ArchiveHeroUpdate = 10166;
-        public const ushort C2M_ReceivedArchiveReward = 10167;
-        public const ushort M2C_ReceivedArchiveReward = 10168;
+        public const ushort C2M_ActiveArchiveHero = 10167;
+        public const ushort M2C_ActiveArchiveHero = 10168;
+        public const ushort C2M_ReceivedArchiveReward = 10169;
+        public const ushort M2C_ReceivedArchiveReward = 10170;
     }
 }

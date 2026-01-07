@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ namespace ET.Client
             self.Text_NotHave = rc.Get<GameObject>("Text_NotHave").GetComponent<TMP_Text>();
 
             self.Button_Click.AddListener(() => { self.OnButton_Click().Coroutine(); });
+            self.Button_JiFen.AddListener(() => { self.OnButton_JiFen().Coroutine(); });
         }
 
         public static async ETTask UpdateInfo(this UIArchiveHeroItem self, ArchiveHero archiveHero)
@@ -57,12 +59,14 @@ namespace ET.Client
                 GameObject star = self.Transform_HeroStar.GetChild(i).GetChild(0).gameObject;
                 star.SetActive(archiveHero.Star > i);
             }
+
+            self.ShowJiFen();
         }
 
         public static async ETTask UpdateInfo(this UIArchiveHeroItem self, int heroConfigId)
         {
             self.HeroConfigId = heroConfigId;
-            
+
             self.Transform_HeroStar.gameObject.SetActive(false);
             self.Text_NotHave.gameObject.SetActive(true);
 
@@ -70,6 +74,34 @@ namespace ET.Client
             self.Text_HeroName.text = heroConfig.HeroName;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+
+            self.ShowJiFen();
+        }
+
+        private static void ShowJiFen(this UIArchiveHeroItem self)
+        {
+            Hero hero = self.Root().GetComponent<HeroComponentC>().GetHeroByConfigId(self.HeroConfigId);
+            if (hero == null)
+            {
+                self.Button_JiFen.gameObject.SetActive(false);
+                return;
+            }
+
+            ArchiveHero archiveHero = self.Root().GetComponent<ArchiveComponentC>().GetArchiveHero(self.HeroConfigId);
+            if (archiveHero == null)
+            {
+                int score = ConfigData.ArchiveHeroAddScore + hero.Star * ConfigData.ArchiveHeroStarAddScore;
+                self.Text_JiFen.SetTextFormat("+{0}积分", score);
+                self.Button_JiFen.gameObject.SetActive(true);
+                return;
+            }
+
+            if (archiveHero.Star < hero.Star)
+            {
+                int score = ConfigData.ArchiveHeroAddScore + (hero.Star - archiveHero.Star) * ConfigData.ArchiveHeroStarAddScore;
+                self.Text_JiFen.SetTextFormat("+{0}积分", score);
+                self.Button_JiFen.gameObject.SetActive(true);
+            }
         }
 
         private static async ETTask OnButton_Click(this UIArchiveHeroItem self)
@@ -77,6 +109,16 @@ namespace ET.Client
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIHeroDetails);
             UIHeroDetailsComponent uiHeroDetailsComponent = ui.GetComponent<UIHeroDetailsComponent>();
             uiHeroDetailsComponent.UpdateHeroDetails(self.HeroConfigId).Coroutine();
+        }
+
+        private static async ETTask OnButton_JiFen(this UIArchiveHeroItem self)
+        {
+            int error = await ClientArchiveHelper.ActiveArchiveHero(self.Root(), self.HeroConfigId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                UIArchiveComponent uIArchiveComponent = self.GetParent<UIArchiveComponent>();
+                uIArchiveComponent.SetShowType(uIArchiveComponent.CurrentPage);
+            }
         }
     }
 }

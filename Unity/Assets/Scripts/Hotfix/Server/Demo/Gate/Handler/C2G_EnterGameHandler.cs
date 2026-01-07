@@ -148,11 +148,6 @@ namespace ET.Server
                             numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId, false);
                         }
 
-                        foreach (Hero hero in heroComponent.GetAllHero())
-                        {
-                            archiveComponent.AddOrUpdateHero(hero, false);
-                        }
-
                         #endregion
 
                         await this.LoginMailServer(unit); //登录邮件服

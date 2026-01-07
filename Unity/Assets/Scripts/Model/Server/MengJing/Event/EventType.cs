@@ -39,10 +39,4 @@ namespace ET.Server
     {
         public Unit Unit;
     }
-
-    public struct AddOrUpdateHero
-    {
-        public Unit Unit;
-        public Hero Hero;
-    }
 }

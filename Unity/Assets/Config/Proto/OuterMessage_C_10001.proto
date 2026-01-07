@@ -1293,6 +1293,20 @@ message M2C_ArchiveHeroUpdate // IMessage
 	ArchiveHeroInfo ArchiveHeroInfo = 1;
 }
 
+// ResponseType M2C_ActiveArchiveHero
+message C2M_ActiveArchiveHero // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 HeroConfigId = 2;
+}
+
+message M2C_ActiveArchiveHero // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 // ResponseType M2C_ReceivedArchiveReward
 message C2M_ReceivedArchiveReward // ILocationRequest
 {
