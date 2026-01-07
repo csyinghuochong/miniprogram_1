@@ -106,7 +106,7 @@ namespace ET.Server
                             response.Error = ErrorCode.ERR_NotFindAccount;
                             return;
                         }
-                        
+
                         CreateRoleInfo createRoleInfo = newAccountList[0].GetRoleInfo(session.Zone(), request.UnitId);
                         if (createRoleInfo == null)
                         {
@@ -134,22 +134,33 @@ namespace ET.Server
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = player.Id;
 
+                        # region 玩家组件设置
+
                         unit.GetComponent<DBSaveComponent>().OnLogin();
                         unit.GetComponent<HeroComponentS>().OnLogin();
                         unit.GetComponent<TaskComponentS>().OnLogin();
                         HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
                         NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+                        ArchiveComponentS archiveComponent = unit.GetComponent<ArchiveComponentS>();
+
                         if (heroComponent.GetFirstHero() != null)
                         {
                             numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId, false);
                         }
-                        
+
+                        foreach (Hero hero in heroComponent.GetAllHero())
+                        {
+                            archiveComponent.AddOrUpdateHero(hero, false);
+                        }
+
+                        #endregion
+
                         await this.LoginMailServer(unit); //登录邮件服
                         await this.LoginChatServer(unit); //登录聊天服
                         await this.LoginFriendServer(unit); //登录好友服
                         await this.LoginRankServer(unit); //登录排行服
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
-                        
+
                         TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 
                         player.PlayerState = PlayerState.Game;

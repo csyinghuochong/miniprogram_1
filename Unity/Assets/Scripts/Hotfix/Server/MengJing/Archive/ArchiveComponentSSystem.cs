@@ -1,5 +1,16 @@
 ﻿namespace ET.Server
 {
+    [Event(SceneType.Map)]
+    public class AddOrUpdateHero_Notify : AEvent<Scene, AddOrUpdateHero>
+    {
+        protected override async ETTask Run(Scene scene, AddOrUpdateHero args)
+        {
+            args.Unit.GetComponent<ArchiveComponentS>()?.AddOrUpdateHero(args.Hero);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(ArchiveComponentS))]
     [FriendOf(typeof(ArchiveComponentS))]
     public static partial class ArchiveComponentSSystem
@@ -27,15 +38,19 @@
             }
         }
 
-        public static void GetOrUpHero(this ArchiveComponentS self, Hero hero)
+        public static void AddOrUpdateHero(this ArchiveComponentS self, Hero hero, bool notice = true)
         {
+            bool change = false;
             ArchiveHero UpdateArchiveHero = null;
             foreach (ArchiveHero archiveHero in self.ArchiveHeroList)
             {
                 if (archiveHero.HeroConfigId == hero.ConfigId)
                 {
-                    archiveHero.Lv = hero.Lv;
-                    archiveHero.Star = hero.Star;
+                    if (hero.Star > archiveHero.Star)
+                    {
+                        archiveHero.Star = hero.Star;
+                        change = true;
+                    }
 
                     UpdateArchiveHero = archiveHero;
                     break;
@@ -46,12 +61,18 @@
             {
                 UpdateArchiveHero = self.AddChild<ArchiveHero>();
                 UpdateArchiveHero.HeroConfigId = hero.ConfigId;
-                UpdateArchiveHero.Lv = hero.Lv;
                 UpdateArchiveHero.Star = hero.Star;
                 self.ArchiveHeroList.Add(UpdateArchiveHero);
+
+                change = true;
             }
 
-            // 通知客户端
+            if (notice && change)
+            {
+                M2C_ArchiveHeroUpdate message = M2C_ArchiveHeroUpdate.Create();
+                message.ArchiveHeroInfo = UpdateArchiveHero.ToMessage();
+                MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
+            }
         }
 
         public static int GetCurrentScore(this ArchiveComponentS self)
@@ -59,7 +80,7 @@
             int score = 0;
             foreach (ArchiveHero archiveHero in self.ArchiveHeroList)
             {
-                score += 10 + archiveHero.Lv * 1 + archiveHero.Star * 1;
+                score += ConfigData.ArchiveHeroAddScore + archiveHero.Star * ConfigData.ArchiveHeroStarAddScore;
             }
 
             return score;

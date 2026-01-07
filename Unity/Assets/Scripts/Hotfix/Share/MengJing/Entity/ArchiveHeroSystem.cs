@@ -18,7 +18,6 @@
         {
             ArchiveHeroInfo archiveHeroInfo = ArchiveHeroInfo.Create();
             archiveHeroInfo.HeroConfigId = self.HeroConfigId;
-            archiveHeroInfo.Lv = self.Lv;
             archiveHeroInfo.Star = self.Star;
             return archiveHeroInfo;
         }
@@ -26,7 +25,6 @@
         public static void FromMessage(this ArchiveHero self, ArchiveHeroInfo archiveHeroInfo)
         {
             self.HeroConfigId = archiveHeroInfo.HeroConfigId;
-            self.Lv = archiveHeroInfo.Lv;
             self.Star = archiveHeroInfo.Star;
         }
     }

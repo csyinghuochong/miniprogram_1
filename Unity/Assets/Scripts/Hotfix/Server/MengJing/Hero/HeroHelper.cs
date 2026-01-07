@@ -35,7 +35,7 @@ namespace ET.Server
             EventSystem.Instance.Publish(unit.Scene(), new UpdateTotalCombatPower() { Unit = unit });
         }
 
-        public static void AddHeroExp(Hero hero, int value)
+        public static void AddHeroExp(Unit unit, Hero hero, int value)
         {
             hero.Exp += value;
 
@@ -60,7 +60,7 @@ namespace ET.Server
             }
         }
 
-        public static void AddHeroHunShi(Hero hero, int value)
+        public static void AddHeroHunShi(Unit unit, Hero hero, int value)
         {
             hero.HunShi += value;
 
@@ -83,6 +83,8 @@ namespace ET.Server
                 hero.HunShi -= heroConfig.HeroUpStarNeed[hero.Star];
                 hero.Star += 1;
             }
+
+            EventSystem.Instance.Publish(unit.Scene(), new AddOrUpdateHero() { Unit = unit, Hero = hero });
         }
 
         public static void UpdateHeroSkill(Hero hero)

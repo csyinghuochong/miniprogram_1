@@ -87,7 +87,11 @@ namespace ET.Server
             }
 
             self.Heros.Add(hero);
-            HeroHelper.SyncHeroInfo(self.GetParent<Unit>(), hero, HeroOpType.Add);
+            
+            Unit unit = self.GetParent<Unit>();
+            EventSystem.Instance.Publish(self.Scene(), new AddOrUpdateHero() { Unit = unit, Hero = hero });
+            
+            HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Add);
         }
 
         // 直接消耗掉

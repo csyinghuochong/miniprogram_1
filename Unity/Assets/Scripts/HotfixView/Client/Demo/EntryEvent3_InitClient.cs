@@ -30,6 +30,7 @@ namespace ET.Client
             root.AddComponent<ChatComponentC>();
             root.AddComponent<FriendComponentC>();
             root.AddComponent<RankComponent>();
+            root.AddComponent<ArchiveComponentC>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

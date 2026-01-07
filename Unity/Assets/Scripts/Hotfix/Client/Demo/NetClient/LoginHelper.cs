@@ -110,6 +110,7 @@ namespace ET.Client
                     await ClientFriendHelper.GetAllFriend(root);
                     await ClientChatHelper.GetAllChatRoom(root);
                     await ClientRankHelper.GetAllRank(root);
+                    await ClientArchiveHelper.GetAllArchiveHero(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

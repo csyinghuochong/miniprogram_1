@@ -5779,9 +5779,6 @@ namespace ET
         public int HeroConfigId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int Lv { get; set; }
-
-        [MemoryPackOrder(2)]
         public int Star { get; set; }
 
         public override void Dispose()
@@ -5792,8 +5789,162 @@ namespace ET
             }
 
             this.HeroConfigId = default;
-            this.Lv = default;
             this.Star = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GetAllArchiveHero)]
+    [ResponseType(nameof(M2C_GetAllArchiveHero))]
+    public partial class C2M_GetAllArchiveHero : MessageObject, ILocationRequest
+    {
+        public static C2M_GetAllArchiveHero Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetAllArchiveHero), isFromPool) as C2M_GetAllArchiveHero;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetAllArchiveHero)]
+    public partial class M2C_GetAllArchiveHero : MessageObject, ILocationResponse
+    {
+        public static M2C_GetAllArchiveHero Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetAllArchiveHero), isFromPool) as M2C_GetAllArchiveHero;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<int> ReceivedArchiveRewardIds { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<ArchiveHeroInfo> ArchiveHeroInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.ReceivedArchiveRewardIds.Clear();
+            this.ArchiveHeroInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ArchiveHeroUpdate)]
+    public partial class M2C_ArchiveHeroUpdate : MessageObject, IMessage
+    {
+        public static M2C_ArchiveHeroUpdate Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ArchiveHeroUpdate), isFromPool) as M2C_ArchiveHeroUpdate;
+        }
+
+        [MemoryPackOrder(0)]
+        public ArchiveHeroInfo ArchiveHeroInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ArchiveHeroInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_ReceivedArchiveReward)]
+    [ResponseType(nameof(M2C_ReceivedArchiveReward))]
+    public partial class C2M_ReceivedArchiveReward : MessageObject, ILocationRequest
+    {
+        public static C2M_ReceivedArchiveReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_ReceivedArchiveReward), isFromPool) as C2M_ReceivedArchiveReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int RewardId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.RewardId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ReceivedArchiveReward)]
+    public partial class M2C_ReceivedArchiveReward : MessageObject, ILocationResponse
+    {
+        public static M2C_ReceivedArchiveReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ReceivedArchiveReward), isFromPool) as M2C_ReceivedArchiveReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -5963,5 +6114,10 @@ namespace ET
         public const ushort C2M_LotteryDrawRequest = 10161;
         public const ushort M2C_LotteryDrawRequest = 10162;
         public const ushort ArchiveHeroInfo = 10163;
+        public const ushort C2M_GetAllArchiveHero = 10164;
+        public const ushort M2C_GetAllArchiveHero = 10165;
+        public const ushort M2C_ArchiveHeroUpdate = 10166;
+        public const ushort C2M_ReceivedArchiveReward = 10167;
+        public const ushort M2C_ReceivedArchiveReward = 10168;
     }
 }

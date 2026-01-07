@@ -70,7 +70,7 @@ namespace ET.Server
                 for (int i = 0; i < request.Num; i++)
                 {
                     int expValue = RandomHelper.RandomNumber(itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);
-                    HeroHelper.AddHeroExp(hero, request.Num * expValue);
+                    HeroHelper.AddHeroExp(unit, hero, request.Num * expValue);
                 }
 
                 HeroHelper.UpdateHeroNumeric(unit, hero);
@@ -93,7 +93,7 @@ namespace ET.Server
                 for (int i = 0; i < request.Num; i++)
                 {
                     int hunShiValue = RandomHelper.RandomNumber(itemConfig.ItemUseParInt[0], itemConfig.ItemUseParInt[1]);
-                    HeroHelper.AddHeroHunShi(hero, request.Num * hunShiValue);
+                    HeroHelper.AddHeroHunShi(unit, hero, request.Num * hunShiValue);
                 }
 
                 HeroHelper.UpdateHeroNumeric(unit, hero);

@@ -1270,6 +1270,39 @@ message M2C_LotteryDrawRequest // ILocationResponse
 message ArchiveHeroInfo
 {
 	int32 HeroConfigId = 1;
-	int32 Lv = 2;
-	int32 Star = 3;
+	int32 Star = 2;
+}
+
+// ResponseType M2C_GetAllArchiveHero
+message C2M_GetAllArchiveHero // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetAllArchiveHero // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated int32 ReceivedArchiveRewardIds = 4;
+	repeated ArchiveHeroInfo ArchiveHeroInfoList = 5;
+}
+
+message M2C_ArchiveHeroUpdate // IMessage
+{
+	ArchiveHeroInfo ArchiveHeroInfo = 1;
+}
+
+// ResponseType M2C_ReceivedArchiveReward
+message C2M_ReceivedArchiveReward // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 RewardId = 2;
+}
+
+message M2C_ReceivedArchiveReward // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
 }

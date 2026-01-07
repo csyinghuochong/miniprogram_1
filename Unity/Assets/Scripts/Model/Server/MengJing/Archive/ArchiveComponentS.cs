@@ -7,7 +7,7 @@ namespace ET.Server
     public class ArchiveComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
         // 已领取的图鉴奖励ID列表
-        public List<long> ReceivedArchiveRewardIds = new();
+        public List<int> ReceivedArchiveRewardIds = new();
 
         [BsonIgnore]
         public List<EntityRef<ArchiveHero>> ArchiveHeroList = new();

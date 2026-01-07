@@ -143,6 +143,12 @@ namespace ET
 
         # region 图鉴奖励
 
+        // 一个英雄加多少积分
+        public const int ArchiveHeroAddScore = 10;
+
+        // 英雄的一个星级加多少积分
+        public const int ArchiveHeroStarAddScore = 1;
+
         [StaticField]
         public static Dictionary<int, RewardItem[]> ArchiveRewardDic = new()
         {
