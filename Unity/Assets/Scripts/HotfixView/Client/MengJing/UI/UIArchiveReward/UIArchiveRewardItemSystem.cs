@@ -22,6 +22,8 @@ namespace ET.Client
             self.Image_PointsProgress = rc.Get<GameObject>("Image_PointsProgress").GetComponent<Image>();
             self.Text_RewardPoints = rc.Get<GameObject>("Text_RewardPoints").GetComponent<TMP_Text>();
             self.Button_GetReward = rc.Get<GameObject>("Button_GetReward").GetComponent<Button>();
+
+            self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
         }
 
         public static async ETTask UpdateInfo(this UIArchiveRewardItem self, int rewardId)
@@ -53,7 +55,8 @@ namespace ET.Client
             }
             else
             {
-                self.Image_PointsProgress.fillAmount = Mathf.Clamp01((currentPoint - lastPoint) / (float)(archiveRewardConfig.RequiredPoints - lastPoint));
+                self.Image_PointsProgress.fillAmount =
+                        Mathf.Clamp01((currentPoint - lastPoint) / (float)(archiveRewardConfig.RequiredPoints - lastPoint));
             }
 
             bool received = archiveComponent.ReceivedArchiveRewardIds.Contains(self.RewardId);
@@ -84,6 +87,11 @@ namespace ET.Client
             }
 
             await ETTask.CompletedTask;
+        }
+
+        private static async ETTask OnButton_GetReward(this UIArchiveRewardItem self)
+        {
+            int error = await ClientArchiveHelper.ReceivedArchiveReward(self.Root(), self.RewardId);
         }
     }
 }
