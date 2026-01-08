@@ -91,6 +91,7 @@ namespace ET.Client
             int error = await ClientArchiveHelper.ReceivedArchiveReward(self.Root(), self.RewardId);
             if (error == ErrorCode.ERR_Success)
             {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取成功！");
                 self.UpdateInfo(self.RewardId);
             }
         }

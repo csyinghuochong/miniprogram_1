@@ -43,6 +43,8 @@
                 archiveComponent.ReceivedArchiveRewardIds.Add(rewardId);
             }
 
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+
             return response.Error;
         }
     }
