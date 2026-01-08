@@ -48,7 +48,7 @@ namespace ET.Client
 
             for (int i = 0; i < archiveRewardConfigs.Count; i++)
             {
-                self.UIArchiveRewardItemList[i].UpdateInfo(archiveRewardConfigs[i].Id).Coroutine();
+                self.UIArchiveRewardItemList[i].UpdateInfo(archiveRewardConfigs[i].Id);
                 self.UIArchiveRewardItemList[i].GameObject.SetActive(true);
             }
 
