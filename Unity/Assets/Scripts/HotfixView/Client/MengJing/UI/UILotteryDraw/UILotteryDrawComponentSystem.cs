@@ -28,11 +28,17 @@ namespace ET.Client
             self.Button_DrawTen = rc.Get<GameObject>("Button_DrawTen").GetComponent<Button>();
             self.Text_FreeTime = rc.Get<GameObject>("Text_FreeTime").GetComponent<TMP_Text>();
             self.Toggle_SkipAnimation = rc.Get<GameObject>("Toggle_SkipAnimation").GetComponent<Toggle>();
-            self.GameObject_RewardPreview = rc.Get<GameObject>("GameObject_RewardPreview");
-            self.GameObject_Probability = rc.Get<GameObject>("GameObject_Probability");
-            self.GameObject_Wish = rc.Get<GameObject>("GameObject_Wish");
+            self.UILotteryDrawRewardPreviewComponent = self.AddComponent<UILotteryDrawRewardPreviewComponent, GameObject>(rc.Get<GameObject>("GameObject_RewardPreview"));
+            self.UILotteryDrawProbabilityComponent = self.AddComponent<UILotteryDrawProbabilityComponent, GameObject>(rc.Get<GameObject>("GameObject_Probability"));
+            self.UILotteryDrawWishComponent = self.AddComponent<UILotteryDrawWishComponent, GameObject>(rc.Get<GameObject>("GameObject_Wish"));
+            self.UILotteryDrawRewardPreviewComponent.GameObject.SetActive(false);
+            self.UILotteryDrawProbabilityComponent.GameObject.SetActive(false);
+            self.UILotteryDrawWishComponent.GameObject.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UILotteryDraw); });
+            self.Button_RewardPreview.AddListener(() => { self.UILotteryDrawRewardPreviewComponent.GameObject.SetActive(true); });
+            self.Button_Probability.AddListener(() => { self.UILotteryDrawProbabilityComponent.GameObject.SetActive(true); });
+            self.Button_Wish.AddListener(() => { self.UILotteryDrawWishComponent.GameObject.SetActive(true); });
             self.Button_DrawOne.AddListener(() => { self.OnButton_Draw(0).Coroutine(); });
             self.Button_DrawTen.AddListener(() => { self.OnButton_Draw(1).Coroutine(); });
 
@@ -77,7 +83,7 @@ namespace ET.Client
 
         private static async ETTask OnButton_Draw(this UILotteryDrawComponent self, int opeType)
         {
-            M2C_LotteryDrawRequest response = await ClientLotteryDrawHelper.LotteryDrawRequest(self.Root(), opeType, self.LookingForwardItemId);
+            M2C_LotteryDrawRequest response = await ClientLotteryDrawHelper.LotteryDrawRequest(self.Root(), opeType, self.WishItemId);
 
             if (response.Error != ErrorCode.ERR_Success)
             {

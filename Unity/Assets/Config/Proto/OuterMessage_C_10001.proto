@@ -1266,7 +1266,7 @@ message C2M_LotteryDrawRequest // ILocationRequest
 {
 	int32 RpcId = 1;
 	int32 OpType = 2; //0单抽 1十连抽
-	int32 LookingForwardItemId = 3;
+	int32 WishItemId = 3;
 }
 
 message M2C_LotteryDrawRequest // ILocationResponse

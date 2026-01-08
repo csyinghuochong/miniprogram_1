@@ -7,8 +7,11 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UILotteryDrawComponent : Entity, IAwake
     {
-        public int LookingForwardItemId;
-        
+        public int WishItemId;
+        public UILotteryDrawRewardPreviewComponent UILotteryDrawRewardPreviewComponent { get; set; }
+        public UILotteryDrawProbabilityComponent UILotteryDrawProbabilityComponent { get; set; }
+        public UILotteryDrawWishComponent UILotteryDrawWishComponent { get; set; }
+
         public Button Button_Close;
         public TMP_Text Text_Type_LotteryTicket;
         public TMP_Text Text_Type_Diamond;
@@ -21,8 +24,5 @@ namespace ET.Client
         public Button Button_DrawTen;
         public TMP_Text Text_FreeTime;
         public Toggle Toggle_SkipAnimation;
-        public GameObject GameObject_RewardPreview;
-        public GameObject GameObject_Probability;
-        public GameObject GameObject_Wish;
     }
 }

@@ -2,11 +2,11 @@
 {
     public static class ClientLotteryDrawHelper
     {
-        public static async ETTask<M2C_LotteryDrawRequest> LotteryDrawRequest(Scene root, int opType, int lookingForwardItemId)
+        public static async ETTask<M2C_LotteryDrawRequest> LotteryDrawRequest(Scene root, int opType, int wishItemId)
         {
             C2M_LotteryDrawRequest request = C2M_LotteryDrawRequest.Create();
             request.OpType = opType;
-            request.LookingForwardItemId = lookingForwardItemId;
+            request.WishItemId = wishItemId;
 
             M2C_LotteryDrawRequest response = (M2C_LotteryDrawRequest)await root.GetComponent<ClientSenderComponent>().Call(request);
 
