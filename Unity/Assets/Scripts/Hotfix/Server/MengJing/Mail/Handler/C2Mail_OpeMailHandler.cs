@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    [FriendOf(typeof(MailComponentS))]
+    [FriendOf(typeof(MailComponent))]
     [FriendOf(typeof(Mail))]
     [FriendOf(typeof(MailRewardComponent))]
     [MessageHandler(SceneType.Mail)]
@@ -10,7 +10,7 @@
         {
             using (await mailUnit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.OpeMail, mailUnit.Id))
             {
-                MailComponentS mailComponent = mailUnit.GetComponent<MailComponentS>();
+                MailComponent mailComponent = mailUnit.GetComponent<MailComponent>();
                 foreach (long mailId in request.MailId)
                 {
                     mailComponent.Children.TryGetValue(mailId, out Entity mailEntity);

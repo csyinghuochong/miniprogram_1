@@ -46,7 +46,7 @@ namespace ET.Server
                         continue;
                     }
 
-                    NumericComponentS numericComponent = defendUnit.GetComponent<NumericComponentS>();
+                    NumericComponent numericComponent = defendUnit.GetComponent<NumericComponent>();
                     long value = (long)(skill.SkillConfig.GameObjectParameter[0] * numericComponent.GetAsLong(NumericType.Now_MaxHp));
                     numericComponent.ApplyChange(NumericType.Now_Hp, value, true, true, skill.TheUnitFrom.Id, skill.SkillConfig.Id, DamageType.Recover);
                 }

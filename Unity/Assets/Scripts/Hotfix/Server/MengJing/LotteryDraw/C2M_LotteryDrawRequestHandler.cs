@@ -7,8 +7,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_LotteryDrawRequest request, M2C_LotteryDrawRequest response)
         {
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
 
             if (request.LookingForwardHeroId != 0 && !ConfigData.LotteryDrawLookingForwardHeroIdList.Contains(request.LookingForwardHeroId))
             {

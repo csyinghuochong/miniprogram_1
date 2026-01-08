@@ -18,7 +18,7 @@
 
                 if (targetChatUnit != null)
                 {
-                    ChatComponentS targetChatComponent = targetChatUnit.GetComponent<ChatComponentS>();
+                    ChatComponent targetChatComponent = targetChatUnit.GetComponent<ChatComponent>();
                     if (!targetChatComponent.ReportList.Contains(myUnitId))
                     {
                         targetChatComponent.ReportList.Add(myUnitId);
@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                    ChatComponentS targetChatComponent = await UnitCacheHelper.GetComponent<ChatComponentS>(root, targetUnitId);
+                    ChatComponent targetChatComponent = await UnitCacheHelper.GetComponent<ChatComponent>(root, targetUnitId);
                     if (!targetChatComponent.ReportList.Contains(myUnitId))
                     {
                         targetChatComponent.ReportList.Add(myUnitId);

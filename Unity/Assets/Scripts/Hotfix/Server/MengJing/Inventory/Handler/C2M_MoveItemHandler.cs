@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_MoveItem request, M2C_MoveItem response)
         {
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
 
             InventoryContainerType targetContainerType = (InventoryContainerType)request.ContainerType;
             if (targetContainerType != InventoryContainerType.Bag && targetContainerType != InventoryContainerType.Warehouse)

@@ -137,11 +137,11 @@ namespace ET.Server
                         # region 玩家组件设置
 
                         unit.GetComponent<DBSaveComponent>().OnLogin();
-                        unit.GetComponent<HeroComponentS>().OnLogin();
-                        unit.GetComponent<TaskComponentS>().OnLogin();
-                        HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
-                        NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-                        ArchiveComponentS archiveComponent = unit.GetComponent<ArchiveComponentS>();
+                        unit.GetComponent<HeroComponent>().OnLogin();
+                        unit.GetComponent<TaskComponent>().OnLogin();
+                        HeroComponent heroComponent = unit.GetComponent<HeroComponent>();
+                        NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+                        ArchiveComponent archiveComponent = unit.GetComponent<ArchiveComponent>();
 
                         if (heroComponent.GetFirstHero() != null)
                         {
@@ -183,7 +183,7 @@ namespace ET.Server
         {
             G2Chat_LoginChatServer request = G2Chat_LoginChatServer.Create();
             request.UnitId = unit.Id;
-            request.Name = unit.GetComponent<UserInfoComponentS>().GetPlayerName();
+            request.Name = unit.GetComponent<UserInfoComponent>().GetPlayerName();
 
             await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetChatServerId(unit.Zone()), request);
         }
@@ -200,8 +200,8 @@ namespace ET.Server
         {
             G2Rank_LoginRankServer request = G2Rank_LoginRankServer.Create();
             request.UnitId = unit.Id;
-            request.PlayerName = unit.GetComponent<UserInfoComponentS>().GetPlayerName();
-            request.CombatPower = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.CombatPower);
+            request.PlayerName = unit.GetComponent<UserInfoComponent>().GetPlayerName();
+            request.CombatPower = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.CombatPower);
 
             await unit.Root().GetComponent<MessageSender>().Call(UnitCacheHelper.GetRankServerId(unit.Zone()), request);
         }

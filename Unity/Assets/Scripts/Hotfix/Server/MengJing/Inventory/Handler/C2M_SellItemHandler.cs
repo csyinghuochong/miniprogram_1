@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SellItem request, M2C_SellItem response)
         {
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
 
             Item item = inventoryComponent.GetItem(request.ItemId);
 

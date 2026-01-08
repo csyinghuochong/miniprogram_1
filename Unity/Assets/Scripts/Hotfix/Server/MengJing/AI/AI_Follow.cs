@@ -8,7 +8,7 @@ namespace ET.Server
         {
             Unit unit = aiComponent.GetParent<Unit>();
             UnitComponent unitComponent = unit.GetParent<UnitComponent>();
-            long masterId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+            long masterId = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.MasterId);
             Unit master = unitComponent.Get(masterId);
             if (master == null)
             {
@@ -36,7 +36,7 @@ namespace ET.Server
 
         private static float3 GetFollowPosition(Unit unit, Unit master)
         {
-            HeroComponentS heroComponent = master.GetComponent<HeroComponentS>();
+            HeroComponent heroComponent = master.GetComponent<HeroComponent>();
             float3 position = heroComponent.GetHeroPosition(unit.Id);
 
             return master.Position + position;
@@ -45,13 +45,13 @@ namespace ET.Server
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             Unit unit = aiComponent.GetParent<Unit>();
-            NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
-            long masterid = numericComponentS.GetAsLong(NumericType.MasterId);
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            long masterid = numericComponent.GetAsLong(NumericType.MasterId);
             Unit master = unit.GetParent<UnitComponent>().Get(masterid);
 
-            long oldSpeed = numericComponentS.GetAsLong(NumericType.Base_Speed_Base);
-            long masterSpeed = master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MoveSpeed);
-            numericComponentS.ApplyValue(NumericType.Base_Speed_Base, masterSpeed);
+            long oldSpeed = numericComponent.GetAsLong(NumericType.Base_Speed_Base);
+            long masterSpeed = master.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_MoveSpeed);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, masterSpeed);
 
             for (int i = 0; i < 10000; i++)
             {
@@ -83,7 +83,7 @@ namespace ET.Server
 
             if (!unit.IsDisposed)
             {
-                unit.GetComponent<NumericComponentS>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
+                unit.GetComponent<NumericComponent>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
             }
         }
     }

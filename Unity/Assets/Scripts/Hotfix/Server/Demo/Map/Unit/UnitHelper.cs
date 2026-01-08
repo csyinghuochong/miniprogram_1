@@ -7,7 +7,7 @@ namespace ET.Server
 {
     [FriendOf(typeof(BuffManagerComponentS))]
     [FriendOf(typeof(MoveComponent))]
-    [FriendOf(typeof(NumericComponentS))]
+    [FriendOf(typeof(NumericComponent))]
     public static partial class UnitHelper
     {
         // 获取看见unit的玩家，主要用于广播
@@ -86,12 +86,12 @@ namespace ET.Server
 
         public static bool IsRobot(this Unit self)
         {
-            return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().RobotId > 0;
+            return self.Type == UnitType.Player && self.GetComponent<UserInfoComponent>().RobotId > 0;
         }
 
         public static int GetBattleCamp(this Unit self)
         {
-            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.GetComponent<NumericComponent>();
             return numericComponent.GetAsInt(NumericType.BattleCamp);
         }
 
@@ -157,7 +157,7 @@ namespace ET.Server
         {
             if (checkDead)
             {
-                NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+                NumericComponent numericComponent = self.GetComponent<NumericComponent>();
                 if (numericComponent.GetAsLong(NumericType.Now_Hp) <= 0 || numericComponent.GetAsLong(NumericType.Now_Dead) == 1)
                 {
                     return false;
@@ -186,7 +186,7 @@ namespace ET.Server
 
         public static void SaveUnitMainCityPos(Unit unit)
         {
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
 
             numericComponent.ApplyValue(NumericType.MainCity_X, unit.Position.x, false);
             numericComponent.ApplyValue(NumericType.MainCity_Y, unit.Position.y, false);

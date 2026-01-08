@@ -127,10 +127,10 @@ namespace ET.Server
             if (targetMailUnit != null)
             {
                 // 在线，直接领取邮件
-                MailComponentS mailComponentS = targetMailUnit.GetComponent<MailComponentS>();
-                if (mailComponentS != null)
+                MailComponent mailComponent = targetMailUnit.GetComponent<MailComponent>();
+                if (mailComponent != null)
                 {
-                    mailComponentS.AddMail(mailInfo);
+                    mailComponent.AddMail(mailInfo);
                     Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
                     message.MailInfo = mailInfo;
                     MapMessageHelper.SendToClient(scene, targetMailUnit.Id, message);
@@ -159,7 +159,7 @@ namespace ET.Server
                     continue;
                 }
 
-                mailUnit.GetComponent<MailComponentS>().AddMail(mailInfo);
+                mailUnit.GetComponent<MailComponent>().AddMail(mailInfo);
                 serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
 
                 Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();
@@ -189,13 +189,13 @@ namespace ET.Server
                     continue;
                 }
 
-                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
+                UserInfoComponent userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponent>(scene, mailUnit.Id);
                 if (userInfoComponent.GetLv() >= targetLevel)
                 {
                     continue;
                 }
 
-                mailUnit.GetComponent<MailComponentS>().AddMail(mailInfo);
+                mailUnit.GetComponent<MailComponent>().AddMail(mailInfo);
                 serverMail.ReceivedPlayerIds.Add(mailUnit.Id);
 
                 Mail2C_ReceiveMail message = Mail2C_ReceiveMail.Create();

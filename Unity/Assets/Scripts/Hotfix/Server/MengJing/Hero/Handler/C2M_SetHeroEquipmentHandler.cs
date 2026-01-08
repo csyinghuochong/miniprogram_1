@@ -7,8 +7,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SetHeroEquipment request, M2C_SetHeroEquipment response)
         {
-            HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            HeroComponent heroComponent = unit.GetComponent<HeroComponent>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
 
             Hero hero = heroComponent.GetHero(request.HeroId);
             if (hero == null)

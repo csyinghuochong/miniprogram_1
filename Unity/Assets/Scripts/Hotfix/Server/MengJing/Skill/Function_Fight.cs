@@ -14,7 +14,7 @@ namespace ET.Server
             FightInternal(attackUnit, defendUnit, skill.SkillConfig.DamageType, skill.SkillConfig.DamgeValue, skill.SkillConfig.SkillActType, customActDamage, skill.SkillConfig.Id);
             
             // 增加怒气
-            attackUnit.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_AngerValue, skill.SkillConfig.SkillAddAnger);
+            attackUnit.GetComponent<NumericComponent>().ApplyChange(NumericType.Now_AngerValue, skill.SkillConfig.SkillAddAnger);
         }
 
         public static void Fight(Unit attackUnit, Unit defendUnit, BuffS buff)
@@ -40,7 +40,7 @@ namespace ET.Server
             }
 
             //获取攻击方属性
-            NumericComponentS numericComponentAttack = attackUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponentAttack = attackUnit.GetComponent<NumericComponent>();
             long attack_Hp = numericComponentAttack.GetAsLong(NumericType.Now_Hp);
             long attack_MaxHp = numericComponentAttack.GetAsLong(NumericType.Now_MaxHp);
             long attack_MinAct = numericComponentAttack.GetAsLong(NumericType.Now_MinAct);
@@ -57,7 +57,7 @@ namespace ET.Server
             // ......
 
             //获取受击方属性
-            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponentDefend = defendUnit.GetComponent<NumericComponent>();
             long defend_Hp = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
             long defend_MaxHp = numericComponentDefend.GetAsLong(NumericType.Now_MaxHp);
             long defend_MinAct = numericComponentDefend.GetAsLong(NumericType.Now_MinAct);
@@ -153,7 +153,7 @@ namespace ET.Server
                             continue;
                         }
 
-                        u.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, (long)(-damage * buff.BuffConfig.BuffParameterValue / 10000f), true, false, attackUnit.Id, skillConfigId, damageType);
+                        u.GetComponent<NumericComponent>().ApplyChange(NumericType.Now_Hp, (long)(-damage * buff.BuffConfig.BuffParameterValue / 10000f), true, false, attackUnit.Id, skillConfigId, damageType);
                     }
                 }
 

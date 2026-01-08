@@ -6,7 +6,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(HeroComponentS))]
+    [FriendOf(typeof(HeroComponent))]
     public class M2M_UnitTransferRequestHandler : MessageHandler<Scene, M2M_UnitTransferRequest, M2M_UnitTransferResponse>
     {
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
@@ -32,7 +32,7 @@ namespace ET.Server
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
 
             M2C_StartSceneChange m2CStartSceneChange = new()
             {

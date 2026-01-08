@@ -9,7 +9,7 @@
             using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
             {
                 FriendUnitComponent friendUnitComponent = root.GetComponent<FriendUnitComponent>();
-                FriendComponentS myFriendComponent = friendUnit.GetComponent<FriendComponentS>();
+                FriendComponent myFriendComponent = friendUnit.GetComponent<FriendComponent>();
 
                 long myUnitId = friendUnit.Id;
                 long targetFrientUnitId = request.UnitId;
@@ -41,7 +41,7 @@
                     if (targetFriendUnit != null)
                     {
                         // 在线
-                        FriendComponentS targetFriendComponent = targetFriendUnit.GetComponent<FriendComponentS>();
+                        FriendComponent targetFriendComponent = targetFriendUnit.GetComponent<FriendComponent>();
 
                         targetFriendComponent.FriendList.Add(myUnitId);
                         if (targetFriendComponent.RequestList.Contains(myUnitId))
@@ -59,7 +59,7 @@
                     else
                     {
                         // 离线
-                        FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(root, request.UnitId);
+                        FriendComponent targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponent>(root, request.UnitId);
 
                         if (targetFriendComponent == null)
                         {

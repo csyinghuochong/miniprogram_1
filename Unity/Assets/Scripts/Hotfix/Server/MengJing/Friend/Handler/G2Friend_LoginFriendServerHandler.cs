@@ -18,10 +18,10 @@
             friendUnit = friendUnitComponent.AddChildWithId<FriendUnit>(request.UnitId);
             friendUnit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
 
-            FriendComponentS friendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(scene, request.UnitId);
+            FriendComponent friendComponent = await UnitCacheHelper.GetComponent<FriendComponent>(scene, request.UnitId);
             if (friendComponent == null)
             {
-                friendComponent = friendUnit.AddComponent<FriendComponentS>();
+                friendComponent = friendUnit.AddComponent<FriendComponent>();
             }
             else
             {

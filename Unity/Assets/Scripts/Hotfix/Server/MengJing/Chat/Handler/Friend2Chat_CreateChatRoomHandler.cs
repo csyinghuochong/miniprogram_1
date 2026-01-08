@@ -29,7 +29,7 @@
 
                     if (chatUnit != null)
                     {
-                        ChatComponentS chatComponent = chatUnit.GetComponent<ChatComponentS>();
+                        ChatComponent chatComponent = chatUnit.GetComponent<ChatComponent>();
                         if (!chatComponent.ChatRoomKeyList.Contains(chatRoomKey))
                         {
                             chatComponent.ChatRoomKeyList.Add(chatRoomKey);
@@ -43,7 +43,7 @@
                     }
                     else
                     {
-                        ChatComponentS chatComponent = await UnitCacheHelper.GetComponent<ChatComponentS>(scene, unitId);
+                        ChatComponent chatComponent = await UnitCacheHelper.GetComponent<ChatComponent>(scene, unitId);
                         if (!chatComponent.ChatRoomKeyList.Contains(chatRoomKey))
                         {
                             chatComponent.ChatRoomKeyList.Add(chatRoomKey);

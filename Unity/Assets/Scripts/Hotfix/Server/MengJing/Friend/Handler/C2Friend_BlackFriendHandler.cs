@@ -8,7 +8,7 @@
             Scene root = friendUnit.Root();
             using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Friend, friendUnit.Id))
             {
-                FriendComponentS myFriendComponent = friendUnit.GetComponent<FriendComponentS>();
+                FriendComponent myFriendComponent = friendUnit.GetComponent<FriendComponent>();
 
                 long myUnitId = friendUnit.Id;
                 long targetUnitId = request.UnitId;
@@ -19,7 +19,7 @@
                     return;
                 }
 
-                FriendComponentS targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponentS>(root, targetUnitId);
+                FriendComponent targetFriendComponent = await UnitCacheHelper.GetComponent<FriendComponent>(root, targetUnitId);
                 if (targetFriendComponent == null)
                 {
                     response.Error = ErrorCode.ERR_TargetUnitIsNull;

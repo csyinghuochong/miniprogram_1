@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_UseItem request, M2C_UseItem response)
         {
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
 
             Item item = inventoryComponent.GetItem(request.ItemId);
 
@@ -57,7 +57,7 @@ namespace ET.Server
             // 英雄经验
             if (itemConfig.ItemSubType == ItemSubType.HeroExp)
             {
-                Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
+                Hero hero = unit.GetComponent<HeroComponent>().GetHero(request.HeroId);
 
                 if (hero == null)
                 {
@@ -80,7 +80,7 @@ namespace ET.Server
             // 英雄星级
             if (itemConfig.ItemSubType == ItemSubType.HeroHunshi)
             {
-                Hero hero = unit.GetComponent<HeroComponentS>().GetHero(request.HeroId);
+                Hero hero = unit.GetComponent<HeroComponent>().GetHero(request.HeroId);
 
                 if (hero == null)
                 {
@@ -117,7 +117,7 @@ namespace ET.Server
                     return;
                 }
 
-                unit.GetComponent<HeroComponentS>().AddHeroByConfigId(heroConfigId);
+                unit.GetComponent<HeroComponent>().AddHeroByConfigId(heroConfigId);
             }
 
             await ETTask.CompletedTask;

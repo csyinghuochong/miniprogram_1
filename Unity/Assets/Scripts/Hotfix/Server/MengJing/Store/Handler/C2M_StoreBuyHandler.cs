@@ -3,14 +3,14 @@
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(StoreComponentS))]
+    [FriendOf(typeof(StoreComponent))]
     public class C2M_StoreBuyHandler : MessageLocationHandler<Unit, C2M_StoreBuy, M2C_StoreBuy>
     {
         protected override async ETTask Run(Unit unit, C2M_StoreBuy request, M2C_StoreBuy response)
         {
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Store, unit.Id))
             {
-                StoreComponentS storeComponent = unit.GetComponent<StoreComponentS>();
+                StoreComponent storeComponent = unit.GetComponent<StoreComponent>();
                 if (!storeComponent.StoreItemList.ContainsKey(request.StoreItemId))
                 {
                     response.Error = ErrorCode.ERR_StoreItemNotExist;
@@ -25,7 +25,7 @@ namespace ET.Server
 
                 StoreItemConfig storeItemConfig = StoreItemConfigCategory.Instance.Get(request.StoreItemId);
 
-                InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+                InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
                 List<RewardItem> cost = new List<RewardItem>() { new() { ItemId = storeItemConfig.SellType, ItemNum = storeItemConfig.SellValue } };
                 if (!inventoryComponent.HaveItemData(cost))
                 {

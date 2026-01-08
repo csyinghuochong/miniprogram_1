@@ -16,7 +16,7 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponent>();
             if (numericComponent == null)
             {
                 buff.BuffState = BuffState.Finished;
@@ -50,7 +50,7 @@ namespace ET.Server
             }
         }
 
-        private void TriggerBuffEffect(BuffS buff, NumericComponentS numericComponent)
+        private void TriggerBuffEffect(BuffS buff, NumericComponent numericComponent)
         {
             switch (buff.BuffConfig.BuffType)
             {
@@ -111,7 +111,7 @@ namespace ET.Server
                 // 移除属性
                 case 1:
                 {
-                    NumericComponentS numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponentS>();
+                    NumericComponent numericComponent = buff.TheUnitBelongTo.GetComponent<NumericComponent>();
 
                     int type = buff.BuffConfig.BuffParameterType;
                     long value = buff.BuffConfig.BuffParameterValue;

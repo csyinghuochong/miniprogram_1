@@ -5,7 +5,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [FriendOf(typeof(UserInfoComponentS))]
+    [FriendOf(typeof(UserInfoComponent))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_GMCommandHandler : MessageLocationHandler<Unit, C2M_GMCommand>
     {
@@ -31,7 +31,7 @@ namespace ET.Server
                             continue;
                         }
 
-                        u.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, -1000000000, attackid: unit.Id);
+                        u.GetComponent<NumericComponent>().ApplyChange(NumericType.Now_Hp, -1000000000, attackid: unit.Id);
                     }
 
                     return;
@@ -63,14 +63,14 @@ namespace ET.Server
 
                         List<RewardItem> rewardItems = new List<RewardItem>();
                         rewardItems.Add(new RewardItem() { ItemId = itemId, ItemNum = itemNum });
-                        unit.GetComponent<InventoryComponentS>().AddItemData(rewardItems, InventoryContainerType.Bag);
+                        unit.GetComponent<InventoryComponent>().AddItemData(rewardItems, InventoryContainerType.Bag);
                         break;
                     }
                     case 2: //新增英雄
                     {
                         int heroId = int.Parse(commands[1]);
 
-                        unit.GetComponent<HeroComponentS>().AddHeroByConfigId(heroId);
+                        unit.GetComponent<HeroComponent>().AddHeroByConfigId(heroId);
                         break;
                     }
                     case 3: //创建怪物
@@ -97,7 +97,7 @@ namespace ET.Server
                     case 6:
                     {
                         int lv = int.Parse(commands[1]);
-                        UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                        UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
 
                         if (lv < userInfoComponent.GetLv())
                         {

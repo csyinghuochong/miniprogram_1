@@ -23,7 +23,7 @@ namespace ET.Server
                                 continue;
                             }
 
-                            await UnitCacheHelper.SaveComponent(scene, mailUnit.GetComponent<MailComponentS>());
+                            await UnitCacheHelper.SaveComponent(scene, mailUnit.GetComponent<MailComponent>());
                         }
 
                         Log.Info($"数据落地:  Mail: {scene.Zone()}");
@@ -41,7 +41,7 @@ namespace ET.Server
                                 continue;
                             }
 
-                            await UnitCacheHelper.SaveComponent(scene, friendUnit.GetComponent<FriendComponentS>());
+                            await UnitCacheHelper.SaveComponent(scene, friendUnit.GetComponent<FriendComponent>());
                         }
 
                         Log.Info($"数据落地:  Friend: {scene.Zone()}");
@@ -60,7 +60,7 @@ namespace ET.Server
                                 continue;
                             }
 
-                            await UnitCacheHelper.SaveComponent(scene, chatUnit.GetComponent<ChatComponentS>());
+                            await UnitCacheHelper.SaveComponent(scene, chatUnit.GetComponent<ChatComponent>());
                         }
 
                         Log.Info($"数据落地:  Chat: {scene.Zone()}");

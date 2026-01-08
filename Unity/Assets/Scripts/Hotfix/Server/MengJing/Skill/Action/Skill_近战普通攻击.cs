@@ -7,7 +7,7 @@
     {
         public override void OnInit(SkillS skill)
         {
-            NumericComponentS numericComponent = skill.TheUnitFrom.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = skill.TheUnitFrom.GetComponent<NumericComponent>();
             skill.TriggerTime = 1 / numericComponent.GetAsFloat(NumericType.Now_AtkSpeed) * 0.8f;
         }
 

@@ -17,7 +17,7 @@ namespace ET.Server
             hero.NumericDic.Clear();
 
             List<Item> equipments = new List<Item>();
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
             foreach (KeyValuePair<int, long> heroEquipment in hero.Equipments)
             {
                 if (heroEquipment.Value != 0)

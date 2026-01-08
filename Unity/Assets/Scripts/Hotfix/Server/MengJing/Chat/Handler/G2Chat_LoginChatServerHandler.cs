@@ -19,10 +19,10 @@
             chatUnit = chatUnitComponent.AddChildWithId<ChatUnit>(request.UnitId);
             chatUnit.Name = request.Name;
 
-            ChatComponentS chatComponent = await UnitCacheHelper.GetComponent<ChatComponentS>(scene, request.UnitId);
+            ChatComponent chatComponent = await UnitCacheHelper.GetComponent<ChatComponent>(scene, request.UnitId);
             if (chatComponent == null)
             {
-                chatComponent = chatUnit.AddComponent<ChatComponentS>();
+                chatComponent = chatUnit.AddComponent<ChatComponent>();
             }
             else
             {

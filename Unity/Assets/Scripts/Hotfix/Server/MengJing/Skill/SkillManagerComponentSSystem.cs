@@ -261,7 +261,7 @@ namespace ET.Server
             if (skillConfig.SkillActType == (int)SkillActType.Normal)
             {
                 // 普通攻击
-                skillCDItem.CD = 1 / self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_AtkSpeed);
+                skillCDItem.CD = 1 / self.GetParent<Unit>().GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_AtkSpeed);
                 self.PublicCD = 0f;
             }
             else

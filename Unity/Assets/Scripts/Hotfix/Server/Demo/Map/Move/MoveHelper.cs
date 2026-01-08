@@ -49,7 +49,7 @@ namespace ET.Server
                 return;
             }
 
-            float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
+            float speed = unit.GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_MoveSpeed);
             // unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
             // unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
             crowdComponent.SetMoveTarget(unit.DtCrowdAgentId, target, speed);
@@ -63,7 +63,7 @@ namespace ET.Server
 
         public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent, float speedRate)
         {
-            float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
+            float speed = unit.GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_MoveSpeed);
             speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(positonsss, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
@@ -77,7 +77,7 @@ namespace ET.Server
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask BulletMoveToAsync(this Unit unit, float3 target)
         {
-            float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_MoveSpeed);
+            float speed = unit.GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_MoveSpeed);
             if (speed < 0.01)
             {
                 Log.Error("Bullet move speed is less than 0.1");

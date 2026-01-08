@@ -7,7 +7,7 @@ namespace ET.Server
 {
     [EntitySystemOf(typeof(LocalLevelComponent))]
     [FriendOf(typeof(LocalLevelComponent))]
-    [FriendOf(typeof(HeroComponentS))]
+    [FriendOf(typeof(HeroComponent))]
     public static partial class LocalLevelComponentSystem
     {
         [Invoke(TimerInvokeType.LocalLevelTimer)]
@@ -49,7 +49,7 @@ namespace ET.Server
                 return;
             }
 
-            if (self.MainUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleMode) == 1)
+            if (self.MainUnit.GetComponent<NumericComponent>().GetAsInt(NumericType.BattleMode) == 1)
             {
                 // 玩家同步到坐标Y值最大的英雄上
                 float3 maxPos = float3.zero;
@@ -97,7 +97,7 @@ namespace ET.Server
 
         private static void UpdateFighting(this LocalLevelComponent self, float deltaTime)
         {
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             int currentWaveIndex = numericComponent.GetAsInt(NumericType.CurrentWaveIndex);
 
@@ -144,7 +144,7 @@ namespace ET.Server
 
             self.HeroUnitIds.Clear();
             
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             WaveConfig firstWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[0]);
 
@@ -153,7 +153,7 @@ namespace ET.Server
             self.MainUnit.Stop();
 
             // 创建英雄队列
-            HeroComponentS heroComponent = self.MainUnit.GetComponent<HeroComponentS>();
+            HeroComponent heroComponent = self.MainUnit.GetComponent<HeroComponent>();
             for (int i = 0; i < heroComponent.Formation.Count; i++)
             {
                 Hero hero = heroComponent.GetHero(heroComponent.Formation[i]);
@@ -190,7 +190,7 @@ namespace ET.Server
             foreach (long heroUnitId in self.HeroUnitIds)
             {
                 Unit heroUnit = unitComponent.Get(heroUnitId);
-                if (heroUnit != null && heroUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 0)
+                if (heroUnit != null && heroUnit.GetComponent<NumericComponent>().GetAsInt(NumericType.Now_Dead) == 0)
                 {
                     aliveCount++;
                 }
@@ -220,7 +220,7 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
 
             // 增加击杀计数
             numericComponent.ApplyChange(NumericType.CurrentWaveKillMonsterNum, 1);
@@ -293,7 +293,7 @@ namespace ET.Server
 
             self.HeroUnitIds.Clear();
 
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
 
             // 重置波次数据
             numericComponent.ApplyValue(NumericType.CurrentWaveIndex, 1);
@@ -308,7 +308,7 @@ namespace ET.Server
 
         private static void StartNextWave(this LocalLevelComponent self)
         {
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
 
             numericComponent.ApplyChange(NumericType.CurrentWaveIndex, 1);
             numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
@@ -333,7 +333,7 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
             int currentWaveIndex = numericComponent.GetAsInt(NumericType.CurrentWaveIndex);
 
@@ -365,7 +365,7 @@ namespace ET.Server
                 Unit heroUnit = unitComponent.Get(heroUnitId);
                 if (heroUnit != null && heroUnit.Type == UnitType.Hero)
                 {
-                    float3 offset = self.MainUnit.GetComponent<HeroComponentS>().GetHeroPosition(heroUnitId);
+                    float3 offset = self.MainUnit.GetComponent<HeroComponent>().GetHeroPosition(heroUnitId);
                     float3 spawnPos = new float3(nextWaveConfig.PlayerSpawnPosition.X, nextWaveConfig.PlayerSpawnPosition.Y, 0);
                     float3 newPosition = spawnPos + offset;
                     self.Scene().GetComponent<CrowdComponent>().ChangePosition(heroUnit.DtCrowdAgentId, new float3(newPosition.x, newPosition.y, 0));
@@ -406,7 +406,7 @@ namespace ET.Server
                 Unit heroUnit = unitComponent.Get(heroUnitId);
                 if (heroUnit != null && heroUnit.Type == UnitType.Hero)
                 {
-                    float3 offset = self.MainUnit.GetComponent<HeroComponentS>().GetHeroPosition(heroUnitId);
+                    float3 offset = self.MainUnit.GetComponent<HeroComponent>().GetHeroPosition(heroUnitId);
                     float3 newPosition = levelPos + offset;
                     self.Scene().GetComponent<CrowdComponent>().ChangePosition(heroUnit.DtCrowdAgentId, new float3(newPosition.x, newPosition.y, 0));
                     heroUnit.Stop();
@@ -421,7 +421,7 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
             int currentLevelId = numericComponent.GetAsInt(NumericType.CurrentLevelId);
 
             Log.Info($"完成关卡 {currentLevelId}");
@@ -489,7 +489,7 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS numericComponent = self.MainUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
 
             // 防止配置表改动导致的数据异常
             if (!LevelConfigCategory.Instance.DataMap.ContainsKey(numericComponent.GetAsInt(NumericType.PassedLevelId)))

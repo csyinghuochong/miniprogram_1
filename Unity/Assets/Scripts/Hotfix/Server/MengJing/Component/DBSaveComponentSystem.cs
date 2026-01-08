@@ -35,13 +35,13 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
-                    $"unit.id: {unit.GetComponent<UserInfoComponentS>().Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
+                    $"unit.id: {unit.GetComponent<UserInfoComponent>().Id} : " +
+                    $" {unit.GetComponent<UserInfoComponent>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}   登录";
             Log.Debug(offLineInfo);
 
             self.PlayerState = PlayerState.Game;
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
             numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
         }
 
@@ -50,7 +50,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
+                    $" {unit.GetComponent<UserInfoComponent>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}   二次登录";
             Log.Debug(offLineInfo);
 
@@ -65,11 +65,11 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
+                    $" {unit.GetComponent<UserInfoComponent>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}   离线";
             Log.Debug(offLineInfo);
 
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
             numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
             self.PlayerState = PlayerState.Disconnect;
 
@@ -83,12 +83,12 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
                     $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().GetPlayerName()} : " +
+                    $" {unit.GetComponent<UserInfoComponent>().GetPlayerName()} : " +
                     $"{TimeHelper.DateTimeNow().ToString()}  移除";
             Log.Debug(offLineInfo);
 
             Scene scene = unit.Scene();
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
             MapType mapType = scene.GetComponent<MapComponent>().MapType;
             if (mapType == MapType.MainCity)
             {

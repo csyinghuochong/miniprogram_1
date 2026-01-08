@@ -176,7 +176,7 @@ namespace ET.Server
                     }
                     case SkillPassiveType.OnSelfHpBelowPercent:
                     {
-                        NumericComponentS numericComponent = myUnit.GetComponent<NumericComponentS>();
+                        NumericComponent numericComponent = myUnit.GetComponent<NumericComponent>();
 
                         long nowHp = numericComponent.GetAsLong(NumericType.Now_Hp);
                         long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
@@ -207,7 +207,7 @@ namespace ET.Server
                                 continue;
                             }
 
-                            NumericComponentS numericComponent = u.GetComponent<NumericComponentS>();
+                            NumericComponent numericComponent = u.GetComponent<NumericComponent>();
 
                             long nowHp = numericComponent.GetAsLong(NumericType.Now_Hp);
                             long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);

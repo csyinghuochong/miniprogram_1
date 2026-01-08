@@ -6,8 +6,8 @@
         {
             FriendUnitComponent friendUnitComponent = root.GetComponent<FriendUnitComponent>();
 
-            UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, unitId);
-            NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(root, unitId);
+            UserInfoComponent userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponent>(root, unitId);
+            NumericComponent numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponent>(root, unitId);
 
             FriendDataInfo friendDataInfo = FriendDataInfo.Create();
             friendDataInfo.UnitId = unitId;
@@ -33,7 +33,7 @@
                     continue;
                 }
 
-                FriendComponentS friendComponent = friendUnit.GetComponent<FriendComponentS>();
+                FriendComponent friendComponent = friendUnit.GetComponent<FriendComponent>();
 
                 bool notice = friendComponent.FriendList.Contains(unitId) || friendComponent.RequestList.Contains(unitId);
 

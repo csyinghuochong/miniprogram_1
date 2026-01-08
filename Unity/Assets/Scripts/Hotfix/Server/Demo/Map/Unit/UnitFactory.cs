@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [FriendOf(typeof(UserInfoComponentS))]
+    [FriendOf(typeof(UserInfoComponent))]
     public static partial class UnitFactory
     {
         public static async ETTask<Unit> LoadUnit(Player player, Scene scene, CreateRoleInfo createRoleInfo, string account, long accountId)
@@ -33,9 +33,9 @@ namespace ET.Server
             unit.Type = UnitType.Player;
             unit.ConfigId = createRoleInfo.PlayerOcc;
 
-            if (unit.GetComponent<UserInfoComponentS>() == null)
+            if (unit.GetComponent<UserInfoComponent>() == null)
             {
-                UserInfoComponentS userInfoComponent = unit.AddComponent<UserInfoComponentS>();
+                UserInfoComponent userInfoComponent = unit.AddComponent<UserInfoComponent>();
                 userInfoComponent.Account = account;
                 userInfoComponent.UnitId = id;
                 userInfoComponent.AccInfoID = accountId;
@@ -43,36 +43,36 @@ namespace ET.Server
                 userInfoComponent.Lv = 1;
             }
 
-            if (unit.GetComponent<NumericComponentS>() == null)
+            if (unit.GetComponent<NumericComponent>() == null)
             {
-                NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+                NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
                 numericComponent.ApplyValue(NumericType.Base_Speed_Base, 60000, false); // 速度是6米每秒
                 numericComponent.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
             }
 
-            if (unit.GetComponent<InventoryComponentS>() == null)
+            if (unit.GetComponent<InventoryComponent>() == null)
             {
-                InventoryComponentS inventoryComponent = unit.AddComponent<InventoryComponentS>();
+                InventoryComponent inventoryComponent = unit.AddComponent<InventoryComponent>();
             }
 
-            if (unit.GetComponent<HeroComponentS>() == null)
+            if (unit.GetComponent<HeroComponent>() == null)
             {
-                HeroComponentS heroComponent = unit.AddComponent<HeroComponentS>();
+                HeroComponent heroComponent = unit.AddComponent<HeroComponent>();
             }
 
-            if (unit.GetComponent<TaskComponentS>() == null)
+            if (unit.GetComponent<TaskComponent>() == null)
             {
-                TaskComponentS taskComponent = unit.AddComponent<TaskComponentS>();
+                TaskComponent taskComponent = unit.AddComponent<TaskComponent>();
             }
 
-            if (unit.GetComponent<StoreComponentS>() == null)
+            if (unit.GetComponent<StoreComponent>() == null)
             {
-                StoreComponentS storeComponent = unit.AddComponent<StoreComponentS>();
+                StoreComponent storeComponent = unit.AddComponent<StoreComponent>();
             }
 
-            if (unit.GetComponent<ArchiveComponentS>() == null)
+            if (unit.GetComponent<ArchiveComponent>() == null)
             {
-                ArchiveComponentS archiveComponent = unit.AddComponent<ArchiveComponentS>();
+                ArchiveComponent archiveComponent = unit.AddComponent<ArchiveComponent>();
             }
 
             unit.AddComponent<StateComponentS>();
@@ -87,7 +87,7 @@ namespace ET.Server
             unit.Position = position;
             unit.Type = UnitType.Hero;
 
-            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
             foreach (KeyValuePair<int, long> keyValuePair in hero.NumericDic)
             {
                 numericComponent.ApplyValue(keyValuePair.Key, keyValuePair.Value, false);
@@ -108,13 +108,13 @@ namespace ET.Server
             unit.AddComponent<BuffManagerComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
-            unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().PlayerName;
+            unitInfoComponent.MasterName = master.GetComponent<UserInfoComponent>().PlayerName;
 
             // unit.AddComponent<MoveComponent>();
             // unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
 
-            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(master.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleMode) == 0 ? 1 : 2);
+            AIComponent aiComponent = unit.AddComponent<AIComponent, int>(master.GetComponent<NumericComponent>().GetAsInt(NumericType.BattleMode) == 0 ? 1 : 2);
             aiComponent.InitHero(hero);
             aiComponent.Begin();
 
@@ -133,7 +133,7 @@ namespace ET.Server
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
 
-            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
             numericComponent.ApplyValue(NumericType.Base_AtkSpeed_Base, monsterConfig.AtkSpeed, false);
             numericComponent.ApplyValue(NumericType.Now_Hp, monsterConfig.Hp, false);
@@ -189,9 +189,9 @@ namespace ET.Server
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
 
-            NumericComponentS fromUnitNumericComponent = fromUnit.GetComponent<NumericComponentS>();
+            NumericComponent fromUnitNumericComponent = fromUnit.GetComponent<NumericComponent>();
 
-            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_Speed_Base), false);
             numericComponent.ApplyValue(NumericType.Base_AtkSpeed_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_AtkSpeed_Base), false);
             numericComponent.ApplyValue(NumericType.Now_Hp, fromUnitNumericComponent.GetAsLong(NumericType.Now_Hp), false);
@@ -245,7 +245,7 @@ namespace ET.Server
             unit.Position = position;
             unit.Type = UnitType.DropItem;
 
-            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
             numericComponent.ApplyValue(NumericType.DropItemId, itemConfigId, false);
             numericComponent.ApplyValue(NumericType.DropItemNum, num, false);
 

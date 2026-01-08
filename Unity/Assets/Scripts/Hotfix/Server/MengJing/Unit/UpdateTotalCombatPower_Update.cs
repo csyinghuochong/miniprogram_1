@@ -3,7 +3,7 @@
 namespace ET.Server
 {
     [Event(SceneType.Map)]
-    [FriendOf(typeof(HeroComponentS))]
+    [FriendOf(typeof(HeroComponent))]
     public class UpdateTotalCombatPower_Update : AEvent<Scene, UpdateTotalCombatPower>
     {
         protected override async ETTask Run(Scene scene, UpdateTotalCombatPower args)
@@ -13,7 +13,7 @@ namespace ET.Server
 
             // 计算总战力
 
-            HeroComponentS heroComponentC = unit.GetComponent<HeroComponentS>();
+            HeroComponent heroComponentC = unit.GetComponent<HeroComponent>();
             List<long> currentFormation = heroComponentC.Formation;
 
             for (int i = 0; i < currentFormation.Count; i++)
@@ -28,7 +28,7 @@ namespace ET.Server
                 totalCP += hero.NumericDic[NumericType.CombatPower];
             }
 
-            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CombatPower, totalCP);
+            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.CombatPower, totalCP);
 
             await ETTask.CompletedTask;
         }

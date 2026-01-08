@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, Mail2M_ReceiveReward request, M2Mail_ReceiveReward response)
         {
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
             response.Error = inventoryComponent.AddItemData(request.ItemInfoList);
 
             await ETTask.CompletedTask;

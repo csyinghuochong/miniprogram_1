@@ -1,12 +1,12 @@
 ﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(TaskComponentS))]
+    [FriendOf(typeof(TaskComponent))]
     public class C2M_GetAllTaskHandler : MessageLocationHandler<Unit, C2M_GetAllTask, M2C_GetAllTask>
     {
         protected override async ETTask Run(Unit unit, C2M_GetAllTask request, M2C_GetAllTask response)
         {
-            TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
+            TaskComponent taskComponent = unit.GetComponent<TaskComponent>();
 
             foreach (TaskPro taskPro in taskComponent.TaskProList)
             {

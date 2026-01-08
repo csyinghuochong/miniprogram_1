@@ -5,7 +5,7 @@
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            NumericComponentS numericComponentDefend = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponentDefend = unit.GetComponent<NumericComponent>();
 
             Scene scene = args.Defend.Scene();
             MapComponent mapComponent = scene.GetComponent<MapComponent>();

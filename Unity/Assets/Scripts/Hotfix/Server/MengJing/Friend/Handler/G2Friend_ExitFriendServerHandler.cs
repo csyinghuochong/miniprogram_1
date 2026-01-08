@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(FriendUnit mailUnit, G2Friend_ExitFriendServer request, Friend2G_ExitFriendServer response)
         {
-            FriendComponentS friendComponent = mailUnit.GetComponent<FriendComponentS>();
+            FriendComponent friendComponent = mailUnit.GetComponent<FriendComponent>();
 
             await UnitCacheHelper.SaveComponent(mailUnit.Root(), friendComponent);
 

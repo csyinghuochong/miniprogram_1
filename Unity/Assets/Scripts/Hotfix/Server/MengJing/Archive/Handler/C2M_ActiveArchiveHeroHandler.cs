@@ -5,8 +5,8 @@
     {
         protected override async ETTask Run(Unit unit, C2M_ActiveArchiveHero request, M2C_ActiveArchiveHero response)
         {
-            ArchiveComponentS archiveComponent = unit.GetComponent<ArchiveComponentS>();
-            HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
+            ArchiveComponent archiveComponent = unit.GetComponent<ArchiveComponent>();
+            HeroComponent heroComponent = unit.GetComponent<HeroComponent>();
 
             Hero hero = heroComponent.GetHeroByConfigId(request.HeroConfigId);
             if (hero == null)

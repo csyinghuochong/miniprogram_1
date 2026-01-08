@@ -17,7 +17,7 @@
                 return;
             }
 
-            NumericComponentS defendNumeric = skill.TheUnitTarget.GetComponent<NumericComponentS>();
+            NumericComponent defendNumeric = skill.TheUnitTarget.GetComponent<NumericComponent>();
             int nowHp = defendNumeric.GetAsInt(NumericType.Now_Hp);
             int maxHp = defendNumeric.GetAsInt(NumericType.Now_MaxHp);
             if (nowHp * 1f / maxHp > skill.SkillConfig.GameObjectParameter[1])
@@ -40,7 +40,7 @@
 
         private void AddAngerByPer(Unit self, float value)
         {
-            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.GetComponent<NumericComponent>();
             int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
             int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
             if (now + (int)(max * value) > max)

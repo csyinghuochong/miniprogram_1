@@ -193,7 +193,7 @@ namespace ET.Server
                         DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();
                         DBComponent dbComponent = dbManagerComponent.GetZoneDB(request.ServerId);
 
-                        List<UserInfoComponentS> userinfoList = await dbComponent.Query<UserInfoComponentS>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
+                        List<UserInfoComponent> userinfoList = await dbComponent.Query<UserInfoComponent>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
                         if (userinfoList == null || userinfoList.Count == 0)
                         {
                             continue;
@@ -204,7 +204,7 @@ namespace ET.Server
                         roleList.UnitId = centerAccountInfo.RoleList[i].UnitId;
                         roleList.PlayerName = userinfoList[0].GetPlayerName();
 
-                        List<NumericComponentS> numericComponentlist = await dbComponent.Query<NumericComponentS>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
+                        List<NumericComponent> numericComponentlist = await dbComponent.Query<NumericComponent>(request.ServerId, d => d.Id == centerAccountInfo.RoleList[i].UnitId);
                         if (numericComponentlist == null || numericComponentlist.Count == 0)
                         {
                             continue;

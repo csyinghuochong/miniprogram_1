@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(HeroComponentS))]
+    [FriendOf(typeof(HeroComponent))]
     public class C2M_EnterBossRoomHandler : MessageLocationHandler<Unit, C2M_EnterBossRoom, M2C_EnterBossRoom>
     {
         protected override async ETTask Run(Unit unit, C2M_EnterBossRoom request, M2C_EnterBossRoom response)

@@ -22,10 +22,10 @@ namespace ET.Server.Handler
 
             mailUnit = mailUnitComponent.AddChildWithId<MailUnit>(request.UnitId);
 
-            MailComponentS mailComponent = await UnitCacheHelper.GetComponent<MailComponentS>(scene, request.UnitId);
+            MailComponent mailComponent = await UnitCacheHelper.GetComponent<MailComponent>(scene, request.UnitId);
             if (mailComponent == null)
             {
-                mailComponent = mailUnit.AddComponent<MailComponentS>();
+                mailComponent = mailUnit.AddComponent<MailComponent>();
             }
             else
             {
@@ -66,7 +66,7 @@ namespace ET.Server.Handler
                     }
                     case MailReceiveType.LessLv:
                     {
-                        UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, mailUnit.Id);
+                        UserInfoComponent userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponent>(scene, mailUnit.Id);
                         if (int.TryParse(serverMail.Params, out int targetLevel) && userInfoComponent.GetLv() < targetLevel)
                         {
                             shouldReceive = true;

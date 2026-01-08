@@ -14,7 +14,7 @@ namespace ET.Server
             {
                 ChatCenterComponent chatCenterComponent = root.GetComponent<ChatCenterComponent>();
                 ChatUnitComponent chatUnitComponent = root.GetComponent<ChatUnitComponent>();
-                ChatComponentS chatComponent = chatUnit.GetComponent<ChatComponentS>();
+                ChatComponent chatComponent = chatUnit.GetComponent<ChatComponent>();
 
                 if (string.IsNullOrEmpty(request.Content))
                 {

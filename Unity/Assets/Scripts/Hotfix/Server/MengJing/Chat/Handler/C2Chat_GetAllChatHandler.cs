@@ -6,7 +6,7 @@
         protected override async ETTask Run(ChatUnit chatUnit, C2Chat_GetAllChat request, Chat2C_GetAllChat response)
         {
             ChatCenterComponent chatCenterComponent = chatUnit.Root().GetComponent<ChatCenterComponent>();
-            ChatComponentS chatComponent = chatUnit.GetComponent<ChatComponentS>();
+            ChatComponent chatComponent = chatUnit.GetComponent<ChatComponent>();
 
             // 世界聊天室
             if (!chatCenterComponent.ChatRoomDict.TryGetValue(ConfigData.WorldChatRoomKey, out var chatRoomRef))

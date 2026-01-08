@@ -4,14 +4,14 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [FriendOf(typeof(NumericComponentS))]
+    [FriendOf(typeof(NumericComponent))]
     [FriendOf(typeof(MoveComponent))]
     public static partial class MapMessageHelper
     {
         public static UnitInfo CreateUnitInfo(Unit unit)
         {
             UnitInfo unitInfo = UnitInfo.Create();
-            NumericComponentS nc = unit.GetComponent<NumericComponentS>();
+            NumericComponent nc = unit.GetComponent<NumericComponent>();
             unitInfo.UnitId = unit.Id;
             unitInfo.ConfigId = unit.ConfigId;
             unitInfo.Type = unit.Type;
@@ -61,7 +61,7 @@ namespace ET.Server
             {
                 case UnitType.Player:
                 {
-                    UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                    UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
 
                     unitInfo.UnitName = userInfoComponent.GetPlayerName();
 

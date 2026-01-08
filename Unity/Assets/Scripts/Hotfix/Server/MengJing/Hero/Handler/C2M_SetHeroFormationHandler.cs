@@ -1,12 +1,12 @@
 ﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(HeroComponentS))]
+    [FriendOf(typeof(HeroComponent))]
     public class C2M_SetHeroFormationHandler : MessageLocationHandler<Unit, C2M_SetHeroFormation, M2C_SetHeroFormation>
     {
         protected override async ETTask Run(Unit unit, C2M_SetHeroFormation request, M2C_SetHeroFormation response)
         {
-            HeroComponentS heroComponent = unit.GetComponent<HeroComponentS>();
+            HeroComponent heroComponent = unit.GetComponent<HeroComponent>();
 
             int error = heroComponent.SetFormation(request.OpType, request.HeroId, request.SlotIndex);
 
@@ -16,7 +16,7 @@
                 return;
             }
 
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
             if (heroComponent.GetFirstHero() != null)
             {
                 numericComponent.ApplyValue(NumericType.ShowHeroId, heroComponent.GetFirstHero().ConfigId);

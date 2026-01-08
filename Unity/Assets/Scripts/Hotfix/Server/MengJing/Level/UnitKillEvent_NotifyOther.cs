@@ -40,12 +40,12 @@
             {
                 if (attackUnit.Type == UnitType.Hero)
                 {
-                    Unit master = attackUnit.GetParent<UnitComponent>().Get(attackUnit.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId));
-                    master.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, mapType);
+                    Unit master = attackUnit.GetParent<UnitComponent>().Get(attackUnit.GetComponent<NumericComponent>().GetAsLong(NumericType.MasterId));
+                    master.GetComponent<TaskComponent>().OnKillUnit(defendUnit, mapType);
                 }
             }
 
-            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponentDefend = defendUnit.GetComponent<NumericComponent>();
             numericComponentDefend.ApplyValue(NumericType.Now_Dead, 1);
 
             long waitTime = 500;

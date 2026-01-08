@@ -102,7 +102,7 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
 
             self.ActDistance = monsterConfig.ActDistance / 10000f;
             self.AISkillIDList.Add(monsterConfig.ActSkillID);
@@ -113,7 +113,7 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
 
             self.FollowDistance = 10f;
             self.ActDistance = heroConfig.AtkDistance / 10000f;
@@ -145,7 +145,7 @@ namespace ET.Server
         public static void Begin(this AIComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
+            NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
             if (numericComponent.GetAsInt(NumericType.Now_Dead) != 0)
             {
                 return;

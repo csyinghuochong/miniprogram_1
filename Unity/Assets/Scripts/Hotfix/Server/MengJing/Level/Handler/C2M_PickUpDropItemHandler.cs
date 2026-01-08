@@ -29,7 +29,7 @@ namespace ET.Server
                         continue;
                     }
 
-                    NumericComponentS numericComponent = dropItem.GetComponent<NumericComponentS>();
+                    NumericComponent numericComponent = dropItem.GetComponent<NumericComponent>();
                     rewardItems.Add(new RewardItem()
                     {
                         ItemId = numericComponent.GetAsInt(NumericType.DropItemId), ItemNum = numericComponent.GetAsInt(NumericType.DropItemNum)
@@ -40,7 +40,7 @@ namespace ET.Server
 
                 if (rewardItems.Count > 0)
                 {
-                    unit.GetComponent<InventoryComponentS>().AddItemData(rewardItems);
+                    unit.GetComponent<InventoryComponent>().AddItemData(rewardItems);
                 }
             }
 

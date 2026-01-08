@@ -2,14 +2,14 @@
 
 namespace ET.Server
 {
-    [FriendOf(typeof(ArchiveComponentS))]
+    [FriendOf(typeof(ArchiveComponent))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_ReceivedArchiveRewardHandler : MessageLocationHandler<Unit, C2M_ReceivedArchiveReward, M2C_ReceivedArchiveReward>
     {
         protected override async ETTask Run(Unit unit, C2M_ReceivedArchiveReward request, M2C_ReceivedArchiveReward response)
         {
-            InventoryComponentS inventoryComponent = unit.GetComponent<InventoryComponentS>();
-            ArchiveComponentS archiveComponent = unit.GetComponent<ArchiveComponentS>();
+            InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
+            ArchiveComponent archiveComponent = unit.GetComponent<ArchiveComponent>();
 
             if (!ArchiveRewardConfigCategory.Instance.DataMap.ContainsKey(request.RewardId))
             {

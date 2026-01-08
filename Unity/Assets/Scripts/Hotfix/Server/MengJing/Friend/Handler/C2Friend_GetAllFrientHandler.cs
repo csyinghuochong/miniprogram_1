@@ -8,7 +8,7 @@ namespace ET.Server
         protected override async ETTask Run(FriendUnit friendUnit, C2Friend_GetAllFriend request, Friend2C_GetAllFriend response)
         {
             Scene root = friendUnit.Root();
-            FriendComponentS friendComponent = friendUnit.GetComponent<FriendComponentS>();
+            FriendComponent friendComponent = friendUnit.GetComponent<FriendComponent>();
 
             response.FriendList = await GetFriendInfoList(root, friendComponent.FriendList);
             response.RequestList = await GetFriendInfoList(root, friendComponent.RequestList);
