@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,8 +21,15 @@ namespace ET.Client
             self.Text_LianMengName = rc.Get<GameObject>("Text_LianMengName").GetComponent<TMP_Text>();
             self.Text_LianMengAcive = rc.Get<GameObject>("Text_LianMengActive").GetComponent<TMP_Text>();
             self.Text_Sort = rc.Get<GameObject>("Text_Sort").GetComponent<TMP_Text>();
-            
         }
-        
+
+        public static void UpdateInfo(this UIRankLianMengItem self, AllianceRank allianceRank)
+        {
+            self.AllianceRank = allianceRank;
+
+            self.Text_Sort.SetText(self.AllianceRank.Sort);
+            self.Text_LianMengName.SetText(self.AllianceRank.AllianceName);
+            self.Text_LianMengAcive.SetTextFormat("活跃度:{0}", self.AllianceRank.Active);
+        }
     }
 }

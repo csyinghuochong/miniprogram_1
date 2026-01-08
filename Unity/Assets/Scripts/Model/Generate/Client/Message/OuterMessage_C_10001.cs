@@ -5568,27 +5568,24 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.RankDataInfo)]
-    public partial class RankDataInfo : MessageObject
+    [Message(OuterMessage.PlayerCombatPowerRankInfo)]
+    public partial class PlayerCombatPowerRankInfo : MessageObject
     {
-        public static RankDataInfo Create(bool isFromPool = false)
+        public static PlayerCombatPowerRankInfo Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(RankDataInfo), isFromPool) as RankDataInfo;
+            return ObjectPool.Instance.Fetch(typeof(PlayerCombatPowerRankInfo), isFromPool) as PlayerCombatPowerRankInfo;
         }
 
         [MemoryPackOrder(0)]
-        public int RankType { get; set; }
+        public int Sort { get; set; }
 
         [MemoryPackOrder(1)]
-        public int Rank { get; set; }
-
-        [MemoryPackOrder(2)]
         public long UnitId { get; set; }
 
-        [MemoryPackOrder(3)]
+        [MemoryPackOrder(2)]
         public string PlayerName { get; set; }
 
-        [MemoryPackOrder(4)]
+        [MemoryPackOrder(3)]
         public long CombatPower { get; set; }
 
         public override void Dispose()
@@ -5598,11 +5595,47 @@ namespace ET
                 return;
             }
 
-            this.RankType = default;
-            this.Rank = default;
+            this.Sort = default;
             this.UnitId = default;
             this.PlayerName = default;
             this.CombatPower = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.AllianceRankInfo)]
+    public partial class AllianceRankInfo : MessageObject
+    {
+        public static AllianceRankInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(AllianceRankInfo), isFromPool) as AllianceRankInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int Sort { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long AllianceId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string AllianceName { get; set; }
+
+        [MemoryPackOrder(3)]
+        public long Active { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Sort = default;
+            this.AllianceId = default;
+            this.AllianceName = default;
+            this.Active = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -5653,7 +5686,10 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(3)]
-        public List<RankDataInfo> RankDataList { get; set; } = new();
+        public List<PlayerCombatPowerRankInfo> PlayerCombatPowerRankInfoList { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<AllianceRankInfo> AllianceRankInfoList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -5665,7 +5701,8 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.RankDataList.Clear();
+            this.PlayerCombatPowerRankInfoList.Clear();
+            this.AllianceRankInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -5681,7 +5718,10 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public List<RankDataInfo> RankDataInfoList { get; set; } = new();
+        public List<PlayerCombatPowerRankInfo> PlayerCombatPowerRankInfoList { get; set; } = new();
+
+        [MemoryPackOrder(1)]
+        public List<AllianceRankInfo> AllianceRankInfoList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -5690,7 +5730,8 @@ namespace ET
                 return;
             }
 
-            this.RankDataInfoList.Clear();
+            this.PlayerCombatPowerRankInfoList.Clear();
+            this.AllianceRankInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -6174,19 +6215,20 @@ namespace ET
         public const ushort Friend2C_BlackFriend = 10154;
         public const ushort Friend2C_DeleteYou = 10155;
         public const ushort Friend2C_FriendOnLineChange = 10156;
-        public const ushort RankDataInfo = 10157;
-        public const ushort C2Rank_GetAllRank = 10158;
-        public const ushort Rank2C_GetAllRank = 10159;
-        public const ushort Rank2C_NoticeRankUpdate = 10160;
-        public const ushort C2M_LotteryDrawRequest = 10161;
-        public const ushort M2C_LotteryDrawRequest = 10162;
-        public const ushort ArchiveHeroInfo = 10163;
-        public const ushort C2M_GetAllArchiveHero = 10164;
-        public const ushort M2C_GetAllArchiveHero = 10165;
-        public const ushort M2C_ArchiveHeroUpdate = 10166;
-        public const ushort C2M_ActiveArchiveHero = 10167;
-        public const ushort M2C_ActiveArchiveHero = 10168;
-        public const ushort C2M_ReceivedArchiveReward = 10169;
-        public const ushort M2C_ReceivedArchiveReward = 10170;
+        public const ushort PlayerCombatPowerRankInfo = 10157;
+        public const ushort AllianceRankInfo = 10158;
+        public const ushort C2Rank_GetAllRank = 10159;
+        public const ushort Rank2C_GetAllRank = 10160;
+        public const ushort Rank2C_NoticeRankUpdate = 10161;
+        public const ushort C2M_LotteryDrawRequest = 10162;
+        public const ushort M2C_LotteryDrawRequest = 10163;
+        public const ushort ArchiveHeroInfo = 10164;
+        public const ushort C2M_GetAllArchiveHero = 10165;
+        public const ushort M2C_GetAllArchiveHero = 10166;
+        public const ushort M2C_ArchiveHeroUpdate = 10167;
+        public const ushort C2M_ActiveArchiveHero = 10168;
+        public const ushort M2C_ActiveArchiveHero = 10169;
+        public const ushort C2M_ReceivedArchiveReward = 10170;
+        public const ushort M2C_ReceivedArchiveReward = 10171;
     }
 }

@@ -1224,13 +1224,20 @@ message Friend2C_FriendOnLineChange // IMessage
 	int32 OnLine = 2;
 }
 
-message RankDataInfo
+message PlayerCombatPowerRankInfo
 {
-	int32 RankType = 1;
-	int32 Rank = 2;
-	int64 UnitId = 3;
-	string PlayerName = 4;
-	int64 CombatPower = 5;
+	int32 Sort = 1;
+	int64 UnitId = 2;
+	string PlayerName = 3;
+	int64 CombatPower = 4;
+}
+
+message AllianceRankInfo
+{
+  	int32 Sort = 1;
+	int64 AllianceId = 2;
+	string AllianceName = 3;
+	int64 Active = 4;
 }
 
 //ResponseType Rank2C_GetAllRank
@@ -1244,12 +1251,14 @@ message Rank2C_GetAllRank // IRankResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
-	repeated RankDataInfo RankDataList = 4;
+	repeated PlayerCombatPowerRankInfo PlayerCombatPowerRankInfoList = 4;
+	repeated AllianceRankInfo AllianceRankInfoList = 5;
 }
 
 message Rank2C_NoticeRankUpdate // IMessage
 {
-	repeated RankDataInfo RankDataInfoList = 1;
+	repeated PlayerCombatPowerRankInfo PlayerCombatPowerRankInfoList = 1;
+	repeated AllianceRankInfo AllianceRankInfoList = 2;
 }
 
 // ResponseType M2C_LotteryDrawRequest

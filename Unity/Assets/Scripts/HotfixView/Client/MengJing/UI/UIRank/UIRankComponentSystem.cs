@@ -62,41 +62,41 @@ namespace ET.Client
         public static void UpdateRankCEItemList(this UIRankComponent self)
         {
             RankComponent rankComponent = self.Root().GetComponent<RankComponent>();
-            List<RankData> playerRankDataList = rankComponent.GetPlayerRankDataList();
+            List<PlayerCombatPowerRank> playerCombatPowerRankList = rankComponent.GetPlayerCombatPowerRankList();
 
-            while (self.UIRankCEItemList.Count < playerRankDataList.Count)
+            while (self.UIRankCEItemList.Count < playerCombatPowerRankList.Count)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIRankCEItem, self.Content_UIRankCEItem);
                 UIRankCEItem newItem = self.AddChild<UIRankCEItem, GameObject>(go);
                 self.UIRankCEItemList.Add(newItem);
             }
 
-            for (int i = 0; i < playerRankDataList.Count; i++)
+            for (int i = 0; i < playerCombatPowerRankList.Count; i++)
             {
-                self.UIRankCEItemList[i].UpdateInfo(playerRankDataList[i]);
+                self.UIRankCEItemList[i].UpdateInfo(playerCombatPowerRankList[i]);
                 self.UIRankCEItemList[i].GameObject.SetActive(true);
             }
 
-            for (int i = playerRankDataList.Count; i < self.UIRankCEItemList.Count; i++)
+            for (int i = playerCombatPowerRankList.Count; i < self.UIRankCEItemList.Count; i++)
             {
                 self.UIRankCEItemList[i].GameObject.SetActive(false);
             }
 
             // 显示自己的排行信息
-            RankData selfRankData = null;
+            PlayerCombatPowerRank selfPlayerCombatPowerRank = null;
             long selfUnitId = self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId;
-            foreach (RankData rankData in playerRankDataList)
+            foreach (PlayerCombatPowerRank rankData in playerCombatPowerRankList)
             {
                 if (rankData.UnitId == selfUnitId)
                 {
-                    selfRankData = rankData;
+                    selfPlayerCombatPowerRank = rankData;
                     break;
                 }
             }
 
-            if (selfRankData != null)
+            if (selfPlayerCombatPowerRank != null)
             {
-                self.Text_SelfSort.SetText(selfRankData.Rank);
+                self.Text_SelfSort.SetText(selfPlayerCombatPowerRank.Sort);
             }
             else
             {
@@ -118,6 +118,26 @@ namespace ET.Client
 
         public static void UpdateRankLianMengItemList(this UIRankComponent self)
         {
+            RankComponent rankComponent = self.Root().GetComponent<RankComponent>();
+            List<AllianceRank> allianceRankList = rankComponent.GetAllianceRankList();
+
+            while (self.UIRankLianMengItemList.Count < allianceRankList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIRankLianMengItem, self.Content_UIRankLianMengItem);
+                UIRankLianMengItem newItem = self.AddChild<UIRankLianMengItem, GameObject>(go);
+                self.UIRankLianMengItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < allianceRankList.Count; i++)
+            {
+                self.UIRankLianMengItemList[i].UpdateInfo(allianceRankList[i]);
+                self.UIRankLianMengItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = allianceRankList.Count; i < self.UIRankLianMengItemList.Count; i++)
+            {
+                self.UIRankLianMengItemList[i].GameObject.SetActive(false);
+            }
         }
     }
 }

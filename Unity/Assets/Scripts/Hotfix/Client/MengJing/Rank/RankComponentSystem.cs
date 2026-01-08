@@ -19,33 +19,41 @@ namespace ET.Client
 
         public static void Clear(this RankComponent self)
         {
-            foreach (RankData rankData in self.PlayerRankDataList)
+            foreach (PlayerCombatPowerRank rankData in self.PlayerCombatPowerRankList)
             {
                 rankData?.Dispose();
             }
 
-            self.PlayerRankDataList.Clear();
+            self.PlayerCombatPowerRankList.Clear();
         }
 
-        public static void AddRankDataFromMessage(this RankComponent self, RankDataInfo rankDataInfo)
+        public static void AddPlayerCombatPowerRankFromMessage(this RankComponent self, PlayerCombatPowerRankInfo info)
         {
-            RankData rankData = self.AddChild<RankData>();
-            rankData.FromMessage(rankDataInfo);
+            PlayerCombatPowerRank playerCombatPowerRank = self.AddChild<PlayerCombatPowerRank>();
+            playerCombatPowerRank.FromMessage(info);
 
-            self.PlayerRankDataList.Add(rankData);
+            self.PlayerCombatPowerRankList.Add(playerCombatPowerRank);
         }
 
-        public static void RankUpdate(this RankComponent self, List<RankDataInfo> rankDataInfoList)
+        public static void AddAllianceRankFromMessage(this RankComponent self, AllianceRankInfo info)
         {
-            for (int i = 0; i < rankDataInfoList.Count; i++)
+            AllianceRank allianceRank = self.AddChild<AllianceRank>();
+            allianceRank.FromMessage(info);
+
+            self.AllianceRankList.Add(allianceRank);
+        }
+
+        public static void PlayerCombatPowerRankUpdate(this RankComponent self, List<PlayerCombatPowerRankInfo> infoList)
+        {
+            for (int i = 0; i < infoList.Count; i++)
             {
                 bool isExit = false;
-                foreach (RankData rankData in self.PlayerRankDataList)
+                foreach (PlayerCombatPowerRank rankData in self.PlayerCombatPowerRankList)
                 {
-                    if (rankData.UnitId == rankDataInfoList[i].UnitId)
+                    if (rankData.UnitId == infoList[i].UnitId)
                     {
                         isExit = true;
-                        rankData.FromMessage(rankDataInfoList[i]);
+                        rankData.FromMessage(infoList[i]);
                         break;
                     }
                 }
@@ -55,30 +63,45 @@ namespace ET.Client
                     continue;
                 }
 
-                self.AddRankDataFromMessage(rankDataInfoList[i]);
+                self.AddPlayerCombatPowerRankFromMessage(infoList[i]);
             }
 
-            self.PlayerRankDataList.Sort((x, y) =>
+            self.PlayerCombatPowerRankList.Sort((x, y) =>
             {
-                RankData xData = x;
-                RankData yData = y;
-                return xData.Rank.CompareTo(yData.Rank);
+                PlayerCombatPowerRank xRank = x;
+                PlayerCombatPowerRank yRank = y;
+                return xRank.Sort.CompareTo(yRank.Sort);
             });
         }
 
-        public static List<RankData> GetPlayerRankDataList(this RankComponent self)
+        public static List<PlayerCombatPowerRank> GetPlayerCombatPowerRankList(this RankComponent self)
         {
-            int showMaxNum = Math.Min(self.PlayerRankDataList.Count, ConfigData.ShowRankMaxNum);
+            int showMaxNum = Math.Min(self.PlayerCombatPowerRankList.Count, ConfigData.ShowRankMaxNum);
 
-            List<RankData> rankDataList = new();
+            List<PlayerCombatPowerRank> playerCombatPowerRankList = new();
 
             for (int i = 0; i < showMaxNum; i++)
             {
-                RankData rankData = self.PlayerRankDataList[i];
-                rankDataList.Add(rankData);
+                PlayerCombatPowerRank playerCombatPowerRank = self.PlayerCombatPowerRankList[i];
+                playerCombatPowerRankList.Add(playerCombatPowerRank);
             }
 
-            return rankDataList;
+            return playerCombatPowerRankList;
+        }
+
+        public static List<AllianceRank> GetAllianceRankList(this RankComponent self)
+        {
+            int showMaxNum = Math.Min(self.AllianceRankList.Count, ConfigData.ShowRankMaxNum);
+
+            List<AllianceRank> allianceRankList = new();
+
+            for (int i = 0; i < showMaxNum; i++)
+            {
+                AllianceRank allianceRank = self.AllianceRankList[i];
+                allianceRankList.Add(allianceRank);
+            }
+
+            return allianceRankList;
         }
     }
 }

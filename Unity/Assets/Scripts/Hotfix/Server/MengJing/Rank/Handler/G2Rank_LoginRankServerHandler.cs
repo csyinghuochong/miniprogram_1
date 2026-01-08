@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene scene, G2Rank_LoginRankServer request, Rank2G_LoginRankServer response)
         {
             RankCenterComponent rankCenterComponent = scene.GetComponent<RankCenterComponent>();
-            rankCenterComponent.UpdatePlayerRankData(request.UnitId, request.PlayerName, request.CombatPower);
+            rankCenterComponent.UpdatePlayerCombatPowerRank(request.UnitId, request.PlayerName, request.CombatPower);
 
             RankUnitComponent rankUnitComponent = scene.GetComponent<RankUnitComponent>();
             rankUnitComponent.Children.TryGetValue(request.UnitId, out Entity rankUnitEntity);

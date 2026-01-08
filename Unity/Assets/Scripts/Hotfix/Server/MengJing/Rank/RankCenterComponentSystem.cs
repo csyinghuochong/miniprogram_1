@@ -22,76 +22,77 @@ namespace ET.Server
         {
             foreach (Entity entity in self.Children.Values)
             {
-                if (entity is RankData rankData)
+                switch (entity)
                 {
-                    if (rankData.RankType == (int)RankType.PlayerRank)
-                    {
-                        self.PlayerRankDataList.Add(rankData);
-                    }
+                    case PlayerCombatPowerRank playerCombatPowerRank:
+                        self.PlayerCombatPowerRankList.Add(playerCombatPowerRank);
+                        break;
+                    case AllianceRank allianceRank:
+                        self.AllianceRankList.Add(allianceRank);
+                        break;
                 }
             }
         }
 
-        public static void UpdatePlayerRankData(this RankCenterComponent self, long unitId, string playerName, long combatPower)
+        public static void UpdatePlayerCombatPowerRank(this RankCenterComponent self, long unitId, string playerName, long combatPower)
         {
-            RankData rankData = null;
-            foreach (RankData data in self.PlayerRankDataList)
+            PlayerCombatPowerRank playerCombatPowerRank = null;
+            foreach (PlayerCombatPowerRank data in self.PlayerCombatPowerRankList)
             {
                 if (data.UnitId == unitId)
                 {
-                    rankData = data;
+                    playerCombatPowerRank = data;
                     break;
                 }
             }
 
-            if (rankData == null)
+            if (playerCombatPowerRank == null)
             {
-                rankData = self.AddChild<RankData>();
-                rankData.RankType = (int)RankType.PlayerRank;
-                rankData.UnitId = unitId;
-                rankData.PlayerName = playerName;
-                rankData.CombatPower = combatPower;
-                self.PlayerRankDataList.Add(rankData);
+                playerCombatPowerRank = self.AddChild<PlayerCombatPowerRank>();
+                playerCombatPowerRank.UnitId = unitId;
+                playerCombatPowerRank.PlayerName = playerName;
+                playerCombatPowerRank.CombatPower = combatPower;
+                self.PlayerCombatPowerRankList.Add(playerCombatPowerRank);
             }
 
             if (string.IsNullOrEmpty(playerName))
             {
-                playerName = rankData.PlayerName;
+                playerName = playerCombatPowerRank.PlayerName;
             }
 
-            bool isUpdate = rankData.PlayerName != playerName || rankData.CombatPower != combatPower;
+            bool isUpdate = playerCombatPowerRank.PlayerName != playerName || playerCombatPowerRank.CombatPower != combatPower;
 
-            rankData.PlayerName = playerName;
-            rankData.CombatPower = combatPower;
+            playerCombatPowerRank.PlayerName = playerName;
+            playerCombatPowerRank.CombatPower = combatPower;
 
-            self.SortRank(isUpdate ? unitId : 0);
+            self.SortPlayerCombatPowerRank(isUpdate ? unitId : 0);
         }
 
-        private static void SortRank(this RankCenterComponent self, long updateUnitId)
+        private static void SortPlayerCombatPowerRank(this RankCenterComponent self, long updateUnitId)
         {
-            self.PlayerRankDataList.Sort((x, y) =>
+            self.PlayerCombatPowerRankList.Sort((x, y) =>
             {
-                RankData xData = x;
-                RankData yData = y;
-                return yData.CombatPower.CompareTo(xData.CombatPower);
+                PlayerCombatPowerRank xRank = x;
+                PlayerCombatPowerRank yRank = y;
+                return yRank.CombatPower.CompareTo(xRank.CombatPower);
             });
 
             Rank2C_NoticeRankUpdate message = Rank2C_NoticeRankUpdate.Create();
 
-            int showMaxNum = Math.Min(self.PlayerRankDataList.Count, ConfigData.ShowRankMaxNum);
+            int showMaxNum = Math.Min(self.PlayerCombatPowerRankList.Count, ConfigData.ShowRankMaxNum);
             for (int i = 0; i < showMaxNum; i++)
             {
-                RankData rankData = self.PlayerRankDataList[i];
+                PlayerCombatPowerRank playerCombatPowerRank = self.PlayerCombatPowerRankList[i];
                 // 排名变化或者玩家数据变化
-                if (rankData.Rank != i + 1 || rankData.UnitId == updateUnitId)
+                if (playerCombatPowerRank.Sort != i + 1 || playerCombatPowerRank.UnitId == updateUnitId)
                 {
-                    rankData.Rank = i + 1;
+                    playerCombatPowerRank.Sort = i + 1;
 
-                    message.RankDataInfoList.Add(rankData.ToMessage());
+                    message.PlayerCombatPowerRankInfoList.Add(playerCombatPowerRank.ToMessage());
                 }
             }
 
-            if (message.RankDataInfoList.Count > 0)
+            if (message.PlayerCombatPowerRankInfoList.Count > 0)
             {
                 RankUnitComponent rankUnitComponent = self.Root().GetComponent<RankUnitComponent>();
                 foreach (Entity entity in rankUnitComponent.Children.Values)

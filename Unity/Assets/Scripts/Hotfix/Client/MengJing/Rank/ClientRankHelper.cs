@@ -13,9 +13,14 @@
                 RankComponent rankComponent = root.GetComponent<RankComponent>();
                 rankComponent.Clear();
 
-                foreach (RankDataInfo rankDataInfo in response.RankDataList)
+                foreach (PlayerCombatPowerRankInfo rankDataInfo in response.PlayerCombatPowerRankInfoList)
                 {
-                    rankComponent.AddRankDataFromMessage(rankDataInfo);
+                    rankComponent.AddPlayerCombatPowerRankFromMessage(rankDataInfo);
+                }
+
+                foreach (AllianceRankInfo allianceRankInfo in response.AllianceRankInfoList)
+                {
+                    rankComponent.AddAllianceRankFromMessage(allianceRankInfo);
                 }
             }
 

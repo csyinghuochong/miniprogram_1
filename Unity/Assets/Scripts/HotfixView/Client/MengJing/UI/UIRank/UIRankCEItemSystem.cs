@@ -25,14 +25,14 @@ namespace ET.Client
             self.Button_OnPlayerHead.AddListener(() => self.OnButton_OnPlayerHead().Coroutine());
         }
 
-        public static void UpdateInfo(this UIRankCEItem self, RankData rankData)
+        public static void UpdateInfo(this UIRankCEItem self, PlayerCombatPowerRank playerCombatPowerRank)
         {
-            self.UnitId = rankData.UnitId;
+            self.UnitId = playerCombatPowerRank.UnitId;
 
-            self.Text_Sort.SetText(rankData.Rank);
-            self.Text_PlayerName.SetText(rankData.PlayerName);
+            self.Text_Sort.SetText(playerCombatPowerRank.Sort);
+            self.Text_PlayerName.SetText(playerCombatPowerRank.PlayerName);
 
-            long combatPower = rankData.CombatPower;
+            long combatPower = playerCombatPowerRank.CombatPower;
             if (combatPower >= 10000)
             {
                 combatPower = combatPower / 10000;

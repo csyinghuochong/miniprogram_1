@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene root, Rank2C_NoticeRankUpdate message)
         {
             RankComponent rankComponent = root.GetComponent<RankComponent>();
-            rankComponent?.RankUpdate(message.RankDataInfoList);
+            rankComponent?.PlayerCombatPowerRankUpdate(message.PlayerCombatPowerRankInfoList);
 
             await ETTask.CompletedTask;
         }

@@ -7,6 +7,9 @@ namespace ET.Client
     [ChildOf]
     public class UIRankLianMengItem : Entity, IAwake<GameObject>
     {
+        private EntityRef<AllianceRank> allianceRank;
+        public AllianceRank AllianceRank { get => this.allianceRank; set => this.allianceRank = value; }
+
         public GameObject GameObject { get; set; }
 
         public Image Image_LianMengHead;
