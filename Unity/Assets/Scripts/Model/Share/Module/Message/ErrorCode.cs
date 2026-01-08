@@ -126,6 +126,9 @@ namespace ET
         public const int ERR_FriendIsBlack = 201506; //黑名单中
         public const int ERR_FriendCantBlack = 201507; //好友不能被拉黑
         public const int ERR_FriendIsNotBlack = 201508; //用户不在黑名单
+        
+        public const int ERR_AlreadyReceived = 201601; //已领取
+        public const int ERR_NotEnoughPoint = 201602; //积分不足
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()
@@ -242,7 +245,10 @@ namespace ET
             { ERR_FriendIsNotFriend, "不是好友" },
             { ERR_FriendIsBlack, "黑名单中" },
             { ERR_FriendCantBlack, "好友不能被拉黑" },
-            { ERR_FriendIsNotBlack, "用户不在黑名单" }
+            { ERR_FriendIsNotBlack, "用户不在黑名单" },
+            
+            { ERR_AlreadyReceived, "已领取"},
+            { ERR_NotEnoughPoint, "积分不足"}
         };
     }
 }
