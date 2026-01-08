@@ -116,7 +116,7 @@ namespace ET
         // 抽卡掉落ID
         public const int LotteryDrawDropId = 2001;
 
-        // 心愿单道具
+        // 心愿单道具列表 从这个列表中选择一个心愿道具，如果抽到的道具也在这个列表中，则把这个道具替换成心愿道具
         [StaticField]
         public static List<int> LotteryDrawWishItemIdList = new()
         {
