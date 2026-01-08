@@ -12,14 +12,14 @@
                 inventoryComponentC.RemoveItemById(itemInfo.Id);
             }
 
-            foreach (ItemInfo itemInfo in message.ItemInfoUpdateList)
-            {
-                inventoryComponentC.UpdateItem(itemInfo);
-            }
-
             foreach (ItemInfo itemInfo in message.ItemInfoAddList)
             {
                 inventoryComponentC.AddItemFromMessage(itemInfo);
+            }
+
+            foreach (ItemInfo itemInfo in message.ItemInfoUpdateList)
+            {
+                inventoryComponentC.UpdateItem(itemInfo);
             }
 
             EventSystem.Instance.Publish(root, new InventoryUpdate());
