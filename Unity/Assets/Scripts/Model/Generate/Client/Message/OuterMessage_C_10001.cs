@@ -5757,7 +5757,7 @@ namespace ET
         public int OpType { get; set; }
 
         [MemoryPackOrder(2)]
-        public int LookingForwardHeroId { get; set; }
+        public int LookingForwardItemId { get; set; }
 
         public override void Dispose()
         {
@@ -5768,7 +5768,7 @@ namespace ET
 
             this.RpcId = default;
             this.OpType = default;
-            this.LookingForwardHeroId = default;
+            this.LookingForwardItemId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

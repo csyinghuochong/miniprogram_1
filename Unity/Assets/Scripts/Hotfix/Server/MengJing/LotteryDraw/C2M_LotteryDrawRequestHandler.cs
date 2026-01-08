@@ -10,7 +10,7 @@ namespace ET.Server
             InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
             NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
 
-            if (request.LookingForwardHeroId != 0 && !ConfigData.LotteryDrawLookingForwardHeroIdList.Contains(request.LookingForwardHeroId))
+            if (request.LookingForwardItemId != 0 && !ConfigData.LotteryDrawLookingForwardItemIdList.Contains(request.LookingForwardItemId))
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
@@ -76,10 +76,10 @@ namespace ET.Server
 
                 RewardItem rewardItem = DropHelper.DropItem(dropId);
 
-                if (request.LookingForwardHeroId != 0 && ConfigData.LotteryDrawLookingForwardHeroIdList.Contains(rewardItem.ItemId))
+                if (request.LookingForwardItemId != 0 && ConfigData.LotteryDrawLookingForwardItemIdList.Contains(rewardItem.ItemId))
                 {
                     // 替换成心愿道具
-                    rewardItemList.Add(rewardItem with { ItemId = request.LookingForwardHeroId });
+                    rewardItemList.Add(rewardItem with { ItemId = request.LookingForwardItemId });
                 }
                 else
                 {

@@ -118,7 +118,7 @@ namespace ET
 
         // 心愿单道具
         [StaticField]
-        public static List<int> LotteryDrawLookingForwardHeroIdList = new()
+        public static List<int> LotteryDrawLookingForwardItemIdList = new()
         {
             10002005, 10002006
         };
