@@ -18,9 +18,9 @@
             // defendUnit.GetComponent<UnitMoveComponent>()?.Stop();
             scene.GetComponent<CrowdComponent>().Stop(defendUnit.DtCrowdAgentId);
             defendUnit.GetComponent<AIComponent>()?.Stop();
-            defendUnit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
+            defendUnit.GetComponent<SkillManagerComponent>()?.OnFinish(false);
             defendUnit.GetComponent<SkillPassiveComponent>()?.Stop();
-            defendUnit.GetComponent<BuffManagerComponentS>()?.OnFinish();
+            defendUnit.GetComponent<BuffManagerComponent>()?.OnFinish();
 
             switch (mapType)
             {

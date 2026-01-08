@@ -78,17 +78,17 @@ namespace ET.Server
         }
     }
 
-    public class SkillHandlerSAttribute : BaseAttribute
+    public class SkillHandlerAttribute : BaseAttribute
     {
     }
 
     [EnableClass]
-    [SkillHandlerSAttribute]
-    public abstract class SkillHandlerS
+    [SkillHandler]
+    public abstract class SkillHandler
     {
-        public abstract void OnInit(SkillS skill);
-        public abstract void OnExecute(SkillS skill);
-        public abstract void OnUpdate(SkillS skill, float deltaTime);
-        public abstract void OnFinished(SkillS skill);
+        public abstract void OnInit(Skill skill);
+        public abstract void OnExecute(Skill skill);
+        public abstract void OnUpdate(Skill skill, float deltaTime);
+        public abstract void OnFinished(Skill skill);
     }
 }

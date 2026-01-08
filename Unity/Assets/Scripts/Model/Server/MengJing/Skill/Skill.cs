@@ -3,12 +3,12 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [ChildOf(typeof(SkillManagerComponentS))]
-    public class SkillS : Entity, IAwake, IDestroy
+    [ChildOf(typeof(SkillManagerComponent))]
+    public class Skill : Entity, IAwake, IDestroy
     {
         public InitSkillData InitSkillData { get; set; }
         public SkillConfig SkillConfig { get; set; }
-        public SkillHandlerS SkillHandler { get; set; }
+        public SkillHandler SkillHandler { get; set; }
         public SkillState SkillState { get; set; }
         private EntityRef<Unit> theUnitFrom; //来自哪个Unit
         public Unit TheUnitFrom { get => this.theUnitFrom; set => this.theUnitFrom = value; }

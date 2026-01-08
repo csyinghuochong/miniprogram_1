@@ -4,7 +4,7 @@ namespace ET.Server
 {
     public static class Function_Fight
     {
-        public static void Fight(Unit attackUnit, Unit defendUnit, SkillS skill, float customActDamage = 0)
+        public static void Fight(Unit attackUnit, Unit defendUnit, Skill skill, float customActDamage = 0)
         {
             if (customActDamage == 0)
             {
@@ -17,7 +17,7 @@ namespace ET.Server
             attackUnit.GetComponent<NumericComponent>().ApplyChange(NumericType.Now_AngerValue, skill.SkillConfig.SkillAddAnger);
         }
 
-        public static void Fight(Unit attackUnit, Unit defendUnit, BuffS buff)
+        public static void Fight(Unit attackUnit, Unit defendUnit, Buff buff)
         {
             FightInternal(attackUnit, defendUnit, buff.BuffConfig.DamageType, 0, SkillActType.Skill, buff.BuffConfig.DamagePro, buff.InitBuffData.SkillConfigId);
         }
@@ -84,7 +84,7 @@ namespace ET.Server
                 damageType = DamageType.Physical;
 
                 // 免疫物理伤害
-                if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateType.PhysicalImmune))
+                if (defendUnit.GetComponent<StateComponent>().StateTypeGet(StateType.PhysicalImmune))
                 {
                     damage = 0;
                     damageType = DamageType.Immune;
@@ -111,7 +111,7 @@ namespace ET.Server
             }
 
             // 无敌
-            if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateType.AllDamageImmune))
+            if (defendUnit.GetComponent<StateComponent>().StateTypeGet(StateType.AllDamageImmune))
             {
                 damage = 0;
                 damageType = DamageType.Immune;
@@ -128,7 +128,7 @@ namespace ET.Server
             {
                 // 链接技能
                 string linkSkillHandler = "Buff_链接";
-                BuffS buff = UnitHelper.HaveBuffByHandler(defendUnit, linkSkillHandler);
+                Buff buff = UnitHelper.HaveBuffByHandler(defendUnit, linkSkillHandler);
                 if (buff != null)
                 {
                     foreach (Unit u in defendUnit.GetParent<UnitComponent>().GetAll())

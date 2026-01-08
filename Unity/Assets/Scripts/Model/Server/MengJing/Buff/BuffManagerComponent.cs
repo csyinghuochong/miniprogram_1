@@ -3,11 +3,11 @@
 namespace ET.Server
 {
     [ComponentOf(typeof(Unit))]
-    public class BuffManagerComponentS : Entity, IAwake, IDestroy
+    public class BuffManagerComponent : Entity, IAwake, IDestroy
     {
         public long Timer;
         public long LastUpdateTime;
 
-        public List<EntityRef<BuffS>> Buffs = new();
+        public List<EntityRef<Buff>> Buffs = new();
     }
 }

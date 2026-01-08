@@ -5,13 +5,13 @@ namespace ET.Server
     /// <summary>
     /// GameObjectParameter 2,5 怪物Id,时间
     /// </summary>
-    public class Skill_混乱之雨 : SkillHandlerS
+    public class Skill_混乱之雨 : SkillHandler
     {
-        public override void OnInit(SkillS skill)
+        public override void OnInit(Skill skill)
         {
         }
 
-        public override void OnExecute(SkillS skill)
+        public override void OnExecute(Skill skill)
         {
             float2 pos = new float2(skill.TheUnitFrom.Position.x, skill.TheUnitFrom.Position.y);
             Unit unit = UnitFactory.CreateZhaoHuan(skill.Scene(), (int)skill.SkillConfig.GameObjectParameter[0], pos, skill.TheUnitFrom);
@@ -20,11 +20,11 @@ namespace ET.Server
             skill.SkillState = SkillState.Finished;
         }
 
-        public override void OnUpdate(SkillS skill, float deltaTime)
+        public override void OnUpdate(Skill skill, float deltaTime)
         {
         }
 
-        public override void OnFinished(SkillS skill)
+        public override void OnFinished(Skill skill)
         {
         }
     }

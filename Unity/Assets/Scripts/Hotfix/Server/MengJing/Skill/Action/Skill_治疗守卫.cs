@@ -2,18 +2,18 @@
 
 namespace ET.Server
 {
-    public class Skill_治疗守卫 : SkillHandlerS
+    public class Skill_治疗守卫 : SkillHandler
     {
-        public override void OnInit(SkillS skill)
+        public override void OnInit(Skill skill)
         {
             skill.ICheckShape = skill.CreateCheckShape(0);
         }
 
-        public override void OnExecute(SkillS skill)
+        public override void OnExecute(Skill skill)
         {
         }
 
-        public override void OnUpdate(SkillS skill, float deltaTime)
+        public override void OnUpdate(Skill skill, float deltaTime)
         {
             skill.RunTime += deltaTime;
 
@@ -53,7 +53,7 @@ namespace ET.Server
             }
         }
 
-        public override void OnFinished(SkillS skill)
+        public override void OnFinished(Skill skill)
         {
         }
     }

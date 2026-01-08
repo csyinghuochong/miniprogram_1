@@ -7,14 +7,14 @@ namespace ET.Server
         {
             Unit unit = args.UnitDefend;
 
-            StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
+            StateComponent stateComponent = unit.GetComponent<StateComponent>();
 
             if (args.nowStateType == StateType.Stun || args.nowStateType == StateType.Freeze)
             {
                 // unit.GetComponent<Move2DComponent>()?.Stop();
                 // unit.GetComponent<UnitMoveComponent>()?.Stop();
                 scene.GetComponent<CrowdComponent>().Stop(unit.DtCrowdAgentId);
-                unit.GetComponent<SkillManagerComponentS>()?.OnBreak();
+                unit.GetComponent<SkillManagerComponent>()?.OnBreak();
             }
 
             M2C_UnitStateUpdate M2C_UnitStateUpdate = M2C_UnitStateUpdate.Create();

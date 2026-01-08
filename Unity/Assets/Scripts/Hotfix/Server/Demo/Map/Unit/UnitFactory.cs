@@ -75,7 +75,7 @@ namespace ET.Server
                 ArchiveComponent archiveComponent = unit.AddComponent<ArchiveComponent>();
             }
 
-            unit.AddComponent<StateComponentS>();
+            unit.AddComponent<StateComponent>();
             unit.AddComponent<UnitInfoComponent>();
             unit.AddDataComponent<DBSaveComponent>();
         }
@@ -97,15 +97,15 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
             numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
 
-            unit.AddComponent<StateComponentS>();
-            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<StateComponent>();
+            unit.AddComponent<SkillManagerComponent>();
             SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
             foreach (int id in hero.Skills)
             {
                 skillPassiveComponent.AddPassiveSkill(id);
             }
 
-            unit.AddComponent<BuffManagerComponentS>();
+            unit.AddComponent<BuffManagerComponent>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponent>().PlayerName;
@@ -151,15 +151,15 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, monsterConfig.HitLess, false);
             numericComponent.ApplyValue(NumericType.BattleCamp, (int)campType, false);
 
-            unit.AddComponent<StateComponentS>();
-            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<StateComponent>();
+            unit.AddComponent<SkillManagerComponent>();
             SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
             foreach (int id in monsterConfig.SkillID)
             {
                 skillPassiveComponent.AddPassiveSkill(id);
             }
 
-            unit.AddComponent<BuffManagerComponentS>();
+            unit.AddComponent<BuffManagerComponent>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
@@ -210,15 +210,15 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_HitDamageLessPro_Base, fromUnitNumericComponent.GetAsLong(NumericType.Base_HitDamageLessPro_Base), false);
             numericComponent.ApplyValue(NumericType.BattleCamp, fromUnitNumericComponent.GetAsLong(NumericType.BattleCamp), false);
 
-            unit.AddComponent<StateComponentS>();
-            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<StateComponent>();
+            unit.AddComponent<SkillManagerComponent>();
             SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
             foreach (int id in monsterConfig.SkillID)
             {
                 skillPassiveComponent.AddPassiveSkill(id);
             }
 
-            unit.AddComponent<BuffManagerComponentS>();
+            unit.AddComponent<BuffManagerComponent>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 

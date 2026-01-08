@@ -3,14 +3,14 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof(SkillManagerComponentS))]
-    [FriendOf(typeof(SkillManagerComponentS))]
-    public static partial class SkillManagerComponentSSystem
+    [EntitySystemOf(typeof(SkillManagerComponent))]
+    [FriendOf(typeof(SkillManagerComponent))]
+    public static partial class SkillManagerComponentSystem
     {
         [Invoke(TimerInvokeType.SkillTimerS)]
-        public class SkillTimerS : ATimer<SkillManagerComponentS>
+        public class SkillTimerS : ATimer<SkillManagerComponent>
         {
-            protected override void Run(SkillManagerComponentS self)
+            protected override void Run(SkillManagerComponent self)
             {
                 try
                 {
@@ -24,12 +24,12 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Awake(this SkillManagerComponentS self)
+        private static void Awake(this SkillManagerComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this SkillManagerComponentS self)
+        private static void Destroy(this SkillManagerComponent self)
         {
             self.Skills.Clear();
             self.Skills = null;
@@ -38,7 +38,7 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        private static void Update(this SkillManagerComponentS self)
+        private static void Update(this SkillManagerComponent self)
         {
             long now = TimeInfo.Instance.ClientNow();
             float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
@@ -46,7 +46,7 @@ namespace ET.Server
 
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
-                SkillS skill = self.Skills[i];
+                Skill skill = self.Skills[i];
 
                 if (skill.SkillState == SkillState.Finished)
                 {
@@ -83,7 +83,7 @@ namespace ET.Server
             }
         }
 
-        public static int TryUseSkill(this SkillManagerComponentS self, int skillConfigId, long targetId, float angle, float3 position)
+        public static int TryUseSkill(this SkillManagerComponent self, int skillConfigId, long targetId, float angle, float3 position)
         {
             if (!SkillConfigCategory.Instance.DataMap.ContainsKey(skillConfigId))
             {
@@ -95,7 +95,7 @@ namespace ET.Server
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
-            if (string.IsNullOrEmpty(skillConfig.SkillHandler) || SkillDispatcherComponentS.Instance.Get(skillConfig.SkillHandler) == null)
+            if (string.IsNullOrEmpty(skillConfig.SkillHandler) || SkillDispatcherComponent.Instance.Get(skillConfig.SkillHandler) == null)
             {
                 return ErrorCode.ERR_ModifyData;
             }
@@ -174,7 +174,7 @@ namespace ET.Server
 
             float cd = self.AddSkillCD(skillConfigId);
 
-            SkillS skill = self.AddChild<SkillS>();
+            Skill skill = self.AddChild<Skill>();
             self.Skills.Add(skill);
             skill.OnInit(initSkillData, myUnit);
             skill.OnExecute();
@@ -200,7 +200,7 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        public static int IsCanUseSkill(this SkillManagerComponentS self, int skillConfigId)
+        public static int IsCanUseSkill(this SkillManagerComponent self, int skillConfigId)
         {
             SkillCDItem skillCdItem = null;
 
@@ -237,7 +237,7 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        private static float AddSkillCD(this SkillManagerComponentS self, int skillConfigId)
+        private static float AddSkillCD(this SkillManagerComponent self, int skillConfigId)
         {
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
 
@@ -273,13 +273,13 @@ namespace ET.Server
             return skillCDItem.CD;
         }
 
-        public static void OnFinish(this SkillManagerComponentS self, bool notice)
+        public static void OnFinish(this SkillManagerComponent self, bool notice)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
 
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
-                SkillS skill = self.Skills[i];
+                Skill skill = self.Skills[i];
                 skill.OnFinished();
                 skill.Dispose();
                 self.Skills.RemoveAt(i);
@@ -294,18 +294,18 @@ namespace ET.Server
             }
         }
 
-        public static void OnBreak(this SkillManagerComponentS self)
+        public static void OnBreak(this SkillManagerComponent self)
         {
             for (int i = self.Skills.Count - 1; i >= 0; i--)
             {
-                SkillS skill = self.Skills[i];
+                Skill skill = self.Skills[i];
                 skill.OnFinished();
                 skill.Dispose();
                 self.Skills.RemoveAt(i);
             }
         }
 
-        private static void OnRemoveSkillItem(this SkillManagerComponentS self, SkillS skill)
+        private static void OnRemoveSkillItem(this SkillManagerComponent self, Skill skill)
         {
             M2C_UnitSkillRemove message = M2C_UnitSkillRemove.Create(true);
             message.UnitId = self.GetParent<Unit>().Id;

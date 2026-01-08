@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_TryUseSkill request, M2C_TryUseSkill response)
         {
-            response.Error = unit.GetComponent<SkillManagerComponentS>().TryUseSkill(request.SkillConfigId, request.TargetId, request.Angle, request.Position);
+            response.Error = unit.GetComponent<SkillManagerComponent>().TryUseSkill(request.SkillConfigId, request.TargetId, request.Angle, request.Position);
 
             await ETTask.CompletedTask;
         }

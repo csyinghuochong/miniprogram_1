@@ -3,13 +3,13 @@ namespace ET.Server
     /// <summary>
     /// BuffParameterValue 伤害比例
     /// </summary>
-    public class Buff_链接 : BuffSHandler
+    public class Buff_链接 : BuffHandler
     {
-        public override void OnInit(BuffS buff)
+        public override void OnInit(Buff buff)
         {
         }
 
-        public override void OnUpdate(BuffS buff, float deltaTime)
+        public override void OnUpdate(Buff buff, float deltaTime)
         {
             buff.RunTime += deltaTime;
 
@@ -19,7 +19,7 @@ namespace ET.Server
             }
         }
 
-        public override void OnFinished(BuffS buff)
+        public override void OnFinished(Buff buff)
         {
         }
     }

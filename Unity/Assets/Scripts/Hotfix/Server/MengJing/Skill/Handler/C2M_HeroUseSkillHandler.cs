@@ -20,7 +20,7 @@
                 return;
             }
 
-            response.Error = hero.GetComponent<SkillManagerComponentS>().TryUseSkill(request.SkillConfigId, request.TargetId, request.Angle, request.Position);
+            response.Error = hero.GetComponent<SkillManagerComponent>().TryUseSkill(request.SkillConfigId, request.TargetId, request.Angle, request.Position);
 
             await ETTask.CompletedTask;
         }

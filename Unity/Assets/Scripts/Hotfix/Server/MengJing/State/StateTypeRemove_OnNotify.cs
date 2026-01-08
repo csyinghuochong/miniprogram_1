@@ -7,7 +7,7 @@ namespace ET.Server
         {
             Unit unit = args.UnitDefend;
 
-            StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
+            StateComponent stateComponent = unit.GetComponent<StateComponent>();
 
             M2C_UnitStateUpdate M2C_UnitStateUpdate = M2C_UnitStateUpdate.Create();
 

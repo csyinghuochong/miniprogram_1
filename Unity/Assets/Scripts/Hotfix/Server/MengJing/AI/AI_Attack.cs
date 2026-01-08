@@ -21,7 +21,7 @@ namespace ET.Server
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             Unit unit = aiComponent.GetParent<Unit>();
-            SkillManagerComponentS skillManagerComponent = unit.GetComponent<SkillManagerComponentS>();
+            SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
 
             for (int i = 0; i < 100000; ++i)
             {

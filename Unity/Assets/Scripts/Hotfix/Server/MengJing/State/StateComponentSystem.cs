@@ -1,29 +1,29 @@
 ﻿namespace ET.Server
 {
-    [EntitySystemOf(typeof(StateComponentS))]
-    [FriendOf(typeof(StateComponentS))]
-    public static partial class StateComponentSSystem
+    [EntitySystemOf(typeof(StateComponent))]
+    [FriendOf(typeof(StateComponent))]
+    public static partial class StateComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this StateComponentS self)
+        private static void Awake(this StateComponent self)
         {
             self.CurrentStateType = StateType.None;
             self.RigidityEndTime = 0;
         }
 
         [EntitySystem]
-        private static void Deserialize(this StateComponentS self)
+        private static void Deserialize(this StateComponent self)
         {
             self.CurrentStateType = StateType.None;
             self.RigidityEndTime = 0;
         }
 
-        public static void Reset(this StateComponentS self)
+        public static void Reset(this StateComponent self)
         {
             self.CurrentStateType = StateType.None;
         }
 
-        public static void StateTypeAdd(this StateComponentS self, StateType nowStateType)
+        public static void StateTypeAdd(this StateComponent self, StateType nowStateType)
         {
             Unit unit = self.GetParent<Unit>();
             self.CurrentStateType = self.CurrentStateType | nowStateType;
@@ -31,7 +31,7 @@
             EventSystem.Instance.Publish(self.Scene(), new StateTypeAdd() { UnitDefend = unit, nowStateType = nowStateType });
         }
 
-        public static void StateTypeRemove(this StateComponentS self, StateType nowStateType)
+        public static void StateTypeRemove(this StateComponent self, StateType nowStateType)
         {
             self.CurrentStateType = self.CurrentStateType & ~nowStateType;
 
@@ -40,7 +40,7 @@
             EventSystem.Instance.Publish(self.Scene(), new StateTypeRemove() { UnitDefend = unit, nowStateType = nowStateType });
         }
 
-        public static bool StateTypeGet(this StateComponentS self, StateType nowStateType)
+        public static bool StateTypeGet(this StateComponent self, StateType nowStateType)
         {
             StateType state = self.CurrentStateType & nowStateType;
 
@@ -54,7 +54,7 @@
             }
         }
 
-        public static bool IsStateBroadcastType(this StateComponentS self, StateType nowStateType)
+        public static bool IsStateBroadcastType(this StateComponent self, StateType nowStateType)
         {
             // return nowStateType == StateTypeEnum.Singing;
             return true;

@@ -17,9 +17,9 @@ namespace ET.Server
     ///
     /// GameObjectParameter[0] - 周期触发间隔（秒）
     /// </summary>
-    public class Skill_Common : SkillHandlerS
+    public class Skill_Common : SkillHandler
     {
-        public override void OnInit(SkillS skill)
+        public override void OnInit(Skill skill)
         {
             // 如果有范围类型，创建碰撞检测体
             if (skill.SkillConfig.DamageRangeType > 0)
@@ -34,7 +34,7 @@ namespace ET.Server
             }
         }
 
-        public override void OnExecute(SkillS skill)
+        public override void OnExecute(Skill skill)
         {
             // 给自己加InitBuff
             if (skill.SkillConfig.InitBuffID.Length > 0 && skill.SkillConfig.InitBuffID[0] != 0)
@@ -146,7 +146,7 @@ namespace ET.Server
             skill.SkillState = SkillState.Finished;
         }
 
-        public override void OnUpdate(SkillS skill, float deltaTime)
+        public override void OnUpdate(Skill skill, float deltaTime)
         {
             skill.RunTime += deltaTime;
 
@@ -170,14 +170,14 @@ namespace ET.Server
             }
         }
 
-        public override void OnFinished(SkillS skill)
+        public override void OnFinished(Skill skill)
         {
         }
 
         /// <summary>
         /// 执行AOE逻辑（伤害+Buff）
         /// </summary>
-        private void ExecuteAOELogic(SkillS skill)
+        private void ExecuteAOELogic(Skill skill)
         {
             List<EntityRef<Unit>> entities = skill.TheUnitFrom.GetParent<UnitComponent>().GetAll();
 

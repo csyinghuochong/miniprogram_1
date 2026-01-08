@@ -3,13 +3,13 @@
     /// <summary>
     /// GameObjectParameter 3.5,0.3,4,0.5 对敌人造成350%物理伤害，如果敌人生命值低于30%，造成400%物理伤害；若成功击杀，将额外恢复50%的怒气。
     /// </summary>
-    public class Skill_淘汰之刃 : SkillHandlerS
+    public class Skill_淘汰之刃 : SkillHandler
     {
-        public override void OnInit(SkillS skill)
+        public override void OnInit(Skill skill)
         {
         }
 
-        public override void OnExecute(SkillS skill)
+        public override void OnExecute(Skill skill)
         {
             if (skill.TheUnitTarget == null)
             {
@@ -53,11 +53,11 @@
             }
         }
         
-        public override void OnUpdate(SkillS skill, float deltaTime)
+        public override void OnUpdate(Skill skill, float deltaTime)
         {
         }
 
-        public override void OnFinished(SkillS skill)
+        public override void OnFinished(Skill skill)
         {
         }
     }

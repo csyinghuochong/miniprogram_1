@@ -2,13 +2,13 @@
 
 namespace ET.Server
 {
-    [ChildOf(typeof(BuffManagerComponentS))]
-    public class BuffS : Entity, IAwake, IDestroy
+    [ChildOf(typeof(BuffManagerComponent))]
+    public class Buff : Entity, IAwake, IDestroy
     {
         public float BuffEndTime { get; set; }
         public InitBuffData InitBuffData { get; set; }
         public BuffState BuffState { get; set; }
-        public BuffSHandler BuffHandler { get; set; }
+        public BuffHandler BuffHandler { get; set; }
 
         public BuffConfig BuffConfig { get; set; }
 

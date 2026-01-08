@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof(BuffManagerComponentS))]
-    [FriendOf(typeof(BuffManagerComponentS))]
-    public static partial class BuffManagerComponentSSystem
+    [EntitySystemOf(typeof(BuffManagerComponent))]
+    [FriendOf(typeof(BuffManagerComponent))]
+    public static partial class BuffManagerComponentSystem
     {
         [Invoke(TimerInvokeType.BuffTimerS)]
-        public class BuffTimerS : ATimer<BuffManagerComponentS>
+        public class BuffTimerS : ATimer<BuffManagerComponent>
         {
-            protected override void Run(BuffManagerComponentS self)
+            protected override void Run(BuffManagerComponent self)
             {
                 try
                 {
@@ -24,18 +24,18 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Awake(this BuffManagerComponentS self)
+        private static void Awake(this BuffManagerComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this BuffManagerComponentS self)
+        private static void Destroy(this BuffManagerComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             self.Buffs.Clear();
         }
 
-        private static void Update(this BuffManagerComponentS self)
+        private static void Update(this BuffManagerComponent self)
         {
             long now = TimeInfo.Instance.ClientNow();
             float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
@@ -43,7 +43,7 @@ namespace ET.Server
 
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                BuffS buff = self.Buffs[i];
+                Buff buff = self.Buffs[i];
 
                 if (buff.BuffState == BuffState.Finished)
                 {
@@ -63,7 +63,7 @@ namespace ET.Server
             }
         }
 
-        public static void BuffFactory(this BuffManagerComponentS self, InitBuffData initBuffData, Unit from, SkillS skill, bool notice = true)
+        public static void BuffFactory(this BuffManagerComponent self, InitBuffData initBuffData, Unit from, Skill skill, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();
             BuffConfig newBuffConfig = BuffConfigCategory.Instance.Get(initBuffData.BuffConfigId);
@@ -74,7 +74,7 @@ namespace ET.Server
                 int curNumber = 0;
                 for (int i = self.Buffs.Count - 1; i >= 0; i--)
                 {
-                    BuffS buff = self.Buffs[i];
+                    Buff buff = self.Buffs[i];
 
                     BuffConfig oldBuffConfig = buff.BuffConfig;
                     if (oldBuffConfig.Id == newBuffConfig.Id)
@@ -94,7 +94,7 @@ namespace ET.Server
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
                 bool remove = false;
-                BuffS buff = self.Buffs[i];
+                Buff buff = self.Buffs[i];
                 BuffConfig oldBuffConfig = buff.BuffConfig;
 
                 if (oldBuffConfig.Id == newBuffConfig.Id && newBuffConfig.IsBuffStackable == 0)
@@ -126,7 +126,7 @@ namespace ET.Server
                 return;
             }
 
-            BuffS newBuff = self.AddChild<BuffS>();
+            Buff newBuff = self.AddChild<Buff>();
             newBuff.OnInit(initBuffData, from, unit, skill);
 
             self.Buffs.Insert(0, newBuff);
@@ -159,7 +159,7 @@ namespace ET.Server
             }
         }
 
-        private static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buff)
+        private static void OnRemoveBuffItem(this BuffManagerComponent self, Buff buff)
         {
             M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create(true);
             m2C_UnitBuffUpdate.UnitId = self.GetParent<Unit>().Id;
@@ -167,13 +167,13 @@ namespace ET.Server
             MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffUpdate);
         }
 
-        public static void OnFinish(this BuffManagerComponentS self)
+        public static void OnFinish(this BuffManagerComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
 
             for (int i = self.Buffs.Count - 1; i >= 0; i--)
             {
-                BuffS buff = self.Buffs[i];
+                Buff buff = self.Buffs[i];
                 self.OnRemoveBuffItem(buff);
                 buff.OnFinished();
                 buff.Dispose();

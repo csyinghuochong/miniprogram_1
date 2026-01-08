@@ -5,7 +5,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [FriendOf(typeof(BuffManagerComponentS))]
+    [FriendOf(typeof(BuffManagerComponent))]
     [FriendOf(typeof(MoveComponent))]
     [FriendOf(typeof(NumericComponent))]
     public static partial class UnitHelper
@@ -169,7 +169,7 @@ namespace ET.Server
 
         public static int IsCanMove(this Unit self)
         {
-            StateComponentS stateComponent = self.GetComponent<StateComponentS>();
+            StateComponent stateComponent = self.GetComponent<StateComponent>();
 
             if (stateComponent.StateTypeGet(StateType.Stun))
             {
@@ -193,9 +193,9 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.MainCity_Z, unit.Position.z, false);
         }
 
-        public static BuffS HaveBuffByHandler(Unit unit, string name)
+        public static Buff HaveBuffByHandler(Unit unit, string name)
         {
-            foreach (BuffS buff in unit.GetComponent<BuffManagerComponentS>().Buffs)
+            foreach (Buff buff in unit.GetComponent<BuffManagerComponent>().Buffs)
             {
                 if (buff.BuffConfig.BuffHandler == name)
                 {

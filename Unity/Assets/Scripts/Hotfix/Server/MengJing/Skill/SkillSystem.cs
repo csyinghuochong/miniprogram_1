@@ -2,25 +2,25 @@
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof(SkillS))]
-    [FriendOf(typeof(SkillS))]
-    public static partial class SkillSSystem
+    [EntitySystemOf(typeof(Skill))]
+    [FriendOf(typeof(Skill))]
+    public static partial class SkillSystem
     {
         [EntitySystem]
-        private static void Awake(this SkillS self)
+        private static void Awake(this Skill self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this SkillS self)
+        private static void Destroy(this Skill self)
         {
         }
 
-        public static void OnInit(this SkillS self, InitSkillData initSkillData, Unit theUnitFrom)
+        public static void OnInit(this Skill self, InitSkillData initSkillData, Unit theUnitFrom)
         {
             self.InitSkillData = initSkillData;
             self.SkillConfig = SkillConfigCategory.Instance.Get(initSkillData.SkillConfigId);
-            self.SkillHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConfig.SkillHandler);
+            self.SkillHandler = SkillDispatcherComponent.Instance.Get(self.SkillConfig.SkillHandler);
             self.SkillState = SkillState.Running;
             self.TheUnitFrom = theUnitFrom;
             if (initSkillData.TargetId != 0)
@@ -33,22 +33,22 @@ namespace ET.Server
             self.SkillHandler?.OnInit(self);
         }
 
-        public static void OnExecute(this SkillS self)
+        public static void OnExecute(this Skill self)
         {
             self.SkillHandler?.OnExecute(self);
         }
 
-        public static void OnUpdate(this SkillS self, float deltaTime)
+        public static void OnUpdate(this Skill self, float deltaTime)
         {
             self.SkillHandler?.OnUpdate(self, deltaTime);
         }
 
-        public static void OnFinished(this SkillS self)
+        public static void OnFinished(this Skill self)
         {
             self.SkillHandler?.OnFinished(self);
         }
 
-        public static void InitSelfBuff(this SkillS self)
+        public static void InitSelfBuff(this Skill self)
         {
             if (self.SkillConfig.InitBuffID != null && self.SkillConfig.InitBuffID[0] != 0)
             {
@@ -59,7 +59,7 @@ namespace ET.Server
             }
         }
 
-        public static void SkillBuff(this SkillS self, int buffId, Unit uu)
+        public static void SkillBuff(this Skill self, int buffId, Unit uu)
         {
             if (uu == null)
             {
@@ -108,10 +108,10 @@ namespace ET.Server
             InitBuffData initBuffData = new InitBuffData();
             initBuffData.SkillConfigId = self.SkillConfig.Id;
             initBuffData.BuffConfigId = buffConfig.Id;
-            uu.GetComponent<BuffManagerComponentS>()?.BuffFactory(initBuffData, self.TheUnitFrom, self);
+            uu.GetComponent<BuffManagerComponent>()?.BuffFactory(initBuffData, self.TheUnitFrom, self);
         }
 
-        public static Shape CreateCheckShape(this SkillS self, int targetAngle)
+        public static Shape CreateCheckShape(this Skill self, int targetAngle)
         {
             Shape ishape = null;
 

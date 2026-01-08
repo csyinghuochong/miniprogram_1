@@ -3,19 +3,19 @@
     /// <summary>
     /// 近战普通攻击
     /// </summary>
-    public class Skill_近战普通攻击 : SkillHandlerS
+    public class Skill_近战普通攻击 : SkillHandler
     {
-        public override void OnInit(SkillS skill)
+        public override void OnInit(Skill skill)
         {
             NumericComponent numericComponent = skill.TheUnitFrom.GetComponent<NumericComponent>();
             skill.TriggerTime = 1 / numericComponent.GetAsFloat(NumericType.Now_AtkSpeed) * 0.8f;
         }
 
-        public override void OnExecute(SkillS skill)
+        public override void OnExecute(Skill skill)
         {
         }
 
-        public override void OnUpdate(SkillS skill, float deltaTime)
+        public override void OnUpdate(Skill skill, float deltaTime)
         {
             skill.TriggerTime -= deltaTime;
 
@@ -27,7 +27,7 @@
             }
         }
 
-        public override void OnFinished(SkillS skill)
+        public override void OnFinished(Skill skill)
         {
         }
     }

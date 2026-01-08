@@ -230,7 +230,7 @@ namespace ET.Server
                     continue;
                 }
                 
-                SkillManagerComponentS skillManagerComponent = myUnit.GetComponent<SkillManagerComponentS>();
+                SkillManagerComponent skillManagerComponent = myUnit.GetComponent<SkillManagerComponent>();
                 if (skillManagerComponent.IsCanUseSkill(skillPassiveInfo.SkillConfigId) != ErrorCode.ERR_Success)
                 {
                     continue;
@@ -275,7 +275,7 @@ namespace ET.Server
                 angle = math.degrees(math.atan2(direction.x, direction.y));
             }
             
-            SkillManagerComponentS skillManagerComponent = unit.GetComponent<SkillManagerComponentS>();
+            SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
             foreach (long id in targetIdList)
             {
                 skillManagerComponent.TryUseSkill(skillPassiveInfo.SkillConfigId, id, angle, float3.zero);

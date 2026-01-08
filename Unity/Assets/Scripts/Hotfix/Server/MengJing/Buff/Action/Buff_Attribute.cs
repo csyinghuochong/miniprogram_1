@@ -1,12 +1,12 @@
 namespace ET.Server
 {
-    public class Buff_Attribute : BuffSHandler
+    public class Buff_Attribute : BuffHandler
     {
-        public override void OnInit(BuffS buff)
+        public override void OnInit(Buff buff)
         {
         }
 
-        public override void OnUpdate(BuffS buff, float deltaTime)
+        public override void OnUpdate(Buff buff, float deltaTime)
         {
             buff.RunTime += deltaTime;
 
@@ -50,7 +50,7 @@ namespace ET.Server
             }
         }
 
-        private void TriggerBuffEffect(BuffS buff, NumericComponent numericComponent)
+        private void TriggerBuffEffect(Buff buff, NumericComponent numericComponent)
         {
             switch (buff.BuffConfig.BuffType)
             {
@@ -87,7 +87,7 @@ namespace ET.Server
                         buff.TheUnitBelongTo.GetComponent<AIComponent>()?.SetTarget(buff.TheUnitFrom.Id);
                     }
                     
-                    buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeAdd((StateType)buff.BuffConfig.BuffParameterType);
+                    buff.TheUnitBelongTo.GetComponent<StateComponent>().StateTypeAdd((StateType)buff.BuffConfig.BuffParameterType);
                     break;
                 }
                 // 技能
@@ -99,7 +99,7 @@ namespace ET.Server
             }
         }
 
-        public override void OnFinished(BuffS buff)
+        public override void OnFinished(Buff buff)
         {
             if (!buff.IsTrigger && buff.BuffConfig.BuffLoopTime <= 0)
             {
@@ -129,7 +129,7 @@ namespace ET.Server
                 // 移除状态
                 case 2:
                 {
-                    buff.TheUnitBelongTo.GetComponent<StateComponentS>().StateTypeRemove((StateType)buff.BuffConfig.BuffParameterType);
+                    buff.TheUnitBelongTo.GetComponent<StateComponent>().StateTypeRemove((StateType)buff.BuffConfig.BuffParameterType);
                     break;
                 }
                 // 移除技能

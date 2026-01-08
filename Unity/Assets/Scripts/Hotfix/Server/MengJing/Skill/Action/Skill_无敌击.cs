@@ -5,13 +5,13 @@ namespace ET.Server
     /// <summary>
     /// GameObjectParameter 5 出击次数
     /// </summary>
-    public class Skill_无敌击: SkillHandlerS
+    public class Skill_无敌击: SkillHandler
     {
-        public override void OnInit(SkillS skill)
+        public override void OnInit(Skill skill)
         {
         }
 
-        public override void OnExecute(SkillS skill)
+        public override void OnExecute(Skill skill)
         {
             foreach (int id in skill.SkillConfig.InitBuffID)
             {
@@ -50,11 +50,11 @@ namespace ET.Server
             skill.SkillState = SkillState.Finished;
         }
 
-        public override void OnUpdate(SkillS skill, float deltaTime)
+        public override void OnUpdate(Skill skill, float deltaTime)
         {
         }
 
-        public override void OnFinished(SkillS skill)
+        public override void OnFinished(Skill skill)
         {
             
         }
