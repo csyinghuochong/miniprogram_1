@@ -18,5 +18,6 @@ namespace ET.Client
         public Image Image_PointsProgress;
         public TMP_Text Text_RewardPoints;
         public Button Button_GetReward;
+        public GameObject GameObject_Received;
     }
 }

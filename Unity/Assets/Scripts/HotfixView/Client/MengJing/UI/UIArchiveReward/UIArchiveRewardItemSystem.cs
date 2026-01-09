@@ -22,6 +22,8 @@ namespace ET.Client
             self.Image_PointsProgress = rc.Get<GameObject>("Image_PointsProgress").GetComponent<Image>();
             self.Text_RewardPoints = rc.Get<GameObject>("Text_RewardPoints").GetComponent<TMP_Text>();
             self.Button_GetReward = rc.Get<GameObject>("Button_GetReward").GetComponent<Button>();
+            self.GameObject_Received = rc.Get<GameObject>("GameObject_Received");
+            self.GameObject_Received.SetActive(false);
 
             self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
         }
@@ -62,6 +64,7 @@ namespace ET.Client
             if (received)
             {
                 // 已经领取奖励
+                self.GameObject_Received.SetActive(true);
             }
 
             // 道具奖励
