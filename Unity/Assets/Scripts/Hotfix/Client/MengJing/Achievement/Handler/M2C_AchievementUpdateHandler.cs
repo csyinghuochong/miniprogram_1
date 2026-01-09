@@ -5,6 +5,12 @@
     {
         protected override async ETTask Run(Scene root, M2C_AchievementUpdate message)
         {
+            AchievementComponentC achievementComponent = root.GetComponent<AchievementComponentC>();
+            foreach (AchievementInfo achievementInfo in message.AchievementInfoList)
+            {
+                achievementComponent?.AddOrUpdateAchievement(achievementInfo);
+            }
+
             await ETTask.CompletedTask;
         }
     }
