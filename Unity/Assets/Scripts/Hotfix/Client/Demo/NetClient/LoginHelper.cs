@@ -111,6 +111,7 @@ namespace ET.Client
                     await ClientChatHelper.GetAllChatRoom(root);
                     await ClientRankHelper.GetAllRank(root);
                     await ClientArchiveHelper.GetAllArchiveHero(root);
+                    await ClientAchievementHelper.GetAllAchievement(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

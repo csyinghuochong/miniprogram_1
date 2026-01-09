@@ -1338,6 +1338,21 @@ message AchievementInfo
 	int32 Progress = 3;
 }
 
+// ResponseType M2C_GetAllAchievement
+message C2M_GetAllAchievement // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetAllAchievement // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated int32 ReceivedAchievementRewardIds = 4;
+	repeated AchievementInfo AchievementInfoList = 5;
+}
+
 message M2C_AchievementUpdate // IMessage
 {
 	repeated AchievementInfo AchievementInfoList = 1;

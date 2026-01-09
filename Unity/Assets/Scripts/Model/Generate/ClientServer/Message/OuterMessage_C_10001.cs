@@ -6092,6 +6092,73 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_GetAllAchievement)]
+    [ResponseType(nameof(M2C_GetAllAchievement))]
+    public partial class C2M_GetAllAchievement : MessageObject, ILocationRequest
+    {
+        public static C2M_GetAllAchievement Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetAllAchievement), isFromPool) as C2M_GetAllAchievement;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetAllAchievement)]
+    public partial class M2C_GetAllAchievement : MessageObject, ILocationResponse
+    {
+        public static M2C_GetAllAchievement Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetAllAchievement), isFromPool) as M2C_GetAllAchievement;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<int> ReceivedAchievementRewardIds { get; set; } = new();
+
+        [MemoryPackOrder(4)]
+        public List<AchievementInfo> AchievementInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.ReceivedAchievementRewardIds.Clear();
+            this.AchievementInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.M2C_AchievementUpdate)]
     public partial class M2C_AchievementUpdate : MessageObject, IMessage
     {
@@ -6289,6 +6356,8 @@ namespace ET
         public const ushort C2M_ReceivedArchiveReward = 10170;
         public const ushort M2C_ReceivedArchiveReward = 10171;
         public const ushort AchievementInfo = 10172;
-        public const ushort M2C_AchievementUpdate = 10173;
+        public const ushort C2M_GetAllAchievement = 10173;
+        public const ushort M2C_GetAllAchievement = 10174;
+        public const ushort M2C_AchievementUpdate = 10175;
     }
 }
