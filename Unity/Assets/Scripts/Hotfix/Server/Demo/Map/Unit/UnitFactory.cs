@@ -75,6 +75,11 @@ namespace ET.Server
                 ArchiveComponent archiveComponent = unit.AddComponent<ArchiveComponent>();
             }
 
+            if (unit.GetComponent<AchievementComponent>() == null)
+            {
+                AchievementComponent achievementComponent = unit.AddComponent<AchievementComponent>();
+            }
+
             unit.AddComponent<StateComponent>();
             unit.AddComponent<UnitInfoComponent>();
             unit.AddDataComponent<DBSaveComponent>();
