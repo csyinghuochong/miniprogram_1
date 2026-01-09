@@ -129,6 +129,8 @@ namespace ET
         
         public const int ERR_AlreadyReceived = 201601; //已领取
         public const int ERR_NotEnoughPoint = 201602; //积分不足
+        
+        public const int ERR_NotEnoughAchievementPoint = 201701; //成就点不足
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()
@@ -248,7 +250,9 @@ namespace ET
             { ERR_FriendIsNotBlack, "用户不在黑名单" },
             
             { ERR_AlreadyReceived, "已领取"},
-            { ERR_NotEnoughPoint, "积分不足"}
+            { ERR_NotEnoughPoint, "积分不足"},
+            
+            { ERR_NotEnoughAchievementPoint, "成就点不足"}
         };
     }
 }

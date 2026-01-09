@@ -9,6 +9,7 @@ namespace ET.Client
     public class UIAchievementComponent : Entity, IAwake, IDestroy
     {
         public int CurrentPage { get; set; } = 0;
+        public int RewardId;
 
         public List<UIAchievementItem> UIAchievementItemList { get; set; } = new();
 

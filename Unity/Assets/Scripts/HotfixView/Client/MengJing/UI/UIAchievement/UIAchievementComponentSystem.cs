@@ -29,8 +29,10 @@ namespace ET.Client
             self.UIAchievementItem.SetActive(false);
 
             self.Button_Close.AddListener(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
+            self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
 
             self.UpdateList();
+            self.UpdatePoint();
         }
 
         [EntitySystem]
@@ -62,8 +64,41 @@ namespace ET.Client
             {
                 self.UIAchievementItemList[i].GameObject.SetActive(false);
             }
+        }
 
-            self.Text_CurrentPoints.SetText(achievementComponent.GetCurrentPoint());
+        private static void UpdatePoint(this UIAchievementComponent self)
+        {
+            AchievementComponentC achievementComponent = self.Root().GetComponent<AchievementComponentC>();
+
+            int max = 0;
+            foreach (AchievementConfig achievementConfig in AchievementConfigCategory.Instance.DataList)
+            {
+                if (!achievementComponent.ReceivedAchievementRewardIds.Contains(achievementConfig.Id))
+                {
+                    max = achievementConfig.RewardPoints;
+                    self.RewardId = achievementConfig.Id;
+                    break;
+                }
+            }
+
+            if (max == 0)
+            {
+                max = AchievementConfigCategory.Instance.DataList[^1].RewardPoints;
+                self.RewardId = AchievementConfigCategory.Instance.DataList[^1].Id;
+            }
+
+            int point = achievementComponent.GetCurrentPoint();
+            self.Text_CurrentPoints.SetTextFormat("{0}/{1}", point, max);
+            self.Image_CurrentPoints.fillAmount = Mathf.Clamp01(point * 1f / max);
+        }
+
+        private static async ETTask OnButton_GetReward(this UIAchievementComponent self)
+        {
+            int error = await ClientAchievementHelper.ReceivedAchievementReward(self.Root(), self.RewardId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.UpdatePoint();
+            }
         }
     }
 }

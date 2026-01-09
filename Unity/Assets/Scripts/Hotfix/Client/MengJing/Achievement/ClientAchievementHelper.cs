@@ -20,5 +20,22 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> ReceivedAchievementReward(Scene root, int rewardId)
+        {
+            C2M_ReceivedAchievementReward request = C2M_ReceivedAchievementReward.Create();
+            request.RewardId = rewardId;
+
+            M2C_ReceivedAchievementReward response = (M2C_ReceivedAchievementReward)await root.GetComponent<ClientSenderComponent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                AchievementComponentC achievementComponent = root.GetComponent<AchievementComponentC>();
+                achievementComponent.ReceivedAchievementRewardIds.Add(rewardId);
+            }
+
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+
+            return response.Error;
+        }
     }
 }

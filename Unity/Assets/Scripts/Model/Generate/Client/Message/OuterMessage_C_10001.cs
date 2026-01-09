@@ -6183,6 +6183,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_ReceivedAchievementReward)]
+    [ResponseType(nameof(M2C_ReceivedAchievementReward))]
+    public partial class C2M_ReceivedAchievementReward : MessageObject, ILocationRequest
+    {
+        public static C2M_ReceivedAchievementReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_ReceivedAchievementReward), isFromPool) as C2M_ReceivedAchievementReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int RewardId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.RewardId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ReceivedAchievementReward)]
+    public partial class M2C_ReceivedAchievementReward : MessageObject, ILocationResponse
+    {
+        public static M2C_ReceivedAchievementReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ReceivedAchievementReward), isFromPool) as M2C_ReceivedAchievementReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -6359,5 +6422,7 @@ namespace ET
         public const ushort C2M_GetAllAchievement = 10173;
         public const ushort M2C_GetAllAchievement = 10174;
         public const ushort M2C_AchievementUpdate = 10175;
+        public const ushort C2M_ReceivedAchievementReward = 10176;
+        public const ushort M2C_ReceivedAchievementReward = 10177;
     }
 }

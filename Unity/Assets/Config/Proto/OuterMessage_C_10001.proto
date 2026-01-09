@@ -1357,3 +1357,17 @@ message M2C_AchievementUpdate // IMessage
 {
 	repeated AchievementInfo AchievementInfoList = 1;
 }
+
+// ResponseType M2C_ReceivedAchievementReward
+message C2M_ReceivedAchievementReward // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 RewardId = 2;
+}
+
+message M2C_ReceivedAchievementReward // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
