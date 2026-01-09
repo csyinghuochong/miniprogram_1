@@ -21,7 +21,7 @@ namespace ET
             Icon = _buf.ReadString();
             ItemQuality = _buf.ReadInt();
             UseLv = _buf.ReadInt();
-            ItemType = (ItemType)_buf.ReadInt();
+            ItemType = _buf.ReadInt();
             ItemSubType = (ItemSubType)_buf.ReadInt();
             SellMoneyType = _buf.ReadInt();
             SellMoneyValue = _buf.ReadInt();
@@ -67,7 +67,7 @@ namespace ET
         /// <summary>
         /// 道具类型
         /// </summary>
-        public readonly ItemType ItemType;
+        public readonly int ItemType;
 
         /// <summary>
         /// 道具子类

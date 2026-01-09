@@ -95,6 +95,7 @@ namespace ET.Client
                 int score = ConfigData.ArchiveHeroAddPoint + hero.Star * ConfigData.ArchiveHeroStarAddPoint;
                 self.Text_JiFen.SetTextFormat("+{0}积分", score);
                 self.Button_JiFen.gameObject.SetActive(true);
+                self.Text_NotHave.gameObject.SetActive(false);
                 return;
             }
 

@@ -27,8 +27,10 @@ namespace ET.Client
         public static async ETTask UpdateInfo(this UIAchievementItem self, int achieveConfigId)
         {
             self.AchieveConfigId = achieveConfigId;
+            
+            self.GameObject_Completed.SetActive(false);
 
-
+            
         }
     }
 }
