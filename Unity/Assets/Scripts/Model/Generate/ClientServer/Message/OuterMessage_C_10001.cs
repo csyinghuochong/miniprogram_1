@@ -6058,6 +6058,35 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.AchievementInfo)]
+    public partial class AchievementInfo : MessageObject
+    {
+        public static AchievementInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(AchievementInfo), isFromPool) as AchievementInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int ConfigId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Progress { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ConfigId = default;
+            this.Progress = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -6230,5 +6259,6 @@ namespace ET
         public const ushort M2C_ActiveArchiveHero = 10169;
         public const ushort C2M_ReceivedArchiveReward = 10170;
         public const ushort M2C_ReceivedArchiveReward = 10171;
+        public const ushort AchievementInfo = 10172;
     }
 }

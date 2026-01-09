@@ -1330,3 +1330,9 @@ message M2C_ReceivedArchiveReward // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+message AchievementInfo
+{
+	int32 ConfigId = 1;
+	int32 Progress = 2;
+}
