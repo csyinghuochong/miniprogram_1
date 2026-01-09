@@ -1,0 +1,29 @@
+[
+  {
+    "Id": 10000001,
+    "Name": "收集大师Ⅰ",
+    "RewardPoints": 10,
+    "AchievementTargetType": 1,
+    "TargetID": 10001001,
+    "TargetValue": 1,
+    "Description": "获得指定英雄"
+  },
+  {
+    "Id": 10000002,
+    "Name": "收集大师Ⅱ",
+    "RewardPoints": 20,
+    "AchievementTargetType": 2,
+    "TargetID": 0,
+    "TargetValue": 3,
+    "Description": "获得三个英雄"
+  },
+  {
+    "Id": 10000003,
+    "Name": "收集大师Ⅲ",
+    "RewardPoints": 50,
+    "AchievementTargetType": 3,
+    "TargetID": 0,
+    "TargetValue": 20,
+    "Description": "拥有一个20级的英雄"
+  }
+]
