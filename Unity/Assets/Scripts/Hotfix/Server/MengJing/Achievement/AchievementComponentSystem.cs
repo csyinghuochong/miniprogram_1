@@ -125,7 +125,7 @@
                         int count = 0;
                         foreach (Hero hero in heroComponent.Heros)
                         {
-                            if (hero.Lv > achievementConfig.TargetID)
+                            if (hero.Lv >= achievementConfig.TargetID)
                             {
                                 count++;
                             }
