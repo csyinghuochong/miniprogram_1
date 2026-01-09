@@ -17,6 +17,7 @@
         {
             AchievementInfo info = AchievementInfo.Create();
             info.ConfigId = self.ConfigId;
+            info.IsCompleted = self.IsCompleted;
             info.Progress = self.Progress;
 
             return info;
@@ -25,6 +26,7 @@
         public static void FromMessage(this Achievement self, AchievementInfo info)
         {
             self.ConfigId = info.ConfigId;
+            self.IsCompleted = info.IsCompleted;
             self.Progress = info.Progress;
         }
     }

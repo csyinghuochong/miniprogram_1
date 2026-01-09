@@ -22,8 +22,8 @@
     "Name": "收集大师Ⅲ",
     "RewardPoints": 50,
     "AchievementTargetType": 3,
-    "TargetID": 0,
-    "TargetValue": 20,
+    "TargetID": 20,
+    "TargetValue": 1,
     "Description": "拥有一个20级的英雄"
   }
 ]

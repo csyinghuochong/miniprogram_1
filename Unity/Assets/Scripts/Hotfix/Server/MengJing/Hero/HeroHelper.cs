@@ -58,6 +58,11 @@ namespace ET.Server
                 hero.Exp -= expConfig.HeroUpExp;
                 hero.Lv += 1;
             }
+
+            EventSystem.Instance.Publish(unit.Scene(), new TriggerAchievement()
+            {
+                Unit = unit, TargetType = AchievementTargetType.HeroLv
+            });
         }
 
         public static void AddHeroHunShi(Unit unit, Hero hero, int value)

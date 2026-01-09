@@ -35,6 +35,14 @@ namespace ET.Server
         public int TargetValue;
     }
 
+    public struct TriggerAchievement
+    {
+        public Unit Unit;
+        public AchievementTargetType TargetType;
+        public int TargetId;
+        public int TargetValue;
+    }
+
     public struct UpdateTotalCombatPower
     {
         public Unit Unit;

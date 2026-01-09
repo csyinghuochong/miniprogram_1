@@ -1334,5 +1334,11 @@ message M2C_ReceivedArchiveReward // ILocationResponse
 message AchievementInfo
 {
 	int32 ConfigId = 1;
-	int32 Progress = 2;
+	int32 IsCompleted = 2;
+	int32 Progress = 3;
+}
+
+message M2C_AchievementUpdate // IMessage
+{
+	repeated AchievementInfo AchievementInfoList = 1;
 }

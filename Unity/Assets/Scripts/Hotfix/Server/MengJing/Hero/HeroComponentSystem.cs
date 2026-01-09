@@ -103,6 +103,15 @@ namespace ET.Server
             self.Heros.Add(hero);
             
             Unit unit = self.GetParent<Unit>();
+
+            EventSystem.Instance.Publish(self.Scene(), new TriggerAchievement()
+            {
+                Unit = self.GetParent<Unit>(), TargetType = AchievementTargetType.HaveHeroId
+            });
+            EventSystem.Instance.Publish(self.Scene(), new TriggerAchievement()
+            {
+                Unit = self.GetParent<Unit>(), TargetType = AchievementTargetType.HaveHeroValue
+            });
             
             HeroHelper.SyncHeroInfo(unit, hero, HeroOpType.Add);
         }
