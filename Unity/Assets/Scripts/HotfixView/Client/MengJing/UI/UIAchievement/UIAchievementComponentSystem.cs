@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace ET.Client
             self.GameObject_LookReward = rc.Get<GameObject>("GameObject_LookReward");
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
-            
+
             self.UIAchievementItem.SetActive(false);
 
             self.Button_Close.AddListener(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
@@ -61,6 +62,8 @@ namespace ET.Client
             {
                 self.UIAchievementItemList[i].GameObject.SetActive(false);
             }
+
+            self.Text_CurrentPoints.SetText(achievementComponent.GetCurrentPoint());
         }
     }
 }

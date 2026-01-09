@@ -159,5 +159,20 @@
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
             }
         }
+
+        public static int GetCurrentPoint(this AchievementComponent self)
+        {
+            int point = 0;
+            foreach (Achievement achievement in self.AchievementList)
+            {
+                if (achievement.IsCompleted != 0)
+                {
+                    AchievementConfig achievementConfig = AchievementConfigCategory.Instance.Get(achievement.ConfigId);
+                    point += achievementConfig.RewardPoints;
+                }
+            }
+
+            return point;
+        }
     }
 }

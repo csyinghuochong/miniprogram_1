@@ -40,5 +40,20 @@
             newAchievement.FromMessage(achievementInfo);
             self.AchievementList.Add(newAchievement);
         }
+
+        public static int GetCurrentPoint(this AchievementComponentC self)
+        {
+            int point = 0;
+            foreach (Achievement achievement in self.AchievementList)
+            {
+                if (achievement.IsCompleted != 0)
+                {
+                    AchievementConfig achievementConfig = AchievementConfigCategory.Instance.Get(achievement.ConfigId);
+                    point += achievementConfig.RewardPoints;
+                }
+            }
+
+            return point;
+        }
     }
 }
