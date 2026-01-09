@@ -221,6 +221,7 @@ namespace ET.Client
             self.Button_Rank = rc.Get<GameObject>("Button_Rank").GetComponent<Button>();
             self.Button_LotteryDraw = rc.Get<GameObject>("Button_LotteryDraw").GetComponent<Button>();
             self.Button_Archive = rc.Get<GameObject>("Button_Archive").GetComponent<Button>();
+            self.Button_Achievement = rc.Get<GameObject>("Button_Achievement").GetComponent<Button>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
@@ -241,6 +242,7 @@ namespace ET.Client
             self.Button_Rank.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRank).Coroutine(); });
             self.Button_LotteryDraw.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UILotteryDraw).Coroutine(); });
             self.Button_Archive.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIArchive).Coroutine(); });
+            self.Button_Achievement.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIAchievement).Coroutine(); });
         }
 
         [EntitySystem]

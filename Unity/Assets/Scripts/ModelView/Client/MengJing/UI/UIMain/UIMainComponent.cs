@@ -51,5 +51,6 @@ namespace ET.Client
         public Button Button_Rank;
         public Button Button_LotteryDraw;
         public Button Button_Archive;
+        public Button Button_Achievement;
     }
 }
