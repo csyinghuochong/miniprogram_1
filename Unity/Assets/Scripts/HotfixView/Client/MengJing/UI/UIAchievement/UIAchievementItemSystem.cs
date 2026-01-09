@@ -29,7 +29,6 @@ namespace ET.Client
             self.AchieveConfigId = achieveConfigId;
             
             self.GameObject_Completed.SetActive(false);
-
             
         }
     }
