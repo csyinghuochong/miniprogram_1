@@ -9,6 +9,8 @@ namespace ET.Client
         private static void Awake(this UILotteryDrawProbabilityComponent self, GameObject gameObject)
         {
             self.GameObject = gameObject;
+            
+            // 直接写上去
         }
 
         [EntitySystem]

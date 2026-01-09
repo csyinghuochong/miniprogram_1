@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -9,8 +10,16 @@ namespace ET.Client
         private static void Awake(this UILotteryDrawRewardPreviewComponent self, GameObject gameObject)
         {
             self.GameObject = gameObject;
-            
-             // ConfigData.LotteryDrawDropId
+
+            // DropConfig dropConfig = DropConfigCategory.Instance.Get(ConfigData.LotteryDrawDropId);
+            // List<RewardItem> rewardItems = new List<RewardItem>();
+            // for (int i = 0; i < dropConfig.DropItemInfos.Length; i++)
+            // {
+            //     RewardItem rewardItem = new RewardItem();
+            //     rewardItem.ItemId = dropConfig.DropItemInfos[i].ItemId;
+            //     rewardItem.ItemNum = dropConfig.DropItemInfos[i].MaxNum;
+            //     rewardItems.Add(rewardItem);
+            // }
         }
 
         [EntitySystem]
