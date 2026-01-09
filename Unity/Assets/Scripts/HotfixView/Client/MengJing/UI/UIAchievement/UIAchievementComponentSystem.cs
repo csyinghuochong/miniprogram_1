@@ -71,20 +71,20 @@ namespace ET.Client
             AchievementComponentC achievementComponent = self.Root().GetComponent<AchievementComponentC>();
 
             int max = 0;
-            foreach (AchievementConfig achievementConfig in AchievementConfigCategory.Instance.DataList)
+            foreach (AchievementRewardConfig achievementRewardConfig in AchievementRewardConfigCategory.Instance.DataList)
             {
-                if (!achievementComponent.ReceivedAchievementRewardIds.Contains(achievementConfig.Id))
+                if (!achievementComponent.ReceivedAchievementRewardIds.Contains(achievementRewardConfig.Id))
                 {
-                    max = achievementConfig.RewardPoints;
-                    self.RewardId = achievementConfig.Id;
+                    max = achievementRewardConfig.RequiredPoints;
+                    self.RewardId = achievementRewardConfig.Id;
                     break;
                 }
             }
 
             if (max == 0)
             {
-                max = AchievementConfigCategory.Instance.DataList[^1].RewardPoints;
-                self.RewardId = AchievementConfigCategory.Instance.DataList[^1].Id;
+                max = AchievementRewardConfigCategory.Instance.DataList[^1].RequiredPoints;
+                self.RewardId = AchievementRewardConfigCategory.Instance.DataList[^1].Id;
             }
 
             int point = achievementComponent.GetCurrentPoint();
