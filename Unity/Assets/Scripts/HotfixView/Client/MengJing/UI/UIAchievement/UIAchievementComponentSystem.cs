@@ -24,8 +24,12 @@ namespace ET.Client
             self.GameObject_LookReward = rc.Get<GameObject>("GameObject_LookReward");
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
+            
+            self.UIAchievementItem.SetActive(false);
 
             self.Button_Close.AddListener(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
+
+            self.UpdateList();
         }
 
         [EntitySystem]
@@ -33,6 +37,30 @@ namespace ET.Client
         {
             self.UIAchievementItemList.Clear();
             self.UIAchievementItem = null;
+        }
+
+        private static void UpdateList(this UIAchievementComponent self)
+        {
+            AchievementComponentC achievementComponent = self.Root().GetComponent<AchievementComponentC>();
+            List<EntityRef<Achievement>> achievementList = achievementComponent.AchievementList;
+
+            while (self.UIAchievementItemList.Count < achievementList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIAchievementItem, self.Content_UIAchievementItem);
+                UIAchievementItem newItem = self.AddChild<UIAchievementItem, GameObject>(go);
+                self.UIAchievementItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < achievementList.Count; i++)
+            {
+                self.UIAchievementItemList[i].UpdateInfo(achievementList[i]);
+                self.UIAchievementItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = achievementList.Count; i < self.UIAchievementItemList.Count; i++)
+            {
+                self.UIAchievementItemList[i].GameObject.SetActive(false);
+            }
         }
     }
 }

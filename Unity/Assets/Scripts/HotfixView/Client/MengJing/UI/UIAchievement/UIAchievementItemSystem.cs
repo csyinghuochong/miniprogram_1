@@ -21,15 +21,20 @@ namespace ET.Client
             self.Text_Description = rc.Get<GameObject>("Text_Description").GetComponent<TMP_Text>();
             self.Text_RewardPoints = rc.Get<GameObject>("Text_RewardPoints").GetComponent<TMP_Text>();
             self.Text_Progress = rc.Get<GameObject>("Text_Progress").GetComponent<TMP_Text>();
-            self.GameObject_Completed = rc.Get<GameObject>("GameObject_Completed");
+            self.GameObject_Completed = rc.Get<GameObject>("Gameobject_Completed");
         }
 
-        public static async ETTask UpdateInfo(this UIAchievementItem self, int achieveConfigId)
+        public static void UpdateInfo(this UIAchievementItem self, Achievement achievement)
         {
-            self.AchieveConfigId = achieveConfigId;
-            
-            self.GameObject_Completed.SetActive(false);
-            
+            self.Achievement = achievement;
+
+            AchievementConfig achievementConfig = AchievementConfigCategory.Instance.Get(achievement.ConfigId);
+            self.Text_Name.SetText(achievementConfig.Name);
+            self.Text_Description.SetText(achievementConfig.Description);
+            self.Text_RewardPoints.SetTextFormat("成就点数：{0}", achievementConfig.RewardPoints);
+            self.Text_Progress.SetTextFormat("进度：{0}/{1}", achievement.Progress, achievementConfig.TargetValue);
+
+            self.GameObject_Completed.SetActive(achievement.IsCompleted == 1);
         }
     }
 }

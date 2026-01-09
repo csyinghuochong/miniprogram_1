@@ -7,7 +7,8 @@ namespace ET.Client
     [ChildOf]
     public class UIAchievementItem : Entity, IAwake<GameObject>
     {
-        public int AchieveConfigId;
+        private EntityRef<Achievement> achievement;
+        public Achievement Achievement { get => this.achievement; set => this.achievement = value; }
 
         public GameObject GameObject { get; set; }
 
