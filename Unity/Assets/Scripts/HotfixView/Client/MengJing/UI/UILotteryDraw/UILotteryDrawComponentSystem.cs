@@ -7,6 +7,51 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateUserData_UILotteryDrawRefresh : AEvent<Scene, UpdateUserData>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserData args)
+        {
+            if (args.UserDataType != UserDataType.Diamond)
+            {
+                return;
+            }
+
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UILotteryDraw);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UILotteryDrawComponent uiLotteryDrawComponent = ui.GetComponent<UILotteryDrawComponent>();
+
+            if (args.UserDataType == UserDataType.Diamond)
+            {
+                uiLotteryDrawComponent.UpdateDiamond();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+    
+    [Event(SceneType.Demo)]
+    public class InventoryUpdate_UILotteryDrawRefresh : AEvent<Scene, InventoryUpdate>
+    {
+        protected override async ETTask Run(Scene scene, InventoryUpdate args)
+        {
+            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UILotteryDraw);
+            if (ui == null)
+            {
+                return;
+            }
+
+            UILotteryDrawComponent uiLotteryDrawComponent = ui.GetComponent<UILotteryDrawComponent>();
+            uiLotteryDrawComponent.UpdateLotteryTicket();
+
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [EntitySystemOf(typeof(UILotteryDrawComponent))]
     [FriendOf(typeof(UILotteryDrawComponent))]
     public static partial class UILotteryDrwaComponentSystem
@@ -44,6 +89,8 @@ namespace ET.Client
 
             self.UpdateBaoDiTip();
             self.UpdateFreeTime().Coroutine();
+            self.UpdateDiamond();
+            self.UpdateLotteryTicket();
         }
 
         private static void UpdateBaoDiTip(this UILotteryDrawComponent self)
@@ -105,6 +152,28 @@ namespace ET.Client
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIGetReward);
             UIGetRewardComponent uiGetRewardComponent = ui.GetComponent<UIGetRewardComponent>();
             uiGetRewardComponent.OnInit(rewardItems);
+        }
+        
+        public static void UpdateLotteryTicket(this UILotteryDrawComponent self)
+        {
+            InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
+
+            List<Item> itemList = inventoryComponentC.GetItemsBySubType(ItemSubType.Type_6, InventoryContainerType.Bag);
+            
+            self.Text_Type_LotteryTicket.SetText(itemList[0].Num);
+        }
+
+        public static void UpdateDiamond(this UILotteryDrawComponent self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            
+            if (userInfoComponent.Diamond >= 10000)
+            {
+                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
+                return;
+            }
+
+            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
     }
 }

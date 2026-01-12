@@ -21,7 +21,7 @@ namespace ET.Client
             self.Text_Description = rc.Get<GameObject>("Text_Description").GetComponent<TMP_Text>();
             self.Text_RewardPoints = rc.Get<GameObject>("Text_RewardPoints").GetComponent<TMP_Text>();
             self.Text_Progress = rc.Get<GameObject>("Text_Progress").GetComponent<TMP_Text>();
-            self.GameObject_Completed = rc.Get<GameObject>("Gameobject_Completed");
+            self.GameObject_Completed = rc.Get<GameObject>("GameObject_Completed");
         }
 
         public static void UpdateInfo(this UIAchievementItem self, Achievement achievement)
@@ -35,6 +35,7 @@ namespace ET.Client
             self.Text_Progress.SetTextFormat("进度：{0}/{1}", achievement.Progress, achievementConfig.TargetValue);
 
             self.GameObject_Completed.SetActive(achievement.IsCompleted == 1);
+            self.Text_Progress.gameObject.SetActive(achievement.IsCompleted == 0);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -6,5 +7,7 @@ namespace ET.Client
     public class UILotteryDrawProbabilityComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject { get; set; }
+
+        public Button Button_Close;
     }
 }

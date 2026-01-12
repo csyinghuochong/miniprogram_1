@@ -291,10 +291,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6257269600143413971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 70}
-  m_SizeDelta: {x: 200, y: 140}
+  m_SizeDelta: {x: 0, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4295795683886954643
 CanvasRenderer:
@@ -1240,10 +1240,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6257269600143413971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 200, y: 80}
+  m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3590077324803814987
 CanvasRenderer:
@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6210\u5C31\u70B9\u6570\uFF1A3"
+  m_text: "\u6210\u5C31\u70B9\u6570\uFF1A100"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2a97cb8eea3b2f4eb56795117d7c939, type: 2}
   m_sharedMaterial: {fileID: 6509247359724258812, guid: a2a97cb8eea3b2f4eb56795117d7c939,
@@ -1977,7 +1977,7 @@ GameObject:
   - component: {fileID: 4482196792452785857}
   - component: {fileID: 4570869256155964788}
   m_Layer: 5
-  m_Name: Gameobject_Completed
+  m_Name: GameObject_Completed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2482,9 +2482,9 @@ RectTransform:
   - {fileID: 6257269600143413971}
   m_Father: {fileID: 5907381725295804198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 576, y: -120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1130487600593532624
@@ -2548,7 +2548,7 @@ MonoBehaviour:
     gameObject: {fileID: 2450343022308509624}
   - key: Text_Progress
     gameObject: {fileID: 296677819366327233}
-  - key: Gameobject_Completed
+  - key: GameObject_Completed
     gameObject: {fileID: 4480823859493954257}
 --- !u!1 &6218819777843046021
 GameObject:
