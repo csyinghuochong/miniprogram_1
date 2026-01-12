@@ -71,8 +71,7 @@
         {
             HeroComponent heroComponent = self.GetParent<Unit>().GetComponent<HeroComponent>();
 
-            M2C_AchievementUpdate message = M2C_AchievementUpdate.Create(true);
-
+            using ListComponent<AchievementInfo> achievementInfoList = ListComponent<AchievementInfo>.Create();
             foreach (Achievement achievement in self.AchievementList)
             {
                 AchievementConfig achievementConfig = AchievementConfigCategory.Instance.Get(achievement.ConfigId);
@@ -150,12 +149,18 @@
 
                 if (update)
                 {
-                    message.AchievementInfoList.Add(achievement.ToMessage());
+                    achievementInfoList.Add(achievement.ToMessage());
                 }
             }
 
-            if (message.AchievementInfoList.Count > 0 && notice)
+            if (achievementInfoList.Count > 0 && notice)
             {
+                M2C_AchievementUpdate message = M2C_AchievementUpdate.Create();
+                foreach (AchievementInfo achievementInfo in achievementInfoList)
+                {
+                    message.AchievementInfoList.Add(achievementInfo);
+                }
+
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
             }
         }
