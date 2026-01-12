@@ -12,6 +12,7 @@ namespace ET.Client
         public int RewardId;
 
         public List<UIAchievementItem> UIAchievementItemList { get; set; } = new();
+        public List<UICommonItem> UICommonItemList { get; set; } = new();
 
         public Button Button_Close;
         public Button Button_Type_Hero;

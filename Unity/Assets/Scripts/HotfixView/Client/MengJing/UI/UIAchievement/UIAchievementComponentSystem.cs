@@ -71,25 +71,49 @@ namespace ET.Client
             AchievementComponentC achievementComponent = self.Root().GetComponent<AchievementComponentC>();
 
             int max = 0;
+            AchievementRewardConfig nowConfig = null;
             foreach (AchievementRewardConfig achievementRewardConfig in AchievementRewardConfigCategory.Instance.DataList)
             {
                 if (!achievementComponent.ReceivedAchievementRewardIds.Contains(achievementRewardConfig.Id))
                 {
-                    max = achievementRewardConfig.RequiredPoints;
-                    self.RewardId = achievementRewardConfig.Id;
+                    nowConfig = achievementRewardConfig;
+
                     break;
                 }
             }
 
-            if (max == 0)
+            if (nowConfig == null)
             {
-                max = AchievementRewardConfigCategory.Instance.DataList[^1].RequiredPoints;
-                self.RewardId = AchievementRewardConfigCategory.Instance.DataList[^1].Id;
+                nowConfig = AchievementRewardConfigCategory.Instance.DataList[^1];
             }
+
+            max = nowConfig.RequiredPoints;
+            self.RewardId = nowConfig.Id;
 
             int point = achievementComponent.GetCurrentPoint();
             self.Text_CurrentPoints.SetTextFormat("{0}/{1}", point, max);
             self.Image_CurrentPoints.fillAmount = Mathf.Clamp01(point * 1f / max);
+
+            // 道具奖励
+            RewardItem[] rewardItems = nowConfig.RewardItem;
+
+            while (self.UICommonItemList.Count < rewardItems.Length)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UICommonItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < rewardItems.Length; i++)
+            {
+                self.UICommonItemList[i].UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
+                self.UICommonItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = rewardItems.Length; i < self.UICommonItemList.Count; i++)
+            {
+                self.UICommonItemList[i].GameObject.SetActive(false);
+            }
         }
 
         private static async ETTask OnButton_GetReward(this UIAchievementComponent self)
