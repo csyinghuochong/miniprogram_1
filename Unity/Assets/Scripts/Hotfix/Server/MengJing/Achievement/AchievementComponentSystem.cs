@@ -24,6 +24,8 @@
         [EntitySystem]
         private static void Destroy(this AchievementComponent self)
         {
+            self.ReceivedAchievementRewardIds.Clear();
+            self.AchievementList.Clear();
         }
 
         [EntitySystem]
