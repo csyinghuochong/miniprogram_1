@@ -25,14 +25,17 @@ namespace ET.Client
             self.GameObject_LookReward = rc.Get<GameObject>("GameObject_LookReward");
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
+            self.Button_CloseLookReward = rc.Get<GameObject>("Button_CloseLookReward").GetComponent<Button>();
 
             self.UIAchievementItem.SetActive(false);
 
             self.Button_Close.AddListener(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
             self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
+            self.Button_CloseLookReward.AddListener(() => self.GameObject_LookReward.SetActive(false));
 
             self.UpdateList();
             self.UpdatePoint();
+            self.SetShowType(1);
         }
 
         [EntitySystem]
@@ -40,6 +43,15 @@ namespace ET.Client
         {
             self.UIAchievementItemList.Clear();
             self.UIAchievementItem = null;
+        }
+        
+        public static void SetShowType(this UIAchievementComponent self, int page)
+        {
+            self.CurrentPage = page;
+
+            self.Button_Type_Hero.transform.Find("Image_On").gameObject.SetActive(page == 1);
+            self.Button_Type_Hero.transform.Find("Image_Off").gameObject.SetActive(page != 1);
+            
         }
 
         private static void UpdateList(this UIAchievementComponent self)

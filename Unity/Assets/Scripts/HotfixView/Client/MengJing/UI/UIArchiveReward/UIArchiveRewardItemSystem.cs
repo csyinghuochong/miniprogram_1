@@ -50,6 +50,7 @@ namespace ET.Client
             if (currentPoint >= archiveRewardConfig.RequiredPoints)
             {
                 self.Image_PointsProgress.fillAmount = 1;
+                
             }
             else if (currentPoint < lastPoint)
             {

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Cysharp.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +18,8 @@ namespace ET.Client
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Content_UIArchiveRewardItem = rc.Get<GameObject>("Content_UIArchiveRewardItem").transform;
             self.UIArchiveRewardItem = rc.Get<GameObject>("UIArchiveRewardItem");
-            // self.Text_CurrentPoints = rc.Get<GameObject>("Text_CurrentPoints").GetComponent<TMP_Text>();
-            
+            self.Text_CurrentPoints = rc.Get<GameObject>("Text_CurrentPoints").GetComponent<TMP_Text>();
+
             self.UIArchiveRewardItem.gameObject.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIArchiveReward); });
@@ -53,6 +55,10 @@ namespace ET.Client
             {
                 self.UIArchiveRewardItemList[i].GameObject.SetActive(false);
             }
+
+            ArchiveComponentC archiveComponent = self.Root().GetComponent<ArchiveComponentC>();
+            int currentPoint = archiveComponent.GetCurrentPoint();
+            self.Text_CurrentPoints.SetTextFormat("当前积分：{0}", currentPoint);
         }
     }
 }
