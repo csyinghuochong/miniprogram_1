@@ -22,7 +22,9 @@ namespace ET.Client
             self.Image_CurrentPoints = rc.Get<GameObject>("Image_CurrentPoints").GetComponent<Image>();
             self.Text_CurrentPoints = rc.Get<GameObject>("Text_CurrentPoints").GetComponent<TMP_Text>();
             self.Button_GetReward = rc.Get<GameObject>("Button_GetReward").GetComponent<Button>();
+            self.Button_LookReward = rc.Get<GameObject>("Button_LookReward").GetComponent<Button>();
             self.GameObject_LookReward = rc.Get<GameObject>("GameObject_LookReward");
+            self.GameObject_LookReward.SetActive(false);
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
             self.Button_CloseLookReward = rc.Get<GameObject>("Button_CloseLookReward").GetComponent<Button>();
@@ -31,6 +33,7 @@ namespace ET.Client
 
             self.Button_Close.AddListener(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
             self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
+            self.Button_LookReward.AddListener(() => { self.OnButton_LookReward(); });
             self.Button_CloseLookReward.AddListener(() => self.GameObject_LookReward.SetActive(false));
 
             self.UpdateList();
@@ -105,10 +108,32 @@ namespace ET.Client
             int point = achievementComponent.GetCurrentPoint();
             self.Text_CurrentPoints.SetTextFormat("{0}/{1}", point, max);
             self.Image_CurrentPoints.fillAmount = Mathf.Clamp01(point * 1f / max);
+            
+        }
 
+        private static void OnButton_LookReward(this UIAchievementComponent self)
+        {
+            AchievementComponentC achievementComponent = self.Root().GetComponent<AchievementComponentC>();
+            
+            AchievementRewardConfig nowConfig = null;
+            foreach (AchievementRewardConfig achievementRewardConfig in AchievementRewardConfigCategory.Instance.DataList)
+            {
+                if (!achievementComponent.ReceivedAchievementRewardIds.Contains(achievementRewardConfig.Id))
+                {
+                    nowConfig = achievementRewardConfig;
+
+                    break;
+                }
+            }
+
+            if (nowConfig == null)
+            {
+                nowConfig = AchievementRewardConfigCategory.Instance.DataList[^1];
+            }
+            
             // 道具奖励
             RewardItem[] rewardItems = nowConfig.RewardItem;
-
+            
             while (self.UICommonItemList.Count < rewardItems.Length)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
@@ -126,6 +151,8 @@ namespace ET.Client
             {
                 self.UICommonItemList[i].GameObject.SetActive(false);
             }
+
+            self.GameObject_LookReward.SetActive(true);
         }
 
         private static async ETTask OnButton_GetReward(this UIAchievementComponent self)

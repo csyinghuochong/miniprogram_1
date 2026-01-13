@@ -21,6 +21,7 @@ namespace ET.Client
         public Image Image_CurrentPoints;
         public TMP_Text Text_CurrentPoints;
         public Button Button_GetReward;
+        public Button Button_LookReward;
         public GameObject GameObject_LookReward;
         public Transform Content_UICommonItem;
         public GameObject UICommonItem;
