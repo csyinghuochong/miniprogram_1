@@ -33,7 +33,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [Event(SceneType.Demo)]
     public class InventoryUpdate_UILotteryDrawRefresh : AEvent<Scene, InventoryUpdate>
     {
@@ -51,7 +51,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [EntitySystemOf(typeof(UILotteryDrawComponent))]
     [FriendOf(typeof(UILotteryDrawComponent))]
     public static partial class UILotteryDrwaComponentSystem
@@ -73,8 +73,10 @@ namespace ET.Client
             self.Button_DrawTen = rc.Get<GameObject>("Button_DrawTen").GetComponent<Button>();
             self.Text_FreeTime = rc.Get<GameObject>("Text_FreeTime").GetComponent<TMP_Text>();
             self.Toggle_SkipAnimation = rc.Get<GameObject>("Toggle_SkipAnimation").GetComponent<Toggle>();
-            self.UILotteryDrawRewardPreviewComponent = self.AddComponent<UILotteryDrawRewardPreviewComponent, GameObject>(rc.Get<GameObject>("GameObject_RewardPreview"));
-            self.UILotteryDrawProbabilityComponent = self.AddComponent<UILotteryDrawProbabilityComponent, GameObject>(rc.Get<GameObject>("GameObject_Probability"));
+            self.UILotteryDrawRewardPreviewComponent =
+                    self.AddComponent<UILotteryDrawRewardPreviewComponent, GameObject>(rc.Get<GameObject>("GameObject_RewardPreview"));
+            self.UILotteryDrawProbabilityComponent =
+                    self.AddComponent<UILotteryDrawProbabilityComponent, GameObject>(rc.Get<GameObject>("GameObject_Probability"));
             self.UILotteryDrawWishComponent = self.AddComponent<UILotteryDrawWishComponent, GameObject>(rc.Get<GameObject>("GameObject_Wish"));
             self.UILotteryDrawRewardPreviewComponent.GameObject.SetActive(false);
             self.UILotteryDrawProbabilityComponent.GameObject.SetActive(false);
@@ -153,20 +155,22 @@ namespace ET.Client
             UIGetRewardComponent uiGetRewardComponent = ui.GetComponent<UIGetRewardComponent>();
             uiGetRewardComponent.OnInit(rewardItems);
         }
-        
+
         public static void UpdateLotteryTicket(this UILotteryDrawComponent self)
         {
             InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
 
             List<Item> itemList = inventoryComponentC.GetItemsBySubType(ItemSubType.Type_6, InventoryContainerType.Bag);
-            
-            self.Text_Type_LotteryTicket.SetText(itemList[0].Num);
+
+            int ticket = itemList.Count != 0 ? itemList[0].Num : 0;
+
+            self.Text_Type_LotteryTicket.SetText(ticket);
         }
 
         public static void UpdateDiamond(this UILotteryDrawComponent self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            
+
             if (userInfoComponent.Diamond >= 10000)
             {
                 self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);

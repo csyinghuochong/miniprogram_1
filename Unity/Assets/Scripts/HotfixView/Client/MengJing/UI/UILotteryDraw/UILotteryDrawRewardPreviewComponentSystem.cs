@@ -31,7 +31,7 @@ namespace ET.Client
             self.UICommonItem = null;
         }
 
-        public static void UpdateItemList(this UILotteryDrawRewardPreviewComponent self)
+        private static void UpdateItemList(this UILotteryDrawRewardPreviewComponent self)
         {
             DropConfig dropConfig = DropConfigCategory.Instance.Get(ConfigData.LotteryDrawDropId);
             List<RewardItem> rewardItems = new List<RewardItem>();
