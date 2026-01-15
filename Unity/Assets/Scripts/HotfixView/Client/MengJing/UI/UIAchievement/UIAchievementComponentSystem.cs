@@ -134,22 +134,11 @@ namespace ET.Client
             // 道具奖励
             RewardItem[] rewardItems = nowConfig.RewardItem;
             
-            while (self.UICommonItemList.Count < rewardItems.Length)
+            for (int i = 0; i < rewardItems.Length; i++)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
                 UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
-                self.UICommonItemList.Add(newItem);
-            }
-
-            for (int i = 0; i < rewardItems.Length; i++)
-            {
-                self.UICommonItemList[i].UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
-                self.UICommonItemList[i].GameObject.SetActive(true);
-            }
-
-            for (int i = rewardItems.Length; i < self.UICommonItemList.Count; i++)
-            {
-                self.UICommonItemList[i].GameObject.SetActive(false);
+                newItem.UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
             }
 
             self.GameObject_LookReward.SetActive(true);
