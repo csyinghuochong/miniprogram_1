@@ -24,5 +24,6 @@ namespace ET.Client
         public Button Button_DrawTen;
         public TMP_Text Text_FreeTime;
         public Toggle Toggle_SkipAnimation;
+        public Image Image_WishIcon;
     }
 }

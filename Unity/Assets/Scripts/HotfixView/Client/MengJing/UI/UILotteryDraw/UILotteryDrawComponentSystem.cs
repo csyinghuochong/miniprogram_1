@@ -54,7 +54,7 @@ namespace ET.Client
 
     [EntitySystemOf(typeof(UILotteryDrawComponent))]
     [FriendOf(typeof(UILotteryDrawComponent))]
-    public static partial class UILotteryDrwaComponentSystem
+    public static partial class UILotteryDrawComponentSystem
     {
         [EntitySystem]
         private static void Awake(this UILotteryDrawComponent self)
@@ -73,6 +73,8 @@ namespace ET.Client
             self.Button_DrawTen = rc.Get<GameObject>("Button_DrawTen").GetComponent<Button>();
             self.Text_FreeTime = rc.Get<GameObject>("Text_FreeTime").GetComponent<TMP_Text>();
             self.Toggle_SkipAnimation = rc.Get<GameObject>("Toggle_SkipAnimation").GetComponent<Toggle>();
+            self.Image_WishIcon = rc.Get<GameObject>("Image_WishIcon").GetComponent<Image>();
+            self.Image_WishIcon.gameObject.SetActive(false);
             self.UILotteryDrawRewardPreviewComponent =
                     self.AddComponent<UILotteryDrawRewardPreviewComponent, GameObject>(rc.Get<GameObject>("GameObject_RewardPreview"));
             self.UILotteryDrawProbabilityComponent =
@@ -93,6 +95,7 @@ namespace ET.Client
             self.UpdateFreeTime().Coroutine();
             self.UpdateDiamond();
             self.UpdateLotteryTicket();
+            self.UpdateWishIcon().Coroutine();
         }
 
         private static void UpdateBaoDiTip(this UILotteryDrawComponent self)
@@ -162,7 +165,11 @@ namespace ET.Client
 
             List<Item> itemList = inventoryComponentC.GetItemsBySubType(ItemSubType.Type_6, InventoryContainerType.Bag);
 
-            int ticket = itemList.Count != 0 ? itemList[0].Num : 0;
+            int ticket = 0;
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                ticket += itemList[i].Num;
+            }
 
             self.Text_Type_LotteryTicket.SetText(ticket);
         }
@@ -178,6 +185,21 @@ namespace ET.Client
             }
 
             self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
+        }
+
+        public static async ETTask UpdateWishIcon(this UILotteryDrawComponent self)
+        {
+            
+            if (self.WishItemId == 0)
+            {
+                return;
+            }
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.WishItemId);
+
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            self.Image_WishIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            self.Image_WishIcon.gameObject.SetActive(true);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace ET.Client
     public class UILotteryDrawWishComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject { get; set; }
+        public long ItemId;
         
         public List<UICommonItem> UICommonItemList { get; set; } = new();
         

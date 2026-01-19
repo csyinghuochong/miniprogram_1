@@ -6,6 +6,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(UILotteryDrawWishComponent))]
     [FriendOf(typeof(UILotteryDrawWishComponent))]
+    [FriendOfAttribute(typeof(ET.Client.UILotteryDrawComponent))]
     public static partial class UILotteryDrawWishComponentSystem
     {
         [EntitySystem]
@@ -21,7 +22,7 @@ namespace ET.Client
 
             self.Button_Close.AddListener(() => { self.GameObject.SetActive(false); });
 
-            self.UpdateItemList();
+            self.UpdateWishItemList();
             //ConfigData.LotteryDrawWishItemIdList
         }
 
@@ -32,23 +33,34 @@ namespace ET.Client
             self.UICommonItem = null;
         }
 
-        private static void UpdateItemList(this UILotteryDrawWishComponent self)
+        private static void UpdateWishItemList(this UILotteryDrawWishComponent self)
         {
             List<Item> items = new List<Item>();
+
+            DropConfig dropConfig = DropConfigCategory.Instance.Get(ConfigData.LotteryDrawDropId);
 
             for (int i = 0; i < ConfigData.LotteryDrawWishItemIdList.Count; i++)
             {
                 Item item = new Item();
                 item.ConfigId = ConfigData.LotteryDrawWishItemIdList[i];
+                
+                for (int j = 0; j < dropConfig.DropItemInfos.Length; j++)
+                {
+                    if (dropConfig.DropItemInfos[j].ItemId == item.ConfigId)
+                    {
+                        item.Num = dropConfig.DropItemInfos[j].MaxNum;
+                        break;
+                    }
+                }
+
                 items.Add(item);
             }
+            
+        }
 
-            for (int i = 0; i < items.Count; i++)
-            {
-                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
-                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
-                newItem.UpdateInfo(items[i], item => { Log.Warning("我点击了"); }).Coroutine();
-            }
+        private static void OnItemClick(this UILotteryDrawWishComponent self, Item item)
+        {
+
         }
     }
 }
