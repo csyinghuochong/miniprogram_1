@@ -38,7 +38,7 @@ namespace ET.Client
 
             self.UpdateList();
             self.UpdatePoint();
-            self.SetShowType(1);
+            self.SetShowType(0);
         }
 
         [EntitySystem]
@@ -52,8 +52,8 @@ namespace ET.Client
         {
             self.CurrentPage = page;
 
-            self.Button_Type_Hero.transform.Find("Image_On").gameObject.SetActive(page == 1);
-            self.Button_Type_Hero.transform.Find("Image_Off").gameObject.SetActive(page != 1);
+            self.Button_Type_Hero.transform.Find("Image_On").gameObject.SetActive(page == 0);
+            self.Button_Type_Hero.transform.Find("Image_Off").gameObject.SetActive(page != 0);
             
         }
 

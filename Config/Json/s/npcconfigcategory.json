@@ -42,5 +42,16 @@
     },
     "OpenUI": "",
     "DialogueText": "你好啊，勇士。去战斗吧。"
+  },
+  {
+    "Id": 1005,
+    "Name": "分解",
+    "Model": "1005",
+    "Position": {
+      "x": 16,
+      "y": 0
+    },
+    "OpenUI": "UIRecycle/UIRecycle",
+    "DialogueText": ""
   }
 ]

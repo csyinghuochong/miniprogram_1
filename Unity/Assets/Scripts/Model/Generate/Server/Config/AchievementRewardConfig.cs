@@ -39,7 +39,7 @@ namespace ET
         public readonly int RequiredPoints;
 
         /// <summary>
-        /// 奖励道具Id
+        /// 奖励道具
         /// </summary>
         public readonly ET.RewardItem[] RewardItem;
 

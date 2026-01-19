@@ -43,7 +43,7 @@ namespace ET.Client
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIArchive); });
             self.Button_Reward.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIArchiveReward).Coroutine(); });
-            self.Button_Type_Hero.onClick.AddListener(() => { self.SetShowType(1); });
+            self.Button_Type_Hero.onClick.AddListener(() => { self.SetShowType(0); });
 
             self.SetShowType(1);
         }
@@ -59,8 +59,8 @@ namespace ET.Client
         {
             self.CurrentPage = page;
 
-            self.Button_Type_Hero.transform.Find("Image_On").gameObject.SetActive(page == 1);
-            self.Button_Type_Hero.transform.Find("Image_Off").gameObject.SetActive(page != 1);
+            self.Button_Type_Hero.transform.Find("Image_On").gameObject.SetActive(page == 0);
+            self.Button_Type_Hero.transform.Find("Image_Off").gameObject.SetActive(page != 0);
 
             self.UpdateHeroList(page);
         }
@@ -76,7 +76,7 @@ namespace ET.Client
             self.Text_CollectProgress.SetTextFormat("{0}/{1}", heroCount, allHeroCount);
 
             List<EntityRef<ArchiveHero>> archiveHeroeList = null;
-            if (page == 1)
+            if (page == 0)
             {
                 archiveHeroeList = archiveComponent.ArchiveHeroList;
             }

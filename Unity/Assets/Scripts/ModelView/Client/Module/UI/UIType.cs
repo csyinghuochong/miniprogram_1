@@ -38,5 +38,6 @@ namespace ET
         public const string UIHeroDetails = "UIHeroDetails/UIHeroDetails";
         public const string UIArchiveReward = "UIArchiveReward/UIArchiveReward";
         public const string UIAchievement = "UIAchievement/UIAchievement";
+        public const string UIRecycle = "UIRecycle/UIRecycle";
     }
 }

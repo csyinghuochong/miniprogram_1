@@ -20,6 +20,7 @@ namespace ET
             ItemName = _buf.ReadString();
             Icon = _buf.ReadString();
             ItemQuality = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); RecycleItem = new ET.RewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { ET.RewardItem __e0;__e0 = ExternalTypeUtil.NewRewardItem(global::ET.rewardItem.DeserializerewardItem(_buf)); RecycleItem[__index0] = __e0;}}
             UseLv = _buf.ReadInt();
             ItemType = (ItemType)_buf.ReadInt();
             ItemSubType = (ItemSubType)_buf.ReadInt();
@@ -58,6 +59,11 @@ namespace ET
         /// 道具品质
         /// </summary>
         public readonly int ItemQuality;
+
+        /// <summary>
+        /// 分解奖励
+        /// </summary>
+        public readonly ET.RewardItem[] RecycleItem;
 
         /// <summary>
         /// 使用等级
@@ -129,6 +135,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -138,6 +145,7 @@ namespace ET
             + "ItemName:" + ItemName + ","
             + "Icon:" + Icon + ","
             + "ItemQuality:" + ItemQuality + ","
+            + "RecycleItem:" + Luban.StringUtil.CollectionToString(RecycleItem) + ","
             + "UseLv:" + UseLv + ","
             + "ItemType:" + ItemType + ","
             + "ItemSubType:" + ItemSubType + ","

@@ -4,6 +4,12 @@
     "ItemName": "金币",
     "Icon": "1",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 0,
+        "ItemNum": 0
+      }
+    ],
     "UseLv": 1,
     "ItemType": 1,
     "ItemSubType": 0,
@@ -20,6 +26,12 @@
     "ItemName": "钻石",
     "Icon": "2",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 0,
+        "ItemNum": 0
+      }
+    ],
     "UseLv": 2,
     "ItemType": 1,
     "ItemSubType": 0,
@@ -36,6 +48,12 @@
     "ItemName": "经验",
     "Icon": "3",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 0,
+        "ItemNum": 0
+      }
+    ],
     "UseLv": 3,
     "ItemType": 1,
     "ItemSubType": 0,
@@ -52,6 +70,12 @@
     "ItemName": "体力",
     "Icon": "4",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 0,
+        "ItemNum": 0
+      }
+    ],
     "UseLv": 4,
     "ItemType": 1,
     "ItemSubType": 0,
@@ -68,6 +92,12 @@
     "ItemName": "联盟贡献度",
     "Icon": "5",
     "ItemQuality": 4,
+    "RecycleItem": [
+      {
+        "ItemId": 0,
+        "ItemNum": 0
+      }
+    ],
     "UseLv": 5,
     "ItemType": 1,
     "ItemSubType": 0,
@@ -84,6 +114,16 @@
     "ItemName": "随机宝箱",
     "Icon": "10000001",
     "ItemQuality": 6,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 1
+      }
+    ],
     "UseLv": 6,
     "ItemType": 1,
     "ItemSubType": 3,
@@ -104,6 +144,16 @@
     "ItemName": "自选宝箱",
     "Icon": "10000002",
     "ItemQuality": 6,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 2
+      }
+    ],
     "UseLv": 7,
     "ItemType": 1,
     "ItemSubType": 4,
@@ -124,6 +174,16 @@
     "ItemName": "英雄召唤券",
     "Icon": "10000003",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 3
+      }
+    ],
     "UseLv": 8,
     "ItemType": 1,
     "ItemSubType": 6,
@@ -140,6 +200,16 @@
     "ItemName": "大力丸",
     "Icon": "10000004",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 4
+      }
+    ],
     "UseLv": 9,
     "ItemType": 1,
     "ItemSubType": 5,
@@ -156,6 +226,16 @@
     "ItemName": "金刚丸",
     "Icon": "10000005",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 5
+      }
+    ],
     "UseLv": 10,
     "ItemType": 1,
     "ItemSubType": 5,
@@ -172,6 +252,16 @@
     "ItemName": "气血丸",
     "Icon": "10000006",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 6
+      }
+    ],
     "UseLv": 11,
     "ItemType": 1,
     "ItemSubType": 5,
@@ -188,6 +278,16 @@
     "ItemName": "神速丸",
     "Icon": "10000007",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 7
+      }
+    ],
     "UseLv": 12,
     "ItemType": 1,
     "ItemSubType": 5,
@@ -204,6 +304,16 @@
     "ItemName": "入场券",
     "Icon": "10000008",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 8
+      }
+    ],
     "UseLv": 13,
     "ItemType": 1,
     "ItemSubType": 7,
@@ -220,6 +330,16 @@
     "ItemName": "金币袋子",
     "Icon": "10000009",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 9
+      }
+    ],
     "UseLv": 1,
     "ItemType": 1,
     "ItemSubType": 1,
@@ -238,6 +358,16 @@
     "ItemName": "斧王碎片",
     "Icon": "10000009",
     "ItemQuality": 2,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 10
+      }
+    ],
     "UseLv": 14,
     "ItemType": 2,
     "ItemSubType": 10,
@@ -257,6 +387,16 @@
     "ItemName": "流浪剑客碎片",
     "Icon": "10000010",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 11
+      }
+    ],
     "UseLv": 15,
     "ItemType": 2,
     "ItemSubType": 10,
@@ -276,6 +416,16 @@
     "ItemName": "剑圣碎片",
     "Icon": "10000011",
     "ItemQuality": 4,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 12
+      }
+    ],
     "UseLv": 16,
     "ItemType": 2,
     "ItemSubType": 10,
@@ -295,6 +445,16 @@
     "ItemName": "全能骑士碎片",
     "Icon": "10000012",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 13
+      }
+    ],
     "UseLv": 17,
     "ItemType": 2,
     "ItemSubType": 10,
@@ -314,6 +474,16 @@
     "ItemName": "冰女碎片",
     "Icon": "10000013",
     "ItemQuality": 6,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 14
+      }
+    ],
     "UseLv": 18,
     "ItemType": 2,
     "ItemSubType": 10,
@@ -333,6 +503,16 @@
     "ItemName": "术士碎片",
     "Icon": "10000013",
     "ItemQuality": 6,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 15
+      }
+    ],
     "UseLv": 18,
     "ItemType": 2,
     "ItemSubType": 10,
@@ -352,6 +532,16 @@
     "ItemName": "材料1",
     "Icon": "10000001",
     "ItemQuality": 1,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 16
+      }
+    ],
     "UseLv": 19,
     "ItemType": 2,
     "ItemSubType": 0,
@@ -368,6 +558,16 @@
     "ItemName": "材料2",
     "Icon": "10000002",
     "ItemQuality": 2,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 17
+      }
+    ],
     "UseLv": 20,
     "ItemType": 2,
     "ItemSubType": 0,
@@ -384,6 +584,16 @@
     "ItemName": "材料3",
     "Icon": "10000003",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 18
+      }
+    ],
     "UseLv": 21,
     "ItemType": 2,
     "ItemSubType": 0,
@@ -400,6 +610,16 @@
     "ItemName": "材料4",
     "Icon": "10000004",
     "ItemQuality": 4,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 19
+      }
+    ],
     "UseLv": 22,
     "ItemType": 2,
     "ItemSubType": 0,
@@ -416,6 +636,16 @@
     "ItemName": "材料5",
     "Icon": "10000005",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 20
+      }
+    ],
     "UseLv": 23,
     "ItemType": 2,
     "ItemSubType": 0,
@@ -432,6 +662,16 @@
     "ItemName": "材料6",
     "Icon": "10000006",
     "ItemQuality": 6,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 21
+      }
+    ],
     "UseLv": 24,
     "ItemType": 2,
     "ItemSubType": 0,
@@ -448,6 +688,16 @@
     "ItemName": "英雄经验道具",
     "Icon": "10000009",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 22
+      }
+    ],
     "UseLv": 1,
     "ItemType": 2,
     "ItemSubType": 8,
@@ -467,6 +717,16 @@
     "ItemName": "低级魂石",
     "Icon": "10000009",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 23
+      }
+    ],
     "UseLv": 1,
     "ItemType": 2,
     "ItemSubType": 9,
@@ -486,6 +746,16 @@
     "ItemName": "一个头盔",
     "Icon": "10003001",
     "ItemQuality": 1,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 24
+      }
+    ],
     "UseLv": 25,
     "ItemType": 3,
     "ItemSubType": 3001,
@@ -502,6 +772,16 @@
     "ItemName": "一个衣服",
     "Icon": "10003002",
     "ItemQuality": 2,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 25
+      }
+    ],
     "UseLv": 26,
     "ItemType": 3,
     "ItemSubType": 3002,
@@ -518,6 +798,16 @@
     "ItemName": "一个裤子",
     "Icon": "10003003",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 26
+      }
+    ],
     "UseLv": 27,
     "ItemType": 3,
     "ItemSubType": 3003,
@@ -534,6 +824,16 @@
     "ItemName": "一个鞋子",
     "Icon": "10003004",
     "ItemQuality": 4,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 27
+      }
+    ],
     "UseLv": 28,
     "ItemType": 3,
     "ItemSubType": 3004,
@@ -550,6 +850,16 @@
     "ItemName": "一个项链",
     "Icon": "10003005",
     "ItemQuality": 5,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 28
+      }
+    ],
     "UseLv": 29,
     "ItemType": 3,
     "ItemSubType": 3005,
@@ -566,6 +876,16 @@
     "ItemName": "一个武器",
     "Icon": "10003006",
     "ItemQuality": 6,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 29
+      }
+    ],
     "UseLv": 30,
     "ItemType": 3,
     "ItemSubType": 3006,
@@ -582,6 +902,16 @@
     "ItemName": "一个更吊的头盔",
     "Icon": "10003001",
     "ItemQuality": 3,
+    "RecycleItem": [
+      {
+        "ItemId": 1,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 2,
+        "ItemNum": 30
+      }
+    ],
     "UseLv": 25,
     "ItemType": 3,
     "ItemSubType": 3001,

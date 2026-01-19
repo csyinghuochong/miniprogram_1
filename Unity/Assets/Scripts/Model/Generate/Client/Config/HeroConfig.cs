@@ -20,6 +20,8 @@ namespace ET
             HeroName = _buf.ReadString();
             HeroType = _buf.ReadInt();
             HeroTag = _buf.ReadInt();
+            HeroQuality = _buf.ReadInt();
+            {int __n0 = _buf.ReadSize(); RecycleItem = new ET.RewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { ET.RewardItem __e0;__e0 = ExternalTypeUtil.NewRewardItem(global::ET.rewardItem.DeserializerewardItem(_buf)); RecycleItem[__index0] = __e0;}}
             HeroHeadIcon = _buf.ReadString();
             HeroModelID = _buf.ReadString();
             {int __n0 = _buf.ReadSize(); HeroUpStarNeed = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); HeroUpStarNeed[__index0] = __e0;}}
@@ -72,6 +74,16 @@ namespace ET
         /// 英雄标签
         /// </summary>
         public readonly int HeroTag;
+
+        /// <summary>
+        /// 英雄品质
+        /// </summary>
+        public readonly int HeroQuality;
+
+        /// <summary>
+        /// 分解奖励
+        /// </summary>
+        public readonly ET.RewardItem[] RecycleItem;
 
         /// <summary>
         /// 英雄头像
@@ -208,6 +220,8 @@ namespace ET
             
             
             
+            
+            
             foreach (var _e in UnlockSkillInfos) { _e?.ResolveRef(); }
             
             
@@ -236,6 +250,8 @@ namespace ET
             + "HeroName:" + HeroName + ","
             + "HeroType:" + HeroType + ","
             + "HeroTag:" + HeroTag + ","
+            + "HeroQuality:" + HeroQuality + ","
+            + "RecycleItem:" + Luban.StringUtil.CollectionToString(RecycleItem) + ","
             + "HeroHeadIcon:" + HeroHeadIcon + ","
             + "HeroModelID:" + HeroModelID + ","
             + "HeroUpStarNeed:" + Luban.StringUtil.CollectionToString(HeroUpStarNeed) + ","
