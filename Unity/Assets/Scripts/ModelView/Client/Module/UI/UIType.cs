@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET
+﻿namespace ET
 {
     [EnableClass]
     public class UIType
@@ -39,5 +36,6 @@ namespace ET
         public const string UIArchiveReward = "UIArchiveReward/UIArchiveReward";
         public const string UIAchievement = "UIAchievement/UIAchievement";
         public const string UIRecycle = "UIRecycle/UIRecycle";
+        public const string UIMainCityMap = "UIMainCityMap/UIMainCityMap";
     }
 }

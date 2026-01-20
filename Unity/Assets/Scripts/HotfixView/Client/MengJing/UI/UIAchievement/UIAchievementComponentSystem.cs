@@ -35,6 +35,7 @@ namespace ET.Client
             self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
             self.Button_LookReward.AddListener(() => { self.OnButton_LookReward(); });
             self.Button_CloseLookReward.AddListener(() => self.GameObject_LookReward.SetActive(false));
+            self.Button_Type_Hero.AddListener(() => { self.SetShowType(0); });
 
             self.UpdateList();
             self.UpdatePoint();
@@ -47,14 +48,14 @@ namespace ET.Client
             self.UIAchievementItemList.Clear();
             self.UIAchievementItem = null;
         }
-        
+
         public static void SetShowType(this UIAchievementComponent self, int page)
         {
             self.CurrentPage = page;
 
             self.Button_Type_Hero.transform.Find("Image_On").gameObject.SetActive(page == 0);
             self.Button_Type_Hero.transform.Find("Image_Off").gameObject.SetActive(page != 0);
-            
+
         }
 
         private static void UpdateList(this UIAchievementComponent self)
@@ -108,13 +109,13 @@ namespace ET.Client
             int point = achievementComponent.GetCurrentPoint();
             self.Text_CurrentPoints.SetTextFormat("{0}/{1}", point, max);
             self.Image_CurrentPoints.fillAmount = Mathf.Clamp01(point * 1f / max);
-            
+
         }
 
         private static void OnButton_LookReward(this UIAchievementComponent self)
         {
             AchievementComponentC achievementComponent = self.Root().GetComponent<AchievementComponentC>();
-            
+
             AchievementRewardConfig nowConfig = null;
             foreach (AchievementRewardConfig achievementRewardConfig in AchievementRewardConfigCategory.Instance.DataList)
             {
@@ -130,10 +131,10 @@ namespace ET.Client
             {
                 nowConfig = AchievementRewardConfigCategory.Instance.DataList[^1];
             }
-            
+
             // 道具奖励
             RewardItem[] rewardItems = nowConfig.RewardItem;
-            
+
             for (int i = 0; i < rewardItems.Length; i++)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);

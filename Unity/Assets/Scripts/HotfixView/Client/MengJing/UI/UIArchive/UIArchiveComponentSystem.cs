@@ -45,7 +45,7 @@ namespace ET.Client
             self.Button_Reward.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIArchiveReward).Coroutine(); });
             self.Button_Type_Hero.onClick.AddListener(() => { self.SetShowType(0); });
 
-            self.SetShowType(1);
+            self.SetShowType(0);
         }
 
         [EntitySystem]
