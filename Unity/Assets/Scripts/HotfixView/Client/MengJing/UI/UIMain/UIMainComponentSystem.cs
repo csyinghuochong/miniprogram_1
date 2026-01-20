@@ -223,6 +223,7 @@ namespace ET.Client
             self.Button_Archive = rc.Get<GameObject>("Button_Archive").GetComponent<Button>();
             self.Button_Achievement = rc.Get<GameObject>("Button_Achievement").GetComponent<Button>();
             self.Button_OpenMap = rc.Get<GameObject>("Button_OpenMap").GetComponent<Button>();
+            self.Button_BattlePass = rc.Get<GameObject>("Button_BattlePass").GetComponent<Button>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
@@ -245,6 +246,7 @@ namespace ET.Client
             self.Button_Archive.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIArchive).Coroutine(); });
             self.Button_Achievement.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIAchievement).Coroutine(); });
             self.Button_OpenMap.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMainCityMap).Coroutine(); });
+            self.Button_BattlePass.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBattlePass).Coroutine(); });
         }
 
         [EntitySystem]

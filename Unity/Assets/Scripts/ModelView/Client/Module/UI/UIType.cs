@@ -37,5 +37,6 @@
         public const string UIAchievement = "UIAchievement/UIAchievement";
         public const string UIRecycle = "UIRecycle/UIRecycle";
         public const string UIMainCityMap = "UIMainCityMap/UIMainCityMap";
+        public const string UIBattlePass = "UIBattlePass/UIBattlePass";
     }
 }
