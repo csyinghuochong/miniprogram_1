@@ -30,6 +30,7 @@ namespace ET.Client
             {
                 self.Image_HeroQuality.gameObject.SetActive(false);
                 self.Image_HeroIcon.gameObject.SetActive(false);
+                self.Image_Selected.gameObject.SetActive(false);
                 return;
             }
 

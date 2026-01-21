@@ -74,6 +74,8 @@ namespace ET
         // 英雄相关错误 200701-200799
         public const int ERR_HeroNotEquipSlot = 200701; //英雄没有这个类型的装备孔位
         public const int ERR_NotExistHero = 200702; //英雄不存在
+        public const int ERR_HeroInFormation = 200703; //英雄上阵中
+        public const int ERR_HeroHaveEquipment = 200704; //英雄有装备
 
         // 冒险/关卡相关错误 200801-200899
         public const int ERR_AlreadyAdventureState = 200801; //已在闯关中

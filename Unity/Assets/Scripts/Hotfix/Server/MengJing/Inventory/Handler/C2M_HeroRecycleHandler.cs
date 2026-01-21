@@ -2,6 +2,7 @@
 
 namespace ET.Server
 {
+    [FriendOf(typeof(HeroComponent))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_HeroRecycleHandler : MessageLocationHandler<Unit, C2M_HeroRecycle, M2C_HeroRecycle>
     {
@@ -26,12 +27,31 @@ namespace ET.Server
 
             List<RewardItem> rewardItemList = CommonHelp.GetRecycleItems(heroList);
 
+            foreach (Hero hero in heroList)
+            {
+                // 英雄上阵不能分解
+                if (heroComponent.Formation.Contains(hero.Id))
+                {
+                    response.Error = ErrorCode.ERR_HeroInFormation;
+                    return;
+                }
+
+                // 英雄有装备不能分解
+                foreach (long equipId in hero.Equipments.Values)
+                {
+                    if (equipId != 0)
+                    {
+                        response.Error = ErrorCode.ERR_HeroHaveEquipment;
+                        return;
+                    }
+                }
+            }
+
             foreach (long heroId in request.HeroIdList)
             {
-                // 上阵的英雄怎么处理
-                // 英雄身上的装备怎么处理？？
+                heroComponent.RemoveHero(heroId);
             }
-            
+
             inventoryComponent.AddItemData(rewardItemList);
 
             await ETTask.CompletedTask;

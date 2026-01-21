@@ -237,6 +237,16 @@ namespace ET.Client
             else if (self.CurrentPage == 1)
             {
                 error = await ClientInventoryHelper.HeroRecycle(self.Root(), self.SelectHeroList);
+
+                if (error == ErrorCode.ERR_HeroInFormation)
+                {
+                    self.Root().GetComponent<FloatingTextComponent>().ShowTipText("有英雄在上阵中，请下阵英雄");
+                }
+
+                if (error == ErrorCode.ERR_HeroHaveEquipment)
+                {
+                    self.Root().GetComponent<FloatingTextComponent>().ShowTipText("有英雄装备未脱下，请脱下装备");
+                }
             }
 
             if (error == ErrorCode.ERR_Success)
