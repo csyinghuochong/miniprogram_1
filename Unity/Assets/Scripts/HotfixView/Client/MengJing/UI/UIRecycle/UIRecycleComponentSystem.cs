@@ -30,6 +30,7 @@ namespace ET.Client
 
             self.Button_Type_Bag.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_Hero.onClick.AddListener(() => { self.SetShowType(1); });
+            self.Button_Recycle.onClick.AddListener(() => { self.OnButton_Recycle().Coroutine(); });
             self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIRecycle); });
 
             self.SetShowType(0);
@@ -224,6 +225,25 @@ namespace ET.Client
             }
 
             self.UpdateItemList(1);
+        }
+
+        private static async ETTask OnButton_Recycle(this UIRecycleComponent self)
+        {
+            int error = 0;
+            if (self.CurrentPage == 0)
+            {
+                error = await ClientInventoryHelper.ItemRecycle(self.Root(), self.SelectItemList);
+            }
+            else if (self.CurrentPage == 1)
+            {
+                error = await ClientInventoryHelper.HeroRecycle(self.Root(), self.SelectHeroList);
+            }
+
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("回收成功");
+                self.UpdateItemList(self.CurrentPage);
+            }
         }
     }
 }
