@@ -623,6 +623,34 @@ message M2C_MoveItem // ILocationResponse
 	string Message = 3;
 }
 
+// ResponseType M2C_ItemRecycle
+message C2M_ItemRecycle // ILocationRequest
+{
+	int32 RpcId = 1;
+	repeated int64 ItemIdList = 2;
+}
+
+message M2C_ItemRecycle // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+// ResponseType M2C_HeroRecycle
+message C2M_HeroRecycle // ILocationRequest
+{
+	int32 RpcId = 1;
+	repeated int64 HeroIdList = 2;
+}
+
+message M2C_HeroRecycle // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 // ResponseType M2C_GetStoreInfo
 message C2M_GetStoreInfo // ILocationRequest
 {
