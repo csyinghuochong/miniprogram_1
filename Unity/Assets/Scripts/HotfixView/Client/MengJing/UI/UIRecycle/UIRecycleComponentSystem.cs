@@ -242,6 +242,9 @@ namespace ET.Client
             if (error == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("回收成功");
+
+                self.SelectItemList.Clear();
+                self.SelectHeroList.Clear();
                 self.UpdateItemList(self.CurrentPage);
             }
         }

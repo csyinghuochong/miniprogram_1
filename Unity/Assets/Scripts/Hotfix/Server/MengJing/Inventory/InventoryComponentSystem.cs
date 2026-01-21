@@ -530,6 +530,26 @@ namespace ET.Server
             return true;
         }
 
+        public static void RemoveItemList(this InventoryComponent self, List<long> itemIdList)
+        {
+            M2C_ItemUpdateOp message = M2C_ItemUpdateOp.Create();
+
+            foreach (long itemId in itemIdList)
+            {
+                Item item = self.GetItem(itemId);
+
+                if (item != null)
+                {
+                    message.ItemInfoRemoveList.Add(item.ToMessage());
+
+                    self.RemoveItemFromContainer(item);
+                    item?.Dispose();
+                }
+            }
+
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
+        }
+
         public static bool RemoveItem(this InventoryComponent self, long itemId, int num)
         {
             Item item = self.GetItem(itemId);
