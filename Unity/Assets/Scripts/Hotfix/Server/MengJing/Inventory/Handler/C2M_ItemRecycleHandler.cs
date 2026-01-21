@@ -9,10 +9,10 @@ namespace ET.Server
         {
             InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
 
-            List<EntityRef<Item>> itemList = new List<EntityRef<Item>>();
+            List<EntityRef<Item>> itemList = new();
             foreach (var itemId in request.ItemIdList)
             {
-                Item item = inventoryComponent.GetItem(itemId);
+                Item item = inventoryComponent.GetItem(itemId, InventoryContainerType.Bag);
 
                 if (item == null)
                 {
@@ -25,13 +25,7 @@ namespace ET.Server
 
             List<RewardItem> rewardItemList = CommonHelp.GetRecycleItems(itemList);
 
-            List<long> itemIdList = new();
-            foreach (Item item in itemList)
-            {
-                itemIdList.Add(item.Id);
-            }
-
-            inventoryComponent.RemoveItemList(itemIdList);
+            inventoryComponent.RemoveItemList(request.ItemIdList);
 
             inventoryComponent.AddItemData(rewardItemList);
 

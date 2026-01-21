@@ -112,6 +112,23 @@ namespace ET.Server
             return null;
         }
 
+        public static Item GetItem(this InventoryComponent self, long itemId, InventoryContainerType containerType)
+        {
+            if (self.ItemsByContainer.TryGetValue((int)containerType, out List<EntityRef<Item>> containerItems))
+            {
+                foreach (EntityRef<Item> itemRef in containerItems)
+                {
+                    Item item = itemRef;
+                    if (item.Id == itemId)
+                    {
+                        return item;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// 将道具移动到不同的容器，并同步到客户端
         /// </summary>
