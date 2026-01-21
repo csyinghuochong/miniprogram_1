@@ -66,12 +66,14 @@ namespace ET.Client
                 InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
                 itemList = inventoryComponentC.GetItemsByContainer(InventoryContainerType.Bag);
                 self.UpdateBagList(itemList);
+                self.UpdateLookRewardList(CommonHelp.GetRecycleItems(self.SelectItemList));
             }
             else if (page == 1)
             {
                 HeroComponentC heroComponentC = self.Root().GetComponent<HeroComponentC>();
                 heroList = heroComponentC.GetAllHero();
                 self.UpdateHeroList(heroList);
+                self.UpdateLookRewardList(CommonHelp.GetRecycleItems(self.SelectHeroList));
             }
             else
             {
@@ -151,6 +153,27 @@ namespace ET.Client
 
             self.GameObject_Hero.SetActive(true);
             self.GameObject_Bag.SetActive(false);
+        }
+
+        public static void UpdateLookRewardList(this UIRecycleComponent self, List<RewardItem> rewardItemList)
+        {
+            while (self.UILookRewardList.Count < rewardItemList.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_LookReward);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UILookRewardList.Add(newItem);
+            }
+
+            for (int i = 0; i < rewardItemList.Count; i++)
+            {
+                self.UILookRewardList[i].UpdateInfo(rewardItemList[i].ItemId, rewardItemList[i].ItemNum).Coroutine();
+                self.UILookRewardList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = rewardItemList.Count; i < self.UILookRewardList.Count; i++)
+            {
+                self.UILookRewardList[i].GameObject.SetActive(false);
+            }
         }
 
         private static void SelectItem(this UIRecycleComponent self, Item item)

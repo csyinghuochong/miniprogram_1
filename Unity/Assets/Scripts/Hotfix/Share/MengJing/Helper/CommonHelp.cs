@@ -328,5 +328,71 @@ namespace ET
 
             return $"{minUserId}_{maxUserId}";
         }
+
+        public static List<RewardItem> GetRecycleItems(List<EntityRef<Item>> itemList)
+        {
+            List<RewardItem> rewardItemList = new List<RewardItem>();
+
+            foreach (Item item in itemList)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ConfigId);
+
+                foreach (RewardItem rewardItem in itemConfig.RecycleItem)
+                {
+                    bool isExist = false;
+                    for (int i = 0; i < rewardItemList.Count; i++)
+                    {
+                        RewardItem old = rewardItemList[i];
+
+                        if (old.ItemId == rewardItem.ItemId)
+                        {
+                            isExist = true;
+                            old.ItemNum += rewardItem.ItemNum * item.Num;
+                            rewardItemList[i] = old;
+                        }
+                    }
+
+                    if (!isExist)
+                    {
+                        rewardItemList.Add(new RewardItem() { ItemId = rewardItem.ItemId, ItemNum = rewardItem.ItemNum * item.Num });
+                    }
+                }
+            }
+
+            return rewardItemList;
+        }
+
+        public static List<RewardItem> GetRecycleItems(List<EntityRef<Hero>> heroList)
+        {
+            List<RewardItem> rewardItemList = new List<RewardItem>();
+
+            foreach (Hero hero in heroList)
+            {
+                HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
+
+                foreach (RewardItem rewardItem in heroConfig.RecycleItem)
+                {
+                    bool isExist = false;
+                    for (int i = 0; i < rewardItemList.Count; i++)
+                    {
+                        RewardItem old = rewardItemList[i];
+
+                        if (old.ItemId == rewardItem.ItemId)
+                        {
+                            isExist = true;
+                            old.ItemNum += rewardItem.ItemNum;
+                            rewardItemList[i] = old;
+                        }
+                    }
+
+                    if (!isExist)
+                    {
+                        rewardItemList.Add(rewardItem);
+                    }
+                }
+            }
+
+            return rewardItemList;
+        }
     }
 }
