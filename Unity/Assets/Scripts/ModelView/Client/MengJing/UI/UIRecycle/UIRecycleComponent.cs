@@ -9,6 +9,9 @@ namespace ET.Client
     {
         public int CurrentPage { get; set; } = 0;
 
+        public List<EntityRef<Item>> SelectItemList = new();
+        public List<EntityRef<Hero>> SelectHeroList = new();
+
         public List<UICommonItem> UICommonItemList { get; set; } = new();
         public List<UICommonItem> UILookRewardList { get; set; } = new();
         public List<UIHeroRecycleItem> UIHeroRecycleItemList { get; set; } = new();

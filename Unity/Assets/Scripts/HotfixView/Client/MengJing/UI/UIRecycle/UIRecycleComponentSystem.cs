@@ -60,7 +60,7 @@ namespace ET.Client
         {
             List<Item> itemList = null;
             List<Hero> heroList = null;
-            
+
             if (page == 0)
             {
                 InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
@@ -77,7 +77,6 @@ namespace ET.Client
             {
                 return;
             }
-            
         }
 
         public static void UpdateBagList(this UIRecycleComponent self, List<Item> itemList)
@@ -91,8 +90,20 @@ namespace ET.Client
 
             for (int i = 0; i < itemList.Count; i++)
             {
-                self.UICommonItemList[i].UpdateInfo(itemList[i], (item) => { }).Coroutine();
+                self.UICommonItemList[i].UpdateInfo(itemList[i], (item) => { self.SelectItem(item); }).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
+
+                bool selected = false;
+                foreach (Item item in self.SelectItemList)
+                {
+                    if (item == itemList[i])
+                    {
+                        selected = true;
+                        break;
+                    }
+                }
+
+                self.UICommonItemList[i].Image_Selected.gameObject.SetActive(selected);
             }
 
             for (int i = itemList.Count; i < self.UICommonItemList.Count; i++)
@@ -100,7 +111,7 @@ namespace ET.Client
                 self.UICommonItemList[i].UpdateInfo(null).Coroutine();
                 self.UICommonItemList[i].GameObject.SetActive(true);
             }
-            
+
             self.GameObject_Bag.SetActive(true);
             self.GameObject_Hero.SetActive(false);
         }
@@ -118,6 +129,18 @@ namespace ET.Client
             {
                 self.UIHeroRecycleItemList[i].UpdateInfo(heroList[i]).Coroutine();
                 self.UIHeroRecycleItemList[i].GameObject.SetActive(true);
+
+                bool selected = false;
+                foreach (Hero hero in self.SelectHeroList)
+                {
+                    if (hero == heroList[i])
+                    {
+                        selected = true;
+                        break;
+                    }
+                }
+
+                self.UIHeroRecycleItemList[i].Image_Selected.gameObject.SetActive(selected);
             }
 
             for (int i = heroList.Count; i < self.UIHeroRecycleItemList.Count; i++)
@@ -125,9 +148,59 @@ namespace ET.Client
                 self.UIHeroRecycleItemList[i].UpdateInfo(null).Coroutine();
                 self.UIHeroRecycleItemList[i].GameObject.SetActive(true);
             }
-            
+
             self.GameObject_Hero.SetActive(true);
             self.GameObject_Bag.SetActive(false);
+        }
+
+        private static void SelectItem(this UIRecycleComponent self, Item item)
+        {
+            bool selected = false;
+            for (int i = 0; i < self.SelectItemList.Count; i++)
+            {
+                Item old = self.SelectItemList[i];
+                if (old == item)
+                {
+                    selected = true;
+                    break;
+                }
+            }
+
+            if (selected)
+            {
+                self.SelectItemList.Remove(item);
+            }
+            else
+            {
+                self.SelectItemList.Add(item);
+            }
+
+            self.UpdateItemList(0);
+        }
+
+        public static void SelectHero(this UIRecycleComponent self, Hero hero)
+        {
+            bool selected = false;
+            for (int i = 0; i < self.SelectHeroList.Count; i++)
+            {
+                Hero old = self.SelectHeroList[i];
+                if (old == hero)
+                {
+                    selected = true;
+                    break;
+                }
+            }
+
+            if (selected)
+            {
+                self.SelectHeroList.Remove(hero);
+            }
+            else
+            {
+                self.SelectHeroList.Add(hero);
+            }
+
+            self.UpdateItemList(1);
         }
     }
 }

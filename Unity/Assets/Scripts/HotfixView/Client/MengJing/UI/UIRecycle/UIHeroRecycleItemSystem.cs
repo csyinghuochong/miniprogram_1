@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,24 +19,37 @@ namespace ET.Client
             self.Image_Selected = rc.Get<GameObject>("Image_Selected").GetComponent<Image>();
             self.Image_Selected.gameObject.SetActive(false);
             self.Button_Click = rc.Get<GameObject>("Button_Click").GetComponent<Button>();
+
+            self.Button_Click.AddListener(() => { self.OnButton_Click(); });
         }
 
         public static async ETTask UpdateInfo(this UIHeroRecycleItem self, Hero hero)
         {
+            self.Hero = hero;
             if (hero == null)
             {
                 self.Image_HeroQuality.gameObject.SetActive(false);
                 self.Image_HeroIcon.gameObject.SetActive(false);
                 return;
             }
-            
+
             HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
-            
+
             self.Image_HeroQuality.gameObject.SetActive(true);
             self.Image_HeroIcon.gameObject.SetActive(true);
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_HeroIcon.sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+        }
+
+        private static void OnButton_Click(this UIHeroRecycleItem self)
+        {
+            if (self.Hero == null)
+            {
+                return;
+            }
+
+            self.GetParent<UIRecycleComponent>().SelectHero(self.Hero);
         }
     }
 }
