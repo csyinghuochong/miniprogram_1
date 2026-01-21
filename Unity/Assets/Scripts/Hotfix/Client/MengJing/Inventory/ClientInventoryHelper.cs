@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     public static class ClientInventoryHelper
     {
@@ -52,6 +54,32 @@
             request.ContainerType = (int)containerType;
 
             M2C_MoveItem response = (M2C_MoveItem)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> ItemRecycle(Scene root, List<EntityRef<Item>> itemList)
+        {
+            C2M_ItemRecycle request = C2M_ItemRecycle.Create();
+            foreach (Item item in itemList)
+            {
+                request.ItemIdList.Add(item.Id);
+            }
+
+            M2C_ItemRecycle response = (M2C_ItemRecycle)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> HeroRecycle(Scene root, List<EntityRef<Hero>> heroList)
+        {
+            C2M_HeroRecycle request = C2M_HeroRecycle.Create();
+            foreach (Hero hero in heroList)
+            {
+                request.HeroIdList.Add(hero.Id);
+            }
+
+            M2C_HeroRecycle response = (M2C_HeroRecycle)await root.GetComponent<ClientSenderComponent>().Call(request);
 
             return response.Error;
         }
