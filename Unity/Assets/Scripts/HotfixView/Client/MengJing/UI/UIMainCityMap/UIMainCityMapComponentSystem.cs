@@ -44,6 +44,7 @@ namespace ET.Client
             self.Button_Close.AddListener((() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIMainCityMap); }));
             self.RawImage_Map.GetComponent<EventTrigger>().AddEventTrigger(self.OnPointerDown, EventTriggerType.PointerDown);
 
+            self.InitNpcList();
             self.LoadMapCamera().Coroutine();
         }
 
@@ -53,6 +54,18 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.UIMainCityMapNPCButtonList.Clear();
             self.UIMainCityMapNPCButton = null;
+        }
+
+        private static void InitNpcList(this UIMainCityMapComponent self)
+        {
+            foreach (NPCConfig npcConfig in NPCConfigCategory.Instance.DataList)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIMainCityMapNPCButton, self.Content_UIMainCityMapNPCButton);
+                UIMainCityMapNPCButton item = self.AddChild<UIMainCityMapNPCButton, GameObject>(go);
+                item.UpdateInfo(npcConfig);
+
+                go.SetActive(true);
+            }
         }
 
         private static async ETTask LoadMapCamera(this UIMainCityMapComponent self)
@@ -235,7 +248,7 @@ namespace ET.Client
             return go;
         }
 
-        public static void OnPointerDown(this UIMainCityMapComponent self, PointerEventData pdata)
+        private static void OnPointerDown(this UIMainCityMapComponent self, PointerEventData pdata)
         {
             Scene currentScene = self.Root().CurrentScene();
             if (currentScene == null)
@@ -259,8 +272,6 @@ namespace ET.Client
             Vector3 position = mapCamera.transform.position;
             wordPos.x += position.x;
             wordPos.y += position.y;
-
-            Log.Warning($"移动到:{wordPos}");
 
             MoveHelper.MoveTo(unit, wordPos);
         }

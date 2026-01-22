@@ -7,6 +7,8 @@ namespace ET.Client
     [ChildOf]
     public class UIMainCityMapNPCButton : Entity, IAwake<GameObject>
     {
+        public int NpcId;
+        
         public GameObject GameObject { get; set; }
 
         public Button Button_GoToNPC;
