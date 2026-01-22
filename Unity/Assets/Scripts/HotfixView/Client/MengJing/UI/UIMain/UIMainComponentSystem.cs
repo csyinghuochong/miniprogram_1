@@ -197,6 +197,7 @@ namespace ET.Client
             self.Text_Ping = rc.Get<GameObject>("Text_Ping").GetComponent<TMP_Text>();
             self.Text_Gold = rc.Get<GameObject>("Text_Gold").GetComponent<TMP_Text>();
             self.Text_Diamond = rc.Get<GameObject>("Text_Diamond").GetComponent<TMP_Text>();
+            self.Button_AddDiamond = rc.Get<GameObject>("Button_AddDiamond").GetComponent<Button>();
             self.Image_TaskCompleted = rc.Get<GameObject>("Image_TaskCompleted").GetComponent<Image>();
             self.Text_TaskName = rc.Get<GameObject>("Text_TaskName").GetComponent<TMP_Text>();
             self.Text_TaskProgress = rc.Get<GameObject>("Text_TaskProgress").GetComponent<TMP_Text>();
@@ -247,6 +248,7 @@ namespace ET.Client
             self.Button_Achievement.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIAchievement).Coroutine(); });
             self.Button_OpenMap.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMainCityMap).Coroutine(); });
             self.Button_BattlePass.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBattlePass).Coroutine(); });
+            self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
         }
 
         [EntitySystem]

@@ -77,7 +77,7 @@ namespace ET.Client
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
 
             self.Button_AddGold.onClick.AddListener(() => { Log.Warning("弹出来金币界面"); });
-            self.Button_AddDiamond.onClick.AddListener(() => { Log.Warning("弹出来钻石界面"); });
+            self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_Consume.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Equipment.onClick.AddListener(() => { self.SetShowType(2); });

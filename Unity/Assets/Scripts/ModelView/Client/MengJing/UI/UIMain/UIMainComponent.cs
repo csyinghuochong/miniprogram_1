@@ -28,6 +28,7 @@ namespace ET.Client
         public TMP_Text Text_Ping;
         public TMP_Text Text_Gold;
         public TMP_Text Text_Diamond;
+        public Button Button_AddDiamond;
         public Image Image_TaskCompleted;
         public TMP_Text Text_TaskName;
         public TMP_Text Text_TaskProgress;

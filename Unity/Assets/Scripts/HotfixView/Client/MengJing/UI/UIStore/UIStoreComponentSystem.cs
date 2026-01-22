@@ -58,6 +58,7 @@ namespace ET.Client
             self.UIStoreItem.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
+            self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             self.Button_RefreshTime.AddListener(() => { self.OnButton_StoreRefresh().Coroutine(); });
 
             self.UpdateGold();

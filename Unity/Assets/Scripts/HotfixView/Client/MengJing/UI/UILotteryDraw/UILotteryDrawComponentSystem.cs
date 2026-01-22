@@ -85,6 +85,7 @@ namespace ET.Client
             self.UILotteryDrawWishComponent.GameObject.SetActive(false);
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UILotteryDraw); });
+            self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             self.Button_RewardPreview.AddListener(() => { self.UILotteryDrawRewardPreviewComponent.GameObject.SetActive(true); });
             self.Button_Probability.AddListener(() => { self.UILotteryDrawProbabilityComponent.GameObject.SetActive(true); });
             self.Button_Wish.AddListener(() => { self.UILotteryDrawWishComponent.GameObject.SetActive(true); });
