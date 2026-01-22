@@ -56,7 +56,7 @@ namespace ET.Client
             self.Button_GetAllReward = rc.Get<GameObject>("Button_GetAllReward").GetComponent<Button>();
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIBattlePass); });
-            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
+            self.Button_AddDiamond.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             
             self.UpdateGold();
             self.UpdateDiamond();
