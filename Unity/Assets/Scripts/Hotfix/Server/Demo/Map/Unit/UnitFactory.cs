@@ -80,6 +80,11 @@ namespace ET.Server
                 AchievementComponent achievementComponent = unit.AddComponent<AchievementComponent>();
             }
 
+            if (unit.GetComponent<BattlePassComponent>() == null)
+            {
+                BattlePassComponent battlePassComponent = unit.AddComponent<BattlePassComponent>();
+            }
+
             unit.AddComponent<StateComponent>();
             unit.AddComponent<UnitInfoComponent>();
             unit.AddDataComponent<DBSaveComponent>();
