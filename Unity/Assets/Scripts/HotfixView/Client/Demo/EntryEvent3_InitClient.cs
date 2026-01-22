@@ -32,6 +32,7 @@ namespace ET.Client
             root.AddComponent<RankComponent>();
             root.AddComponent<ArchiveComponentC>();
             root.AddComponent<AchievementComponentC>();
+            root.AddComponent<BattlePassComponentC>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
