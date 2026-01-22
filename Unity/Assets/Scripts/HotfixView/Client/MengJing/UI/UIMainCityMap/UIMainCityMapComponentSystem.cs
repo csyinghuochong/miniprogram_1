@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,7 +15,8 @@ namespace ET.Client
         {
             try
             {
-                self.OnUpdateMiniMapAllUnit();
+                self.OnUpdateMapAllUnit();
+                self.UpdatePathPoint();
             }
             catch (Exception e)
             {
@@ -37,6 +39,9 @@ namespace ET.Client
             self.Transform_HeadList = rc.Get<GameObject>("Transform_HeadList").transform;
             self.Transform_HeadItem = rc.Get<GameObject>("Transform_HeadItem").transform;
             self.Transform_HeadItem.gameObject.SetActive(false);
+            self.Transform_PathPointList = rc.Get<GameObject>("Transform_PathPointList").transform;
+            self.Transform_PathPoint = rc.Get<GameObject>("Transform_PathPoint").transform;
+            self.Transform_PathPoint.gameObject.SetActive(false);
             self.Content_UIMainCityMapNPCButton = rc.Get<GameObject>("Content_UIMainCityMapNPCButton").transform;
             self.UIMainCityMapNPCButton = rc.Get<GameObject>("UIMainCityMapNPCButton");
             self.UIMainCityMapNPCButton.SetActive(false);
@@ -54,6 +59,8 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.UIMainCityMapNPCButtonList.Clear();
             self.UIMainCityMapNPCButton = null;
+            self.LastPathTargets.Clear();
+            self.CachedInterpolatedPath.Clear();
         }
 
         private static void InitNpcList(this UIMainCityMapComponent self)
@@ -89,7 +96,7 @@ namespace ET.Client
             self.ScaleRateX = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.ScaleRateY = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
 
-            self.OnUpdateMiniMapAllUnit();
+            self.OnUpdateMapAllUnit();
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIMapBigTimer, self);
         }
@@ -108,7 +115,7 @@ namespace ET.Client
             camera.enabled = false;
         }
 
-        public static void OnUpdateMiniMapAllUnit(this UIMainCityMapComponent self)
+        public static void OnUpdateMapAllUnit(this UIMainCityMapComponent self)
         {
             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
@@ -275,5 +282,171 @@ namespace ET.Client
 
             MoveHelper.MoveTo(unit, wordPos);
         }
+
+        # region 移动路径
+
+        public static void UpdatePathPoint(this UIMainCityMapComponent self)
+        {
+            Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+
+            if (mainUnit == null || self.MapCamera == null)
+            {
+                // 如果没有主角单位或相机，隐藏所有路径点
+                self.HideAllPathPoints();
+                return;
+            }
+
+            Move2DComponent move2DComponent = mainUnit.GetComponent<Move2DComponent>();
+            if (move2DComponent == null || move2DComponent.Targets.Count == 0)
+            {
+                // 如果没有移动目标，隐藏所有路径点并清空缓存
+                self.HideAllPathPoints();
+                self.LastPathTargets.Clear();
+                self.CachedInterpolatedPath.Clear();
+                return;
+            }
+
+            // 检查路径是否发生了变化
+            bool pathChanged = self.IsPathChanged(mainUnit.Position, move2DComponent.Targets);
+
+            if (!pathChanged && self.CachedInterpolatedPath.Count > 0)
+            {
+                // 路径没变，直接使用缓存的插值路径更新显示
+                self.UpdatePathPointDisplay();
+                return;
+            }
+
+            // 路径发生了变化，重新计算插值路径
+            self.RecalculateInterpolatedPath(mainUnit.Position, move2DComponent.Targets);
+
+            // 更新显示
+            self.UpdatePathPointDisplay();
+        }
+
+        /// <summary>
+        /// 检查路径是否发生了变化
+        /// </summary>
+        private static bool IsPathChanged(this UIMainCityMapComponent self, Vector3 currentPosition, List<float3> targets)
+        {
+            // 如果缓存的目标点数量不一致，路径肯定变了
+            if (self.LastPathTargets.Count != targets.Count + 1)
+            {
+                return true;
+            }
+
+            // 检查起点是否变化（容差 0.01）
+            if (Vector3.Distance(self.LastPathTargets[0], currentPosition) > 0.01f)
+            {
+                return true;
+            }
+
+            // 检查每个目标点是否变化
+            for (int i = 0; i < targets.Count; i++)
+            {
+                if (Vector3.Distance(self.LastPathTargets[i + 1], targets[i]) > 0.01f)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 重新计算插值后的完整路径
+        /// </summary>
+        private static void RecalculateInterpolatedPath(this UIMainCityMapComponent self, Vector3 currentPosition, List<float3> targets)
+        {
+            // 更新缓存的原始路径
+            self.LastPathTargets.Clear();
+            self.LastPathTargets.Add(currentPosition);
+            for (int i = 0; i < targets.Count; i++)
+            {
+                self.LastPathTargets.Add(targets[i]);
+            }
+
+            // 计算插值路径
+            self.CachedInterpolatedPath.Clear();
+
+            if (self.LastPathTargets.Count < 2)
+            {
+                return;
+            }
+
+            float intervalDistance = 1f;
+            self.CachedInterpolatedPath.Add(self.LastPathTargets[0]);
+
+            for (int i = 1; i < self.LastPathTargets.Count; i++)
+            {
+                Vector3 startPoint = self.LastPathTargets[i - 1];
+                Vector3 endPoint = self.LastPathTargets[i];
+
+                float distanceBetweenPoints = Vector3.Distance(startPoint, endPoint);
+                Vector3 direction = (endPoint - startPoint).normalized;
+                float currentDistance = 0;
+
+                while (currentDistance + intervalDistance <= distanceBetweenPoints)
+                {
+                    currentDistance += intervalDistance;
+                    Vector3 newPoint = startPoint + direction * currentDistance;
+                    self.CachedInterpolatedPath.Add(newPoint);
+                }
+
+                // 添加终点
+                self.CachedInterpolatedPath.Add(endPoint);
+            }
+        }
+
+        /// <summary>
+        /// 更新路径点的显示（使用缓存的插值路径）
+        /// </summary>
+        private static void UpdatePathPointDisplay(this UIMainCityMapComponent self)
+        {
+            // 从后往前显示路径点（终点在前，起点在后）
+            int showNumber = 0;
+            for (int i = self.CachedInterpolatedPath.Count - 1; i >= 0; i--)
+            {
+                Vector3 temp = self.CachedInterpolatedPath[i];
+                Vector3 uiPos = self.GetWordToUIPositon(new Vector3(temp.x, temp.y, 0f));
+
+                GameObject go = self.GetPathPointObj(showNumber);
+                go.transform.localPosition = uiPos;
+                go.SetActive(true);
+                showNumber++;
+            }
+
+            // 隐藏多余的路径点对象
+            for (int i = showNumber; i < self.PathPointList.Count; i++)
+            {
+                self.PathPointList[i].SetActive(false);
+            }
+        }
+
+        /// <summary>
+        /// 隐藏所有路径点
+        /// </summary>
+        private static void HideAllPathPoints(this UIMainCityMapComponent self)
+        {
+            for (int i = 0; i < self.PathPointList.Count; i++)
+            {
+                self.PathPointList[i].SetActive(false);
+            }
+        }
+
+        private static GameObject GetPathPointObj(this UIMainCityMapComponent self, int index)
+        {
+            if (self.PathPointList.Count > index)
+            {
+                return self.PathPointList[index];
+            }
+
+            GameObject go = UnityEngine.Object.Instantiate(self.Transform_PathPoint.gameObject, self.Transform_PathPointList.transform, true);
+            go.SetActive(true);
+            go.transform.localScale = Vector3.one;
+            self.PathPointList.Add(go);
+            return go;
+        }
+
+        # endregion
     }
 }
