@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Numerics;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -26,6 +28,10 @@ namespace ET
         // 2.5D 摄像机角度
         public const float CameraAngle = -25f;
 
+        [StaticField]
+        public static float3 MapCameraPosition = new float3(0, 0, -100);
+        public const float MapCameraOrthographicSize = 30f;
+        
         public const int Item_Gold = 1;
         public const int Item_Diamond = 2;
         public const int Item_Exp = 3;

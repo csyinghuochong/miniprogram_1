@@ -5,7 +5,13 @@ namespace ET.Client
 {
     public static partial class MoveHelper
     {
-        
+        public static void MoveTo(this Unit unit, float2 targetPos)
+        {
+            float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
+            using ListComponent<float3> path = ListComponent<float3>.Create();
+            unit.GetComponent<PathfindingComponent>()?.Find(unit.Position, new float3(targetPos.x, targetPos.y, 0), path);
+            unit.GetComponent<Move2DComponent>().MoveTo(path, speed);
+        }
 
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null, bool waitmove = false)

@@ -231,7 +231,7 @@ namespace ET.Client
             // 2D
             float3 start = self.MyUnit.Position;
             Vector2 dire = self.Direction * 10f;
-            float3 targetPosition = new float3(start.x + dire.x, start.y + dire.y, start.z);
+            float2 targetPosition = new float2(start.x + dire.x, start.y + dire.y);
 
             // // 检查目标点是否在可移动区域内
             // float3 finalTarget = self.GetValidMoveTarget(targetPosition);
@@ -248,10 +248,7 @@ namespace ET.Client
             // c2MPathfindingResult.Position.Add(targetPosition);
             // self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
 
-            float speed = self.MyUnit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-            using ListComponent<float3> path = ListComponent<float3>.Create();
-            self.MyUnit.GetComponent<PathfindingComponent>()?.Find(self.MyUnit.Position, targetPosition, path);
-            self.MyUnit.GetComponent<Move2DComponent>().MoveTo(path, speed);
+            MoveHelper.MoveTo(self.MyUnit, targetPosition);
         }
 
         private static bool IsInMovableArea(this UIJoystickComponent self, float3 position)

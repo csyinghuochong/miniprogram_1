@@ -80,6 +80,12 @@ namespace ET.Server
 
                     break;
                 }
+                case UnitType.NPC:
+                {
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
+
+                    break;
+                }
             }
 
             return unitInfo;

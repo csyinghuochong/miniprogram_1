@@ -69,11 +69,12 @@ namespace ET.Client
             }
 
             self.MapCamera = mapCamera;
-            self.MapCamera.transform.position = new Vector3(0, 0, -100f);
+            self.MapCamera.transform.position = ConfigData.MapCameraPosition;
 
             self.TakePhoto().Coroutine();
 
             Camera camera = self.MapCamera.GetComponent<Camera>();
+            camera.orthographicSize = 100f; //控制地图大小
             self.ScaleRateX = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.ScaleRateY = self.RawImage_Map.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
 
@@ -171,7 +172,7 @@ namespace ET.Client
             Vector3 vector32 = self.GetWordToUIPositon(vector31);
             GameObject headItem = self.GetHeadItemObj(unit.Id);
 
-            //1自己 2敌对 3队友  4主城
+            //1自己 2敌对 3队友
             string showType = "1";
 
             if (unit.Type == UnitType.Player)

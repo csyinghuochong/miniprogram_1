@@ -54,7 +54,7 @@ namespace ET.Client
 
             NPCConfig npcConfig = NPCConfigCategory.Instance.Get(unit.ConfigId);
 
-            self.Text_Name.SetText(npcConfig.Name);
+            self.Text_Name.SetText(unit.GetComponent<UnitInfoComponent>().UnitName);
         }
     }
 }

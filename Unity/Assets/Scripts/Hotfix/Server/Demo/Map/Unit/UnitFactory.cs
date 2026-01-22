@@ -268,6 +268,9 @@ namespace ET.Server
 
             unit.Position = new float3(npcConfig.Position.X, npcConfig.Position.Y, 0);
             unit.Type = UnitType.NPC;
+            
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unitInfoComponent.UnitName = npcConfig.Name;
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
 
