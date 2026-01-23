@@ -112,6 +112,7 @@ namespace ET.Client
                     await ClientRankHelper.GetAllRank(root);
                     await ClientArchiveHelper.GetAllArchiveHero(root);
                     await ClientAchievementHelper.GetAllAchievement(root);
+                    await ClientBattlePassHelper.GetAllBattlePass(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }

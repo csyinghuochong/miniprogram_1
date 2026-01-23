@@ -1421,3 +1421,17 @@ message BattlePassInfo
 	bool RewardReceived_2 = 3;
 	bool RewardReceived_3 = 4;
 }
+
+// ResponseType M2C_GetAllBattlePass
+message C2M_GetAllBattlePass // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetAllBattlePass // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated BattlePassInfo BattlePassInfoList = 4;
+}
