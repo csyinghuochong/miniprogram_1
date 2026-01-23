@@ -1,0 +1,90 @@
+[
+  {
+    "Id": 10000001,
+    "Type": 0,
+    "Price": 6,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 60
+      }
+    ]
+  },
+  {
+    "Id": 10000002,
+    "Type": 0,
+    "Price": 30,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 300
+      }
+    ]
+  },
+  {
+    "Id": 10000003,
+    "Type": 0,
+    "Price": 50,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 500
+      }
+    ]
+  },
+  {
+    "Id": 10000004,
+    "Type": 0,
+    "Price": 98,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 9800
+      }
+    ]
+  },
+  {
+    "Id": 10000005,
+    "Type": 0,
+    "Price": 198,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 19800
+      }
+    ]
+  },
+  {
+    "Id": 10000006,
+    "Type": 0,
+    "Price": 298,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 29800
+      }
+    ]
+  },
+  {
+    "Id": 10000007,
+    "Type": 0,
+    "Price": 488,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 48800
+      }
+    ]
+  },
+  {
+    "Id": 10000008,
+    "Type": 0,
+    "Price": 648,
+    "RewardItem": [
+      {
+        "ItemId": 2,
+        "ItemNum": 64800
+      }
+    ]
+  }
+]
