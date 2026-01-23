@@ -8,33 +8,6 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateUserData_UpdateUIHero : AEvent<Scene, UpdateUserData>
-    {
-        protected override async ETTask Run(Scene scene, UpdateUserData args)
-        {
-            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIHero);
-            if (ui == null)
-            {
-                return;
-            }
-
-            UIHeroComponent uiHeroComponent = ui.GetComponent<UIHeroComponent>();
-
-            if (args.UserDataType == UserDataType.Gold)
-            {
-                uiHeroComponent.UpdateGold();
-            }
-
-            if (args.UserDataType == UserDataType.Diamond)
-            {
-                uiHeroComponent.UpdateDiamond();
-            }
-
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [Event(SceneType.Demo)]
     public class HeroFormationUpdate_UpdateUIHero : AEvent<Scene, HeroFormationUpdate>
     {
         protected override async ETTask Run(Scene root, HeroFormationUpdate args)
@@ -82,20 +55,16 @@ namespace ET.Client
 
             self.Transform_PanelRoot = rc.Get<GameObject>("Transform_PanelRoot").transform;
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
-            self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
-            self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
-
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
             self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
             self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
 
+            self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
             self.Button_Hero.AddListener(() => { self.ShowPanel(1); });
             self.Button_HeroList.AddListener(() => { self.ShowPanel(2); });
             self.Button_Formation.AddListener(() => { self.ShowPanel(3); });
-
-            self.UpdateGold();
-            self.UpdateDiamond();
+            
             self.ShowPanel(1);
         }
 
@@ -155,32 +124,6 @@ namespace ET.Client
                 self.UIHeroFormationComponent.UpdateSlotItemList();
                 self.UIHeroFormationComponent.GameObject.SetActive(true);
             }
-        }
-
-        public static void UpdateGold(this UIHeroComponent self)
-        {
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            
-            if (userInfoComponent.Gold >= 10000)
-            {
-                self.Text_Type_Gold.SetTextFormat("{0}k", userInfoComponent.Gold / 1000);
-                return;
-            }
-
-            self.Text_Type_Gold.SetText(userInfoComponent.Gold);
-        }
-
-        public static void UpdateDiamond(this UIHeroComponent self)
-        {
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            
-            if (userInfoComponent.Diamond >= 10000)
-            {
-                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
-                return;
-            }
-
-            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
     }
 }
