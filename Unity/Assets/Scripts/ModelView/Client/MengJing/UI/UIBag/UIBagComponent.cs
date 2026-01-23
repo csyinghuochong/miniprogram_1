@@ -11,10 +11,6 @@ namespace ET.Client
         public int CurrentPage { get; set; } = 0;
         public List<UICommonItem> UICommonItemList { get; set; } = new();
 
-        public TMP_Text Text_Type_Gold;
-        public TMP_Text Text_Type_Diamond;
-        public Button Button_AddGold;
-        public Button Button_AddDiamond;
         public Button Button_Close;
         public Button Button_Type_All;
         public Button Button_Type_Consume;
