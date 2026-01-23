@@ -21,7 +21,7 @@ namespace ET.Server
             {
                 BattlePassConfig battlePassConfig = BattlePassConfigCategory.Instance.Get(battlePass.ConfigId);
 
-                if (lv > battlePassConfig.RequiredLv)
+                if (lv < battlePassConfig.RequiredLv)
                 {
                     continue;
                 }
