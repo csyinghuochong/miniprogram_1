@@ -7,51 +7,6 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateUserData_UILotteryDrawRefresh : AEvent<Scene, UpdateUserData>
-    {
-        protected override async ETTask Run(Scene scene, UpdateUserData args)
-        {
-            if (args.UserDataType != UserDataType.Diamond)
-            {
-                return;
-            }
-
-            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UILotteryDraw);
-            if (ui == null)
-            {
-                return;
-            }
-
-            UILotteryDrawComponent uiLotteryDrawComponent = ui.GetComponent<UILotteryDrawComponent>();
-
-            if (args.UserDataType == UserDataType.Diamond)
-            {
-                uiLotteryDrawComponent.UpdateDiamond();
-            }
-
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [Event(SceneType.Demo)]
-    public class InventoryUpdate_UILotteryDrawRefresh : AEvent<Scene, InventoryUpdate>
-    {
-        protected override async ETTask Run(Scene scene, InventoryUpdate args)
-        {
-            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UILotteryDraw);
-            if (ui == null)
-            {
-                return;
-            }
-
-            UILotteryDrawComponent uiLotteryDrawComponent = ui.GetComponent<UILotteryDrawComponent>();
-            uiLotteryDrawComponent.UpdateLotteryTicket();
-
-            await ETTask.CompletedTask;
-        }
-    }
-
     [EntitySystemOf(typeof(UILotteryDrawComponent))]
     [FriendOf(typeof(UILotteryDrawComponent))]
     public static partial class UILotteryDrawComponentSystem
@@ -62,9 +17,6 @@ namespace ET.Client
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
-            self.Text_Type_LotteryTicket = rc.Get<GameObject>("Text_Type_LotteryTicket").GetComponent<TMP_Text>();
-            self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
-            self.Button_AddDiamond = rc.Get<GameObject>("Button_AddDiamond").GetComponent<Button>();
             self.Button_RewardPreview = rc.Get<GameObject>("Button_RewardPreview").GetComponent<Button>();
             self.Button_Probability = rc.Get<GameObject>("Button_Probability").GetComponent<Button>();
             self.Button_Wish = rc.Get<GameObject>("Button_Wish").GetComponent<Button>();
@@ -75,17 +27,17 @@ namespace ET.Client
             self.Toggle_SkipAnimation = rc.Get<GameObject>("Toggle_SkipAnimation").GetComponent<Toggle>();
             self.Image_WishIcon = rc.Get<GameObject>("Image_WishIcon").GetComponent<Image>();
             self.Image_WishIcon.gameObject.SetActive(false);
-            self.UILotteryDrawRewardPreviewComponent =
-                    self.AddComponent<UILotteryDrawRewardPreviewComponent, GameObject>(rc.Get<GameObject>("GameObject_RewardPreview"));
-            self.UILotteryDrawProbabilityComponent =
-                    self.AddComponent<UILotteryDrawProbabilityComponent, GameObject>(rc.Get<GameObject>("GameObject_Probability"));
+            self.UILotteryDrawRewardPreviewComponent = self.AddComponent<UILotteryDrawRewardPreviewComponent, GameObject>(rc.Get<GameObject>("GameObject_RewardPreview"));
+            self.UILotteryDrawProbabilityComponent = self.AddComponent<UILotteryDrawProbabilityComponent, GameObject>(rc.Get<GameObject>("GameObject_Probability"));
             self.UILotteryDrawWishComponent = self.AddComponent<UILotteryDrawWishComponent, GameObject>(rc.Get<GameObject>("GameObject_Wish"));
             self.UILotteryDrawRewardPreviewComponent.GameObject.SetActive(false);
             self.UILotteryDrawProbabilityComponent.GameObject.SetActive(false);
             self.UILotteryDrawWishComponent.GameObject.SetActive(false);
 
+            UICommonHuoBiSetComponent uiCommonHuoBiSetComponent = self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
+            uiCommonHuoBiSetComponent.LotteryTicket.SetActive(true);
+            uiCommonHuoBiSetComponent.Gold.SetActive(false);
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UILotteryDraw); });
-            self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             self.Button_RewardPreview.AddListener(() => { self.UILotteryDrawRewardPreviewComponent.GameObject.SetActive(true); });
             self.Button_Probability.AddListener(() => { self.UILotteryDrawProbabilityComponent.GameObject.SetActive(true); });
             self.Button_Wish.AddListener(() => { self.UILotteryDrawWishComponent.GameObject.SetActive(true); });
@@ -94,8 +46,6 @@ namespace ET.Client
 
             self.UpdateBaoDiTip();
             self.UpdateFreeTime().Coroutine();
-            self.UpdateDiamond();
-            self.UpdateLotteryTicket();
             self.UpdateWishIcon().Coroutine();
         }
 
@@ -158,34 +108,6 @@ namespace ET.Client
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIGetReward);
             UIGetRewardComponent uiGetRewardComponent = ui.GetComponent<UIGetRewardComponent>();
             uiGetRewardComponent.OnInit(rewardItems);
-        }
-
-        public static void UpdateLotteryTicket(this UILotteryDrawComponent self)
-        {
-            InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
-
-            List<Item> itemList = inventoryComponentC.GetItemsBySubType(ItemSubType.Type_6, InventoryContainerType.Bag);
-
-            int ticket = 0;
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                ticket += itemList[i].Num;
-            }
-
-            self.Text_Type_LotteryTicket.SetText(ticket);
-        }
-
-        public static void UpdateDiamond(this UILotteryDrawComponent self)
-        {
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-
-            if (userInfoComponent.Diamond >= 10000)
-            {
-                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
-                return;
-            }
-
-            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
 
         public static async ETTask UpdateWishIcon(this UILotteryDrawComponent self)

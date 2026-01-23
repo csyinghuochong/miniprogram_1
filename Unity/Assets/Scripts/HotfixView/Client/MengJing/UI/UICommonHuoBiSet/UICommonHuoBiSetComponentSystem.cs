@@ -1,4 +1,5 @@
-﻿using Cysharp.Text;
+﻿using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,20 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class InventoryUpdate_UICommonHuoBiSetRefresh : AEvent<Scene, InventoryUpdate>
+    {
+        protected override async ETTask Run(Scene scene, InventoryUpdate args)
+        {
+            foreach (UICommonHuoBiSetComponent ui in UICommonHuoBiSetComponent.InstanceList)
+            {
+                ui.UpdateLotteryTicket();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof(UICommonHuoBiSetComponent))]
     [EntitySystemOf(typeof(UICommonHuoBiSetComponent))]
     public static partial class UICommonHuoBiSetComponentSystem
@@ -43,8 +58,13 @@ namespace ET.Client
 
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
 
+            self.LotteryTicket = rc.Get<GameObject>("LotteryTicket");
+            self.LotteryTicket.SetActive(false);
+            self.Text_Type_LotteryTicket = rc.Get<GameObject>("Text_Type_LotteryTicket").GetComponent<TMP_Text>();
+            self.Gold = rc.Get<GameObject>("Gold");
             self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
             self.Button_AddGold = rc.Get<GameObject>("Button_AddGold").GetComponent<Button>();
+            self.Diamond = rc.Get<GameObject>("Diamond");
             self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
             self.Button_AddDiamond = rc.Get<GameObject>("Button_AddDiamond").GetComponent<Button>();
 
@@ -53,6 +73,7 @@ namespace ET.Client
 
             UICommonHuoBiSetComponent.InstanceList.Add(self);
 
+            self.UpdateLotteryTicket();
             self.UpdateGold();
             self.UpdateDiamond();
         }
@@ -61,6 +82,21 @@ namespace ET.Client
         private static void Destroy(this UICommonHuoBiSetComponent self)
         {
             UICommonHuoBiSetComponent.InstanceList.Remove(self);
+        }
+
+        public static void UpdateLotteryTicket(this UICommonHuoBiSetComponent self)
+        {
+            InventoryComponentC inventoryComponentC = self.Root().GetComponent<InventoryComponentC>();
+
+            List<Item> itemList = inventoryComponentC.GetItemsBySubType(ItemSubType.Type_6, InventoryContainerType.Bag);
+
+            int ticket = 0;
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                ticket += itemList[i].Num;
+            }
+
+            self.Text_Type_LotteryTicket.SetText(ticket);
         }
 
         public static void UpdateGold(this UICommonHuoBiSetComponent self)

@@ -13,9 +13,6 @@ namespace ET.Client
         public UILotteryDrawWishComponent UILotteryDrawWishComponent { get; set; }
 
         public Button Button_Close;
-        public TMP_Text Text_Type_LotteryTicket;
-        public TMP_Text Text_Type_Diamond;
-        public Button Button_AddDiamond;
         public Button Button_RewardPreview;
         public Button Button_Probability;
         public Button Button_Wish;
