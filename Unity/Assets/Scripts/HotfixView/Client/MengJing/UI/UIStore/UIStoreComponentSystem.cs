@@ -6,37 +6,6 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateUserData_UIStoreRefresh : AEvent<Scene, UpdateUserData>
-    {
-        protected override async ETTask Run(Scene scene, UpdateUserData args)
-        {
-            if (args.UserDataType != UserDataType.Gold && args.UserDataType != UserDataType.Diamond)
-            {
-                return;
-            }
-
-            UI ui = scene.GetComponent<UIComponent>().Get(UIType.UIStore);
-            if (ui == null)
-            {
-                return;
-            }
-
-            UIStoreComponent uiBagComponent = ui.GetComponent<UIStoreComponent>();
-            if (args.UserDataType == UserDataType.Gold)
-            {
-                uiBagComponent.UpdateGold();
-            }
-
-            if (args.UserDataType == UserDataType.Diamond)
-            {
-                uiBagComponent.UpdateDiamond();
-            }
-
-            await ETTask.CompletedTask;
-        }
-    }
-
     [EntitySystemOf(typeof(UIStoreComponent))]
     [FriendOf(typeof(UIStoreComponent))]
     public static partial class UIStoreComponentSystem
@@ -46,10 +15,6 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
-            self.Text_Type_Gold = rc.Get<GameObject>("Text_Type_Gold").GetComponent<TMP_Text>();
-            self.Text_Type_Diamond = rc.Get<GameObject>("Text_Type_Diamond").GetComponent<TMP_Text>();
-            self.Button_AddGold = rc.Get<GameObject>("Button_AddGold").GetComponent<Button>();
-            self.Button_AddDiamond = rc.Get<GameObject>("Button_AddDiamond").GetComponent<Button>();
             self.Button_Close = rc.Get<GameObject>("Button_Close").GetComponent<Button>();
             self.Text_RefreshTime = rc.Get<GameObject>("Text_RefreshTime").GetComponent<TMP_Text>();
             self.Button_RefreshTime = rc.Get<GameObject>("Button_Refresh").GetComponent<Button>();
@@ -57,12 +22,10 @@ namespace ET.Client
             self.UIStoreItem = rc.Get<GameObject>("UIStoreItem");
             self.UIStoreItem.SetActive(false);
 
+            self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
-            self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             self.Button_RefreshTime.AddListener(() => { self.OnButton_StoreRefresh().Coroutine(); });
 
-            self.UpdateGold();
-            self.UpdateDiamond();
             self.GetStoreInfo().Coroutine();
         }
 
@@ -158,32 +121,6 @@ namespace ET.Client
             self.StoreItemList = response.StoreItemList;
 
             self.UpdateStoreList();
-        }
-
-        public static void UpdateGold(this UIStoreComponent self)
-        {
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-
-            if (userInfoComponent.Gold >= 10000)
-            {
-                self.Text_Type_Gold.SetTextFormat("{0}k", userInfoComponent.Gold / 1000);
-                return;
-            }
-
-            self.Text_Type_Gold.SetText(userInfoComponent.Gold);
-        }
-
-        public static void UpdateDiamond(this UIStoreComponent self)
-        {
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-
-            if (userInfoComponent.Diamond >= 10000)
-            {
-                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
-                return;
-            }
-
-            self.Text_Type_Diamond.SetText(userInfoComponent.Diamond);
         }
 
         private static async ETTask OnButton_StoreRefresh(this UIStoreComponent self)

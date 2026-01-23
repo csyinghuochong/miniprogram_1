@@ -13,11 +13,7 @@ namespace ET.Client
         public int StoreRefreshNum;
 
         public List<UIStoreItem> UIStoreItemList { get; set; } = new();
-
-        public TMP_Text Text_Type_Gold;
-        public TMP_Text Text_Type_Diamond;
-        public Button Button_AddGold;
-        public Button Button_AddDiamond;
+        
         public Button Button_Close;
         public TMP_Text Text_RefreshTime;
         public Button Button_RefreshTime;
