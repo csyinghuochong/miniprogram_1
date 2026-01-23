@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ChildOf]
-    public class UIRechargePointsItem : Entity, IAwake<GameObject>, IDestroy
+    public class UIRechargePointsRewardItem : Entity, IAwake<GameObject>, IDestroy
     {
 
         public List<UICommonItem> UIRewardItemList { get; set; } = new();

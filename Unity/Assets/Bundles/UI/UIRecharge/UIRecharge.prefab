@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 5104571409417453596}
   - component: {fileID: 87145916065679499}
   m_Layer: 5
-  m_Name: Content_UIRechargePointsItem
+  m_Name: Content_UIRechargePointsRewardItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1087,7 +1087,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 180}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5104571409417453596
 MonoBehaviour:
@@ -3269,7 +3269,7 @@ GameObject:
   - component: {fileID: 7694643172373085523}
   - component: {fileID: 7935915136474075818}
   m_Layer: 5
-  m_Name: UIRechargePointsItem
+  m_Name: UIRechargePointsRewardItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3294,10 +3294,10 @@ RectTransform:
   - {fileID: 5447205673300236594}
   m_Father: {fileID: 295603068283880614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460, y: -90}
-  m_SizeDelta: {x: 900, y: 160}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3155040949077727275
 CanvasRenderer:
@@ -4217,12 +4217,12 @@ GameObject:
   - component: {fileID: 5403432803309678692}
   - component: {fileID: 1114083048128853002}
   m_Layer: 5
-  m_Name: GameObject_RechargePoints
+  m_Name: GameObject_RechargePointsReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5403432803309678692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4258,9 +4258,9 @@ MonoBehaviour:
   data:
   - key: Button_Close
     gameObject: {fileID: 8399532461239676221}
-  - key: Content_UIRechargePointsItem
+  - key: Content_UIRechargePointsRewardItem
     gameObject: {fileID: 1796717808075454488}
-  - key: UIRechargePointsItem
+  - key: UIRechargePointsRewardItem
     gameObject: {fileID: 4950803298536620148}
   - key: Text_VipLv
     gameObject: {fileID: 5789686722774755218}
@@ -5102,7 +5102,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 130}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5450872792278370297
 MonoBehaviour:
@@ -5348,7 +5348,7 @@ MonoBehaviour:
     gameObject: {fileID: 5989414717928942015}
   - key: Button_Reward
     gameObject: {fileID: 5268859652047454605}
-  - key: GameObject_RechargePoints
+  - key: GameObject_RechargePointsReward
     gameObject: {fileID: 5944671868146466217}
 --- !u!1 &8306374234591994502
 GameObject:

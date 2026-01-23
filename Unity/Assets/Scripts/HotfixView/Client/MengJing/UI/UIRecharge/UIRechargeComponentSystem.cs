@@ -24,9 +24,9 @@ namespace ET.Client
             self.Text_VipLv = rc.Get<GameObject>("Text_VipLv").GetComponent<TMP_Text>();
             self.Image_PointsProgress = rc.Get<GameObject>("Image_PointsProgress").GetComponent<Image>();
             self.Button_Reward = rc.Get<GameObject>("Button_Reward").GetComponent<Button>();
-            self.UIRechargePointsComponent =
-                    self.AddComponent<UIRechargePointsComponent, GameObject>(rc.Get<GameObject>("GameObject_RechargePoints"));
-            self.UIRechargePointsComponent.GameObject.SetActive(false);
+            self.UIRechargePointsRewardComponent =
+                    self.AddComponent<UIRechargePointsRewardComponent, GameObject>(rc.Get<GameObject>("GameObject_RechargePointsReward"));
+            self.UIRechargePointsRewardComponent.GameObject.SetActive(false);
 
 
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIRecharge); });
@@ -36,7 +36,7 @@ namespace ET.Client
             self.Button_RechargeFour.AddListener(() => { self.OnRecharge(128); });
             self.Button_RechargeFive.AddListener(() => { self.OnRecharge(198); });
             self.Button_RechargeSix.AddListener(() => { self.OnRecharge(328); });
-            self.Button_Reward.AddListener(() => { self.UIRechargePointsComponent.GameObject.SetActive(true); });
+            self.Button_Reward.AddListener(() => { self.UIRechargePointsRewardComponent.GameObject.SetActive(true); });
         }
 
         public static void OnRecharge(this UIRechargeComponent self,int num)

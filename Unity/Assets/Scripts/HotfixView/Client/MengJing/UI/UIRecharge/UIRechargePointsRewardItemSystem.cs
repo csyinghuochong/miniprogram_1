@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(UIRechargePointsItem))]
-    [FriendOf(typeof(UIRechargePointsItem))]
-    public static partial class UIRechargePointsItemSystem
+    [EntitySystemOf(typeof(UIRechargePointsRewardItem))]
+    [FriendOf(typeof(UIRechargePointsRewardItem))]
+    public static partial class UIRechargePointsRewardItemSystem
     {
         [EntitySystem]
-        private static void Awake(this UIRechargePointsItem self, GameObject gameObject)
+        private static void Awake(this UIRechargePointsRewardItem self, GameObject gameObject)
         {
             self.GameObject = gameObject;
 
@@ -23,7 +23,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this UIRechargePointsItem self)
+        private static void Destroy(this UIRechargePointsRewardItem self)
         {
             self.UIRewardItemList.Clear();
             self.UICommonItem = null;

@@ -6,15 +6,15 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf]
-    public class UIRechargePointsComponent : Entity, IAwake<GameObject>, IDestroy
+    public class UIRechargePointsRewardComponent : Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject { get; set; }
         
-        public List<UIRechargePointsItem> UIRechargePointsItemList { get; set; } = new();
+        public List<UIRechargePointsRewardItem> UIRechargePointsRewardItemList { get; set; } = new();
 
         public Button Button_Close;
-        public Transform Content_UIRechargePointsItem;
-        public GameObject UIRechargePointsItem;
+        public Transform Content_UIRechargePointsRewardItem;
+        public GameObject UIRechargePointsRewardItem;
         public TMP_Text Text_VipLv;
         public Image Image_PointsProgress;
         public TMP_Text Text_Points;
