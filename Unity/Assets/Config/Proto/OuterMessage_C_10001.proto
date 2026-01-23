@@ -1413,3 +1413,11 @@ message M2C_ReceivedAchievementReward // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+message BattlePassInfo
+{
+	int32 ConfigId = 1;
+	bool RewardReceived_1 = 2;
+	bool RewardReceived_2 = 3;
+	bool RewardReceived_3 = 4;
+}

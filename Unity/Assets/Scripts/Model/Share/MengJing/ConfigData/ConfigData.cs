@@ -30,8 +30,9 @@ namespace ET
 
         [StaticField]
         public static float3 MapCameraPosition = new float3(0, 0, -100);
+
         public const float MapCameraOrthographicSize = 30f;
-        
+
         public const int Item_Gold = 1;
         public const int Item_Diamond = 2;
         public const int Item_Exp = 3;
@@ -163,5 +164,12 @@ namespace ET
         public const int ArchiveHeroStarAddPoint = 1;
 
         #endregion
+
+        # region 令牌
+
+        public const int BattlePassRecharge_2 = 98;
+        public const int BattlePassRecharge_3 = 198;
+
+        # endregion
     }
 }

@@ -18,5 +18,10 @@
         private static void Deserialize(this BattlePassComponent self)
         {
         }
+
+        public static void OnLogin(this BattlePassComponent self)
+        {
+            
+        }
     }
 }

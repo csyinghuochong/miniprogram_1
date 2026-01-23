@@ -6435,6 +6435,43 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.BattlePassInfo)]
+    public partial class BattlePassInfo : MessageObject
+    {
+        public static BattlePassInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(BattlePassInfo), isFromPool) as BattlePassInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int ConfigId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public bool RewardReceived_1 { get; set; }
+
+        [MemoryPackOrder(2)]
+        public bool RewardReceived_2 { get; set; }
+
+        [MemoryPackOrder(3)]
+        public bool RewardReceived_3 { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.ConfigId = default;
+            this.RewardReceived_1 = default;
+            this.RewardReceived_2 = default;
+            this.RewardReceived_3 = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -6619,5 +6656,6 @@ namespace ET
         public const ushort M2C_AchievementUpdate = 10181;
         public const ushort C2M_ReceivedAchievementReward = 10182;
         public const ushort M2C_ReceivedAchievementReward = 10183;
+        public const ushort BattlePassInfo = 10184;
     }
 }

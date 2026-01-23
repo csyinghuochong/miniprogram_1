@@ -140,6 +140,7 @@ namespace ET.Server
                         unit.GetComponent<HeroComponent>().OnLogin();
                         unit.GetComponent<TaskComponent>().OnLogin();
                         unit.GetComponent<AchievementComponent>().OnLogin();
+                        unit.GetComponent<BattlePassComponent>().OnLogin();
                         HeroComponent heroComponent = unit.GetComponent<HeroComponent>();
                         NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
                         ArchiveComponent archiveComponent = unit.GetComponent<ArchiveComponent>();
