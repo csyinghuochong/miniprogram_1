@@ -788,6 +788,20 @@ message M2C_GetUserInfo // ILocationResponse
 	int32 Lv = 8;
 }
 
+// ResponseType M2C_Recharge
+message C2M_Recharge // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 Num = 2;
+}
+
+message M2C_Recharge // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 // ResponseType M2C_SetTimeScale
 message C2M_SetTimeScale // ILocationRequest
 {
