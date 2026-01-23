@@ -94,7 +94,12 @@ namespace ET.Server
 
                         break;
                     }
-                    case 6:
+                    case 4: //充值
+                    {
+                        
+                        break;
+                    }
+                    case 6: //修改等级
                     {
                         int lv = int.Parse(commands[1]);
                         UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();

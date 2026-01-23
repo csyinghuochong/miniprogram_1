@@ -8,7 +8,7 @@
         //当前属性[玩家刷新属性的时候不会清掉这些值]
         public const int Now_Hp = 3001;                                         //生命值
         public const int Now_Dead = 3002;                                       //0活 1死
-        public const int LastLoginTime = 3003;
+        public const int LastLoginTime = 3003;                                  //上次在线时间
         public const int CombatPower = 3004;                                    //战斗力
         public const int ShowHeroId = 3005;                                     //在主城显示的英雄ConfigId
         public const int MainCity_X = 3006;
@@ -20,7 +20,7 @@
         public const int InvulnerableCount = 3012;                              //免疫伤害次数
         public const int DropItemId = 3013;                                     //掉落物Id
         public const int DropItemNum = 3014;                                    //掉落物数量
-        public const int DropType = 3015;
+        public const int DropType = 3015;                                       //掉落物类型
         public const int BattleMode = 3016;                                     //0:跟随玩家战斗 1:自由战斗
         
         // 闯关相关
@@ -31,9 +31,11 @@
         
         public const int LotteryDrawNum = 3200;                                 //抽卡次数
         public const int LotteryDrawFreeTime = 3201;                            //抽卡免费时间
+        public const int RechargeNumber = 3202;                                 //充值金额
 
         public const int Max = 10000;
 
+        // 以下战斗属性[刷新属性的时候会清掉这些值]
         public const int Now_MaxHp = 1002;         //生命总值
         public const int Base_MaxHp_Base = Now_MaxHp * 100 + 1;                  //属性累加
         public const int Base_MaxHp_Mul = Now_MaxHp * 100 + 2;                   //属性乘法
