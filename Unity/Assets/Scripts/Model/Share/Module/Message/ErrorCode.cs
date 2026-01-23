@@ -133,6 +133,8 @@ namespace ET
         public const int ERR_NotEnoughPoint = 201602; //积分不足
         
         public const int ERR_NotEnoughAchievementPoint = 201701; //成就点不足
+        
+        public const int ERR_NotEnoughLv = 201801; //等级不足
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()

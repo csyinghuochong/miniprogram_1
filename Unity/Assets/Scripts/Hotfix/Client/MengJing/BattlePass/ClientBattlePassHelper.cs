@@ -19,7 +19,7 @@
 
             return response.Error;
         }
-        
+
         public static async ETTask<int> BattlePassGetAllReward(Scene root)
         {
             C2M_BattlePassGetAllReward request = C2M_BattlePassGetAllReward.Create();
@@ -32,6 +32,21 @@
                 {
                     battlePassComponent.AddOrUpdateBattlePass(battlePassInfo);
                 }
+            }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> BattlePassGetReward(Scene root, int rewardId)
+        {
+            C2M_BattlePassGetReward request = C2M_BattlePassGetReward.Create();
+            request.ConfigId = rewardId;
+
+            M2C_BattlePassGetReward response = (M2C_BattlePassGetReward)await root.GetComponent<ClientSenderComponent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                BattlePassComponentC battlePassComponent = root.GetComponent<BattlePassComponentC>();
+                battlePassComponent.AddOrUpdateBattlePass(response.BattlePassInfo);
             }
 
             return response.Error;

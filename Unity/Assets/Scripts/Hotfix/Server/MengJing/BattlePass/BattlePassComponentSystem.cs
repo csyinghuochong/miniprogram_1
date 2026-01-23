@@ -51,5 +51,18 @@
                 self.BattlePassList.Add(newBattlePass);
             }
         }
+        
+        public static BattlePass GetBattlePass(this BattlePassComponent self, int configId)
+        {
+            foreach (BattlePass battlePass in self.BattlePassList)
+            {
+                if (battlePass.ConfigId == configId)
+                {
+                    return battlePass;
+                }
+            }
+
+            return null;
+        }
     }
 }

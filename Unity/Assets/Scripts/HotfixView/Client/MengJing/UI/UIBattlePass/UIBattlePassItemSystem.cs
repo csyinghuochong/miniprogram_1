@@ -24,6 +24,8 @@ namespace ET.Client
             self.GameObject_NotCompleted.SetActive(false);
             self.Button_OnClick = rc.Get<GameObject>("Button_OnClick").GetComponent<Button>();
 
+            self.Button_OnClick.AddListener(() => { self.OnButton_OnClick().Coroutine(); });
+
             GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward1);
             go.SetActive(true);
             self.UICommonItem_1 = self.AddChild<UICommonItem, GameObject>(go);
@@ -64,13 +66,24 @@ namespace ET.Client
 
             int lv = userInfoComponent.Lv;
             int recharge = numericComponent.GetAsInt(NumericType.RechargeNumber);
-            if (lv >= battlePassConfig.RequiredLv && (!battlePass.RewardReceived_1 || recharge >= ConfigData.BattlePassRecharge_2 && !battlePass.RewardReceived_2 || recharge >= ConfigData.BattlePassRecharge_3 && !battlePass.RewardReceived_3))
+            if (lv >= battlePassConfig.RequiredLv && (!battlePass.RewardReceived_1 ||
+                    recharge >= ConfigData.BattlePassRecharge_2 && !battlePass.RewardReceived_2 ||
+                    recharge >= ConfigData.BattlePassRecharge_3 && !battlePass.RewardReceived_3))
             {
                 // 有道具可领取
             }
             else
             {
                 // 没有道具可领取
+            }
+        }
+
+        private static async ETTask OnButton_OnClick(this UIBattlePassItem self)
+        {
+            int error = await ClientBattlePassHelper.BattlePassGetReward(self.Root(), self.RewardId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.UpdateInfo(self.RewardId);
             }
         }
     }
