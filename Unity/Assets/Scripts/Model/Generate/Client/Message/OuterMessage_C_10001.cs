@@ -6535,6 +6535,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_BattlePassGetAllReward)]
+    [ResponseType(nameof(M2C_BattlePassGetAllReward))]
+    public partial class C2M_BattlePassGetAllReward : MessageObject, ILocationRequest
+    {
+        public static C2M_BattlePassGetAllReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_BattlePassGetAllReward), isFromPool) as C2M_BattlePassGetAllReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_BattlePassGetAllReward)]
+    public partial class M2C_BattlePassGetAllReward : MessageObject, ILocationResponse
+    {
+        public static M2C_BattlePassGetAllReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_BattlePassGetAllReward), isFromPool) as M2C_BattlePassGetAllReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<BattlePassInfo> BattlePassInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.BattlePassInfoList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -6722,5 +6785,7 @@ namespace ET
         public const ushort BattlePassInfo = 10184;
         public const ushort C2M_GetAllBattlePass = 10185;
         public const ushort M2C_GetAllBattlePass = 10186;
+        public const ushort C2M_BattlePassGetAllReward = 10187;
+        public const ushort M2C_BattlePassGetAllReward = 10188;
     }
 }

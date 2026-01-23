@@ -19,5 +19,22 @@
 
             return response.Error;
         }
+        
+        public static async ETTask<int> BattlePassGetAllReward(Scene root)
+        {
+            C2M_BattlePassGetAllReward request = C2M_BattlePassGetAllReward.Create();
+
+            M2C_BattlePassGetAllReward response = (M2C_BattlePassGetAllReward)await root.GetComponent<ClientSenderComponent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                BattlePassComponentC battlePassComponent = root.GetComponent<BattlePassComponentC>();
+                foreach (BattlePassInfo battlePassInfo in response.BattlePassInfoList)
+                {
+                    battlePassComponent.AddOrUpdateBattlePass(battlePassInfo);
+                }
+            }
+
+            return response.Error;
+        }
     }
 }

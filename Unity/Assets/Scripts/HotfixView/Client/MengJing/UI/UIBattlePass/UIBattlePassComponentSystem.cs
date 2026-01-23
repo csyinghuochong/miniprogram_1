@@ -23,7 +23,8 @@ namespace ET.Client
 
             self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIBattlePass); });
-            
+            self.Button_GetAllReward.AddListener(() => { self.OnButton_GetAllReward().Coroutine(); });
+
             self.UpdateInfo();
         }
 
@@ -55,7 +56,15 @@ namespace ET.Client
             {
                 self.UIBattlePassItemList[i].GameObject.SetActive(false);
             }
+        }
 
+        private static async ETTask OnButton_GetAllReward(this UIBattlePassComponent self)
+        {
+            int error = await ClientBattlePassHelper.BattlePassGetAllReward(self.Root());
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.UpdateInfo();
+            }
         }
     }
 }

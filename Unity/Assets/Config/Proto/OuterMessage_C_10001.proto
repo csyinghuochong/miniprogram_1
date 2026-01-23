@@ -1435,3 +1435,17 @@ message M2C_GetAllBattlePass // ILocationResponse
 	string Message = 3;
 	repeated BattlePassInfo BattlePassInfoList = 4;
 }
+
+// ResponseType M2C_BattlePassGetAllReward
+message C2M_BattlePassGetAllReward // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_BattlePassGetAllReward // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated BattlePassInfo BattlePassInfoList = 4;
+}
