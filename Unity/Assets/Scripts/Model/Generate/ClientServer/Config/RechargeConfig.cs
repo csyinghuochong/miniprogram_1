@@ -20,6 +20,7 @@ namespace ET
             Type = _buf.ReadInt();
             Price = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); RewardItem = new ET.RewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { ET.RewardItem __e0;__e0 = ExternalTypeUtil.NewRewardItem(global::ET.rewardItem.DeserializerewardItem(_buf)); RewardItem[__index0] = __e0;}}
+            Point = _buf.ReadInt();
 
             PostInit();
         }
@@ -49,12 +50,18 @@ namespace ET
         /// </summary>
         public readonly ET.RewardItem[] RewardItem;
 
+        /// <summary>
+        /// 积分
+        /// </summary>
+        public readonly int Point;
+
 
         public const int __ID__ = -1565007639;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
+            
             
             
             
@@ -68,6 +75,7 @@ namespace ET
             + "Type:" + Type + ","
             + "Price:" + Price + ","
             + "RewardItem:" + Luban.StringUtil.CollectionToString(RewardItem) + ","
+            + "Point:" + Point + ","
             + "}";
         }
 
