@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 5104571409417453596}
   - component: {fileID: 87145916065679499}
   m_Layer: 5
-  m_Name: Content_UIRechargeItem
+  m_Name: Content_UIRechargePointsItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1087,7 +1087,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 180}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5104571409417453596
 MonoBehaviour:
@@ -2026,7 +2026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7000193603890726182}
   m_Layer: 5
-  m_Name: GameObject_Reveived
+  m_Name: GameObject_Received
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3269,7 +3269,7 @@ GameObject:
   - component: {fileID: 7694643172373085523}
   - component: {fileID: 7935915136474075818}
   m_Layer: 5
-  m_Name: UIRechargeItem
+  m_Name: UIRechargePointsItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3350,14 +3350,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: Text_RequiredPoints
-    gameObject: {fileID: 6717781038474021263}
   - key: Content_UICommonItem
     gameObject: {fileID: 7206482475626262617}
   - key: UICommonItem
     gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
       type: 3}
-  - key: GameObject_Reveived
+  - key: Text_RequiredPoints
+    gameObject: {fileID: 6717781038474021263}
+  - key: GameObject_Received
     gameObject: {fileID: 2790950629087156655}
   - key: Button_GetReward
     gameObject: {fileID: 403929489518689282}
@@ -4217,12 +4217,12 @@ GameObject:
   - component: {fileID: 5403432803309678692}
   - component: {fileID: 1114083048128853002}
   m_Layer: 5
-  m_Name: GameObject_Recharge
+  m_Name: GameObject_RechargePoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5403432803309678692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4258,9 +4258,9 @@ MonoBehaviour:
   data:
   - key: Button_Close
     gameObject: {fileID: 8399532461239676221}
-  - key: Content_UIRechargeItem
+  - key: Content_UIRechargePointsItem
     gameObject: {fileID: 1796717808075454488}
-  - key: UIRechargeItem
+  - key: UIRechargePointsItem
     gameObject: {fileID: 4950803298536620148}
   - key: Text_VipLv
     gameObject: {fileID: 5789686722774755218}
@@ -5102,7 +5102,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 130}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5450872792278370297
 MonoBehaviour:
@@ -5348,6 +5348,8 @@ MonoBehaviour:
     gameObject: {fileID: 5989414717928942015}
   - key: Button_Reward
     gameObject: {fileID: 5268859652047454605}
+  - key: GameObject_RechargePoints
+    gameObject: {fileID: 5944671868146466217}
 --- !u!1 &8306374234591994502
 GameObject:
   m_ObjectHideFlags: 0

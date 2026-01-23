@@ -8,6 +8,7 @@ namespace ET.Client
     [ComponentOf(typeof(UI))]
     public class UIRechargeComponent : Entity, IAwake
     {
+        public UIRechargePointsComponent UIRechargePointsComponent { get; set; }
         
         public Button Button_Close;
         public Button Button_RechargeOne;
