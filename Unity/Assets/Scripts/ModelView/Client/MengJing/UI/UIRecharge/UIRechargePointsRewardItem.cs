@@ -6,10 +6,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [ChildOf]
-    public class UIRechargePointsRewardItem : Entity, IAwake<GameObject>, IDestroy
+    public class UIRechargePointsRewardItem : Entity, IAwake<GameObject>
     {
-
-        public List<UICommonItem> UIRewardItemList { get; set; } = new();
+        public int RewardId;
+        public List<UICommonItem> UICommonItemList { get; set; } = new();
         public GameObject GameObject { get; set; }
 
         public Transform Content_UICommonItem;

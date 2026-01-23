@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,11 +23,34 @@ namespace ET.Client
             self.Button_GetReward = rc.Get<GameObject>("Button_GetReward").GetComponent<Button>();
         }
 
-        [EntitySystem]
-        private static void Destroy(this UIRechargePointsRewardItem self)
+        public static void UpdateInfo(this UIRechargePointsRewardItem self, int rewardId)
         {
-            self.UIRewardItemList.Clear();
-            self.UICommonItem = null;
+            self.RewardId = rewardId;
+            
+            RechargePointsRewardConfig rechargePointsRewardConfig = RechargePointsRewardConfigCategory.Instance.Get(self.RewardId);
+
+            self.Text_RequiredPoints.SetTextFormat("累计获得\n{0}积分", rechargePointsRewardConfig.RequiredPoints);
+            
+            // 道具奖励
+            RewardItem[] rewardItems = rechargePointsRewardConfig.RewardItem;
+
+            while (self.UICommonItemList.Count < rewardItems.Length)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UICommonItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < rewardItems.Length; i++)
+            {
+                self.UICommonItemList[i].UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
+                self.UICommonItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = rewardItems.Length; i < self.UICommonItemList.Count; i++)
+            {
+                self.UICommonItemList[i].GameObject.SetActive(false);
+            }
         }
     }
 }

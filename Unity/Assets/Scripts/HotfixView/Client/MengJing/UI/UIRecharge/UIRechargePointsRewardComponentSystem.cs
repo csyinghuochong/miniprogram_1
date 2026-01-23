@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ namespace ET.Client
 
             self.Button_Close.AddListener(() => { self.GameObject.SetActive(false); });
             
+            self.UpdateInfo();
+            
         }
 
         [EntitySystem]
@@ -34,6 +37,28 @@ namespace ET.Client
             self.UIRechargePointsRewardItem = null;
         }
         
-        
+        public static void UpdateInfo(this UIRechargePointsRewardComponent self)
+        {
+            List<RechargePointsRewardConfig> rechargePointsRewardConfigs = RechargePointsRewardConfigCategory.Instance.DataList;
+
+            while (self.UIRechargePointsRewardItemList.Count < rechargePointsRewardConfigs.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIRechargePointsRewardItem, self.Content_UIRechargePointsRewardItem);
+                UIRechargePointsRewardItem newItem = self.AddChild<UIRechargePointsRewardItem, GameObject>(go);
+                self.UIRechargePointsRewardItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < rechargePointsRewardConfigs.Count; i++)
+            {
+                self.UIRechargePointsRewardItemList[i].UpdateInfo(rechargePointsRewardConfigs[i].Id);
+                self.UIRechargePointsRewardItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = rechargePointsRewardConfigs.Count; i < self.UIRechargePointsRewardItemList.Count; i++)
+            {
+                self.UIRechargePointsRewardItemList[i].GameObject.SetActive(false);
+            }
+            
+        }
     }
 }
