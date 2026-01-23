@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace ET.Client
 
             self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIBattlePass); });
+            
+            self.UpdateInfo();
         }
 
         [EntitySystem]
@@ -29,6 +32,30 @@ namespace ET.Client
         {
             self.UIBattlePassItemList.Clear();
             self.UIBattlePassItem = null;
+        }
+
+        public static void UpdateInfo(this UIBattlePassComponent self)
+        {
+            List<RechargePointsRewardConfig> rechargePointsRewardConfigs = RechargePointsRewardConfigCategory.Instance.DataList;
+
+            while (self.UIBattlePassItemList.Count < rechargePointsRewardConfigs.Count)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UIBattlePassItem, self.Content_UIBattlePassItem);
+                UIBattlePassItem newItem = self.AddChild<UIBattlePassItem, GameObject>(go);
+                self.UIBattlePassItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < rechargePointsRewardConfigs.Count; i++)
+            {
+                self.UIBattlePassItemList[i].UpdateInfo(rechargePointsRewardConfigs[i].Id);
+                self.UIBattlePassItemList[i].GameObject.SetActive(true);
+            }
+
+            for (int i = rechargePointsRewardConfigs.Count; i < self.UIBattlePassItemList.Count; i++)
+            {
+                self.UIBattlePassItemList[i].GameObject.SetActive(false);
+            }
+
         }
     }
 }
