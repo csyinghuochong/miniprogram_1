@@ -31,5 +31,15 @@
 
             return response;
         }
+
+        public static async ETTask<int> Recharge(Scene root, int configId)
+        {
+            C2M_Recharge request = C2M_Recharge.Create();
+            request.ConfigId = configId;
+
+            M2C_Recharge response = (M2C_Recharge)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

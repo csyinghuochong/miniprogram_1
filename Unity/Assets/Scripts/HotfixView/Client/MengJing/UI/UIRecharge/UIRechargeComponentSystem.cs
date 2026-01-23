@@ -1,4 +1,4 @@
-
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,22 +28,34 @@ namespace ET.Client
                     self.AddComponent<UIRechargePointsRewardComponent, GameObject>(rc.Get<GameObject>("GameObject_RechargePointsReward"));
             self.UIRechargePointsRewardComponent.GameObject.SetActive(false);
 
-
             self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIRecharge); });
-            self.Button_RechargeOne.AddListener(() => { self.OnRecharge(6); });
-            self.Button_RechargeTwo.AddListener(() => { self.OnRecharge(30); });
-            self.Button_RechargeThree.AddListener(() => { self.OnRecharge(98); });
-            self.Button_RechargeFour.AddListener(() => { self.OnRecharge(128); });
-            self.Button_RechargeFive.AddListener(() => { self.OnRecharge(198); });
-            self.Button_RechargeSix.AddListener(() => { self.OnRecharge(328); });
+            self.Button_RechargeOne.AddListener(() => { self.OnRecharge(6).Coroutine(); });
+            self.Button_RechargeTwo.AddListener(() => { self.OnRecharge(30).Coroutine(); });
+            self.Button_RechargeThree.AddListener(() => { self.OnRecharge(98).Coroutine(); });
+            self.Button_RechargeFour.AddListener(() => { self.OnRecharge(128).Coroutine(); });
+            self.Button_RechargeFive.AddListener(() => { self.OnRecharge(198).Coroutine(); });
+            self.Button_RechargeSix.AddListener(() => { self.OnRecharge(328).Coroutine(); });
             self.Button_Reward.AddListener(() => { self.UIRechargePointsRewardComponent.GameObject.SetActive(true); });
         }
 
-        public static void OnRecharge(this UIRechargeComponent self,int num)
+        public static async ETTask OnRecharge(this UIRechargeComponent self, int num)
         {
-            Log.Warning("我充值了" + num + "元");
-        }
-        
+            int configId = 0;
+            foreach (RechargeConfig rechargeConfig in RechargeConfigCategory.Instance.DataMap.Values)
+            {
+                if (rechargeConfig.Price == num)
+                {
+                    configId = rechargeConfig.Id;
+                    break;
+                }
+            }
 
+            int error = await ClientUserInfoHelper.Recharge(self.Root(), configId);
+
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText(ZString.Format("充值{0}元成功", num));
+            }
+        }
     }
 }
