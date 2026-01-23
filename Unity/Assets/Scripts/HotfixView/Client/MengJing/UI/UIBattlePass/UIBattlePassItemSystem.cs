@@ -58,6 +58,20 @@ namespace ET.Client
 
             self.UICommonItem_3.UpdateInfo(rewardItem3.ItemId, rewardItem3.ItemNum).Coroutine();
             self.UICommonItem_3.Image_Selected.gameObject.SetActive(battlePass != null && battlePass.RewardReceived_3);
+
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+
+            int lv = userInfoComponent.Lv;
+            int recharge = numericComponent.GetAsInt(NumericType.RechargeNumber);
+            if (lv >= battlePassConfig.RequiredLv && (!battlePass.RewardReceived_1 || recharge >= ConfigData.BattlePassRecharge_2 && !battlePass.RewardReceived_2 || recharge >= ConfigData.BattlePassRecharge_3 && !battlePass.RewardReceived_3))
+            {
+                // 有道具可领取
+            }
+            else
+            {
+                // 没有道具可领取
+            }
         }
     }
 }
