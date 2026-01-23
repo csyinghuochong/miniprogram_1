@@ -23,6 +23,16 @@ namespace ET.Client
             self.GameObject_NotCompleted = rc.Get<GameObject>("GameObject_NotCompleted");
             self.GameObject_NotCompleted.SetActive(false);
             self.Button_OnClick = rc.Get<GameObject>("Button_OnClick").GetComponent<Button>();
+
+            GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward1);
+            go.SetActive(true);
+            self.UICommonItem_1 = self.AddChild<UICommonItem, GameObject>(go);
+            go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward2);
+            go.SetActive(true);
+            self.UICommonItem_2 = self.AddChild<UICommonItem, GameObject>(go);
+            go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward3);
+            go.SetActive(true);
+            self.UICommonItem_3 = self.AddChild<UICommonItem, GameObject>(go);
         }
 
         public static void UpdateInfo(this UIBattlePassItem self, int rewardId)
@@ -30,31 +40,24 @@ namespace ET.Client
             self.RewardId = rewardId;
 
             BattlePassConfig battlePassConfig = BattlePassConfigCategory.Instance.Get(self.RewardId);
+            BattlePassComponentC battlePassComponent = self.Root().GetComponent<BattlePassComponentC>();
+
+            BattlePass battlePass = battlePassComponent.GetBattlePass(rewardId);
 
             self.Text_RequiredLv.SetText(battlePassConfig.RequiredLv.ToString());
-
 
             RewardItem rewardItem1 = battlePassConfig.RewardItem1;
             RewardItem rewardItem2 = battlePassConfig.RewardItem2;
             RewardItem rewardItem3 = battlePassConfig.RewardItem3;
 
-            GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward1);
-            UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
-            self.uiCommonItem = newItem;
-            self.uiCommonItem.UpdateInfo(rewardItem1.ItemId, rewardItem1.ItemNum).Coroutine();
-            self.uiCommonItem.GameObject.SetActive(true);
-            
-            go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward2);
-            newItem = self.AddChild<UICommonItem, GameObject>(go);
-            self.uiCommonItem = newItem;
-            self.uiCommonItem.UpdateInfo(rewardItem2.ItemId, rewardItem2.ItemNum).Coroutine();
-            self.uiCommonItem.GameObject.SetActive(true);
-            
-            go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Transform_Reward3);
-            newItem = self.AddChild<UICommonItem, GameObject>(go);
-            self.uiCommonItem = newItem;
-            self.uiCommonItem.UpdateInfo(rewardItem3.ItemId, rewardItem3.ItemNum).Coroutine();
-            self.uiCommonItem.GameObject.SetActive(true);
+            self.UICommonItem_1.UpdateInfo(rewardItem1.ItemId, rewardItem1.ItemNum).Coroutine();
+            self.UICommonItem_1.Image_Selected.gameObject.SetActive(battlePass != null && battlePass.RewardReceived_1);
+
+            self.UICommonItem_2.UpdateInfo(rewardItem2.ItemId, rewardItem2.ItemNum).Coroutine();
+            self.UICommonItem_2.Image_Selected.gameObject.SetActive(battlePass != null && battlePass.RewardReceived_2);
+
+            self.UICommonItem_3.UpdateInfo(rewardItem3.ItemId, rewardItem3.ItemNum).Coroutine();
+            self.UICommonItem_3.Image_Selected.gameObject.SetActive(battlePass != null && battlePass.RewardReceived_3);
         }
     }
 }

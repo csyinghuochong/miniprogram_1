@@ -8,7 +8,9 @@ namespace ET.Client
     public class UIBattlePassItem : Entity, IAwake<GameObject>
     {
         public int RewardId;
-        public UICommonItem uiCommonItem { get; set; } = new();
+        public UICommonItem UICommonItem_1 { get; set; }
+        public UICommonItem UICommonItem_2 { get; set; }
+        public UICommonItem UICommonItem_3 { get; set; }
         public GameObject GameObject { get; set; }
 
         public TMP_Text Text_RequiredLv;
