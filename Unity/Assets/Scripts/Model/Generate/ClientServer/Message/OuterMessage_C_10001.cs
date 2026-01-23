@@ -3593,7 +3593,7 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public int Num { get; set; }
+        public int ConfigId { get; set; }
 
         public override void Dispose()
         {
@@ -3603,7 +3603,7 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.Num = default;
+            this.ConfigId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

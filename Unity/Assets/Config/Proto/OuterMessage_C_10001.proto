@@ -792,7 +792,7 @@ message M2C_GetUserInfo // ILocationResponse
 message C2M_Recharge // ILocationRequest
 {
 	int32 RpcId = 1;
-	int32 Num = 2;
+	int32 ConfigId = 2;
 }
 
 message M2C_Recharge // ILocationResponse

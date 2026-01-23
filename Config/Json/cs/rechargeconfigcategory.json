@@ -3,96 +3,56 @@
     "Id": 10000001,
     "Type": 0,
     "Price": 6,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 60
-      }
-    ],
+    "Diamond": 60,
     "Point": 60
   },
   {
     "Id": 10000002,
     "Type": 0,
     "Price": 30,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 300
-      }
-    ],
+    "Diamond": 300,
     "Point": 300
   },
   {
     "Id": 10000003,
     "Type": 0,
     "Price": 50,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 500
-      }
-    ],
+    "Diamond": 500,
     "Point": 500
   },
   {
     "Id": 10000004,
     "Type": 0,
     "Price": 98,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 9800
-      }
-    ],
+    "Diamond": 9800,
     "Point": 980
   },
   {
     "Id": 10000005,
     "Type": 0,
     "Price": 198,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 19800
-      }
-    ],
+    "Diamond": 19800,
     "Point": 1980
   },
   {
     "Id": 10000006,
     "Type": 0,
     "Price": 298,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 29800
-      }
-    ],
+    "Diamond": 29800,
     "Point": 2980
   },
   {
     "Id": 10000007,
     "Type": 0,
     "Price": 488,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 48800
-      }
-    ],
+    "Diamond": 48800,
     "Point": 4880
   },
   {
     "Id": 10000008,
     "Type": 0,
     "Price": 648,
-    "RewardItem": [
-      {
-        "ItemId": 2,
-        "ItemNum": 64800
-      }
-    ],
+    "Diamond": 64800,
     "Point": 6480
   }
 ]

@@ -19,7 +19,7 @@ namespace ET
             Id = _buf.ReadInt();
             Type = _buf.ReadInt();
             Price = _buf.ReadInt();
-            {int __n0 = _buf.ReadSize(); RewardItem = new ET.RewardItem[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { ET.RewardItem __e0;__e0 = ExternalTypeUtil.NewRewardItem(global::ET.rewardItem.DeserializerewardItem(_buf)); RewardItem[__index0] = __e0;}}
+            Diamond = _buf.ReadInt();
             Point = _buf.ReadInt();
 
             PostInit();
@@ -46,9 +46,9 @@ namespace ET
         public readonly int Price;
 
         /// <summary>
-        /// 道具
+        /// 钻石
         /// </summary>
-        public readonly ET.RewardItem[] RewardItem;
+        public readonly int Diamond;
 
         /// <summary>
         /// 积分
@@ -74,7 +74,7 @@ namespace ET
             + "Id:" + Id + ","
             + "Type:" + Type + ","
             + "Price:" + Price + ","
-            + "RewardItem:" + Luban.StringUtil.CollectionToString(RewardItem) + ","
+            + "Diamond:" + Diamond + ","
             + "Point:" + Point + ","
             + "}";
         }
