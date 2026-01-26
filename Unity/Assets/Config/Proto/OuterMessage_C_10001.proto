@@ -1464,3 +1464,25 @@ message M2C_BattlePassGetReward // ILocationResponse
 	string Message = 3;
 	BattlePassInfo BattlePassInfo = 4;
 }
+
+// ResponseType M2C_GetAllActivity
+message C2M_GetAllActivity // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_GetAllActivity // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	
+	int32 RechargePoint = 10;
+	repeated int32 ReceivedRechargePointRewardIds = 11;
+}
+
+message M2C_ActivityRechargePointUpdate // IMessage
+{
+	int32 RechargePoint = 1;
+	repeated int32 ReceivedRechargePointRewardIds = 2;
+}

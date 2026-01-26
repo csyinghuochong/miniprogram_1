@@ -52,37 +52,42 @@ namespace ET.Server
 
             if (unit.GetComponent<InventoryComponent>() == null)
             {
-                InventoryComponent inventoryComponent = unit.AddComponent<InventoryComponent>();
+                unit.AddComponent<InventoryComponent>();
             }
 
             if (unit.GetComponent<HeroComponent>() == null)
             {
-                HeroComponent heroComponent = unit.AddComponent<HeroComponent>();
+                unit.AddComponent<HeroComponent>();
             }
 
             if (unit.GetComponent<TaskComponent>() == null)
             {
-                TaskComponent taskComponent = unit.AddComponent<TaskComponent>();
+                unit.AddComponent<TaskComponent>();
             }
 
             if (unit.GetComponent<StoreComponent>() == null)
             {
-                StoreComponent storeComponent = unit.AddComponent<StoreComponent>();
+                unit.AddComponent<StoreComponent>();
             }
 
             if (unit.GetComponent<ArchiveComponent>() == null)
             {
-                ArchiveComponent archiveComponent = unit.AddComponent<ArchiveComponent>();
+                unit.AddComponent<ArchiveComponent>();
             }
 
             if (unit.GetComponent<AchievementComponent>() == null)
             {
-                AchievementComponent achievementComponent = unit.AddComponent<AchievementComponent>();
+                unit.AddComponent<AchievementComponent>();
             }
 
             if (unit.GetComponent<BattlePassComponent>() == null)
             {
-                BattlePassComponent battlePassComponent = unit.AddComponent<BattlePassComponent>();
+                unit.AddComponent<BattlePassComponent>();
+            }
+
+            if (unit.GetComponent<ActivityRechargePointComponent>() == null)
+            {
+                unit.AddComponent<ActivityRechargePointComponent>();
             }
 
             unit.AddComponent<StateComponent>();

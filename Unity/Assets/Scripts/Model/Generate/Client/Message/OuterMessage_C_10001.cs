@@ -6665,6 +6665,102 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GetAllActivity)]
+    [ResponseType(nameof(M2C_GetAllActivity))]
+    public partial class C2M_GetAllActivity : MessageObject, ILocationRequest
+    {
+        public static C2M_GetAllActivity Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GetAllActivity), isFromPool) as C2M_GetAllActivity;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GetAllActivity)]
+    public partial class M2C_GetAllActivity : MessageObject, ILocationResponse
+    {
+        public static M2C_GetAllActivity Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GetAllActivity), isFromPool) as M2C_GetAllActivity;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(9)]
+        public int RechargePoint { get; set; }
+
+        [MemoryPackOrder(10)]
+        public List<int> ReceivedRechargePointRewardIds { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.RechargePoint = default;
+            this.ReceivedRechargePointRewardIds.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ActivityRechargePointUpdate)]
+    public partial class M2C_ActivityRechargePointUpdate : MessageObject, IMessage
+    {
+        public static M2C_ActivityRechargePointUpdate Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ActivityRechargePointUpdate), isFromPool) as M2C_ActivityRechargePointUpdate;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RechargePoint { get; set; }
+
+        [MemoryPackOrder(1)]
+        public List<int> ReceivedRechargePointRewardIds { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RechargePoint = default;
+            this.ReceivedRechargePointRewardIds.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -6856,5 +6952,8 @@ namespace ET
         public const ushort M2C_BattlePassGetAllReward = 10188;
         public const ushort C2M_BattlePassGetReward = 10189;
         public const ushort M2C_BattlePassGetReward = 10190;
+        public const ushort C2M_GetAllActivity = 10191;
+        public const ushort M2C_GetAllActivity = 10192;
+        public const ushort M2C_ActivityRechargePointUpdate = 10193;
     }
 }
