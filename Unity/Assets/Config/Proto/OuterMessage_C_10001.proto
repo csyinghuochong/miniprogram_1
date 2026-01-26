@@ -1485,5 +1485,18 @@ message M2C_GetAllActivity // ILocationResponse
 message M2C_ActivityRechargePointUpdate // IMessage
 {
 	int32 RechargePoint = 1;
-	repeated int32 ReceivedRechargePointRewardIds = 2;
+}
+
+// ResponseType M2C_ActivityRechargePointGetReward
+message C2M_ActivityRechargePointGetReward // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 ConfigId = 2;
+}
+
+message M2C_ActivityRechargePointGetReward // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
 }

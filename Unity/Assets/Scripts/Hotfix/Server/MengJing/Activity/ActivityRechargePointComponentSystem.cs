@@ -21,6 +21,12 @@
 
         public static void Recharge(this ActivityRechargePointComponent self, int recharge)
         {
+            self.RechargePoint += recharge * 10;
+
+            M2C_ActivityRechargePointUpdate message = M2C_ActivityRechargePointUpdate.Create();
+            message.RechargePoint = self.RechargePoint;
+
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), message);
         }
     }
 }

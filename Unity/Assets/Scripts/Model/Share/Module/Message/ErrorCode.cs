@@ -135,6 +135,8 @@ namespace ET
         public const int ERR_NotEnoughAchievementPoint = 201701; //成就点不足
         
         public const int ERR_NotEnoughLv = 201801; //等级不足
+        
+        public const int ERR_NotEnoughRechargePoint = 201901; //充值积分不足
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()
@@ -256,7 +258,9 @@ namespace ET
             { ERR_AlreadyReceived, "已领取"},
             { ERR_NotEnoughPoint, "积分不足"},
             
-            { ERR_NotEnoughAchievementPoint, "成就点不足"}
+            { ERR_NotEnoughAchievementPoint, "成就点不足"},
+            
+            { ERR_NotEnoughRechargePoint, "充值积分不足"},
         };
     }
 }

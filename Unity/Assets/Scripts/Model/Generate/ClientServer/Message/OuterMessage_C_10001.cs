@@ -6748,9 +6748,6 @@ namespace ET
         [MemoryPackOrder(0)]
         public int RechargePoint { get; set; }
 
-        [MemoryPackOrder(1)]
-        public List<int> ReceivedRechargePointRewardIds { get; set; } = new();
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -6759,7 +6756,69 @@ namespace ET
             }
 
             this.RechargePoint = default;
-            this.ReceivedRechargePointRewardIds.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_ActivityRechargePointGetReward)]
+    [ResponseType(nameof(M2C_ActivityRechargePointGetReward))]
+    public partial class C2M_ActivityRechargePointGetReward : MessageObject, ILocationRequest
+    {
+        public static C2M_ActivityRechargePointGetReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_ActivityRechargePointGetReward), isFromPool) as C2M_ActivityRechargePointGetReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ActivityRechargePointGetReward)]
+    public partial class M2C_ActivityRechargePointGetReward : MessageObject, ILocationResponse
+    {
+        public static M2C_ActivityRechargePointGetReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ActivityRechargePointGetReward), isFromPool) as M2C_ActivityRechargePointGetReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -6959,5 +7018,7 @@ namespace ET
         public const ushort C2M_GetAllActivity = 10191;
         public const ushort M2C_GetAllActivity = 10192;
         public const ushort M2C_ActivityRechargePointUpdate = 10193;
+        public const ushort C2M_ActivityRechargePointGetReward = 10194;
+        public const ushort M2C_ActivityRechargePointGetReward = 10195;
     }
 }
