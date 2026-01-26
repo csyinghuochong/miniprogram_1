@@ -110,9 +110,10 @@ namespace ET.Client
                     await ClientFriendHelper.GetAllFriend(root);
                     await ClientChatHelper.GetAllChatRoom(root);
                     await ClientRankHelper.GetAllRank(root);
-                    await ClientArchiveHelper.GetAllArchiveHero(root);
-                    await ClientAchievementHelper.GetAllAchievement(root);
-                    await ClientBattlePassHelper.GetAllBattlePass(root);
+                    ClientArchiveHelper.GetAllArchiveHero(root).Coroutine();
+                    ClientAchievementHelper.GetAllAchievement(root).Coroutine();
+                    ClientBattlePassHelper.GetAllBattlePass(root).Coroutine();
+                    ClientActivityHelper.GetAllActivity(root).Coroutine();
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());
                 }
