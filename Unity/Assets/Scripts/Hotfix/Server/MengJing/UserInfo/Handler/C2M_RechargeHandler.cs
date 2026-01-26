@@ -18,9 +18,8 @@ namespace ET.Server
             InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
             inventoryComponent.AddItemData(new List<RewardItem>() { new() { ItemId = ConfigData.Item_Diamond, ItemNum = rechargeConfig.Diamond } });
 
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            numericComponent.ApplyChange(NumericType.RechargeNumber, rechargeConfig.Price);
-            numericComponent.ApplyChange(NumericType.RechargePoint, rechargeConfig.Point);
+            unit.GetComponent<UserInfoComponent>().ChangeRoleData(UserDataType.RechargeNumber, rechargeConfig.Price);
+            unit.GetComponent<ActivityRechargePointComponent>().Recharge(rechargeConfig.Price);
 
             await ETTask.CompletedTask;
         }

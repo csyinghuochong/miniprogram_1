@@ -18,6 +18,7 @@
             userInfoComponent.Diamond = response.Diamond;
             userInfoComponent.Exp = response.Exp;
             userInfoComponent.Lv = response.Lv;
+            userInfoComponent.RechargeNumber = response.RechargeNumber;
 
             return response.Error;
         }

@@ -30,6 +30,10 @@
                     oldLong = userInfoComponent.Lv;
                     userInfoComponent.Lv = (int)message.UpdateValueLong;
                     break;
+                case (int)UserDataType.RechargeNumber:
+                    oldLong = userInfoComponent.RechargeNumber;
+                    userInfoComponent.RechargeNumber = (int)message.UpdateValueLong;
+                    break;
             }
 
             //更新比较频繁的单独处理

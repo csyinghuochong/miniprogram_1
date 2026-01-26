@@ -65,7 +65,7 @@ namespace ET.Client
             NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
 
             int lv = userInfoComponent.Lv;
-            int recharge = numericComponent.GetAsInt(NumericType.RechargeNumber);
+            int recharge = userInfoComponent.RechargeNumber;
             if (lv >= battlePassConfig.RequiredLv && (!battlePass.RewardReceived_1 ||
                     recharge >= ConfigData.BattlePassRecharge_2 && !battlePass.RewardReceived_2 ||
                     recharge >= ConfigData.BattlePassRecharge_3 && !battlePass.RewardReceived_3))

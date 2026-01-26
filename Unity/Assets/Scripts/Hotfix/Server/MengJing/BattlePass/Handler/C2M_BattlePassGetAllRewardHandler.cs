@@ -14,7 +14,7 @@ namespace ET.Server
             InventoryComponent inventoryComponent = unit.GetComponent<InventoryComponent>();
 
             int lv = userInfoComponent.GetLv();
-            int recharge = numericComponent.GetAsInt(NumericType.RechargeNumber);
+            int recharge = userInfoComponent.GetRechargeNumber();
 
             List<RewardItem> rewardItemList = new List<RewardItem>();
             foreach (BattlePass battlePass in battlePassComponent.BattlePassList)

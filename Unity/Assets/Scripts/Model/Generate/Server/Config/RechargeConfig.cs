@@ -20,7 +20,6 @@ namespace ET
             Type = _buf.ReadInt();
             Price = _buf.ReadInt();
             Diamond = _buf.ReadInt();
-            Point = _buf.ReadInt();
 
             PostInit();
         }
@@ -50,18 +49,12 @@ namespace ET
         /// </summary>
         public readonly int Diamond;
 
-        /// <summary>
-        /// 积分
-        /// </summary>
-        public readonly int Point;
-
 
         public const int __ID__ = -1565007639;
         public override int GetTypeId() => __ID__;
 
         public  void ResolveRef()
         {
-            
             
             
             
@@ -75,7 +68,6 @@ namespace ET
             + "Type:" + Type + ","
             + "Price:" + Price + ","
             + "Diamond:" + Diamond + ","
-            + "Point:" + Point + ","
             + "}";
         }
 

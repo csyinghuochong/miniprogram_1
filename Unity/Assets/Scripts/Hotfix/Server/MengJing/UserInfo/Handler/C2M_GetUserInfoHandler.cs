@@ -12,6 +12,7 @@
             response.Diamond = userInfoComponent.Diamond;
             response.Exp = userInfoComponent.Exp;
             response.Lv = userInfoComponent.Lv;
+            response.RechargeNumber = userInfoComponent.RechargeNumber;
 
             await ETTask.CompletedTask;
         }

@@ -786,6 +786,7 @@ message M2C_GetUserInfo // ILocationResponse
 	int64 Diamond = 6;
 	int64 Exp = 7;
 	int32 Lv = 8;
+	int32 RechargeNumber = 9;
 }
 
 // ResponseType M2C_Recharge

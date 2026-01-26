@@ -31,8 +31,6 @@
         
         public const int LotteryDrawNum = 3200;                                 //抽卡次数
         public const int LotteryDrawFreeTime = 3201;                            //抽卡免费时间
-        public const int RechargeNumber = 3202;                                 //充值金额
-        public const int RechargePoint = 3203;                                  //充值积分
 
         public const int Max = 10000;
 

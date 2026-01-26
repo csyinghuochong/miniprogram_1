@@ -8,5 +8,6 @@
         public long Diamond { get; set; }
         public long Exp { get; set; }
         public int Lv { get; set; }
+        public int RechargeNumber { get; set; }
     }
 }

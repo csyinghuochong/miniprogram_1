@@ -22,7 +22,7 @@ namespace ET.Client
             }
 
             int lv = userInfoComponent.GetLv();
-            int recharge = numericComponent.GetAsInt(NumericType.RechargeNumber);
+            int recharge = userInfoComponent.GetRechargeNumber();
 
             List<RewardItem> rewardItemList = new List<RewardItem>();
 

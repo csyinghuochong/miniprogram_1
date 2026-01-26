@@ -3559,6 +3559,9 @@ namespace ET
         [MemoryPackOrder(7)]
         public int Lv { get; set; }
 
+        [MemoryPackOrder(8)]
+        public int RechargeNumber { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3574,6 +3577,7 @@ namespace ET
             this.Diamond = default;
             this.Exp = default;
             this.Lv = default;
+            this.RechargeNumber = default;
 
             ObjectPool.Instance.Recycle(this);
         }

@@ -43,7 +43,7 @@
             request.ConfigId = rewardId;
 
             M2C_BattlePassGetReward response = (M2C_BattlePassGetReward)await root.GetComponent<ClientSenderComponent>().Call(request);
-            if (response.Error == ErrorCode.ERR_Success)
+            if (response.Error == ErrorCode.ERR_Success && response.BattlePassInfo != null)
             {
                 BattlePassComponentC battlePassComponent = root.GetComponent<BattlePassComponentC>();
                 battlePassComponent.AddOrUpdateBattlePass(response.BattlePassInfo);

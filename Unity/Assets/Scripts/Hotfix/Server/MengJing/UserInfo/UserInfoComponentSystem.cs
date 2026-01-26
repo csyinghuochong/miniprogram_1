@@ -39,6 +39,11 @@
             return self.Lv;
         }
 
+        public static int GetRechargeNumber(this UserInfoComponent self)
+        {
+            return self.RechargeNumber;
+        }
+
         // 直接设置
         public static void UpdateRoleData(this UserInfoComponent self, UserDataType type, string value, bool notice = true)
         {
@@ -85,6 +90,10 @@
                     {
                         Unit = self.GetParent<Unit>(), TargetType = TaskTargetType.PlayerLv, TargetId = 0, TargetValue = self.Lv
                     });
+                    break;
+                case UserDataType.RechargeNumber:
+                    self.RechargeNumber += (int)value;
+                    newValue = self.RechargeNumber;
                     break;
                 default:
                     return;

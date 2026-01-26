@@ -3,42 +3,36 @@
     "Id": 10000001,
     "Type": 0,
     "Price": 6,
-    "Diamond": 60,
-    "Point": 60
+    "Diamond": 60
   },
   {
     "Id": 10000002,
     "Type": 0,
     "Price": 30,
-    "Diamond": 300,
-    "Point": 300
+    "Diamond": 300
   },
   {
     "Id": 10000003,
     "Type": 0,
     "Price": 98,
-    "Diamond": 9800,
-    "Point": 980
+    "Diamond": 9800
   },
   {
     "Id": 10000004,
     "Type": 0,
     "Price": 128,
-    "Diamond": 1280,
-    "Point": 1280
+    "Diamond": 1280
   },
   {
     "Id": 10000005,
     "Type": 0,
     "Price": 198,
-    "Diamond": 19800,
-    "Point": 1980
+    "Diamond": 19800
   },
   {
     "Id": 10000006,
     "Type": 0,
     "Price": 328,
-    "Diamond": 32800,
-    "Point": 3280
+    "Diamond": 32800
   }
 ]
