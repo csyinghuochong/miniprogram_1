@@ -16,6 +16,7 @@ namespace ET.Server
         public long Exp;
         public int Lv;
         public int RechargeNumber;
+        public int VipLv;
 
         [BsonIgnore]
         public readonly M2C_RoleDataBroadcast m2C_RoleDataBroadcast = M2C_RoleDataBroadcast.Create();

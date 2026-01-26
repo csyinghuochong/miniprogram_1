@@ -9,5 +9,6 @@
         public long Exp { get; set; }
         public int Lv { get; set; }
         public int RechargeNumber { get; set; }
+        public int VipLv { get; set; }
     }
 }

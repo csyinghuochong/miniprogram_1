@@ -21,16 +21,18 @@ namespace ET.Client
             self.Text_RequiredPoints = rc.Get<GameObject>("Text_RequiredPoints").GetComponent<TMP_Text>();
             self.GameObject_Received = rc.Get<GameObject>("GameObject_Received");
             self.Button_GetReward = rc.Get<GameObject>("Button_GetReward").GetComponent<Button>();
+
+            self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
         }
 
         public static void UpdateInfo(this UIRechargePointsRewardItem self, int rewardId)
         {
             self.RewardId = rewardId;
-            
+
             RechargePointsRewardConfig rechargePointsRewardConfig = RechargePointsRewardConfigCategory.Instance.Get(self.RewardId);
 
             self.Text_RequiredPoints.SetTextFormat("累计获得\n{0}积分", rechargePointsRewardConfig.RequiredPoints);
-            
+
             // 道具奖励
             RewardItem[] rewardItems = rechargePointsRewardConfig.RewardItem;
 
@@ -50,6 +52,15 @@ namespace ET.Client
             for (int i = rewardItems.Length; i < self.UICommonItemList.Count; i++)
             {
                 self.UICommonItemList[i].GameObject.SetActive(false);
+            }
+        }
+
+        private static async ETTask OnButton_GetReward(this UIRechargePointsRewardItem self)
+        {
+            int error = await ClientActivityHelper.ActivityRechargePointGetReward(self.Root(), self.RewardId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取成功");
             }
         }
     }

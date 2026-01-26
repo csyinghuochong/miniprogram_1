@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,9 +26,6 @@ namespace ET.Client
             self.Text_Points = rc.Get<GameObject>("Text_Points").GetComponent<TMP_Text>();
 
             self.Button_Close.AddListener(() => { self.GameObject.SetActive(false); });
-            
-            self.UpdateInfo();
-            
         }
 
         [EntitySystem]
@@ -36,7 +34,7 @@ namespace ET.Client
             self.UIRechargePointsRewardItemList.Clear();
             self.UIRechargePointsRewardItem = null;
         }
-        
+
         public static void UpdateInfo(this UIRechargePointsRewardComponent self)
         {
             List<RechargePointsRewardConfig> rechargePointsRewardConfigs = RechargePointsRewardConfigCategory.Instance.DataList;
@@ -58,7 +56,14 @@ namespace ET.Client
             {
                 self.UIRechargePointsRewardItemList[i].GameObject.SetActive(false);
             }
-            
+
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            ActivityRechargePointComponentC activityRechargePointComponent = self.Root().GetComponent<ActivityRechargePointComponentC>();
+            RechargePointsRewardConfig config = RechargePointsRewardConfigCategory.Instance.DataList[userInfoComponent.VipLv - 1];
+
+            self.Text_VipLv.SetTextFormat("vip{0}", userInfoComponent.VipLv);
+            self.Image_PointsProgress.fillAmount = Mathf.Clamp01((float)activityRechargePointComponent.RechargePoint / config.RequiredPoints);
+            self.Text_Points.SetTextFormat("{0}/{1}", activityRechargePointComponent.RechargePoint, config.RequiredPoints);
         }
     }
 }

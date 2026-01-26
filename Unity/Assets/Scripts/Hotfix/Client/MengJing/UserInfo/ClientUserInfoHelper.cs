@@ -19,6 +19,7 @@
             userInfoComponent.Exp = response.Exp;
             userInfoComponent.Lv = response.Lv;
             userInfoComponent.RechargeNumber = response.RechargeNumber;
+            userInfoComponent.VipLv = response.VipLv;
 
             return response.Error;
         }

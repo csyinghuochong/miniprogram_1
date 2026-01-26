@@ -5346,6 +5346,8 @@ MonoBehaviour:
     gameObject: {fileID: 3177058948840709562}
   - key: Image_PointsProgress
     gameObject: {fileID: 5989414717928942015}
+  - key: Text_Points
+    gameObject: {fileID: 1252958367707251136}
   - key: Button_Reward
     gameObject: {fileID: 5268859652047454605}
   - key: GameObject_RechargePointsReward

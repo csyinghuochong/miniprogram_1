@@ -33,14 +33,22 @@ namespace ET.Server
             unit.Type = UnitType.Player;
             unit.ConfigId = createRoleInfo.PlayerOcc;
 
-            if (unit.GetComponent<UserInfoComponent>() == null)
+            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+            if (userInfoComponent == null)
             {
-                UserInfoComponent userInfoComponent = unit.AddComponent<UserInfoComponent>();
+                userInfoComponent = unit.AddComponent<UserInfoComponent>();
                 userInfoComponent.Account = account;
                 userInfoComponent.UnitId = id;
                 userInfoComponent.AccInfoID = accountId;
                 userInfoComponent.PlayerName = createRoleInfo.PlayerName;
+            }
+            if (userInfoComponent.Lv <= 0)
+            {
                 userInfoComponent.Lv = 1;
+            }
+            if (userInfoComponent.VipLv <= 0)
+            {
+                userInfoComponent.VipLv = 1;
             }
 
             if (unit.GetComponent<NumericComponent>() == null)

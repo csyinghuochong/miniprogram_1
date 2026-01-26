@@ -13,6 +13,7 @@
             response.Exp = userInfoComponent.Exp;
             response.Lv = userInfoComponent.Lv;
             response.RechargeNumber = userInfoComponent.RechargeNumber;
+            response.VipLv = userInfoComponent.VipLv;
 
             await ETTask.CompletedTask;
         }

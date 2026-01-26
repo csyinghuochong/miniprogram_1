@@ -19,6 +19,7 @@ namespace ET.Client
         public Button Button_RechargeSix;
         public TMP_Text Text_VipLv;
         public Image Image_PointsProgress;
+        public TMP_Text Text_Points;
         public Button Button_Reward;
     }
 }

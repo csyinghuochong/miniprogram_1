@@ -3562,6 +3562,9 @@ namespace ET
         [MemoryPackOrder(8)]
         public int RechargeNumber { get; set; }
 
+        [MemoryPackOrder(9)]
+        public int VipLv { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3578,6 +3581,7 @@ namespace ET
             this.Exp = default;
             this.Lv = default;
             this.RechargeNumber = default;
+            this.VipLv = default;
 
             ObjectPool.Instance.Recycle(this);
         }

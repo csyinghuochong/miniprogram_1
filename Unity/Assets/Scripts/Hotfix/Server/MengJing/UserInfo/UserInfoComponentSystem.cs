@@ -43,26 +43,20 @@
         {
             return self.RechargeNumber;
         }
-
-        // 直接设置
-        public static void UpdateRoleData(this UserInfoComponent self, UserDataType type, string value, bool notice = true)
+        
+        public static int GetVipLv(this UserInfoComponent self)
         {
-            switch (type)
-            {
-                case UserDataType.PlayerName:
-                    self.PlayerName = value;
-                    break;
-                default:
-                    return;
-            }
+            return self.VipLv;
+        }
 
-            if (notice)
-            {
-                M2C_RoleDataUpdate m2C_RoleDataUpdate = M2C_RoleDataUpdate.Create();
-                m2C_RoleDataUpdate.UpdateType = (int)type;
-                m2C_RoleDataUpdate.UpdateTypeValue = value;
-                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RoleDataUpdate);
-            }
+        public static void SetVipLv(this UserInfoComponent self, int value)
+        {
+            self.VipLv = value;
+
+            M2C_RoleDataUpdate m2C_RoleDataUpdate = M2C_RoleDataUpdate.Create();
+            m2C_RoleDataUpdate.UpdateType = (int)UserDataType.VipLv;
+            m2C_RoleDataUpdate.UpdateValueLong = value;
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RoleDataUpdate);
         }
 
         // 加上

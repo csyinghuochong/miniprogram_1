@@ -10,7 +10,8 @@ namespace ET
         Diamond,
         Exp,
         Lv,
-        RechargeNumber
+        RechargeNumber,
+        VipLv,
     }
 
     [EnableClass]
