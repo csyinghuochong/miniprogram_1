@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 8347961609329721200}
   - component: {fileID: 322285312485160549}
   m_Layer: 5
-  m_Name: GameObject_Recevied
+  m_Name: GameObject_Received
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3383,9 +3383,9 @@ RectTransform:
   - {fileID: 4743501274940974942}
   m_Father: {fileID: 5907381725295804198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 550, y: -120}
   m_SizeDelta: {x: 1080, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9083058248856661534
@@ -3445,15 +3445,15 @@ MonoBehaviour:
     gameObject: {fileID: 3041809719631889574}
   - key: Content_UICommonItem
     gameObject: {fileID: 7940643343129882674}
-  - key: UICommonItem
-    gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
-      type: 3}
   - key: GameObject_NotCompleted
     gameObject: {fileID: 9101004362644221312}
-  - key: GameObject_Recevied
+  - key: GameObject_Received
     gameObject: {fileID: 1085492519416328608}
   - key: Button_GetReward
     gameObject: {fileID: 2740653984143932376}
+  - key: UICommonItem
+    gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
+      type: 3}
 --- !u!1 &8963890516800167591
 GameObject:
   m_ObjectHideFlags: 0

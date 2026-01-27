@@ -101,6 +101,10 @@ namespace ET.Server
             {
                 unit.AddComponent<ActivityMonthSignInComponent>();
             }
+            if (unit.GetComponent<ActivityServerOpenComponent>() == null)
+            {
+                unit.AddComponent<ActivityServerOpenComponent>();
+            }
 
             unit.AddComponent<StateComponent>();
             unit.AddComponent<UnitInfoComponent>();

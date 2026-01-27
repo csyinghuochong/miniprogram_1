@@ -35,11 +35,11 @@ namespace ET.Client
 
             if (serverOpenRewardConfig.RequiredType == 1)
             {
-                self.Text_Required.SetTextFormat("等级达到{0}级",serverOpenRewardConfig.RequiredValue);
+                self.Text_Required.SetTextFormat("等级达到{0}级", serverOpenRewardConfig.RequiredValue);
             }
-            else if(serverOpenRewardConfig.RequiredType == 2)
+            else if (serverOpenRewardConfig.RequiredType == 2)
             {
-                self.Text_Required.SetTextFormat("战力达到{0}",serverOpenRewardConfig.RequiredValue);
+                self.Text_Required.SetTextFormat("战力达到{0}", serverOpenRewardConfig.RequiredValue);
             }
 
             // 道具奖励
@@ -62,11 +62,36 @@ namespace ET.Client
             {
                 self.UICommonItemList[i].GameObject.SetActive(false);
             }
+
+            ActivityServerOpenComponentC activityServerOpenComponent = self.Root().GetComponent<ActivityServerOpenComponentC>();
+            bool isReceived = activityServerOpenComponent.ReceivedServerOpenRewardIds.Contains(self.RewardId);
+            bool isCompleted = false;
+            if (serverOpenRewardConfig.RequiredType == 1)
+            {
+                // 等级要求
+                UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                isCompleted = userInfoComponent.Lv >= serverOpenRewardConfig.RequiredValue;
+            }
+            else
+            {
+                // 战力要求
+                NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+                isCompleted = numericComponent.GetAsInt(NumericType.CombatPower) >= serverOpenRewardConfig.RequiredValue;
+            }
+
+            self.GameObject_NotCompleted.gameObject.SetActive(!isReceived && !isCompleted);
+            self.GameObject_Received.gameObject.SetActive(isReceived);
+            self.Button_GetReward.gameObject.SetActive(!isReceived && isCompleted);
         }
 
         private static async ETTask OnButton_GetReward(this UIRewardItem self)
         {
-            
+            int error = await ClientActivityHelper.ActivityServerOpenGetReward(self.Root(), self.RewardId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取成功");
+                self.UpdateInfo(self.RewardId);
+            }
         }
     }
 }

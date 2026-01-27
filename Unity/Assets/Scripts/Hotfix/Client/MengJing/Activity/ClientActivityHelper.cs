@@ -19,6 +19,10 @@
                 activityMonthSignInComponent.LastSignInTime = response.LastSignInTime;
                 activityMonthSignInComponent.TotalSignInDay = response.TotalSignInDay;
                 activityMonthSignInComponent.ReceivedMonthSignInIds.AddRange(response.ReceivedMonthSignInIds);
+                
+                ActivityServerOpenComponentC activityServerOpenComponent = root.GetComponent<ActivityServerOpenComponentC>();
+                activityServerOpenComponent.Clear();
+                activityServerOpenComponent.ReceivedServerOpenRewardIds.AddRange(response.ReceivedServerOpenRewardIds);
             }
 
             return response.Error;
@@ -29,8 +33,7 @@
             C2M_ActivityRechargePointGetReward request = C2M_ActivityRechargePointGetReward.Create();
             request.ConfigId = configId;
 
-            M2C_ActivityRechargePointGetReward response =
-                    (M2C_ActivityRechargePointGetReward)await root.GetComponent<ClientSenderComponent>().Call(request);
+            M2C_ActivityRechargePointGetReward response = (M2C_ActivityRechargePointGetReward)await root.GetComponent<ClientSenderComponent>().Call(request);
             if (response.Error == ErrorCode.ERR_Success)
             {
                 ActivityRechargePointComponentC activityRechargePointComponent = root.GetComponent<ActivityRechargePointComponentC>();
@@ -69,6 +72,23 @@
             {
                 ActivityMonthSignInComponentC activityMonthSignInComponent = root.GetComponent<ActivityMonthSignInComponentC>();
                 activityMonthSignInComponent.ReceivedMonthSignInIds.Add(configId);
+            }
+
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+
+            return response.Error;
+        }
+        
+        public static async ETTask<int> ActivityServerOpenGetReward(Scene root, int configId)
+        {
+            C2M_ActivityServerOpenGetReward request = C2M_ActivityServerOpenGetReward.Create();
+            request.ConfigId = configId;
+
+            M2C_ActivityServerOpenGetReward response = (M2C_ActivityServerOpenGetReward)await root.GetComponent<ClientSenderComponent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                ActivityServerOpenComponentC activityServerOpenComponent = root.GetComponent<ActivityServerOpenComponentC>();
+                activityServerOpenComponent.ReceivedServerOpenRewardIds.Add(configId);
             }
 
             if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });

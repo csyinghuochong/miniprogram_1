@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [EntitySystemOf(typeof(ActivityRechargePointComponentC))]
-    public static partial class ActivityRechargePointComponentSystem
+    public static partial class ActivityRechargePointComponentCSystem
     {
         [EntitySystem]
         private static void Awake(this ActivityRechargePointComponentC self)

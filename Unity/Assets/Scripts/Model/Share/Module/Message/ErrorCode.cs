@@ -135,6 +135,7 @@ namespace ET
         public const int ERR_NotEnoughAchievementPoint = 201701; //成就点不足
         
         public const int ERR_NotEnoughLv = 201801; //等级不足
+        public const int ERR_NotEnoughCombatPower = 201802; //战力不足
         
         public const int ERR_NotEnoughRechargePoint = 201901; //充值积分不足
         
@@ -237,7 +238,7 @@ namespace ET
             { ERR_StoreItemNotExist, "商店道具不存在" },
             { ERR_StoreItemNotEnough, "商店道具不足" },
             { ERR_StoreRefreshNumNotEnough, "商店刷新次数不足" },
-            
+
             // 聊天相关错误 201401-201499
             { ERR_ChatInfoNull, "聊天信息为空" },
             { ERR_ChatMessageEmpty, "聊天信息为空" },
@@ -248,7 +249,7 @@ namespace ET
             { ERR_ChatContentTooLong, "聊天内容过长" },
             { ERR_ChatTooFast, "聊天内容发送太快" },
             { ERR_ChatMute, "玩家禁言中" },
-            
+
             // 好友相关错误 201501-201599
             { ERR_FriendIsFriend, "已经添加好友" },
             { ERR_FriendIsRequest, "已经发送好友请求" },
@@ -258,17 +259,20 @@ namespace ET
             { ERR_FriendIsBlack, "黑名单中" },
             { ERR_FriendCantBlack, "好友不能被拉黑" },
             { ERR_FriendIsNotBlack, "用户不在黑名单" },
-            
-            { ERR_AlreadyReceived, "已领取"},
-            { ERR_NotEnoughPoint, "积分不足"},
-            
-            { ERR_NotEnoughAchievementPoint, "成就点不足"},
-            
-            { ERR_NotEnoughRechargePoint, "充值积分不足"},
-            
-            { ERR_AlreadySignIn, "已经签到"},
-            { ERR_FinishSignIn, "已经完成全部签到"},
-            { ERR_NotEnoughSignInDay, "签到天数不足"},
+
+            { ERR_AlreadyReceived, "已领取" },
+            { ERR_NotEnoughPoint, "积分不足" },
+
+            { ERR_NotEnoughAchievementPoint, "成就点不足" },
+
+            { ERR_NotEnoughLv, "等级不足" },
+            { ERR_NotEnoughCombatPower, "战力不足" },
+
+            { ERR_NotEnoughRechargePoint, "充值积分不足" },
+
+            { ERR_AlreadySignIn, "已经签到" },
+            { ERR_FinishSignIn, "已经完成全部签到" },
+            { ERR_NotEnoughSignInDay, "签到天数不足" },
         };
     }
 }

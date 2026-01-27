@@ -6732,6 +6732,9 @@ namespace ET
         [MemoryPackOrder(21)]
         public List<int> ReceivedMonthSignInIds { get; set; } = new();
 
+        [MemoryPackOrder(29)]
+        public List<int> ReceivedServerOpenRewardIds { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -6747,6 +6750,7 @@ namespace ET
             this.LastSignInTime = default;
             this.TotalSignInDay = default;
             this.ReceivedMonthSignInIds.Clear();
+            this.ReceivedServerOpenRewardIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -6936,6 +6940,69 @@ namespace ET
         public static M2C_ActivityMonthSignInTotal Create(bool isFromPool = false)
         {
             return ObjectPool.Instance.Fetch(typeof(M2C_ActivityMonthSignInTotal), isFromPool) as M2C_ActivityMonthSignInTotal;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_ActivityServerOpenGetReward)]
+    [ResponseType(nameof(M2C_ActivityServerOpenGetReward))]
+    public partial class C2M_ActivityServerOpenGetReward : MessageObject, ILocationRequest
+    {
+        public static C2M_ActivityServerOpenGetReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_ActivityServerOpenGetReward), isFromPool) as C2M_ActivityServerOpenGetReward;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_ActivityServerOpenGetReward)]
+    public partial class M2C_ActivityServerOpenGetReward : MessageObject, ILocationResponse
+    {
+        public static M2C_ActivityServerOpenGetReward Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_ActivityServerOpenGetReward), isFromPool) as M2C_ActivityServerOpenGetReward;
         }
 
         [MemoryPackOrder(0)]
@@ -7162,5 +7229,7 @@ namespace ET
         public const ushort M2C_ActivityMonthSignIn = 10197;
         public const ushort C2M_ActivityMonthSignInTotal = 10198;
         public const ushort M2C_ActivityMonthSignInTotal = 10199;
+        public const ushort C2M_ActivityServerOpenGetReward = 10200;
+        public const ushort M2C_ActivityServerOpenGetReward = 10201;
     }
 }

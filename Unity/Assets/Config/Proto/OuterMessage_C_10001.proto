@@ -1485,6 +1485,8 @@ message M2C_GetAllActivity // ILocationResponse
 	int64 LastSignInTime = 20;
 	int32 TotalSignInDay = 21;
 	repeated int32 ReceivedMonthSignInIds = 22;
+
+	repeated int32 ReceivedServerOpenRewardIds = 30;
 }
 
 message M2C_ActivityRechargePointUpdate // IMessage
@@ -1533,3 +1535,16 @@ message M2C_ActivityMonthSignInTotal // ILocationResponse
 	string Message = 3;
 }
 
+// ResponseType M2C_ActivityServerOpenGetReward
+message C2M_ActivityServerOpenGetReward // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 ConfigId = 2;
+}
+
+message M2C_ActivityServerOpenGetReward // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
