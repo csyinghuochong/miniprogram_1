@@ -48,6 +48,7 @@ namespace ET.Client
             ActivityMonthSignInComponentC activityMonthSignInComponent = self.Root().GetComponent<ActivityMonthSignInComponentC>();
 
             self.Text_SignedInDays.SetTextFormat("累计\n{0}天", activityMonthSignInComponent.TotalSignInDay);
+            self.Image_SignedInDays.fillAmount = activityMonthSignInComponent.TotalSignInDay / 30f;
 
             List<MonthSignInConfig> monthSignInConfigs = MonthSignInConfigCategory.Instance.DataList;
 
