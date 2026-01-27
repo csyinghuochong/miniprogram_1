@@ -226,6 +226,7 @@ namespace ET.Client
             self.Button_OpenMap = rc.Get<GameObject>("Button_OpenMap").GetComponent<Button>();
             self.Button_BattlePass = rc.Get<GameObject>("Button_BattlePass").GetComponent<Button>();
             self.Button_SignIn = rc.Get<GameObject>("Button_SignIn").GetComponent<Button>();
+            self.Button_ServerOpenReward = rc.Get<GameObject>("Button_ServerOpenReward").GetComponent<Button>();
 
             self.UIMiniMapComponent = self.AddComponent<UIMiniMapComponent, GameObject>(rc.Get<GameObject>("UIMiniMap"));
             self.UIJoystickComponent = self.AddComponent<UIJoystickComponent, GameObject>(rc.Get<GameObject>("UIJoystick"));
@@ -251,6 +252,7 @@ namespace ET.Client
             self.Button_BattlePass.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIBattlePass).Coroutine(); });
             self.Button_AddDiamond.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIRecharge).Coroutine(); });
             self.Button_SignIn.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIMonthSignIn).Coroutine(); });
+            self.Button_ServerOpenReward.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIServerOpenReward).Coroutine(); });
         }
 
         [EntitySystem]

@@ -1,0 +1,304 @@
+[
+  {
+    "Id": 10000001,
+    "RequiredType": 1,
+    "RequiredValue": 1,
+    "RewardItem": [
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000002,
+    "RequiredType": 1,
+    "RequiredValue": 2,
+    "RewardItem": [
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000003,
+    "RequiredType": 1,
+    "RequiredValue": 3,
+    "RewardItem": [
+      {
+        "ItemId": 10001004,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000004,
+    "RequiredType": 1,
+    "RequiredValue": 4,
+    "RewardItem": [
+      {
+        "ItemId": 10001005,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000005,
+    "RequiredType": 1,
+    "RequiredValue": 5,
+    "RewardItem": [
+      {
+        "ItemId": 10003001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000006,
+    "RequiredType": 1,
+    "RequiredValue": 6,
+    "RewardItem": [
+      {
+        "ItemId": 10003002,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000007,
+    "RequiredType": 1,
+    "RequiredValue": 7,
+    "RewardItem": [
+      {
+        "ItemId": 10003003,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000008,
+    "RequiredType": 1,
+    "RequiredValue": 8,
+    "RewardItem": [
+      {
+        "ItemId": 10003004,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000009,
+    "RequiredType": 1,
+    "RequiredValue": 9,
+    "RewardItem": [
+      {
+        "ItemId": 10003005,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10000010,
+    "RequiredType": 1,
+    "RequiredValue": 10,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002001,
+    "RequiredType": 2,
+    "RequiredValue": 500,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002002,
+    "RequiredType": 2,
+    "RequiredValue": 1000,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 2
+      },
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002003,
+    "RequiredType": 2,
+    "RequiredValue": 1500,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 3
+      }
+    ]
+  },
+  {
+    "Id": 10002004,
+    "RequiredType": 2,
+    "RequiredValue": 2000,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 4
+      }
+    ]
+  },
+  {
+    "Id": 10002005,
+    "RequiredType": 2,
+    "RequiredValue": 2500,
+    "RewardItem": [
+      {
+        "ItemId": 10003001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002006,
+    "RequiredType": 2,
+    "RequiredValue": 3000,
+    "RewardItem": [
+      {
+        "ItemId": 10001005,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002007,
+    "RequiredType": 2,
+    "RequiredValue": 3500,
+    "RewardItem": [
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002008,
+    "RequiredType": 2,
+    "RequiredValue": 4000,
+    "RewardItem": [
+      {
+        "ItemId": 10003001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002009,
+    "RequiredType": 2,
+    "RequiredValue": 4500,
+    "RewardItem": [
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002010,
+    "RequiredType": 2,
+    "RequiredValue": 5000,
+    "RewardItem": [
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002011,
+    "RequiredType": 2,
+    "RequiredValue": 5500,
+    "RewardItem": [
+      {
+        "ItemId": 10003006,
+        "ItemNum": 2
+      },
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      }
+    ]
+  },
+  {
+    "Id": 10002012,
+    "RequiredType": 2,
+    "RequiredValue": 6000,
+    "RewardItem": [
+      {
+        "ItemId": 10003004,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001003,
+        "ItemNum": 1
+      },
+      {
+        "ItemId": 10001001,
+        "ItemNum": 10
+      }
+    ]
+  }
+]

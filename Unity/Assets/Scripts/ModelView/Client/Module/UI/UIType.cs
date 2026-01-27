@@ -40,5 +40,6 @@
         public const string UIBattlePass = "UIBattlePass/UIBattlePass";
         public const string UIRecharge = "UIRecharge/UIRecharge";
         public const string UIMonthSignIn = "UIMonthSignIn/UIMonthSignIn";
+        public const string UIServerOpenReward = "UIServerOpenReward/UIServerOpenReward";
     }
 }

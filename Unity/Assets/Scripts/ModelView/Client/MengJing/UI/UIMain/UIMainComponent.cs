@@ -56,5 +56,6 @@ namespace ET.Client
         public Button Button_OpenMap;
         public Button Button_BattlePass;
         public Button Button_SignIn;
+        public Button Button_ServerOpenReward;
     }
 }
