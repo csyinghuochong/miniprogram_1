@@ -1481,6 +1481,10 @@ message M2C_GetAllActivity // ILocationResponse
 	
 	int32 RechargePoint = 10;
 	repeated int32 ReceivedRechargePointRewardIds = 11;
+
+	int64 LastSignInTime = 20;
+	int32 TotalSignInDay = 21;
+	repeated int32 ReceivedMonthSignInIds = 22;
 }
 
 message M2C_ActivityRechargePointUpdate // IMessage
@@ -1501,3 +1505,31 @@ message M2C_ActivityRechargePointGetReward // ILocationResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+// ResponseType M2C_ActivityMonthSignIn
+message C2M_ActivityMonthSignIn // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+message M2C_ActivityMonthSignIn // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+// ResponseType M2C_ActivityMonthSignInTotal
+message C2M_ActivityMonthSignInTotal // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 ConfigId = 2;
+}
+
+message M2C_ActivityMonthSignInTotal // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+

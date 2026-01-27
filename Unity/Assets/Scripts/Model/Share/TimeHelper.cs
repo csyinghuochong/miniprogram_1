@@ -186,7 +186,18 @@ namespace ET
             int days = (d3 - d4).Days + 1;
             return days;
         }
-        
+
+        public static bool IsLaterDay(long time1, long time2)
+        {
+            DateTime d1 = TimeInfo.Instance.ToDateTime(time1);
+            DateTime d2 = TimeInfo.Instance.ToDateTime(time2);
+
+            DateTime date1 = d1.Date;
+            DateTime date2 = d2.Date;
+
+            return date1 < date2;
+        }
+
         public static bool IsInTime(string openTime)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();

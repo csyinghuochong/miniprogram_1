@@ -97,6 +97,10 @@ namespace ET.Server
             {
                 unit.AddComponent<ActivityRechargePointComponent>();
             }
+            if (unit.GetComponent<ActivityMonthSignInComponent>() == null)
+            {
+                unit.AddComponent<ActivityMonthSignInComponent>();
+            }
 
             unit.AddComponent<StateComponent>();
             unit.AddComponent<UnitInfoComponent>();

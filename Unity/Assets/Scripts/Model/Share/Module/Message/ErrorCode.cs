@@ -137,6 +137,10 @@ namespace ET
         public const int ERR_NotEnoughLv = 201801; //等级不足
         
         public const int ERR_NotEnoughRechargePoint = 201901; //充值积分不足
+        
+        public const int ERR_AlreadySignIn = 202001; //已经签到
+        public const int ERR_FinishSignIn = 202002; //已经完成全部签到
+        public const int ERR_NotEnoughSignInDay = 202003; //签到天数不足
 
         [StaticField]
         public static Dictionary<int, string> ErrorTips = new()
@@ -261,6 +265,10 @@ namespace ET
             { ERR_NotEnoughAchievementPoint, "成就点不足"},
             
             { ERR_NotEnoughRechargePoint, "充值积分不足"},
+            
+            { ERR_AlreadySignIn, "已经签到"},
+            { ERR_FinishSignIn, "已经完成全部签到"},
+            { ERR_NotEnoughSignInDay, "签到天数不足"},
         };
     }
 }
