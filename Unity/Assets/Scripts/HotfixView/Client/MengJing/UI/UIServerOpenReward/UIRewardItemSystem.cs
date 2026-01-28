@@ -66,22 +66,22 @@ namespace ET.Client
             ActivityServerOpenComponentC activityServerOpenComponent = self.Root().GetComponent<ActivityServerOpenComponentC>();
             bool isReceived = activityServerOpenComponent.ReceivedServerOpenRewardIds.Contains(self.RewardId);
             bool isCompleted = false;
+            int value = 0;
             if (serverOpenRewardConfig.RequiredType == 1)
             {
                 // 等级要求
                 UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                isCompleted = userInfoComponent.Lv >= serverOpenRewardConfig.RequiredValue;
-
-                self.Text_Progress.SetTextFormat("{0}/{1}", userInfoComponent.Lv, serverOpenRewardConfig.RequiredValue);
+                value = userInfoComponent.Lv;
             }
             else
             {
                 // 战力要求
                 NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
-                isCompleted = numericComponent.GetAsInt(NumericType.CombatPower) >= serverOpenRewardConfig.RequiredValue;
-                
-                self.Text_Progress.SetTextFormat("{0}/{1}", numericComponent.GetAsInt(NumericType.CombatPower), serverOpenRewardConfig.RequiredValue);
+                value = numericComponent.GetAsInt(NumericType.CombatPower);
             }
+
+            isCompleted = value >= serverOpenRewardConfig.RequiredValue;
+            self.Text_Progress.SetTextFormat("{0}/{1}", value > serverOpenRewardConfig.RequiredValue ? serverOpenRewardConfig.RequiredValue : value, serverOpenRewardConfig.RequiredValue);
 
             self.GameObject_NotCompleted.gameObject.SetActive(!isReceived && !isCompleted);
             self.GameObject_Received.gameObject.SetActive(isReceived);
