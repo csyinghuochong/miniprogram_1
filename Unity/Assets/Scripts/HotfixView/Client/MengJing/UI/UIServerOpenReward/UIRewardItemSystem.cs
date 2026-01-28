@@ -42,27 +42,6 @@ namespace ET.Client
                 self.Text_Required.SetTextFormat("战力达到{0}", serverOpenRewardConfig.RequiredValue);
             }
 
-            // 道具奖励
-            RewardItem[] rewardItems = serverOpenRewardConfig.RewardItem;
-
-            while (self.UICommonItemList.Count < rewardItems.Length)
-            {
-                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
-                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
-                self.UICommonItemList.Add(newItem);
-            }
-
-            for (int i = 0; i < rewardItems.Length; i++)
-            {
-                self.UICommonItemList[i].UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
-                self.UICommonItemList[i].GameObject.SetActive(true);
-            }
-
-            for (int i = rewardItems.Length; i < self.UICommonItemList.Count; i++)
-            {
-                self.UICommonItemList[i].GameObject.SetActive(false);
-            }
-
             ActivityServerOpenComponentC activityServerOpenComponent = self.Root().GetComponent<ActivityServerOpenComponentC>();
             bool isReceived = activityServerOpenComponent.ReceivedServerOpenRewardIds.Contains(self.RewardId);
             bool isCompleted = false;
@@ -81,6 +60,29 @@ namespace ET.Client
             }
 
             isCompleted = value >= serverOpenRewardConfig.RequiredValue;
+            
+            // 道具奖励
+            RewardItem[] rewardItems = serverOpenRewardConfig.RewardItem;
+
+            while (self.UICommonItemList.Count < rewardItems.Length)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(self.UICommonItem, self.Content_UICommonItem);
+                UICommonItem newItem = self.AddChild<UICommonItem, GameObject>(go);
+                self.UICommonItemList.Add(newItem);
+            }
+
+            for (int i = 0; i < rewardItems.Length; i++)
+            {
+                self.UICommonItemList[i].UpdateInfo(rewardItems[i].ItemId, rewardItems[i].ItemNum).Coroutine();
+                self.UICommonItemList[i].GameObject.SetActive(true);
+                self.UICommonItemList[i].Image_Selected.gameObject.SetActive(isReceived);
+            }
+
+            for (int i = rewardItems.Length; i < self.UICommonItemList.Count; i++)
+            {
+                self.UICommonItemList[i].GameObject.SetActive(false);
+            }
+            
             self.Text_Progress.SetTextFormat("{0}/{1}", value > serverOpenRewardConfig.RequiredValue ? serverOpenRewardConfig.RequiredValue : value, serverOpenRewardConfig.RequiredValue);
 
             self.GameObject_NotCompleted.gameObject.SetActive(!isReceived && !isCompleted);
