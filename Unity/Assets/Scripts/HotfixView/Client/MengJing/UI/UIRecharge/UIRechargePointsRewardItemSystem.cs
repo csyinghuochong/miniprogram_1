@@ -20,6 +20,7 @@ namespace ET.Client
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
             self.Text_RequiredPoints = rc.Get<GameObject>("Text_RequiredPoints").GetComponent<TMP_Text>();
             self.GameObject_Received = rc.Get<GameObject>("GameObject_Received");
+            self.GameObject_Received.SetActive(false);
             self.Button_GetReward = rc.Get<GameObject>("Button_GetReward").GetComponent<Button>();
 
             self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
@@ -53,11 +54,22 @@ namespace ET.Client
             {
                 self.UICommonItemList[i].GameObject.SetActive(false);
             }
+            
+            ActivityRechargePointComponentC activityRechargePointComponentC = self.Root().GetComponent<ActivityRechargePointComponentC>();
+            bool received = activityRechargePointComponentC.ReceivedRechargePointRewardIds.Contains(self.RewardId);
+            if (received)
+            {
+                // 已经领取奖励
+                self.GameObject_Received.SetActive(true);
+                self.Button_GetReward.gameObject.SetActive(false);
+            }
+            
         }
 
         private static async ETTask OnButton_GetReward(this UIRechargePointsRewardItem self)
         {
             int error = await ClientActivityHelper.ActivityRechargePointGetReward(self.Root(), self.RewardId);
+            
             if (error == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<FloatingTextComponent>().ShowTipText("领取成功");
