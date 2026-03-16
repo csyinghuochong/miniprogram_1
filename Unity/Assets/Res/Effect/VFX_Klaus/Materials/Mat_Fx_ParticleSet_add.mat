@@ -46,10 +46,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Boolean_52F3CBA5: 1
+    - Boolean_52F3CBA5: 0
     - Vector1_53729B24: 5
     - Vector1_79CA7A6: 0
     - Vector1_DB09B049: 0.5
+    - _BUILTIN_QueueControl: -1
+    - _BUILTIN_QueueOffset: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
