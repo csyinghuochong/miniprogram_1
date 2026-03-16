@@ -98,6 +98,22 @@ namespace ET.Client
 
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
             self.Text_Name.text = unitInfoComponent.UnitName;
+            
+            string color = heroConfig.HeroQuality switch
+            {
+                1 => "#0e832a",
+                2 => "#2e69c4",
+                3 => "#d6bb10",
+                4 => "#be5e10",
+                5 => "#e200af",
+                6 => "#d01a06",
+                _ => "#ffffff"
+            };
+
+            Color nowColor;
+            ColorUtility.TryParseHtmlString(color, out nowColor);
+
+            self.Text_Name.color = nowColor;
         }
 
         public static void UpdateBlood(this UIHeroHpComponent self)

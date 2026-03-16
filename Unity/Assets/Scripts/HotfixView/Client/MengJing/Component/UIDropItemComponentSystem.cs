@@ -61,7 +61,23 @@ namespace ET.Client
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.DropItemId));
+            
+            string color = itemConfig.ItemQuality switch
+            {
+                1 => "#0e832a",
+                2 => "#2e69c4",
+                3 => "#d6bb10",
+                4 => "#be5e10",
+                5 => "#e200af",
+                6 => "#d01a06",
+                _ => "#ffffff"
+            };
+
+            Color nowColor;
+            ColorUtility.TryParseHtmlString(color, out nowColor);
+            
             self.Text_Name.text = itemConfig.ItemName;
+            self.Text_Name.color = nowColor;
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("DropModel").GetComponent<SpriteRenderer>().sprite =
