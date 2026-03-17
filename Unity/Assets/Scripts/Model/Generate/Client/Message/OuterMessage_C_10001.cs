@@ -3802,6 +3802,90 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.M2C_BattleFailure)]
+    public partial class M2C_BattleFailure : MessageObject, IMessage
+    {
+        public static M2C_BattleFailure Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_BattleFailure), isFromPool) as M2C_BattleFailure;
+        }
+
+        [MemoryPackOrder(0)]
+        public int Error { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Error = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_Rechallenge)]
+    [ResponseType(nameof(M2C_Rechallenge))]
+    public partial class C2M_Rechallenge : MessageObject, ILocationRequest
+    {
+        public static C2M_Rechallenge Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_Rechallenge), isFromPool) as C2M_Rechallenge;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_Rechallenge)]
+    public partial class M2C_Rechallenge : MessageObject, ILocationResponse
+    {
+        public static M2C_Rechallenge Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_Rechallenge), isFromPool) as M2C_Rechallenge;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_SetAutoFight)]
     [ResponseType(nameof(M2C_SetAutoFight))]
     public partial class C2M_SetAutoFight : MessageObject, ILocationRequest
@@ -7135,101 +7219,104 @@ namespace ET
         public const ushort M2C_UpdateTimeScale = 10103;
         public const ushort C2M_EnterBossRoom = 10104;
         public const ushort M2C_EnterBossRoom = 10105;
-        public const ushort C2M_SetAutoFight = 10106;
-        public const ushort M2C_SetAutoFight = 10107;
-        public const ushort C2M_TryUseSkill = 10108;
-        public const ushort M2C_TryUseSkill = 10109;
-        public const ushort C2M_HeroUseSkill = 10110;
-        public const ushort M2C_HeroUseSkill = 10111;
-        public const ushort M2C_OnUseSkill = 10112;
-        public const ushort M2C_UnitSkillRemove = 10113;
-        public const ushort M2C_UnitFinishSkill = 10114;
-        public const ushort M2C_UnitBuffUpdate = 10115;
-        public const ushort M2C_UnitBuffRemove = 10116;
-        public const ushort M2C_UnitStateUpdate = 10117;
-        public const ushort TaskProInfo = 10118;
-        public const ushort C2M_GetAllTask = 10119;
-        public const ushort M2C_GetAllTask = 10120;
-        public const ushort M2C_TaskUpdate = 10121;
-        public const ushort C2M_TaskCommit = 10122;
-        public const ushort M2C_TaskCommit = 10123;
-        public const ushort C2M_PickUpDropItem = 10124;
-        public const ushort M2C_PickUpDropItem = 10125;
-        public const ushort C2M_WatchPlayer = 10126;
-        public const ushort WatchPlayerInfo = 10127;
-        public const ushort M2C_WatchPlayer = 10128;
-        public const ushort MailInfo = 10129;
-        public const ushort MailRewardComponentInfo = 10130;
-        public const ushort C2Mail_GetAllMailList = 10131;
-        public const ushort Mail2C_GetAllMailList = 10132;
-        public const ushort C2Mail_OpeMail = 10133;
-        public const ushort Mail2C_OpeMail = 10134;
-        public const ushort Mail2C_ReceiveMail = 10135;
-        public const ushort M2C_NoticeUnitTransformList = 10136;
-        public const ushort C2M_NoticeUnitTransform = 10137;
-        public const ushort ChatRoomInfo = 10138;
-        public const ushort ChatInfo = 10139;
-        public const ushort C2Chat_GetAllChat = 10140;
-        public const ushort Chat2C_GetAllChat = 10141;
-        public const ushort Chat2C_UpdateChatRoom = 10142;
-        public const ushort C2Chat_SendChat = 10143;
-        public const ushort Chat2C_SendChat = 10144;
-        public const ushort C2Chat_Report = 10145;
-        public const ushort Chat2C_Report = 10146;
-        public const ushort Chat2C_NoticeChat = 10147;
-        public const ushort FriendDataInfo = 10148;
-        public const ushort C2Friend_GetAllFriend = 10149;
-        public const ushort Friend2C_GetAllFriend = 10150;
-        public const ushort C2Friend_FriendRequest = 10151;
-        public const ushort Friend2C_FriendRequest = 10152;
-        public const ushort Friend2C_ReceiveFriendRequest = 10153;
-        public const ushort C2Friend_FriendRequestAccept = 10154;
-        public const ushort Friend2C_FriendRequestAccept = 10155;
-        public const ushort Friend2C_FriendRequestSucceed = 10156;
-        public const ushort C2Friend_DeleteFriend = 10157;
-        public const ushort Friend2C_DeleteFriend = 10158;
-        public const ushort C2Friend_BlackFriend = 10159;
-        public const ushort Friend2C_BlackFriend = 10160;
-        public const ushort Friend2C_DeleteYou = 10161;
-        public const ushort Friend2C_FriendOnLineChange = 10162;
-        public const ushort PlayerCombatPowerRankInfo = 10163;
-        public const ushort AllianceRankInfo = 10164;
-        public const ushort C2Rank_GetAllRank = 10165;
-        public const ushort Rank2C_GetAllRank = 10166;
-        public const ushort Rank2C_NoticeRankUpdate = 10167;
-        public const ushort C2M_LotteryDrawRequest = 10168;
-        public const ushort M2C_LotteryDrawRequest = 10169;
-        public const ushort ArchiveHeroInfo = 10170;
-        public const ushort C2M_GetAllArchiveHero = 10171;
-        public const ushort M2C_GetAllArchiveHero = 10172;
-        public const ushort M2C_ArchiveHeroUpdate = 10173;
-        public const ushort C2M_ActiveArchiveHero = 10174;
-        public const ushort M2C_ActiveArchiveHero = 10175;
-        public const ushort C2M_ReceivedArchiveReward = 10176;
-        public const ushort M2C_ReceivedArchiveReward = 10177;
-        public const ushort AchievementInfo = 10178;
-        public const ushort C2M_GetAllAchievement = 10179;
-        public const ushort M2C_GetAllAchievement = 10180;
-        public const ushort M2C_AchievementUpdate = 10181;
-        public const ushort C2M_ReceivedAchievementReward = 10182;
-        public const ushort M2C_ReceivedAchievementReward = 10183;
-        public const ushort BattlePassInfo = 10184;
-        public const ushort C2M_GetAllBattlePass = 10185;
-        public const ushort M2C_GetAllBattlePass = 10186;
-        public const ushort C2M_BattlePassGetAllReward = 10187;
-        public const ushort M2C_BattlePassGetAllReward = 10188;
-        public const ushort C2M_BattlePassGetReward = 10189;
-        public const ushort M2C_BattlePassGetReward = 10190;
-        public const ushort C2M_GetAllActivity = 10191;
-        public const ushort M2C_GetAllActivity = 10192;
-        public const ushort M2C_ActivityRechargePointUpdate = 10193;
-        public const ushort C2M_ActivityRechargePointGetReward = 10194;
-        public const ushort M2C_ActivityRechargePointGetReward = 10195;
-        public const ushort C2M_ActivityMonthSignIn = 10196;
-        public const ushort M2C_ActivityMonthSignIn = 10197;
-        public const ushort C2M_ActivityMonthSignInTotal = 10198;
-        public const ushort M2C_ActivityMonthSignInTotal = 10199;
-        public const ushort C2M_ActivityServerOpenGetReward = 10200;
-        public const ushort M2C_ActivityServerOpenGetReward = 10201;
+        public const ushort M2C_BattleFailure = 10106;
+        public const ushort C2M_Rechallenge = 10107;
+        public const ushort M2C_Rechallenge = 10108;
+        public const ushort C2M_SetAutoFight = 10109;
+        public const ushort M2C_SetAutoFight = 10110;
+        public const ushort C2M_TryUseSkill = 10111;
+        public const ushort M2C_TryUseSkill = 10112;
+        public const ushort C2M_HeroUseSkill = 10113;
+        public const ushort M2C_HeroUseSkill = 10114;
+        public const ushort M2C_OnUseSkill = 10115;
+        public const ushort M2C_UnitSkillRemove = 10116;
+        public const ushort M2C_UnitFinishSkill = 10117;
+        public const ushort M2C_UnitBuffUpdate = 10118;
+        public const ushort M2C_UnitBuffRemove = 10119;
+        public const ushort M2C_UnitStateUpdate = 10120;
+        public const ushort TaskProInfo = 10121;
+        public const ushort C2M_GetAllTask = 10122;
+        public const ushort M2C_GetAllTask = 10123;
+        public const ushort M2C_TaskUpdate = 10124;
+        public const ushort C2M_TaskCommit = 10125;
+        public const ushort M2C_TaskCommit = 10126;
+        public const ushort C2M_PickUpDropItem = 10127;
+        public const ushort M2C_PickUpDropItem = 10128;
+        public const ushort C2M_WatchPlayer = 10129;
+        public const ushort WatchPlayerInfo = 10130;
+        public const ushort M2C_WatchPlayer = 10131;
+        public const ushort MailInfo = 10132;
+        public const ushort MailRewardComponentInfo = 10133;
+        public const ushort C2Mail_GetAllMailList = 10134;
+        public const ushort Mail2C_GetAllMailList = 10135;
+        public const ushort C2Mail_OpeMail = 10136;
+        public const ushort Mail2C_OpeMail = 10137;
+        public const ushort Mail2C_ReceiveMail = 10138;
+        public const ushort M2C_NoticeUnitTransformList = 10139;
+        public const ushort C2M_NoticeUnitTransform = 10140;
+        public const ushort ChatRoomInfo = 10141;
+        public const ushort ChatInfo = 10142;
+        public const ushort C2Chat_GetAllChat = 10143;
+        public const ushort Chat2C_GetAllChat = 10144;
+        public const ushort Chat2C_UpdateChatRoom = 10145;
+        public const ushort C2Chat_SendChat = 10146;
+        public const ushort Chat2C_SendChat = 10147;
+        public const ushort C2Chat_Report = 10148;
+        public const ushort Chat2C_Report = 10149;
+        public const ushort Chat2C_NoticeChat = 10150;
+        public const ushort FriendDataInfo = 10151;
+        public const ushort C2Friend_GetAllFriend = 10152;
+        public const ushort Friend2C_GetAllFriend = 10153;
+        public const ushort C2Friend_FriendRequest = 10154;
+        public const ushort Friend2C_FriendRequest = 10155;
+        public const ushort Friend2C_ReceiveFriendRequest = 10156;
+        public const ushort C2Friend_FriendRequestAccept = 10157;
+        public const ushort Friend2C_FriendRequestAccept = 10158;
+        public const ushort Friend2C_FriendRequestSucceed = 10159;
+        public const ushort C2Friend_DeleteFriend = 10160;
+        public const ushort Friend2C_DeleteFriend = 10161;
+        public const ushort C2Friend_BlackFriend = 10162;
+        public const ushort Friend2C_BlackFriend = 10163;
+        public const ushort Friend2C_DeleteYou = 10164;
+        public const ushort Friend2C_FriendOnLineChange = 10165;
+        public const ushort PlayerCombatPowerRankInfo = 10166;
+        public const ushort AllianceRankInfo = 10167;
+        public const ushort C2Rank_GetAllRank = 10168;
+        public const ushort Rank2C_GetAllRank = 10169;
+        public const ushort Rank2C_NoticeRankUpdate = 10170;
+        public const ushort C2M_LotteryDrawRequest = 10171;
+        public const ushort M2C_LotteryDrawRequest = 10172;
+        public const ushort ArchiveHeroInfo = 10173;
+        public const ushort C2M_GetAllArchiveHero = 10174;
+        public const ushort M2C_GetAllArchiveHero = 10175;
+        public const ushort M2C_ArchiveHeroUpdate = 10176;
+        public const ushort C2M_ActiveArchiveHero = 10177;
+        public const ushort M2C_ActiveArchiveHero = 10178;
+        public const ushort C2M_ReceivedArchiveReward = 10179;
+        public const ushort M2C_ReceivedArchiveReward = 10180;
+        public const ushort AchievementInfo = 10181;
+        public const ushort C2M_GetAllAchievement = 10182;
+        public const ushort M2C_GetAllAchievement = 10183;
+        public const ushort M2C_AchievementUpdate = 10184;
+        public const ushort C2M_ReceivedAchievementReward = 10185;
+        public const ushort M2C_ReceivedAchievementReward = 10186;
+        public const ushort BattlePassInfo = 10187;
+        public const ushort C2M_GetAllBattlePass = 10188;
+        public const ushort M2C_GetAllBattlePass = 10189;
+        public const ushort C2M_BattlePassGetAllReward = 10190;
+        public const ushort M2C_BattlePassGetAllReward = 10191;
+        public const ushort C2M_BattlePassGetReward = 10192;
+        public const ushort M2C_BattlePassGetReward = 10193;
+        public const ushort C2M_GetAllActivity = 10194;
+        public const ushort M2C_GetAllActivity = 10195;
+        public const ushort M2C_ActivityRechargePointUpdate = 10196;
+        public const ushort C2M_ActivityRechargePointGetReward = 10197;
+        public const ushort M2C_ActivityRechargePointGetReward = 10198;
+        public const ushort C2M_ActivityMonthSignIn = 10199;
+        public const ushort M2C_ActivityMonthSignIn = 10200;
+        public const ushort C2M_ActivityMonthSignInTotal = 10201;
+        public const ushort M2C_ActivityMonthSignInTotal = 10202;
+        public const ushort C2M_ActivityServerOpenGetReward = 10203;
+        public const ushort M2C_ActivityServerOpenGetReward = 10204;
     }
 }

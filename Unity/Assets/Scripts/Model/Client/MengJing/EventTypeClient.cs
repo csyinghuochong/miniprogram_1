@@ -151,4 +151,8 @@ namespace ET.Client
     public struct ArchiveHeroUpdate
     {
     }
+
+    public struct BattleFailure
+    {
+    }
 }

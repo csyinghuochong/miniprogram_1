@@ -8,6 +8,7 @@ namespace ET.Server
         None,               // 未开始
         Fighting,           // 战斗中(生成怪物+战斗)
         WaitEnterBoss,      // 等待玩家进入Boss房间
+        BattleFailure,      // 英雄全部死亡，战斗失败
         Completed,          // 全部关卡完成
     }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -44,14 +43,44 @@ namespace ET.Server
             float deltaTime = (now - self.LastUpdateTime) / 1000f * self.Scene().TimeScale;
             self.LastUpdateTime = now;
 
-            if (self.MainUnit == null || self.LevelState == LocalLevelState.None || self.LevelState == LocalLevelState.Completed)
+            if (self.MainUnit == null)
             {
                 return;
             }
 
+            switch (self.LevelState)
+            {
+                case LocalLevelState.None:
+                    break;
+                case LocalLevelState.Fighting:
+                    if (!self.CheckHeroesAlive())
+                    {
+                        self.LevelState = LocalLevelState.BattleFailure;
+
+                        M2C_BattleFailure message = M2C_BattleFailure.Create();
+                        MapMessageHelper.SendToClient(self.MainUnit, message);
+
+                        return;
+                    }
+
+                    self.UpdatePlayerPosition();
+                    self.GenerateMonster(deltaTime);
+                    break;
+                case LocalLevelState.WaitEnterBoss:
+                    // 等待玩家手动调用EnterBossRoom()
+                    break;
+                case LocalLevelState.BattleFailure:
+                    break;
+                case LocalLevelState.Completed:
+                    break;
+            }
+        }
+
+        // 玩家同步到坐标Y值最大的英雄上
+        private static void UpdatePlayerPosition(this LocalLevelComponent self)
+        {
             if (self.MainUnit.GetComponent<NumericComponent>().GetAsInt(NumericType.BattleMode) == 1)
             {
-                // 玩家同步到坐标Y值最大的英雄上
                 float3 maxPos = float3.zero;
                 foreach (Unit u in self.Scene().GetComponent<UnitComponent>().GetAll())
                 {
@@ -77,25 +106,9 @@ namespace ET.Server
                     self.MainUnit.Stop();
                 }
             }
-
-            // 所有状态都检测英雄存活
-            if (!self.CheckHeroesAlive())
-            {
-                return; // 英雄全灭了,已经触发重置
-            }
-
-            switch (self.LevelState)
-            {
-                case LocalLevelState.Fighting:
-                    self.UpdateFighting(deltaTime);
-                    break;
-                case LocalLevelState.WaitEnterBoss:
-                    // 等待玩家手动调用EnterBossRoom()
-                    break;
-            }
         }
 
-        private static void UpdateFighting(this LocalLevelComponent self, float deltaTime)
+        private static void GenerateMonster(this LocalLevelComponent self, float deltaTime)
         {
             NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
@@ -135,6 +148,22 @@ namespace ET.Server
             }
         }
 
+        private static void InitPlayerPosition(this LocalLevelComponent self)
+        {
+            if (self.MainUnit == null)
+            {
+                return;
+            }
+
+            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
+            LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
+            WaveConfig firstWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[0]);
+
+            float3 playerPosition = new float3(firstWaveConfig.PlayerSpawnPosition.X, firstWaveConfig.PlayerSpawnPosition.Y, 0);
+            self.MainUnit.Position = playerPosition;
+            self.MainUnit.Stop();
+        }
+
         private static void GenerateHeroes(this LocalLevelComponent self)
         {
             if (self.MainUnit == null)
@@ -143,14 +172,6 @@ namespace ET.Server
             }
 
             self.HeroUnitIds.Clear();
-            
-            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
-            LevelConfig levelConfig = LevelConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.CurrentLevelId));
-            WaveConfig firstWaveConfig = WaveConfigCategory.Instance.Get(levelConfig.WaveIds[0]);
-
-            float3 playerPosition = new float3(firstWaveConfig.PlayerSpawnPosition.X, firstWaveConfig.PlayerSpawnPosition.Y, 0);
-            self.MainUnit.Position = playerPosition;
-            self.MainUnit.Stop();
 
             // 创建英雄队列
             HeroComponent heroComponent = self.MainUnit.GetComponent<HeroComponent>();
@@ -165,16 +186,9 @@ namespace ET.Server
                 float3 position = heroComponent.GetHeroPosition(hero.Id);
 
                 Unit heroUnit = UnitFactory.CreateHero(self.Scene(), self.MainUnit, hero, position);
-                
+
                 self.HeroUnitIds.Add(heroUnit.Id);
             }
-
-            Log.Info($"生成了{self.HeroUnitIds.Count}个英雄");
-
-            // 开始战斗,生成第一波怪物
-            self.LevelState = LocalLevelState.Fighting;
-            self.SpawnedMonsterIndex = 0;
-            self.SpawnTime = 0;
         }
 
         private static bool CheckHeroesAlive(this LocalLevelComponent self)
@@ -199,8 +213,6 @@ namespace ET.Server
             // 所有英雄都死亡
             if (aliveCount == 0)
             {
-                Log.Warning("所有英雄死亡,关卡失败,重置关卡");
-                // self.ResetLevel();
                 return false;
             }
 
@@ -210,6 +222,11 @@ namespace ET.Server
         public static void OnKillEvent(this LocalLevelComponent self, Unit unit)
         {
             if (self.MainUnit == null)
+            {
+                return;
+            }
+
+            if (self.LevelState != LocalLevelState.Fighting)
             {
                 return;
             }
@@ -243,6 +260,7 @@ namespace ET.Server
                         // Boss被击败,传送回关卡
                         self.ReturnFromBossRoom();
                     }
+
                     // 进行下一关
                     self.GoToNextLevel();
                 }
@@ -254,7 +272,6 @@ namespace ET.Server
                     {
                         // 等待玩家进入Boss房间
                         self.LevelState = LocalLevelState.WaitEnterBoss;
-                        Log.Info("当前波次完成,等待玩家进入Boss房间");
                     }
                     else
                     {
@@ -265,45 +282,14 @@ namespace ET.Server
             }
         }
 
-        private static void ResetLevel(this LocalLevelComponent self)
+        public static void ResetLevel(this LocalLevelComponent self)
         {
             if (self.MainUnit == null)
             {
                 return;
             }
 
-            Log.Info("重置关卡");
-
-            // 清除场景中所有怪物和英雄
-            UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
-            List<Unit> toRemove = new List<Unit>();
-
-            foreach (Unit unit in unitComponent.GetAll())
-            {
-                if (unit.Type == UnitType.Monster || unit.Type == UnitType.Hero)
-                {
-                    toRemove.Add(unit);
-                }
-            }
-
-            foreach (Unit unit in toRemove)
-            {
-                unit.GetParent<UnitComponent>().Remove(unit.Id);
-            }
-
-            self.HeroUnitIds.Clear();
-
-            NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
-
-            // 重置波次数据
-            numericComponent.ApplyValue(NumericType.CurrentWaveIndex, 1);
-            numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
-
-            self.SpawnedMonsterIndex = 0;
-            self.SpawnTime = 0;
-
-            // 重新生成英雄阵容
-            self.GenerateHeroes();
+            self.GenerateLevel();
         }
 
         private static void StartNextWave(this LocalLevelComponent self)
@@ -317,7 +303,7 @@ namespace ET.Server
             self.SpawnTime = 0;
             self.LevelState = LocalLevelState.Fighting;
 
-            Log.Info($"开始第 {numericComponent.GetAsInt(NumericType.CurrentWaveIndex)} 波怪物");
+            // Log.Info($"开始第 {numericComponent.GetAsInt(NumericType.CurrentWaveIndex)} 波怪物");
         }
 
         public static void EnterBossRoom(this LocalLevelComponent self)
@@ -350,8 +336,6 @@ namespace ET.Server
                 return;
             }
 
-            Log.Info("传送到Boss房间");
-            
             self.ClearDropItem();
 
             // 传送玩家到Boss房间
@@ -379,8 +363,6 @@ namespace ET.Server
             self.SpawnedMonsterIndex = 0;
             self.SpawnTime = 0;
             self.LevelState = LocalLevelState.Fighting;
-
-            Log.Info($"开始生成Boss波次: 第 {numericComponent.GetAsInt(NumericType.CurrentWaveIndex)} 波");
         }
 
         private static void ReturnFromBossRoom(this LocalLevelComponent self)
@@ -390,8 +372,6 @@ namespace ET.Server
                 return;
             }
 
-            Log.Info("从Boss房间传送回关卡");
-            
             self.ClearDropItem();
 
             // 传送玩家回到循环地图
@@ -424,7 +404,7 @@ namespace ET.Server
             NumericComponent numericComponent = self.MainUnit.GetComponent<NumericComponent>();
             int currentLevelId = numericComponent.GetAsInt(NumericType.CurrentLevelId);
 
-            Log.Info($"完成关卡 {currentLevelId}");
+            // Log.Info($"完成关卡 {currentLevelId}");
 
             // 更新已通关的关卡ID
             numericComponent.ApplyValue(NumericType.PassedLevelId, currentLevelId);
@@ -432,7 +412,6 @@ namespace ET.Server
             // 检查是否已经通关所有关卡
             if (currentLevelId >= LevelConfigCategory.Instance.DataList[^1].Id)
             {
-                Log.Info("恭喜!已经通关所有关卡!");
                 self.LevelState = LocalLevelState.Completed;
                 // TODO: 可以在这里触发通关奖励、返回主城等逻辑
                 return;
@@ -446,7 +425,7 @@ namespace ET.Server
                 {
                     numericComponent.ApplyValue(NumericType.CurrentLevelId, config.Id);
                     foundNext = true;
-                    Log.Info($"准备进入下一关: {config.Id} - {config.LevelName}");
+                    // Log.Info($"准备进入下一关: {config.Id} - {config.LevelName}");
                     break;
                 }
             }
@@ -525,7 +504,7 @@ namespace ET.Server
                         break;
                     }
                 }
-            
+
                 if (!foundNext)
                 {
                     Log.Error("找不到下一关配置");
@@ -536,25 +515,40 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.CurrentLevelId, targetLevelId);
             LevelConfig levelConfig = LevelConfigCategory.Instance.Get(targetLevelId);
 
-            Log.Info($"开始生成关卡: {levelConfig.Id} - {levelConfig.LevelName}");
+            // Log.Info($"开始生成关卡: {levelConfig.Id} - {levelConfig.LevelName}");
 
             // 重置关卡数据
+            self.LevelState = LocalLevelState.Fighting;
             self.SpawnedMonsterIndex = 0;
             self.SpawnTime = 0;
             numericComponent.ApplyValue(NumericType.CurrentWaveIndex, 1);
             numericComponent.ApplyValue(NumericType.CurrentWaveKillMonsterNum, 0);
 
-            // 启动定时器
+            // 清除Unit
+            UnitComponent unitComponent = self.Scene().GetComponent<UnitComponent>();
+            List<Unit> toRemove = new List<Unit>();
+            foreach (Unit unit in unitComponent.GetAll())
+            {
+                if (unit.Type != UnitType.Player)
+                {
+                    toRemove.Add(unit);
+                }
+            }
+            foreach (Unit unit in toRemove)
+            {
+                unit.GetParent<UnitComponent>().Remove(unit.Id);
+            }
+            self.HeroUnitIds.Clear();
+
+            // 重置玩家位置、重新生成英雄
+            self.InitPlayerPosition();
+            self.GenerateHeroes();
+
             if (self.Timer == 0)
             {
                 self.LastUpdateTime = TimeInfo.Instance.ClientNow();
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.LocalLevelTimer, self);
             }
-
-            // 生成英雄并开始战斗
-            self.GenerateHeroes();
-
-            Log.Info("关卡初始化完成,开始战斗");
         }
     }
 }

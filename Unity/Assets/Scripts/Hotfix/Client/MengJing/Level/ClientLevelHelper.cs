@@ -32,5 +32,13 @@ namespace ET.Client
 
             return response.Error;
         }
+        
+        public static async ETTask<int> RequestRechallenge(Scene root)
+        {
+            C2M_Rechallenge request = C2M_Rechallenge.Create();
+            M2C_Rechallenge response = (M2C_Rechallenge)await root.GetComponent<ClientSenderComponent>().Call(request);
+
+            return ErrorCode.ERR_Success;
+        }
     }
 }

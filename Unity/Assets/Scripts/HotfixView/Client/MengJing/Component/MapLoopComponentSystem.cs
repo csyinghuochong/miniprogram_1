@@ -17,6 +17,7 @@ namespace ET.Client
 
             foreach (GameObject map in self.MapList)
             {
+                self.MapOldPositions.Add(map.transform.position);
                 self.TotalHeight += 72;
             }
         }
@@ -26,6 +27,14 @@ namespace ET.Client
         {
             if (self.LookAtUnit.Position.y < 72)
             {
+                if (self.MapOldPositions[0] != self.MapList[0].transform.position)
+                {
+                    for (int i = 0; i < self.MapList.Count; i++)
+                    {
+                        self.MapList[i].transform.position = self.MapOldPositions[i];
+                    }
+                }
+
                 return;
             }
 

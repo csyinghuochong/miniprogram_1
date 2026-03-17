@@ -10,6 +10,7 @@ namespace ET.Client
         public Unit LookAtUnit { get => this.lookAtUnit; set => this.lookAtUnit = value; }
 
         public List<GameObject> MapList = new();
+        public List<Vector3> MapOldPositions = new();
         public float TotalHeight;
     }
 }
