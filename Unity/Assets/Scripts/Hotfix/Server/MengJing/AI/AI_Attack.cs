@@ -23,6 +23,8 @@ namespace ET.Server
             Unit unit = aiComponent.GetParent<Unit>();
             SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
 
+            unit.Stop();
+            
             for (int i = 0; i < 100000; ++i)
             {
                 int skillId = 0;

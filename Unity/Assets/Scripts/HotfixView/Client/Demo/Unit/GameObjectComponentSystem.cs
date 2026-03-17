@@ -232,6 +232,9 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
                     unit.AddComponent<TransformSyncComponent>(true);
+                    
+                    HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
+                    self.ShowRadius(self.GameObject, heroConfig.Radius);
                     break;
                 }
                 case UnitType.Monster:
@@ -244,6 +247,9 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
                     unit.AddComponent<TransformSyncComponent>(true);
+                    
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    self.ShowRadius(self.GameObject, monsterConfig.Radius);
                     break;
                 }
                 case UnitType.DropItem:
@@ -263,6 +269,21 @@ namespace ET.Client
                 }
                 default:
                     break;
+            }
+        }
+        
+        private static void ShowRadius(this GameObjectComponent self, GameObject gameObject, float radius)
+        {
+            if (Define.IsEditor)
+            {
+                CircleCollider2D collider2D = gameObject.GetComponent<CircleCollider2D>();
+                if (collider2D == null)
+                {
+                    collider2D = gameObject.AddComponent<CircleCollider2D>();
+                }
+
+                collider2D.radius = radius;
+                collider2D.isTrigger = true;
             }
         }
 
