@@ -29,7 +29,7 @@ namespace ET
             }
         }
 
-        const float agentRadius = 0.6f;
+        const float maxAgentRadius = 2f;
         const float agentHeight = 2f;
         private const float agentMaxAcceleration = 8f;
         const int SAMPLE_POLYFLAGS_DISABLED = 0x10; // Disabled polygon
@@ -70,7 +70,7 @@ namespace ET
 
         private static void Setup(this CrowdComponent self, DtNavMesh navMesh)
         {
-            DtCrowdConfig config = new DtCrowdConfig(agentRadius);
+            DtCrowdConfig config = new DtCrowdConfig(maxAgentRadius);
             self.Crowd = new DtCrowd(config, navMesh, __ => new DtQueryDefaultFilter(SAMPLE_POLYFLAGS_ALL,
                 SAMPLE_POLYFLAGS_DISABLED,
                 new float[] { 1f, 10f, 1f, 1f, 2f, 1.5f }));
@@ -206,8 +206,24 @@ namespace ET
 
             RcVec3f p = UnityToRecast(unit.Position);
 
+            float radius = 0.5f;
+            if (unit.Type == UnitType.Hero)
+            {
+                if (HeroConfigCategory.Instance.DataMap.ContainsKey(unit.ConfigId))
+                {
+                    radius = HeroConfigCategory.Instance.Get(unit.ConfigId).Radius;
+                }
+            }
+            else if (unit.Type == UnitType.Monster)
+            {
+                if (MonsterConfigCategory.Instance.DataMap.ContainsKey(unit.ConfigId))
+                {
+                    radius = MonsterConfigCategory.Instance.Get(unit.ConfigId).Radius;
+                }
+            }
+
             DtCrowdAgentParams ap = new DtCrowdAgentParams();
-            ap.radius = agentRadius;
+            ap.radius = radius;
             ap.height = agentHeight;
             ap.maxAcceleration = agentMaxAcceleration;
             // ap.maxSpeed = agentMaxSpeed;

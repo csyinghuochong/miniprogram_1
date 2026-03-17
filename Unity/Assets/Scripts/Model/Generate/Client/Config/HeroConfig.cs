@@ -40,6 +40,7 @@ namespace ET
             BaseHitLess = _buf.ReadLong();
             BaseMoveSpeed = _buf.ReadLong();
             BaseAtkSpeed = _buf.ReadLong();
+            Radius = _buf.ReadFloat();
             AtkDistance = _buf.ReadLong();
             LvHp = _buf.ReadInt();
             LvAct = _buf.ReadInt();
@@ -176,6 +177,11 @@ namespace ET
         public readonly long BaseAtkSpeed;
 
         /// <summary>
+        /// 半径
+        /// </summary>
+        public readonly float Radius;
+
+        /// <summary>
         /// 攻击距离
         /// </summary>
         public readonly long AtkDistance;
@@ -241,6 +247,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -270,6 +277,7 @@ namespace ET
             + "BaseHitLess:" + BaseHitLess + ","
             + "BaseMoveSpeed:" + BaseMoveSpeed + ","
             + "BaseAtkSpeed:" + BaseAtkSpeed + ","
+            + "Radius:" + Radius + ","
             + "AtkDistance:" + AtkDistance + ","
             + "LvHp:" + LvHp + ","
             + "LvAct:" + LvAct + ","

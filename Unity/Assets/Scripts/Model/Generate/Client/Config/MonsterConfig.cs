@@ -26,6 +26,7 @@ namespace ET
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
             Lv = _buf.ReadInt();
             MoveSpeed = _buf.ReadLong();
+            Radius = _buf.ReadFloat();
             ActDistance = _buf.ReadLong();
             AtkSpeed = _buf.ReadLong();
             Hp = _buf.ReadInt();
@@ -98,6 +99,11 @@ namespace ET
         /// 移动速度
         /// </summary>
         public readonly long MoveSpeed;
+
+        /// <summary>
+        /// 半径
+        /// </summary>
+        public readonly float Radius;
 
         /// <summary>
         /// 攻击距离
@@ -199,6 +205,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -214,6 +221,7 @@ namespace ET
             + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
             + "Lv:" + Lv + ","
             + "MoveSpeed:" + MoveSpeed + ","
+            + "Radius:" + Radius + ","
             + "ActDistance:" + ActDistance + ","
             + "AtkSpeed:" + AtkSpeed + ","
             + "Hp:" + Hp + ","
