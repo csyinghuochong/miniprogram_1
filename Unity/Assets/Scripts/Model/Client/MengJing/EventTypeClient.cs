@@ -120,6 +120,12 @@ namespace ET.Client
     {
     }
 
+    // 任务提交成功
+    public struct TaskCommit
+    {
+        public int TaskConfigId;
+    }
+
     public struct SkillSound
     {
         public string Asset;
