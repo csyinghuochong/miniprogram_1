@@ -19,6 +19,11 @@ namespace ET
 
         #endregion
 
+        // 显示Unit的半径
+        public const bool ShowUnitRadius = true;
+        // 显示技能的范围
+        public const bool ShowSkillRange = false;
+        
         /// <summary>
         /// 0->2D 1->2.5D
         /// </summary>

@@ -152,22 +152,23 @@ namespace ET.Client
             self.EffectObj.GetComponentInChildren<SkeletonAnimation>()?.AnimationState.SetAnimation(0, "animation", true);
             self.EffectObj.SetActive(true);
 
-#if UNITY_EDITOR
-            self.AddCollider();
-#endif
+            self.ShowRange();
         }
 
-        private static void AddCollider(this Effect self)
+        private static void ShowRange(this Effect self)
         {
-            if (self.InitEffectData.Radius > 0)
+            if (ConfigData.ShowSkillRange)
             {
-                if (self.EffectObj.GetComponent<CircleCollider2D>() == null)
+                if (self.InitEffectData.Radius > 0)
                 {
-                    self.EffectObj.AddComponent<CircleCollider2D>();
+                    if (self.EffectObj.GetComponent<CircleCollider2D>() == null)
+                    {
+                        self.EffectObj.AddComponent<CircleCollider2D>();
+                    }
+
+                    self.EffectObj.GetComponent<CircleCollider2D>().radius = self.InitEffectData.Radius;
+                    self.EffectObj.GetComponent<CircleCollider2D>().isTrigger = true;
                 }
-                
-                self.EffectObj.GetComponent<CircleCollider2D>().radius = self.InitEffectData.Radius;
-                self.EffectObj.GetComponent<CircleCollider2D>().isTrigger = true;
             }
         }
 

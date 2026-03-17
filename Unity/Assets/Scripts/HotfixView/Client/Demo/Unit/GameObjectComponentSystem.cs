@@ -274,7 +274,7 @@ namespace ET.Client
         
         private static void ShowRadius(this GameObjectComponent self, GameObject gameObject, float radius)
         {
-            if (Define.IsEditor)
+            if (ConfigData.ShowUnitRadius)
             {
                 CircleCollider2D collider2D = gameObject.GetComponent<CircleCollider2D>();
                 if (collider2D == null)
