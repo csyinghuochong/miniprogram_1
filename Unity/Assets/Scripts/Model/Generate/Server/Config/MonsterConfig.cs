@@ -25,6 +25,7 @@ namespace ET
             ActSkillID = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); SkillID = new int[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { int __e0;__e0 = _buf.ReadInt(); SkillID[__index0] = __e0;}}
             Lv = _buf.ReadInt();
+            CenterY = _buf.ReadFloat();
             MoveSpeed = _buf.ReadLong();
             Radius = _buf.ReadFloat();
             ActDistance = _buf.ReadLong();
@@ -94,6 +95,11 @@ namespace ET
         /// 怪物等级
         /// </summary>
         public readonly int Lv;
+
+        /// <summary>
+        /// 中心位置
+        /// </summary>
+        public readonly float CenterY;
 
         /// <summary>
         /// 移动速度
@@ -206,6 +212,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -220,6 +227,7 @@ namespace ET
             + "ActSkillID:" + ActSkillID + ","
             + "SkillID:" + Luban.StringUtil.CollectionToString(SkillID) + ","
             + "Lv:" + Lv + ","
+            + "CenterY:" + CenterY + ","
             + "MoveSpeed:" + MoveSpeed + ","
             + "Radius:" + Radius + ","
             + "ActDistance:" + ActDistance + ","

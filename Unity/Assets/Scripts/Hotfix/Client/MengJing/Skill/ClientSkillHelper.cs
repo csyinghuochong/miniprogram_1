@@ -17,5 +17,20 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static float GetCenterHigh(Unit unit)
+        {
+            if (unit.Type == UnitType.Hero)
+            {
+                return HeroConfigCategory.Instance.Get(unit.ConfigId).CenterY;
+            }
+
+            if (unit.Type == UnitType.Monster)
+            {
+                return MonsterConfigCategory.Instance.Get(unit.ConfigId).CenterY;
+            }
+
+            return 1f;
+        }
     }
 }

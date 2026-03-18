@@ -41,6 +41,7 @@
         "SkillConfigId": 30000003
       }
     ],
+    "CenterY": 2,
     "Base_Hp": 14000,
     "Base_Act": 60,
     "Base_Mage": 60,
@@ -103,6 +104,7 @@
         "SkillConfigId": 30000006
       }
     ],
+    "CenterY": 2,
     "Base_Hp": 8000,
     "Base_Act": 100,
     "Base_Mage": 100,
@@ -165,6 +167,7 @@
         "SkillConfigId": 30000009
       }
     ],
+    "CenterY": 2,
     "Base_Hp": 8000,
     "Base_Act": 100,
     "Base_Mage": 100,
@@ -227,6 +230,7 @@
         "SkillConfigId": 30000015
       }
     ],
+    "CenterY": 2,
     "Base_Hp": 10000,
     "Base_Act": 80,
     "Base_Mage": 80,
@@ -289,6 +293,7 @@
         "SkillConfigId": 30000012
       }
     ],
+    "CenterY": 2,
     "Base_Hp": 8000,
     "Base_Act": 100,
     "Base_Mage": 100,
@@ -351,6 +356,7 @@
         "SkillConfigId": 30000018
       }
     ],
+    "CenterY": 2,
     "Base_Hp": 10000,
     "Base_Act": 80,
     "Base_Mage": 80,

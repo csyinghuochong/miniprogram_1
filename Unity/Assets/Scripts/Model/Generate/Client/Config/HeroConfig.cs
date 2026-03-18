@@ -28,6 +28,7 @@ namespace ET
             DamageType = _buf.ReadInt();
             AtkId = _buf.ReadInt();
             {int __n0 = _buf.ReadSize(); UnlockSkillInfos = new UnlockSkillInfo[__n0];for(var __index0 = 0 ; __index0 < __n0 ; __index0++) { UnlockSkillInfo __e0;__e0 = global::ET.UnlockSkillInfo.DeserializeUnlockSkillInfo(_buf); UnlockSkillInfos[__index0] = __e0;}}
+            CenterY = _buf.ReadFloat();
             BaseHp = _buf.ReadInt();
             BaseAct = _buf.ReadInt();
             BaseMage = _buf.ReadInt();
@@ -115,6 +116,11 @@ namespace ET
         /// 英雄技能ID
         /// </summary>
         public readonly UnlockSkillInfo[] UnlockSkillInfos;
+
+        /// <summary>
+        /// 中心位置
+        /// </summary>
+        public readonly float CenterY;
 
         /// <summary>
         /// 血量
@@ -248,6 +254,7 @@ namespace ET
             
             
             
+            
         }
 
         public override string ToString()
@@ -265,6 +272,7 @@ namespace ET
             + "DamageType:" + DamageType + ","
             + "AtkId:" + AtkId + ","
             + "UnlockSkillInfos:" + Luban.StringUtil.CollectionToString(UnlockSkillInfos) + ","
+            + "CenterY:" + CenterY + ","
             + "BaseHp:" + BaseHp + ","
             + "BaseAct:" + BaseAct + ","
             + "BaseMage:" + BaseMage + ","

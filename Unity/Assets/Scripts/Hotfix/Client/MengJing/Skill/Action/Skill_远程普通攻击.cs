@@ -7,7 +7,7 @@ namespace ET.Client
         public override void OnInit(SkillC skill)
         {
             skill.Speed = skill.SkillConfig.Speed;
-            skill.NowPosition = skill.TheUnitFrom.Position;
+            skill.NowPosition = new float3(skill.TheUnitFrom.Position.x, skill.TheUnitFrom.Position.y + ClientSkillHelper.GetCenterHigh(skill.TheUnitFrom), skill.TheUnitFrom.Position.z);
         }
 
         public override void OnExecute(SkillC skill)
@@ -23,7 +23,7 @@ namespace ET.Client
                 return;
             }
 
-            float3 direction = skill.TheUnitTarget.Position - skill.NowPosition;
+            float3 direction = new float3(skill.TheUnitTarget.Position.x, skill.TheUnitTarget.Position.y + ClientSkillHelper.GetCenterHigh(skill.TheUnitTarget), skill.TheUnitTarget.Position.z) - skill.NowPosition;
             float distanceToTarget = math.length(direction);
             float moveStep = skill.Speed * deltaTime;
 
