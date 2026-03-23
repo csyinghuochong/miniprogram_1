@@ -12,7 +12,7 @@ namespace ET.Client
 
         public override void OnExecute(SkillC skill)
         {
-            skill.PlaySkillEffects(skill.TheUnitFrom.Position);
+            skill.PlaySkillEffects(skill.NowPosition);
         }
 
         public override void OnUpdate(SkillC skill, float deltaTime)
