@@ -70,7 +70,17 @@ namespace ET.Server
 
                     if (currentDistance > aiComponent.ActDistance)
                     {
-                        float3 direction = math.normalize(target.Position - unit.Position);
+                        float3 targetPos = target.Position;
+                        if (targetPos.x > unit.Position.x)
+                        {
+                            targetPos.x -= 1;
+                        }
+                        else
+                        {
+                            targetPos.x += 1;
+                        }
+
+                        float3 direction = math.normalize(targetPos - unit.Position);
                         float3 targetSidePosition = unit.Position + direction * (currentDistance - aiComponent.ActDistance + 0.1f);
 
                         MoveHelper.PathResultTo(unit, targetSidePosition);
