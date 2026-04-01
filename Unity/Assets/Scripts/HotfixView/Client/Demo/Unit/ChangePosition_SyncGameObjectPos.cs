@@ -22,12 +22,12 @@
                 scene.Root().GetComponent<UIComponent>().Get(UIType.UIMain)?.GetComponent<UIMainComponent>()?.UIMiniMapComponent?.OnUpdateMiniMapOneUnit(unit);
             }
 
-            TransformSyncComponent transformSyncComponent = unit.GetComponent<TransformSyncComponent>();
-            if (transformSyncComponent != null)
-            {
-                transformSyncComponent.ReceiveServerPosition(unit.Position);
-                return;
-            }
+            // TransformSyncComponent transformSyncComponent = unit.GetComponent<TransformSyncComponent>();
+            // if (transformSyncComponent != null)
+            // {
+            //     transformSyncComponent.ReceiveServerPosition(unit.Position);
+            //     return;
+            // }
 
             GameObjectComponent gameObjectComponent = unit.GetComponent<GameObjectComponent>();
             if (gameObjectComponent != null)

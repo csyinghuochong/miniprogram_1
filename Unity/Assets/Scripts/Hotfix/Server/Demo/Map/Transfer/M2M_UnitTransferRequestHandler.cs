@@ -57,7 +57,8 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
-                    unit.AddComponent<TransformNoticeToClientComponent>();
+                    // unit.AddComponent<TransformNoticeToClientComponent>();
+                    unit.AddComponent<Move2DComponent>();
                     break;
                 }
                 case (int)MapType.LocalLevel:
@@ -72,7 +73,8 @@ namespace ET.Server
                     MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
-                    unit.AddComponent<TransformNoticeToClientComponent>();
+                    // unit.AddComponent<TransformNoticeToClientComponent>();
+                    unit.AddComponent<Move2DComponent>();
 
                     // 测试一直从第一关开始
                     scene.GetComponent<LocalLevelComponent>().MainUnit = unit;

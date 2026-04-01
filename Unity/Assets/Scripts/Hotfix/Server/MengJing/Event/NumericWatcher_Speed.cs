@@ -5,9 +5,9 @@
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            // unit.GetComponent<Move2DComponent>()?.ChangeSpeed(args.NewValue / 10000f);
+            unit.GetComponent<Move2DComponent>()?.ChangeSpeed(args.NewValue / 10000f);
             // unit.GetComponent<UnitMoveComponent>()?.ChangeSpeed(args.NewValue / 10000f);
-            unit.Scene().GetComponent<CrowdComponent>()?.ChangeSpeed(unit.DtCrowdAgentId, args.NewValue / 10000f);
+            // unit.Scene().GetComponent<CrowdComponent>()?.ChangeSpeed(unit.DtCrowdAgentId, args.NewValue / 10000f);
         }
     }
 }

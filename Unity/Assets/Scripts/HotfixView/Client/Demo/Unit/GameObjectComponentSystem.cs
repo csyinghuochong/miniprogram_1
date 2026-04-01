@@ -208,17 +208,17 @@ namespace ET.Client
                     unit.AddComponent<UIPlayerHpComponent>(true);
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
-
+                    unit.AddComponent<Move2DComponent>(true);
                     if (unit.MainHero)
                     {
-                        unit.AddComponent<TransformNoticeToServerComponent>(true);
-                        unit.AddComponent<Move2DComponent>(true);
+                        // unit.AddComponent<TransformNoticeToServerComponent>(true);
+                        // unit.AddComponent<Move2DComponent>(true);
                         self.LoadPath().Coroutine();
                     }
-                    else
-                    {
-                        unit.AddComponent<TransformSyncComponent>(true);
-                    }
+                    // else
+                    // {
+                    //     unit.AddComponent<TransformSyncComponent>(true);
+                    // }
 
                     break;
                 }
@@ -231,7 +231,8 @@ namespace ET.Client
                     unit.AddComponent<UIHeroHpComponent>(true);
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
-                    unit.AddComponent<TransformSyncComponent>(true);
+                    // unit.AddComponent<TransformSyncComponent>(true);
+                    unit.AddComponent<Move2DComponent>(true);
                     
                     HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
                     self.ShowRadius(self.GameObject, heroConfig.Radius);
@@ -246,7 +247,8 @@ namespace ET.Client
                     unit.AddComponent<UIMonsterHpComponent>(true);
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
-                    unit.AddComponent<TransformSyncComponent>(true);
+                    // unit.AddComponent<TransformSyncComponent>(true);
+                    unit.AddComponent<Move2DComponent>(true);
                     
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                     self.ShowRadius(self.GameObject, monsterConfig.Radius);

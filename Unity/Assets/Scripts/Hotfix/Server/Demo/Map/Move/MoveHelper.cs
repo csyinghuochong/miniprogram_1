@@ -42,23 +42,23 @@ namespace ET.Server
                 return;
             }
 
-            CrowdComponent crowdComponent = unit.Scene().GetComponent<CrowdComponent>();
-            if (crowdComponent == null)
-            {
-                Log.Error("PathResultTo failed, CrowdComponent not found");
-                return;
-            }
+            // CrowdComponent crowdComponent = unit.Scene().GetComponent<CrowdComponent>();
+            // if (crowdComponent == null)
+            // {
+            //     Log.Error("PathResultTo failed, CrowdComponent not found");
+            //     return;
+            // }
 
             float speed = unit.GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_MoveSpeed);
-            // unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
+            unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
             // unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
-            crowdComponent.SetMoveTarget(unit.DtCrowdAgentId, target, speed);
+            // crowdComponent.SetMoveTarget(unit.DtCrowdAgentId, target, speed);
 
-            // M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
-            // m2CPathfindingResult.Id = unit.Id;
-            // m2CPathfindingResult.Points.Add(target);
-            //
-            // MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
+            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
+            m2CPathfindingResult.Id = unit.Id;
+            m2CPathfindingResult.Points.Add(target);
+            
+            MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
         }
 
         public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent, float speedRate)
@@ -129,9 +129,9 @@ namespace ET.Server
         public static void Stop(this Unit unit, int error = 0)
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
-            // unit.GetComponent<Move2DComponent>().Stop();
+            unit.GetComponent<Move2DComponent>().Stop();
             // unit.GetComponent<UnitMoveComponent>().Stop();
-            unit.Scene().GetComponent<CrowdComponent>()?.Stop(unit.DtCrowdAgentId);
+            // unit.Scene().GetComponent<CrowdComponent>()?.Stop(unit.DtCrowdAgentId);
             unit.SendStop(error);
         }
 
@@ -149,9 +149,9 @@ namespace ET.Server
         public static void StopResult(this Unit unit, float3 position, int error)
         {
             // unit.GetComponent<MoveComponent>().Stop(error == 0);
-            // unit.GetComponent<Move2DComponent>().Stop();
+            unit.GetComponent<Move2DComponent>().Stop();
             // unit.GetComponent<UnitMoveComponent>().Stop();
-            unit.Scene().GetComponent<CrowdComponent>()?.Stop(unit.DtCrowdAgentId);
+            // unit.Scene().GetComponent<CrowdComponent>()?.Stop(unit.DtCrowdAgentId);
             unit.Position = position;
             M2C_StopResult m2CStop = M2C_StopResult.Create();
             m2CStop.Error = error;

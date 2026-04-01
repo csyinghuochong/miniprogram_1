@@ -11,9 +11,9 @@ namespace ET.Server
 
             if (args.nowStateType == StateType.Stun || args.nowStateType == StateType.Freeze)
             {
-                // unit.GetComponent<Move2DComponent>()?.Stop();
+                unit.GetComponent<Move2DComponent>()?.Stop();
                 // unit.GetComponent<UnitMoveComponent>()?.Stop();
-                scene.GetComponent<CrowdComponent>().Stop(unit.DtCrowdAgentId);
+                // scene.GetComponent<CrowdComponent>().Stop(unit.DtCrowdAgentId);
                 unit.GetComponent<SkillManagerComponent>()?.OnBreak();
             }
 

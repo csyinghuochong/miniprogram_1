@@ -142,7 +142,7 @@ namespace ET.Server
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponent>().PlayerName;
 
             // unit.AddComponent<MoveComponent>();
-            // unit.AddComponent<Move2DComponent>();
+            unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
 
             AIComponent aiComponent = unit.AddComponent<AIComponent, int>(master.GetComponent<NumericComponent>().GetAsInt(NumericType.BattleMode) == 0 ? 1 : 2);
@@ -150,7 +150,7 @@ namespace ET.Server
             aiComponent.Begin();
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            scene.GetComponent<CrowdComponent>().AddAgent(unit);
+            // scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }
@@ -195,7 +195,7 @@ namespace ET.Server
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
             // unit.AddComponent<MoveComponent>();
-            // unit.AddComponent<Move2DComponent>();
+            unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
 
             if (monsterConfig.AI != 0)
@@ -206,7 +206,7 @@ namespace ET.Server
             }
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            scene.GetComponent<CrowdComponent>().AddAgent(unit);
+            // scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }
@@ -253,7 +253,7 @@ namespace ET.Server
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
-            // unit.AddComponent<Move2DComponent>();
+            unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
 
             if (monsterConfig.AI != 0)
@@ -264,7 +264,7 @@ namespace ET.Server
             }
 
             unit.AddComponent<AOIEntity, int, float3>(20 * 1000, unit.Position);
-            scene.GetComponent<CrowdComponent>().AddAgent(unit);
+            // scene.GetComponent<CrowdComponent>().AddAgent(unit);
 
             return unit;
         }

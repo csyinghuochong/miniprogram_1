@@ -50,7 +50,7 @@ namespace ET.Server
                         MapComponent mapComponent = levelScene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo(MapType.LocalLevel, request.SceneId);
 
-                        levelScene.AddComponent<CrowdComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
+                        // levelScene.AddComponent<CrowdComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
 
                         levelScene.AddComponent<LocalLevelComponent>();
 

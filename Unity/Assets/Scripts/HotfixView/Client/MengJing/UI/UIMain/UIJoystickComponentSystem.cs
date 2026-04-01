@@ -132,11 +132,11 @@ namespace ET.Client
             self.IsDrag = false;
             self.LastDirection = Vector3.zero;
 
-            // C2M_StopResult c2MStop = C2M_StopResult.Create();
-            // c2MStop.Position = self.MyUnit.Position;
-            // self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
-
             self.MyUnit.GetComponent<Move2DComponent>().Stop();
+
+            C2M_StopResult c2MStop = C2M_StopResult.Create(true);
+            c2MStop.Position = self.MyUnit.Position;
+            self.Root().GetComponent<ClientSenderComponent>().Send(c2MStop);
 
             self.ResetUI();
 
@@ -244,9 +244,9 @@ namespace ET.Client
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
 
-            // C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
-            // c2MPathfindingResult.Position.Add(targetPosition);
-            // self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
+            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
+            c2MPathfindingResult.Position.Add(new float3(targetPosition, 0));
+            self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
 
             MoveHelper.MoveTo(self.MyUnit, targetPosition);
         }
