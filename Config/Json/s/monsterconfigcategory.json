@@ -127,14 +127,15 @@
   },
   {
     "Id": 10000003,
-    "MonsterName": "巨型骷髅",
+    "MonsterName": "巨型蛇怪",
     "MonsterHeadIcon": "10000003",
     "MonsterType": 3,
     "MonsterModelID": "10000003",
     "ChallengeTime": 60,
     "ActSkillID": 10000003,
     "SkillID": [
-      20000001
+      20000004,
+      30000011
     ],
     "Lv": 10,
     "CenterY": 1,
@@ -151,7 +152,7 @@
     "Eva": 1000,
     "Hit": 500,
     "HitLess": 500,
-    "MonsterDescription": "超级大的骷髅。",
+    "MonsterDescription": "超级大的蛇。",
     "AI": 2,
     "DropId": [
       1001,
