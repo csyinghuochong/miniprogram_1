@@ -84,6 +84,10 @@ namespace ET.Server
                         {
                             float3 direction = math.normalize(target.Position - unit.Position);
                             ttt = unit.Position + direction * (currentDistance - (aiComponent.ActDistance - 0.1f));
+                            // 垂直方向偏移，防止多单位从同一起点移动时完全重叠
+                            float3 perp = new float3(-direction.y, direction.x, 0);
+                            float offset = ((unit.Id % 7) - 3) * 0.6f; // -1.8 ~ 1.8
+                            ttt += perp * offset;
                         }
 
                         MoveHelper.PathResultTo(unit, ttt);
