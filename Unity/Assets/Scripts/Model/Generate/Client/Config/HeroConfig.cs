@@ -47,6 +47,7 @@ namespace ET
             LvAct = _buf.ReadInt();
             LvDef = _buf.ReadInt();
             LvAdf = _buf.ReadInt();
+            MaxAnger = _buf.ReadInt();
             HeroDescription = _buf.ReadString();
 
             PostInit();
@@ -213,6 +214,11 @@ namespace ET
         public readonly int LvAdf;
 
         /// <summary>
+        /// 怒气
+        /// </summary>
+        public readonly int MaxAnger;
+
+        /// <summary>
         /// 英雄简介
         /// </summary>
         public readonly string HeroDescription;
@@ -235,6 +241,7 @@ namespace ET
             
             
             foreach (var _e in UnlockSkillInfos) { _e?.ResolveRef(); }
+            
             
             
             
@@ -291,6 +298,7 @@ namespace ET
             + "LvAct:" + LvAct + ","
             + "LvDef:" + LvDef + ","
             + "LvAdf:" + LvAdf + ","
+            + "MaxAnger:" + MaxAnger + ","
             + "HeroDescription:" + HeroDescription + ","
             + "}";
         }

@@ -149,6 +149,7 @@ namespace ET
             long base_HitLess = heroConfig.BaseHitLess;
             long base_MoveSpeed = heroConfig.BaseMoveSpeed;
             long base_AtkSpeed = heroConfig.BaseAtkSpeed;
+            long base_MaxAnger = heroConfig.MaxAnger;
             long base_Combo = 0;
             long base_Counterattack = 0;
             long base_LifeSteal = 0;
@@ -229,6 +230,7 @@ namespace ET
             numericDic.Add(NumericType.Base_Speed_Base, base_MoveSpeed);
             numericDic.Add(NumericType.Base_AtkSpeed_Base, base_AtkSpeed);
             numericDic.Add(NumericType.CombatPower, combatPower);
+            numericDic.Add(NumericType.Base_MaxAngerValue_Base, base_MaxAnger);
 
             return numericDic;
         }

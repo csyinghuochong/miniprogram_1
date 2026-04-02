@@ -60,6 +60,7 @@
     "Lv_Act": 10,
     "Lv_Def": 20,
     "Lv_Adf": 20,
+    "MaxAnger": 50,
     "HeroDescription": "一个拿着斧头的强壮家伙。"
   },
   {
@@ -123,6 +124,7 @@
     "Lv_Act": 20,
     "Lv_Def": 10,
     "Lv_Adf": 10,
+    "MaxAnger": 50,
     "HeroDescription": "在外面流浪的无名剑客。"
   },
   {
@@ -186,6 +188,7 @@
     "Lv_Act": 20,
     "Lv_Def": 10,
     "Lv_Adf": 10,
+    "MaxAnger": 50,
     "HeroDescription": "剑术出神入化的大师。"
   },
   {
@@ -249,6 +252,7 @@
     "Lv_Act": 15,
     "Lv_Def": 15,
     "Lv_Adf": 15,
+    "MaxAnger": 50,
     "HeroDescription": "一个打辅助的骑士。"
   },
   {
@@ -312,6 +316,7 @@
     "Lv_Act": 20,
     "Lv_Def": 10,
     "Lv_Adf": 10,
+    "MaxAnger": 50,
     "HeroDescription": "冰冷的法师。"
   },
   {
@@ -375,6 +380,7 @@
     "Lv_Act": 15,
     "Lv_Def": 15,
     "Lv_Adf": 15,
+    "MaxAnger": 50,
     "HeroDescription": "治疗队友的巫师。"
   }
 ]

@@ -124,7 +124,6 @@ namespace ET.Server
                 numericComponent.ApplyValue(keyValuePair.Key, keyValuePair.Value, false);
             }
 
-            numericComponent.ApplyValue(NumericType.Base_MaxAngerValue_Base, 100, false);
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
             numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
 
