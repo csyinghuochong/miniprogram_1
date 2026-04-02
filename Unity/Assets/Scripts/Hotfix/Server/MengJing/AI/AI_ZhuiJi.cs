@@ -70,20 +70,14 @@ namespace ET.Server
 
                     if (currentDistance > aiComponent.ActDistance)
                     {
-                        float3 targetPos = target.Position;
-                        if (targetPos.x > unit.Position.x)
-                        {
-                            targetPos.x -= 1;
-                        }
-                        else
-                        {
-                            targetPos.x += 1;
-                        }
+                        float3 dir = unit.Position - target.Position;
+                        float ange = math.degrees(math.atan2(dir.x, dir.y));
+                        // 将ID散列到360°，使连续ID也能均匀分布
+                        float addg = (unit.Id % 8) * 45f;
+                        quaternion rotation = quaternion.Euler(0, 0, math.radians(ange + addg));
+                        float3 ttt = target.Position + math.mul(rotation, math.up()) * (aiComponent.ActDistance - 0.1f);
 
-                        float3 direction = math.normalize(targetPos - unit.Position);
-                        float3 targetSidePosition = unit.Position + direction * (currentDistance - aiComponent.ActDistance + 0.1f);
-
-                        MoveHelper.PathResultTo(unit, targetSidePosition);
+                        MoveHelper.PathResultTo(unit, ttt);
                     }
                     else
                     {
