@@ -20,7 +20,7 @@ namespace ET.Server
 
         protected override async ETTask Run(Unit unit, C2M_PathfindingResult message)
         {
-            MoveHelper.PathResultTo(unit, message.Position[0]);
+            MoveHelper.PathResultTo(unit, message.Position);
             
             // M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
             //

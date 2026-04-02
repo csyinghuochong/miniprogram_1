@@ -11,6 +11,10 @@ namespace ET.Client
             using ListComponent<float3> path = ListComponent<float3>.Create();
             unit.GetComponent<PathfindingComponent>()?.Find(unit.Position, new float3(targetPos.x, targetPos.y, 0), path);
             unit.GetComponent<Move2DComponent>().MoveTo(path, speed);
+
+            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
+            c2MPathfindingResult.Position.AddRange(path);
+            unit.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
         }
 
         // 可以多次调用，多次调用的话会取消上一次的协程

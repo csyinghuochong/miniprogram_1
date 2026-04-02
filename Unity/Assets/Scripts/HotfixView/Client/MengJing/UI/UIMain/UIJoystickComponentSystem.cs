@@ -244,10 +244,6 @@ namespace ET.Client
             self.LastDirection = self.Direction;
             self.LastUnitPosition = self.MyUnit.Position;
 
-            C2M_PathfindingResult c2MPathfindingResult = C2M_PathfindingResult.Create(true);
-            c2MPathfindingResult.Position.Add(new float3(targetPosition, 0));
-            self.Root().GetComponent<ClientSenderComponent>().Send(c2MPathfindingResult);
-
             MoveHelper.MoveTo(self.MyUnit, targetPosition);
         }
 

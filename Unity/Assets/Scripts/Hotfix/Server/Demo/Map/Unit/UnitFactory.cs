@@ -141,6 +141,7 @@ namespace ET.Server
             unitInfoComponent.UnitName = HeroConfigCategory.Instance.Get(hero.ConfigId).HeroName;
             unitInfoComponent.MasterName = master.GetComponent<UserInfoComponent>().PlayerName;
 
+            unit.AddComponent<PathfindingComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
             // unit.AddComponent<MoveComponent>();
             unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
@@ -194,6 +195,7 @@ namespace ET.Server
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
+            unit.AddComponent<PathfindingComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
             // unit.AddComponent<MoveComponent>();
             unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
@@ -253,6 +255,7 @@ namespace ET.Server
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
 
+            unit.AddComponent<PathfindingComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
             unit.AddComponent<Move2DComponent>();
             // unit.AddComponent<UnitMoveComponent>();
 

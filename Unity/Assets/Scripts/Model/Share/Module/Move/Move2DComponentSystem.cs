@@ -91,24 +91,24 @@ namespace ET
             EventSystem.Instance.Publish(self.Scene(), new MoveStop() { Unit = self.Unit });
         }
 
-        public static void MoveTo(this Move2DComponent self, float3 target, float speed)
+        public static void MoveTo(this Move2DComponent self, List<float3> path, float speed)
         {
             self.Targets.Clear();
 
-            self.Targets.Add(target);
-
-            self.Speed = speed;
-
-            self.StartTimer();
-        }
-
-        public static void MoveTo(this Move2DComponent self, List<float3> target, float speed)
-        {
-            self.Targets.Clear();
-
-            foreach (float3 point in target)
+            if (path.Count == 0)
             {
-                self.Targets.Add(point);
+                return;
+            }
+
+            for (int i = 0; i < path.Count; i++)
+            {
+                if (i == 0)
+                {
+                    self.Unit.Position = path[i];
+                    continue;
+                }
+
+                self.Targets.Add(path[i]);
             }
 
             self.Speed = speed;

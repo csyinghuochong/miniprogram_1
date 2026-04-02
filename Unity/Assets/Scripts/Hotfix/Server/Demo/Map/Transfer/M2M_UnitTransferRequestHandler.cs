@@ -58,6 +58,7 @@ namespace ET.Server
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
                     // unit.AddComponent<TransformNoticeToClientComponent>();
+                    unit.AddComponent<PathfindingComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
                     unit.AddComponent<Move2DComponent>();
                     break;
                 }
@@ -74,6 +75,7 @@ namespace ET.Server
 
                     unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
                     // unit.AddComponent<TransformNoticeToClientComponent>();
+                    unit.AddComponent<PathfindingComponent, byte[]>(NavmeshComponent.Instance.Get(CommonHelp.GetMapObjName(MapType.LocalLevel)));
                     unit.AddComponent<Move2DComponent>();
 
                     // 测试一直从第一关开始

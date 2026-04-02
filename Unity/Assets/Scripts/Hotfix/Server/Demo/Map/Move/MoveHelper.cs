@@ -42,6 +42,26 @@ namespace ET.Server
                 return;
             }
 
+            float speed = unit.GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_MoveSpeed);
+            using ListComponent<float3> path = ListComponent<float3>.Create();
+            unit.GetComponent<PathfindingComponent>()?.Find(unit.Position, target, path);
+            unit.GetComponent<Move2DComponent>().MoveTo(path, speed);
+            // unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
+
+            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create(true);
+            m2CPathfindingResult.Id = unit.Id;
+            m2CPathfindingResult.Points.AddRange(path);
+
+            MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
+        }
+
+        public static void PathResultTo(Unit unit, List<float3> path)
+        {
+            if (unit.IsCanMove() != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
             // CrowdComponent crowdComponent = unit.Scene().GetComponent<CrowdComponent>();
             // if (crowdComponent == null)
             // {
@@ -50,13 +70,13 @@ namespace ET.Server
             // }
 
             float speed = unit.GetComponent<NumericComponent>().GetAsFloat(NumericType.Now_MoveSpeed);
-            unit.GetComponent<Move2DComponent>().MoveTo(target, speed);
+            unit.GetComponent<Move2DComponent>().MoveTo(path, speed);
             // unit.GetComponent<UnitMoveComponent>().MoveTo(target, speed);
             // crowdComponent.SetMoveTarget(unit.DtCrowdAgentId, target, speed);
 
-            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create();
+            M2C_PathfindingResult m2CPathfindingResult = M2C_PathfindingResult.Create(true);
             m2CPathfindingResult.Id = unit.Id;
-            m2CPathfindingResult.Points.Add(target);
+            m2CPathfindingResult.Points.AddRange(path);
             
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
         }
