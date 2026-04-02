@@ -69,11 +69,11 @@ namespace ET.Server
                     {
                         if (type == NumericType.Now_Hp)
                         {
-                            numericComponent.ApplyChange(type, value, true, true, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Recover);
+                            numericComponent.ApplyChange(type, value, true, true, buff.TheUnitFrom?.Id ?? 0, buff.InitBuffData.SkillConfigId, DamageType.Recover);
                         }
                         else
                         {
-                            numericComponent.ApplyChange(type, value, true, true, buff.TheUnitFrom.Id, buff.InitBuffData.SkillConfigId, DamageType.Physical);
+                            numericComponent.ApplyChange(type, value, true, true, buff.TheUnitFrom?.Id ?? 0, buff.InitBuffData.SkillConfigId, DamageType.Physical);
                         }
                     }
 
@@ -84,7 +84,7 @@ namespace ET.Server
                 {
                     if ((StateType)buff.BuffConfig.BuffParameterType == StateType.Taunt)
                     {
-                        buff.TheUnitBelongTo.GetComponent<AIComponent>()?.SetTarget(buff.TheUnitFrom.Id);
+                        buff.TheUnitBelongTo.GetComponent<AIComponent>()?.SetTarget(buff.TheUnitFrom?.Id ?? 0);
                     }
                     
                     buff.TheUnitBelongTo.GetComponent<StateComponent>().StateTypeAdd((StateType)buff.BuffConfig.BuffParameterType);
