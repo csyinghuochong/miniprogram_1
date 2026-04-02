@@ -76,7 +76,7 @@ namespace ET.Server
                             float3 dir = unit.Position - target.Position;
                             float ange = math.degrees(math.atan2(dir.x, dir.y));
                             // 将ID散列到360°，使连续ID也能均匀分布
-                            float addg = (unit.Id % 8) * 45f;
+                            float addg = (unit.InstanceId % 8) * 45f;
                             quaternion rotation = quaternion.Euler(0, 0, math.radians(ange + addg));
                             ttt = target.Position + math.mul(rotation, math.up()) * (aiComponent.ActDistance - 0.1f);
                         }
@@ -86,7 +86,7 @@ namespace ET.Server
                             ttt = unit.Position + direction * (currentDistance - (aiComponent.ActDistance - 0.1f));
                             // 垂直方向偏移，防止多单位从同一起点移动时完全重叠
                             float3 perp = new float3(-direction.y, direction.x, 0);
-                            float offset = ((unit.Id % 7) - 3) * 0.6f; // -1.8 ~ 1.8
+                            float offset = ((unit.InstanceId % 7) - 3) * 0.6f; // -1.8 ~ 1.8
                             ttt += perp * offset;
                         }
 
