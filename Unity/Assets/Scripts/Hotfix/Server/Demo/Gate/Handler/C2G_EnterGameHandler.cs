@@ -33,14 +33,14 @@ namespace ET.Server
 
             if (player == null)
             {
-                Log.Console($"C2G_EnterGame: player == null  {request.UnitId}  {session.Id}");
+                Console.WriteLine($"C2G_EnterGame: player == null  {request.UnitId}  {session.Id}");
                 response.Error = ErrorCode.ERR_NonePlayerError;
                 return;
             }
 
             if (player.IsDisposed)
             {
-                Log.Console($"C2G_EnterGame: player.IsDisposed  {request.UnitId}  {session.Id}");
+                Console.WriteLine($"C2G_EnterGame: player.IsDisposed  {request.UnitId}  {session.Id}");
                 response.Error = ErrorCode.ERR_NonePlayerError;
                 return;
             }
@@ -59,7 +59,7 @@ namespace ET.Server
 
                     if (player.PlayerState == PlayerState.Game && request.ReLink == 0)
                     {
-                        Log.Console($"G2M_RequestExitGame:  {player.Id} ");
+                        Console.WriteLine($"G2M_RequestExitGame:  {player.Id} ");
                         var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, G2M_RequestExitGame.Create());
                         player.RemoveComponent<GateMapComponent>();
                         player.PlayerState = PlayerState.Gate;
@@ -72,7 +72,7 @@ namespace ET.Server
                             M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.Id, g2MSecondLogin) as M2G_SecondLogin;
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
-                                Log.Console($"二次登陆逻辑，补全下发切换场景消息:{request.UnitId}");
+                                Console.WriteLine($"二次登陆逻辑，补全下发切换场景消息:{request.UnitId}");
                                 G2C_SecondLogin g2CSecondLogin = G2C_SecondLogin.Create();
                                 g2CSecondLogin.SceneType = reqEnter.SceneType;
                                 g2CSecondLogin.SceneId = reqEnter.SceneId;
@@ -81,7 +81,7 @@ namespace ET.Server
                             }
 
                             Log.Error("二次登录失败  " + reqEnter.Error + " | " + reqEnter.Message);
-                            Log.Console("二次登录失败  " + reqEnter.Error + " | " + reqEnter.Message);
+                            Console.WriteLine("二次登录失败  " + reqEnter.Error + " | " + reqEnter.Message);
                             response.Error = ErrorCode.ERR_ReEnterGameError;
                             await DisconnectHelper.KickPlayerNoLock(player, 1);
                             session.Disconnect().Coroutine();

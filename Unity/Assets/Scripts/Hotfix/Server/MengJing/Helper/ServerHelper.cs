@@ -178,6 +178,7 @@ namespace ET
 
                 if (servertozone[serverItem.ServerIp].Contains(serverItem.ServerId))
                 {
+                    Console.WriteLine("ServerItem 配置重复: " + serverItem.ServerIp);
                     Log.Error("ServerItem 配置重复: " + serverItem.ServerIp);
                     break;
                 }

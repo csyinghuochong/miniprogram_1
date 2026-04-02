@@ -24,7 +24,7 @@ namespace ET.Server
                 }
                 catch (Exception e)
                 {
-                    Log.Console(e.ToString());
+                    Console.WriteLine(e);
                     throw;
                 }
             }

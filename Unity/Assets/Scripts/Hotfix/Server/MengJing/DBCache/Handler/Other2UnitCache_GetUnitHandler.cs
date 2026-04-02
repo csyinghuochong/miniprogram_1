@@ -43,7 +43,8 @@ namespace ET.Server
                     }
                     catch (Exception e)
                     {
-                        Log.Error(e.ToString());
+                        Console.WriteLine(e);
+                        Log.Debug(e.ToString());
                         throw;
                     }
                 }

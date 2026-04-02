@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override void Run(PlayerOfflineOutTimeComponent t)
         {
-            Log.Console($"PlayerOfflineOutTime:  {t.Id}");
+            Console.WriteLine($"PlayerOfflineOutTime:  {t.Id}");
             t?.KickPlayer();
         }
     }
