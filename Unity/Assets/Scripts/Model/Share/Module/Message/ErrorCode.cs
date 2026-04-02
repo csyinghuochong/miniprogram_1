@@ -91,6 +91,7 @@ namespace ET
         public const int ERR_TargetUnitCantBeAttack = 200905; //目标不能被攻击
         public const int ERR_Stun = 200906; //眩晕状态中
         public const int ERR_Freeze = 200907; //冰冻状态中
+        public const int ERR_NotMaxAnger = 200908; //怒气不足
 
         // 场景相关错误 201001-201099
         public const int ERR_SceneCantSetTimeScale = 201001; //当前Scene不能设置TimeScale
@@ -218,6 +219,7 @@ namespace ET
             { ERR_TargetUnitCantBeAttack, "目标不能被攻击" },
             { ERR_Stun, "眩晕状态中" },
             { ERR_Freeze, "冰冻状态中" },
+            { ERR_NotMaxAnger, "怒气不足" },
 
             // 场景相关错误 201001-201099
             { ERR_SceneCantSetTimeScale, "当前Scene不能设置TimeScale" },

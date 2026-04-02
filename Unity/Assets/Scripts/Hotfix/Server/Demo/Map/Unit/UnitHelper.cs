@@ -184,6 +184,26 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
+        public static bool IsMaxAnger(this Unit self)
+        {
+            if (self == null)
+            {
+                return false;
+            }
+
+            NumericComponent numericComponent = self.GetComponent<NumericComponent>();
+
+            if (numericComponent == null)
+            {
+                return false;
+            }
+
+            int max = numericComponent.GetAsInt(NumericType.Now_MaxAngerValue);
+            int now = numericComponent.GetAsInt(NumericType.Now_AngerValue);
+            
+            return now >= max;
+        }
+
         public static void SaveUnitMainCityPos(Unit unit)
         {
             NumericComponent numericComponent = unit.GetComponent<NumericComponent>();

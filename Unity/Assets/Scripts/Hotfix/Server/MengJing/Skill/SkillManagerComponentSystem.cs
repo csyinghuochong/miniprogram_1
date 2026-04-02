@@ -172,6 +172,15 @@ namespace ET.Server
                 }
             }
 
+            if (self.IsUseAnger(skillConfigId))
+            {
+                NumericComponent numericComponent = myUnit.GetComponent<NumericComponent>();
+                if (numericComponent != null)
+                {
+                    numericComponent.ApplyValue(NumericType.Now_AngerValue, 0);
+                }
+            }
+
             float cd = self.AddSkillCD(skillConfigId);
 
             Skill skill = self.AddChild<Skill>();
@@ -200,8 +209,25 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
+        private static bool IsUseAnger(this SkillManagerComponent self, int skillConfigId)
+        {
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
+            return skillConfig.SkillActType == SkillActType.Skill && skillConfig.SkillType == SkillType.Active;
+        }
+
         public static int IsCanUseSkill(this SkillManagerComponent self, int skillConfigId)
         {
+            if (self.IsUseAnger(skillConfigId) && !self.GetParent<Unit>().IsMaxAnger())
+            {
+                return ErrorCode.ERR_NotMaxAnger;
+            }
+            
+            int error = self.GetParent<Unit>().IsCanMove();
+            if (error != ErrorCode.ERR_Success)
+            {
+                return error;
+            }
+            
             SkillCDItem skillCdItem = null;
 
             foreach (SkillCDItem skillCDItem in self.SkillCDs)
@@ -226,12 +252,6 @@ namespace ET.Server
             if (self.PublicCD > 0)
             {
                 return ErrorCode.ERR_UseSkillInPublicCD;
-            }
-
-            int error = self.GetParent<Unit>().IsCanMove();
-            if (error != ErrorCode.ERR_Success)
-            {
-                return error;
             }
 
             return ErrorCode.ERR_Success;

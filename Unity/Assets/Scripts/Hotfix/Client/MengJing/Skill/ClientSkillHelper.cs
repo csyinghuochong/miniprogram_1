@@ -15,6 +15,8 @@ namespace ET.Client
 
             using M2C_HeroUseSkill response = (M2C_HeroUseSkill)await root.GetComponent<ClientSenderComponent>().Call(request);
 
+            if (ErrorCode.ErrorTips.TryGetValue(response.Error, out string tip)) EventSystem.Instance.Publish(root, new ShowTip() { Tip = tip });
+
             return response.Error;
         }
 
