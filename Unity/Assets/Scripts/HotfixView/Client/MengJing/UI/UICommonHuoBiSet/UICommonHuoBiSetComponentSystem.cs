@@ -103,9 +103,9 @@ namespace ET.Client
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 
-            if (userInfoComponent.Gold >= 10000)
+            if (userInfoComponent.Gold >= 100000)
             {
-                self.Text_Type_Gold.SetTextFormat("{0}k", userInfoComponent.Gold / 1000);
+                self.Text_Type_Gold.SetTextFormat("{0}万", userInfoComponent.Gold / 10000);
                 return;
             }
 
@@ -116,9 +116,9 @@ namespace ET.Client
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 
-            if (userInfoComponent.Diamond >= 10000)
+            if (userInfoComponent.Diamond >= 100000)
             {
-                self.Text_Type_Diamond.SetTextFormat("{0}k", userInfoComponent.Diamond / 1000);
+                self.Text_Type_Diamond.SetTextFormat("{0}万", userInfoComponent.Diamond / 10000);
                 return;
             }
 

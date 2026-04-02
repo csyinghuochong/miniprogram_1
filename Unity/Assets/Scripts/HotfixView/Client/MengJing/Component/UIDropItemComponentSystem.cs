@@ -62,6 +62,11 @@ namespace ET.Client
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.DropItemId));
             
+            int dropNum = numericComponent.GetAsInt(NumericType.DropItemNum);
+            int dropId = numericComponent.GetAsInt(NumericType.DropItemId);
+            string dropItemNum = dropNum >= 100000 ? $"{dropNum / 10000}万" : dropNum.ToString();
+            string dropItemName = dropId is 1 or 2 ? $"{dropItemNum}{itemConfig.ItemName}" : itemConfig.ItemName;
+
             string color = itemConfig.ItemQuality switch
             {
                 1 => "#0e832a",
@@ -75,8 +80,8 @@ namespace ET.Client
 
             Color nowColor;
             ColorUtility.TryParseHtmlString(color, out nowColor);
-            
-            self.Text_Name.text = itemConfig.ItemName;
+
+            self.Text_Name.text = dropItemName;
             self.Text_Name.color = nowColor;
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
