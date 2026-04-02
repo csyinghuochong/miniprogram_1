@@ -11,7 +11,7 @@ namespace ET.Server
             root.AddComponent<TimerComponent>();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get((int)root.Id);
 
-            // Log.Console($"FiberInit_RouterManager");
+            Log.Console($"FiberInit_RouterManager");
             root.AddComponent<HttpComponent, string>($"http://*:{startSceneConfig.Port}/");
 
             await ETTask.CompletedTask;

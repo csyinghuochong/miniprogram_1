@@ -20,7 +20,7 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get(root.Fiber.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
             
-            // Log.Console($"FiberInit_LoginCenter: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
+            Log.Console($"FiberInit_LoginCenter: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
             await ETTask.CompletedTask;
         }
     }

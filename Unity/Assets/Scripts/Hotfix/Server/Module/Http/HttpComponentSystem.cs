@@ -51,14 +51,14 @@ namespace ET.Server
             try
             {
                 self.Listener = new HttpListener();
-                // Log.Console($"HttpComponent: Awake");
+                Log.Console($"HttpComponent: Awake");
                 foreach (string s in address.Split(';'))
                 {
                     if (s.Trim() == "")
                     {
                         continue;
                     }
-                    // Log.Console($"HttpComponent: {s}  ");
+                    Log.Console($"HttpComponent: {s}  ");
 
                     self.Listener.Prefixes.Add(s);
                 }
