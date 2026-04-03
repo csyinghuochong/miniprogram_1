@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -67,35 +68,36 @@ namespace ET.Server
                 if (target != null)
                 {
                     float currentDistance = math.distance(unit.Position, target.Position);
-                    if (currentDistance > aiComponent.ActDistance)
+                    float3 targetPos = target.Position;
+                    if (aiComponent.ActDistance < 5)
                     {
-                        float3 ttt;
-                        if (currentDistance < 8)
+                        float range = 90f;
+                        int maxCount = 8;
+
+                        // XOR 让不同 target 的结果差异更大
+                        int slot = (int)((unit.InstanceId ^ target.InstanceId) % maxCount);
+                        bool right = slot % 2 == 0;
+
+                        int sideIndex = slot / 2;
+                        int sideCount = maxCount / 2;
+                        float angle = (range / sideCount) * sideIndex - (range / 2f);
+
+                        if (!right)
                         {
-                            // 近距离站分散点
-                            float3 dir = unit.Position - target.Position;
-                            float ange = math.degrees(math.atan2(dir.x, dir.y));
-                            // 将ID散列到360°，使连续ID也能均匀分布
-                            float addg = (unit.InstanceId % 8) * 45f;
-                            quaternion rotation = quaternion.Euler(0, 0, math.radians(ange + addg));
-                            ttt = target.Position + math.mul(rotation, math.up()) * (aiComponent.ActDistance - 0.1f);
-                        }
-                        else
-                        {
-                            float3 direction = math.normalize(target.Position - unit.Position);
-                            ttt = unit.Position + direction * (currentDistance - (aiComponent.ActDistance - 0.1f));
-                            // 垂直方向偏移，防止多单位从同一起点移动时完全重叠
-                            float3 perp = new float3(-direction.y, direction.x, 0);
-                            float offset = ((unit.InstanceId % 7) - 3) * 0.6f; // -1.8 ~ 1.8
-                            ttt += perp * offset;
+                            angle = angle >= 0 ? 180f - angle : -(180f + angle);
                         }
 
-                        MoveHelper.PathResultTo(unit, ttt);
+                        float rad = math.radians(angle);
+                        float3 offset = new float3(math.cos(rad), math.sin(rad), 0) * (aiComponent.ActDistance - 0.1f);
+                        targetPos = target.Position + offset;
                     }
                     else
                     {
-                        unit.Stop();
+                        float3 direction = math.normalize(targetPos - unit.Position);
+                        targetPos = unit.Position + direction * (currentDistance - (aiComponent.ActDistance - 0.1f));
                     }
+
+                    MoveHelper.PathResultTo(unit, targetPos);
                 }
 
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(300, cancellationToken);
