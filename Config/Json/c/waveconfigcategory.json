@@ -9,7 +9,7 @@
     },
     "MonsterSpawnInfos": [
       {
-        "SpawnTime": 2,
+        "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
           "y": 50
@@ -17,41 +17,9 @@
         "MonsterId": 10000001
       },
       {
-        "SpawnTime": 2,
+        "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2,
-        "SpawnPosition": {
-          "x": 0,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 2,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.4,
-        "SpawnPosition": {
-          "x": 2,
           "y": 50
         },
         "MonsterId": 10000002
@@ -68,7 +36,7 @@
     },
     "MonsterSpawnInfos": [
       {
-        "SpawnTime": 2,
+        "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
           "y": 50
@@ -76,41 +44,9 @@
         "MonsterId": 10000001
       },
       {
-        "SpawnTime": 2,
+        "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2,
-        "SpawnPosition": {
-          "x": 0,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 2,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.4,
-        "SpawnPosition": {
-          "x": 2,
           "y": 50
         },
         "MonsterId": 10000002
@@ -127,7 +63,7 @@
     },
     "MonsterSpawnInfos": [
       {
-        "SpawnTime": 2,
+        "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
           "y": 50
@@ -135,41 +71,9 @@
         "MonsterId": 10000001
       },
       {
-        "SpawnTime": 2,
+        "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2,
-        "SpawnPosition": {
-          "x": 0,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 2,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.4,
-        "SpawnPosition": {
-          "x": 2,
           "y": 50
         },
         "MonsterId": 10000002
@@ -186,7 +90,7 @@
     },
     "MonsterSpawnInfos": [
       {
-        "SpawnTime": 2,
+        "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
           "y": 50
@@ -194,41 +98,9 @@
         "MonsterId": 10000001
       },
       {
-        "SpawnTime": 2,
+        "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2,
-        "SpawnPosition": {
-          "x": 0,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 2,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.4,
-        "SpawnPosition": {
-          "x": 2,
           "y": 50
         },
         "MonsterId": 10000002
@@ -245,7 +117,7 @@
     },
     "MonsterSpawnInfos": [
       {
-        "SpawnTime": 2,
+        "SpawnTime": 0.5,
         "SpawnPosition": {
           "x": -5,
           "y": 50
@@ -253,41 +125,9 @@
         "MonsterId": 10000001
       },
       {
-        "SpawnTime": 2,
+        "SpawnTime": 2.5,
         "SpawnPosition": {
           "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2,
-        "SpawnPosition": {
-          "x": 0,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 5,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.2,
-        "SpawnPosition": {
-          "x": 2,
-          "y": 50
-        },
-        "MonsterId": 10000002
-      },
-      {
-        "SpawnTime": 2.4,
-        "SpawnPosition": {
-          "x": 2,
           "y": 50
         },
         "MonsterId": 10000002
