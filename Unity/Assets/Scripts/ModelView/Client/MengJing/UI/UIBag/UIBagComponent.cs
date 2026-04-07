@@ -18,5 +18,7 @@ namespace ET.Client
         public Button Button_Type_Equipment;
         public Transform Content_UICommonItem;
         public GameObject UICommonItem;
+        public Transform Dotween_Btn;
+        public Transform Dotween_Scroll;
     }
 }

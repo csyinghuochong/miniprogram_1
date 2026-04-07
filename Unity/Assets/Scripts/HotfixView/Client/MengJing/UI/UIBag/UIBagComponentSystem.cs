@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Cysharp.Text;
-using TMPro;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,13 +39,15 @@ namespace ET.Client
             self.Button_Type_Material = rc.Get<GameObject>("Button_Type_Material").GetComponent<Button>();
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").GetComponent<Transform>();
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
+            self.Dotween_Btn = rc.Get<GameObject>("Dotween_Btn").transform;
+            self.Dotween_Scroll = rc.Get<GameObject>("Dotween_Scroll").transform;
 
             self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
             self.Button_Type_All.onClick.AddListener(() => { self.SetShowType(0); });
             self.Button_Type_Consume.onClick.AddListener(() => { self.SetShowType(1); });
             self.Button_Type_Equipment.onClick.AddListener(() => { self.SetShowType(2); });
             self.Button_Type_Material.onClick.AddListener(() => { self.SetShowType(3); });
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIBag); });
+            self.Button_Close.onClick.AddListener(() => { self.OnClose(); });
 
             self.SetShowType(0);
         }
@@ -130,6 +131,13 @@ namespace ET.Client
                     UIItemTipOpType = UIItemTipOpType.OnRoleBag
                 });
             }
+        }
+
+        private static void OnClose(this UIBagComponent self)
+        {
+            self.Dotween_Btn.DOLocalMoveY(-220, 0.2f);
+            self.Dotween_Scroll.DOLocalMoveY(1390, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIBag));
+
         }
     }
 }

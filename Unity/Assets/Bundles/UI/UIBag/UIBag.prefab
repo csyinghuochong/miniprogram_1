@@ -132,6 +132,10 @@ MonoBehaviour:
   - key: UICommonItem
     gameObject: {fileID: 1665607622829192704, guid: 8ab797564e9360a4abe2d0235e5af2da,
       type: 3}
+  - key: Dotween_Btn
+    gameObject: {fileID: 1790788136650666454}
+  - key: Dotween_Scroll
+    gameObject: {fileID: 5816429168180389472}
 --- !u!1 &222535302017203037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2048,7 @@ GameObject:
   - component: {fileID: 6595018696296674543}
   - component: {fileID: 7679840983433768752}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: Dotween_Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
