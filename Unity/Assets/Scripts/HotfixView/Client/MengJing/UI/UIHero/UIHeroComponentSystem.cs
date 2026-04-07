@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Text;
+using DG.Tweening;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
@@ -58,13 +59,14 @@ namespace ET.Client
             self.Button_Hero = rc.Get<GameObject>("Button_Hero").GetComponent<Button>();
             self.Button_HeroList = rc.Get<GameObject>("Button_HeroList").GetComponent<Button>();
             self.Button_Formation = rc.Get<GameObject>("Button_Formation").GetComponent<Button>();
+            self.Dotween_Btn = rc.Get<GameObject>("Dotween_Btn").transform;
 
             self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
-            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero); });
+            self.Button_Close.AddListener(() => { self.OnClose(); });
             self.Button_Hero.AddListener(() => { self.ShowPanel(1); });
             self.Button_HeroList.AddListener(() => { self.ShowPanel(2); });
             self.Button_Formation.AddListener(() => { self.ShowPanel(3); });
-            
+
             self.ShowPanel(1);
         }
 
@@ -76,7 +78,7 @@ namespace ET.Client
         private static void ShowPanel(this UIHeroComponent self, int panel)
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
-            
+
             self.Button_Hero.transform.Find("Image_On").gameObject.SetActive(panel == 1);
             self.Button_Hero.transform.Find("Image_Off").gameObject.SetActive(panel != 1);
             self.Button_HeroList.transform.Find("Image_On").gameObject.SetActive(panel == 2);
@@ -124,6 +126,12 @@ namespace ET.Client
                 self.UIHeroFormationComponent.UpdateSlotItemList();
                 self.UIHeroFormationComponent.GameObject.SetActive(true);
             }
+        }
+
+        private static void OnClose(this UIHeroComponent self)
+        {
+            self.Dotween_Btn.DOLocalMoveY(-220, 0.2f);
+            self.Transform_PanelRoot.DOLocalMoveY(1390, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIHero));
         }
     }
 }

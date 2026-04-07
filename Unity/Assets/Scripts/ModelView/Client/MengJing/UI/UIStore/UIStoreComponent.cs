@@ -19,5 +19,7 @@ namespace ET.Client
         public Button Button_RefreshTime;
         public Transform Content_UIStoreITem;
         public GameObject UIStoreItem;
+        public Transform Dotween_Close;
+        public Transform Dotween_Scroll;
     }
 }

@@ -14,5 +14,8 @@ namespace ET.Client
         public GameObject UICommonItem;
         public Transform Content_WarehouseItem;
         public Transform Content_BagItem;
+        public Transform Dotween_Warehouse;
+        public Transform Dotween_Bag;
+        public Transform Dotween_Close;
     }
 }

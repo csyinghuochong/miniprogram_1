@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,8 +37,11 @@ namespace ET.Client
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
             self.Content_WarehouseItem = rc.Get<GameObject>("Content_WarehouseItem").transform;
             self.Content_BagItem = rc.Get<GameObject>("Content_BagItem").transform;
+            self.Dotween_Warehouse = rc.Get<GameObject>("Dotween_Warehouse").transform;
+            self.Dotween_Bag = rc.Get<GameObject>("Dotween_Bag").transform;
+            self.Dotween_Close = rc.Get<GameObject>("Dotween_Close").transform;
 
-            self.Button_Close.onClick.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIWarehouse); });
+            self.Button_Close.onClick.AddListener(() => { self.OnClose(); });
 
             self.UpdateWarehouseItemList();
             self.UpdateBagItemList();
@@ -127,6 +131,13 @@ namespace ET.Client
                     UIItemTipOpType = UIItemTipOpType.Bag2Warehouse
                 });
             }
+        }
+
+        private static void OnClose(this UIWarehouseComponent self)
+        {
+            self.Dotween_Close.DOLocalMoveY(-100, 0.2f);
+            self.Dotween_Warehouse.DOLocalMoveY(1280, 0.2f);
+            self.Dotween_Bag.DOLocalMoveY(-380, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIWarehouse));
         }
     }
 }

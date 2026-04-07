@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Text;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,9 +22,11 @@ namespace ET.Client
             self.Content_UIStoreITem = rc.Get<GameObject>("Content_UIStoreItem").transform;
             self.UIStoreItem = rc.Get<GameObject>("UIStoreItem");
             self.UIStoreItem.SetActive(false);
+            self.Dotween_Close = rc.Get<GameObject>("Dotween_Close").transform;
+            self.Dotween_Scroll = rc.Get<GameObject>("Dotween_Scroll").transform;
 
             self.AddComponent<UICommonHuoBiSetComponent, GameObject>(rc.Get<GameObject>("UICommonHuoBiSet"));
-            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore); });
+            self.Button_Close.AddListener(() => { self.OnClose(); });
             self.Button_RefreshTime.AddListener(() => { self.OnButton_StoreRefresh().Coroutine(); });
 
             self.GetStoreInfo().Coroutine();
@@ -128,6 +131,12 @@ namespace ET.Client
             UI ui = await self.Root().GetComponent<UIComponent>().Create(UIType.UIStoreRefTip);
             UIStoreRefTipComponent uiStoreRefTipComponent = ui.GetComponent<UIStoreRefTipComponent>();
             uiStoreRefTipComponent.Init(self.StoreRefreshNum);
+        }
+
+        private static void OnClose(this UIStoreComponent self)
+        {
+            self.Dotween_Close.DOLocalMoveY(-100, 0.2f);
+            self.Dotween_Scroll.DOLocalMoveY(1750, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIStore));
         }
     }
 }

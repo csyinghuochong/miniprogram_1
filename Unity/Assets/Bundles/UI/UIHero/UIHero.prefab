@@ -136,6 +136,8 @@ MonoBehaviour:
   - key: UIHeroList
     gameObject: {fileID: 1386170326414932, guid: fb1f06b77eac83a40ab02a6be0ab8606,
       type: 3}
+  - key: Dotween_Btn
+    gameObject: {fileID: 8592158900573412583}
 --- !u!1 &517364498885863650
 GameObject:
   m_ObjectHideFlags: 0

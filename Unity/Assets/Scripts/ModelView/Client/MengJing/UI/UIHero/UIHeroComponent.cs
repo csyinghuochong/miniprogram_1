@@ -18,5 +18,6 @@ namespace ET.Client
         public Button Button_Hero;
         public Button Button_HeroList;
         public Button Button_Formation;
+        public Transform Dotween_Btn;
     }
 }

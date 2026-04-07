@@ -137,7 +137,6 @@ namespace ET.Client
         {
             self.Dotween_Btn.DOLocalMoveY(-220, 0.2f);
             self.Dotween_Scroll.DOLocalMoveY(1390, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIBag));
-
         }
     }
 }
