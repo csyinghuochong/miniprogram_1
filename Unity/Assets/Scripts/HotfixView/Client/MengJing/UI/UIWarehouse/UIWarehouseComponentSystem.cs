@@ -135,7 +135,7 @@ namespace ET.Client
 
         private static void OnClose(this UIWarehouseComponent self)
         {
-            self.Dotween_Close.DOLocalMoveY(-100, 0.2f);
+            self.Dotween_Close.DOLocalMoveY(-1000, 0.2f);
             self.Dotween_Warehouse.DOLocalMoveY(1280, 0.2f);
             self.Dotween_Bag.DOLocalMoveY(-380, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIWarehouse));
         }
