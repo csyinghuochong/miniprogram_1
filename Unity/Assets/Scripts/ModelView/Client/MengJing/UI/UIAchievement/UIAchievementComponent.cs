@@ -26,5 +26,7 @@ namespace ET.Client
         public Transform Content_UICommonItem;
         public GameObject UICommonItem;
         public Button Button_CloseLookReward;
+        public Transform Dotween_Upper;
+        public Transform Dotween_Under;
     }
 }

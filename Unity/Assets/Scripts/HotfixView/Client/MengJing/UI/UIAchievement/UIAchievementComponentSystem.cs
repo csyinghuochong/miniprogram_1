@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Text;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,10 +29,12 @@ namespace ET.Client
             self.Content_UICommonItem = rc.Get<GameObject>("Content_UICommonItem").transform;
             self.UICommonItem = rc.Get<GameObject>("UICommonItem");
             self.Button_CloseLookReward = rc.Get<GameObject>("Button_CloseLookReward").GetComponent<Button>();
+            self.Dotween_Upper = rc.Get<GameObject>("Dotween_Upper").transform;
+            self.Dotween_Under = rc.Get<GameObject>("Dotween_Under").transform;
 
             self.UIAchievementItem.SetActive(false);
 
-            self.Button_Close.AddListener(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
+            self.Button_Close.AddListener(() => self.OnClose());
             self.Button_GetReward.AddListener(() => { self.OnButton_GetReward().Coroutine(); });
             self.Button_LookReward.AddListener(() => { self.OnButton_LookReward(); });
             self.Button_CloseLookReward.AddListener(() => self.GameObject_LookReward.SetActive(false));
@@ -152,6 +155,12 @@ namespace ET.Client
             {
                 self.UpdatePoint();
             }
+        }
+        
+        private static void OnClose(this UIAchievementComponent self)
+        {
+            self.Dotween_Under.DOLocalMoveY(-700, 0.2f);
+            self.Dotween_Upper.DOLocalMoveY(700, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIAchievement));
         }
     }
 }

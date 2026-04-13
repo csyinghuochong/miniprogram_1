@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Text;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,8 +41,10 @@ namespace ET.Client
             self.UIArchiveHeroItem = rc.Get<GameObject>("UIArchiveHeroItem");
             self.UIArchiveHeroItem.gameObject.SetActive(false);
             self.Text_CollectProgress = rc.Get<GameObject>("Text_CollectProgress").GetComponent<TMP_Text>();
+            self.Dotween_Upper = rc.Get<GameObject>("Dotween_Upper").transform;
+            self.Dotween_Under = rc.Get<GameObject>("Dotween_Under").transform;
 
-            self.Button_Close.AddListener(() => { self.Root().GetComponent<UIComponent>().Remove(UIType.UIArchive); });
+            self.Button_Close.AddListener(() => { self.OnClose(); });
             self.Button_Reward.AddListener(() => { self.Root().GetComponent<UIComponent>().Create(UIType.UIArchiveReward).Coroutine(); });
             self.Button_Type_Hero.onClick.AddListener(() => { self.SetShowType(0); });
 
@@ -129,6 +132,12 @@ namespace ET.Client
             {
                 self.UIArchiveHeroItemList[i].GameObject.SetActive(false);
             }
+        }
+        
+        private static void OnClose(this UIArchiveComponent self)
+        {
+            self.Dotween_Under.DOLocalMoveY(-700, 0.2f);
+            self.Dotween_Upper.DOLocalMoveY(700, 0.2f).OnComplete(() => self.Root().GetComponent<UIComponent>().Remove(UIType.UIArchive));
         }
     }
 }

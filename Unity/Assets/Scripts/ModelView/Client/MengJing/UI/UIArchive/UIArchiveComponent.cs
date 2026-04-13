@@ -18,5 +18,7 @@ namespace ET.Client
         public Transform Content_UIArchiveHeroItem;
         public GameObject UIArchiveHeroItem;
         public TMP_Text Text_CollectProgress;
+        public Transform Dotween_Upper;
+        public Transform Dotween_Under;
     }
 }
