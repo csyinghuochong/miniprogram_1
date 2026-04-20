@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Rendering.Universal;
 
 namespace ET.Client
 {
@@ -112,25 +111,25 @@ namespace ET.Client
             self.MainCamera.farClipPlane = 100f; // 降低远裁剪面（根据实际场景调整）
             self.MainCamera.nearClipPlane = 0.3f; // 近裁剪面（避免太小）
 
-            UniversalAdditionalCameraData mainCameraData = self.MainCamera.GetUniversalAdditionalCameraData();
-            mainCameraData.renderPostProcessing = false;
-            mainCameraData.renderShadows = false;
-            mainCameraData.requiresColorOption = CameraOverrideOption.Off;
-            mainCameraData.requiresDepthOption = CameraOverrideOption.Off;
-            mainCameraData.antialiasing = AntialiasingMode.None; // URP抗锯齿关闭
-            mainCameraData.renderType = CameraRenderType.Base; // 基础渲染类型
+            // UniversalAdditionalCameraData mainCameraData = self.MainCamera.GetUniversalAdditionalCameraData();
+            // mainCameraData.renderPostProcessing = false;
+            // mainCameraData.renderShadows = false;
+            // mainCameraData.requiresColorOption = CameraOverrideOption.Off;
+            // mainCameraData.requiresDepthOption = CameraOverrideOption.Off;
+            // mainCameraData.antialiasing = AntialiasingMode.None; // URP抗锯齿关闭
+            // mainCameraData.renderType = CameraRenderType.Base; // 基础渲染类型
 
             // UI摄像机设置
             self.UICamera.useOcclusionCulling = false;
             self.UICamera.allowMSAA = false;
             self.UICamera.allowHDR = false;
 
-            UniversalAdditionalCameraData uiCameraData = self.UICamera.GetUniversalAdditionalCameraData();
-            uiCameraData.renderPostProcessing = false;
-            uiCameraData.renderShadows = false;
-            uiCameraData.requiresColorOption = CameraOverrideOption.Off;
-            uiCameraData.requiresDepthOption = CameraOverrideOption.Off;
-            uiCameraData.antialiasing = AntialiasingMode.None;
+            // UniversalAdditionalCameraData uiCameraData = self.UICamera.GetUniversalAdditionalCameraData();
+            // uiCameraData.renderPostProcessing = false;
+            // uiCameraData.renderShadows = false;
+            // uiCameraData.requiresColorOption = CameraOverrideOption.Off;
+            // uiCameraData.requiresDepthOption = CameraOverrideOption.Off;
+            // uiCameraData.antialiasing = AntialiasingMode.None;
         }
 
         private static void SetCanvas(this GlobalComponent self)
