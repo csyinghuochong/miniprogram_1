@@ -12,5 +12,7 @@ namespace ET.Client
         public long LastSendTime = 0;
         public List<long> SendIdList = new();
         public long Timer;
+
+        public const float PickUpRange = 8f;
     }
 }

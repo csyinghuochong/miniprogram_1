@@ -99,7 +99,9 @@ namespace ET.Client
             UnitComponent unitComponent = self.MainUnit.GetParent<UnitComponent>();
             foreach (Unit unit in unitComponent.GetAll())
             {
-                if (unit.Type == UnitType.DropItem)
+                float distance = Vector3.Distance(self.MainUnit.Position, unit.Position);
+                
+                if (unit.Type == UnitType.DropItem && distance <= PickUpDropItemComponent.PickUpRange)
                 {
                     self.DropItemList.Add(unit);
                 }
