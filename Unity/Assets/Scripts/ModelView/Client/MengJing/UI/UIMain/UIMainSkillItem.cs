@@ -20,5 +20,7 @@ namespace ET.Client
         public Image Image_SkillCd;
         public TMP_Text Text_SkillCd;
         public EventTrigger EventTrigger_Click;
+        public Image Image_Hp;
+        public Image Image_Anger;
     }
 }

@@ -145,16 +145,16 @@ namespace ET.Client
             }
 
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
-            long currentHp = numericComponent.GetAsLong(NumericType.Now_AngerValue);
-            long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxAngerValue);
+            long currentAnger = numericComponent.GetAsLong(NumericType.Now_AngerValue);
+            long maxAnger = numericComponent.GetAsLong(NumericType.Now_MaxAngerValue);
 
-            if (maxHp == 0)
+            if (maxAnger == 0)
             {
                 self.Image_Anger.fillAmount = 0;
             }
             else
             {
-                self.Image_Anger.fillAmount = currentHp * 1f / maxHp;
+                self.Image_Anger.fillAmount = currentAnger * 1f / maxAnger;
             }
         }
     }

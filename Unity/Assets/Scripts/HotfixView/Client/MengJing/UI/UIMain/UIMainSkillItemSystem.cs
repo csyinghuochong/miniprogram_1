@@ -39,6 +39,8 @@ namespace ET.Client
             self.Image_SkillCd = rc.Get<GameObject>("Image_SkillCd").GetComponent<Image>();
             self.Text_SkillCd = rc.Get<GameObject>("Text_SkillCd").GetComponent<TMP_Text>();
             self.EventTrigger_Click = rc.Get<GameObject>("EventTrigger_Click").GetComponent<EventTrigger>();
+            self.Image_Hp = rc.Get<GameObject>("Image_Hp").GetComponent<Image>();
+            self.Image_Anger = rc.Get<GameObject>("Image_Anger").GetComponent<Image>();
 
             self.EventTrigger_Click.AddEventTrigger(self.OnPointerDown, EventTriggerType.PointerDown);
             self.EventTrigger_Click.AddEventTrigger(self.OnBeginDrag, EventTriggerType.BeginDrag);
@@ -280,6 +282,48 @@ namespace ET.Client
                     self.IndicatorGameObject.transform.Find("Skill_InnerArea").position = myUnit.Position;
                     break;
                 }
+            }
+        }
+        
+        public static void UpdateBlood(this UIMainSkillItem self)
+        {
+            if (self.GameObject == null)
+            {
+                return;
+            }
+
+            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
+            long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);
+            long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+
+            if (maxHp == 0)
+            {
+                self.Image_Hp.fillAmount = 0;
+            }
+            else
+            {
+                self.Image_Hp.fillAmount = currentHp * 1f / maxHp;
+            }
+        }
+        
+        public static void UpdateAnger(this UIMainSkillItem self)
+        {
+            if (self.GameObject == null)
+            {
+                return;
+            }
+
+            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
+            long currentAnger = numericComponent.GetAsLong(NumericType.Now_AngerValue);
+            long maxAnger = numericComponent.GetAsLong(NumericType.Now_MaxAngerValue);
+
+            if (maxAnger == 0)
+            {
+                self.Image_Anger.fillAmount = 0;
+            }
+            else
+            {
+                self.Image_Anger.fillAmount = currentAnger * 1f / maxAnger;
             }
         }
     }
