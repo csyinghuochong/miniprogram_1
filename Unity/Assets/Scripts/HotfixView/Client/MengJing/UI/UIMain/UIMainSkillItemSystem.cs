@@ -92,8 +92,14 @@ namespace ET.Client
             self.SkillId = skillId;
 
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+            HeroComponentC heroComponent = self.Root().GetComponent<HeroComponentC>();
+            Hero hero = heroComponent.GetHero(self.UnitId);
+            HeroConfig heroConfig = HeroConfigCategory.Instance.Get(hero.ConfigId);
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.SkillIcon, skillConfig.SkillIcon);
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.SkillIcon, skillConfig.SkillIcon);
+            // self.Image_SkillIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+            
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.HeroIcon, heroConfig.HeroHeadIcon);
             self.Image_SkillIcon.overrideSprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
         }
 
