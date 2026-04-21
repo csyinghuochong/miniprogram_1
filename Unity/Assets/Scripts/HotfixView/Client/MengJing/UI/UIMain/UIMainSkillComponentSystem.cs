@@ -51,7 +51,7 @@ namespace ET.Client
         {
             foreach (UIMainSkillItem item in self.UIMainSkillItemList)
             {
-                item.UpdateCD();
+                item.Update();
             }
         }
 

@@ -55,7 +55,7 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void UpdateCD(this UIMainSkillItem self)
+        public static void Update(this UIMainSkillItem self)
         {
             if (!self.GameObject.activeSelf)
             {
@@ -83,6 +83,30 @@ namespace ET.Client
                 self.Image_SkillCd.gameObject.SetActive(true);
                 self.Image_SkillCd.fillAmount = cd / skillConfig.SkillCD;
                 self.Text_SkillCd.SetTextFormat(cd >= 1 ? "{0:0}" : "{0:0.#}", cd);
+            }
+            
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);
+            long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+            long currentAnger = numericComponent.GetAsLong(NumericType.Now_AngerValue);
+            long maxAnger = numericComponent.GetAsLong(NumericType.Now_MaxAngerValue);
+            
+            if (maxHp == 0)
+            {
+                self.Image_Hp.fillAmount = 0;
+            }
+            else
+            {
+                self.Image_Hp.fillAmount = currentHp * 1f / maxHp;
+            }
+            
+            if (maxAnger == 0)
+            {
+                self.Image_Anger.fillAmount = 0;
+            }
+            else
+            {
+                self.Image_Anger.fillAmount = currentAnger * 1f / maxAnger;
             }
         }
 
