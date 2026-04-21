@@ -76,6 +76,7 @@ namespace ET.Client
 
             unit.AddComponent<SkillManagerComponentC>(true);
             unit.AddComponent<BuffManagerComponentC>(true);
+            unit.AddComponent<Move2DComponent>(true);
 
             OnAfterCreateUnit(unit);
             return unit;

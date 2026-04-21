@@ -17,7 +17,7 @@
             {
                 EventSystem.Instance.Publish(root.CurrentScene(), new MoveStart() { Unit = unit });
                 float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
-                unit.GetComponent<Move2DComponent>().MoveTo(message.Points, speed);
+                unit.GetComponent<Move2DComponent>()?.MoveTo(message.Points, speed);
 
                 // float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_MoveSpeed);
                 // speed *= (message.SpeedRate * 0.01f);

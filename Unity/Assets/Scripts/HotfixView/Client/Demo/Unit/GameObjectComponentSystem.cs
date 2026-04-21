@@ -208,7 +208,6 @@ namespace ET.Client
                     unit.AddComponent<UIPlayerHpComponent>(true);
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
-                    unit.AddComponent<Move2DComponent>(true);
                     if (unit.MainHero)
                     {
                         // unit.AddComponent<TransformNoticeToServerComponent>(true);
@@ -232,7 +231,6 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
                     unit.AddComponent<TransformSyncComponent>(true);
-                    unit.AddComponent<Move2DComponent>(true);
                     
                     HeroConfig heroConfig = HeroConfigCategory.Instance.Get(unit.ConfigId);
                     self.ShowRadius(self.GameObject, heroConfig.Radius);
@@ -248,7 +246,6 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>(true);
                     unit.AddComponent<FsmComponent>(true);
                     unit.AddComponent<TransformSyncComponent>(true);
-                    unit.AddComponent<Move2DComponent>(true);
                     
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                     self.ShowRadius(self.GameObject, monsterConfig.Radius);
