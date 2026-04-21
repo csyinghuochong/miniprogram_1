@@ -290,47 +290,5 @@ namespace ET.Client
                 }
             }
         }
-        
-        public static void UpdateBlood(this UIMainSkillItem self)
-        {
-            if (self.GameObject == null)
-            {
-                return;
-            }
-
-            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
-            long currentHp = numericComponent.GetAsLong(NumericType.Now_Hp);
-            long maxHp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-
-            if (maxHp == 0)
-            {
-                self.Image_Hp.fillAmount = 0;
-            }
-            else
-            {
-                self.Image_Hp.fillAmount = currentHp * 1f / maxHp;
-            }
-        }
-        
-        public static void UpdateAnger(this UIMainSkillItem self)
-        {
-            if (self.GameObject == null)
-            {
-                return;
-            }
-
-            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
-            long currentAnger = numericComponent.GetAsLong(NumericType.Now_AngerValue);
-            long maxAnger = numericComponent.GetAsLong(NumericType.Now_MaxAngerValue);
-
-            if (maxAnger == 0)
-            {
-                self.Image_Anger.fillAmount = 0;
-            }
-            else
-            {
-                self.Image_Anger.fillAmount = currentAnger * 1f / maxAnger;
-            }
-        }
     }
 }
