@@ -87,7 +87,7 @@ Material:
     - Boolean_52F3CBA5: 0
     - Vector1_53729B24: 1
     - _AlphaClip: 0
-    - _BUILTIN_QueueControl: -1
+    - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Blend: 0
     - _BumpScale: 1
