@@ -49,7 +49,7 @@ namespace ET.Client
 
             self.CopyModelGameObject =
                     UnityEngine.Object.Instantiate(self.Transform_HeroIcon.GetChild(0).gameObject, self.GameObject.transform.parent.parent);
-            self.CopyModelGameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            self.CopyModelGameObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
             self.Text_HeroName.gameObject.SetActive(false);
             self.Transform_HeroIcon.gameObject.SetActive(false);
