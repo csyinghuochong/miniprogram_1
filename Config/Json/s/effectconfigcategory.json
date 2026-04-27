@@ -5,7 +5,7 @@
     "EffectType": 1,
     "EffectName": "Eff_Test2",
     "SkillEffectLiveTime": 1,
-    "SkillEffectDelayTime": 0,
+    "SkillEffectDelayTime": 0.5,
     "SkillParent": 0,
     "SkillParentPosition": ""
   },
@@ -15,7 +15,7 @@
     "EffectType": 1,
     "EffectName": "Eff_Test2",
     "SkillEffectLiveTime": 5,
-    "SkillEffectDelayTime": 0,
+    "SkillEffectDelayTime": 1,
     "SkillParent": 0,
     "SkillParentPosition": ""
   },
@@ -25,7 +25,7 @@
     "EffectType": 1,
     "EffectName": "Eff_Test3",
     "SkillEffectLiveTime": 5,
-    "SkillEffectDelayTime": 0,
+    "SkillEffectDelayTime": 0.5,
     "SkillParent": 0,
     "SkillParentPosition": ""
   },
@@ -35,7 +35,7 @@
     "EffectType": 1,
     "EffectName": "Eff_Test2",
     "SkillEffectLiveTime": 2,
-    "SkillEffectDelayTime": 0,
+    "SkillEffectDelayTime": 0.5,
     "SkillParent": 0,
     "SkillParentPosition": ""
   },
@@ -45,7 +45,7 @@
     "EffectType": 1,
     "EffectName": "Eff_Test5",
     "SkillEffectLiveTime": 5,
-    "SkillEffectDelayTime": 0,
+    "SkillEffectDelayTime": 0.5,
     "SkillParent": 1,
     "SkillParentPosition": "Bottom"
   },
@@ -55,7 +55,7 @@
     "EffectType": 1,
     "EffectName": "Eff_Test1",
     "SkillEffectLiveTime": 2,
-    "SkillEffectDelayTime": 0,
+    "SkillEffectDelayTime": 0.5,
     "SkillParent": 0,
     "SkillParentPosition": ""
   },
