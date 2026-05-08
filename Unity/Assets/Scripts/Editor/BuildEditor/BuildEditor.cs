@@ -177,7 +177,14 @@ namespace ET
                 var sError =
                         m_LanguageSourceData.Import_CSV(string.Empty, content, eSpreadsheetUpdateMode.Replace, ',');
                 if (!string.IsNullOrEmpty(sError))
-                    Log.Error($"导入全数据时发生错误 请检查 {sError} {path}");
+                {
+                    Debug.LogError($"导入全数据时发生错误 请检查 {sError} {path}");
+                    return;
+                }
+
+                EditorUtility.SetDirty(editorAsset);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
             catch (Exception e)
             {
